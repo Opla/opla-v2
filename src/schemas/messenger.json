@@ -1,0 +1,106 @@
+{
+  "title": "messenger",
+  "description": "JSON schema for Opla's Messenger description collections",
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+  "definitions": {
+    "Id": {
+      "type": "string"
+    },
+    "DateTime": {
+      "type": "string"
+    },
+    "Timestamp": {
+      "type": "integer"
+    },
+    "Link": {
+      "type": "string"
+    },
+    "Map": {
+      "type": "object"
+    }
+  },
+  "properties": {
+        "conversations": {
+            "title": "Conversations",
+            "properties": {
+                "id": {
+                    "type": "#Id"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "participants": {
+                    "type": "array",
+                    "arraytype": "string"
+                },
+                "created_time": {
+                    "type": "#DateTime"
+                },
+                "last": {
+                    "type": "#DateTime"
+                },
+                "origin": {
+                    "type": "string"
+                }
+            }
+        },
+        "messages": {
+            "title": "Messages",
+            "properties": {
+                "id": {
+                    "type": "#Id"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string",
+                    "size": "big"
+                },
+                "conversationId": {
+                    "type": "#Link",
+                    "link": "conversations.id",
+                    "internal": true
+                },
+                "created_time": {
+                    "type": "#DateTime"
+                },
+                "timestamp": {
+                    "type": "#Timestamp"
+                },
+                "relayed": {
+                    "type": "boolean"
+                },
+                "attachments": {
+                    "type": "array",
+                    "arraytype": "object",
+                    "link": "attachments.id",
+                    "nested": true
+                },
+                "extras": {
+                    "type": "object"
+                }
+            }
+        },
+        "attachments": {
+            "title": "attachments",
+            "nested": true,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "payload": {
+                    "type": "#Map",
+                    "nested": true
+                }
+            }
+        }
+    }
+}

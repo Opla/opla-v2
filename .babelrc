@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "es2016",
+    ["env", {
+      "targets": {
+        "node": 8
+      }
+    }]
+  ],
+  "plugins": ["transform-object-rest-spread"]
+}
