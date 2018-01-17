@@ -1,0 +1,43 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": false,
+        "jquery": false,
+        "mocha": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+        "indent": [2, 2],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-console": 1,
+        "prefer-const": "error",
+        "no-var": "error"
+    },
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "webpack.common.js"
+            }
+        }
+    }
+}
