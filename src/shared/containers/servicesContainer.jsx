@@ -381,7 +381,7 @@ ServicesContainer.propTypes = {
   apiGetMiddlewaresRequest: PropTypes.func.isRequired,
   apiSetMiddlewareRequest: PropTypes.func.isRequired,
   apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
-  pluginsManager: PropTypes.shape({}).isRequired,
+  pluginsManager: PropTypes.shape({ getPlugins: PropTypes.func }).isRequired,
 };
 
 const mapStateToProps = (state) => {

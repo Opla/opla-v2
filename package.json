@@ -39,7 +39,8 @@
     "redux-devtools-dock-monitor": "1.1.2",
     "redux-devtools-log-monitor": "1.4.0",
     "redux-saga": "0.16.0",
-    "style-loader": "^0.19.1"
+    "style-loader": "^0.19.1",
+    "zoapp-common": "0.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

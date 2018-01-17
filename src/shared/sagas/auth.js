@@ -1,7 +1,7 @@
 import { put, take, race, call } from "redux-saga/effects";
+import { AuthService } from "zoapp-common";
 import { AUTH_INIT_SETTINGS, AUTH_SIGNIN, AUTH_SIGNOUT, FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAILURE } from "../actions/constants";
-import AuthService from "../services/authService";
-import { authService } from "../services";
+import { authService } from "./services";
 
 function getAuthService(provider) {
   let service = authService;

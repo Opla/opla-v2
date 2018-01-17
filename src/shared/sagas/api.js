@@ -9,7 +9,7 @@ import {
   SUBSCRIBE, UNSUBSCRIBE,
   FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAILURE,
 } from "../actions/constants";
-import { webService, createSocketService } from "../services";
+import { webService, createSocketService } from "./services";
 
 function* getSandboxMessages(action) {
   const { botId } = action;

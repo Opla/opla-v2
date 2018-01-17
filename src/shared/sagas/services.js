@@ -1,6 +1,4 @@
-import WebService from "./webService";
-import AuthService from "../services/authService";
-import SocketService from "../services/socketService";
+import { WebService, AuthService, SocketService } from "zoapp-common";
 import { apiConfig, authConfig } from "../config";
 
 export const authService = new AuthService(authConfig);
