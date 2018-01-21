@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Stepper } from "MdlExt";
+import { Stepper } from "zoapp-ui";
 import { FBContainer } from "./fbContainer";
 
 export default class FBTemplate extends Component {

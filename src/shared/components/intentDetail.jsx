@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { List, ListItem, ListItemContent, ListItemAction, Textfield, Button } from "react-mdl";
+import { ExpansionPanel, DialogManager } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
-import DialogManager from "../utils/dialogManager";
-import { ExpansionPanel } from "../components/mdl";
 
 const IntentDetail = ({ intent, onSelect }) => {
   const { name, input, output } = intent;

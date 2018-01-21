@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { DialogTitle, DialogContent, DialogActions } from "react-mdl";
-import DialogPolyFill from "../components/dialogPolyFill";
+import { DialogBox } from "zoapp-ui";
 
 export default class ProcessingDialog extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ export default class ProcessingDialog extends Component {
 
   render() {
     return (
-      <DialogPolyFill
+      <DialogBox
         open={this.state.openDialog}
         id={this.state.id}
         onClose={this.handleCloseDialog}
@@ -43,7 +43,7 @@ export default class ProcessingDialog extends Component {
                   Please wait ...
         </DialogContent>
         <DialogActions />
-      </DialogPolyFill>
+      </DialogBox>
     );
   }
 }

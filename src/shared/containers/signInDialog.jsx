@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button, DialogTitle, DialogContent, DialogActions, Textfield } from "react-mdl";
 import { connect } from "react-redux";
-import DialogPolyFill from "../components/dialogPolyFill";
+import { DialogBox } from "zoapp-ui";
 import { signIn } from "../actions/signIn";
 
 class SignInDialog extends Component {
@@ -45,7 +45,7 @@ class SignInDialog extends Component {
 
   render() {
     return (
-      <DialogPolyFill
+      <DialogBox
         open={this.state.openDialog}
         id={this.state.id}
         onClose={this.handleCloseDialog}
@@ -76,7 +76,7 @@ class SignInDialog extends Component {
           <Button type="button" onClick={(e) => { e.preventDefault(); this.handleSignIn(); }}>Sign in</Button>
           <Button type="button" onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}>Cancel</Button>
         </DialogActions>
-      </DialogPolyFill>
+      </DialogBox>
     );
   }
 }

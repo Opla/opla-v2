@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Content, Button, Textfield } from "react-mdl";
+import { DialogManager, Selectfield } from "zoapp-ui";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import TemplatesList from "../components/templatesList";
 import ProcessingDialog from "./processingDialog";
-import DialogManager from "../utils/dialogManager";
 import { apiCreateBot } from "../actions/api";
 import { appSetTitle } from "../actions/app";
-import { Selectfield } from "../components/mdl";
 
 const formStyle = {
   paddingLeft: "16px",

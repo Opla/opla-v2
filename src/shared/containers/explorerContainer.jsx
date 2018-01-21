@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { DialogManager } from "zoapp-ui";
 import ListDragComponent from "../components/listDragComponent";
 import SubToolbar from "../components/subToolbar";
 import { apiGetIntentsRequest, apiSendIntentRequest, apiDeleteIntentRequest, apiMoveIntentRequest } from "../actions/api";
 import { appSelectIntent } from "../actions/app";
-import DialogManager from "../utils/dialogManager";
 
 class ExplorerContainer extends Component {
   onDropIntent = (dragIndex, dropIndex) => {

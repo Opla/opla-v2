@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-mdl";
 import PropTypes from "prop-types";
-import { Stepper } from "MdlExt";
+import { Stepper } from "zoapp-ui";
 
 
 export default class AppTemplate extends Component {

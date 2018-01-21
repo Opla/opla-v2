@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Checkbox, Button, DialogTitle, DialogContent, DialogActions, Tabs, Tab } from "react-mdl";
-import DialogPolyFill from "../components/dialogPolyFill";
-import DialogManager from "../utils/dialogManager";
+import { DialogManager, DialogBox } from "zoapp-ui";
 import FileManager from "../utils/fileManager";
 
 class IODialog extends Component {
@@ -91,7 +90,7 @@ class IODialog extends Component {
   render() {
     if (this.props.importOnly) {
       return (
-        <DialogPolyFill
+        <DialogBox
           open={this.state.openDialog}
           id={this.state.id}
           onClose={this.handleCloseDialog}
@@ -110,7 +109,7 @@ class IODialog extends Component {
             <Button type="button" onClick={(e) => { e.preventDefault(); this.handleImport(); }}>Import</Button>
             <Button type="button" onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}>Cancel</Button>
           </DialogActions>
-        </DialogPolyFill>
+        </DialogBox>
       );
     }
     const p1 = this.state.activeTab === 0 ? "block" : "none";
@@ -129,7 +128,7 @@ class IODialog extends Component {
         </DialogActions>);
     }
     return (
-      <DialogPolyFill
+      <DialogBox
         open={this.state.openDialog}
         id={this.state.id}
         style={{ backgroundColor: "white" }}
@@ -165,7 +164,7 @@ class IODialog extends Component {
           </section>
         </DialogContent>
         {dialogActions}
-      </DialogPolyFill>
+      </DialogBox>
     );
   }
 }

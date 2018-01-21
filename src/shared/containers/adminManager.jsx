@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Cell, Button, IconButton, Content, Textfield, Tooltip } from "react-mdl";
+import { DialogManager, Selectfield } from "zoapp-ui";
 import { connect } from "react-redux";
-import { Selectfield } from "../components/mdl";
 import { appSetTitle } from "../actions/app";
 import { apiSetAdminParametersRequest } from "../actions/api";
 import TableComponent from "../components/tableComponent";
@@ -11,7 +11,7 @@ import SignInForm from "./signInForm";
 import ServicesContainer from "./servicesContainer";
 import PluginsManager from "../utils/pluginsManager";
 import TunnelBox from "../components/tunnelBox";
-import DialogManager from "../utils/dialogManager";
+
 
 const infoStyleD = {
   fontSize: "16px",

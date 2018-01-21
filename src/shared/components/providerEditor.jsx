@@ -1,4 +1,4 @@
-import DialogManager from "../utils/dialogManager";
+import { DialogManager } from "zoapp-ui";
 
 const displayProviderEditor = (
   title,

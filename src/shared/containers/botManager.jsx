@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Cell, Button, Content } from "react-mdl";
+import { DialogManager } from "zoapp-ui";
 import { apiGetIntentsRequest, apiSendIntentRequest, apiSaveBotRequest, apiImportRequest } from "../actions/api";
 import { appUpdateIntent, appSetTitle } from "../actions/app";
 import Loading from "../components/loading";
@@ -9,7 +10,6 @@ import SignInForm from "./signInForm";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";
 import SandboxContainer from "./sandboxContainer";
-import DialogManager from "../utils/dialogManager";
 import IODialog from "./ioDialog";
 import FileManager from "../utils/fileManager";
 

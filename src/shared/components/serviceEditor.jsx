@@ -1,6 +1,6 @@
 import React from "react";
 import { Textfield } from "react-mdl";
-import DialogManager from "../utils/dialogManager";
+import { DialogManager } from "zoapp-ui";
 
 const displayWebServiceEditor = (
   title,

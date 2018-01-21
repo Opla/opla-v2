@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "react-mdl";
+import { DialogManager } from "zoapp-ui";
 import { connect } from "react-redux";
-import DialogManager from "../utils/dialogManager";
 import PublishDialog from "./publishDialog";
 
 class BuilderBox extends Component {

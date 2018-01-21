@@ -29,16 +29,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-  // We have to register the dialogs window
-    /* global document */
-    /* const dialog = ReactDOM.findDOMNode(this);
-    if (!dialog.showModal) {   // avoid chrome warnings and update only on unsupported browsers
-      window.dialogPolyfill.registerDialog(dialog);
-    } */
     this.props.initAuthSettings();
     this.updateAdmin();
-    /* const dialogs = document.querySelector("dialog");
-    dialogs && dialogPolyfill.registerDialog(dialogs); */
   }
 
   componentWillUpdate() {

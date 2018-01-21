@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { List, ListItem, ListItemContent, ListItemAction, IconButton, Chip } from "react-mdl";
+import { ExpansionPanel } from "zoapp-ui";
 /* import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import ListDragItem from "./listDragItem"; */
 import ActionsTools from "../utils/actionsTools";
-import { ExpansionPanel } from "../components/mdl";
 
 // @DragDropContext(HTML5Backend)
 class ActionsList extends Component {

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button, DialogTitle, DialogContent, DialogActions } from "react-mdl";
 import { connect } from "react-redux";
-import DialogPolyFill from "../components/dialogPolyFill";
-import DialogManager from "../utils/dialogManager";
+import { DialogManager, DialogBox } from "zoapp-ui";
 import PluginsManager from "../utils/pluginsManager";
 import MessagingsList from "../components/messagingsList";
 import ServiceDialog from "./serviceDialog";
@@ -201,7 +200,7 @@ class PublishDialog extends Component {
     const content = this.renderDialog();
     const style = { width: "550px" };
     return (
-      <DialogPolyFill open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
+      <DialogBox open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>{content}</DialogContent>
         <DialogActions>
@@ -216,7 +215,7 @@ class PublishDialog extends Component {
           >Cancel
           </Button>
         </DialogActions>
-      </DialogPolyFill>
+      </DialogBox>
     );
   }
 }

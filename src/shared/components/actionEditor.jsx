@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { IconButton, Tooltip } from "react-mdl";
-import { ContentEditable } from "./mdl";
+import { ContentEditable } from "zoapp-ui";
 import ActionsTools from "../utils/actionsTools";
 
 class ActionEditor extends Component {

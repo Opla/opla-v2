@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { DialogManager } from "zoapp-ui";
 import MessengerBox from "../components/messengerBox";
 import SubToolbar from "../components/subToolbar";
 import {
@@ -8,7 +9,6 @@ import {
   apiUnsubscribeSandboxMessages, apiSendSandboxMessageRequest,
   apiGetSandboxContextRequest, apiSandboxResetRequest,
 } from "../actions/api";
-import DialogManager from "../utils/dialogManager";
 
 
 class SandboxContainer extends Component {
