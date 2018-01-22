@@ -15,13 +15,6 @@ const store = configureStore();
 
 DialogManager.init(store);
 
-// export the React MDL components globally to use them without the ReactMDL prefix
-/* eslint-disable no-restricted-syntax */
-/* for (const component in ReactMDL) {
-  if (Object.prototype.hasOwnProperty(ReactMDL, component)) {
-    window[component] = ReactMDL[component];
-  }
-} */
 /* eslint-enable no-restricted-syntax */
 const mountNode = document.getElementById("app");
 
