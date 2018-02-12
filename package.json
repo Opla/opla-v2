@@ -9,12 +9,13 @@
   "author": "The Opla team <hello@opla.ai>",
   "license": "GPL-2.0+",
   "scripts": {
-    "start:node": "NODE_PATH=$NODE_PATH:./shared node --harmony ./dist",
-    "start:dev": "webpack-dev-server --env=dev --inline",
-    "lint:prod": "eslint src --ext=js --ext=jsx",
+    "build:prod": "webpack --env=prod --progress --profile --colors",
+    "compile:dev": "webpack --env=dev --progress --profile --colors",
+    "dev": "yarn compile:dev && yarn start:dev",
     "lint:dev": "eslint src --rule 'no-console: off' --ext=js --ext=jsx --fix",
-    "build:dev": "webpack --env=dev --progress --profile --colors",
-    "build:prod": "webpack --env=prod --progress --profile --colors"
+    "lint:prod": "eslint src --ext=js --ext=jsx",
+    "start:dev": "webpack-dev-server --env=dev --inline",
+    "start:node": "NODE_PATH=$NODE_PATH:./shared node --harmony ./dist"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",

@@ -17,6 +17,7 @@ module.exports = merge(commonConfig, {
     contentBase: path.resolve(__dirname, "./dist/public"),
     port: 8080,
     host: "localhost",
+    lazy: false,
     publicPath: "/",
     historyApiFallback: true,
   },
