@@ -1,0 +1,11 @@
+{
+  "presets": [["es2015", {"modules": false}], "react", "stage-1"],
+  "plugins": ["transform-regenerator", "react-hot-loader/babel", "transform-decorators-legacy"],
+  "env": {
+    "start": {
+      "presets": [
+        "react-hmre"
+      ]
+    }
+  }
+}
