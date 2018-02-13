@@ -15,7 +15,8 @@
     "lint:dev": "eslint src --rule 'no-console: off' --ext=js --ext=jsx --fix",
     "lint:prod": "eslint src --ext=js --ext=jsx",
     "start:dev": "webpack-dev-server --env=dev --inline",
-    "start:node": "NODE_PATH=$NODE_PATH:./shared node --harmony ./dist"
+    "start:node": "NODE_PATH=$NODE_PATH:./shared node --harmony ./dist",
+    "test": "jest"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
