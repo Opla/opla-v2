@@ -1,5 +1,8 @@
 # opla-front
 
+[![Build
+Status](https://travis-ci.org/Opla/front.svg?branch=master)](https://travis-ci.org/Opla/front)
+
 Opla.ai Frontend using Node es7 react and redux.
 
 
