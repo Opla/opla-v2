@@ -1,0 +1,71 @@
+{
+  "title": "users",
+  "description": "JSON schema for Opla's Users description collections",
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+  "definitions": {
+    "Id": {
+      "type": "string"
+    },
+    "DateTime": {
+      "type": "string"
+    },
+    "Timestamp": {
+      "type": "integer"
+    },
+    "Link": {
+      "type": "string"
+    },
+    "Map": {
+      "type": "object"
+    }
+  },
+  "properties": {
+        "profiles": {
+            "title": "Profiles",
+            "properties": {
+                "id": {
+                    "type": "#Id"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "creation_date": {
+                    "type": "#DateTime"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "locale": {
+                    "type": "string"
+                },
+                "timezone": {
+                    "type": "integer"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "#Link",
+                    "link": "users.id",
+                    "internal": true
+                }
+            }
+        }
+    }
+}
