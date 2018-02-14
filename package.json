@@ -11,6 +11,7 @@
     "build": "yarn clean-dist && babel src -s -D -d dist && cp -f ./package.json ./dist/package.json && cp -f ./LICENSE ./dist/LICENSE && cp -f ./README.md ./dist/README.md",
     "build:dev": "yarn build",
     "build:prod": "yarn build && rm -r -f ./dist/config.j*",
+    "dev": "yarn build:dev && yarn start:dev",
     "start:dev": "nodemon -w src --exec \"babel-node src \"",
     "start:prod": "node dist",
     "prestart": "yarn run -s build",
