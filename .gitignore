@@ -3,4 +3,3 @@ dist
 lib
 *.DS_Store
 config
-yarn.lock
