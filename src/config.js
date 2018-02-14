@@ -7,7 +7,7 @@ const config = {
   global: {
     database: {
       datatype: "mysql",
-      host: "localhost",
+      host: "127.0.0.1",
       name: "opla_dev",
       user: "root",
       charset: "utf8mb4",
@@ -16,11 +16,10 @@ const config = {
     api: {
       endpoint: "/api",
       version: "1",
-      ip: "178.32.63.243",
       port: 8081,
     },
     botSite: {
-      url: "http://localhost:8085/?b=",
+      url: "http://127.0.0.1:8085/?b=",
     },
   },
   auth: {
