@@ -1,14 +1,16 @@
+import { appSetTitle } from "zoapp-front/actions/app";
+
 import {
-  APP_SETTITLE, APP_SELECTINTENT, APP_UPDATEPUBLISHER,
-  APP_UPDATEINTENT, APP_SETINTENTACTION, APP_DELETEINTENTACTION,
+  APP_DELETEINTENTACTION,
+  APP_SELECTINTENT,
+  APP_SETINTENTACTION,
+  APP_UPDATEINTENT,
+  APP_UPDATEPUBLISHER,
 } from "./constants";
+
 
 export function appSelectIntent(selectedBotId, selectedIntentIndex) {
   return { type: APP_SELECTINTENT, selectedBotId, selectedIntentIndex };
-}
-
-export function appSetTitle(titleName) {
-  return { type: APP_SETTITLE, titleName };
 }
 
 export function appUpdatePublisher(selectedBotId, publisher) {
@@ -28,3 +30,5 @@ export function appSetIntentAction(actionContainer, actionType, actionValue, sel
 export function appDeleteIntentAction(actionContainer, selectedAction) {
   return { type: APP_DELETEINTENTACTION, actionContainer, selectedAction };
 }
+
+export { appSetTitle };

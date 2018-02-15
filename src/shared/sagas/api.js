@@ -10,6 +10,7 @@ import {
   SUBSCRIBE,
   UNSUBSCRIBE,
 } from "zoapp-front/actions/constants";
+import { getWebService, createSocketService } from "zoapp-front/services";
 
 import {
   API_CREATEBOT,
@@ -28,12 +29,11 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
 } from "../actions/constants";
-import { webService, createSocketService } from "./services";
 
 function* getSandboxMessages(action) {
   const { botId } = action;
   try {
-    const response = yield webService.get(`bots/${botId}/sandbox/messages`);
+    const response = yield getWebService().get(`bots/${botId}/sandbox/messages`);
     yield put({ type: `${API_SB_GETMESSAGES}${FETCH_SUCCESS}`, loading: false, conversations: response });
   } catch (error) {
     yield put({ type: `${API_SB_GETMESSAGES}${FETCH_FAILURE}`, error });
@@ -107,7 +107,7 @@ const api = [
   [API_USERPROFILE + FETCH_REQUEST,
     function* f() {
       try {
-        const response = yield webService.get("me");
+        const response = yield getWebService().get("me");
         yield put({ type: `${API_USERPROFILE}${FETCH_SUCCESS}`, loading: false, profile: response });
       } catch (error) {
         yield put({ type: `${API_USERPROFILE}${FETCH_FAILURE}`, error });
@@ -118,7 +118,7 @@ const api = [
   [API_ADMIN + FETCH_REQUEST,
     function* f() {
       try {
-        const response = yield webService.get("admin");
+        const response = yield getWebService().get("admin");
         yield put({ type: `${API_ADMIN}${FETCH_SUCCESS}`, loading: false, admin: response });
       } catch (error) {
         yield put({ type: `${API_ADMIN}${FETCH_FAILURE}`, error });
@@ -129,7 +129,7 @@ const api = [
     function* f(action) {
       try {
         const { params } = action;
-        const response = yield webService.put("admin", params);
+        const response = yield getWebService().put("admin", params);
         yield put({ type: `${API_SETADMINPARAMETERS}${FETCH_SUCCESS}`, loading: false, params: response });
       } catch (error) {
         yield put({ type: `${API_SETADMINPARAMETERS}${FETCH_FAILURE}`, error });
@@ -141,7 +141,7 @@ const api = [
     function* f(action) {
       const { botParams } = action;
       try {
-        const response = yield webService.post("bots", botParams, false);
+        const response = yield getWebService().post("bots", botParams, false);
         yield put({ type: `${API_CREATEBOT}${FETCH_SUCCESS}`, loading: false, bot: response });
       } catch (error) {
         yield put({ type: `${API_CREATEBOT}${FETCH_FAILURE}`, error });
@@ -153,7 +153,7 @@ const api = [
       const { botParams } = action;
       const botId = botParams.id;
       try {
-        const response = yield webService.put(`bots/${botId}`, botParams, false);
+        const response = yield getWebService().put(`bots/${botId}`, botParams, false);
         yield put({ type: `${API_SAVEBOT}${FETCH_SUCCESS}`, loading: false, bot: response });
       } catch (error) {
         yield put({ type: `${API_SAVEBOT}${FETCH_FAILURE}`, error });
@@ -165,7 +165,7 @@ const api = [
       const { botId } = action;
       const params = { data: action.data, options: action.options };
       try {
-        const response = yield webService.post(`bots/${botId}/import`, params, false);
+        const response = yield getWebService().post(`bots/${botId}/import`, params, false);
         yield put({ type: `${API_IMPORT}${FETCH_SUCCESS}`, loading: false, result: response });
       } catch (error) {
         yield put({ type: `${API_IMPORT}${FETCH_FAILURE}`, error });
@@ -177,7 +177,7 @@ const api = [
       const { botId } = action;
       const params = { from: action.from, to: action.to, channels: action.channels };
       try {
-        const response = yield webService.post(`bots/${botId}/publish`, params, false);
+        const response = yield getWebService().post(`bots/${botId}/publish`, params, false);
         yield put({ type: `${API_PUBLISH}${FETCH_SUCCESS}`, loading: false, result: response });
       } catch (error) {
         yield put({ type: `${API_PUBLISH}${FETCH_FAILURE}`, error });
@@ -189,7 +189,7 @@ const api = [
     function* f(action) {
       const { botId } = action;
       try {
-        const response = yield webService.get(`bots/${botId}/intents`);
+        const response = yield getWebService().get(`bots/${botId}/intents`);
         yield put({ type: `${API_GETINTENTS}${FETCH_SUCCESS}`, loading: false, intents: response.intents });
       } catch (error) {
         yield put({ type: `${API_GETINTENTS}${FETCH_FAILURE}`, error });
@@ -204,9 +204,9 @@ const api = [
       try {
         let response;
         if (intent.id) {
-          response = yield webService.put(`bots/${botId}/intents`, intent);
+          response = yield getWebService().put(`bots/${botId}/intents`, intent);
         } else {
-          response = yield webService.post(`bots/${botId}/intents`, intent);
+          response = yield getWebService().post(`bots/${botId}/intents`, intent);
         }
         yield put({ type: `${API_SENDINTENT}${FETCH_SUCCESS}`, loading: false, data: response });
       } catch (error) {
@@ -224,7 +224,7 @@ const api = [
         botId, intentId, from, to,
       };
       try {
-        const response = yield webService.put(`bots/${botId}/intents/${intentId}/move`, data);
+        const response = yield getWebService().put(`bots/${botId}/intents/${intentId}/move`, data);
         yield put({ type: `${API_MOVEINTENT}${FETCH_SUCCESS}`, loading: false, response });
       } catch (error) {
         yield put({ type: `${API_MOVEINTENT}${FETCH_FAILURE}`, error });
@@ -236,7 +236,7 @@ const api = [
     function* f(action) {
       const { botId, intent } = action;
       try {
-        const response = yield webService.delete(`bots/${botId}/intents/${intent.id}`);
+        const response = yield getWebService().delete(`bots/${botId}/intents/${intent.id}`);
         yield put({ type: `${API_DELETEINTENT}${FETCH_SUCCESS}`, loading: false, intent: response });
       } catch (error) {
         yield put({ type: `${API_DELETEINTENT}${FETCH_FAILURE}`, error });
@@ -266,7 +266,7 @@ const api = [
     function* f(action) {
       const { botId, conversationId, message } = action;
       try {
-        const response = yield webService.post(`bots/${botId}/sandbox/messages/${conversationId}`, message);
+        const response = yield getWebService().post(`bots/${botId}/sandbox/messages/${conversationId}`, message);
         yield put({
           type: `${API_SB_SENDMESSAGE}${FETCH_SUCCESS}`, loading: false, conversationId, message: response,
         });
@@ -280,7 +280,7 @@ const api = [
     function* f(action) {
       const { botId } = action;
       try {
-        const response = yield webService.get(`bots/${botId}/sandbox/context`);
+        const response = yield getWebService().get(`bots/${botId}/sandbox/context`);
         yield put({ type: `${API_SB_GETCONTEXT}${FETCH_SUCCESS}`, loading: false, context: response });
       } catch (error) {
         yield put({ type: `${API_SB_GETCONTEXT}${FETCH_FAILURE}`, error });
@@ -292,7 +292,7 @@ const api = [
     function* f(action) {
       const { botId } = action;
       try {
-        const response = yield webService.delete(`bots/${botId}/sandbox`);
+        const response = yield getWebService().delete(`bots/${botId}/sandbox`);
         yield put({ type: `${API_SB_RESET}${FETCH_SUCCESS}`, loading: false, result: response });
       } catch (error) {
         yield put({ type: `${API_SB_RESET}${FETCH_FAILURE}`, error });
@@ -308,7 +308,7 @@ const api = [
         url += `?type=${action.middlewareType}`;
       }
       try {
-        const middlewares = yield webService.get(url);
+        const middlewares = yield getWebService().get(url);
         yield put({ type: `${API_GETMIDDLEWARES}${FETCH_SUCCESS}`, loading: false, middlewares });
       } catch (error) {
         yield put({ type: `${API_GETMIDDLEWARES}${FETCH_FAILURE}`, error });
@@ -322,9 +322,9 @@ const api = [
       try {
         let response;
         if (middleware.id) {
-          response = yield webService.put(`middlewares/${botId}`, middleware);
+          response = yield getWebService().put(`middlewares/${botId}`, middleware);
         } else {
-          response = yield webService.post(`middlewares/${botId}`, middleware);
+          response = yield getWebService().post(`middlewares/${botId}`, middleware);
         }
         yield put({ type: `${API_SETMIDDLEWARE}${FETCH_SUCCESS}`, loading: false, middleware: response });
       } catch (error) {
@@ -337,7 +337,7 @@ const api = [
     function* f(action) {
       const { botId, middlewareId } = action;
       try {
-        const response = yield webService.delete(`middlewares/${botId}/${middlewareId}`);
+        const response = yield getWebService().delete(`middlewares/${botId}/${middlewareId}`);
         yield put({ type: `${API_DELETEMIDDLEWARE}${FETCH_SUCCESS}`, loading: false, middlewareId: response.id });
       } catch (error) {
         yield put({ type: `${API_DELETEMIDDLEWARE}${FETCH_FAILURE}`, error });

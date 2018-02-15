@@ -4,12 +4,15 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { AppContainer } from "react-hot-loader";
 import { DialogManager } from "zoapp-ui";
+import { initServices } from "zoapp-front/services";
 
 import configureStore from "OplaLibs/store";
 import App from "OplaContainers/app";
 
 // import DevTools from "../shared/containers/DevTools";
 /* eslint-enable no-unused-vars */
+
+initServices();
 
 const store = configureStore();
 
