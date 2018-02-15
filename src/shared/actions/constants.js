@@ -25,7 +25,6 @@ export const API_SB_GETCONTEXT = "API_SB_GETCONTEXT";
 export const API_SB_RESET = "API_SB_RESET";
 
 // App logic constants
-export const APP_SETTITLE = "APP_SETTITLE";
 export const APP_UPDATEPUBLISHER = "APP_UPDATEPUBLISHER";
 export const APP_SELECTINTENT = "APP_SELECTINTENT";
 export const APP_UPDATEINTENT = "APP_UPDATEINTENT";
