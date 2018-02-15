@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, Card, CardTitle, CardText, CardActions, Textfield } from "react-mdl";
+import {
+  Button,
+  Card,
+  CardTitle,
+  CardText,
+  CardActions,
+  Textfield,
+} from "react-mdl";
 import { connect } from "react-redux";
-import { signIn } from "../actions/signIn";
+import { signIn } from "zoapp-front/actions/auth";
 
 class SignInForm extends Component {
   handleCloseDialog = () => {
