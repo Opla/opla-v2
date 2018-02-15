@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { DialogManager } from "zoapp-ui";
 import ListDragComponent from "zoapp-front/components/listDragComponent";
-import SubToolbar from "../components/subToolbar";
+import SubToolbar from "zoapp-front/components/subToolbar";
 import { apiGetIntentsRequest, apiSendIntentRequest, apiDeleteIntentRequest, apiMoveIntentRequest } from "../actions/api";
 import { appSelectIntent } from "../actions/app";
 
