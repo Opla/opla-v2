@@ -43,7 +43,8 @@
     "style-loader": "^0.19.1",
     "zoapp-common": "0.1.0",
     "zoapp-front": "^0.1.1",
-    "zoapp-ui": "0.1.5"
+    "zoapp-ui": "0.1.5",
+    "classnames": "^2.2.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
