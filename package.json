@@ -12,8 +12,7 @@
     "build:prod": "webpack --env=prod --progress --profile --colors",
     "compile:dev": "webpack --env=dev --progress --profile --colors",
     "dev": "yarn compile:dev && yarn start:dev",
-    "lint:dev": "eslint src --rule 'no-console: off' --ext=js --ext=jsx --fix",
-    "lint:prod": "eslint src --ext=js --ext=jsx",
+    "lint": "eslint src --rule 'no-console: 1' --ext=js --ext=jsx --fix",
     "start:dev": "webpack-dev-server --env=dev --inline",
     "start:node": "NODE_PATH=$NODE_PATH:./shared node --harmony ./dist",
     "test": "jest"
