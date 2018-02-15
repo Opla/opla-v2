@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubToolbar renders correctly 1`] = `
+<div
+  className="mrb-panel-header"
+>
+  <div
+    className="mrb-panel-header-title"
+    style={
+      Object {
+        "marginLeft": "16px",
+      }
+    }
+  >
+    some-name
+  </div>
+  <div
+    className="mrb-panel-header__actions"
+  >
+    <div />
+    <div />
+  </div>
+</div>
+`;

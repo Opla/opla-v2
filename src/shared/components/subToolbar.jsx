@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { IconButton, Menu, MenuItem } from "react-mdl";
-import HeaderIcon from "./headerIcon";
+import HeaderIcon from "zoapp-front/components/headerIcon";
 
 const SubToolbar = ({
   titleIcon,
@@ -83,11 +83,15 @@ SubToolbar.defaultProps = {
 
 SubToolbar.propTypes = {
   titleName: PropTypes.oneOfType([
-    PropTypes.string, PropTypes.element]).isRequired,
+    PropTypes.element,
+    PropTypes.string,
+  ]).isRequired,
   titleIcon: PropTypes.string,
-  icons: PropTypes.arrayOf(PropTypes.shape({})),
+  icons: PropTypes.arrayOf(PropTypes.shape({
+  })),
   menu: PropTypes.shape({
-    items: PropTypes.arrayOf(PropTypes.shape({})),
+    items: PropTypes.arrayOf(PropTypes.shape({
+    })),
   }),
 };
 
