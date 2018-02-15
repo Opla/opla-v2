@@ -42,6 +42,7 @@
     "redux-saga": "0.16.0",
     "style-loader": "^0.19.1",
     "zoapp-common": "0.1.0",
+    "zoapp-front": "github:zoapp/front#master",
     "zoapp-ui": "0.1.5"
   },
   "devDependencies": {
