@@ -5,7 +5,7 @@ import { Grid, Cell, Button, Content } from "react-mdl";
 import { DialogManager } from "zoapp-ui";
 import { apiGetIntentsRequest, apiSendIntentRequest, apiSaveBotRequest, apiImportRequest } from "../actions/api";
 import { appUpdateIntent, appSetTitle } from "../actions/app";
-import Loading from "../components/loading";
+import Loading from "zoapp-front/components/loading";
 import SignInForm from "./signInForm";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";

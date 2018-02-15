@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Content, Grid, Cell, Button } from "react-mdl";
-import Loading from "../components/loading";
-/* import UsersChart from "../components/usersChart"; */
+import Loading from "zoapp-front/components/loading";
 import DonutChart from "../components/donutChart";
 import { appSetTitle } from "../actions/app";
 

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { appSetTitle } from "../actions/app";
 import { apiSetAdminParametersRequest } from "../actions/api";
 import TableComponent from "../components/tableComponent";
-import Loading from "../components/loading";
+import Loading from "zoapp-front/components/loading";
 import SignInForm from "./signInForm";
 import ServicesContainer from "./servicesContainer";
 import PluginsManager from "../utils/pluginsManager";

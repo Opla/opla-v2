@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Cell } from "react-mdl";
 import { DialogManager } from "zoapp-ui";
-import List from "../components/listComponent";
+import List from "zoapp-front/components/listComponent";
 import ServicesList from "../components/servicesList";
 import displayWebServiceEditor from "../components/serviceEditor";
 import displayProviderEditor from "../components/providerEditor";
