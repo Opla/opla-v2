@@ -3,6 +3,7 @@ import { Layout, Header, Drawer, Navigation, IconButton, Menu, MenuItem, HeaderT
 import PropTypes from "prop-types";
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { initAuthSettings } from "zoapp-front/actions/initialize";
 
 import Home from "OplaContainers/home";
 import ReportsManager from "OplaContainers/reportsManager";
@@ -14,7 +15,6 @@ import CreateAssistant from "OplaContainers/createAssistant";
 import DemoManager from "OplaContainers/demoManager";
 import BuilderBox from "OplaContainers/builderBox";
 import UserBox from "./userBox";
-import { initAuthSettings } from "../actions/initialize";
 import { apiAdminRequest } from "../actions/api";
 
 class App extends React.Component {

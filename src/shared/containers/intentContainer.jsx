@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { DialogManager } from "zoapp-ui";
-import IntentDetail, { displayActionEditor } from "../components/intentDetail";
 import SubToolbar from "zoapp-front/components/subToolbar";
+
+import IntentDetail, { displayActionEditor } from "../components/intentDetail";
 import { apiSendIntentRequest } from "../actions/api";
-import { appSetIntentAction, appDeleteIntentAction, appUpdateIntent } from "../actions/app";
+import {
+  appDeleteIntentAction,
+  appSetIntentAction,
+  appUpdateIntent,
+} from "../actions/app";
 
 class IntentContainer extends Component {
   onChangeAction = (actionText) => {

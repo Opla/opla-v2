@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Checkbox, Button, DialogTitle, DialogContent, DialogActions, Tabs, Tab } from "react-mdl";
+import {
+  Button,
+  Checkbox,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Tab,
+  Tabs,
+} from "react-mdl";
 import { DialogManager, DialogBox } from "zoapp-ui";
+
 import FileManager from "../utils/fileManager";
 
 class IODialog extends Component {
@@ -24,7 +33,8 @@ class IODialog extends Component {
     }
   }
 
-  /* static importCSV(data) {
+  /*
+  static importCSV(data) {
     const lines = data.split(/\r\n|\n/);
     const headers = lines.shift().split(",");
     const items = [];
@@ -50,15 +60,17 @@ class IODialog extends Component {
       items.push(item);
     });
     return items;
-  } */
+  }
+  */
 
   onUpload = (selectorFiles) => {
     FileManager.upload(selectorFiles, (data, filetype) => {
-      console.log("IODialog.onUpload=", filetype);
-      /* if (filetype === ".csv" || filetype === "text/csv") {
+      /*
+      if (filetype === ".csv" || filetype === "text/csv") {
         const csv = this.importCSV(data);
         console.log("imported csv", csv);
-      } */
+       }
+       */
       this.setState({ data, filetype });
     });
   };
@@ -96,37 +108,78 @@ class IODialog extends Component {
           onClose={this.handleCloseDialog}
         >
           <DialogTitle>
-          Import Intents
+            Import Intents
           </DialogTitle>
+
           <DialogContent>
             <section>
-              <Button className="mdl-button--file" raised style={{ width: "100%", marginTop: "30px" }}>Upload datasets
-                <input type="file" accept={this.props.accept} onChange={e => this.onUpload(e.target.files)} />
+              <Button
+                className="mdl-button--file"
+                raised
+                style={{ width: "100%", marginTop: "30px" }}
+              >
+                Upload datasets
+                <input
+                  type="file"
+                  accept={this.props.accept}
+                  onChange={e => this.onUpload(e.target.files)}
+                />
               </Button>
             </section>
           </DialogContent>
+
           <DialogActions>
-            <Button type="button" onClick={(e) => { e.preventDefault(); this.handleImport(); }}>Import</Button>
-            <Button type="button" onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}>Cancel</Button>
+            <Button
+              type="button"
+              onClick={(e) => { e.preventDefault(); this.handleImport(); }}
+            >
+              Import
+            </Button>
+            <Button
+              type="button"
+              onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
+            >
+              Cancel
+            </Button>
           </DialogActions>
         </DialogBox>
       );
     }
+
     const p1 = this.state.activeTab === 0 ? "block" : "none";
     const p2 = this.state.activeTab === 1 ? "block" : "none";
+
     let dialogActions = null;
     if (this.state.activeTab === 0) {
       dialogActions = (
         <DialogActions>
-          <Button type="button" onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}>Done</Button>
-        </DialogActions>);
+          <Button
+            type="button"
+            onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
+          >
+            Done
+          </Button>
+        </DialogActions>
+      );
     } else {
       dialogActions = (
         <DialogActions>
-          <Button type="button" onClick={(e) => { e.preventDefault(); this.handleImport(); }}>Import</Button>
-          <Button type="button" onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}>Cancel</Button>
-        </DialogActions>);
+          <Button
+            type="button"
+            onClick={(e) => { e.preventDefault(); this.handleImport(); }}
+          >
+            Import
+          </Button>
+          <Button
+            type="button"
+            onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      );
     }
+
     return (
       <DialogBox
         open={this.state.openDialog}
@@ -146,7 +199,11 @@ class IODialog extends Component {
         </DialogTitle>
         <DialogContent>
           <section style={{ display: p1 }}>
-            <Button raised style={{ width: "100%", marginTop: "20px" }} onClick={() => this.props.onDownload()}>
+            <Button
+              raised
+              style={{ width: "100%", marginTop: "20px" }}
+              onClick={() => this.props.onDownload()}
+            >
               Download as json
             </Button>
           </section>
@@ -157,12 +214,21 @@ class IODialog extends Component {
               checked={this.state.deletePrevious}
               onChange={(e) => { this.setState({ deletePrevious: !!e.target.value }); }}
             />
-            <Button className="mdl-button--file" raised style={{ width: "100%", marginTop: "30px" }}>
+            <Button
+              className="mdl-button--file"
+              raised
+              style={{ width: "100%", marginTop: "30px" }}
+            >
               Upload datasets
-              <input type="file" accept={this.props.accept} onChange={e => this.onUpload(e.target.files)} />
+              <input
+                type="file"
+                accept={this.props.accept}
+                onChange={e => this.onUpload(e.target.files)}
+              />
             </Button>
           </section>
         </DialogContent>
+
         {dialogActions}
       </DialogBox>
     );

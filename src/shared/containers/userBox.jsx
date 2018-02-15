@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Button, IconButton, Menu, MenuItem } from "react-mdl";
 import { connect } from "react-redux";
 import { DialogManager } from "zoapp-ui";
-import { apiUserProfileRequest } from "../actions/user";
+import { apiUserProfileRequest } from "zoapp-front/actions/user";
+
 import SignInDialog from "./signInDialog";
 import SignOutDialog from "./signOutDialog";
 

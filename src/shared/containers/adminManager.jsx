@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { Grid, Cell, Button, IconButton, Content, Textfield, Tooltip } from "react-mdl";
 import { DialogManager, Selectfield } from "zoapp-ui";
 import { connect } from "react-redux";
-import { appSetTitle } from "../actions/app";
-import { apiSetAdminParametersRequest } from "../actions/api";
 import TableComponent from "zoapp-front/components/tableComponent";
 import Loading from "zoapp-front/components/loading";
+
+import { appSetTitle } from "../actions/app";
+import { apiSetAdminParametersRequest } from "../actions/api";
 import SignInForm from "./signInForm";
 import ServicesContainer from "./servicesContainer";
 import PluginsManager from "../utils/pluginsManager";
 import TunnelBox from "../components/tunnelBox";
-
 
 const infoStyleD = {
   fontSize: "16px",
@@ -22,8 +22,7 @@ const infoStyleD = {
 };
 
 class AdminManager extends Component {
-  static onActionTunnel(dialog, action) {
-    console.log("onActionTunnel", dialog, action);
+  static onActionTunnel(/* dialog, action */) {
     DialogManager.close();
   }
 
@@ -153,18 +152,29 @@ class AdminManager extends Component {
       const items = [];
       const status = "you";
       const { user, profile } = this.props;
-      // const spanStyle = { width: "160px" };
+
       const values = [];
       values.push(profile.username);
       values.push(profile.email);
       values.push(user.attributes.scope);
       values.push(status);
+
       items.push({ id: 1, values, icon: `../images/${profile.avatar}.png` });
+
       const headers = ["", "username", "email", "role", "status"];
       const title = (
-        <div style={infoStyleD}>You could give an access to your collaborators here.
-          <Button raised colored style={{ float: "right", marginBottom: "24px" }}>ADD</Button>
-        </div>);
+        <div style={infoStyleD}>
+          You could give an access to your collaborators here.
+          <Button
+            raised
+            colored
+            style={{ float: "right", marginBottom: "24px" }}
+          >
+            ADD
+          </Button>
+        </div>
+      );
+
       content = (
         <Grid>
           <Cell className="mdl-color--white" col={12}>
@@ -178,9 +188,11 @@ class AdminManager extends Component {
               />
             </div>
           </Cell>
-        </Grid>);
+        </Grid>
+      );
     } else if (active === 3) {
       const { params } = this.props.admin;
+
       const emailServer = this.state.emailParams || params.emailServer || { };
       const backend = this.state.backendParams || params.backend || { };
       // const tunnelParams = this.state.tunnelParams || backend.tunnel || {};
@@ -190,8 +202,17 @@ class AdminManager extends Component {
       content = (
         <Grid>
           <Cell className="mdl-color--white" col={12}>
-            <div style={infoStyleD}>Backend configuration
-              <Button raised colored disabled={saveBackendDisabled} style={{ float: "right" }} onClick={(e) => { e.preventDefault(); this.onSaveBackend(); }}>SAVE</Button>
+            <div style={infoStyleD}>
+              Backend configuration
+              <Button
+                raised
+                colored
+                disabled={saveBackendDisabled}
+                style={{ float: "right" }}
+                onClick={(e) => { e.preventDefault(); this.onSaveBackend(); }}
+              >
+                SAVE
+              </Button>
             </div>
             <form style={infoStyleD}>
               <div style={{ width: "520px" }}>
@@ -203,7 +224,12 @@ class AdminManager extends Component {
                   value={backend.publicUrl}
                 />
                 <Tooltip label="Setup tunnel">
-                  <IconButton colored={hasTunnelParams} style={{ float: "right", marginTop: "8px" }} name="link" onClick={(e) => { e.preventDefault(); this.displayTunnelDialog(); }} />
+                  <IconButton
+                    colored={hasTunnelParams}
+                    style={{ float: "right", marginTop: "8px" }}
+                    name="link"
+                    onClick={(e) => { e.preventDefault(); this.displayTunnelDialog(); }}
+                  />
                 </Tooltip>
               </div>
               <div><Textfield
@@ -246,7 +272,19 @@ class AdminManager extends Component {
             <div />
           </Cell>
           <Cell className="mdl-color--white" col={12}>
-            <div style={infoStyleD}>Email server configuration<Button raised colored disabled={saveEmailDisabled} style={{ float: "right" }}>SAVE</Button></div>
+            <div
+              style={infoStyleD}
+            >
+              Email server configuration
+              <Button
+                raised
+                colored
+                disabled={saveEmailDisabled}
+                style={{ float: "right" }}
+              >
+                SAVE
+              </Button>
+            </div>
             <form style={infoStyleD} autoComplete="nope">
               <div><Textfield
                 onChange={() => {}}

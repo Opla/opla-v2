@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { DialogManager } from "zoapp-ui";
-import MessengerBox from "../components/messengerBox";
 import SubToolbar from "zoapp-front/components/subToolbar";
+
+import MessengerBox from "../components/messengerBox";
 import {
   apiGetSandboxMessagesRequest, apiSubscribeSandboxMessages,
   apiUnsubscribeSandboxMessages, apiSendSandboxMessageRequest,

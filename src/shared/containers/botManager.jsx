@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Cell, Button, Content } from "react-mdl";
 import { DialogManager } from "zoapp-ui";
+import Loading from "zoapp-front/components/loading";
+
 import { apiGetIntentsRequest, apiSendIntentRequest, apiSaveBotRequest, apiImportRequest } from "../actions/api";
 import { appUpdateIntent, appSetTitle } from "../actions/app";
-import Loading from "zoapp-front/components/loading";
 import SignInForm from "./signInForm";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";
