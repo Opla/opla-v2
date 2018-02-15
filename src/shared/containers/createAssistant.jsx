@@ -228,7 +228,7 @@ CreateAssistant.defaultProps = {
 
 CreateAssistant.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.objectOf(),
+  error: PropTypes.string,
   createBot: PropTypes.func.isRequired,
   appSetTitle: PropTypes.func.isRequired,
   history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func }).isRequired,

@@ -1,5 +1,7 @@
 import createReducer from "zoapp-front/reducers/createReducer";
 import {
+  API_ADMIN,
+  APP_SETTITLE,
   AUTH_SIGNOUT,
   FETCH_FAILURE,
   FETCH_REQUEST,
@@ -7,7 +9,6 @@ import {
 } from "zoapp-front/actions/constants";
 
 import {
-  API_ADMIN,
   API_CREATEBOT,
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
@@ -27,7 +28,6 @@ import {
   APP_DELETEINTENTACTION,
   APP_SELECTINTENT,
   APP_SETINTENTACTION,
-  APP_SETTITLE,
   APP_UPDATEINTENT,
   APP_UPDATEPUBLISHER,
 } from "../actions/constants";
