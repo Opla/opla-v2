@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Cell } from "react-mdl";
-import FileInput from "./fileInput";
+import makeClassName from "classnames";
+import FileInput from "zoapp-front/components/fileInput";
 
 const infoStyleC = {
   fontSize: "16px",
@@ -14,13 +15,7 @@ const infoStyleC = {
 
 const templateBoxStyle = {
   height: "168px",
-  // backgroundColor: "white"
 };
-
-/* const templateSelectedBoxStyle = {
-  height: "168px",
-  backgroundColor: "#E0E0E0",
-}; */
 
 const anchorStyle = {
   textDecoration: "none",
@@ -38,28 +33,45 @@ const TemplatesList = ({
 }) => (
   <Grid>
     {items.map((item, index) => {
-      let cn = "mdl-shadow--2dp selectableListItem";
-      if (selectedItem === index) {
-        cn = "mdl-shadow--2dp selectedListItem";
-      }
-      const i = `./images/robots/robot-${index}.svg`;
-      let b = <img src={i} style={{ width: "40%", margin: "30px" }} alt={item.name} />;
-      if (item.name === "Import") {
-        b = <form style={{ width: "100%" }}><FileInput onLoad={onImport} accept={acceptImport} /></form>;
-      }
+      const isSelectedItem = selectedItem === index;
+      const className = makeClassName("mdl-shadow--2dp", {
+        selectableListItem: !isSelectedItem,
+        selectedListItem: isSelectedItem,
+      });
+
       return (
-        <Cell key={item.id} style={templateBoxStyle} className={cn} col={2}>
+        <Cell
+          key={item.id}
+          style={templateBoxStyle}
+          className={className}
+          col={2}
+        >
           <div
-            onKeyUp={() => { }}
             role="presentation"
             style={anchorStyle}
-            onClick={() => { /* e.preventDefault(); */ onSelect(index); }}
+            onClick={() => { onSelect(index); }}
           >
-            <div style={infoStyleC}><div style={cellStyle}>{item.name}</div>
-              <div style={cellStyle}>{b}</div>
+            <div style={infoStyleC}>
+              <div style={cellStyle}>
+                {item.name}
+              </div>
+              <div style={cellStyle}>
+                {item.name === "Import" ? (
+                  <form style={{ width: "100%" }}>
+                    <FileInput onLoad={onImport} accept={acceptImport} />
+                  </form>
+                ) : (
+                  <img
+                    src={`./images/robots/robot-${index}.svg`}
+                    style={{ width: "40%", margin: "30px" }}
+                    alt={item.name}
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </Cell>);
+        </Cell>
+      );
     })}
   </Grid>
 );
@@ -70,7 +82,9 @@ TemplatesList.defaultProps = {
 };
 
 TemplatesList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+  })).isRequired,
   selectedItem: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
   onImport: PropTypes.func,
