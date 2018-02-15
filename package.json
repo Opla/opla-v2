@@ -42,7 +42,7 @@
     "redux-saga": "0.16.0",
     "style-loader": "^0.19.1",
     "zoapp-common": "0.1.0",
-    "zoapp-front": "github:zoapp/front#master",
+    "zoapp-front": "^0.1.1",
     "zoapp-ui": "0.1.5"
   },
   "devDependencies": {
@@ -75,7 +75,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "OplaLibs/(.*)": "<rootDir>/src/shared/$1"
+      "@shared/(.*)": "<rootDir>/src/shared/$1"
     }
   }
 }
