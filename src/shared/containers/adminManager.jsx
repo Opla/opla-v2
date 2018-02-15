@@ -5,7 +5,7 @@ import { DialogManager, Selectfield } from "zoapp-ui";
 import { connect } from "react-redux";
 import { appSetTitle } from "../actions/app";
 import { apiSetAdminParametersRequest } from "../actions/api";
-import TableComponent from "../components/tableComponent";
+import TableComponent from "zoapp-front/components/tableComponent";
 import Loading from "zoapp-front/components/loading";
 import SignInForm from "./signInForm";
 import ServicesContainer from "./servicesContainer";
