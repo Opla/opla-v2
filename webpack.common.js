@@ -4,9 +4,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   context: path.resolve(__dirname, "./src/"),
-  entry: {
-    app: "./client/index.jsx"
-  },
   output: {
     path: path.resolve(__dirname, "./dist/public/js"),
     filename: "app.js",
@@ -32,22 +29,8 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {
-            presets: ["es2015", "react", "stage-1"],
-            plugins: [
-              ["transform-runtime", { "polyfill": false }],
-              "transform-regenerator",
-              "react-hot-loader/babel",
-              "transform-decorators-legacy"
-            ],
-            env: {
-              start: {
-                presets: ["react-hmre"]
-              }
-            }
-          }
         }
-      }
+      },
     ]
   },
   plugins: [
