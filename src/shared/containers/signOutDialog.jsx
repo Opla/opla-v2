@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Button, DialogTitle, DialogContent, DialogActions } from "react-mdl";
 import { connect } from "react-redux";
 import { DialogBox } from "zoapp-ui";
-import { signOut } from "../actions/signOut";
+import { signOut } from "zoapp-front/actions/auth";
 
 class SignOutDialog extends Component {
   constructor(props) {

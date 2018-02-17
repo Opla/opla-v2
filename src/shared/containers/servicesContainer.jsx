@@ -3,11 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Cell } from "react-mdl";
 import { DialogManager } from "zoapp-ui";
-import List from "../components/listComponent";
-import ServicesList from "../components/servicesList";
-import displayWebServiceEditor from "../components/serviceEditor";
-import displayProviderEditor from "../components/providerEditor";
-import { apiGetMiddlewaresRequest, apiSetMiddlewareRequest, apiDeleteMiddlewareRequest } from "../actions/api";
+import List from "zoapp-front/components/listComponent";
+import ServicesList from "zoapp-front/components/servicesList";
+import displayWebServiceEditor from "zoapp-front/components/displayWebServiceEditor";
+
+import displayProviderEditor from "../components/displayProviderEditor";
+import {
+  apiGetMiddlewaresRequest,
+  apiSetMiddlewareRequest,
+  apiDeleteMiddlewareRequest,
+} from "../actions/api";
 
 const divCellStyle = {
   width: "100%",

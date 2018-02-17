@@ -1,14 +1,45 @@
 {
-  "presets": [["es2015", {"modules": false}], "react", "stage-1"],
-  "plugins": ["transform-regenerator", "react-hot-loader/babel", "transform-decorators-legacy"],
-  "env": {
-    "start": {
-      "presets": [
-        "react-hmre"
-      ]
-    },
-    "test": {
-      "presets": [["es2015"], "react", "stage-1"]
+    "plugins": [
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "transform-decorators-legacy",
+        "react-hot-loader/babel",
+        [
+            "transform-runtime",
+            {
+                "polyfill": false,
+                "regenerator": true
+            }
+        ]
+    ],
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": [
+                        "last 2 versions",
+                        "IE >= 11"
+                    ]
+                },
+                "modules": false
+            }
+        ],
+        "react"
+    ],
+    "env": {
+        "test": {
+            "presets": [
+                [
+                    "env",
+                    {
+                        "targets": {
+                            "node": "current"
+                        }
+                    }
+                ],
+                "react"
+            ]
+        }
     }
-  }
 }

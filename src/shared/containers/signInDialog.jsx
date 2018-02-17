@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, DialogTitle, DialogContent, DialogActions, Textfield } from "react-mdl";
+import {
+  Button,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Textfield,
+} from "react-mdl";
 import { connect } from "react-redux";
 import { DialogBox } from "zoapp-ui";
-import { signIn } from "../actions/signIn";
+import { signIn } from "zoapp-front/actions/auth";
 
 class SignInDialog extends Component {
   constructor(props) {

@@ -4,6 +4,7 @@ import { Content, Button, Textfield } from "react-mdl";
 import { DialogManager, Selectfield } from "zoapp-ui";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+
 import TemplatesList from "../components/templatesList";
 import ProcessingDialog from "./processingDialog";
 import { apiCreateBot } from "../actions/api";
@@ -35,9 +36,6 @@ const h4 = {
 const secText = {
   color: "rgba(0, 0, 0, 0.54)",
 };
-/* const hintText = {
-  color: "rgba(0, 0, 0, 0.38)",
-}; */
 
 // TODO get templates from API
 const templates = [
@@ -66,7 +64,6 @@ class CreateAssistant extends Component {
   onImportTemplate = (data) => {
     // TODO check if json
     const json = JSON.parse(data);
-    console.log("onImportTemplate json=", json);
     this.onSelectTemplate(3, json);
   }
 
@@ -143,7 +140,8 @@ class CreateAssistant extends Component {
             acceptImport={acceptImport}
           />
           <div style={headerStyle}>
-            <div style={secText}>Want more ?
+            <div style={secText}>
+              Want more ?
               <br />
               In a near future we will release our BotStore to find
               the perfect bot from our community.
@@ -230,7 +228,7 @@ CreateAssistant.defaultProps = {
 
 CreateAssistant.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.objectOf(),
+  error: PropTypes.string,
   createBot: PropTypes.func.isRequired,
   appSetTitle: PropTypes.func.isRequired,
   history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func }).isRequired,

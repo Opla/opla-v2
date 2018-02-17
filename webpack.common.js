@@ -4,9 +4,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   context: path.resolve(__dirname, "./src/"),
-  entry: {
-    app: "./client/index.jsx"
-  },
   output: {
     path: path.resolve(__dirname, "./dist/public/js"),
     filename: "app.js",
@@ -20,7 +17,8 @@ module.exports = {
       OplaPlugins: path.resolve(__dirname, "./src/plugins/"),
       OplaLibs: path.resolve(__dirname, "./src/shared/"),
       OplaContainers: path.resolve(__dirname, "./src/shared/containers/"),
-      MdlExt: path.resolve(__dirname, "./src/shared/components/mdl/")
+      MdlExt: path.resolve(__dirname, "./src/shared/components/mdl/"),
+      './config': path.resolve(__dirname, './config/default.json')
     },
     modules: [path.join(__dirname, "src"), "node_modules"]
   },
@@ -31,29 +29,12 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {
-            presets: ["es2015", "react", "stage-1"],
-            plugins: [
-              ["transform-runtime", { "polyfill": false }],
-              "transform-regenerator",
-              "react-hot-loader/babel",
-              "transform-decorators-legacy"
-            ],
-            env: {
-              start: {
-                presets: ["react-hmre"]
-              }
-            }
-          }
         }
-      }
+      },
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      '__REACT_DEVTOOLS_GLOBAL_HOOK__': '({ isDisabled: true })'
-    }),
     new CopyWebpackPlugin([
       {
         from: "./public",

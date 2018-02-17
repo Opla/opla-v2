@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Content, Grid, Cell, Button } from "react-mdl";
-import Loading from "../components/loading";
-/* import UsersChart from "../components/usersChart"; */
+import Loading from "zoapp-front/components/loading";
+
 import DonutChart from "../components/donutChart";
 import { appSetTitle } from "../actions/app";
 
@@ -58,10 +58,22 @@ class Dashboard extends Component {
       <Content className="mdl-color--grey-100">
         <Grid>
           <Cell className="mdl-color--white" col={12}>
-            <div style={infoStyleD}> Last 7 days |  Filter: All
+            <div style={infoStyleD}>
+              Last 7 days |  Filter: All
 
-              <Button raised colored style={{ float: "right", marginBottom: "16px" }}>Export</Button>
-              <Button raised style={{ float: "right", marginBottom: "16px", marginRight: "16px" }}>Edit</Button>
+              <Button
+                raised
+                colored
+                style={{ float: "right", marginBottom: "16px" }}
+              >
+                Export
+              </Button>
+              <Button
+                raised
+                style={{ float: "right", marginBottom: "16px", marginRight: "16px" }}
+              >
+                Edit
+              </Button>
             </div>
 
           </Cell>

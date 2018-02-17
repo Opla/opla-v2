@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Stepper } from "zoapp-ui";
-import { FBContainer } from "./fbContainer";
 
-export default class FBTemplate extends Component {
+import FBContainer from "./fbContainer";
+
+class FBTemplate extends Component {
   constructor() {
     super();
     this.state = {
@@ -62,7 +63,8 @@ export default class FBTemplate extends Component {
             selectedStep={selectedStep}
           />
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
@@ -70,3 +72,5 @@ FBTemplate.propTypes = {
   appId: PropTypes.string.isRequired,
   onAction: PropTypes.func.isRequired,
 };
+
+export default FBTemplate;
