@@ -101,7 +101,7 @@ class ActionsList extends Component {
                 >
                   <ListItemContent icon={icon} subtitle={text} className="mdl-list_action">{condition}</ListItemContent>
                   <ListItemAction>
-                    <IconButton
+                    <Icon
                       name="delete"
                       onClick={(e) => {
                         e.preventDefault(); if (onSelect) {
@@ -133,7 +133,7 @@ class ActionsList extends Component {
                 >
                   <ListItemContent icon={icon} className="mdl-list_action">{text}</ListItemContent>
                   <ListItemAction>
-                    <IconButton
+                    <Icon
                       name="delete"
                       onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "delete", index }); } }}
                     />

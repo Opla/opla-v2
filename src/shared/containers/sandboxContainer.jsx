@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DialogManager } from "zoapp-ui";
-import SubToolbar from "zoapp-front/components/subToolbar";
+import { DialogManager, SubToolbar } from "zoapp-ui";
 
 import MessengerBox from "../components/messengerBox";
 import {

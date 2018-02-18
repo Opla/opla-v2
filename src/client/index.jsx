@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { AppContainer } from "react-hot-loader";
-import { DialogManager } from "zoapp-ui";
 import { initServices } from "zoapp-front/services";
 
 import configureStore from "OplaLibs/store";
@@ -15,8 +14,6 @@ import App from "OplaContainers/app";
 initServices();
 
 const store = configureStore();
-
-DialogManager.init(store);
 
 /* eslint-enable no-restricted-syntax */
 const mountNode = document.getElementById("app");

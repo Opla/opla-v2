@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { initAuthSettings } from "zoapp-front/actions/initialize";
+import UserBox from "zoapp-front/containers/userBox";
 
 import Home from "OplaContainers/home";
 import ReportsManager from "OplaContainers/reportsManager";
 import BotManager from "OplaContainers/botManager";
 import AdminManager from "OplaContainers/adminManager";
 import CreateAssistant from "OplaContainers/createAssistant";
-import DemoManager from "OplaContainers/demoManager";
 import BuilderBox from "OplaContainers/builderBox";
-import UserBox from "./userBox";
+
 import { apiAdminRequest } from "../actions/api";
 
 class App extends React.Component {
@@ -163,7 +163,6 @@ class App extends React.Component {
             <Route path="/builder" render={props => <BotManager {...props} activeTab={this.state.activeTab} />} />
             <Route path="/admin" render={props => <AdminManager {...props} activeTab={this.state.activeTab} />} />
             <Route path="/create" component={CreateAssistant} />
-            <Route path="/demo" component={DemoManager} />
             <Route path="*" component={Home} />
           </Switch>
         </Layout>

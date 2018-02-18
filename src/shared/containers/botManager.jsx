@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { Grid, Cell, Button, Content } from "zoapp-materialcomponents";
 import { DialogManager } from "zoapp-ui";
 import Loading from "zoapp-front/components/loading";
+import SignInForm from "zoapp-front/containers/signInForm";
 
 import { apiGetIntentsRequest, apiSendIntentRequest, apiSaveBotRequest, apiImportRequest } from "../actions/api";
 import { appUpdateIntent, appSetTitle } from "../actions/app";
-import SignInForm from "./signInForm";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";
 import SandboxContainer from "./sandboxContainer";

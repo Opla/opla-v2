@@ -4,10 +4,10 @@ import { Grid, Cell, Button, IconButton, Content, Textfield, Tooltip } from "zoa
 import { DialogManager, Selectfield, TableComponent } from "zoapp-ui";
 import { connect } from "react-redux";
 import Loading from "zoapp-front/components/loading";
+import SignInForm from "zoapp-front/containers/signInForm";
 
 import { appSetTitle } from "../actions/app";
 import { apiSetAdminParametersRequest } from "../actions/api";
-import SignInForm from "./signInForm";
 import ServicesContainer from "./servicesContainer";
 import PluginsManager from "../utils/pluginsManager";
 import TunnelBox from "../components/tunnelBox";
