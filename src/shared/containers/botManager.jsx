@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid, Cell, Button, Content } from "react-mdl";
+import { Grid, Cell, Button, Content } from "zoapp-materialcomponents";
 import { DialogManager } from "zoapp-ui";
 import Loading from "zoapp-front/components/loading";
 

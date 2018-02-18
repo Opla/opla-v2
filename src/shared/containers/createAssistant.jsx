@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Content, Button, Textfield } from "react-mdl";
+import { Content, Button, Textfield } from "zoapp-materialcomponents";
 import { DialogManager, Selectfield } from "zoapp-ui";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";

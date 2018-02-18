@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Textfield, IconButton, Button } from "react-mdl";
+import { Textfield, IconButton, Button } from "zoapp-materialcomponents";
 import PropTypes from "prop-types";
 
 class MessengerBox extends Component {

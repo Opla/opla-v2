@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Textfield, Button } from "react-mdl";
+import { Textfield, Button } from "zoapp-materialcomponents";
 import { Selectfield } from "zoapp-ui";
 
 class TunnelBox extends Component {

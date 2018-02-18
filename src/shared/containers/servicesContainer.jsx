@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Cell } from "react-mdl";
-import { DialogManager } from "zoapp-ui";
-import List from "zoapp-front/components/listComponent";
+import { Cell } from "zoapp-materialcomponents";
+import { DialogManager, ListComponent } from "zoapp-ui";
 import ServicesList from "zoapp-front/components/servicesList";
 import displayWebServiceEditor from "zoapp-front/components/displayWebServiceEditor";
 
@@ -132,7 +131,7 @@ class ServicesContainer extends Component {
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><List
+          <div style={{ height: "280px" }}><ListComponent
             className="list-content"
             style={{ padding: "0px" }}
             items={items}
@@ -170,7 +169,7 @@ class ServicesContainer extends Component {
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><List
+          <div style={{ height: "280px" }}><ListComponent
             className="list-content"
             style={{ padding: "0px" }}
             items={items}
@@ -210,7 +209,7 @@ class ServicesContainer extends Component {
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><List
+          <div style={{ height: "280px" }}><ListComponent
             className="list-content"
             style={{ padding: "0px" }}
             items={items}

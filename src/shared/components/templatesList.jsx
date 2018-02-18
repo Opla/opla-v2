@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid, Cell } from "react-mdl";
+import { Grid, Cell } from "zoapp-materialcomponents";
 import makeClassName from "classnames";
 import FileInput from "zoapp-front/components/fileInput";
 

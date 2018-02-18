@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemContent, ListItemAction, IconButton, Chip } from "react-mdl";
+import { List, ListItem, ListItemContent, ListItemAction, Icon, Chip } from "zoapp-materialcomponents";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsTools from "../utils/actionsTools";
 
@@ -40,7 +40,7 @@ class ActionsList extends Component {
         } else if (actionItem.type === "variable") {
           return (<Chip key={id} style={styleVar}>{actionItem.text}</Chip>);
         } else if (actionItem.type === "br") {
-          return (<Chip key={id} style={styleHtml}><IconButton name="keyboard_return" style={{ fontSize: "13px" }} /></Chip>);
+          return (<Chip key={id} style={styleHtml}><Icon name="keyboard_return" style={{ fontSize: "13px" }} /></Chip>);
         } else if (actionItem.type === "button") {
           return (<Chip key={id} style={styleHtml}>{actionItem.text}</Chip>);
         }

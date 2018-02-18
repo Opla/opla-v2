@@ -8,7 +8,7 @@ import {
   DialogTitle,
   Tab,
   Tabs,
-} from "react-mdl";
+} from "zoapp-materialcomponents";
 import { DialogManager, DialogBox } from "zoapp-ui";
 
 import FileManager from "../utils/fileManager";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button } from "react-mdl";
+import { Button } from "zoapp-materialcomponents";
 import { DialogManager } from "zoapp-ui";
 import { connect } from "react-redux";
 import PublishDialog from "./publishDialog";

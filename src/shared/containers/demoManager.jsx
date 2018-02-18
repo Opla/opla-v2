@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Content } from "react-mdl";
+import { Content } from "zoapp-materialcomponents";
 import { apiGetIntentsRequest, apiSendIntentRequest } from "../actions/api";
 import SignInForm from "./signInForm";
 import SandboxContainer from "./sandboxContainer";

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, Cell, Button, IconButton, Content, Textfield, Tooltip } from "react-mdl";
-import { DialogManager, Selectfield } from "zoapp-ui";
+import { Grid, Cell, Button, IconButton, Content, Textfield, Tooltip } from "zoapp-materialcomponents";
+import { DialogManager, Selectfield, TableComponent } from "zoapp-ui";
 import { connect } from "react-redux";
-import TableComponent from "zoapp-front/components/tableComponent";
 import Loading from "zoapp-front/components/loading";
 
 import { appSetTitle } from "../actions/app";

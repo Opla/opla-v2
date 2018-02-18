@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { DialogTitle, DialogContent, DialogActions } from "react-mdl";
+import { DialogTitle, DialogContent, DialogActions } from "zoapp-materialcomponents";
 import { DialogBox } from "zoapp-ui";
 
 export default class ProcessingDialog extends Component {

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemContent, ListItemAction, Textfield, Button } from "react-mdl";
+import { List, ListItem, ListItemContent, ListItemAction, Textfield, Button } from "zoapp-materialcomponents";
 import { ExpansionPanel, DialogManager } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
