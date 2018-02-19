@@ -8,6 +8,7 @@ import React from "react";
 import Front from "zoapp-front/front";
 import Screen from "zoapp-front/containers/screen";
 import Home from "OplaContainers/home";
+import CreateAssistant from "OplaContainers/createAssistant";
 import configureStore from "OplaLibs/store";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
@@ -24,16 +25,16 @@ const app = {
   screens: [
     {
       id: "1",
-      to: "/",
+      isDrawerItem: true,
       icon: "dashboard",
       name: "Dashboard",
       access: "auth",
       path: "/",
-      render: props => React.createElement(Home, props, "Dashboard"),
+      render: props => React.createElement(Home, props),
     },
     {
       id: "2",
-      to: "/builder",
+      isDrawerItem: true,
       icon: "build",
       name: "Builder",
       path: "/builder",
@@ -44,7 +45,7 @@ const app = {
     },
     {
       id: "3",
-      to: "/admin",
+      isDrawerItem: true,
       icon: "settings",
       name: "Admin",
       path: "/admin",
@@ -54,16 +55,23 @@ const app = {
     },
     {
       id: "4",
-      to: "/",
+      name: "Create Assistant",
+      path: "/create",
+      access: "public",
+      render: props => React.createElement(CreateAssistant, props),
+    },
+    {
+      id: "5",
+      isDrawerItem: true,
       icon: "home",
       name: "Home",
       path: "*",
       access: "public",
-      render: props => React.createElement(Home, props, "Home"),
+      render: props => React.createElement(Home, props),
     },
     {
-      id: "5",
-      to: "/help",
+      id: "6",
+      isDrawerItem: true,
       name: "Help",
       icon: "help",
       path: "/help",

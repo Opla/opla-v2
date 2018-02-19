@@ -7362,9 +7362,9 @@ zoapp-common@0.1.2:
   dependencies:
     winston "2.4.0"
 
-zoapp-front@0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.2.2.tgz#9b47a0ce1694e1e768045eccb4b908532d93e4bb"
+zoapp-front@0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.2.3.tgz#7cb59d9db540d9b9deafcfbc55f7a5e9f9dc3373"
   dependencies:
     babel-runtime "^6.26.0"
     css-loader "^0.28.7"
@@ -7396,6 +7396,16 @@ zoapp-materialcomponents@0.2.2:
 zoapp-materialcomponents@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.3.tgz#af093c0ea8fbfd4c474ec5448228afef7216e439"
+  dependencies:
+    dialog-polyfill "^0.4.9"
+    prop-types "15.6.0"
+    react "16.2.0"
+    react-dom "16.2.0"
+    react-hot-loader "3.1.3"
+
+zoapp-materialcomponents@0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.5.tgz#e2ed4e72d7f6f8dea4635af34f31b1d7bdd706c6"
   dependencies:
     dialog-polyfill "^0.4.9"
     prop-types "15.6.0"
