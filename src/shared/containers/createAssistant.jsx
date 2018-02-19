@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 import TemplatesList from "../components/templatesList";
-import ProcessingDialog from "./processingDialog";
+import ProcessingDialog from "./dialogs/processingDialog";
 import { apiCreateBot } from "../actions/api";
 import { appSetTitle } from "../actions/app";
 

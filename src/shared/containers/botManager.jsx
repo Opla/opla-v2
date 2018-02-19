@@ -11,7 +11,7 @@ import { appUpdateIntent, appSetTitle } from "../actions/app";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";
 import SandboxContainer from "./sandboxContainer";
-import IODialog from "./ioDialog";
+import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
 
 const infoStyleD = {

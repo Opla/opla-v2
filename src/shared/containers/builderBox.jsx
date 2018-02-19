@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Button } from "zoapp-materialcomponents";
 import { DialogManager } from "zoapp-ui";
 import { connect } from "react-redux";
-import PublishDialog from "./publishDialog";
+import PublishDialog from "./dialogs/publishDialog";
 
 class BuilderBox extends Component {
   constructor(props) {
