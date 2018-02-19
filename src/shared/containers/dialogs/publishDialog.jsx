@@ -30,9 +30,9 @@ class PublishDialog extends Component {
   }
 
   onSelect = ({
-    name, state, index, item,
+    /* name, */ state, /* index, */ item,
   }) => {
-    console.log("WIP onSelected", name, state, index);
+    // console.log("WIP onSelected", name, state, index);
     const { service, instance } = item;
     if (state === "enable") {
       let status;
@@ -45,7 +45,7 @@ class PublishDialog extends Component {
         ({ status } = service);
       }
       publisher.status = status === "start" ? null : "start";
-      console.log("status ", publisher.status, status);
+      // console.log("status ", publisher.status, status);
       // this.setState({ servicesEnabled });
       this.props.appUpdatePublisher(this.props.selectedBotId, publisher);
     } else {
@@ -61,8 +61,8 @@ class PublishDialog extends Component {
     }
   }
 
-  onAction = (action) => {
-    console.log("WIP onAction=", action);
+  onAction = (/* action */) => {
+    // console.log("WIP onAction=", action);
     // TODO check if services are available
     let ready = false;
     const { publishers } = this.props;

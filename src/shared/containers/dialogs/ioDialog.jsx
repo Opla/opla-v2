@@ -68,7 +68,7 @@ class IODialog extends Component {
       /*
       if (filetype === ".csv" || filetype === "text/csv") {
         const csv = this.importCSV(data);
-        console.log("imported csv", csv);
+        // console.log("imported csv", csv);
        }
        */
       this.setState({ data, filetype });

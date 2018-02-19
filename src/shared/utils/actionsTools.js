@@ -98,13 +98,13 @@ const ActionsTools = {
               }
             }
           }
-          console.log("parse HTML", tag, t, buf, actionText.substring(l + 1));
+          // console.log("parse HTML", tag, t, buf, actionText.substring(l + 1));
           if (t === tag) {
             i = l;
             actions.push({ type: tag, text: buf });
             buf = "";
           } else {
-            console.log("actionTools.parse HTML Error");
+            // console.log("actionTools.parse HTML Error");
           }
         } else {
           buf += c;

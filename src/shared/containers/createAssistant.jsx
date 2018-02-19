@@ -105,8 +105,8 @@ class CreateAssistant extends Component {
   }
 
   handleLanguageChange = () => {
-    const language = this.selectField.inputRef.value;
-    console.log("handleCreate language=", language);
+    // const language = this.selectField.inputRef.value;
+    // console.log("handleCreate language=", language);
   }
 
   render() {

@@ -12,7 +12,7 @@ class TunnelBox extends Component {
 
   onChange = (name, value) => {
     const params = this.state.params || { ...this.props.params };
-    console.log("onChangeTunnel", name, value);
+    // console.log("onChangeTunnel", name, value);
     let { advanced } = this.state;
     if (name === "provider") {
       advanced = false;

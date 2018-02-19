@@ -60,24 +60,24 @@ function subscribe(socketClient, action) {
   return eventChannel((emitter) => {
     socketClient.on("connected", () => {
       const { botId } = action;
-      console.log(`WebSocket connected: ${botId}`);
+      // console.log(`WebSocket connected: ${botId}`);
       const payload = JSON.stringify({ event: "subscribe", channelId: botId });
       socketClient.send(payload);
     });
     socketClient.on("newMessages", (data) => {
-      console.log(`WebSocket newMessages: ${data}`);
+      // console.log(`WebSocket newMessages: ${data}`);
       emitter({ type: `${API_SB_GETMESSAGES}${FETCH_SUCCESS}`, loading: false, conversations: data });
     });
-    socketClient.on("error", (error) => {
+    socketClient.on("error", (/* error */) => {
       // TODO: handle error
-      console.log(`WebSocket error: ${error}`);
+      // console.log(`WebSocket error: ${error}`);
     });
     socketClient.on("close", () => {
       // TODO: handle close
-      console.log("WebSocket close");
+      // console.log("WebSocket close");
     });
     return () => {
-      console.log("WebSocket off");
+      // console.log("WebSocket off");
     };
   });
 }

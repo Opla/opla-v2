@@ -4,14 +4,14 @@ import PropTypes from "prop-types";
 export default class AppSettings extends Component {
   onAction = (action) => {
     if (action === "Build") {
-      console.log("onAction Build TODO");
+      // console.log("onAction Build TODO");
     }
     this.props.onAction(action);
   }
 
   renderCreateApp() {
     const { instance } = this.props;
-    console.log("instance=", instance);
+    // console.log("instance=", instance);
     const app = instance.application;
     let appId = "";
     let appSecret = "";

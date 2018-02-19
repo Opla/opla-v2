@@ -37,7 +37,7 @@ if (module.hot) {
   /* eslint-disable no-undef */
   // const rootPath = "./shared/container/app";
   module.hot.accept("OplaContainers/app", () => {
-    console.log("HMR app");
+    // // console.log("HMR app");
     const newApp = require("OplaContainers/app").default;
     renderApp(newApp);
   });

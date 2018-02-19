@@ -100,7 +100,7 @@ class MessengerBox extends Component {
               }
               const from = message.from.toLowerCase();
               const user = users[from];
-              // console.log("from=", from, user);
+              // // console.log("from=", from, user);
               let dest = "you";
               let icon = "default";
               if (user) {

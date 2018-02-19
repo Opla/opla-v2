@@ -43,7 +43,7 @@ const MessagingsList = (props) => {
               className="selectableListItem switchListItem"
               twoLine
               onClick={(e) => {
-                console.log("e.target", e.target.className);
+                // console.log("e.target", e.target.className);
                 if (onSelect && (e.target.className.indexOf("mdl-switch") < 0)) {
                   e.preventDefault(); onSelect({
                     name, state: "select", index, item,

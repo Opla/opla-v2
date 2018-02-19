@@ -12,8 +12,8 @@ import {
 } from "../actions/app";
 
 class IntentContainer extends Component {
-  onChangeAction = (actionText) => {
-    console.log("IntentContainer.onChangeAction =", actionText);
+  onChangeAction = (/* actionText */) => {
+    // console.log("IntentContainer.onChangeAction =", actionText);
   }
 
   onEditAction = (dialog, editAction) => {
@@ -43,7 +43,8 @@ class IntentContainer extends Component {
       } else {
         actionValue = text;
       }
-      console.log("WIP", `IntentContainer.onEditAction :${actionValue} / ${this.selectedAction}`);
+      /* console.log("WIP",
+      `IntentContainer.onEditAction :${actionValue} / ${this.selectedAction}`); */
       if ((!actionValue) || actionValue === "") {
         return false;
       }
@@ -52,10 +53,10 @@ class IntentContainer extends Component {
         actionType, actionValue, this.selectedAction,
       );
     } else if (editAction === "Delete") {
-      console.log("WIP", `IntentContainer.onDeleteAction :${this.selectedAction}`);
+      // console.log("WIP", `IntentContainer.onDeleteAction :${this.selectedAction}`);
       this.props.appDeleteIntentAction(this.actionContainer, this.selectedAction);
     } else if (editAction === "Topic") {
-      console.log("WIP", "IntentContainer.onTopic ");
+      // console.log("WIP", "IntentContainer.onTopic ");
       const topic = this.actionField.inputRef.value.trim();
       const { selectedIntent } = this.props;
       const currentTopic = selectedIntent.topic ? selectedIntent.topic : "";
@@ -64,7 +65,7 @@ class IntentContainer extends Component {
         this.props.appUpdateIntent(this.props.selectedBotId, intent);
       }
     } else if (editAction === "Previous") {
-      console.log("TODO", "IntentContainer.onPrevious ");
+      // console.log("TODO", "IntentContainer.onPrevious ");
     }
     this.selectedAction = undefined;
     this.actionContainer = undefined;
@@ -73,7 +74,7 @@ class IntentContainer extends Component {
   }
 
   handleSaveIntent = () => {
-    console.log("WIP", "IntentContainer.handleSaveIntent");
+    // console.log("WIP", "IntentContainer.handleSaveIntent");
     // DialogManager.open({ title: "TODO", content: "IntentContainer.handleSaveIntent" });
     if (this.props.selectedIntent) {
       const intent = { ...this.props.selectedIntent };
@@ -81,7 +82,7 @@ class IntentContainer extends Component {
         delete intent.notSaved;
         this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
       } else {
-        console.log("WIP", "IntentContainer.handleSaveIntent : intent already saved");
+        // console.log("WIP", "IntentContainer.handleSaveIntent : intent already saved");
       }
     }
   }

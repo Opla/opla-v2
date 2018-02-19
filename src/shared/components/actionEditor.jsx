@@ -129,10 +129,10 @@ class ActionEditor extends Component {
     };
   }
 
-  onFocusIn = (element, caretPosition) => {
+  onFocusIn = (element /* , caretPosition */) => {
     const type = element.getAttribute("data");
     const key = element.getAttribute("key");
-    console.log("onFocusIn", element.tabIndex, key, type, caretPosition);
+    // console.log("onFocusIn", element.tabIndex, key, type, caretPosition);
     if (type === "any") {
       this.anySelect();
     } else if (type === "variable") {

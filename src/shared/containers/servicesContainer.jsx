@@ -76,7 +76,7 @@ class ServicesContainer extends Component {
         this.setState({ needUpdate: true });
       }
     }
-    console.log("TODO", `ServicesContainer.onEditAction : ${editAction}`);
+    // console.log("TODO", `ServicesContainer.onEditAction : ${editAction}`);
 
     this.currentSelected = null;
     this.paramFields = null;
@@ -102,12 +102,12 @@ class ServicesContainer extends Component {
     let couldDelete = true;
     let className = null;
     this.currentSelected = { ...selected };
-    console.log("test");
+    // console.log("test");
     if (name === "Web services") {
       services = this.getMiddlewares("WebService");
       editor = displayProviderEditor;
       couldDelete = false;
-      console.log("ws");
+      // console.log("ws");
       if ((state === "select" || state === "create")) {
         if (item.provider) {
           className = "mdl-dialog-extended";
@@ -115,7 +115,7 @@ class ServicesContainer extends Component {
           content = item.provider.renderSettings();
           action = "next";
         } else {
-          console.log("demo");
+          // console.log("demo");
           editor = displayWebServiceEditor;
           if (state === "create") {
             title = `Add ${title} entry`;
@@ -138,8 +138,8 @@ class ServicesContainer extends Component {
             selectedItem={-1}
             onSelect={(i) => {
               const it = items[i];
-              const n = it.name;
-              console.log("WIP select Web services =", n);
+              // const n = it.name;
+              // console.log("WIP select Web services =", n);
               setTimeout(() => {
                 DialogManager.closeCurrentDialog();
                 that.onSelect({
@@ -176,8 +176,8 @@ class ServicesContainer extends Component {
             selectedItem={-1}
             onSelect={(i) => {
               const it = items[i];
-              const n = it.name;
-              console.log("WIP select AI/NLU providers =", n);
+              // const n = it.name;
+              // console.log("WIP select AI/NLU providers =", n);
               setTimeout(() => {
                 DialogManager.closeCurrentDialog();
                 that.onSelect({
@@ -216,8 +216,8 @@ class ServicesContainer extends Component {
             selectedItem={-1}
             onSelect={(i) => {
               const it = items[i];
-              const n = it.name;
-              console.log("WIP select messaging platform =", n);
+              // const n = it.name;
+              // console.log("WIP select messaging platform =", n);
               setTimeout(() => {
                 DialogManager.closeCurrentDialog();
                 that.onSelect({
@@ -272,7 +272,7 @@ class ServicesContainer extends Component {
           className,
         });
       }
-      console.log("WIP WebServicesContainer.onSelect", selected);
+      // console.log("WIP WebServicesContainer.onSelect", selected);
     }
   }
 

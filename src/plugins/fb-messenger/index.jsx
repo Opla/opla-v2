@@ -45,7 +45,8 @@ export default class FBMessengerPlugin {
   }
 
   onAction(action) {
-    console.log("onAction=", action, this.active);
+    this.action = action;
+    // console.log("onAction=", action, this.active);
   }
 
   renderTemplate() {

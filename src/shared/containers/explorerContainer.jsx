@@ -7,7 +7,7 @@ import { appSelectIntent } from "../actions/app";
 
 class ExplorerContainer extends Component {
   onDropIntent = (dragIndex, dropIndex) => {
-    console.log("TODO", `ExplorerContainer.onDropIntent ${dragIndex} / ${dropIndex}`);
+    // console.log("TODO", `ExplorerContainer.onDropIntent ${dragIndex} / ${dropIndex}`);
     const intent = this.props.intents[dragIndex];
     const intentId = intent.id;
     this.props.apiMoveIntentRequest(this.props.selectedBotId, intentId, dragIndex, dropIndex);
@@ -20,7 +20,7 @@ class ExplorerContainer extends Component {
   onAddIntent = (dialog, action) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
-      console.log("WIP", `ExplorerContainer.onAddIntent :${intentName}`);
+      // console.log("WIP", `ExplorerContainer.onAddIntent :${intentName}`);
       if (intentName === "") {
         dialog.invalidateField();
         return false;
@@ -34,7 +34,7 @@ class ExplorerContainer extends Component {
   onRenameIntent = (dialog, action) => {
     if (action === "Rename") {
       const intentName = dialog.getFieldValue();
-      console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
+      // console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
       if (intentName === "") {
         dialog.invalidateField();
         return false;
@@ -51,14 +51,14 @@ class ExplorerContainer extends Component {
     if (action === "Delete") {
       const selected = this.props.selectedIntentIndex;
       const intent = this.props.intents[selected];
-      console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
+      // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
       this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
   }
 
   handleAddIntent = () => {
-    console.log("WIP", "ExplorerContainer.handleAddIntent");
+    // console.log("WIP", "ExplorerContainer.handleAddIntent");
     const content = {
       defaultValue: "", pattern: ".+", name: "Intent name", error: "Wrong name",
     };
@@ -68,7 +68,7 @@ class ExplorerContainer extends Component {
   }
 
   handleRename = () => {
-    console.log("TODO", "ExplorerContainer.handleRename");
+    // console.log("TODO", "ExplorerContainer.handleRename");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
     const content = {
@@ -80,12 +80,12 @@ class ExplorerContainer extends Component {
   }
 
   handleSynchronize = () => {
-    console.log("WIP", "ExplorerContainer.handleSynchronize");
+    // console.log("WIP", "ExplorerContainer.handleSynchronize");
     this.props.apiGetIntentsRequest(this.props.selectedBotId);
   }
 
   handleDelete = () => {
-    console.log("WIP", "ExplorerContainer.handleDelete");
+    // console.log("WIP", "ExplorerContainer.handleDelete");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
     DialogManager.open({

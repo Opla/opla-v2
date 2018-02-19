@@ -54,10 +54,10 @@ class BotManager extends Component {
   }
 
   onImportData = (data, options) => {
-    console.log("BotManager.onUpload=", options.filetype);
+    // console.log("BotManager.onUpload=", options.filetype);
     if (options.filetype === "application/json" || options.filetype === "text/csv") {
       // WIP detect format
-      console.log("BotManager.onUpload=", data);
+      // console.log("BotManager.onUpload=", data);
       this.props.apiImportRequest(this.props.selectedBotId, data, options);
     }
   }
@@ -66,7 +66,7 @@ class BotManager extends Component {
     const { name } = this.props.bot;
     const data = { name, intents: this.props.intents };
     const json = JSON.stringify(data);
-    FileManager.download(json, `${name}.json`, "application/json,.csv", () => { console.log("ExplorerContainer.onDownload=", name); });
+    FileManager.download(json, `${name}.json`, "application/json,.csv", () => { /* console.log("ExplorerContainer.onDownload=", name); */ });
   }
 
   onEditWelcome = (dialog, action) => {
@@ -124,7 +124,7 @@ class BotManager extends Component {
       intent.input.push(defaultValue);
       this.props.appUpdateIntent(this.props.selectedBotId, intent);
     }
-    console.log("botManager.handlePlaygroundAction", action);
+    // console.log("botManager.handlePlaygroundAction", action);
   }
 
   updateIntents() {

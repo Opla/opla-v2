@@ -12,7 +12,7 @@ class BuilderBox extends Component {
   }
 
   onAction = (action) => {
-    console.log("TODO Publish");
+    // console.log("TODO Publish");
     if (action === "Publish") {
       return false;
     }
