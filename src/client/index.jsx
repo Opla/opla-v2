@@ -8,9 +8,8 @@ import React from "react";
 import Front from "zoapp-front/front";
 import Screen from "zoapp-front/containers/screen";
 import configureStore from "OplaLibs/store";
-/** eslint-disabled import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
-/* eslint-enable import/no-unresolved */
 
 const app = {
   name: "Opla.ai CE",
