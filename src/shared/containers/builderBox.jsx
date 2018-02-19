@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button } from "zoapp-materialcomponents";
-import { DialogManager } from "zoapp-ui";
+import Rmdc, { Button } from "zoapp-materialcomponents";
 import { connect } from "react-redux";
 import PublishDialog from "./dialogs/publishDialog";
 
@@ -21,7 +20,7 @@ class BuilderBox extends Component {
 
   handleOpenPublishDialog = () => {
     const dialog = <PublishDialog open onAction={this.onAction} store={this.props.store} />;
-    DialogManager.open({ dialog });
+    Rmdc.showDialog(dialog);
   }
 
   render() {
@@ -31,7 +30,6 @@ class BuilderBox extends Component {
         <div style={style}>
           <Button
             raised
-            colored
             onClick={(e) => { e.preventDefault(); this.handleOpenPublishDialog(); }}
           >
           Publish

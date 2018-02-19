@@ -10,6 +10,7 @@ import Screen from "zoapp-front/containers/screen";
 import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
 import AdminManager from "OplaContainers/adminManager";
+import BotManager from "OplaContainers/botManager";
 import configureStore from "OplaLibs/store";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
@@ -42,7 +43,7 @@ const app = {
       access: "auth",
       panels: ["Intents", "Entities", "Flow"],
       toolbox: ["Publish"],
-      render: props => React.createElement(Screen, props, "Builder"),
+      render: props => React.createElement(BotManager, props),
     },
     {
       id: "3",

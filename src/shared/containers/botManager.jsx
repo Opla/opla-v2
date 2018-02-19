@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid, Cell, Button, Content } from "zoapp-materialcomponents";
-import { DialogManager } from "zoapp-ui";
+import Rmdc, { Grid, Inner, Cell, Button } from "zoapp-materialcomponents";
 import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
 
@@ -86,8 +85,8 @@ class BotManager extends Component {
     const content = {
       defaultValue, pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    DialogManager.open({
-      title: "Add new intent", content, actions: ["Create", "Cancel"], onAction: this.onAddIntent, data,
+    Rmdc.showDialog({
+      header: "Add new intent", body: content, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent, data,
     });
   }
 
@@ -101,7 +100,7 @@ class BotManager extends Component {
       onDownload={this.onDownloadData}
       onImport={this.onImportData}
     />);
-    DialogManager.open({ dialog });
+    Rmdc.showDialog(dialog);
   }
 
   handlePlaygroundAction = (action, defaultValue = "", data = {}) => {
@@ -109,8 +108,8 @@ class BotManager extends Component {
       const content = {
         defaultValue, pattern: ".+", name: "Welcome message", error: "Wrong message",
       };
-      DialogManager.open({
-        title: "Edit Bot", content, actions: ["Save", "Cancel"], onAction: this.onEditWelcome, data,
+      Rmdc.showDialog({
+        header: "Edit Bot", body: content, actions: [{ name: "Save" }, { name: "Cancel" }], onAction: this.onEditWelcome, data,
       });
     } else if (action === "createIntent") {
       const intent = { input: [defaultValue] };
@@ -154,16 +153,16 @@ class BotManager extends Component {
     let panel2 = null;
     if (this.props.intents.length > 0) {
       panel1 = (
-        <Cell style={{ margin: "0px", borderRight: "1px solid #e1e1e1" }} className="mdl-color--white mrb-panel" col={2} phone={4}>
+        <Cell style={{ margin: "0px", borderRight: "1px solid #e1e1e1" }} className="mdl-color--white mrb-panel" span={2} >
           <ExplorerContainer handleExportImport={this.handleExportImport} />
         </Cell>);
       panel2 = (
-        <Cell style={{ margin: "0px" }} className="mdl-color--white mrb-panel" col={6} tablet={8}>
+        <Cell style={{ margin: "0px" }} className="mdl-color--white mrb-panel" span={6}>
           <IntentContainer />
         </Cell>);
     } else {
       panel1 = (
-        <Cell style={{ margin: "0px" }} col={7} tablet={7}>
+        <Cell style={{ margin: "0px" }} span={7}>
           <div className="mrb-panel mrb-panel-empty" style={{ height: "80%" }} >
             <div style={{ height: "30%", ...infoStyleD }}>
               <div style={{ /* margin: "48px 0", */ textAlign: "left" }}>
@@ -185,14 +184,12 @@ class BotManager extends Component {
               <div>
                 <Button
                   raised
-                  primary
                   style={{ marginRight: "32px" }}
                   onClick={(e) => { e.preventDefault(); this.handleAddIntent(); }}
                 >Create intent
                 </Button>
                 <Button
                   raised
-                  primary
                   onClick={(e) => { e.preventDefault(); this.handleExportImport(true); }}
                 >Import intents
                 </Button>
@@ -216,15 +213,17 @@ class BotManager extends Component {
       panel2 = "";
     }
     return (
-      <Content className="mdl-color--grey-100">
+      <div className="mdl-color--grey-100">
         <Grid style={{ margin: "0px", padding: "0px" }}>
-          {panel1}
-          {panel2}
-          <Cell style={{ margin: "16px 24px" }} className="mdl-color--white mdl-shadow--2dp" col={4} tablet={6}>
-            <SandboxContainer onAction={this.handlePlaygroundAction} />
-          </Cell>
+          <Inner>
+            {panel1}
+            {panel2}
+            <Cell style={{ margin: "16px 24px" }} className="mdl-color--white mdl-shadow--2dp" span={4}>
+              <SandboxContainer onAction={this.handlePlaygroundAction} />
+            </Cell>
+          </Inner>
         </Grid>
-      </Content>
+      </div>
     );
   }
 }
@@ -265,7 +264,7 @@ const mapStateToProps = (state) => {
   const bot = selectedBotId ? admin.bots[0] : null;
   const intents = state.app.intents ? state.app.intents : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const isLoading = state.app ? state.app.loading : false;
+  const isLoading = state.loading || false;
   const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
   if (!selectedIntent) {
     selectedIntent = state.app.intents ? state.app.intents[selectedIntentIndex] : null;

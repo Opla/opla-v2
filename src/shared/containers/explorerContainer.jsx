@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DialogManager, ListDragComponent, SubToolbar } from "zoapp-ui";
+import Rmdc from "zoapp-materialcomponents";
+import { ListDragComponent, SubToolbar } from "zoapp-ui";
 import { apiGetIntentsRequest, apiSendIntentRequest, apiDeleteIntentRequest, apiMoveIntentRequest } from "../actions/api";
 import { appSelectIntent } from "../actions/app";
 
@@ -62,8 +63,8 @@ class ExplorerContainer extends Component {
     const content = {
       defaultValue: "", pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    DialogManager.open({
-      title: "Add new intent", content, actions: ["Create", "Cancel"], onAction: this.onAddIntent,
+    Rmdc.showDialog({
+      header: "Add new intent", body: content, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent,
     });
   }
 
@@ -74,8 +75,8 @@ class ExplorerContainer extends Component {
     const content = {
       defaultValue: intent.name, pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    DialogManager.open({
-      title: "Rename intent", content, actions: ["Rename", "Cancel"], onAction: this.onRenameIntent,
+    Rmdc.showDialog({
+      header: "Rename intent", body: content, actions: [{ name: "Rename" }, { name: "Cancel" }], onAction: this.onRenameIntent,
     });
   }
 
@@ -88,8 +89,8 @@ class ExplorerContainer extends Component {
     // console.log("WIP", "ExplorerContainer.handleDelete");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
-    DialogManager.open({
-      title: "Intent", content: `${intent.name} Do you want to delete it ?`, actions: ["Delete", "Cancel"], onAction: this.onDeleteIntent,
+    Rmdc.showDialog({
+      header: "Intent", body: `${intent.name} Do you want to delete it ?`, actions: [{ name: "Delete" }, { name: "Cancel" }], onAction: this.onDeleteIntent,
     });
   }
 

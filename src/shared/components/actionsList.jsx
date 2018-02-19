@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemContent, ListItemAction, Icon, Chip } from "zoapp-materialcomponents";
+import { List, ListItem, ListItemMeta, Icon, Chip } from "zoapp-materialcomponents";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsTools from "../utils/actionsTools";
 
@@ -63,10 +63,14 @@ class ActionsList extends Component {
     const style = { padding: "0px 16px" };
     const addText = name === "input" ? "Add an input sentence" : "Add an output response";
     const color = (!actions) || actions.length === 0 ? "rgb(213, 0, 0)" : "rgb(221, 221, 221)";
-    const addContent = (<ListItem className="selectableListItem onFocusAction" onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, type, state: "add" }); } }}>
-      <ListItemContent icon={icon} className="mdl-list_action" style={{ color }}>
-        {addText}
-      </ListItemContent></ListItem>);
+    const addContent = (
+      <ListItem
+        className="selectableListItem onFocusAction mdl-list_action"
+        icon={icon}
+        style={{ color }}
+        onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, type, state: "add" }); } }}
+      >{addText}
+      </ListItem>);
     if (actions && actions.length > 0) {
       if (actions[0].type === "condition") {
         const { children } = actions[0];
@@ -88,8 +92,9 @@ class ActionsList extends Component {
                 <ListItem
                   style={style}
                   key={key}
-                  className="selectableListItem onFocusAction"
-                  twoLine
+                  className="selectableListItem onFocusAction mdl-list_action"
+                  icon={icon}
+                  secondaryText={text}
                   onDrop={onDrop}
                   onClick={(e) => {
                     e.preventDefault(); if (onSelect) {
@@ -98,20 +103,17 @@ class ActionsList extends Component {
                       });
                     }
                   }}
-                >
-                  <ListItemContent icon={icon} subtitle={text} className="mdl-list_action">{condition}</ListItemContent>
-                  <ListItemAction>
-                    <Icon
-                      name="delete"
-                      onClick={(e) => {
-                        e.preventDefault(); if (onSelect) {
-                          onSelect({
-                            name, type: "condition", state: "delete", index,
-                          });
-                        }
-                      }}
-                    />
-                  </ListItemAction>
+                >{condition}
+                  <ListItemMeta
+                    icon="delete"
+                    onClick={(e) => {
+                      e.preventDefault(); if (onSelect) {
+                        onSelect({
+                          name, type: "condition", state: "delete", index,
+                        });
+                      }
+                    }}
+                  />
                 </ListItem>
               );
             })
@@ -127,17 +129,15 @@ class ActionsList extends Component {
                 <ListItem
                   style={style}
                   key={key}
-                  className="selectableListItem onFocusAction"
+                  icon={icon}
+                  className="selectableListItem onFocusAction mdl-list_action"
                   onDrop={onDrop}
                   onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "select", index }); } }}
-                >
-                  <ListItemContent icon={icon} className="mdl-list_action">{text}</ListItemContent>
-                  <ListItemAction>
-                    <Icon
-                      name="delete"
-                      onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "delete", index }); } }}
-                    />
-                  </ListItemAction>
+                >{text}
+                  <ListItemMeta
+                    icon="delete"
+                    onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "delete", index }); } }}
+                  />
                 </ListItem>
               );
             })

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DialogManager, SubToolbar } from "zoapp-ui";
+import Rmdc from "zoapp-materialcomponents";
+import { SubToolbar } from "zoapp-ui";
 
 import IntentDetail, { displayActionEditor } from "../components/intentDetail";
 import { apiSendIntentRequest } from "../actions/api";
@@ -149,8 +150,8 @@ class IntentContainer extends Component {
         } else { this.actionField = input; }
       }, this.onEditAction, this.onChangeAction, isInput);
     } else {
-      DialogManager.open({
-        title: "Action", content: "Do you want to delete it ?", actions: ["Delete", "Cancel"], onAction: this.onEditAction,
+      Rmdc.showDialog({
+        header: "Action", body: "Do you want to delete it ?", actions: [{ name: "Delete" }, { name: "Cancel" }], onAction: this.onEditAction,
       });
     }
   }

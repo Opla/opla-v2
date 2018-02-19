@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Textfield, IconButton, Button } from "zoapp-materialcomponents";
+import { TextField, Icon, Button } from "zoapp-materialcomponents";
 import PropTypes from "prop-types";
 
 class MessengerBox extends Component {
@@ -56,7 +56,6 @@ class MessengerBox extends Component {
                   <div>
                     <Button
                       raised
-                      primary
                       onClick={(e) => { e.preventDefault(); this.props.onAction("createIntent", inputText, message); }}
                     >create intent
                     </Button>
@@ -66,13 +65,11 @@ class MessengerBox extends Component {
                     <div>
                       <Button
                         raised
-                        primary
                         onClick={(e) => { e.preventDefault(); this.props.onAction("createIntent", inputText, message); }}
                       >create intent
                       </Button>
                       <Button
                         raised
-                        primary
                         onClick={(e) => { e.preventDefault(); this.props.onAction("addInput", inputText); }}
                       >add input
                       </Button>
@@ -122,9 +119,9 @@ class MessengerBox extends Component {
           </div>
         </div>
         <div className="messenger-box__actions">
-          <IconButton className="mdl-button-left" onClick={(e) => { e.preventDefault(); }} name="add" />
-          <IconButton className="mdl-button-left" onClick={(e) => { e.preventDefault(); }} name="mic" />
-          <Textfield
+          <Icon className="mdl-button-left" onClick={(e) => { e.preventDefault(); }} name="add" />
+          <Icon className="mdl-button-left" onClick={(e) => { e.preventDefault(); }} name="mic" />
+          <TextField
             type="text"
             id="chat-input-field"
             label="Your message"
@@ -138,9 +135,9 @@ class MessengerBox extends Component {
               }
             }}
           />
-          <IconButton
+          <Icon
             className="mdl-button-right"
-            colored
+            /* colored */
             onClick={(e) => {
               e.preventDefault();
               if (onSendMessage && onSendMessage(chatInput.inputRef.value)) {

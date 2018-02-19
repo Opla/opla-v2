@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon, Tooltip } from "zoapp-materialcomponents";
-import { ContentEditable } from "zoapp-ui";
+import { Icon } from "zoapp-materialcomponents";
+import { ContentEditable, Tooltip } from "zoapp-ui";
 import ActionsTools from "../utils/actionsTools";
 
 class ActionEditor extends Component {
@@ -315,13 +315,13 @@ class ActionEditor extends Component {
       extra = (
         <span>
           <Tooltip label="Insert code">
-            <Icon colored={toolbox.code} onClick={(e) => { this.onCodeSelected(e); }} name="code" />
+            <Icon /* colored={toolbox.code} */ onClick={(e) => { this.onCodeSelected(e); }} name="code" />
           </Tooltip>
           <Tooltip label="Insert Linebreak">
-            <Icon colored={toolbox.linebreak} onClick={(e) => { this.onLineBreakSelected(e); }} name="keyboard_return" />
+            <Icon /* colored={toolbox.linebreak} */ onClick={(e) => { this.onLineBreakSelected(e); }} name="keyboard_return" />
           </Tooltip>
           <Tooltip label="Insert Button">
-            <Icon colored={toolbox.button} onClick={(e) => { this.onButtonSelected(e); }} name="insert_link" />
+            <Icon /* colored={toolbox.button} */ onClick={(e) => { this.onButtonSelected(e); }} name="insert_link" />
           </Tooltip>
         </span>);
     }
@@ -330,13 +330,13 @@ class ActionEditor extends Component {
         <div style={styleToolbox}>
           <div style={styleToolbar}>
             <Tooltip label="Insert text">
-              <Icon colored={toolbox.text} onClick={(e) => { this.onTextSelected(e); }} name="text_fields" />
+              <Icon /* colored={toolbox.text} */ onClick={(e) => { this.onTextSelected(e); }} name="text_fields" />
             </Tooltip>
             <Tooltip label="Insert block any">
-              <Icon colored={toolbox.any} onClick={(e) => { this.onAnySelected(e); }} name="all_out" />
+              <Icon /* colored={toolbox.any} */ onClick={(e) => { this.onAnySelected(e); }} name="all_out" />
             </Tooltip>
             <Tooltip label="Insert entity assignment">
-              <Icon colored={toolbox.entity} onClick={(e) => { this.onEntitySelected(e); }} name="assignment" />
+              <Icon /* colored={toolbox.entity} */ onClick={(e) => { this.onEntitySelected(e); }} name="assignment" />
             </Tooltip>
             {extra}
           </div>
