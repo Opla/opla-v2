@@ -2,10 +2,10 @@
 
 exports[`TemplatesList creates a form for the 'Import' special item 1`] = `
 <div
-  className="mdl-grid"
+  className="mdc-layout-grid"
 >
   <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectedListItem"
+    className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell"
     style={
       Object {
         "height": "168px",
@@ -85,10 +85,10 @@ exports[`TemplatesList creates a form for the 'Import' special item 1`] = `
 
 exports[`TemplatesList marks an item as selected 1`] = `
 <div
-  className="mdl-grid"
+  className="mdc-layout-grid"
 >
   <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectableListItem"
+    className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell"
     style={
       Object {
         "height": "168px",
@@ -152,7 +152,7 @@ exports[`TemplatesList marks an item as selected 1`] = `
     </div>
   </div>
   <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectedListItem"
+    className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell"
     style={
       Object {
         "height": "168px",
@@ -220,16 +220,16 @@ exports[`TemplatesList marks an item as selected 1`] = `
 
 exports[`TemplatesList renders correctly 1`] = `
 <div
-  className="mdl-grid"
+  className="mdc-layout-grid"
 />
 `;
 
 exports[`TemplatesList renders some items 1`] = `
 <div
-  className="mdl-grid"
+  className="mdc-layout-grid"
 >
   <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectedListItem"
+    className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell"
     style={
       Object {
         "height": "168px",
