@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, DialogTitle, DialogContent, DialogActions } from "react-mdl";
+import Rmdc, { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "zoapp-materialcomponents";
 import { connect } from "react-redux";
-import { DialogManager, DialogBox } from "zoapp-ui";
-import PluginsManager from "../utils/pluginsManager";
-import MessagingsList from "../components/messagingsList";
+import PluginsManager from "../../utils/pluginsManager";
+import MessagingsList from "../../components/messagingsList";
 import ServiceDialog from "./serviceDialog";
 import {
   apiGetMiddlewaresRequest,
   /* apiSetMiddlewareRequest, apiDeleteMiddlewareRequest, */
   apiPublishRequest,
-} from "../actions/api";
-import { appUpdatePublisher } from "../actions/app";
+} from "../../actions/api";
+import { appUpdatePublisher } from "../../actions/app";
 
 class PublishDialog extends Component {
   constructor(props) {
@@ -30,9 +29,9 @@ class PublishDialog extends Component {
   }
 
   onSelect = ({
-    name, state, index, item,
+    /* name, */ state, /* index, */ item,
   }) => {
-    console.log("WIP onSelected", name, state, index);
+    // console.log("WIP onSelected", name, state, index);
     const { service, instance } = item;
     if (state === "enable") {
       let status;
@@ -45,7 +44,7 @@ class PublishDialog extends Component {
         ({ status } = service);
       }
       publisher.status = status === "start" ? null : "start";
-      console.log("status ", publisher.status, status);
+      // console.log("status ", publisher.status, status);
       // this.setState({ servicesEnabled });
       this.props.appUpdatePublisher(this.props.selectedBotId, publisher);
     } else {
@@ -57,12 +56,12 @@ class PublishDialog extends Component {
           onClosed={this.handleCloseDialog}
           store={this.props.store}
         />);
-      setTimeout(() => DialogManager.open({ dialog: sdialog }), 100);
+      setTimeout(() => Rmdc.showDialog(sdialog), 100);
     }
   }
 
-  onAction = (action) => {
-    console.log("WIP onAction=", action);
+  onAction = (/* action */) => {
+    // console.log("WIP onAction=", action);
     // TODO check if services are available
     let ready = false;
     const { publishers } = this.props;
@@ -79,20 +78,18 @@ class PublishDialog extends Component {
       this.props.apiPublishRequest(this.props.selectedBotId, publishers);
       // TODO display published dialog with links to service's messenger
       setTimeout(() => {
-        DialogManager.close();
-        DialogManager.open({
-          title: "Published",
-          content: "Published to:",
-          actions: ["Ok"],
+        Rmdc.closeDialog();
+        Rmdc.showDialog({
+          header: "Published",
+          body: "Published to:",
           onAction: this.handleCloseDialog,
         });
       }, 100);
     } else {
       setTimeout(() => {
-        DialogManager.open({
-          title: "Error",
-          content: "You need at least one service started !",
-          actions: ["Ok"],
+        Rmdc.showDialog({
+          header: "Error",
+          body: "You need at least one service started !",
           onAction: this.handleCloseDialog,
         });
       }, 100);
@@ -100,7 +97,7 @@ class PublishDialog extends Component {
   }
 
   handleCloseDialog = () => {
-    setTimeout(() => { DialogManager.close(); }, 100);
+    setTimeout(() => { Rmdc.closeDialog(); }, 100);
   }
 
   updateMiddlewares(needUpdate = false) {
@@ -200,10 +197,10 @@ class PublishDialog extends Component {
     const content = this.renderDialog();
     const style = { width: "550px" };
     return (
-      <DialogBox open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>{content}</DialogContent>
-        <DialogActions>
+      <Dialog open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
+        <DialogHeader>{title}</DialogHeader>
+        <DialogBody>{content}</DialogBody>
+        <DialogFooter>
           <Button
             type="button"
             onClick={(e) => { e.preventDefault(); this.onAction("publish"); }}
@@ -214,8 +211,8 @@ class PublishDialog extends Component {
             onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
           >Cancel
           </Button>
-        </DialogActions>
-      </DialogBox>
+        </DialogFooter>
+      </Dialog>
     );
   }
 }

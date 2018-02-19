@@ -40,6 +40,31 @@ html, body {
   top: 0;
 }
 
+mdl-button--file input {
+  cursor: pointer;
+  height: 100%;
+  right: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+}
+/* https://codepen.io/mupkie/pen/LkdaEV */
+.mdl-select__arrow {
+  background:
+  linear-gradient(45deg, transparent 50%, rgba(0,0,0, 0.26) 50%),
+  linear-gradient(135deg, rgba(0,0,0, 0.26) 50%, transparent 50%),
+  linear-gradient(to right, transparent, transparent);
+  background-position:
+  calc(100% - 10px) calc(1em - 4px),
+  calc(100% - 5px) calc(1em - 4px),
+  100% 0;
+  background-size:
+  5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
 a {
   color: rgba(34, 190, 196, 1);
   font-weight: 500;

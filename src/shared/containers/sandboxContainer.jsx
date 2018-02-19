@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DialogManager } from "zoapp-ui";
-import SubToolbar from "zoapp-front/components/subToolbar";
+import { DialogManager, SubToolbar } from "zoapp-ui";
 
 import MessengerBox from "../components/messengerBox";
 import {
@@ -27,13 +26,13 @@ class SandboxContainer extends Component {
   }
 
   componentWillUnmount() {
-    console.log("UnsubscribeSandboxMessages");
+    // console.log("UnsubscribeSandboxMessages");
     this.props.apiUnsubscribeSandboxMessages(this.props.selectedBotId);
   }
 
   onReset = (dialog, action) => {
     if (action === "Reset") {
-      console.log("WIP", "SandboxContainer.onReset");
+      // console.log("WIP", "SandboxContainer.onReset");
       this.props.apiSandboxResetRequest(this.props.selectedBotId);
     }
     return true;
@@ -42,13 +41,13 @@ class SandboxContainer extends Component {
   subscribeSandboxMessages() {
     if (this.props.selectedBot && this.state.needToSubscribe) {
       this.setState({ needToSubscribe: false });
-      console.log("SubscribeSandboxMessages");
+      // console.log("SubscribeSandboxMessages");
       this.props.apiSubscribeSandboxMessages(this.props.selectedBotId);
     }
   }
 
-  handleMenu = (action) => {
-    console.log("sandboxContainer.handleMenu", action);
+  handleMenu = (/* action */) => {
+    // console.log("sandboxContainer.handleMenu", action);
     DialogManager.open({ title: "TODO", content: "SandboxContainer.handleMenu" });
   }
 
@@ -62,7 +61,7 @@ class SandboxContainer extends Component {
   }
 
   handleSend = (messageBody) => {
-    console.log("WIP", "SandboxContainer.handleSend");
+    // console.log("WIP", "SandboxContainer.handleSend");
     // DialogManager.open({ title:"TODO", content:"SandboxContainer.handleSend" + message});
     const body = messageBody.trim();
     if (this.props.conversation && body.length > 0) {
@@ -73,7 +72,7 @@ class SandboxContainer extends Component {
       );
       return true;
     }
-    console.log("Error", "SandboxContainer.handleSend", this.props.conversation, body.length);
+    // console.log("Error", "SandboxContainer.handleSend", this.props.conversation, body.length);
     return false;
   }
 
@@ -90,7 +89,7 @@ class SandboxContainer extends Component {
   }
 
   handleAction = (action, defaultValue, data) => {
-    console.log("sandboxContainer.handleAction", action);
+    // console.log("sandboxContainer.handleAction", action);
     this.props.onAction(action, defaultValue, data);
   }
 

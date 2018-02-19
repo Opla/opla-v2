@@ -2,80 +2,84 @@
 
 exports[`TemplatesList creates a form for the 'Import' special item 1`] = `
 <div
-  className="mdl-grid"
+  className="mdc-layout-grid"
 >
   <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectedListItem"
-    style={
-      Object {
-        "height": "168px",
-      }
-    }
+    className="mdc-layout-grid__inner"
   >
     <div
-      onClick={[Function]}
-      role="presentation"
+      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "textDecoration": "none",
-          "width": "100%",
+          "height": "168px",
         }
       }
     >
       <div
+        onClick={[Function]}
+        role="presentation"
         style={
           Object {
-            "color": "#666",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "height": "87%",
-            "lineHeight": "1.1",
-            "padding": "16px",
+            "textDecoration": "none",
+            "width": "100%",
           }
         }
       >
         <div
           style={
             Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
+              "color": "#666",
+              "fontSize": "16px",
+              "fontWeight": "400",
+              "height": "87%",
+              "lineHeight": "1.1",
+              "padding": "16px",
             }
           }
         >
-          Import
-        </div>
-        <div
-          style={
-            Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
-            }
-          }
-        >
-          <form
+          <div
             style={
               Object {
+                "display": "table-row",
+                "textAlign": "center",
                 "width": "100%",
               }
             }
           >
-            <div
-              className="fileInput"
+            Import
+          </div>
+          <div
+            style={
+              Object {
+                "display": "table-row",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <form
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
             >
-              <i
-                className="material-icons"
+              <div
+                className="fileInput"
               >
-                cloud_upload
-              </i>
-              <input
-                accept={null}
-                onChange={[Function]}
-                type="file"
-              />
-            </div>
-          </form>
+                <i
+                  className="material-icons"
+                >
+                  cloud_upload
+                </i>
+                <input
+                  accept={null}
+                  onChange={[Function]}
+                  type="file"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -85,132 +89,136 @@ exports[`TemplatesList creates a form for the 'Import' special item 1`] = `
 
 exports[`TemplatesList marks an item as selected 1`] = `
 <div
-  className="mdl-grid"
+  className="mdc-layout-grid"
 >
   <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectableListItem"
-    style={
-      Object {
-        "height": "168px",
-      }
-    }
+    className="mdc-layout-grid__inner"
   >
     <div
-      onClick={[Function]}
-      role="presentation"
+      className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "textDecoration": "none",
-          "width": "100%",
+          "height": "168px",
         }
       }
     >
       <div
+        onClick={[Function]}
+        role="presentation"
         style={
           Object {
-            "color": "#666",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "height": "87%",
-            "lineHeight": "1.1",
-            "padding": "16px",
+            "textDecoration": "none",
+            "width": "100%",
           }
         }
       >
         <div
           style={
             Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
+              "color": "#666",
+              "fontSize": "16px",
+              "fontWeight": "400",
+              "height": "87%",
+              "lineHeight": "1.1",
+              "padding": "16px",
             }
           }
         >
-          template 1
-        </div>
-        <div
-          style={
-            Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
-            }
-          }
-        >
-          <img
-            alt="template 1"
-            src="./images/robots/robot-0.svg"
+          <div
             style={
               Object {
-                "margin": "30px",
-                "width": "40%",
+                "display": "table-row",
+                "textAlign": "center",
+                "width": "100%",
               }
             }
-          />
+          >
+            template 1
+          </div>
+          <div
+            style={
+              Object {
+                "display": "table-row",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <img
+              alt="template 1"
+              src="./images/robots/robot-0.svg"
+              style={
+                Object {
+                  "margin": "30px",
+                  "width": "40%",
+                }
+              }
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectedListItem"
-    style={
-      Object {
-        "height": "168px",
-      }
-    }
-  >
     <div
-      onClick={[Function]}
-      role="presentation"
+      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "textDecoration": "none",
-          "width": "100%",
+          "height": "168px",
         }
       }
     >
       <div
+        onClick={[Function]}
+        role="presentation"
         style={
           Object {
-            "color": "#666",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "height": "87%",
-            "lineHeight": "1.1",
-            "padding": "16px",
+            "textDecoration": "none",
+            "width": "100%",
           }
         }
       >
         <div
           style={
             Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
+              "color": "#666",
+              "fontSize": "16px",
+              "fontWeight": "400",
+              "height": "87%",
+              "lineHeight": "1.1",
+              "padding": "16px",
             }
           }
         >
-          template 2
-        </div>
-        <div
-          style={
-            Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
-            }
-          }
-        >
-          <img
-            alt="template 2"
-            src="./images/robots/robot-1.svg"
+          <div
             style={
               Object {
-                "margin": "30px",
-                "width": "40%",
+                "display": "table-row",
+                "textAlign": "center",
+                "width": "100%",
               }
             }
-          />
+          >
+            template 2
+          </div>
+          <div
+            style={
+              Object {
+                "display": "table-row",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <img
+              alt="template 2"
+              src="./images/robots/robot-1.svg"
+              style={
+                Object {
+                  "margin": "30px",
+                  "width": "40%",
+                }
+              }
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -220,74 +228,82 @@ exports[`TemplatesList marks an item as selected 1`] = `
 
 exports[`TemplatesList renders correctly 1`] = `
 <div
-  className="mdl-grid"
-/>
+  className="mdc-layout-grid"
+>
+  <div
+    className="mdc-layout-grid__inner"
+  />
+</div>
 `;
 
 exports[`TemplatesList renders some items 1`] = `
 <div
-  className="mdl-grid"
+  className="mdc-layout-grid"
 >
   <div
-    className="mdl-cell mdl-cell--2-col mdl-shadow--2dp selectedListItem"
-    style={
-      Object {
-        "height": "168px",
-      }
-    }
+    className="mdc-layout-grid__inner"
   >
     <div
-      onClick={[Function]}
-      role="presentation"
+      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "textDecoration": "none",
-          "width": "100%",
+          "height": "168px",
         }
       }
     >
       <div
+        onClick={[Function]}
+        role="presentation"
         style={
           Object {
-            "color": "#666",
-            "fontSize": "16px",
-            "fontWeight": "400",
-            "height": "87%",
-            "lineHeight": "1.1",
-            "padding": "16px",
+            "textDecoration": "none",
+            "width": "100%",
           }
         }
       >
         <div
           style={
             Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
+              "color": "#666",
+              "fontSize": "16px",
+              "fontWeight": "400",
+              "height": "87%",
+              "lineHeight": "1.1",
+              "padding": "16px",
             }
           }
         >
-          template 1
-        </div>
-        <div
-          style={
-            Object {
-              "display": "table-row",
-              "textAlign": "center",
-              "width": "100%",
-            }
-          }
-        >
-          <img
-            alt="template 1"
-            src="./images/robots/robot-0.svg"
+          <div
             style={
               Object {
-                "margin": "30px",
-                "width": "40%",
+                "display": "table-row",
+                "textAlign": "center",
+                "width": "100%",
               }
             }
-          />
+          >
+            template 1
+          </div>
+          <div
+            style={
+              Object {
+                "display": "table-row",
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <img
+              alt="template 1"
+              src="./images/robots/robot-0.svg"
+              style={
+                Object {
+                  "margin": "30px",
+                  "width": "40%",
+                }
+              }
+            />
+          </div>
         </div>
       </div>
     </div>

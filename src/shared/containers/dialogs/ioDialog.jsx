@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
+import Rmdc, {
   Button,
   Checkbox,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
+  Dialog,
+  DialogFooter,
+  DialogBody,
+  DialogHeader,
   Tab,
   Tabs,
-} from "react-mdl";
-import { DialogManager, DialogBox } from "zoapp-ui";
+} from "zoapp-materialcomponents";
 
-import FileManager from "../utils/fileManager";
+import FileManager from "../../utils/fileManager";
 
 class IODialog extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class IODialog extends Component {
       /*
       if (filetype === ".csv" || filetype === "text/csv") {
         const csv = this.importCSV(data);
-        console.log("imported csv", csv);
+        // console.log("imported csv", csv);
        }
        */
       this.setState({ data, filetype });
@@ -95,23 +95,23 @@ class IODialog extends Component {
     if (this.props.onClosed instanceof Function) {
       this.props.onClosed();
     } else {
-      setTimeout(() => { DialogManager.close(); }, 300);
+      setTimeout(() => { Rmdc.closeDialog(); }, 300);
     }
   };
 
   render() {
     if (this.props.importOnly) {
       return (
-        <DialogBox
+        <Dialog
           open={this.state.openDialog}
           id={this.state.id}
           onClose={this.handleCloseDialog}
         >
-          <DialogTitle>
+          <DialogHeader>
             Import Intents
-          </DialogTitle>
+          </DialogHeader>
 
-          <DialogContent>
+          <DialogBody>
             <section>
               <Button
                 className="mdl-button--file"
@@ -126,9 +126,9 @@ class IODialog extends Component {
                 />
               </Button>
             </section>
-          </DialogContent>
+          </DialogBody>
 
-          <DialogActions>
+          <DialogFooter>
             <Button
               type="button"
               onClick={(e) => { e.preventDefault(); this.handleImport(); }}
@@ -141,8 +141,8 @@ class IODialog extends Component {
             >
               Cancel
             </Button>
-          </DialogActions>
-        </DialogBox>
+          </DialogFooter>
+        </Dialog>
       );
     }
 
@@ -152,18 +152,18 @@ class IODialog extends Component {
     let dialogActions = null;
     if (this.state.activeTab === 0) {
       dialogActions = (
-        <DialogActions>
+        <DialogFooter>
           <Button
             type="button"
             onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
           >
             Done
           </Button>
-        </DialogActions>
+        </DialogFooter>
       );
     } else {
       dialogActions = (
-        <DialogActions>
+        <DialogFooter>
           <Button
             type="button"
             onClick={(e) => { e.preventDefault(); this.handleImport(); }}
@@ -176,18 +176,18 @@ class IODialog extends Component {
           >
             Cancel
           </Button>
-        </DialogActions>
+        </DialogFooter>
       );
     }
 
     return (
-      <DialogBox
+      <Dialog
         open={this.state.openDialog}
         id={this.state.id}
         style={{ backgroundColor: "white" }}
         onClose={this.handleCloseDialog}
       >
-        <DialogTitle>
+        <DialogHeader>
           <Tabs
             activeTab={this.state.activeTab}
             onChange={tabId => this.setState({ activeTab: tabId })}
@@ -196,8 +196,8 @@ class IODialog extends Component {
             <Tab>Export</Tab>
             <Tab>Import</Tab>
           </Tabs>
-        </DialogTitle>
-        <DialogContent>
+        </DialogHeader>
+        <DialogBody>
           <section style={{ display: p1 }}>
             <Button
               raised
@@ -227,10 +227,10 @@ class IODialog extends Component {
               />
             </Button>
           </section>
-        </DialogContent>
+        </DialogBody>
 
         {dialogActions}
-      </DialogBox>
+      </Dialog>
     );
   }
 }

@@ -45,7 +45,8 @@ export default class ExternalAppPlugin {
   }
 
   onAction = (action) => {
-    console.log("onAction=", action);
+    this.action = action;
+    // console.log("onAction=", action);
   }
 
   renderSettings(instance, onAction = null, publicUrl = null) {

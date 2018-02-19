@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Content, Button, Textfield } from "react-mdl";
-import { DialogManager, Selectfield } from "zoapp-ui";
+import Rmdc, { Select, MenuItem, Button, TextField } from "zoapp-materialcomponents";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import ProcessingDialog from "zoapp-front/containers/processingDialog";
 
 import TemplatesList from "../components/templatesList";
-import ProcessingDialog from "./processingDialog";
 import { apiCreateBot } from "../actions/api";
 import { appSetTitle } from "../actions/app";
 
@@ -77,7 +76,7 @@ class CreateAssistant extends Component {
 
   handleCloseCreateDialog = () => {
     this.setState({ loading: false });
-    DialogManager.close();
+    Rmdc.closeDialog();
     if (!this.props.error) {
       this.props.history.push("/builder");
     }
@@ -97,7 +96,7 @@ class CreateAssistant extends Component {
       };
       this.setState({ loading: true });
       const dialog = <ProcessingDialog open onClosed={this.handleCloseDialog} />;
-      DialogManager.open({ dialog });
+      Rmdc.open(dialog);
       this.props.createBot(botParams);
     } else {
       // TODO display errors in dialogs
@@ -105,8 +104,8 @@ class CreateAssistant extends Component {
   }
 
   handleLanguageChange = () => {
-    const language = this.selectField.inputRef.value;
-    console.log("handleCreate language=", language);
+    // const language = this.selectField.inputRef.value;
+    // console.log("handleCreate language=", language);
   }
 
   render() {
@@ -114,7 +113,7 @@ class CreateAssistant extends Component {
     // TODO json only for instance
     const acceptImport = "application/json";
     return (
-      <Content className="mdl-color--grey-100">
+      <div className="mdl-layout__content mdl-color--grey-100">
         <section className="mdl-color--white mdl-shadow--2dp" style={boxStyle}>
           <div style={headerStyle}>
             <h4 style={h4}>Opla !</h4>
@@ -158,66 +157,60 @@ class CreateAssistant extends Component {
             </div>
           </div>
           <form style={formStyle} autoComplete="new-password">
-            <div><Textfield
+            <div><TextField
               onChange={this.handleNameChange}
               label="Assistant name"
-              floatingLabel
-              style={{ maxWidth: "400px" }}
+              style={{ width: "400px" }}
               ref={(input) => { this.nameField = input; }}
             />
             </div>
-            <div><Textfield
+            <div><TextField
               onChange={this.handleEmailChange}
               label="Username"
-              floatingLabel
               autoComplete="new-password"
-              style={{ maxWidth: "400px" }}
+              style={{ width: "400px" }}
               ref={(input) => { this.usernameField = input; }}
             />
             </div>
-            <div><Textfield
+            <div><TextField
               onChange={this.handleEmailChange}
               label="Password"
-              floatingLabel
               type="password"
               autoComplete="new-password"
-              style={{ maxWidth: "400px" }}
+              style={{ width: "400px" }}
               ref={(input) => { this.passwordField = input; }}
             />
             </div>
-            <div><Textfield
+            <div><TextField
               onChange={this.handleEmailChange}
               label="Your email"
-              floatingLabel
-              style={{ maxWidth: "400px" }}
+              style={{ width: "400px" }}
               ref={(input) => { this.emailField = input; }}
             />
             </div>
             <div>
-              <Selectfield
+              <Select
                 label="Choose language"
                 onChange={this.handleLanguageChange}
-                floatingLabel
+                style={{ width: "400px" }}
                 ref={(input) => { this.selectField = input; }}
               >
-                <option value="en">English</option>
-                <option value="fr">French</option>
-              </Selectfield>
+                <MenuItem value="en">English</MenuItem>
+                <MenuItem value="fr">French</MenuItem>
+              </Select>
             </div>
           </form>
         </section>
         <section style={boxStyle}>
           <Button
             raised
-            accent
-            ripple
             onClick={(e) => { e.preventDefault(); this.handleCreate(); }}
           >
           Let&apos;s go
           </Button>
-          <Button ripple style={advancedStyle}>Advanced settings</Button>
+          <Button style={advancedStyle}>Advanced settings</Button>
         </section>
-      </Content>
+      </div>
     );
   }
 }
@@ -237,7 +230,7 @@ CreateAssistant.propTypes = {
 const mapStateToProps = (state) => {
   const { admin, error } = state.app;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const isLoading = state.app.loading;
+  const isLoading = state.app.loading || false;
   return {
     admin, isLoading, isSignedIn, error,
   };

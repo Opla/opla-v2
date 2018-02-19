@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DialogManager } from "zoapp-ui";
-import ListDragComponent from "zoapp-front/components/listDragComponent";
-import SubToolbar from "zoapp-front/components/subToolbar";
+import Rmdc from "zoapp-materialcomponents";
+import { ListDragComponent, SubToolbar } from "zoapp-ui";
 import { apiGetIntentsRequest, apiSendIntentRequest, apiDeleteIntentRequest, apiMoveIntentRequest } from "../actions/api";
 import { appSelectIntent } from "../actions/app";
 
 class ExplorerContainer extends Component {
   onDropIntent = (dragIndex, dropIndex) => {
-    console.log("TODO", `ExplorerContainer.onDropIntent ${dragIndex} / ${dropIndex}`);
+    // console.log("TODO", `ExplorerContainer.onDropIntent ${dragIndex} / ${dropIndex}`);
     const intent = this.props.intents[dragIndex];
     const intentId = intent.id;
     this.props.apiMoveIntentRequest(this.props.selectedBotId, intentId, dragIndex, dropIndex);
@@ -22,7 +21,7 @@ class ExplorerContainer extends Component {
   onAddIntent = (dialog, action) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
-      console.log("WIP", `ExplorerContainer.onAddIntent :${intentName}`);
+      // console.log("WIP", `ExplorerContainer.onAddIntent :${intentName}`);
       if (intentName === "") {
         dialog.invalidateField();
         return false;
@@ -36,7 +35,7 @@ class ExplorerContainer extends Component {
   onRenameIntent = (dialog, action) => {
     if (action === "Rename") {
       const intentName = dialog.getFieldValue();
-      console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
+      // console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
       if (intentName === "") {
         dialog.invalidateField();
         return false;
@@ -53,45 +52,45 @@ class ExplorerContainer extends Component {
     if (action === "Delete") {
       const selected = this.props.selectedIntentIndex;
       const intent = this.props.intents[selected];
-      console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
+      // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
       this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
   }
 
   handleAddIntent = () => {
-    console.log("WIP", "ExplorerContainer.handleAddIntent");
+    // console.log("WIP", "ExplorerContainer.handleAddIntent");
     const content = {
       defaultValue: "", pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    DialogManager.open({
-      title: "Add new intent", content, actions: ["Create", "Cancel"], onAction: this.onAddIntent,
+    Rmdc.showDialog({
+      header: "Add new intent", body: content, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent,
     });
   }
 
   handleRename = () => {
-    console.log("TODO", "ExplorerContainer.handleRename");
+    // console.log("TODO", "ExplorerContainer.handleRename");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
     const content = {
       defaultValue: intent.name, pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    DialogManager.open({
-      title: "Rename intent", content, actions: ["Rename", "Cancel"], onAction: this.onRenameIntent,
+    Rmdc.showDialog({
+      header: "Rename intent", body: content, actions: [{ name: "Rename" }, { name: "Cancel" }], onAction: this.onRenameIntent,
     });
   }
 
   handleSynchronize = () => {
-    console.log("WIP", "ExplorerContainer.handleSynchronize");
+    // console.log("WIP", "ExplorerContainer.handleSynchronize");
     this.props.apiGetIntentsRequest(this.props.selectedBotId);
   }
 
   handleDelete = () => {
-    console.log("WIP", "ExplorerContainer.handleDelete");
+    // console.log("WIP", "ExplorerContainer.handleDelete");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
-    DialogManager.open({
-      title: "Intent", content: `${intent.name} Do you want to delete it ?`, actions: ["Delete", "Cancel"], onAction: this.onDeleteIntent,
+    Rmdc.showDialog({
+      header: "Intent", body: `${intent.name} Do you want to delete it ?`, actions: [{ name: "Delete" }, { name: "Cancel" }], onAction: this.onDeleteIntent,
     });
   }
 

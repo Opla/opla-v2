@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemContent, ListItemAction, Icon, Switch } from "react-mdl";
+import { List, ListItem, ListItemMeta, Icon, Switch } from "zoapp-materialcomponents";
 
 const MessagingsList = (props) => {
   const {
@@ -41,9 +41,11 @@ const MessagingsList = (props) => {
             <ListItem
               key={key}
               className="selectableListItem switchListItem"
-              twoLine
+              style={{ height: "40px" }}
+              avatar={icon}
+              secondaryText="click to setup"
               onClick={(e) => {
-                console.log("e.target", e.target.className);
+                // console.log("e.target", e.target.className);
                 if (onSelect && (e.target.className.indexOf("mdl-switch") < 0)) {
                   e.preventDefault(); onSelect({
                     name, state: "select", index, item,
@@ -51,9 +53,8 @@ const MessagingsList = (props) => {
                 }
               }}
             >
-              <ListItemContent style={{ height: "40px" }} avatar={icon} subtitle="click to setup">{item.name}
-              </ListItemContent>
-              <ListItemAction>
+              {item.name}
+              <ListItemMeta>
                 <Switch
                   checked={item.enabled}
                   onChange={(e) => {
@@ -64,7 +65,7 @@ const MessagingsList = (props) => {
                     }
                   }}
                 />
-              </ListItemAction>
+              </ListItemMeta>
             </ListItem>
           );
         })

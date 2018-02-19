@@ -20,11 +20,11 @@ export default function configureStore(initialState = {}) {
   /* eslint-disable no-undef */
   if (module.hot) {
     module.hot.accept("OplaLibs/reducers", () => {
-      console.log("HMR reducers");
+      // console.log("HMR reducers");
       store.replaceReducer(require("./reducers").default);
     });
     module.hot.accept("OplaLibs/sagas", () => {
-      console.log("HMR sagas TODO");
+      // console.log("HMR sagas TODO");
       // TODO reload Sagas
       // @see https://gist.github.com/markerikson/dc6cee36b5b6f8d718f2e24a249e0491
       // SagaManager.cancelSagas(store);

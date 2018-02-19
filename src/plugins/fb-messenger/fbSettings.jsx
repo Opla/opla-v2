@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Textfield, IconButton } from "react-mdl";
+import { Textfield, Icon } from "zoapp-materialcomponents";
 
 export default class FBSettings extends Component {
   onAction = (action) => {
@@ -61,7 +61,7 @@ export default class FBSettings extends Component {
             style={{ width: "320px" }}
             disabled
             ref={(input) => { this.tfCallback = input; }}
-          /><IconButton name="mode_edit" />
+          /><Icon name="mode_edit" />
           </div>
         </div>
         <div style={{

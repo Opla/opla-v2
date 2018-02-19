@@ -1512,10 +1512,6 @@ circular-json@^0.3.1:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
-clamp@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/clamp/-/clamp-1.0.1.tgz#66a0e64011816e37196828fdc8c8c147312c8634"
-
 clap@^1.0.9:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
@@ -1531,7 +1527,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.3, classnames@^2.2.5:
+classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -4339,10 +4335,6 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
-lodash.isequal@^4.4.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-
 lodash.isfunction@^3.0.8:
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
@@ -4429,10 +4421,6 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-material-design-lite@^1.1.3:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/material-design-lite/-/material-design-lite-1.3.0.tgz#d004ce3fee99a1eeb74a78b8a325134a5f1171d3"
-
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
@@ -4443,12 +4431,6 @@ md5.js@^1.3.4:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
-
-mdl-selectfield@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/mdl-selectfield/-/mdl-selectfield-1.0.4.tgz#7d05cdd33e9b5be4a5c4d0d322558041b8529ac9"
-  dependencies:
-    material-design-lite "^1.1.3"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -5472,7 +5454,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.6.0, prop-types@^15.0.0, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@15.6.0, prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -5690,15 +5672,6 @@ react-json-tree@^0.11.0:
     babel-runtime "^6.6.1"
     prop-types "^15.5.8"
     react-base16-styling "^0.5.1"
-
-react-mdl@1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/react-mdl/-/react-mdl-1.11.0.tgz#7e07ee1009dd9b358b616dc400ff2ae1845a2e67"
-  dependencies:
-    clamp "^1.0.1"
-    classnames "^2.2.3"
-    lodash.isequal "^4.4.0"
-    prop-types "^15.5.0"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
@@ -7389,20 +7362,17 @@ zoapp-common@0.1.2:
   dependencies:
     winston "2.4.0"
 
-zoapp-front@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.1.2.tgz#81909fdbee1b1f2649c49a3c73c71761d52b4788"
+zoapp-front@0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.2.4.tgz#51471ea8cc6e6170a92f855d63c86cb4a45f586f"
   dependencies:
     babel-runtime "^6.26.0"
     css-loader "^0.28.7"
     json-loader "0.5.4"
     prop-types "15.6.0"
     react "16.2.0"
-    react-dnd "2.5.4"
-    react-dnd-html5-backend "2.5.4"
     react-dom "16.2.0"
     react-hot-loader "3.1.3"
-    react-mdl "1.11.0"
     react-redux "5.0.6"
     react-router "^4.2.0"
     react-router-dom "^4.2.2"
@@ -7410,12 +7380,12 @@ zoapp-front@^0.1.2:
     redux-saga "0.16.0"
     style-loader "^0.19.1"
     zoapp-common "0.1.2"
-    zoapp-materialcomponents "^0.2.1"
-    zoapp-ui "0.1.5"
+    zoapp-materialcomponents "0.2.3"
+    zoapp-ui "0.3.0"
 
-zoapp-materialcomponents@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.1.tgz#0f1dd97f9b2ff2e8f37baa945c95937d604119e6"
+zoapp-materialcomponents@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.2.tgz#8c0cd3e530d835412872bb44e41c3ea73544a908"
   dependencies:
     dialog-polyfill "^0.4.9"
     prop-types "15.6.0"
@@ -7423,13 +7393,50 @@ zoapp-materialcomponents@^0.2.1:
     react-dom "16.2.0"
     react-hot-loader "3.1.3"
 
-zoapp-ui@0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.1.5.tgz#a07405efa754cf5db7ab202bc0943e9c02f8c9cb"
+zoapp-materialcomponents@0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.3.tgz#af093c0ea8fbfd4c474ec5448228afef7216e439"
   dependencies:
+    dialog-polyfill "^0.4.9"
     prop-types "15.6.0"
     react "16.2.0"
     react-dom "16.2.0"
-    react-mdl "1.11.0"
+    react-hot-loader "3.1.3"
+
+zoapp-materialcomponents@0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.5.tgz#e2ed4e72d7f6f8dea4635af34f31b1d7bdd706c6"
+  dependencies:
+    dialog-polyfill "^0.4.9"
+    prop-types "15.6.0"
+    react "16.2.0"
+    react-dom "16.2.0"
+    react-hot-loader "3.1.3"
+
+zoapp-ui@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.3.0.tgz#d0892c6c39d3597f71c2783574bf20dd62ae309d"
+  dependencies:
+    prop-types "15.6.0"
+    react "16.2.0"
+    react-dnd "2.5.4"
+    react-dnd-html5-backend "2.5.4"
+    react-dom "16.2.0"
+    react-hot-loader "3.1.3"
     react-redux "5.0.6"
-    winston "2.4.0"
+    redux "3.7.2"
+    zoapp-materialcomponents "0.2.2"
+
+zoapp-ui@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.4.0.tgz#10854d154849f1c5383f56ebaae2c3d54f477b1f"
+  dependencies:
+    prop-types "15.6.0"
+    react "16.2.0"
+    react-dnd "2.5.4"
+    react-dnd-html5-backend "2.5.4"
+    react-dom "16.2.0"
+    react-hot-loader "3.1.3"
+    react-redux "5.0.6"
+    redux "3.7.2"
+    zoapp-materialcomponents "0.2.2"

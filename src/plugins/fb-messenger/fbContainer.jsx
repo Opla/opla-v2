@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, Textfield } from "react-mdl";
+import { Button, Textfield } from "zoapp-materialcomponents";
 
 export default class FBContainer extends Component {
   constructor() {
@@ -46,7 +46,7 @@ export default class FBContainer extends Component {
   }
 
   onStatusChange(response) {
-    console.log(response);
+    // console.log(response);
     if (response.status === "connected") {
       this.connected();
     }
@@ -57,7 +57,7 @@ export default class FBContainer extends Component {
   }
 
   onButtonAction(action) {
-    console.log("buttonAction=", action);
+    // console.log("buttonAction=", action);
     if (action === "Login") {
       this.login();
     } else if (action === "Manual") {
@@ -71,7 +71,7 @@ export default class FBContainer extends Component {
     const that = this;
     // https://developers.facebook.com/docs/graph-api/reference/user/accounts/
     window.FB.api("/me/accounts", (response) => {
-      console.log("getPages =", response);
+      // console.log("getPages =", response);
       if (response && response.data) {
         that.setState({ pages: response.data });
       } else {
@@ -84,10 +84,10 @@ export default class FBContainer extends Component {
   start() {
     if (this.state.isStarted) return;
 
-    console.log("started");
+    // console.log("started");
     this.setState({ isStarted: true });
     window.FB.getLoginStatus((response) => {
-      console.log("start=", response);
+      // console.log("start=", response);
       if (response.status === "connected") {
         this.connected();
       }
@@ -97,7 +97,7 @@ export default class FBContainer extends Component {
   connected() {
     if (this.state.isConnected) return;
 
-    console.log("connected");
+    // console.log("connected");
     this.setState({ isConnected: true });
     const that = this;
     window.FB.api("/me", (response) => {
@@ -111,17 +111,17 @@ export default class FBContainer extends Component {
     const that = this;
     window.FB.login((response) => {
       if (response.authResponse) {
-        console.log("Welcome! Fetching your information.... ");
+        // console.log("Welcome! Fetching your information.... ");
         that.connected();
       } else {
-        console.log("User cancelled login or did not fully authorize.");
+        // console.log("User cancelled login or did not fully authorize.");
       }
     }, { scope: "public_profile,manage_pages" });
   }
 
   logout() {
     window.FB.logout(() => {
-      console.log("Logout");
+      // console.log("Logout");
       this.setState({ isConnected: false });
     });
   }

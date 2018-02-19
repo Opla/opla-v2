@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Cell } from "react-mdl";
-import { DialogManager } from "zoapp-ui";
-import List from "zoapp-front/components/listComponent";
+import Rmdc, { Cell } from "zoapp-materialcomponents";
+import { ListComponent } from "zoapp-ui";
 import ServicesList from "zoapp-front/components/servicesList";
 import displayWebServiceEditor from "zoapp-front/components/displayWebServiceEditor";
 
@@ -77,7 +76,7 @@ class ServicesContainer extends Component {
         this.setState({ needUpdate: true });
       }
     }
-    console.log("TODO", `ServicesContainer.onEditAction : ${editAction}`);
+    // console.log("TODO", `ServicesContainer.onEditAction : ${editAction}`);
 
     this.currentSelected = null;
     this.paramFields = null;
@@ -103,12 +102,12 @@ class ServicesContainer extends Component {
     let couldDelete = true;
     let className = null;
     this.currentSelected = { ...selected };
-    console.log("test");
+    // console.log("test");
     if (name === "Web services") {
       services = this.getMiddlewares("WebService");
       editor = displayProviderEditor;
       couldDelete = false;
-      console.log("ws");
+      // console.log("ws");
       if ((state === "select" || state === "create")) {
         if (item.provider) {
           className = "mdl-dialog-extended";
@@ -116,7 +115,7 @@ class ServicesContainer extends Component {
           content = item.provider.renderSettings();
           action = "next";
         } else {
-          console.log("demo");
+          // console.log("demo");
           editor = displayWebServiceEditor;
           if (state === "create") {
             title = `Add ${title} entry`;
@@ -128,21 +127,21 @@ class ServicesContainer extends Component {
         title = "Add a WebService";
         const items = this.getWebServices(true);
         items.push({
-          id: items.length + 1, name: "Add plugin", icon: "add", color: "gray",
+          id: `${items.length + 1}`, name: "Add plugin", icon: "add", color: "gray",
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><List
+          <div style={{ height: "280px" }}><ListComponent
             className="list-content"
             style={{ padding: "0px" }}
             items={items}
             selectedItem={-1}
             onSelect={(i) => {
               const it = items[i];
-              const n = it.name;
-              console.log("WIP select Web services =", n);
+              // const n = it.name;
+              // console.log("WIP select Web services =", n);
               setTimeout(() => {
-                DialogManager.closeCurrentDialog();
+                Rmdc.closeDialog();
                 that.onSelect({
                   name: "Web services", index: i, item: it, state: "create",
                 });
@@ -170,17 +169,17 @@ class ServicesContainer extends Component {
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><List
+          <div style={{ height: "280px" }}><ListComponent
             className="list-content"
             style={{ padding: "0px" }}
             items={items}
             selectedItem={-1}
             onSelect={(i) => {
               const it = items[i];
-              const n = it.name;
-              console.log("WIP select AI/NLU providers =", n);
+              // const n = it.name;
+              // console.log("WIP select AI/NLU providers =", n);
               setTimeout(() => {
-                DialogManager.closeCurrentDialog();
+                Rmdc.closeDialog();
                 that.onSelect({
                   name: "AI/NLU providers", index: i, item: it, state: "create",
                 });
@@ -210,17 +209,17 @@ class ServicesContainer extends Component {
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><List
+          <div style={{ height: "280px" }}><ListComponent
             className="list-content"
             style={{ padding: "0px" }}
             items={items}
             selectedItem={-1}
             onSelect={(i) => {
               const it = items[i];
-              const n = it.name;
-              console.log("WIP select messaging platform =", n);
+              // const n = it.name;
+              // console.log("WIP select messaging platform =", n);
               setTimeout(() => {
-                DialogManager.closeCurrentDialog();
+                Rmdc.closeDialog();
                 that.onSelect({
                   name: "Messaging platforms", index: i, item: it, state: "create",
                 });
@@ -265,15 +264,15 @@ class ServicesContainer extends Component {
           }
         }, this.onEditAction, content, className);
       } else if (state === "delete" && couldDelete) {
-        DialogManager.open({
-          title,
-          content: "Do you want to delete it ?",
-          actions: ["Delete", "Cancel"],
+        Rmdc.showDialog({
+          header: title,
+          body: "Do you want to delete it ?",
+          actions: [{ name: "Delete" }, { name: "Cancel" }],
           onAction: this.onEditAction,
           className,
         });
       }
-      console.log("WIP WebServicesContainer.onSelect", selected);
+      // console.log("WIP WebServicesContainer.onSelect", selected);
     }
   }
 
@@ -359,13 +358,13 @@ class ServicesContainer extends Component {
 
     return (
       <div style={divCellStyle}>
-        <Cell className="mdl-color--white" col={12}>
+        <Cell className="mdl-color--white" span={12}>
           <ServicesList name="Messaging platforms" items={messagings} onSelect={this.onSelect} />
         </Cell>
-        <Cell className="mdl-color--white" col={12}>
+        <Cell className="mdl-color--white" span={12}>
           <ServicesList name="AI/NLU providers" items={ais} onSelect={this.onSelect} />
         </Cell>
-        <Cell className="mdl-color--white" col={12}>
+        <Cell className="mdl-color--white" span={12}>
           <ServicesList name="Web services" items={webservices} onSelect={this.onSelect} />
         </Cell>
       </div>

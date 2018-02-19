@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemContent, ListItemAction, Textfield, Button } from "react-mdl";
+import { List, ListItem, ListItemMeta, TextField, Button } from "zoapp-materialcomponents";
 import { ExpansionPanel, DialogManager } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
@@ -17,27 +17,27 @@ const IntentDetail = ({ intent, onSelect }) => {
         <hr />
         <ExpansionPanel label="Parameters" collapsed >
           <List>
-            <ListItem>
-              <ListItemContent icon="title">Topic</ListItemContent>
-              <ListItemAction>
+            <ListItem icon="title">
+              Topic
+              <ListItemMeta>
                 <Button
                   ripple
                   className="mrb-action-button"
                   onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "topic" }); } }}
                 >{topic}
                 </Button>
-              </ListItemAction>
+              </ListItemMeta>
             </ListItem>
-            <ListItem>
-              <ListItemContent icon="link">Previous</ListItemContent>
-              <ListItemAction>
+            <ListItem icon="link">
+              Previous
+              <ListItemMeta>
                 <Button
                   ripple
                   className="mrb-action-button"
                   onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "previous" }); } }}
                 >NONE
                 </Button>
-              </ListItemAction>
+              </ListItemMeta>
             </ListItem>
           </List>
         </ExpansionPanel>
@@ -70,7 +70,7 @@ export const displayActionEditor = (
   if (actionDef === "Topic" || actionDef === "Previous") {
     content = (
       <div>
-        <Textfield
+        <TextField
           defaultValue={text}
           pattern=".+"
           label={actionDef}
@@ -86,7 +86,7 @@ export const displayActionEditor = (
       const value = parameters.value ? parameters.value : "";
       condition = (
         <div style={{ width: "100%", display: "table" }}>
-          <Textfield
+          <TextField
             defaultValue={name}
             pattern=".+"
             label="Condition entity"
@@ -95,7 +95,7 @@ export const displayActionEditor = (
             ref={input => setInput(input, "fieldParamName")}
           />
           <div style={{ fontWeight: "900", textAlign: "center", display: "table-cell" }}>=</div>
-          <Textfield
+          <TextField
             defaultValue={value}
             pattern=".+"
             label="Condition value"

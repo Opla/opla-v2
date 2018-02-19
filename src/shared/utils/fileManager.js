@@ -14,7 +14,7 @@ const FileManager = {
 
   upload(selectorFiles, callback) {
     const file = selectorFiles[0];
-    console.log("FileManager file=", file);
+    // console.log("FileManager file=", file);
     /* eslint-disable no-undef */
     const reader = new FileReader();
     reader.onload = (e) => {

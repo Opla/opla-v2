@@ -1,20 +1,17 @@
 import React from "react";
-import { Layout, Header, Drawer, Navigation, IconButton, Menu, MenuItem, HeaderTabs, Tab } from "react-mdl";
+import { Layout, Header, Drawer, Navigation, IconButton, Menu, MenuItem, HeaderTabs, Tab } from "zoapp-materialcomponents";
 import PropTypes from "prop-types";
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { initAuthSettings } from "zoapp-front/actions/initialize";
+import UserBox from "zoapp-front/containers/userBox";
 
 import Home from "OplaContainers/home";
-import ReportsManager from "OplaContainers/reportsManager";
-import ConversationsManager from "OplaContainers/conversationsManager";
-import CampaignsManager from "OplaContainers/campaignsManager";
 import BotManager from "OplaContainers/botManager";
 import AdminManager from "OplaContainers/adminManager";
 import CreateAssistant from "OplaContainers/createAssistant";
-import DemoManager from "OplaContainers/demoManager";
 import BuilderBox from "OplaContainers/builderBox";
-import UserBox from "./userBox";
+
 import { apiAdminRequest } from "../actions/api";
 
 class App extends React.Component {
@@ -161,13 +158,9 @@ class App extends React.Component {
             </Navigation>
           </Drawer>
           <Switch>
-            <Route path="/reports" component={ReportsManager} />
-            <Route path="/campaigns" component={CampaignsManager} />
-            <Route path="/users" component={ConversationsManager} />
             <Route path="/builder" render={props => <BotManager {...props} activeTab={this.state.activeTab} />} />
             <Route path="/admin" render={props => <AdminManager {...props} activeTab={this.state.activeTab} />} />
             <Route path="/create" component={CreateAssistant} />
-            <Route path="/demo" component={DemoManager} />
             <Route path="*" component={Home} />
           </Switch>
         </Layout>

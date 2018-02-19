@@ -1,4 +1,4 @@
-import { DialogManager } from "zoapp-ui";
+import Rmdc from "zoapp-materialcomponents";
 
 const displayProviderEditor = (
   title,
@@ -12,17 +12,12 @@ const displayProviderEditor = (
 ) => {
   const actions = [];
   if (action) {
-    actions.push(action);
-    actions.push("Cancel");
+    actions.push({ title: action, name: actionDef });
+    actions.push({ name: "Cancel" });
   }
 
-  const actionsDef = [];
-  if (actionDef) {
-    actionsDef.push(actionDef);
-    actionsDef.push("Cancel");
-  }
-  DialogManager.open({
-    title, content, actions, actionsDef, onAction: onEditAction, className,
+  Rmdc.showDialog({
+    header: title, body: content, actions, onAction: onEditAction, className,
   });
 };
 

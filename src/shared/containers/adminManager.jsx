@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, Cell, Button, IconButton, Content, Textfield, Tooltip } from "react-mdl";
-import { DialogManager, Selectfield } from "zoapp-ui";
+import Rmdc, { Grid, Inner, Cell, Button, Icon, TextField, Select, MenuItem } from "zoapp-materialcomponents";
+import { TableComponent } from "zoapp-ui";
 import { connect } from "react-redux";
-import TableComponent from "zoapp-front/components/tableComponent";
 import Loading from "zoapp-front/components/loading";
+import SignInForm from "zoapp-front/containers/signInForm";
 
 import { appSetTitle } from "../actions/app";
 import { apiSetAdminParametersRequest } from "../actions/api";
-import SignInForm from "./signInForm";
 import ServicesContainer from "./servicesContainer";
 import PluginsManager from "../utils/pluginsManager";
 import TunnelBox from "../components/tunnelBox";
@@ -23,7 +22,7 @@ const infoStyleD = {
 
 class AdminManager extends Component {
   static onActionTunnel(/* dialog, action */) {
-    DialogManager.close();
+    Rmdc.closeDialog();
   }
 
   constructor(props) {
@@ -67,9 +66,9 @@ class AdminManager extends Component {
     const { params } = this.props.admin;
     const backend = this.state.backendParams || params.backend || { };
     const tunnelParams = this.state.tunnelParams || backend.tunnel || { };
-    const content = <TunnelBox onChange={this.onChangeTunnel} params={tunnelParams} />;
-    DialogManager.open({
-      title: "Tunnel settings", content, width: "520px", onAction: AdminManager.onActionTunnel,
+    const body = <TunnelBox onChange={this.onChangeTunnel} params={tunnelParams} />;
+    Rmdc.showDialog({
+      header: "Tunnel settings", body, syle: { width: "520px" }, onAction: AdminManager.onActionTunnel,
     });
   }
 
@@ -89,59 +88,60 @@ class AdminManager extends Component {
       const saveDisabled = !this.state.botParams;
       content = (
         <Grid>
-          <Cell className="mdl-color--white" col={12} style={{ display: "table" }}>
-            <div style={{ width: "200px", display: "table-cell" }}>
-              <div style={{
-                position: "absolute", width: "180px", height: "180px", margin: "24px", backgroundColor: "#ddd",
-              }}
-              />
-            </div>
-            <div style={{ display: "table-cell" }}>
-              <form style={infoStyleD}>
-                <div>
-                  <Textfield
-                    onChange={() => {}}
-                    label="Assistant name"
-                    floatingLabel
-                    style={{ width: "400px" }}
-                    value={this.props.bot.name}
-                  />
-                </div>
-                <div><Textfield
-                  onChange={() => {}}
-                  label="Describe how your assistant is wonderfull !"
-                  rows={3}
-                  value={this.props.bot.description}
-                  style={{ width: "400px" }}
+          <Inner>
+            <Cell className="mdl-color--white" span={12} style={{ display: "table" }}>
+              <div style={{ width: "200px", display: "table-cell" }}>
+                <div style={{
+                  position: "absolute", width: "180px", height: "180px", margin: "24px", backgroundColor: "#ddd",
+                }}
                 />
-                </div>
-                <div>
-                  <Selectfield
-                    label="Language"
-                    onChange={this.handleLanguageChange}
-                    floatingLabel
-                    ref={(input) => { this.selectFieldLanguage = input; }}
-                    value={this.props.bot.language}
-                  >
-                    <option value="en">English</option>
-                    <option value="fr">French</option>
-                  </Selectfield>
-                </div>
-                <div>
-                  <Selectfield
-                    label="Timezone"
-                    onChange={this.handleTimezoneChange}
-                    floatingLabel
-                    ref={(input) => { this.selectFieldTimezone = input; }}
-                  >
-                    <option value="gmt">GMT</option>
-                    <option value="gmt+1">GMT+1</option>
-                  </Selectfield>
-                </div>
-              </form>
-            </div>
-            <div><Button raised colored disabled={saveDisabled} style={{ float: "right", margin: "24px" }}>SAVE</Button></div>
-          </Cell>
+              </div>
+              <div style={{ display: "table-cell" }}>
+                <form style={infoStyleD}>
+                  <div>
+                    <TextField
+                      onChange={() => {}}
+                      label="Assistant name"
+                      style={{ width: "400px" }}
+                      value={this.props.bot.name}
+                    />
+                  </div>
+                  <div><TextField
+                    onChange={() => {}}
+                    label="Describe how your assistant is wonderfull !"
+                    rows={3}
+                    value={this.props.bot.description}
+                    style={{ width: "400px" }}
+                  />
+                  </div>
+                  <div>
+                    <Select
+                      label="Language"
+                      onChange={this.handleLanguageChange}
+                      ref={(input) => { this.selectFieldLanguage = input; }}
+                      style={{ width: "400px" }}
+                      value={this.props.bot.language}
+                    >
+                      <MenuItem value="en">English</MenuItem>
+                      <MenuItem value="fr">French</MenuItem>
+                    </Select>
+                  </div>
+                  <div>
+                    <Select
+                      label="Timezone"
+                      onChange={this.handleTimezoneChange}
+                      ref={(input) => { this.selectFieldTimezone = input; }}
+                      style={{ width: "400px" }}
+                    >
+                      <MenuItem value="gmt">GMT</MenuItem>
+                      <MenuItem value="gmt+1">GMT+1</MenuItem>
+                    </Select>
+                  </div>
+                </form>
+              </div>
+              <div><Button raised disabled={saveDisabled} style={{ float: "right", margin: "24px" }}>SAVE</Button></div>
+            </Cell>
+          </Inner>
         </Grid>);
     } else if (active === 1) {
       content = (
@@ -167,7 +167,6 @@ class AdminManager extends Component {
           You could give an access to your collaborators here.
           <Button
             raised
-            colored
             style={{ float: "right", marginBottom: "24px" }}
           >
             ADD
@@ -177,17 +176,19 @@ class AdminManager extends Component {
 
       content = (
         <Grid>
-          <Cell className="mdl-color--white" col={12}>
-            <div>
-              <TableComponent
-                title={title}
-                headers={headers}
-                items={items}
-                selectedItem={-1}
-                onSelect={() => { }}
-              />
-            </div>
-          </Cell>
+          <Inner>
+            <Cell className="mdl-color--white" span={12}>
+              <div>
+                <TableComponent
+                  title={title}
+                  headers={headers}
+                  items={items}
+                  selectedItem={-1}
+                  onSelect={() => { }}
+                />
+              </div>
+            </Cell>
+          </Inner>
         </Grid>
       );
     } else if (active === 3) {
@@ -196,142 +197,136 @@ class AdminManager extends Component {
       const emailServer = this.state.emailParams || params.emailServer || { };
       const backend = this.state.backendParams || params.backend || { };
       // const tunnelParams = this.state.tunnelParams || backend.tunnel || {};
-      const hasTunnelParams = !!this.state.tunnelParams;
+      /* const hasTunnelParams = !!this.state.tunnelParams; */
       const saveBackendDisabled = !(this.state.backendParams || this.state.tunnelParams);
       const saveEmailDisabled = !this.state.emailServerParams;
       content = (
         <Grid>
-          <Cell className="mdl-color--white" col={12}>
-            <div style={infoStyleD}>
-              Backend configuration
-              <Button
-                raised
-                colored
-                disabled={saveBackendDisabled}
-                style={{ float: "right" }}
-                onClick={(e) => { e.preventDefault(); this.onSaveBackend(); }}
-              >
-                SAVE
-              </Button>
-            </div>
-            <form style={infoStyleD}>
-              <div style={{ width: "520px" }}>
-                <Textfield
-                  onChange={() => {}}
-                  label="Public Api url"
-                  floatingLabel
-                  style={{ width: "400px" }}
-                  value={backend.publicUrl}
-                />
-                <Tooltip label="Setup tunnel">
-                  <IconButton
-                    colored={hasTunnelParams}
+          <Inner>
+            <Cell className="mdl-color--white" span={12}>
+              <div style={infoStyleD}>
+                Backend configuration
+                <Button
+                  raised
+                  disabled={saveBackendDisabled}
+                  style={{ float: "right" }}
+                  onClick={(e) => { e.preventDefault(); this.onSaveBackend(); }}
+                >
+                  SAVE
+                </Button>
+              </div>
+              <form style={infoStyleD}>
+                <div style={{ width: "520px" }}>
+                  <TextField
+                    onChange={() => {}}
+                    label="Public Api url"
+                    style={{ width: "400px" }}
+                    value={backend.publicUrl}
+                  />
+                  <Icon
+                    /* colored={hasTunnelParams} */
                     style={{ float: "right", marginTop: "8px" }}
                     name="link"
                     onClick={(e) => { e.preventDefault(); this.displayTunnelDialog(); }}
                   />
-                </Tooltip>
-              </div>
-              <div><Textfield
-                onChange={() => {}}
-                label="Api url"
-                floatingLabel
-                disabled
-                style={{ width: "400px" }}
-                value={backend.apiUrl}
-              />
-              </div>
-              <div><Textfield
-                onChange={() => {}}
-                label="Auth url"
-                floatingLabel
-                disabled
-                style={{ width: "400px" }}
-                value={backend.authUrl}
-              />
-              </div>
-              <div><Textfield
-                onChange={() => {}}
-                label="AppId"
-                floatingLabel
-                disabled
-                style={{ width: "400px" }}
-                value={backend.clientId}
-              />
-              </div>
-              <div><Textfield
-                onChange={() => {}}
-                label="Secret"
-                floatingLabel
-                disabled
-                style={{ width: "400px" }}
-                value={backend.clientSecret}
-              />
-              </div>
-            </form>
-            <div />
-          </Cell>
-          <Cell className="mdl-color--white" col={12}>
-            <div
-              style={infoStyleD}
-            >
-              Email server configuration
-              <Button
-                raised
-                colored
-                disabled={saveEmailDisabled}
-                style={{ float: "right" }}
+                </div>
+                <div><TextField
+                  onChange={() => {}}
+                  label="Api url"
+                  disabled
+                  style={{ width: "400px" }}
+                  value={backend.apiUrl}
+                />
+                </div>
+                <div><TextField
+                  onChange={() => {}}
+                  label="Auth url"
+                  disabled
+                  style={{ width: "400px" }}
+                  value={backend.authUrl}
+                />
+                </div>
+                <div><TextField
+                  onChange={() => {}}
+                  label="AppId"
+                  disabled
+                  style={{ width: "400px" }}
+                  value={backend.clientId}
+                />
+                </div>
+                <div><TextField
+                  onChange={() => {}}
+                  label="Secret"
+                  disabled
+                  style={{ width: "400px" }}
+                  value={backend.clientSecret}
+                />
+                </div>
+              </form>
+              <div />
+            </Cell>
+          </Inner>
+          <Inner>
+            <Cell className="mdl-color--white" span={12}>
+              <div
+                style={infoStyleD}
               >
-                SAVE
-              </Button>
-            </div>
-            <form style={infoStyleD} autoComplete="nope">
-              <div><Textfield
-                onChange={() => {}}
-                label="Server address"
-                floatingLabel
-                style={{ width: "400px" }}
-                value={emailServer.url}
-              />
+                Email server configuration
+                <Button
+                  raised
+                  disabled={saveEmailDisabled}
+                  style={{ float: "right" }}
+                >
+                  SAVE
+                </Button>
               </div>
-              <div>
-                <Textfield
+              <form style={infoStyleD} autoComplete="nope">
+                <div><TextField
                   onChange={() => {}}
-                  label="Username"
-                  floatingLabel
-                  autoComplete="new-password"
+                  label="Server address"
                   style={{ width: "400px" }}
-                  value={emailServer.username}
+                  value={emailServer.url}
                 />
+                </div>
+                <div>
+                  <TextField
+                    onChange={() => {}}
+                    label="Username"
+                    autoComplete="new-password"
+                    style={{ width: "400px" }}
+                    value={emailServer.username}
+                  />
+                </div>
+                <div>
+                  <TextField
+                    onChange={() => {}}
+                    label="Password"
+                    autoComplete="new-password"
+                    type="password"
+                    style={{ width: "400px" }}
+                    value={emailServer.password}
+                  />
+                </div>
+              </form>
+              <div />
+            </Cell>
+          </Inner>
+          <Inner>
+            <Cell className="mdl-color--white" span={12}>
+              <div style={infoStyleD}><span style={{ color: "#d50000" }}>Delete this assistant</span>
+                <Button raised style={{ float: "right", marginBottom: "24px", backgroundColor: "#d50000" }}>DELETE</Button>
               </div>
-              <div>
-                <Textfield
-                  onChange={() => {}}
-                  label="Password"
-                  floatingLabel
-                  autoComplete="new-password"
-                  type="password"
-                  style={{ width: "400px" }}
-                  value={emailServer.password}
-                />
-              </div>
-            </form>
-            <div />
-          </Cell>
-          <Cell className="mdl-color--white" col={12}>
-            <div style={infoStyleD}><span style={{ color: "#d50000" }}>Delete this assistant</span>
-              <Button raised colored style={{ float: "right", marginBottom: "24px", backgroundColor: "#d50000" }}>DELETE</Button>
-            </div>
-            <div />
-          </Cell>
+              <div />
+            </Cell>
+          </Inner>
         </Grid>);
     }
     return (
-      <Content className="mdl-color--grey-100">
+      <div className="mdl-layout__content mdl-color--grey-100">
         <section>
           {content}
         </section>
-      </Content>
+      </div>
     );
   }
 }
@@ -360,10 +355,6 @@ AdminManager.propTypes = {
   appSetTitle: PropTypes.func.isRequired,
   apiSetAdminParametersRequest: PropTypes.func.isRequired,
   profile: PropTypes.shape({}),
-};
-
-AdminManager.contextTypes = {
-  activeTab: PropTypes.number,
 };
 
 const mapStateToProps = (state) => {
