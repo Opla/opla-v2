@@ -1,6 +1,6 @@
 {
   "name": "opla-front",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": " Opla.ai Frontend using node ES7 react and redux",
   "main": "index.js",
   "homepage": "https://github.com/Opla/front",
