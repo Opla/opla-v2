@@ -7362,9 +7362,9 @@ zoapp-common@0.1.2:
   dependencies:
     winston "2.4.0"
 
-zoapp-front@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.2.1.tgz#9cea632c199d49e7d2fa390ae50437d0cf9165a3"
+zoapp-front@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.2.2.tgz#9b47a0ce1694e1e768045eccb4b908532d93e4bb"
   dependencies:
     babel-runtime "^6.26.0"
     css-loader "^0.28.7"

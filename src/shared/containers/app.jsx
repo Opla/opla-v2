@@ -7,7 +7,6 @@ import { initAuthSettings } from "zoapp-front/actions/initialize";
 import UserBox from "zoapp-front/containers/userBox";
 
 import Home from "OplaContainers/home";
-import ReportsManager from "OplaContainers/reportsManager";
 import BotManager from "OplaContainers/botManager";
 import AdminManager from "OplaContainers/adminManager";
 import CreateAssistant from "OplaContainers/createAssistant";
@@ -159,7 +158,6 @@ class App extends React.Component {
             </Navigation>
           </Drawer>
           <Switch>
-            <Route path="/reports" component={ReportsManager} />
             <Route path="/builder" render={props => <BotManager {...props} activeTab={this.state.activeTab} />} />
             <Route path="/admin" render={props => <AdminManager {...props} activeTab={this.state.activeTab} />} />
             <Route path="/create" component={CreateAssistant} />

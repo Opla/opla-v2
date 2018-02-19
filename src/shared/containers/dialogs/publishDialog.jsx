@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { Button, DialogTitle, DialogContent, DialogActions } from "zoapp-materialcomponents";
 import { connect } from "react-redux";
 import { DialogManager, DialogBox } from "zoapp-ui";
-import PluginsManager from "../utils/pluginsManager";
-import MessagingsList from "../components/messagingsList";
+import PluginsManager from "../../utils/pluginsManager";
+import MessagingsList from "../../components/messagingsList";
 import ServiceDialog from "./serviceDialog";
 import {
   apiGetMiddlewaresRequest,
   /* apiSetMiddlewareRequest, apiDeleteMiddlewareRequest, */
   apiPublishRequest,
-} from "../actions/api";
-import { appUpdatePublisher } from "../actions/app";
+} from "../../actions/api";
+import { appUpdatePublisher } from "../../actions/app";
 
 class PublishDialog extends Component {
   constructor(props) {

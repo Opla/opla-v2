@@ -40,7 +40,7 @@
     "redux-saga": "0.16.0",
     "style-loader": "^0.19.1",
     "zoapp-common": "0.1.0",
-    "zoapp-front": "^0.2.1",
+    "zoapp-front": "0.2.2",
     "zoapp-materialcomponents": "0.2.3",
     "zoapp-ui": "0.3.0"
   },

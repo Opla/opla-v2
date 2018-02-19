@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Button, DialogTitle, DialogContent, DialogActions } from "zoapp-materialcomponents";
 import { connect } from "react-redux";
 import { DialogManager, DialogBox } from "zoapp-ui";
-import { apiSetMiddlewareRequest } from "../actions/api";
-import PluginsManager from "../utils/pluginsManager";
+import { apiSetMiddlewareRequest } from "../../actions/api";
+import PluginsManager from "../../utils/pluginsManager";
 /* eslint-enable no-unused-vars */
 
 class ServiceDialog extends Component {

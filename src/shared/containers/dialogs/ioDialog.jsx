@@ -11,7 +11,7 @@ import {
 } from "zoapp-materialcomponents";
 import { DialogManager, DialogBox } from "zoapp-ui";
 
-import FileManager from "../utils/fileManager";
+import FileManager from "../../utils/fileManager";
 
 class IODialog extends Component {
   constructor(props) {
