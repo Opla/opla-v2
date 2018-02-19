@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Textfield, Button } from "zoapp-materialcomponents";
-import { Selectfield } from "zoapp-ui";
+import { TextField, Button, Select, ListItem } from "zoapp-materialcomponents";
 
 class TunnelBox extends Component {
   constructor(props) {
@@ -55,41 +54,37 @@ class TunnelBox extends Component {
     return (
       <div style={{ width: "512px", margin: "auto" }}>
         <div>
-          <Selectfield
+          <Select
             label="Tunnel provider"
             onChange={(e) => { this.onChange("provider", e.target.value); }}
-            floatingLabel
             ref={(input) => { this.fields.provider = input; }}
             value={value}
             style={{ width: "400px" }}
           >
-            {items.map(item => (<option key={item.id} value={item.name}>{item.name}</option>))}
-          </Selectfield>
+            {items.map(item => (<ListItem key={item.id} value={item.name}>{item.name}</ListItem>))}
+          </Select>
         </div>
         {advanced}
         <form style={{ display: formDisplay }}>
-          <div><Textfield
+          <div><TextField
             onChange={(e) => { this.onChange("subdomain", e.target.value); }}
             label="Subdomain"
-            floatingLabel
             style={{ width: "400px" }}
             value={active.subdomain}
             ref={(input) => { this.fields.subdomain = input; }}
           />
           </div>
-          <div><Textfield
+          <div><TextField
             onChange={(e) => { this.onChange("host", e.target.value); }}
             label="Host"
-            floatingLabel
             style={{ width: "400px" }}
             value={active.host}
             ref={(input) => { this.fields.host = input; }}
           />
           </div>
-          <div><Textfield
+          <div><TextField
             onChange={(e) => { this.onChange("localhost", e.target.value); }}
             label="Localhost"
-            floatingLabel
             style={{ width: "400px" }}
             value={active.localhost}
             ref={(input) => { this.fields.localhost = input; }}

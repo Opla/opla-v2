@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, DialogTitle, DialogContent, DialogActions } from "zoapp-materialcomponents";
+import Rmdc, { Button, DialogHeader, DialogBody, DialogFooter, Dialog } from "zoapp-materialcomponents";
 import { connect } from "react-redux";
-import { DialogManager, DialogBox } from "zoapp-ui";
 import { apiSetMiddlewareRequest } from "../../actions/api";
 import PluginsManager from "../../utils/pluginsManager";
 /* eslint-enable no-unused-vars */
@@ -50,7 +49,7 @@ class ServiceDialog extends Component {
     if (this.props.onClosed instanceof Function) {
       this.props.onClosed();
     } else {
-      setTimeout(() => { DialogManager.close(); }, 300);
+      setTimeout(() => { Rmdc.closeDialog(); }, 300);
     }
   }
 
@@ -77,10 +76,10 @@ class ServiceDialog extends Component {
     }
     const style = { width: "550px" };
     return (
-      <DialogBox open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>{content}</DialogContent>
-        <DialogActions>
+      <Dialog open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
+        <DialogHeader>{title}</DialogHeader>
+        <DialogBody>{content}</DialogBody>
+        <DialogFooter>
           <Button
             type="button"
             onClick={(e) => { e.preventDefault(); this.onAction("save"); }}
@@ -91,8 +90,8 @@ class ServiceDialog extends Component {
             onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
           >Cancel
           </Button>
-        </DialogActions>
-      </DialogBox>
+        </DialogFooter>
+      </Dialog>
     );
   }
 }

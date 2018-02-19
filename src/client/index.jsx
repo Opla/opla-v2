@@ -9,6 +9,7 @@ import Front from "zoapp-front/front";
 import Screen from "zoapp-front/containers/screen";
 import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
+import AdminManager from "OplaContainers/adminManager";
 import configureStore from "OplaLibs/store";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
@@ -51,7 +52,7 @@ const app = {
       path: "/admin",
       access: "auth",
       panels: ["General", "Extensions", "Users", "Advanced"],
-      render: props => React.createElement(Screen, props, "Admin"),
+      render: props => React.createElement(AdminManager, props),
     },
     {
       id: "4",
