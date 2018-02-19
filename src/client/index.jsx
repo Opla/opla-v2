@@ -7,6 +7,7 @@
 import React from "react";
 import Front from "zoapp-front/front";
 import Screen from "zoapp-front/containers/screen";
+import Home from "OplaContainers/home";
 import configureStore from "OplaLibs/store";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
@@ -28,7 +29,7 @@ const app = {
       name: "Dashboard",
       access: "auth",
       path: "/",
-      render: props => React.createElement(Screen, props, "Dashboard"),
+      render: props => React.createElement(Home, props, "Dashboard"),
     },
     {
       id: "2",
@@ -58,7 +59,7 @@ const app = {
       name: "Home",
       path: "*",
       access: "public",
-      render: props => React.createElement(Screen, props, "Home"),
+      render: props => React.createElement(Home, props, "Home"),
     },
     {
       id: "5",

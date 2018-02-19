@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Content, Grid, Cell, Button } from "zoapp-materialcomponents";
+import { Grid, Inner, Cell, Button } from "zoapp-materialcomponents";
 import Loading from "zoapp-front/components/loading";
 
 import DonutChart from "../components/donutChart";
@@ -55,68 +55,80 @@ class Dashboard extends Component {
     const conversationsCount = admin.conversations != null ? admin.conversations.count : 0;
     const messagesCount = admin.messages != null ? admin.messages.count : 0;
     return (
-      <Content className="mdl-color--grey-100">
+      <div className="mdl-layout__content mdl-color--grey-100">
         <Grid>
-          <Cell className="mdl-color--white" col={12}>
-            <div style={infoStyleD}>
-              Last 7 days |  Filter: All
+          <Inner>
+            <Cell className="mdl-color--white" span={12}>
+              <div style={infoStyleD}>
+                Last 7 days |  Filter: All
 
-              <Button
-                raised
-                colored
-                style={{ float: "right", marginBottom: "16px" }}
-              >
-                Export
-              </Button>
-              <Button
-                raised
-                style={{ float: "right", marginBottom: "16px", marginRight: "16px" }}
-              >
-                Edit
-              </Button>
-            </div>
+                <Button
+                  raised
+                  style={{ float: "right", marginBottom: "16px" }}
+                >
+                  Export
+                </Button>
+                <Button
+                  raised
+                  style={{ float: "right", marginBottom: "16px", marginRight: "16px" }}
+                >
+                  Edit
+                </Button>
+              </div>
 
-          </Cell>
-          <Cell className="mdl-color--white" col={12}>
-            <Grid>
-              <Cell col={4}>
-                <div style={infoStyle}>
-                  <span style={infoStyle}>{usersCount}</span><br />
-                  <span style={infoStyleB}>users / <span style={infoStyleC}>+4%</span></span>
-                </div>
-              </Cell>
-              <Cell col={4}>
-                <div style={infoStyle}>
-                  <span style={infoStyle}>{conversationsCount}</span><br />
-                  <span style={infoStyleB}>errors / <span style={infoStyleC}>+8%</span></span>
-                </div>
-              </Cell>
-              <Cell col={4}>
-                <div style={infoStyle}>
-                  <span style={infoStyle}>{messagesCount}</span><br />
-                  <span style={infoStyleB}>messages / <span style={infoStyleC}>+11%</span></span>
-                </div>
-              </Cell>
-            </Grid>
-          </Cell>
-          <Cell className="mdl-color--white" col={12}>
-            <Grid>
-              <Cell col={3}>
-                <DonutChart title="Platform" dataset={0} />
-              </Cell>
-              <Cell col={3}>
-                <DonutChart title="Country" dataset={1} />
-              </Cell>
-              <Cell col={3}>
-                <DonutChart title="Language" dataset={2} />
-              </Cell>
-              <Cell col={3}>
-                <DonutChart title="Age" dataset={3} />
-              </Cell>
-            </Grid>
-          </Cell>
+            </Cell>
+          </Inner>
+          <Inner>
+            <Cell className="mdl-color--white" span={12}>
+              <Grid>
+                <Inner>
+                  <Cell span={4}>
+                    <div style={infoStyle}>
+                      <span style={infoStyle}>{usersCount}</span><br />
+                      <span style={infoStyleB}>users / <span style={infoStyleC}>+4%</span></span>
+                    </div>
+                  </Cell>
+                  <Cell span={4}>
+                    <div style={infoStyle}>
+                      <span style={infoStyle}>{conversationsCount}</span><br />
+                      <span style={infoStyleB}>errors / <span style={infoStyleC}>+8%</span></span>
+                    </div>
+                  </Cell>
+                  <Cell span={4}>
+                    <div style={infoStyle}>
+                      <span style={infoStyle}>{messagesCount}</span><br />
+                      <span style={infoStyleB}>
+                      messages /
+                        <span style={infoStyleC}>+11%</span>
+                      </span>
+                    </div>
+                  </Cell>
+                </Inner>
+              </Grid>
+            </Cell>
+          </Inner>
+          <Inner>
+            <Cell className="mdl-color--white" span={12}>
+              <Grid>
+                <Inner>
+                  <Cell span={3}>
+                    <DonutChart title="Platform" dataset={0} />
+                  </Cell>
+                  <Cell span={3}>
+                    <DonutChart title="Country" dataset={1} />
+                  </Cell>
+                  <Cell span={3}>
+                    <DonutChart title="Language" dataset={2} />
+                  </Cell>
+                  <Cell span={3}>
+                    <DonutChart title="Age" dataset={3} />
+                  </Cell>
+                </Inner>
+              </Grid>
+            </Cell>
+          </Inner>
         </Grid>
-      </Content>
+      </div>
     );
   }
 }
