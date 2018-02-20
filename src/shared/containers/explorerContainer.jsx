@@ -60,11 +60,11 @@ class ExplorerContainer extends Component {
 
   handleAddIntent = () => {
     // console.log("WIP", "ExplorerContainer.handleAddIntent");
-    const content = {
+    const field = {
       defaultValue: "", pattern: ".+", name: "Intent name", error: "Wrong name",
     };
     Rmdc.showDialog({
-      header: "Add new intent", body: content, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent,
+      header: "Add new intent", field, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent,
     });
   }
 
@@ -72,11 +72,11 @@ class ExplorerContainer extends Component {
     // console.log("TODO", "ExplorerContainer.handleRename");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
-    const content = {
+    const field = {
       defaultValue: intent.name, pattern: ".+", name: "Intent name", error: "Wrong name",
     };
     Rmdc.showDialog({
-      header: "Rename intent", body: content, actions: [{ name: "Rename" }, { name: "Cancel" }], onAction: this.onRenameIntent,
+      header: "Rename intent", field, actions: [{ name: "Rename" }, { name: "Cancel" }], onAction: this.onRenameIntent,
     });
   }
 
@@ -98,7 +98,7 @@ class ExplorerContainer extends Component {
     const dialog = <IODialog open store={this.props.store}
       onClosed={this.handleCloseDialog} accept={"application/json"}
       onDownload={this.props.onDownloadData} onImport={this.props.onImportData} />;
-    DialogManager.open({ dialog });
+    Rmdc.showDialog(dialog);
   } */
 
   render() {

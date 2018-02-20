@@ -25,7 +25,6 @@ class PublishDialog extends Component {
 
   componentDidUpdate() {
     this.updateMiddlewares();
-    /* DialogManager.forceUpdate(); */
   }
 
   onSelect = ({

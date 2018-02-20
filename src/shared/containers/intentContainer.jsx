@@ -76,7 +76,7 @@ class IntentContainer extends Component {
 
   handleSaveIntent = () => {
     // console.log("WIP", "IntentContainer.handleSaveIntent");
-    // DialogManager.open({ title: "TODO", content: "IntentContainer.handleSaveIntent" });
+    // Rmdc.open({ title: "TODO", content: "IntentContainer.handleSaveIntent" });
     if (this.props.selectedIntent) {
       const intent = { ...this.props.selectedIntent };
       if (intent.notSaved) {
@@ -151,7 +151,10 @@ class IntentContainer extends Component {
       }, this.onEditAction, this.onChangeAction, isInput);
     } else {
       Rmdc.showDialog({
-        header: "Action", body: "Do you want to delete it ?", actions: [{ name: "Delete" }, { name: "Cancel" }], onAction: this.onEditAction,
+        header: "Action",
+        body: "Do you want to delete it ?",
+        actions: [{ name: "Delete" }, { name: "Cancel" }],
+        onAction: this.onEditAction,
       });
     }
   }

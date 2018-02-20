@@ -8,7 +8,7 @@ import Rmdc, {
   DialogBody,
   DialogHeader,
   Tab,
-  Tabs,
+  Tabbar,
 } from "zoapp-materialcomponents";
 
 import FileManager from "../../utils/fileManager";
@@ -104,13 +104,9 @@ class IODialog extends Component {
       return (
         <Dialog
           open={this.state.openDialog}
-          id={this.state.id}
           onClose={this.handleCloseDialog}
+          header="Import Intents"
         >
-          <DialogHeader>
-            Import Intents
-          </DialogHeader>
-
           <DialogBody>
             <section>
               <Button
@@ -188,14 +184,14 @@ class IODialog extends Component {
         onClose={this.handleCloseDialog}
       >
         <DialogHeader>
-          <Tabs
+          <Tabbar
             activeTab={this.state.activeTab}
             onChange={tabId => this.setState({ activeTab: tabId })}
             ripple
           >
             <Tab>Export</Tab>
             <Tab>Import</Tab>
-          </Tabs>
+          </Tabbar>
         </DialogHeader>
         <DialogBody>
           <section style={{ display: p1 }}>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DialogManager, SubToolbar } from "zoapp-ui";
+import Rmdc from "zoapp-materialcomponents";
+import { SubToolbar } from "zoapp-ui";
 
 import MessengerBox from "../components/messengerBox";
 import {
@@ -48,21 +49,19 @@ class SandboxContainer extends Component {
 
   handleMenu = (/* action */) => {
     // console.log("sandboxContainer.handleMenu", action);
-    DialogManager.open({ title: "TODO", content: "SandboxContainer.handleMenu" });
+    Rmdc.showDialog({ header: "TODO", body: "SandboxContainer.handleMenu" });
   }
 
   handleReset = () => {
-    DialogManager.open({
-      title: "Sandbox",
-      content: "Do you want to reset conversation and context ?",
-      actions: ["Reset", "Cancel"],
+    Rmdc.showDialog({
+      header: "Sandbox",
+      body: "Do you want to reset conversation and context ?",
+      actions: [{ name: "Reset" }, { name: "Cancel" }],
       onAction: this.onReset,
     });
   }
 
   handleSend = (messageBody) => {
-    // console.log("WIP", "SandboxContainer.handleSend");
-    // DialogManager.open({ title:"TODO", content:"SandboxContainer.handleSend" + message});
     const body = messageBody.trim();
     if (this.props.conversation && body.length > 0) {
       const message = { message: body, timestamp: Date.now() };

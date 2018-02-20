@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta, TextField, Button } from "zoapp-materialcomponents";
-import { ExpansionPanel, DialogManager } from "zoapp-ui";
+import Rmdc, { List, ListItem, ListItemMeta, TextField, Button } from "zoapp-materialcomponents";
+import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
 
@@ -118,7 +118,11 @@ export const displayActionEditor = (
   }
 
 
-  DialogManager.open({
-    title, content, actions: [action, "Cancel"], actionsDef: [actionDef, "Cancel"], onAction: onEditAction, width: "720px",
+  Rmdc.showDialog({
+    header: title,
+    body: content,
+    actions: [{ name: actionDef, title: action }, { name: "Cancel" }],
+    onAction: onEditAction,
+    style: { width: "720px" },
   });
 };
