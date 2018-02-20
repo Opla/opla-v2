@@ -393,7 +393,7 @@ export default createReducer(initialState, {
   [API_SB_GETMESSAGES + FETCH_SUCCESS]: (state, { conversations }) => {
     // WIP, TODO check if BotId is ok
     let { sandbox } = state;
-    if (sandbox === null) {
+    if (!sandbox) {
       sandbox = {};
     }
     if (conversations) {
