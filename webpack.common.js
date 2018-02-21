@@ -17,7 +17,6 @@ module.exports = {
       OplaPlugins: path.resolve(__dirname, "./src/plugins/"),
       OplaLibs: path.resolve(__dirname, "./src/shared/"),
       OplaContainers: path.resolve(__dirname, "./src/shared/containers/"),
-      MdlExt: path.resolve(__dirname, "./src/shared/components/mdl/"),
       './config': path.resolve(__dirname, './config/default.json')
     },
     modules: [path.join(__dirname, "src"), "node_modules"]

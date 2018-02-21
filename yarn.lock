@@ -7362,9 +7362,9 @@ zoapp-common@0.1.2:
   dependencies:
     winston "2.4.0"
 
-zoapp-front@0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.2.4.tgz#51471ea8cc6e6170a92f855d63c86cb4a45f586f"
+zoapp-front@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.3.1.tgz#7fb6c1da9d8ff5c371ae7d46bc3ba81b660a8b20"
   dependencies:
     babel-runtime "^6.26.0"
     css-loader "^0.28.7"
@@ -7380,32 +7380,12 @@ zoapp-front@0.2.4:
     redux-saga "0.16.0"
     style-loader "^0.19.1"
     zoapp-common "0.1.2"
-    zoapp-materialcomponents "0.2.3"
-    zoapp-ui "0.3.0"
+    zoapp-materialcomponents "0.2.11"
+    zoapp-ui "0.4.4"
 
 zoapp-materialcomponents@0.2.11:
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.11.tgz#2318161e26c47f589b1755c6cade3cbaddd7496f"
-  dependencies:
-    dialog-polyfill "^0.4.9"
-    prop-types "15.6.0"
-    react "16.2.0"
-    react-dom "16.2.0"
-    react-hot-loader "3.1.3"
-
-zoapp-materialcomponents@0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.2.tgz#8c0cd3e530d835412872bb44e41c3ea73544a908"
-  dependencies:
-    dialog-polyfill "^0.4.9"
-    prop-types "15.6.0"
-    react "16.2.0"
-    react-dom "16.2.0"
-    react-hot-loader "3.1.3"
-
-zoapp-materialcomponents@0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.3.tgz#af093c0ea8fbfd4c474ec5448228afef7216e439"
   dependencies:
     dialog-polyfill "^0.4.9"
     prop-types "15.6.0"
@@ -7422,20 +7402,6 @@ zoapp-materialcomponents@0.2.7:
     react "16.2.0"
     react-dom "16.2.0"
     react-hot-loader "3.1.3"
-
-zoapp-ui@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.3.0.tgz#d0892c6c39d3597f71c2783574bf20dd62ae309d"
-  dependencies:
-    prop-types "15.6.0"
-    react "16.2.0"
-    react-dnd "2.5.4"
-    react-dnd-html5-backend "2.5.4"
-    react-dom "16.2.0"
-    react-hot-loader "3.1.3"
-    react-redux "5.0.6"
-    redux "3.7.2"
-    zoapp-materialcomponents "0.2.2"
 
 zoapp-ui@0.4.4:
   version "0.4.4"
