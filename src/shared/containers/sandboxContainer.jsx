@@ -27,13 +27,11 @@ class SandboxContainer extends Component {
   }
 
   componentWillUnmount() {
-    // console.log("UnsubscribeSandboxMessages");
     this.props.apiUnsubscribeSandboxMessages(this.props.selectedBotId);
   }
 
   onReset = (dialog, action) => {
     if (action === "Reset") {
-      // console.log("WIP", "SandboxContainer.onReset");
       this.props.apiSandboxResetRequest(this.props.selectedBotId);
     }
     return true;
@@ -42,13 +40,11 @@ class SandboxContainer extends Component {
   subscribeSandboxMessages() {
     if (this.props.selectedBot && this.state.needToSubscribe) {
       this.setState({ needToSubscribe: false });
-      // console.log("SubscribeSandboxMessages");
       this.props.apiSubscribeSandboxMessages(this.props.selectedBotId);
     }
   }
 
   handleMenu = (/* action */) => {
-    // console.log("sandboxContainer.handleMenu", action);
     Rmdc.showDialog({ header: "TODO", body: "SandboxContainer.handleMenu" });
   }
 
@@ -88,12 +84,10 @@ class SandboxContainer extends Component {
   }
 
   handleAction = (action, defaultValue, data) => {
-    // console.log("sandboxContainer.handleAction", action);
     this.props.onAction(action, defaultValue, data);
   }
 
   renderMessenger(messages, users) {
-    // TODO get welcome from bot
     const welcome = this.props.selectedBot.welcome || "Welcome fellow user! Here you could test your assistant, before you publish it.";
     return (<MessengerBox
       messages={messages}

@@ -82,11 +82,11 @@ class BotManager extends Component {
   }
 
   handleAddIntent = (defaultValue = "", data = {}) => {
-    const content = {
+    const field = {
       defaultValue, pattern: ".+", name: "Intent name", error: "Wrong name",
     };
     Rmdc.showDialog({
-      header: "Add new intent", body: content, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent, data,
+      header: "Add new intent", field, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent, data,
     });
   }
 
@@ -105,11 +105,11 @@ class BotManager extends Component {
 
   handlePlaygroundAction = (action, defaultValue = "", data = {}) => {
     if (action === "welcomeMessage") {
-      const content = {
+      const field = {
         defaultValue, pattern: ".+", name: "Welcome message", error: "Wrong message",
       };
       Rmdc.showDialog({
-        header: "Edit Bot", body: content, actions: [{ name: "Save" }, { name: "Cancel" }], onAction: this.onEditWelcome, data,
+        header: "Edit Bot", field, actions: [{ name: "Save" }, { name: "Cancel" }], onAction: this.onEditWelcome, data,
       });
     } else if (action === "createIntent") {
       const intent = { input: [defaultValue] };
