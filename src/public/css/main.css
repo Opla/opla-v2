@@ -135,10 +135,30 @@ a {
   outline: 0px solid transparent;
 }
 
+.mdl-chip {
+  height: 32px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 16px;
+  background-color: #dedede;
+  display: inline-block;
+  color: rgba(0,0,0, 0.87);
+  margin: 2px 0;
+  font-size: 0;
+  white-space: nowrap;
+}
+
 .mdl-chip__text_ex {
   font-size: 13px;
   vertical-align: inherit;
   display: inline-block;
+}
+
+.mdl-chip__text {
+  font-size: 13px;
+  vertical-align: initial;
 }
 
 .dialog_bg {
@@ -236,10 +256,6 @@ a {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-.mdl-chip__text {
-  vertical-align: initial;
 }
 
 .mdl-list__item--two-line .mdl-list__item-primary-content {
