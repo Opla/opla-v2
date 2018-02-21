@@ -125,6 +125,8 @@ class MessengerBox extends Component {
             type="text"
             id="chat-input-field"
             label="Your message"
+            style={{ width: "440px", height: "24px", margin: "6px 8px" }}
+            noFloatingLabel
             ref={(input) => { chatInput = input; }}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
