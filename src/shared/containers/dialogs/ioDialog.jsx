@@ -180,13 +180,12 @@ class IODialog extends Component {
       <Dialog
         open={this.state.openDialog}
         id={this.state.id}
-        style={{ backgroundColor: "white" }}
         onClose={this.handleCloseDialog}
       >
         <DialogHeader>
           <Tabbar
             activeTab={this.state.activeTab}
-            onChange={tabId => this.setState({ activeTab: tabId })}
+            onChange={(name, tabId) => this.setState({ activeTab: tabId })}
             ripple
           >
             <Tab>Export</Tab>
@@ -224,7 +223,6 @@ class IODialog extends Component {
             </Button>
           </section>
         </DialogBody>
-
         {dialogActions}
       </Dialog>
     );
