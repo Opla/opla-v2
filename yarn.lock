@@ -7407,9 +7407,9 @@ zoapp-materialcomponents@0.2.11:
     react-dom "16.2.0"
     react-hot-loader "3.1.3"
 
-zoapp-materialcomponents@0.2.21:
-  version "0.2.21"
-  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.21.tgz#c7defa768fbad835868ac3b3f122322d2d444446"
+zoapp-materialcomponents@0.2.22:
+  version "0.2.22"
+  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.22.tgz#e7aaa2480f88c51eefe0e325aaea629863a13b33"
   dependencies:
     dialog-polyfill "^0.4.9"
     prop-types "15.6.0"

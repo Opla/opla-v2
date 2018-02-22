@@ -91,6 +91,7 @@ export const displayActionEditor = (
             pattern=".+"
             label="Condition entity"
             error="Wrong value"
+            noFloatingLabel
             style={{ width: "42%", display: "table-cell" }}
             ref={input => setInput(input, "fieldParamName")}
           />
@@ -100,6 +101,7 @@ export const displayActionEditor = (
             pattern=".+"
             label="Condition value"
             error="Wrong value"
+            noFloatingLabel
             style={{ width: "42%", display: "table-cell" }}
             ref={input => setInput(input, "fieldParamValue")}
           />

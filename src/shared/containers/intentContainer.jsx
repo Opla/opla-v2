@@ -19,7 +19,7 @@ class IntentContainer extends Component {
 
   onEditAction = (dialog, editAction) => {
     if (editAction === "Change" || editAction === "Add") {
-      const text = this.actionField.inputRef.value.trim();
+      const text = this.actionField.getContent().trim();
       let actionValue = null;
       const intent = this.props.selectedIntent;
       let { actionType } = this;
