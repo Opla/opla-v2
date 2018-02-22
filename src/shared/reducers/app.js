@@ -252,7 +252,7 @@ export default createReducer(initialState, {
   [API_GETINTENTS + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
   [API_GETINTENTS + FETCH_SUCCESS]: (state, { intents }) => {
     let { selectedIntent, selectedIntentIndex } = state;
-    if (selectedIntentIndex >= intents.length) {
+    if ((!selectedIntentIndex) || selectedIntentIndex >= intents.length) {
       selectedIntentIndex = 0;
     }
     if (intents && ((!selectedIntent) || (!selectedIntent.notSaved))) {

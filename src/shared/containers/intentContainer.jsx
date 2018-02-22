@@ -204,7 +204,7 @@ IntentContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
+  const selectedIntentIndex = state.app.selectedIntentIndex ? state.app.selectedIntentIndex : 0;
   let { selectedIntent } = state.app;
   if (!selectedIntent) {
     selectedIntent = state.app.intents ? state.app.intents[selectedIntentIndex] : null;
