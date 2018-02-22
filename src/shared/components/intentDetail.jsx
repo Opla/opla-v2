@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta, TextField, Button } from "zoapp-materialcomponents";
-import { ExpansionPanel, DialogManager } from "zoapp-ui";
+import Rmdc, { List, ListItem, ListItemMeta, TextField, Button } from "zoapp-materialcomponents";
+import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
 
@@ -86,23 +86,29 @@ export const displayActionEditor = (
       const value = parameters.value ? parameters.value : "";
       condition = (
         <div style={{ width: "100%", display: "table" }}>
-          <TextField
-            defaultValue={name}
-            pattern=".+"
-            label="Condition entity"
-            error="Wrong value"
-            style={{ width: "42%", display: "table-cell" }}
-            ref={input => setInput(input, "fieldParamName")}
-          />
+          <div style={{ display: "table-cell" }}>
+            <TextField
+              defaultValue={name}
+              pattern=".+"
+              label="Condition entity"
+              error="Wrong value"
+              noFloatingLabel
+              style={{ width: "100%", margin: "8px 0px", height: "24px" }}
+              ref={input => setInput(input, "fieldParamName")}
+            />
+          </div>
           <div style={{ fontWeight: "900", textAlign: "center", display: "table-cell" }}>=</div>
-          <TextField
-            defaultValue={value}
-            pattern=".+"
-            label="Condition value"
-            error="Wrong value"
-            style={{ width: "42%", display: "table-cell" }}
-            ref={input => setInput(input, "fieldParamValue")}
-          />
+          <div style={{ display: "table-cell" }}>
+            <TextField
+              defaultValue={value}
+              pattern=".+"
+              label="Condition value"
+              error="Wrong value"
+              noFloatingLabel
+              style={{ width: "100%", margin: "0px" }}
+              ref={input => setInput(input, "fieldParamValue")}
+            />
+          </div>
         </div>);
     }
     content = (
@@ -118,7 +124,11 @@ export const displayActionEditor = (
   }
 
 
-  DialogManager.open({
-    title, content, actions: [action, "Cancel"], actionsDef: [actionDef, "Cancel"], onAction: onEditAction, width: "720px",
+  Rmdc.showDialog({
+    header: title,
+    body: content,
+    actions: [{ name: actionDef, title: action }, { name: "Cancel" }],
+    onAction: onEditAction,
+    style: { width: "720px" },
   });
 };

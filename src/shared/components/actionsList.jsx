@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta, Icon, Chip } from "zoapp-materialcomponents";
+import { List, ListItem, ListItemMeta, Icon } from "zoapp-materialcomponents";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsTools from "../utils/actionsTools";
 
@@ -34,15 +34,32 @@ class ActionsList extends Component {
       <span>{actions.map((actionItem, index) => {
         const id = `al_${index}`;
         if (actionItem.type === "any") {
-          return (<Chip key={id} style={styleAny}>any</Chip>);
+          return (
+            <span className="mdl-chip" key={id} style={styleAny}>
+              <span className="mdl-chip__text_ex">any</span>
+            </span>);
         } else if (actionItem.type === "output_var") {
-          return (<Chip key={id} style={styleOut}>{actionItem.text}</Chip>);
+          return (
+            <span className="mdl-chip" key={id} style={styleOut}>
+              <span className="mdl-chip__text_ex">{actionItem.text}</span>
+            </span>);
         } else if (actionItem.type === "variable") {
-          return (<Chip key={id} style={styleVar}>{actionItem.text}</Chip>);
+          return (
+            <span className="mdl-chip" key={id} style={styleVar}>
+              <span className="mdl-chip__text_ex">{actionItem.text}</span>
+            </span>);
         } else if (actionItem.type === "br") {
-          return (<Chip key={id} style={styleHtml}><Icon name="keyboard_return" style={{ fontSize: "13px" }} /></Chip>);
+          return (
+            <span className="mdl-chip" key={id} style={styleHtml}>
+              <span className="mdl-chip__text_ex">
+                <Icon name="keyboard_return" style={{ fontSize: "13px" }} />
+              </span>
+            </span>);
         } else if (actionItem.type === "button") {
-          return (<Chip key={id} style={styleHtml}>{actionItem.text}</Chip>);
+          return (
+            <span className="mdl-chip" key={id} style={styleHtml}>
+              <span className="mdl-chip__text_ex">{actionItem.text}</span>
+            </span>);
         }
         return (<span key={id} style={styleText}>{actionItem.text}</span>);
       })}
@@ -56,7 +73,8 @@ class ActionsList extends Component {
     let content;
     // let addDisabled;
     let type = null;
-    if (name === "output" && ((!actions) || actions.length === 0 || actions[0].type === "condition")) {
+    if (name === "output" &&
+      ((!actions) || actions.length === 0 || actions[0].type === "condition")) {
       type = "condition";
     }
     const icon = name === "input" ? "format_quote" : "chat_bubble_outline";

@@ -252,7 +252,7 @@ export default createReducer(initialState, {
   [API_GETINTENTS + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
   [API_GETINTENTS + FETCH_SUCCESS]: (state, { intents }) => {
     let { selectedIntent, selectedIntentIndex } = state;
-    if (selectedIntentIndex >= intents.length) {
+    if ((!selectedIntentIndex) || selectedIntentIndex >= intents.length) {
       selectedIntentIndex = 0;
     }
     if (intents && ((!selectedIntent) || (!selectedIntent.notSaved))) {
@@ -393,7 +393,7 @@ export default createReducer(initialState, {
   [API_SB_GETMESSAGES + FETCH_SUCCESS]: (state, { conversations }) => {
     // WIP, TODO check if BotId is ok
     let { sandbox } = state;
-    if (sandbox === null) {
+    if (!sandbox) {
       sandbox = {};
     }
     if (conversations) {

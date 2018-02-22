@@ -135,10 +135,30 @@ a {
   outline: 0px solid transparent;
 }
 
+.mdl-chip {
+  height: 32px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 16px;
+  background-color: #dedede;
+  display: inline-block;
+  color: rgba(0,0,0, 0.87);
+  margin: 2px 0;
+  font-size: 0;
+  white-space: nowrap;
+}
+
 .mdl-chip__text_ex {
   font-size: 13px;
   vertical-align: inherit;
   display: inline-block;
+}
+
+.mdl-chip__text {
+  font-size: 13px;
+  vertical-align: initial;
 }
 
 .dialog_bg {
@@ -148,7 +168,7 @@ a {
 }
 
 
-.mdl-list__item .mdl-list__item-primary-content .mdl-list__item-icon {
+.mdc-list-item .mdc-list-item__secondary-text .mdl-list__item-icon {
   color: rgb(221,221,221);
 }
 
@@ -232,17 +252,13 @@ a {
   background-color: #F2F2F2;
 }
 
-.mdl-list__item .mdl-list__item-primary-content {
+.mdc-list-item .mdc-list-item__secondary-text {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.mdl-chip__text {
-  vertical-align: initial;
-}
-
-.mdl-list__item--two-line .mdl-list__item-primary-content {
+.mdc-list-item--two-line .mdl-list__item-primary-content {
   height: initial;
 }
 
@@ -271,12 +287,12 @@ a {
   cursor: pointer;
 }
 
-.onFocusAction > .mdl-list__item-secondary-content {
+.onFocusAction > .mdc-list-item__meta {
   display: none;
 }
 
-.onFocusAction:hover > .mdl-list__item-secondary-content {
-  display: flex;
+.onFocusAction:hover > .mdc-list-item__meta {
+  display: block;
 }
 
 .onFocusAction:hover > span > span {
@@ -322,7 +338,7 @@ a {
   color: rgba(0,0,0, 0.87);
 }
 
-.list-content > .mdl-list__item {
+.list-content > .mdc-list-item {
   font-size: 14px;
 }
 
@@ -447,11 +463,11 @@ hr {
   height: 100%;
 }
 
-.mdl-list__item--two-line .mdl-list__item-primary-content .mdl-list__item-icon {
+.mdc-list-item--two-line .mdc-list-item__secondary-text .mdl-list__item-icon {
   height: 100%;
 }
-.mdl-list__item .mdl-list__item-primary-content {
-  width:92%;
+.mdc-list-item .mdc-list-item__text {
+  width: 80%;
 }
 
 .bear-icon {
