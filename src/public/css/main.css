@@ -287,12 +287,12 @@ a {
   cursor: pointer;
 }
 
-.onFocusAction > .mdl-list__item-secondary-content {
+.onFocusAction > .mdc-list-item__meta {
   display: none;
 }
 
-.onFocusAction:hover > .mdl-list__item-secondary-content {
-  display: flex;
+.onFocusAction:hover > .mdc-list-item__meta {
+  display: block;
 }
 
 .onFocusAction:hover > span > span {
