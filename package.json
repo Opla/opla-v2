@@ -40,9 +40,9 @@
     "redux-saga": "0.16.0",
     "style-loader": "^0.19.1",
     "zoapp-common": "0.1.0",
-    "zoapp-front": "0.3.1",
-    "zoapp-materialcomponents": "0.2.22",
-    "zoapp-ui": "0.4.4"
+    "zoapp-front": "0.3.3",
+    "zoapp-materialcomponents": "0.3.7",
+    "zoapp-ui": "0.4.6"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
