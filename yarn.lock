@@ -7376,9 +7376,9 @@ zoapp-common@0.1.2:
   dependencies:
     winston "2.4.0"
 
-zoapp-front@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.3.1.tgz#7fb6c1da9d8ff5c371ae7d46bc3ba81b660a8b20"
+zoapp-front@0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.3.3.tgz#0e3167baf73aad10cde68d742930746f67dd8b20"
   dependencies:
     babel-runtime "^6.26.0"
     css-loader "^0.28.7"
@@ -7394,12 +7394,12 @@ zoapp-front@0.3.1:
     redux-saga "0.16.0"
     style-loader "^0.19.1"
     zoapp-common "0.1.2"
-    zoapp-materialcomponents "0.2.11"
-    zoapp-ui "0.4.4"
+    zoapp-materialcomponents "0.3.7"
+    zoapp-ui "0.4.6"
 
-zoapp-materialcomponents@0.2.11:
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.11.tgz#2318161e26c47f589b1755c6cade3cbaddd7496f"
+zoapp-materialcomponents@0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.3.7.tgz#f1b9cb65130daeecbeddec3876f65c0f77e253b1"
   dependencies:
     dialog-polyfill "^0.4.9"
     prop-types "15.6.0"
@@ -7407,29 +7407,9 @@ zoapp-materialcomponents@0.2.11:
     react-dom "16.2.0"
     react-hot-loader "3.1.3"
 
-zoapp-materialcomponents@0.2.22:
-  version "0.2.22"
-  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.22.tgz#e7aaa2480f88c51eefe0e325aaea629863a13b33"
-  dependencies:
-    dialog-polyfill "^0.4.9"
-    prop-types "15.6.0"
-    react "16.2.0"
-    react-dom "16.2.0"
-    react-hot-loader "3.1.3"
-
-zoapp-materialcomponents@0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/zoapp-materialcomponents/-/zoapp-materialcomponents-0.2.7.tgz#27a4f901c8081741771b8e042b19e866d34e285b"
-  dependencies:
-    dialog-polyfill "^0.4.9"
-    prop-types "15.6.0"
-    react "16.2.0"
-    react-dom "16.2.0"
-    react-hot-loader "3.1.3"
-
-zoapp-ui@0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.4.4.tgz#201e88a78208cb32af33a06a375bd680764fb8cd"
+zoapp-ui@0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.4.6.tgz#9328264e2415f25b35f7132e56417d3aaa66cd02"
   dependencies:
     prop-types "15.6.0"
     react "16.2.0"
@@ -7439,4 +7419,4 @@ zoapp-ui@0.4.4:
     react-hot-loader "3.1.3"
     react-redux "5.0.6"
     redux "3.7.2"
-    zoapp-materialcomponents "0.2.7"
+    zoapp-materialcomponents "0.3.7"

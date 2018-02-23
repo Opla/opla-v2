@@ -103,14 +103,14 @@ class AdminManager extends Component {
                       onChange={() => {}}
                       label="Assistant name"
                       style={{ width: "400px" }}
-                      value={this.props.bot.name}
+                      defaultValue={this.props.bot.name}
                     />
                   </div>
                   <div><TextField
                     onChange={() => {}}
                     label="Describe how your assistant is wonderfull !"
                     rows={3}
-                    value={this.props.bot.description}
+                    defaultValue={this.props.bot.description}
                     style={{ width: "400px" }}
                   />
                   </div>
@@ -120,7 +120,7 @@ class AdminManager extends Component {
                       onChange={this.handleLanguageChange}
                       ref={(input) => { this.selectFieldLanguage = input; }}
                       style={{ width: "400px" }}
-                      value={this.props.bot.language}
+                      defaultValue={this.props.bot.language}
                     >
                       <MenuItem value="en">English</MenuItem>
                       <MenuItem value="fr">French</MenuItem>
