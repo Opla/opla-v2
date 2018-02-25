@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Rmdc from "zoapp-materialcomponents";
+import Zrmc from "zrmc";
 import { SubToolbar } from "zoapp-ui";
 
 import MessengerBox from "../components/messengerBox";
@@ -45,11 +45,11 @@ class SandboxContainer extends Component {
   }
 
   handleMenu = (/* action */) => {
-    Rmdc.showDialog({ header: "TODO", body: "SandboxContainer.handleMenu" });
+    Zrmc.showDialog({ header: "TODO", body: "SandboxContainer.handleMenu" });
   }
 
   handleReset = () => {
-    Rmdc.showDialog({
+    Zrmc.showDialog({
       header: "Sandbox",
       body: "Do you want to reset conversation and context ?",
       actions: [{ name: "Reset" }, { name: "Cancel" }],

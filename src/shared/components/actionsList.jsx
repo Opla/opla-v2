@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta, Icon } from "zoapp-materialcomponents";
+import { List, ListItem, ListItemMeta, Icon } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsTools from "../utils/actionsTools";
 

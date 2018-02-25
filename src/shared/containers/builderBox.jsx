@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Rmdc, { Button } from "zoapp-materialcomponents";
+import Zrmc, { Button } from "zrmc";
 import { connect } from "react-redux";
 import PublishDialog from "./dialogs/publishDialog";
 
@@ -20,7 +20,7 @@ class BuilderBox extends Component {
 
   handleOpenPublishDialog = () => {
     const dialog = <PublishDialog open onAction={this.onAction} store={this.props.store} />;
-    Rmdc.showDialog(dialog);
+    Zrmc.showDialog(dialog);
   }
 
   render() {

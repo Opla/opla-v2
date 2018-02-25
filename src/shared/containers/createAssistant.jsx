@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Rmdc, { Select, MenuItem, Button, TextField } from "zoapp-materialcomponents";
+import Zrmc, { Select, MenuItem, Button, TextField } from "zrmc";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ProcessingDialog from "zoapp-front/containers/processingDialog";
@@ -76,7 +76,7 @@ class CreateAssistant extends Component {
 
   handleCloseCreateDialog = () => {
     this.setState({ loading: false });
-    Rmdc.closeDialog();
+    Zrmc.closeDialog();
     if (!this.props.error) {
       this.props.history.push("/builder");
     }
@@ -96,7 +96,7 @@ class CreateAssistant extends Component {
       };
       this.setState({ loading: true });
       const dialog = <ProcessingDialog open onClosed={this.handleCloseDialog} />;
-      Rmdc.open(dialog);
+      Zrmc.open(dialog);
       this.props.createBot(botParams);
     } else {
       // TODO display errors in dialogs

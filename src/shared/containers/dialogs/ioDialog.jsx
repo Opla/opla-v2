@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Rmdc, {
+import Zrmc, {
   Button,
   Checkbox,
   Dialog,
@@ -9,7 +9,7 @@ import Rmdc, {
   DialogHeader,
   Tab,
   Tabbar,
-} from "zoapp-materialcomponents";
+} from "zrmc";
 
 import FileManager from "../../utils/fileManager";
 
@@ -95,7 +95,7 @@ class IODialog extends Component {
     if (this.props.onClosed instanceof Function) {
       this.props.onClosed();
     } else {
-      setTimeout(() => { Rmdc.closeDialog(); }, 300);
+      setTimeout(() => { Zrmc.closeDialog(); }, 300);
     }
   };
 

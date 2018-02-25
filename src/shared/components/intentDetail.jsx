@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Rmdc, { List, ListItem, ListItemMeta, TextField, Button } from "zoapp-materialcomponents";
+import Zrmc, { List, ListItem, ListItemMeta, TextField, Button } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
@@ -124,7 +124,7 @@ export const displayActionEditor = (
   }
 
 
-  Rmdc.showDialog({
+  Zrmc.showDialog({
     header: title,
     body: content,
     actions: [{ name: actionDef, title: action }, { name: "Cancel" }],

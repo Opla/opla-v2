@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Rmdc, { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "zoapp-materialcomponents";
+import Zrmc, { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "zrmc";
 import { connect } from "react-redux";
 import PluginsManager from "../../utils/pluginsManager";
 import MessagingsList from "../../components/messagingsList";
@@ -55,7 +55,7 @@ class PublishDialog extends Component {
           onClosed={this.handleCloseDialog}
           store={this.props.store}
         />);
-      setTimeout(() => Rmdc.showDialog(sdialog), 100);
+      setTimeout(() => Zrmc.showDialog(sdialog), 100);
     }
   }
 
@@ -77,8 +77,8 @@ class PublishDialog extends Component {
       this.props.apiPublishRequest(this.props.selectedBotId, publishers);
       // TODO display published dialog with links to service's messenger
       setTimeout(() => {
-        Rmdc.closeDialog();
-        Rmdc.showDialog({
+        Zrmc.closeDialog();
+        Zrmc.showDialog({
           header: "Published",
           body: "Published to:",
           onAction: this.handleCloseDialog,
@@ -86,7 +86,7 @@ class PublishDialog extends Component {
       }, 100);
     } else {
       setTimeout(() => {
-        Rmdc.showDialog({
+        Zrmc.showDialog({
           header: "Error",
           body: "You need at least one service started !",
           onAction: this.handleCloseDialog,
@@ -96,7 +96,7 @@ class PublishDialog extends Component {
   }
 
   handleCloseDialog = () => {
-    setTimeout(() => { Rmdc.closeDialog(); }, 100);
+    setTimeout(() => { Zrmc.closeDialog(); }, 100);
   }
 
   updateMiddlewares(needUpdate = false) {

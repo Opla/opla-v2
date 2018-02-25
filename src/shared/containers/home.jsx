@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, CardTitle, CardText, CardMedia, CardActions, Button } from "zoapp-materialcomponents";
+import { Card, CardTitle, CardText, CardMedia, CardActions, Button } from "zrmc";
 import { connect } from "react-redux";
 import Dashboard from "./dashboard";
 

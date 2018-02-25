@@ -1,4 +1,4 @@
-import Rmdc from "zoapp-materialcomponents";
+import Zrmc from "zrmc";
 
 const displayProviderEditor = (
   title,
@@ -16,7 +16,7 @@ const displayProviderEditor = (
     actions.push({ name: "Cancel" });
   }
 
-  Rmdc.showDialog({
+  Zrmc.showDialog({
     header: title, body: content, actions, onAction: onEditAction, className,
   });
 };

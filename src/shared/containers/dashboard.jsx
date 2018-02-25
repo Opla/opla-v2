@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid, Inner, Cell, Button } from "zoapp-materialcomponents";
+import { Grid, Inner, Cell, Button } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 
 import DonutChart from "../components/donutChart";

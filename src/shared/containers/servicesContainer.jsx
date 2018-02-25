@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Rmdc, { Cell } from "zoapp-materialcomponents";
+import Zrmc, { Cell } from "zrmc";
 import { ListComponent } from "zoapp-ui";
 import ServicesList from "zoapp-front/components/servicesList";
 import displayWebServiceEditor from "zoapp-front/components/displayWebServiceEditor";
@@ -141,7 +141,7 @@ class ServicesContainer extends Component {
               // const n = it.name;
               // console.log("WIP select Web services =", n);
               setTimeout(() => {
-                Rmdc.closeDialog();
+                Zrmc.closeDialog();
                 that.onSelect({
                   name: "Web services", index: i, item: it, state: "create",
                 });
@@ -179,7 +179,7 @@ class ServicesContainer extends Component {
               // const n = it.name;
               // console.log("WIP select AI/NLU providers =", n);
               setTimeout(() => {
-                Rmdc.closeDialog();
+                Zrmc.closeDialog();
                 that.onSelect({
                   name: "AI/NLU providers", index: i, item: it, state: "create",
                 });
@@ -219,7 +219,7 @@ class ServicesContainer extends Component {
               // const n = it.name;
               // console.log("WIP select messaging platform =", n);
               setTimeout(() => {
-                Rmdc.closeDialog();
+                Zrmc.closeDialog();
                 that.onSelect({
                   name: "Messaging platforms", index: i, item: it, state: "create",
                 });
@@ -264,7 +264,7 @@ class ServicesContainer extends Component {
           }
         }, this.onEditAction, content, className);
       } else if (state === "delete" && couldDelete) {
-        Rmdc.showDialog({
+        Zrmc.showDialog({
           header: title,
           body: "Do you want to delete it ?",
           actions: [{ name: "Delete" }, { name: "Cancel" }],

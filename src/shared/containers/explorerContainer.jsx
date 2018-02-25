@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Rmdc from "zoapp-materialcomponents";
+import Zrmc from "zrmc";
 import { ListDragComponent, SubToolbar } from "zoapp-ui";
 import { apiGetIntentsRequest, apiSendIntentRequest, apiDeleteIntentRequest, apiMoveIntentRequest } from "../actions/api";
 import { appSelectIntent } from "../actions/app";
@@ -63,7 +63,7 @@ class ExplorerContainer extends Component {
     const field = {
       defaultValue: "", pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    Rmdc.showDialog({
+    Zrmc.showDialog({
       header: "Add new intent", field, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent,
     });
   }
@@ -75,7 +75,7 @@ class ExplorerContainer extends Component {
     const field = {
       defaultValue: intent.name, pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    Rmdc.showDialog({
+    Zrmc.showDialog({
       header: "Rename intent", field, actions: [{ name: "Rename" }, { name: "Cancel" }], onAction: this.onRenameIntent,
     });
   }
@@ -89,7 +89,7 @@ class ExplorerContainer extends Component {
     // console.log("WIP", "ExplorerContainer.handleDelete");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
-    Rmdc.showDialog({
+    Zrmc.showDialog({
       header: "Intent", body: `${intent.name} Do you want to delete it ?`, actions: [{ name: "Delete" }, { name: "Cancel" }], onAction: this.onDeleteIntent,
     });
   }
@@ -98,7 +98,7 @@ class ExplorerContainer extends Component {
     const dialog = <IODialog open store={this.props.store}
       onClosed={this.handleCloseDialog} accept={"application/json"}
       onDownload={this.props.onDownloadData} onImport={this.props.onImportData} />;
-    Rmdc.showDialog(dialog);
+    Zrmc.showDialog(dialog);
   } */
 
   render() {
