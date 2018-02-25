@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Textfield, Icon } from "zoapp-materialcomponents";
+import { Textfield, Icon } from "zrmc";
 
 export default class FBSettings extends Component {
   onAction = (action) => {

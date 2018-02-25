@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta, Icon, Switch } from "zoapp-materialcomponents";
+import { List, ListItem, ListItemMeta, Icon, Switch } from "zrmc";
 
 const MessagingsList = (props) => {
   const {

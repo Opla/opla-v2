@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Rmdc from "zoapp-materialcomponents";
+import Zrmc from "zrmc";
 import { SubToolbar } from "zoapp-ui";
 
 import IntentDetail, { displayActionEditor } from "../components/intentDetail";
@@ -76,7 +76,7 @@ class IntentContainer extends Component {
 
   handleSaveIntent = () => {
     // console.log("WIP", "IntentContainer.handleSaveIntent");
-    // Rmdc.open({ title: "TODO", content: "IntentContainer.handleSaveIntent" });
+    // Zrmc.open({ title: "TODO", content: "IntentContainer.handleSaveIntent" });
     if (this.props.selectedIntent) {
       const intent = { ...this.props.selectedIntent };
       if (intent.notSaved) {
@@ -150,7 +150,7 @@ class IntentContainer extends Component {
         } else { this.actionField = input; }
       }, this.onEditAction, this.onChangeAction, isInput);
     } else {
-      Rmdc.showDialog({
+      Zrmc.showDialog({
         header: "Action",
         body: "Do you want to delete it ?",
         actions: [{ name: "Delete" }, { name: "Cancel" }],

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Rmdc, { Button, DialogHeader, DialogBody, DialogFooter, Dialog } from "zoapp-materialcomponents";
+import Zrmc, { Button, DialogHeader, DialogBody, DialogFooter, Dialog } from "zrmc";
 import { connect } from "react-redux";
 import { apiSetMiddlewareRequest } from "../../actions/api";
 import PluginsManager from "../../utils/pluginsManager";
@@ -49,7 +49,7 @@ class ServiceDialog extends Component {
     if (this.props.onClosed instanceof Function) {
       this.props.onClosed();
     } else {
-      setTimeout(() => { Rmdc.closeDialog(); }, 300);
+      setTimeout(() => { Zrmc.closeDialog(); }, 300);
     }
   }
 

@@ -12,7 +12,7 @@ import CreateAssistant from "OplaContainers/createAssistant";
 import AdminManager from "OplaContainers/adminManager";
 import BotManager from "OplaContainers/botManager";
 import configureStore from "OplaLibs/store";
-import Rmdc from "zoapp-materialcomponents";
+import Zrmc from "zrmc";
 import PublishDialog from "OplaContainers/dialogs/publishDialog";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
@@ -20,7 +20,7 @@ import config from "../../config/default.json";
 let store = null;
 const handleOpenPublishDialog = () => {
   const dialog = React.createElement(PublishDialog, { open: true, store });
-  Rmdc.showDialog(dialog);
+  Zrmc.showDialog(dialog);
 };
 
 const app = {

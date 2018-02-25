@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Rmdc, { Grid, Inner, Cell, Button } from "zoapp-materialcomponents";
+import Zrmc, { Grid, Inner, Cell, Button } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
 
@@ -85,7 +85,7 @@ class BotManager extends Component {
     const field = {
       defaultValue, pattern: ".+", name: "Intent name", error: "Wrong name",
     };
-    Rmdc.showDialog({
+    Zrmc.showDialog({
       header: "Add new intent", field, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent, data,
     });
   }
@@ -100,7 +100,7 @@ class BotManager extends Component {
       onDownload={this.onDownloadData}
       onImport={this.onImportData}
     />);
-    Rmdc.showDialog(dialog);
+    Zrmc.showDialog(dialog);
   }
 
   handlePlaygroundAction = (action, defaultValue = "", data = {}) => {
@@ -108,7 +108,7 @@ class BotManager extends Component {
       const field = {
         defaultValue, pattern: ".+", name: "Welcome message", error: "Wrong message",
       };
-      Rmdc.showDialog({
+      Zrmc.showDialog({
         header: "Edit Bot", field, actions: [{ name: "Save" }, { name: "Cancel" }], onAction: this.onEditWelcome, data,
       });
     } else if (action === "createIntent") {
