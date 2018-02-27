@@ -25,10 +25,9 @@
     "OAuth2"
   ],
   "dependencies": {
-    "zoapp-backend": "0.8.4"
+    "zoapp-backend": "^0.10.0"
   },
   "devDependencies": {
-    "zoapp-core": "0.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
@@ -41,6 +40,7 @@
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-import": "2.8.0",
     "mocha": "^4.0.1",
-    "nodemon": "^1.13.3"
+    "nodemon": "^1.13.3",
+    "zoapp-core": "0.3.0"
   }
 }
