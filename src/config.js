@@ -1,8 +1,9 @@
+import pkg from "../package.json";
 // TODO load config
 
 const config = {
   name: "Opla.ai",
-  version: "0.9.0",
+  version: pkg.version,
   // Global Database
   global: {
     database: {
