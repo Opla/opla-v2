@@ -40,8 +40,8 @@
     "redux-saga": "0.16.0",
     "style-loader": "^0.19.1",
     "zoapp-common": "0.1.0",
-    "zoapp-front": "0.3.4",
-    "zoapp-ui": "0.4.7",
+    "zoapp-front": "^0.4.0",
+    "zoapp-ui": "^0.4.7",
     "zrmc": "0.3.8"
   },
   "devDependencies": {

@@ -7376,9 +7376,9 @@ zoapp-common@0.1.2:
   dependencies:
     winston "2.4.0"
 
-zoapp-front@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.3.4.tgz#05d62f7ec567c3db6bba70ed4db0a5d34576295e"
+zoapp-front@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.4.0.tgz#73ac1e4ada264f641dbac39ebb0bbf8d408520ac"
   dependencies:
     babel-runtime "^6.26.0"
     css-loader "^0.28.7"
@@ -7397,7 +7397,7 @@ zoapp-front@0.3.4:
     zoapp-ui "0.4.7"
     zrmc "0.3.8"
 
-zoapp-ui@0.4.7:
+zoapp-ui@0.4.7, zoapp-ui@^0.4.7:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.4.7.tgz#f1b879f2c69aede62bdf8202ca7dddae3359a6d8"
   dependencies:
