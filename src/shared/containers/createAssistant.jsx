@@ -47,7 +47,13 @@ const templates = [
 class CreateAssistant extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedTemplate: 0, template: null, loading: false };
+
+    this.state = {
+      language: "en",
+      loading: false,
+      selectedTemplate: 0,
+      template: null,
+    };
   }
 
   componentWillMount() {
@@ -88,24 +94,32 @@ class CreateAssistant extends Component {
     const email = this.emailField.inputRef.value;
     const username = this.usernameField.inputRef.value;
     const password = this.passwordField.inputRef.value;
-    const language = this.selectField.inputRef.value || "en";
-    if (this.state.loading === false && name !== "" && email !== "" && username !== "" && password !== "") {
+    const { language } = this.state;
+
+    if (
+      this.state.loading === false &&
+      name !== "" &&
+      email !== "" &&
+      username !== "" &&
+      password !== ""
+    ) {
       const { template } = this.state;
       const botParams = {
         name, email, username, password, template, language,
       };
+
       this.setState({ loading: true });
-      const dialog = <ProcessingDialog open onClosed={this.handleCloseDialog} />;
-      Zrmc.open(dialog);
+
+      Zrmc.showDialog(<ProcessingDialog open onClosed={this.handleCloseDialog} />);
+
       this.props.createBot(botParams);
     } else {
       // TODO display errors in dialogs
     }
   }
 
-  handleLanguageChange = () => {
-    // const language = this.selectField.inputRef.value;
-    // console.log("handleCreate language=", language);
+  handleLanguageChange = ({ props: itemProps }) => {
+    this.setState({ language: itemProps.value });
   }
 
   render() {
@@ -191,12 +205,15 @@ class CreateAssistant extends Component {
             <div>
               <Select
                 label="Choose language"
-                onChange={this.handleLanguageChange}
+                onSelected={this.handleLanguageChange}
                 style={{ width: "400px" }}
-                ref={(input) => { this.selectField = input; }}
               >
-                <MenuItem value="en">English</MenuItem>
-                <MenuItem value="fr">French</MenuItem>
+                <MenuItem selected={this.state.language === "en"} value="en">
+                  English
+                </MenuItem>
+                <MenuItem selected={this.state.language === "fr"} value="fr">
+                  French
+                </MenuItem>
               </Select>
             </div>
           </form>
