@@ -8,16 +8,15 @@
   "license": "GPL-2.0+",
   "scripts": {
     "clean-dist": "rm -r -f dist && mkdir dist",
-    "build": "yarn clean-dist && babel src -s -D -d dist && cp -f ./package.json ./dist/package.json && cp -f ./LICENSE ./dist/LICENSE && cp -f ./README.md ./dist/README.md",
-    "build:dev": "yarn build",
-    "build:prod": "yarn build && rm -r -f ./dist/config.j*",
-    "dev": "yarn build:dev && yarn start:dev",
-    "start:dev": "nodemon -w src --exec \"babel-node src \"",
-    "start:prod": "node dist",
-    "prestart": "yarn run -s build",
-    "lint:prod": "eslint src",
+    "compile": "yarn compile:dev && rm -r -f ./dist/config.j*",
+    "compile:dev": "yarn clean-dist && babel src -s -D -d dist && cp -f ./package.json ./dist/package.json && cp -f ./LICENSE ./dist/LICENSE && cp -f ./README.md ./dist/README.md",
+    "dev": "yarn compile:dev && yarn start:dev",
+    "lint": "eslint src",
     "lint:dev": "eslint src --rule 'no-console: off' --fix",
-    "test": "eslint test --rule 'no-console: off' --fix && ./node_modules/.bin/mocha --compilers js:babel-core/register --exit"
+    "prestart": "yarn run -s build",
+    "start": "node dist",
+    "start:dev": "nodemon -w src --exec \"babel-node src \"",
+    "test": "mocha --compilers js:babel-core/register --exit"
   },
   "keywords": [
     "Node",
@@ -31,16 +30,15 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
+    "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-es2016": "^6.24.1",
-    "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-import": "2.8.0",
-    "mocha": "^4.0.1",
+    "jest": "^22.4.2",
     "nodemon": "^1.13.3",
+    "regenerator-runtime": "^0.11.1",
     "zoapp-core": "0.3.0"
   }
 }
