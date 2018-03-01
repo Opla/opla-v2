@@ -6,5 +6,7 @@ node_js:
 addons:
   mariadb: '10.2'
 
+cache: yarn
 script:
+  - yarn lint
   - yarn test
