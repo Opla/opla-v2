@@ -16,7 +16,7 @@
     "prestart": "yarn run -s build",
     "start": "node dist",
     "start:dev": "nodemon -w src --exec \"babel-node src \"",
-    "test": "mocha --compilers js:babel-core/register --exit"
+    "test": "jest"
   },
   "keywords": [
     "Node",
@@ -39,6 +39,12 @@
     "jest": "^22.4.2",
     "nodemon": "^1.13.3",
     "regenerator-runtime": "^0.11.1",
-    "zoapp-core": "0.3.0"
+    "supertest": "^3.0.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "opla-backend/(.*)": "<rootDir>/src/$1"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/setupTests.js"
   }
 }
