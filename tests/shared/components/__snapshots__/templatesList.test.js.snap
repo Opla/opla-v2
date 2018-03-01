@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TemplatesList creates a form for the 'Import' special item 1`] = `
+exports[`components/TemplatesList creates a form for the 'Import' special item 1`] = `
 <div
   className="mdc-layout-grid"
 >
@@ -87,7 +87,7 @@ exports[`TemplatesList creates a form for the 'Import' special item 1`] = `
 </div>
 `;
 
-exports[`TemplatesList marks an item as selected 1`] = `
+exports[`components/TemplatesList marks an item as selected 1`] = `
 <div
   className="mdc-layout-grid"
 >
@@ -226,7 +226,7 @@ exports[`TemplatesList marks an item as selected 1`] = `
 </div>
 `;
 
-exports[`TemplatesList renders correctly 1`] = `
+exports[`components/TemplatesList renders correctly 1`] = `
 <div
   className="mdc-layout-grid"
 >
@@ -236,7 +236,7 @@ exports[`TemplatesList renders correctly 1`] = `
 </div>
 `;
 
-exports[`TemplatesList renders some items 1`] = `
+exports[`components/TemplatesList renders some items 1`] = `
 <div
   className="mdc-layout-grid"
 >

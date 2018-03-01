@@ -17,6 +17,7 @@ import {
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
   API_GETINTENTS,
+  API_GETMETRICS,
   API_GETMIDDLEWARES,
   API_IMPORT,
   API_MOVEINTENT,
@@ -29,6 +30,10 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
 } from "../actions/constants";
+import {
+  apiGetMetricsFailure,
+  apiGetMetricsSuccess,
+} from "../actions/api";
 
 function* getSandboxMessages(action) {
   const { botId } = action;
@@ -344,5 +349,18 @@ const api = [
       }
     },
   ],
+
+  // Metrics
+  [API_GETMETRICS + FETCH_REQUEST,
+    function* f() {
+      try {
+        const response = yield getWebService().get("/metrics");
+        yield put(apiGetMetricsSuccess(response));
+      } catch (error) {
+        yield put(apiGetMetricsFailure(error));
+      }
+    },
+  ],
 ];
+
 export default api;

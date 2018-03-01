@@ -81,7 +81,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "@shared/(.*)": "<rootDir>/src/shared/$1"
+      "shared/(.*)": "<rootDir>/src/shared/$1"
     }
   }
 }

@@ -1,7 +1,9 @@
 import {
   API_ADMIN,
   API_SETADMINPARAMETERS,
+  FETCH_FAILURE,
   FETCH_REQUEST,
+  FETCH_SUCCESS,
   SUBSCRIBE,
   UNSUBSCRIBE,
 } from "zoapp-front/actions/constants";
@@ -11,6 +13,7 @@ import {
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
   API_GETINTENTS,
+  API_GETMETRICS,
   API_GETMIDDLEWARES,
   API_IMPORT,
   API_MOVEINTENT,
@@ -106,4 +109,16 @@ export function apiSetMiddlewareRequest(botId, middleware) {
 
 export function apiDeleteMiddlewareRequest(botId, middlewareId) {
   return { type: API_DELETEMIDDLEWARE + FETCH_REQUEST, botId, middlewareId };
+}
+
+export function apiGetMetricsRequest() {
+  return { type: API_GETMETRICS + FETCH_REQUEST };
+}
+
+export function apiGetMetricsSuccess(metrics) {
+  return { type: API_GETMETRICS + FETCH_SUCCESS, metrics };
+}
+
+export function apiGetMetricsFailure(error) {
+  return { type: API_GETMETRICS + FETCH_FAILURE, error };
 }

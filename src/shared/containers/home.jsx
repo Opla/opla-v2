@@ -8,6 +8,7 @@ const Home = ({ isSignedIn }) => {
   if (isSignedIn) {
     return (<Dashboard />);
   }
+
   return (
     <div className="mdl-layout__content mdl-color--grey-100">
       <section className="text-section" style={{ margin: "40px" }}>
