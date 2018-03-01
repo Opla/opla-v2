@@ -242,9 +242,9 @@ exports[`containers/Dashboard renders correctly 1`] = `
             <div
               className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
             >
-              <h3>
+              <h2>
                 Platform metrics
-              </h3>
+              </h2>
             </div>
           </div>
           <div

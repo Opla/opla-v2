@@ -14,7 +14,7 @@ export const initialState = {
 };
 
 export default createReducer(initialState, {
-  [API_GETMETRICS + FETCH_REQUEST]: (state) => ({
+  [API_GETMETRICS + FETCH_REQUEST]: () => ({
     ...initialState,
     loading: true,
   }),

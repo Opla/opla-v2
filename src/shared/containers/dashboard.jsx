@@ -103,7 +103,7 @@ export class DashboardBase extends Component {
               <Grid>
                 <Inner>
                   <Cell span={12}>
-                    <h3>Platform metrics</h3>
+                    <h2>Platform metrics</h2>
                   </Cell>
                 </Inner>
 
