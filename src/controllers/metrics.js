@@ -11,9 +11,7 @@ class MetricsController extends Controller {
       },
       conversations: {
         count: 1200,
-        messages_count: 4320,
-        // messages per conversation/number of conversations
-        average: 3.6,
+        messages_per_conversation: 4,
       },
       sessions: {
         duration: 5000, // ms
