@@ -9,8 +9,7 @@ describe("controllers/metrics", () => {
 
       expect(metrics).toHaveProperty("users.count");
       expect(metrics).toHaveProperty("conversations.count");
-      expect(metrics).toHaveProperty("conversations.messages_count");
-      expect(metrics).toHaveProperty("conversations.average");
+      expect(metrics).toHaveProperty("conversations.messages_per_conversation");
       expect(metrics).toHaveProperty("sessions.duration");
       expect(metrics).toHaveProperty("errors.rate");
       expect(metrics).toHaveProperty("responses.speed");
