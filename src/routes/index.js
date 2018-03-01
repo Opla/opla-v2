@@ -124,5 +124,5 @@ export default (zoapp) => {
 
   // /metrics routes
   route = zoapp.createRoute("/metrics");
-  route.add("GET", "", [], metrics.getAll);
+  route.add("GET", "", ["*", "admin", "master"], metrics.getAll);
 };
