@@ -1,14 +1,19 @@
 import Zoapp from "zoapp-backend";
-import Controllers from "./controllers";
-import BuildRoutes from "./routes";
+
+import createExtensionsController from "./controllers";
+import buildRoutes from "./routes";
 import plugins from "./plugins";
 
 class App {
   constructor(config = {}) {
     this.zoapp = Zoapp(config);
-    this.zoapp.addControllerExtensions(Controllers(this.zoapp, config));
+    this.zoapp.addControllerExtensions(createExtensionsController(
+      this.zoapp,
+      config,
+    ));
     this.zoapp.addPlugins(plugins(this.zoapp.pluginsManager));
-    BuildRoutes(this.zoapp);
+
+    buildRoutes(this.zoapp);
   }
 
   start() {

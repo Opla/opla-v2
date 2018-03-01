@@ -149,13 +149,13 @@ const deleteAsync = async (context, route, token) => {
 };
 
 const describeParams = (name, datasets, commonDatasets, func) => {
-  datasets.forEach(params => {
+  datasets.forEach((params) => {
     describe(`${name} using ${params.title}`, () =>
       func(params, commonDatasets));
   });
 };
 
-let context = null;
+const context = null;
 
 describe("API", () => {
   // we run the same test suite for different datasets.
@@ -164,7 +164,7 @@ describe("API", () => {
     { title: "MySQLDataset", config: mysqlConfig },
   ];
 
-  datasets.forEach(params => {
+  datasets.forEach((params) => {
     describe(`with ${params.title}`, () => {
       const commons = { password: "12345" };
 
@@ -196,7 +196,7 @@ describe("API", () => {
           context.userProfile1 = await getAsync(
             context,
             "/me",
-            context.authUser1.access_token
+            context.authUser1.access_token,
           );
           // WIP
 
@@ -212,7 +212,7 @@ describe("API", () => {
           const res = await getAsync(
             context,
             `/users/${context.userProfile1.id}`,
-            context.authUser1.access_token
+            context.authUser1.access_token,
           );
           // WIP
           expect(Object.keys(res).sort()).toEqual([
@@ -229,7 +229,7 @@ describe("API", () => {
           const res = await getAsync(
             context,
             "/conversations",
-            context.authUser1.access_token
+            context.authUser1.access_token,
           );
           // WIP
           expect(res).toBeInstanceOf(Array);
@@ -240,7 +240,7 @@ describe("API", () => {
             context,
             "/conversations",
             context.authUser1.access_token,
-            { participants: ["user2"] }
+            { participants: ["user2"] },
           );
           // WIP
           expect(Object.keys(context.conversation).sort()).toEqual([
@@ -255,7 +255,7 @@ describe("API", () => {
           const res = await getAsync(
             context,
             `/conversations/${context.conversation.id}`,
-            context.authUser1.access_token
+            context.authUser1.access_token,
           );
           expect(Object.keys(res).sort()).toEqual([
             "id",
@@ -269,7 +269,7 @@ describe("API", () => {
           const res = await getAsync(
             context,
             `/conversations/${context.conversation.id}/messages`,
-            context.authUser1.access_token
+            context.authUser1.access_token,
           );
           // WIP
           expect(res).toBeInstanceOf(Array);
@@ -280,7 +280,7 @@ describe("API", () => {
             context,
             `/conversations/${context.conversation.id}/messages`,
             context.authUser1.access_token,
-            { body: "hello" }
+            { body: "hello" },
           );
           // WIP
           expect(Object.keys(res).sort()).toEqual([
@@ -307,7 +307,7 @@ describe("API", () => {
               username: "user1",
               password: "12345",
               email: "user1@test.com",
-            }
+            },
           );
           // WIP
           expect(Object.keys(context.bot1).sort()).toEqual([
@@ -340,7 +340,7 @@ describe("API", () => {
           const res = await getAsync(
             context,
             `/bots/${context.bot1.id}/intents`,
-            context.authUser1.access_token
+            context.authUser1.access_token,
           );
           // WIP
           expect(Object.keys(res)).toEqual(["intents"]);
@@ -352,7 +352,7 @@ describe("API", () => {
             context,
             `/bots/${context.bot1.id}/intents`,
             context.authUser1.access_token,
-            { name: "hello", input: ["hello"], output: ["hello"] }
+            { name: "hello", input: ["hello"], output: ["hello"] },
           );
           // WIP
           expect(Object.keys(res).sort()).toEqual([
@@ -372,7 +372,7 @@ describe("API", () => {
             context,
             `/bots/${context.bot1.id}/intents`,
             context.authUser1.access_token,
-            { name: "what", input: ["what"], output: ["what"] }
+            { name: "what", input: ["what"], output: ["what"] },
           );
           // WIP
           expect(Object.keys(res).sort()).toEqual([
@@ -397,7 +397,7 @@ describe("API", () => {
                 input: ["hello", "hi"],
                 output: ["hello"],
               },
-            ]
+            ],
           );
           // WIP
           expect(Object.keys(res)).toEqual(["intents"]);
@@ -415,7 +415,7 @@ describe("API", () => {
               name: "hello",
               input: ["hello", "hi"],
               output: ["hello"],
-            }
+            },
           );
           // WIP
           expect(Object.keys(res).sort()).toEqual([
@@ -431,7 +431,7 @@ describe("API", () => {
           const res = await deleteAsync(
             context,
             `/bots/${context.bot1.id}/intents/${context.intent1id}`,
-            context.authUser1.access_token
+            context.authUser1.access_token,
           );
           // WIP
           // logger.info(`intent.id=${intent1.id}`);
@@ -443,7 +443,7 @@ describe("API", () => {
             const res = await getAsync(
               context,
               `/bots/${context.bot1.id}/sandbox/messages`,
-              context.authUser1.access_token
+              context.authUser1.access_token,
             );
             // WIP
             expect(res).toBeInstanceOf(Array);
@@ -456,7 +456,7 @@ describe("API", () => {
               `/bots/${context.bot1.id}/sandbox/messages/${context
                 .botconversation.id}`,
               context.authUser1.access_token,
-              { body: "hello" }
+              { body: "hello" },
             );
             // WIP
             expect(Object.keys(res).sort()).toEqual([
@@ -473,7 +473,7 @@ describe("API", () => {
             const res = await deleteAsync(
               context,
               `/bots/${context.bot1.id}/sandbox`,
-              context.authUser1.access_token
+              context.authUser1.access_token,
             );
             // WIP
             expect(Object.keys(res)).toEqual(["result"]);
