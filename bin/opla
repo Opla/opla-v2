@@ -50,9 +50,28 @@ program
         default: ["http"],
       },
     ];
-    const answers = await prompt(questions);
 
     try {
+      const fileExists = await fs.pathExists(CONFIG_FILE);
+
+      if (fileExists) {
+        questions.push(
+          {
+            type: "confirm",
+            name: "overwrite",
+            message:
+            "The configuration file already exists. Do you want to overwrite it?",
+            default: false,
+          },
+        );
+      }
+
+      const answers = await prompt(questions);
+
+      if (fileExists && !answers.overwrite) {
+        return;
+      }
+
       const apiURL = [
         answers.apiProtocol,
         `//${answers.apiHost}`,
@@ -87,24 +106,6 @@ program
           secure: answers.apiProtocol === "https",
         },
       };
-
-      const fileExists = await fs.pathExists(CONFIG_FILE);
-
-      if (fileExists) {
-        const { overwrite } = await prompt([
-          {
-            type: "confirm",
-            name: "overwrite",
-            message:
-              "The configuration file already exists. Do you want to overwrite it?",
-            default: false,
-          },
-        ]);
-
-        if (!overwrite) {
-          return;
-        }
-      }
 
       await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, 4));
 
