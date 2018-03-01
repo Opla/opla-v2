@@ -46,8 +46,8 @@ program
         type: "list",
         name: "apiProtocol",
         message: "API protocol",
-        choices: ["HTTP", "HTTPS"],
-        default: ["HTTP"],
+        choices: ["http", "https"],
+        default: ["http"],
       },
     ];
     const answers = await prompt(questions);
@@ -84,7 +84,7 @@ program
             path: "auth/",
             port: answers.apiPort,
           },
-          secure: answers.apiProtocol === "HTTPS",
+          secure: answers.apiProtocol === "https",
         },
       };
 
@@ -95,7 +95,8 @@ program
           {
             type: "confirm",
             name: "overwrite",
-            message: "The configuration file already exists. Do you want to overwrite it?",
+            message:
+              "The configuration file already exists. Do you want to overwrite it?",
             default: false,
           },
         ]);
@@ -109,7 +110,12 @@ program
 
       console.log(chalk.green("Project successfully configured!"));
     } catch (err) {
-      console.error(chalk.red(err.message));
+      let errorMessage = err.message;
+      if (err.error && err.error.error) {
+        errorMessage = err.error.error;
+      }
+
+      console.error(chalk.red(`An error has occured: ${errorMessage}`));
     }
   });
 
