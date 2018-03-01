@@ -1,6 +1,7 @@
 import BotsController from "./bots";
 import MessengerController from "./messenger";
 import SandboxMessengerController from "./sandboxMessenger";
+import MetricsController from "./metrics";
 
 class ExtensionsController {
   constructor(zoapp, config) {
@@ -11,6 +12,7 @@ class ExtensionsController {
     this.bots = new BotsController("Bots", this, "bot");
     this.sandboxMessenger = new SandboxMessengerController("SandboxMessenger", this, "sandbox");
     this.messenger = new MessengerController("Messenger", this, "messenger");
+    this.metrics = new MetricsController("Metrics", this);
   }
 
   async getAdminParameters(me, isMaster, params) {
@@ -47,6 +49,10 @@ class ExtensionsController {
 
   getMessenger() {
     return this.messenger;
+  }
+
+  getMetrics() {
+    return this.metrics;
   }
 }
 
