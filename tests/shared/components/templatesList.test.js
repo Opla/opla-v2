@@ -1,8 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import TemplatesList from "@shared/components/templatesList";
 
-describe("TemplatesList", () => {
+import TemplatesList from "shared/components/templatesList";
+
+describe("components/TemplatesList", () => {
   it("renders correctly", () => {
     const items = [];
 

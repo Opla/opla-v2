@@ -1,0 +1,385 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Dashboard renders a Loading component when isLoading is true 1`] = `
+<div
+  className="mdc-card"
+  style={
+    Object {
+      "margin": "auto",
+      "width": "512px",
+    }
+  }
+>
+  <section
+    className="mdc-card__primary"
+  >
+    
+    <h1
+      className="mdc-card__title"
+    >
+      Processing
+    </h1>
+    
+  </section>
+  <section
+    className="mdc-card__supporting-text"
+  >
+    Please wait ...
+  </section>
+  <section
+    className="mdc-card__actions"
+  />
+</div>
+`;
+
+exports[`containers/Dashboard renders a Loading component when no metrics 1`] = `
+<div
+  className="mdc-card"
+  style={
+    Object {
+      "margin": "auto",
+      "width": "512px",
+    }
+  }
+>
+  <section
+    className="mdc-card__primary"
+  >
+    
+    <h1
+      className="mdc-card__title"
+    >
+      Processing
+    </h1>
+    
+  </section>
+  <section
+    className="mdc-card__supporting-text"
+  >
+    Please wait ...
+  </section>
+  <section
+    className="mdc-card__actions"
+  />
+</div>
+`;
+
+exports[`containers/Dashboard renders a Loading component when user is not signed in 1`] = `
+<div>
+  You need to sign in...
+</div>
+`;
+
+exports[`containers/Dashboard renders correctly 1`] = `
+<div
+  className="mdl-layout__content mdl-color--grey-100"
+>
+  <div
+    className="mdc-layout-grid"
+  >
+    <div
+      className="mdc-layout-grid__inner"
+    >
+      <div
+        className="mdl-color--white mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+      >
+        <div
+          className="mdc-layout-grid"
+        >
+          <div
+            className="mdc-layout-grid__inner"
+          >
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+            >
+              <h2>
+                Key metrics
+              </h2>
+            </div>
+          </div>
+          <div
+            className="mdc-layout-grid__inner"
+          >
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+            >
+              <div
+                style={
+                  Object {
+                    "margin": "1em",
+                    "textAlign": "center",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "color": "#888",
+                      "fontSize": "34px",
+                      "fontWeight": "500",
+                      "lineHeight": "1.1",
+                      "padding": "16px 0",
+                    }
+                  }
+                >
+                  123
+                </span>
+                <br />
+                <span
+                  style={
+                    Object {
+                      "color": "#666",
+                      "fontSize": "16px",
+                      "fontWeight": "400",
+                      "lineHeight": "1.1",
+                      "padding": "60px 0",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  users
+                </span>
+              </div>
+            </div>
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+            >
+              <div
+                style={
+                  Object {
+                    "margin": "1em",
+                    "textAlign": "center",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "color": "#888",
+                      "fontSize": "34px",
+                      "fontWeight": "500",
+                      "lineHeight": "1.1",
+                      "padding": "16px 0",
+                    }
+                  }
+                >
+                  1200
+                </span>
+                <br />
+                <span
+                  style={
+                    Object {
+                      "color": "#666",
+                      "fontSize": "16px",
+                      "fontWeight": "400",
+                      "lineHeight": "1.1",
+                      "padding": "60px 0",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  conversations
+                </span>
+              </div>
+            </div>
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+            >
+              <div
+                style={
+                  Object {
+                    "margin": "1em",
+                    "textAlign": "center",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "color": "#888",
+                      "fontSize": "34px",
+                      "fontWeight": "500",
+                      "lineHeight": "1.1",
+                      "padding": "16px 0",
+                    }
+                  }
+                >
+                  4
+                </span>
+                <br />
+                <span
+                  style={
+                    Object {
+                      "color": "#666",
+                      "fontSize": "16px",
+                      "fontWeight": "400",
+                      "lineHeight": "1.1",
+                      "padding": "60px 0",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  messages/conversations
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="mdc-layout-grid__inner"
+    >
+      <div
+        className="mdl-color--white mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+      >
+        <div
+          className="mdc-layout-grid"
+        >
+          <div
+            className="mdc-layout-grid__inner"
+          >
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+            >
+              <h3>
+                Platform metrics
+              </h3>
+            </div>
+          </div>
+          <div
+            className="mdc-layout-grid__inner"
+          >
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+            >
+              <div
+                style={
+                  Object {
+                    "margin": "1em",
+                    "textAlign": "center",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "color": "#888",
+                      "fontSize": "34px",
+                      "fontWeight": "500",
+                      "lineHeight": "1.1",
+                      "padding": "16px 0",
+                    }
+                  }
+                >
+                  5000
+                  ms
+                </span>
+                <br />
+                <span
+                  style={
+                    Object {
+                      "color": "#666",
+                      "fontSize": "16px",
+                      "fontWeight": "400",
+                      "lineHeight": "1.1",
+                      "padding": "60px 0",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  session duration
+                </span>
+              </div>
+            </div>
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+            >
+              <div
+                style={
+                  Object {
+                    "margin": "1em",
+                    "textAlign": "center",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "color": "#888",
+                      "fontSize": "34px",
+                      "fontWeight": "500",
+                      "lineHeight": "1.1",
+                      "padding": "16px 0",
+                    }
+                  }
+                >
+                  23
+                  %
+                </span>
+                <br />
+                <span
+                  style={
+                    Object {
+                      "color": "#666",
+                      "fontSize": "16px",
+                      "fontWeight": "400",
+                      "lineHeight": "1.1",
+                      "padding": "60px 0",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  errors rate
+                </span>
+              </div>
+            </div>
+            <div
+              className="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+            >
+              <div
+                style={
+                  Object {
+                    "margin": "1em",
+                    "textAlign": "center",
+                  }
+                }
+              >
+                <span
+                  style={
+                    Object {
+                      "color": "#888",
+                      "fontSize": "34px",
+                      "fontWeight": "500",
+                      "lineHeight": "1.1",
+                      "padding": "16px 0",
+                    }
+                  }
+                >
+                  40
+                  ms
+                </span>
+                <br />
+                <span
+                  style={
+                    Object {
+                      "color": "#666",
+                      "fontSize": "16px",
+                      "fontWeight": "400",
+                      "lineHeight": "1.1",
+                      "padding": "60px 0",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  response time
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

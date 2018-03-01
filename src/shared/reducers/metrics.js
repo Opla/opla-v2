@@ -7,12 +7,12 @@ import {
 import { API_GETMETRICS } from "../actions/constants";
 
 
-const initialState = {
+export const initialState = {
   metrics: null,
 };
 
 export default createReducer(initialState, {
-  [API_GETMETRICS + FETCH_REQUEST]: state => ({ ...state }),
+  [API_GETMETRICS + FETCH_REQUEST]: () => ({ ...initialState }),
   [API_GETMETRICS + FETCH_SUCCESS]: (state, { metrics }) => ({
     ...state,
     metrics,

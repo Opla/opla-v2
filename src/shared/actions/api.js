@@ -2,6 +2,7 @@ import {
   API_ADMIN,
   API_SETADMINPARAMETERS,
   FETCH_REQUEST,
+  FETCH_SUCCESS,
   SUBSCRIBE,
   UNSUBSCRIBE,
 } from "zoapp-front/actions/constants";
@@ -109,6 +110,10 @@ export function apiDeleteMiddlewareRequest(botId, middlewareId) {
   return { type: API_DELETEMIDDLEWARE + FETCH_REQUEST, botId, middlewareId };
 }
 
-export function apiMetricsRequest() {
+export function apiGetMetricsRequest() {
   return { type: API_GETMETRICS + FETCH_REQUEST };
+}
+
+export function apiGetMetricsSuccess(metrics) {
+  return { type: API_GETMETRICS + FETCH_SUCCESS, metrics };
 }

@@ -30,6 +30,7 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
 } from "../actions/constants";
+import { apiGetMetricsSuccess } from "../actions/api";
 
 function* getSandboxMessages(action) {
   const { botId } = action;
@@ -351,7 +352,7 @@ const api = [
     function* f() {
       try {
         const response = yield getWebService().get("/metrics");
-        yield put({ type: `${API_GETMETRICS}${FETCH_SUCCESS}`, metrics: response });
+        yield put(apiGetMetricsSuccess(response));
       } catch (error) {
         yield put({ type: `${API_GETMETRICS}${FETCH_FAILURE}`, error });
       }

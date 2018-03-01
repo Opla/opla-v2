@@ -5,7 +5,7 @@ import { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 
 import { appSetTitle } from "../actions/app";
-import { apiMetricsRequest } from "../actions/api";
+import { apiGetMetricsRequest } from "../actions/api";
 
 const metricStyle = {
   textAlign: "center",
@@ -29,7 +29,7 @@ const legendStyle = {
   lineHeight: "1.1",
 };
 
-class Dashboard extends Component {
+export class DashboardBase extends Component {
   componentWillMount() {
     this.props.appSetTitle("Dashboard");
     this.props.fetchMetrics();
@@ -54,7 +54,7 @@ class Dashboard extends Component {
               <Grid>
                 <Inner>
                   <Cell span={12}>
-                    <h2>Bot metrics</h2>
+                    <h2>Key metrics</h2>
                   </Cell>
                 </Inner>
                 <Inner>
@@ -153,13 +153,13 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.defaultProps = {
+DashboardBase.defaultProps = {
   isLoading: false,
   isSignedIn: false,
   metrics: null,
 };
 
-Dashboard.propTypes = {
+DashboardBase.propTypes = {
   isLoading: PropTypes.bool,
   isSignedIn: PropTypes.bool,
   metrics: PropTypes.shape({}),
@@ -183,7 +183,7 @@ const mapDispatchToProps = dispatch => ({
   appSetTitle: (titleName) => {
     dispatch(appSetTitle(titleName));
   },
-  fetchMetrics: () => dispatch(apiMetricsRequest()),
+  fetchMetrics: () => dispatch(apiGetMetricsRequest()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardBase);
