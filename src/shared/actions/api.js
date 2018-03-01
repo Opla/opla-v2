@@ -11,6 +11,7 @@ import {
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
   API_GETINTENTS,
+  API_GETMETRICS,
   API_GETMIDDLEWARES,
   API_IMPORT,
   API_MOVEINTENT,
@@ -106,4 +107,8 @@ export function apiSetMiddlewareRequest(botId, middleware) {
 
 export function apiDeleteMiddlewareRequest(botId, middlewareId) {
   return { type: API_DELETEMIDDLEWARE + FETCH_REQUEST, botId, middlewareId };
+}
+
+export function apiMetricsRequest() {
+  return { type: API_GETMETRICS + FETCH_REQUEST };
 }

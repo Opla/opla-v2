@@ -1,105 +1,96 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid, Inner, Cell, Button } from "zrmc";
+import { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 
-import DonutChart from "../components/donutChart";
 import { appSetTitle } from "../actions/app";
+import { apiMetricsRequest } from "../actions/api";
+
+const metricStyle = {
+  textAlign: "center",
+  margin: "1em",
+};
+
+const valueStyle = {
+  fontSize: "34px",
+  fontWeight: "500",
+  color: "#888",
+  padding: "16px 0",
+  lineHeight: "1.1",
+};
+
+const legendStyle = {
+  textAlign: "center",
+  fontSize: "16px",
+  fontWeight: "400",
+  color: "#666",
+  padding: "60px 0",
+  lineHeight: "1.1",
+};
 
 class Dashboard extends Component {
   componentWillMount() {
     this.props.appSetTitle("Dashboard");
+    this.props.fetchMetrics();
   }
 
   render() {
-    const infoStyle = {
-      textAlign: "center",
-      fontSize: "28px",
-      fontWeight: "400",
-      color: "#888",
-      padding: "16px 0",
-      lineHeight: "1.1",
-    };
-    const infoStyleB = {
-      textAlign: "center",
-      fontSize: "16px",
-      fontWeight: "400",
-      color: "#666",
-      padding: "60px 0",
-      lineHeight: "1.1",
-    };
-    const infoStyleC = {
-      fontSize: "16px",
-      fontWeight: "400",
-      color: "green",
-      padding: "60px 0",
-      lineHeight: "1.1",
-    };
-    const infoStyleD = {
-      fontSize: "16px",
-      fontWeight: "400",
-      color: "#666",
-      padding: "16px",
-      lineHeight: "1.1",
-    };
+    const { isLoading, isSignedIn, metrics } = this.props;
 
-    const { isLoading } = this.props;
-    if (!this.props.isSignedIn) {
-      return (<div>You need to sign in...</div>);
-    } else if (isLoading || this.props.admin == null) {
-      return (<Loading />);
+    if (!isSignedIn) {
+      return <div>You need to sign in...</div>;
     }
-    const { admin } = this.props;
-    const usersCount = admin.users != null ? admin.users.count : 0;
-    const conversationsCount = admin.conversations != null ? admin.conversations.count : 0;
-    const messagesCount = admin.messages != null ? admin.messages.count : 0;
+
+    if (isLoading || !metrics) {
+      return <Loading />;
+    }
+
     return (
       <div className="mdl-layout__content mdl-color--grey-100">
         <Grid>
           <Inner>
             <Cell className="mdl-color--white" span={12}>
-              <div style={infoStyleD}>
-                Last 7 days |  Filter: All
-
-                <Button
-                  raised
-                  style={{ float: "right", marginBottom: "16px" }}
-                >
-                  Export
-                </Button>
-                <Button
-                  raised
-                  style={{ float: "right", marginBottom: "16px", marginRight: "16px" }}
-                >
-                  Edit
-                </Button>
-              </div>
-
-            </Cell>
-          </Inner>
-          <Inner>
-            <Cell className="mdl-color--white" span={12}>
               <Grid>
                 <Inner>
+                  <Cell span={12}>
+                    <h2>Bot metrics</h2>
+                  </Cell>
+                </Inner>
+                <Inner>
                   <Cell span={4}>
-                    <div style={infoStyle}>
-                      <span style={infoStyle}>{usersCount}</span><br />
-                      <span style={infoStyleB}>users / <span style={infoStyleC}>+4%</span></span>
+                    <div style={metricStyle}>
+                      <span style={valueStyle}>
+                        {metrics.users.count}
+                      </span>
+                      <br />
+                      <span style={legendStyle}>
+                        users
+                      </span>
                     </div>
                   </Cell>
+
                   <Cell span={4}>
-                    <div style={infoStyle}>
-                      <span style={infoStyle}>{conversationsCount}</span><br />
-                      <span style={infoStyleB}>errors / <span style={infoStyleC}>+8%</span></span>
+                    <div style={metricStyle}>
+                      <span style={valueStyle}>
+                        {metrics.conversations.count}
+                      </span>
+                      <br />
+                      <span style={legendStyle}>
+                        conversations
+                      </span>
                     </div>
                   </Cell>
+
+
                   <Cell span={4}>
-                    <div style={infoStyle}>
-                      <span style={infoStyle}>{messagesCount}</span><br />
-                      <span style={infoStyleB}>
-                      messages /
-                        <span style={infoStyleC}>+11%</span>
+                    <div style={metricStyle}>
+                      <span style={valueStyle}>
+                        {metrics.conversations.messages_per_conversation}
+                      </span>
+                      <br />
+                      <span style={legendStyle}>
+                        messages/conversations
                       </span>
                     </div>
                   </Cell>
@@ -111,17 +102,46 @@ class Dashboard extends Component {
             <Cell className="mdl-color--white" span={12}>
               <Grid>
                 <Inner>
-                  <Cell span={3}>
-                    <DonutChart title="Platform" dataset={0} />
+                  <Cell span={12}>
+                    <h3>Platform metrics</h3>
                   </Cell>
-                  <Cell span={3}>
-                    <DonutChart title="Country" dataset={1} />
+                </Inner>
+
+                <Inner>
+                  <Cell span={4}>
+                    <div style={metricStyle}>
+                      <span style={valueStyle}>
+                        {metrics.sessions.duration}ms
+                      </span>
+                      <br />
+                      <span style={legendStyle}>
+                        session duration
+                      </span>
+                    </div>
                   </Cell>
-                  <Cell span={3}>
-                    <DonutChart title="Language" dataset={2} />
+
+                  <Cell span={4}>
+                    <div style={metricStyle}>
+                      <span style={valueStyle}>
+                        {metrics.errors.rate * 100}%
+                      </span>
+                      <br />
+                      <span style={legendStyle}>
+                        errors rate
+                      </span>
+                    </div>
                   </Cell>
-                  <Cell span={3}>
-                    <DonutChart title="Age" dataset={3} />
+
+                  <Cell span={4}>
+                    <div style={metricStyle}>
+                      <span style={valueStyle}>
+                        {metrics.responses.speed}ms
+                      </span>
+                      <br />
+                      <span style={legendStyle}>
+                        response time
+                      </span>
+                    </div>
                   </Cell>
                 </Inner>
               </Grid>
@@ -134,29 +154,36 @@ class Dashboard extends Component {
 }
 
 Dashboard.defaultProps = {
-  admin: null,
   isLoading: false,
   isSignedIn: false,
+  metrics: null,
 };
 
 Dashboard.propTypes = {
-  admin: PropTypes.shape({ params: PropTypes.shape({}).isRequired }),
   isLoading: PropTypes.bool,
   isSignedIn: PropTypes.bool,
+  metrics: PropTypes.shape({}),
   appSetTitle: PropTypes.func.isRequired,
+  fetchMetrics: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state.app;
-  const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const isLoading = state.loading;
-  return { admin, isLoading, isSignedIn };
+  const { metrics, user, loading: isLoading } = state;
+
+  const isSignedIn = user ? user.isSignedIn : false;
+
+  return {
+    metrics: metrics.metrics,
+    isLoading,
+    isSignedIn,
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
   appSetTitle: (titleName) => {
     dispatch(appSetTitle(titleName));
   },
+  fetchMetrics: () => dispatch(apiMetricsRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

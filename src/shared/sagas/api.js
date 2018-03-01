@@ -17,6 +17,7 @@ import {
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
   API_GETINTENTS,
+  API_GETMETRICS,
   API_GETMIDDLEWARES,
   API_IMPORT,
   API_MOVEINTENT,
@@ -344,5 +345,18 @@ const api = [
       }
     },
   ],
+
+  // Metrics
+  [API_GETMETRICS + FETCH_REQUEST,
+    function* f() {
+      try {
+        const response = yield getWebService().get("/metrics");
+        yield put({ type: `${API_GETMETRICS}${FETCH_SUCCESS}`, metrics: response });
+      } catch (error) {
+        yield put({ type: `${API_GETMETRICS}${FETCH_FAILURE}`, error });
+      }
+    },
+  ],
 ];
+
 export default api;
