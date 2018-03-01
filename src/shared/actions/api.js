@@ -1,6 +1,7 @@
 import {
   API_ADMIN,
   API_SETADMINPARAMETERS,
+  FETCH_FAILURE,
   FETCH_REQUEST,
   FETCH_SUCCESS,
   SUBSCRIBE,
@@ -116,4 +117,8 @@ export function apiGetMetricsRequest() {
 
 export function apiGetMetricsSuccess(metrics) {
   return { type: API_GETMETRICS + FETCH_SUCCESS, metrics };
+}
+
+export function apiGetMetricsFailure(error) {
+  return { type: API_GETMETRICS + FETCH_FAILURE, error };
 }

@@ -168,13 +168,13 @@ DashboardBase.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { metrics, user, loading: isLoading } = state;
+  const { metrics, user } = state;
 
   const isSignedIn = user ? user.isSignedIn : false;
 
   return {
     metrics: metrics.metrics,
-    isLoading,
+    isLoading: metrics.loading,
     isSignedIn,
   };
 };
