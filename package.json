@@ -1,7 +1,7 @@
 {
   "name": "opla-front",
   "version": "0.1.0",
-  "description": " Opla.ai Frontend using node ES7 react and redux",
+  "description": "Opla.ai Frontend",
   "main": "index.js",
   "homepage": "https://github.com/Opla/front",
   "bugs": "https://github.com/Opla/front/issues",
@@ -21,7 +21,9 @@
     "babel-runtime": "^6.26.0",
     "chart.js": "2.7.1",
     "classnames": "^2.2.5",
+    "commander": "^2.14.1",
     "css-loader": "^0.28.7",
+    "inquirer": "^5.1.0",
     "json-loader": "0.5.4",
     "prop-types": "15.6.0",
     "react": "16.2.0",
