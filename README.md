@@ -26,42 +26,13 @@ available at: `127.0.0.1:8081`.
     $ yarn install
     ```
 
-2. Register a new client application on the backend application in order to
-   obtain client ID/secret and allow authentication:
+2. Run the configuration tool:
 
-    ```
-    $ curl -H "Content-Type: application/json" -X POST \
-        -d '{ "name": "Your Client Name", "email": "hello@example.org", "grant_type": "password", "redirect_uri": "http://127.0.0.1:8080" }' \
-        http://127.0.0.1:8081/auth/application
-    ```
+   ```
+   $ bin/opla init
+   ```
 
-You should receive a response with credentials that will be needed in the next
-step.
-
-3. Create a configuration file named `config/default.json` with the following
-   content:
-
-    ``` json
-   {
-        "backend": {
-            "api": {
-                "host": "127.0.0.1",
-                "port": "8081",
-                "path": "api/v1/"
-            },
-            "auth": {
-                "clientId": "<YOUR CLIENT ID>",
-                "clientSecret": "<YOUR CLIENT SECRET>",
-                "host": "127.0.0.1",
-                "port": "8081",
-                "path": "auth/"
-            },
-            "secure": false
-        }
-    }
-    ```
-
-4. Start the dev environment:
+3. Start the dev environment:
 
     ```
     $ yarn dev

@@ -1,10 +1,120 @@
 #!/usr/bin/env node
-
-const program = require("commander");
+const chalk = require("chalk");
+const fs = require("fs-extra");
 const pkg = require("../package.json");
+const program = require("commander");
+const request = require("request-promise-native");
+const { prompt } = require("inquirer");
+
+const CONFIG_FILE = "config/default.json";
 
 program
   .version(pkg.version)
   .description(`Management tool for ${pkg.description}`);
 
+program
+  .command("init")
+  .alias("i")
+  .description("Initialize the project and create the configuration file")
+  .action(async () => {
+    const questions = [
+      {
+        type: "input",
+        name: "clientName",
+        message: "Client name",
+        default: "Opla Front",
+      },
+      {
+        type: "input",
+        name: "clientEmail",
+        message: "Client email",
+        default: "opla@example.org",
+      },
+      {
+        type: "input",
+        name: "apiHost",
+        message: "API host",
+        default: "127.0.0.1",
+      },
+      {
+        type: "input",
+        name: "apiPort",
+        message: "API port",
+        default: "8081",
+      },
+      {
+        type: "list",
+        name: "apiProtocol",
+        message: "API protocol",
+        choices: ["HTTP", "HTTPS"],
+        default: ["HTTP"],
+      },
+    ];
+    const answers = await prompt(questions);
+
+    try {
+      const apiURL = [
+        answers.apiProtocol,
+        `//${answers.apiHost}`,
+        answers.apiPort,
+      ].join(":");
+      // register application on the backend
+      const response = await request.post({
+        url: `${apiURL}/auth/application`,
+        json: {
+          name: answers.clientName,
+          email: answers.clientEmail,
+          grant_type: "password",
+          redirect_uri: "http://127.0.0.1:8080",
+        },
+      });
+
+      // create the configuration
+      const config = {
+        backend: {
+          api: {
+            host: answers.apiHost,
+            path: "api/v1/",
+            port: answers.apiPort,
+          },
+          auth: {
+            clientId: response.client_id,
+            clientSecret: response.client_secret,
+            host: answers.apiHost,
+            path: "auth/",
+            port: answers.apiPort,
+          },
+          secure: answers.apiProtocol === "HTTPS",
+        },
+      };
+
+      const fileExists = await fs.pathExists(CONFIG_FILE);
+
+      if (fileExists) {
+        const { overwrite } = await prompt([
+          {
+            type: "confirm",
+            name: "overwrite",
+            message: "The configuration file already exists. Do you want to overwrite it?",
+            default: false,
+          },
+        ]);
+
+        if (!overwrite) {
+          return;
+        }
+      }
+
+      await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, 4));
+
+      console.log(chalk.green("Project successfully configured!"));
+    } catch (err) {
+      console.error(chalk.red(err.message));
+    }
+  });
+
 program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}
