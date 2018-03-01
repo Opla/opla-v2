@@ -480,6 +480,24 @@ describe("API", () => {
           });
         });
       });
-    });
+
+      describe("/metrics", () => {
+        it("returns metrics", async () => {
+          const metrics = await getAsync(
+            context,
+            "/metrics",
+            context.authUser1.access_token,
+          );
+
+          expect(metrics).toHaveProperty("users.count");
+          expect(metrics).toHaveProperty("conversations.count");
+          expect(metrics).toHaveProperty("conversations.messages_count");
+          expect(metrics).toHaveProperty("conversations.average");
+          expect(metrics).toHaveProperty("sessions.duration");
+          expect(metrics).toHaveProperty("errors.rate");
+          expect(metrics).toHaveProperty("responses.speed");
+        });
+      });
+    }); // end with dataset
   });
 });
