@@ -25,6 +25,7 @@
     "classnames": "^2.2.5",
     "commander": "^2.14.1",
     "css-loader": "^0.28.7",
+    "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
     "inquirer": "^5.1.0",
     "json-loader": "0.5.4",
