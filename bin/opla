@@ -1,0 +1,107 @@
+#!/usr/bin/env node
+const chalk = require("chalk");
+const figlet = require('figlet');
+const fs = require("fs-extra");
+const pkg = require("../package.json");
+const program = require("commander");
+const { prompt } = require("inquirer");
+
+const CONFIG_FILE = "config/generated.json";
+const DESCRIPTION = `Management tool for ${pkg.description}`;
+
+program
+  .version(pkg.version)
+  .description(DESCRIPTION);
+
+program
+  .command("init")
+  .alias("i")
+  .description("Initialize the project and create the configuration file")
+  .action(async () => {
+    const questions = [
+      {
+        type: "list",
+        name: "databaseType",
+        message: "Database engine",
+        choices: ["mysql"],
+        default: ["mysql"],
+      },
+      {
+        type: "input",
+        name: "databaseHost",
+        message: "Database host",
+        default: "127.0.0.1",
+      },
+      {
+        type: "input",
+        name: "databaseName",
+        message: "Database name",
+        default: "opla_dev",
+      },
+      {
+        type: "input",
+        name: "databaseUser",
+        message: "Database user",
+        default: "root",
+      },
+      {
+        type: "password",
+        name: "databasePass",
+        message: "Database password",
+        default: "",
+      },
+      {
+        type: "input",
+        name: "apiEndpoint",
+        message: "Main API endpoint",
+        default: "/api",
+      },
+      {
+        type: "input",
+        name: "authEndpoint",
+        message: "Auth API endpoint",
+        default: "/auth",
+      },
+    ];
+
+    try {
+      const answers = await prompt(questions);
+
+      // create the configuration
+      const config = {
+        global: {
+          database: {
+            datatype: answers.databaseType,
+            host: answers.databaseHost,
+            name: answers.databaseName,
+            user: answers.databaseUser,
+            password: answers.databasePassword,
+          },
+          api: {
+            endpoint: answers.apiEndpoint,
+          },
+        },
+        auth: {
+          api: {
+            endpoint: answers.authEndpoint,
+          },
+        },
+      };
+
+      await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, 4));
+
+      console.log(chalk.green("Project successfully configured!"));
+    } catch (err) {
+      let errorMessage = err.message;
+      console.error(chalk.red(`An error has occured: ${errorMessage}`));
+    }
+  });
+
+console.log(chalk.yellow(figlet.textSync("Opla CE", { horizontalLayout: "full" })));
+console.log(`${DESCRIPTION}\n`);
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}

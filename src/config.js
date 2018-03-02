@@ -4,10 +4,12 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import pkg from "../package.json";
-// TODO load config
+import deepmerge from "deepmerge";
 
-const config = {
+import pkg from "../package.json";
+import generatedConfig from "../config/generated.json";
+
+const defaultConfig = {
   name: "Opla.ai",
   version: pkg.version,
   // Global Database
@@ -76,4 +78,4 @@ const config = {
   },
 };
 
-export default () => config;
+export default deepmerge(defaultConfig, generatedConfig);
