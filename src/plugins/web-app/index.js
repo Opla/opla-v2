@@ -7,7 +7,7 @@
 
 class AppMessenger {
   constructor(pluginManager) {
-    this.workers = { };
+    this.workers = {};
     this.listener = null;
     this.manager = pluginManager;
     this.name = "app-connector";

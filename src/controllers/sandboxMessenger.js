@@ -36,9 +36,14 @@ export default class extends MessengerController {
       const bot = await this.main.getBots().getBot(botId, user.id, isAdmin);
       // logger.info("bot=", bot);
       if (bot) {
-        const participants = Participants([user, { name: bot.name, id: bot.id, type: "bot" }]);
-        const conversation = await this
-          .createConversation(user, { participants, origin: botId });
+        const participants = Participants([
+          user,
+          { name: bot.name, id: bot.id, type: "bot" },
+        ]);
+        const conversation = await this.createConversation(user, {
+          participants,
+          origin: botId,
+        });
         conversations.push(conversation);
       } else {
         return { error: "Can't get messages" };
@@ -47,16 +52,23 @@ export default class extends MessengerController {
     return this.appendConversationsMessages(conversations);
   }
 
-
   async resetConversations(user, botId, isAdmin = false) {
     await this.deleteConversations(user, botId, isAdmin);
-    const conversations = await this.getFullBotConversations(user, botId, isAdmin);
+    const conversations = await this.getFullBotConversations(
+      user,
+      botId,
+      isAdmin,
+    );
     if (!conversations.error) {
       const conversation = conversations[0];
       const conversationId = conversation.id;
       if (this.className) {
         this.dispatch(this.className, {
-          origin: conversation.origin, author: conversation.author, conversationId, action: "newMessages", messages: [],
+          origin: conversation.origin,
+          author: conversation.author,
+          conversationId,
+          action: "newMessages",
+          messages: [],
         });
       }
       return { result: "ok" };

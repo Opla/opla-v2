@@ -39,7 +39,7 @@ export default class extends CommonRoutes {
       ctx.isMaster = scope === "master";
       ctx.isAdmin = ctx.isMaster || scope === "admin";
       let { botId } = context.getParams();
-      if (botId && (!context.isAdmin)) {
+      if (botId && !context.isAdmin) {
         // WIP check if user as access to this bot
         const botUser = await this.extensions.getBots().getUser(botId, ctx.me);
         if (!botUser) {
@@ -69,14 +69,12 @@ export default class extends CommonRoutes {
     if (!bot.error) {
       // then associate owner to bot
       // logger.info("owner=" + JSON.stringify(owner));
-      const r = await this.extensions
-        .getBots()
-        .setUser(bot.id, owner, scope);
+      const r = await this.extensions.getBots().setUser(bot.id, owner, scope);
       // TODO put admin scope in config
 
       if (template) {
         // logger.info("bot template=" + JSON.stringify(template));
-        await Importer.import(template, { }, bot.id, this.extensions.getBots());
+        await Importer.import(template, {}, bot.id, this.extensions.getBots());
       }
       if (r && r.error) {
         return r;
@@ -90,7 +88,10 @@ export default class extends CommonRoutes {
     const { username, email, password } = params;
     const resp = await this.controller.signUp(
       {
-        username, password, email, client_id: clientId,
+        username,
+        password,
+        email,
+        client_id: clientId,
       },
       clientId,
     );
@@ -100,7 +101,13 @@ export default class extends CommonRoutes {
     }
     // TODO If first user then "admin" otherwise "owner"
     const user = { password, ...resp.result };
-    const scope = await this.controller.authorize(user, clientId, clientSecret, "owner", "admin");
+    const scope = await this.controller.authorize(
+      user,
+      clientId,
+      clientSecret,
+      "owner",
+      "admin",
+    );
     // TODO Authenticate user using scope
     return this.createBotNext(params, resp.result, scope);
   }
@@ -109,8 +116,10 @@ export default class extends CommonRoutes {
     logger.info("createBot");
     const me = await this.access(context);
     logger.info("createBot", me);
-    const clientId = context.getQuery().client_id || context.req.get("client_id");
-    const clientSecret = context.getQuery().client_secret || context.req.get("client_secret");
+    const clientId =
+      context.getQuery().client_id || context.req.get("client_id");
+    const clientSecret =
+      context.getQuery().client_secret || context.req.get("client_secret");
     const { ...params } = context.getBody();
     // logger.info("createBot", clientId);
     if (me) {
@@ -157,7 +166,9 @@ export default class extends CommonRoutes {
     let bot = await this.extensions.getBots().getBot(botId, userId);
     // format anonymous bot data
     if (bot && isAnonymous) {
-      bot = await this.extensions.getBots().getAnonymousBotConversation(me, bot);
+      bot = await this.extensions
+        .getBots()
+        .getAnonymousBotConversation(me, bot);
     }
     return bot === null ? { error: "Can't find bot" } : { result: bot };
   }
@@ -170,7 +181,12 @@ export default class extends CommonRoutes {
     const body = context.getBody();
     const { data, options } = body;
     // logger.info("Import data", data, options);
-    const payload = await Importer.import(data, options, botId, this.extensions.getBots());
+    const payload = await Importer.import(
+      data,
+      options,
+      botId,
+      this.extensions.getBots(),
+    );
     if (payload) {
       logger.info("import payload=", payload);
       return payload;
@@ -189,7 +205,9 @@ export default class extends CommonRoutes {
     const { channels } = context.getBody();
     const fromVersion = context.getBody().from;
     const toVersion = context.getBody().to || "pub";
-    return this.extensions.getBots().publish(botId, me, channels, toVersion, fromVersion);
+    return this.extensions
+      .getBots()
+      .publish(botId, me, channels, toVersion, fromVersion);
   }
 
   async intents(context) {

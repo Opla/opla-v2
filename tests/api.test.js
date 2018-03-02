@@ -154,15 +154,6 @@ const deleteAsync = async (context, route, token) => {
   return result(res);
 };
 
-const describeParams = (name, datasets, commonDatasets, func) => {
-  datasets.forEach((params) => {
-    describe(`${name} using ${params.title}`, () =>
-      func(params, commonDatasets));
-  });
-};
-
-const context = null;
-
 describe("API", () => {
   // we run the same test suite for different datasets.
   const datasets = [
@@ -206,12 +197,9 @@ describe("API", () => {
           );
           // WIP
 
-          expect(Object.keys(context.userProfile1).sort()).toEqual([
-            "id",
-            "username",
-            "avatar",
-            "email",
-          ].sort());
+          expect(Object.keys(context.userProfile1).sort()).toEqual(
+            ["id", "username", "avatar", "email"].sort(),
+          );
         });
 
         it("should get a SINGLE user on /users/:id GET", async () => {
@@ -221,12 +209,9 @@ describe("API", () => {
             context.authUser1.access_token,
           );
           // WIP
-          expect(Object.keys(res).sort()).toEqual([
-            "id",
-            "username",
-            "avatar",
-            "email",
-          ].sort());
+          expect(Object.keys(res).sort()).toEqual(
+            ["id", "username", "avatar", "email"].sort(),
+          );
         });
       });
 
@@ -249,12 +234,9 @@ describe("API", () => {
             { participants: ["user2"] },
           );
           // WIP
-          expect(Object.keys(context.conversation).sort()).toEqual([
-            "id",
-            "created_time",
-            "author",
-            "participants",
-          ].sort());
+          expect(Object.keys(context.conversation).sort()).toEqual(
+            ["id", "created_time", "author", "participants"].sort(),
+          );
         });
 
         it("should get a SINGLE conversation on /conversations/:id GET", async () => {
@@ -263,12 +245,9 @@ describe("API", () => {
             `/conversations/${context.conversation.id}`,
             context.authUser1.access_token,
           );
-          expect(Object.keys(res).sort()).toEqual([
-            "id",
-            "created_time",
-            "author",
-            "participants",
-          ].sort());
+          expect(Object.keys(res).sort()).toEqual(
+            ["id", "created_time", "author", "participants"].sort(),
+          );
         });
 
         it("should get a all conversation's messages on /conversations/:id/messages GET", async () => {
@@ -289,14 +268,16 @@ describe("API", () => {
             { body: "hello" },
           );
           // WIP
-          expect(Object.keys(res).sort()).toEqual([
-            "id",
-            "conversationId",
-            "created_time",
-            "from",
-            "body",
-            "timestamp",
-          ].sort());
+          expect(Object.keys(res).sort()).toEqual(
+            [
+              "id",
+              "conversationId",
+              "created_time",
+              "from",
+              "body",
+              "timestamp",
+            ].sort(),
+          );
         });
       });
 
@@ -316,13 +297,9 @@ describe("API", () => {
             },
           );
           // WIP
-          expect(Object.keys(context.bot1).sort()).toEqual([
-            "id",
-            "creation_date",
-            "name",
-            "author",
-            "email",
-          ].sort());
+          expect(Object.keys(context.bot1).sort()).toEqual(
+            ["id", "creation_date", "name", "author", "email"].sort(),
+          );
         });
 
         it("should create a SINGLE bot non authentified on /bots POST", async () => {
@@ -333,13 +310,9 @@ describe("API", () => {
             email: "user3@test.com",
           });
           // WIP
-          expect(Object.keys(res).sort()).toEqual([
-            "id",
-            "creation_date",
-            "name",
-            "author",
-            "email",
-          ].sort());
+          expect(Object.keys(res).sort()).toEqual(
+            ["id", "creation_date", "name", "author", "email"].sort(),
+          );
         });
 
         it("should get a all bot's intents on /bots/:id/intents GET", async () => {
@@ -361,13 +334,9 @@ describe("API", () => {
             { name: "hello", input: ["hello"], output: ["hello"] },
           );
           // WIP
-          expect(Object.keys(res).sort()).toEqual([
-            "id",
-            "botId",
-            "name",
-            "input",
-            "output",
-          ].sort());
+          expect(Object.keys(res).sort()).toEqual(
+            ["id", "botId", "name", "input", "output"].sort(),
+          );
           context.intent1 = { ...res };
           // logger.info(`intentId=${context.intent1.id}`);
           context.intent1id = context.intent1.id;
@@ -381,13 +350,9 @@ describe("API", () => {
             { name: "what", input: ["what"], output: ["what"] },
           );
           // WIP
-          expect(Object.keys(res).sort()).toEqual([
-            "id",
-            "botId",
-            "name",
-            "input",
-            "output",
-          ].sort());
+          expect(Object.keys(res).sort()).toEqual(
+            ["id", "botId", "name", "input", "output"].sort(),
+          );
         });
 
         it("should update bot's intents on /bots/:id/intents PUT", async () => {
@@ -424,13 +389,9 @@ describe("API", () => {
             },
           );
           // WIP
-          expect(Object.keys(res).sort()).toEqual([
-            "id",
-            "botId",
-            "name",
-            "input",
-            "output",
-          ].sort());
+          expect(Object.keys(res).sort()).toEqual(
+            ["id", "botId", "name", "input", "output"].sort(),
+          );
         });
 
         it("should delete bot's intent on /bots/:id/intents/:intentId DELETE", async () => {
@@ -459,20 +420,23 @@ describe("API", () => {
           it("shouldcreate new message in bot's sandbox on /bots/:id/sandbox/messagesPOST", async () => {
             const res = await postAsync(
               context,
-              `/bots/${context.bot1.id}/sandbox/messages/${context
-                .botconversation.id}`,
+              `/bots/${context.bot1.id}/sandbox/messages/${
+                context.botconversation.id
+              }`,
               context.authUser1.access_token,
               { body: "hello" },
             );
             // WIP
-            expect(Object.keys(res).sort()).toEqual([
-              "id",
-              "conversationId",
-              "created_time",
-              "timestamp",
-              "from",
-              "body",
-            ].sort());
+            expect(Object.keys(res).sort()).toEqual(
+              [
+                "id",
+                "conversationId",
+                "created_time",
+                "timestamp",
+                "from",
+                "body",
+              ].sort(),
+            );
           });
 
           it("should delete context of bot's sandbox on /bots/:id/sandbox DELETE", async () => {
@@ -497,7 +461,9 @@ describe("API", () => {
 
           expect(metrics).toHaveProperty("users.count");
           expect(metrics).toHaveProperty("conversations.count");
-          expect(metrics).toHaveProperty("conversations.messages_per_conversation");
+          expect(metrics).toHaveProperty(
+            "conversations.messages_per_conversation",
+          );
           expect(metrics).toHaveProperty("sessions.duration");
           expect(metrics).toHaveProperty("errors.rate");
           expect(metrics).toHaveProperty("responses.speed");

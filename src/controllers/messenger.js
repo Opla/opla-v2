@@ -25,7 +25,12 @@ export default class extends Controller {
     let conversation = null;
     const { participants, origin, ...p } = params;
     if (participants) {
-      conversation = await this.model.createConversation(user, participants, p, origin);
+      conversation = await this.model.createConversation(
+        user,
+        participants,
+        p,
+        origin,
+      );
     }
     return conversation;
   }
@@ -42,7 +47,10 @@ export default class extends Controller {
     let message = await this.model.buildMessage(fromUser, params);
     if (message) {
       // TODO queue message
-      const conversation = await this.model.getConversation(user, conversationId);
+      const conversation = await this.model.getConversation(
+        user,
+        conversationId,
+      );
       if (conversation) {
         message = await this.model.storeMessage(conversationId, {
           conversationId: conversation.id,
@@ -63,9 +71,19 @@ export default class extends Controller {
             origin = conversation.id;
           }
           const payload = {
-            origin, conversationOrigin, author: conversation.author, conversationId, action: "newMessages", messages: [message],
+            origin,
+            conversationOrigin,
+            author: conversation.author,
+            conversationId,
+            action: "newMessages",
+            messages: [message],
           };
-          logger.info("createMessage dispatch start", this.className, message, payload);
+          logger.info(
+            "createMessage dispatch start",
+            this.className,
+            message,
+            payload,
+          );
           this.dispatch(this.className, payload);
           logger.info("dispatch stop", message.body);
         }

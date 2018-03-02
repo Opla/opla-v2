@@ -44,8 +44,14 @@ export default class extends Controller {
     const messenger = this.main.getMessenger();
     let conversation = await messenger.getConversation(user);
     if (!conversation) {
-      const participants = Participants([user, { name: bot.name, id: bot.id, type: "bot" }]);
-      conversation = await messenger.createConversation(user, { participants, origin: bot.id });
+      const participants = Participants([
+        user,
+        { name: bot.name, id: bot.id, type: "bot" },
+      ]);
+      conversation = await messenger.createConversation(user, {
+        participants,
+        origin: bot.id,
+      });
     }
     if (conversation) {
       b.conversationId = conversation.id;
@@ -77,7 +83,12 @@ export default class extends Controller {
       const action = "publishBot";
       // this.dispatchIntentAction(botId, action, { bot, publisher });
       this.dispatch(this.className, {
-        botId, action, bot, version: versionId, publisher, channels,
+        botId,
+        action,
+        bot,
+        version: versionId,
+        publisher,
+        channels,
       });
       const intents = await this.model.getIntents(botId, fromVersion);
       res = await this.duplicateIntents(botId, intents, versionId);
@@ -128,7 +139,10 @@ export default class extends Controller {
     let ret = null;
     if (ok) {
       ret = {
-        botId, id: intentId, fromIndex, toIndex,
+        botId,
+        id: intentId,
+        fromIndex,
+        toIndex,
       };
       this.dispatchIntentAction(botId, "moveIntents", ret);
     } else {
@@ -151,7 +165,6 @@ export default class extends Controller {
     this.dispatchIntentAction(botId, "removeAllIntents", []);
     return true;
   }
-
 
   dispatchIntentAction(botId, action, intents) {
     this.dispatch(this.className, { botId, action, intents });

@@ -7,7 +7,6 @@
 import CSVImporter from "./csv";
 
 const Importer = {
-
   async import(rawData, options, botId, controller) {
     let result = null;
     let data = null;
@@ -19,17 +18,24 @@ const Importer = {
     if (typeof rawData === "string") {
       let str = rawData.trim();
       logger.info("detect data");
-      if (options.filetype === "application/json" || str.startsWith("{") || str.startsWith("[")) {
+      if (
+        options.filetype === "application/json" ||
+        str.startsWith("{") ||
+        str.startsWith("[")
+      ) {
         str = rawData.replace(/\u00A0/, "");
         // logger.info("parse JSON", str);
         data = JSON.parse(str);
-      } else if (options.filetype === "text/csv" || options.filetype === ".csv") {
+      } else if (
+        options.filetype === "text/csv" ||
+        options.filetype === ".csv"
+      ) {
         const array = CSVImporter.import(rawData);
         let intent = null;
         data = { intents: [] };
         array.forEach((item) => {
           if (item.name) {
-            if ((!intent) || intent.name) {
+            if (!intent || intent.name) {
               intent = { input: [], output: [] };
               data.intents.push(intent);
             }
@@ -58,8 +64,6 @@ const Importer = {
     }
     return result;
   },
-
-
 };
 
 export default Importer;
