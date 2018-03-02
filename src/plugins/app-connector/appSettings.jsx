@@ -13,7 +13,7 @@ export default class AppSettings extends Component {
       // console.log("onAction Build TODO");
     }
     this.props.onAction(action);
-  }
+  };
 
   renderCreateApp() {
     const { instance } = this.props;
@@ -35,50 +35,74 @@ export default class AppSettings extends Component {
           }}
           href={instance.url}
           target="_blank"
-        >{instance.url}
-        </a>);
+        >
+          {instance.url}
+        </a>
+      );
     }
     const botId = instance.origin;
 
     return (
-      <div style={{
-        width: "420px",
-        height: "200px",
-        margin: "auto",
-        position: "absolute",
-        left: "0px",
-        right: "0px",
-        bottom: "0px",
-        top: "0px",
-      }}
-      >
-        <div style={{ marginTop: "8px", textAlign: "center" }}>Link to webapp :</div>
-        <div style={{
-          width: "390px",
-          paddingTop: "8px",
+      <div
+        style={{
+          width: "420px",
+          height: "200px",
           margin: "auto",
+          position: "absolute",
+          left: "0px",
+          right: "0px",
+          bottom: "0px",
+          top: "0px",
         }}
-        >{botUrl}
+      >
+        <div style={{ marginTop: "8px", textAlign: "center" }}>
+          Link to webapp :
+        </div>
+        <div
+          style={{
+            width: "390px",
+            paddingTop: "8px",
+            margin: "auto",
+          }}
+        >
+          {botUrl}
         </div>
 
-        <div style={{ marginTop: "12px", textAlign: "center" }}>Or install SDK and set these parameters :</div>
-        <div style={{
-          marginTop: "0px", marginBottom: "0px", fontSize: "10px", color: "black",
-        }}
-        >botId : {botId}
+        <div style={{ marginTop: "12px", textAlign: "center" }}>
+          Or install SDK and set these parameters :
         </div>
-        <div style={{
-          marginTop: "0px", marginBottom: "0px", fontSize: "10px", color: "black",
-        }}
-        >appId : {appId}
+        <div
+          style={{
+            marginTop: "0px",
+            marginBottom: "0px",
+            fontSize: "10px",
+            color: "black",
+          }}
+        >
+          botId : {botId}
         </div>
-        <div style={{
-          marginTop: "0px", marginBottom: "12px", fontSize: "10px", color: "black",
-        }}
-        >appSecret : {appSecret}
+        <div
+          style={{
+            marginTop: "0px",
+            marginBottom: "0px",
+            fontSize: "10px",
+            color: "black",
+          }}
+        >
+          appId : {appId}
         </div>
-
-      </div>);
+        <div
+          style={{
+            marginTop: "0px",
+            marginBottom: "12px",
+            fontSize: "10px",
+            color: "black",
+          }}
+        >
+          appSecret : {appSecret}
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -96,7 +120,8 @@ export default class AppSettings extends Component {
         <div className="mdl-color--grey-100" style={style}>
           {container}
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 

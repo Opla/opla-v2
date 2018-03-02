@@ -66,13 +66,9 @@ export class DashboardBase extends Component {
                 <Inner>
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      <span style={valueStyle}>
-                        {metrics.users.count}
-                      </span>
+                      <span style={valueStyle}>{metrics.users.count}</span>
                       <br />
-                      <span style={legendStyle}>
-                        users
-                      </span>
+                      <span style={legendStyle}>users</span>
                     </div>
                   </Cell>
 
@@ -82,12 +78,9 @@ export class DashboardBase extends Component {
                         {metrics.conversations.count}
                       </span>
                       <br />
-                      <span style={legendStyle}>
-                        conversations
-                      </span>
+                      <span style={legendStyle}>conversations</span>
                     </div>
                   </Cell>
-
 
                   <Cell span={4}>
                     <div style={metricStyle}>
@@ -95,9 +88,7 @@ export class DashboardBase extends Component {
                         {metrics.conversations.messages_per_conversation}
                       </span>
                       <br />
-                      <span style={legendStyle}>
-                        messages/conversations
-                      </span>
+                      <span style={legendStyle}>messages/conversations</span>
                     </div>
                   </Cell>
                 </Inner>
@@ -120,9 +111,7 @@ export class DashboardBase extends Component {
                         {metrics.sessions.duration}ms
                       </span>
                       <br />
-                      <span style={legendStyle}>
-                        session duration
-                      </span>
+                      <span style={legendStyle}>session duration</span>
                     </div>
                   </Cell>
 
@@ -132,9 +121,7 @@ export class DashboardBase extends Component {
                         {metrics.errors.rate * 100}%
                       </span>
                       <br />
-                      <span style={legendStyle}>
-                        errors rate
-                      </span>
+                      <span style={legendStyle}>errors rate</span>
                     </div>
                   </Cell>
 
@@ -144,9 +131,7 @@ export class DashboardBase extends Component {
                         {metrics.responses.speed}ms
                       </span>
                       <br />
-                      <span style={legendStyle}>
-                        response time
-                      </span>
+                      <span style={legendStyle}>response time</span>
                     </div>
                   </Cell>
                 </Inner>
@@ -185,7 +170,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   appSetTitle: (titleName) => {
     dispatch(appSetTitle(titleName));
   },

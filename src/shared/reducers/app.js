@@ -51,24 +51,43 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [API_ADMIN + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_ADMIN + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_ADMIN + FETCH_SUCCESS]: (state, { admin }) => {
     let { selectedBotId } = state;
     if (selectedBotId == null && admin.bots && admin.bots.length > 0) {
       selectedBotId = admin.bots[0].id;
     }
     return {
-      ...state, loading: false, error: null, admin: { ...admin }, selectedBotId,
+      ...state,
+      loading: false,
+      error: null,
+      admin: { ...admin },
+      selectedBotId,
     };
   },
-  [API_ADMIN + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_ADMIN + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_SETADMINPARAMETERS + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_SETADMINPARAMETERS + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_SETADMINPARAMETERS + FETCH_SUCCESS]: (state, { params }) => {
     const admin = { ...state.admin };
     admin.params = { ...params };
     return {
-      ...state, loading: false, error: null, admin,
+      ...state,
+      loading: false,
+      error: null,
+      admin,
     };
   },
   [API_SETADMINPARAMETERS + FETCH_FAILURE]: (state, { error }) => ({
@@ -77,7 +96,7 @@ export default createReducer(initialState, {
     error,
   }),
 
-  [API_GETMIDDLEWARES + FETCH_REQUEST]: state => ({
+  [API_GETMIDDLEWARES + FETCH_REQUEST]: (state) => ({
     ...state,
     loading: true,
     error: null,
@@ -95,7 +114,7 @@ export default createReducer(initialState, {
     error,
   }),
 
-  [API_SETMIDDLEWARE + FETCH_REQUEST]: state => ({
+  [API_SETMIDDLEWARE + FETCH_REQUEST]: (state) => ({
     ...state,
     loading: true,
     error: null,
@@ -123,9 +142,13 @@ export default createReducer(initialState, {
       lastMiddleware: { ...middleware },
     };
   },
-  [API_SETMIDDLEWARE + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_SETMIDDLEWARE + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_DELETEMIDDLEWARE + FETCH_REQUEST]: state => ({
+  [API_DELETEMIDDLEWARE + FETCH_REQUEST]: (state) => ({
     ...state,
     loading: true,
     error: null,
@@ -139,7 +162,10 @@ export default createReducer(initialState, {
       }
     });
     return {
-      ...state, loading: false, error: null, middlewares,
+      ...state,
+      loading: false,
+      error: null,
+      middlewares,
     };
   },
   [API_DELETEMIDDLEWARE + FETCH_FAILURE]: (state, { error }) => ({
@@ -147,7 +173,11 @@ export default createReducer(initialState, {
     loading: false,
     error,
   }),
-  [API_CREATEBOT + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_CREATEBOT + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_CREATEBOT + FETCH_SUCCESS]: (state, { bot }) => {
     const { error } = bot;
     let { selectedBotId } = state;
@@ -175,12 +205,24 @@ export default createReducer(initialState, {
       admin.bots = bots;
     }
     return {
-      ...state, loading: false, error, admin, selectedBotId,
+      ...state,
+      loading: false,
+      error,
+      admin,
+      selectedBotId,
     };
   },
-  [API_CREATEBOT + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_CREATEBOT + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_SAVEBOT + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_SAVEBOT + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_SAVEBOT + FETCH_SUCCESS]: (state, { bot }) => {
     const { error } = bot;
     let admin = null;
@@ -206,12 +248,23 @@ export default createReducer(initialState, {
       admin.bots = bots;
     }
     return {
-      ...state, loading: false, error, admin,
+      ...state,
+      loading: false,
+      error,
+      admin,
     };
   },
-  [API_SAVEBOT + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_SAVEBOT + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_IMPORT + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_IMPORT + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_IMPORT + FETCH_SUCCESS]: (state, { result }) => {
     let { intents, selectedIntentIndex, selectedIntent } = state;
     if (result.intents) {
@@ -219,21 +272,34 @@ export default createReducer(initialState, {
       if (selectedIntentIndex >= intents.length) {
         selectedIntentIndex = 0;
       }
-      if (intents && ((!selectedIntent) || (!selectedIntent.notSaved))) {
-        selectedIntent = { ...(intents[selectedIntentIndex]) };
-      } else if ((!selectedIntent) && (!selectedIntent.notSaved)) {
+      if (intents && (!selectedIntent || !selectedIntent.notSaved)) {
+        selectedIntent = { ...intents[selectedIntentIndex] };
+      } else if (!selectedIntent && !selectedIntent.notSaved) {
         selectedIntent = null;
       } else {
         // TODO handle conflicts
       }
     }
     return {
-      ...state, loading: false, error: null, intents, selectedIntentIndex, selectedIntent,
+      ...state,
+      loading: false,
+      error: null,
+      intents,
+      selectedIntentIndex,
+      selectedIntent,
     };
   },
-  [API_IMPORT + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_IMPORT + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_PUBLISH + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_PUBLISH + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_PUBLISH + FETCH_SUCCESS]: (state, { result }) => {
     let { intents, selectedIntentIndex, selectedIntent } = state;
     if (result.intents) {
@@ -241,29 +307,42 @@ export default createReducer(initialState, {
       if (selectedIntentIndex >= intents.length) {
         selectedIntentIndex = 0;
       }
-      if (intents && ((!selectedIntent) || (!selectedIntent.notSaved))) {
-        selectedIntent = { ...(intents[selectedIntentIndex]) };
-      } else if ((!selectedIntent) && (!selectedIntent.notSaved)) {
+      if (intents && (!selectedIntent || !selectedIntent.notSaved)) {
+        selectedIntent = { ...intents[selectedIntentIndex] };
+      } else if (!selectedIntent && !selectedIntent.notSaved) {
         selectedIntent = null;
       } else {
         // TODO handle conflicts
       }
     }
     return {
-      ...state, loading: false, error: null, intents, selectedIntentIndex, selectedIntent,
+      ...state,
+      loading: false,
+      error: null,
+      intents,
+      selectedIntentIndex,
+      selectedIntent,
     };
   },
-  [API_PUBLISH + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_PUBLISH + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_GETINTENTS + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_GETINTENTS + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_GETINTENTS + FETCH_SUCCESS]: (state, { intents }) => {
     let { selectedIntent, selectedIntentIndex } = state;
-    if ((!selectedIntentIndex) || selectedIntentIndex >= intents.length) {
+    if (!selectedIntentIndex || selectedIntentIndex >= intents.length) {
       selectedIntentIndex = 0;
     }
-    if (intents && ((!selectedIntent) || (!selectedIntent.notSaved))) {
-      selectedIntent = { ...(intents[selectedIntentIndex]) };
-    } else if ((!selectedIntent) && (!selectedIntent.notSaved)) {
+    if (intents && (!selectedIntent || !selectedIntent.notSaved)) {
+      selectedIntent = { ...intents[selectedIntentIndex] };
+    } else if (!selectedIntent && !selectedIntent.notSaved) {
       selectedIntent = null;
     } else {
       // TODO handle conflicts
@@ -277,9 +356,17 @@ export default createReducer(initialState, {
       selectedIntent,
     };
   },
-  [API_GETINTENTS + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_GETINTENTS + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_SENDINTENT + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_SENDINTENT + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_SENDINTENT + FETCH_SUCCESS]: (state, { data }) => {
     // WIP search for intent in intents and add replace it
     let { intents, selectedIntent, selectedIntentIndex } = state;
@@ -330,7 +417,6 @@ export default createReducer(initialState, {
           }
           intents[previousIntentIndex] = previousIntent;
 
-
           if (selectedIntent && selectedIntent.id === intent.id) {
             // WIP Compare input & output arrays
             selectedIntent = { ...intent };
@@ -343,12 +429,25 @@ export default createReducer(initialState, {
       });
     }
     return {
-      ...state, loading: false, error: null, intents, selectedIntentIndex, selectedIntent,
+      ...state,
+      loading: false,
+      error: null,
+      intents,
+      selectedIntentIndex,
+      selectedIntent,
     };
   },
-  [API_SENDINTENT + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_SENDINTENT + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_DELETEINTENT + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_DELETEINTENT + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_DELETEINTENT + FETCH_SUCCESS]: (state, { intent }) => {
     // WIP search for intentId in intents and remove it
     const intents = [...state.intents];
@@ -362,7 +461,7 @@ export default createReducer(initialState, {
             selectedIntentIndex = 0;
           }
           if (intents && selectedIntentIndex < intents.length) {
-            selectedIntent = { ...(intents[selectedIntentIndex]) };
+            selectedIntent = { ...intents[selectedIntentIndex] };
           } else {
             selectedIntent = null;
           }
@@ -371,12 +470,25 @@ export default createReducer(initialState, {
       }
     }
     return {
-      ...state, loading: false, error: null, intents, selectedIntentIndex, selectedIntent,
+      ...state,
+      loading: false,
+      error: null,
+      intents,
+      selectedIntentIndex,
+      selectedIntent,
     };
   },
-  [API_DELETEINTENT + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_DELETEINTENT + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_MOVEINTENT + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_MOVEINTENT + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_MOVEINTENT + FETCH_SUCCESS]: (state, { response }) => {
     // TODO move intent
     const { toIndex, fromIndex } = response;
@@ -385,13 +497,22 @@ export default createReducer(initialState, {
     const selectedIntentIndex = toIndex;
     const selectedIntent = intents[toIndex];
     return {
-      ...state, loading: false, error: null, intents, selectedIntentIndex, selectedIntent,
+      ...state,
+      loading: false,
+      error: null,
+      intents,
+      selectedIntentIndex,
+      selectedIntent,
     };
   },
-  [API_MOVEINTENT + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_MOVEINTENT + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
   /* API Sandbox section */
-  [API_SB_GETMESSAGES + FETCH_REQUEST]: state => ({
+  [API_SB_GETMESSAGES + FETCH_REQUEST]: (state) => ({
     ...state,
     loadingMessages: true,
     error: null,
@@ -408,7 +529,10 @@ export default createReducer(initialState, {
       sandbox.conversations = [];
     }
     return {
-      ...state, loadingMessages: false, error: null, sandbox,
+      ...state,
+      loadingMessages: false,
+      error: null,
+      sandbox,
     };
   },
   [API_SB_GETMESSAGES + FETCH_FAILURE]: (state, { error }) => ({
@@ -417,7 +541,7 @@ export default createReducer(initialState, {
     error,
   }),
 
-  [API_SB_SENDMESSAGE + FETCH_REQUEST]: state => ({
+  [API_SB_SENDMESSAGE + FETCH_REQUEST]: (state) => ({
     ...state,
     loadingMessages: true,
     error: null,
@@ -427,7 +551,10 @@ export default createReducer(initialState, {
     const { sandbox } = state;
     // sandbox.conversations = [...conversations];
     return {
-      ...state, loadingMessages: false, error: null, sandbox,
+      ...state,
+      loadingMessages: false,
+      error: null,
+      sandbox,
     };
   },
   [API_SB_SENDMESSAGE + FETCH_FAILURE]: (state, { error }) => ({
@@ -436,36 +563,61 @@ export default createReducer(initialState, {
     error,
   }),
 
-  [API_SB_GETCONTEXT + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_SB_GETCONTEXT + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_SB_GETCONTEXT + FETCH_SUCCESS]: (state, { context }) => {
     // TODO check if BotId is ok
     const { sandbox } = state;
     sandbox.context = [...context];
     return {
-      ...state, loading: false, error: null, sandbox,
+      ...state,
+      loading: false,
+      error: null,
+      sandbox,
     };
   },
-  [API_SB_GETCONTEXT + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_SB_GETCONTEXT + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
-  [API_SB_RESET + FETCH_REQUEST]: state => ({ ...state, loading: true, error: null }),
+  [API_SB_RESET + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
   [API_SB_RESET + FETCH_SUCCESS]: (state) => {
     // TODO check if BotId is ok
     const sandbox = { conversations: [] };
     return {
-      ...state, loading: false, error: null, sandbox,
+      ...state,
+      loading: false,
+      error: null,
+      sandbox,
     };
   },
-  [API_SB_RESET + FETCH_FAILURE]: (state, { error }) => ({ ...state, loading: false, error }),
+  [API_SB_RESET + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 
   /* APP Section */
   [APP_SETTITLE]: (state, { titleName }) => ({ ...state, titleName }),
   [APP_SELECTINTENT]: (state, { selectedBotId, selectedIntentIndex }) => {
     let selectedIntent = null;
     if (state.intents && selectedIntentIndex < state.intents.length) {
-      selectedIntent = { ...(state.intents[selectedIntentIndex]) };
+      selectedIntent = { ...state.intents[selectedIntentIndex] };
     }
     return {
-      ...state, selectedBotId, selectedIntentIndex, selectedIntent,
+      ...state,
+      selectedBotId,
+      selectedIntentIndex,
+      selectedIntent,
     };
   },
   [APP_UPDATEPUBLISHER]: (state, { selectedBotId, publisher }) => {
@@ -487,12 +639,17 @@ export default createReducer(initialState, {
       selectedIntent.notSaved = true;
     }
     return {
-      ...state, selectedBotId, intents, selectedIntentIndex, selectedIntent,
+      ...state,
+      selectedBotId,
+      intents,
+      selectedIntentIndex,
+      selectedIntent,
     };
   },
-  [APP_SETINTENTACTION]: (state, {
-    actionContainer, actionType, actionValue, selectedAction,
-  }) => {
+  [APP_SETINTENTACTION]: (
+    state,
+    { actionContainer, actionType, actionValue, selectedAction },
+  ) => {
     const intents = [...state.intents];
     const selectedIntentIndex =
       state.selectedIntentIndex !== undefined ? state.selectedIntentIndex : 0;

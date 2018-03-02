@@ -13,7 +13,6 @@ import {
 
 import { API_GETMETRICS } from "../actions/constants";
 
-
 export const initialState = {
   loading: false,
   metrics: null,

@@ -94,14 +94,16 @@ class IODialog extends Component {
     this.setState({
       openDialog: true,
     });
-  }
+  };
 
   handleCloseDialog = () => {
     this.setState({ openDialog: false });
     if (this.props.onClosed instanceof Function) {
       this.props.onClosed();
     } else {
-      setTimeout(() => { Zrmc.closeDialog(); }, 300);
+      setTimeout(() => {
+        Zrmc.closeDialog();
+      }, 300);
     }
   };
 
@@ -124,7 +126,7 @@ class IODialog extends Component {
                 <input
                   type="file"
                   accept={this.props.accept}
-                  onChange={e => this.onUpload(e.target.files)}
+                  onChange={(e) => this.onUpload(e.target.files)}
                 />
               </Button>
             </section>
@@ -133,13 +135,19 @@ class IODialog extends Component {
           <DialogFooter>
             <Button
               type="button"
-              onClick={(e) => { e.preventDefault(); this.handleImport(); }}
+              onClick={(e) => {
+                e.preventDefault();
+                this.handleImport();
+              }}
             >
               Import
             </Button>
             <Button
               type="button"
-              onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
+              onClick={(e) => {
+                e.preventDefault();
+                this.handleCloseDialog();
+              }}
             >
               Cancel
             </Button>
@@ -157,7 +165,10 @@ class IODialog extends Component {
         <DialogFooter>
           <Button
             type="button"
-            onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleCloseDialog();
+            }}
           >
             Done
           </Button>
@@ -168,13 +179,19 @@ class IODialog extends Component {
         <DialogFooter>
           <Button
             type="button"
-            onClick={(e) => { e.preventDefault(); this.handleImport(); }}
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleImport();
+            }}
           >
             Import
           </Button>
           <Button
             type="button"
-            onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleCloseDialog();
+            }}
           >
             Cancel
           </Button>
@@ -213,7 +230,9 @@ class IODialog extends Component {
               label="Delete previous data"
               ripple
               checked={this.state.deletePrevious}
-              onChange={(e) => { this.setState({ deletePrevious: !!e.target.value }); }}
+              onChange={(e) => {
+                this.setState({ deletePrevious: !!e.target.value });
+              }}
             />
             <Button
               className="mdl-button--file"
@@ -224,7 +243,7 @@ class IODialog extends Component {
               <input
                 type="file"
                 accept={this.props.accept}
-                onChange={e => this.onUpload(e.target.files)}
+                onChange={(e) => this.onUpload(e.target.files)}
               />
             </Button>
           </section>

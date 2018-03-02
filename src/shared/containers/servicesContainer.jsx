@@ -87,16 +87,14 @@ class ServicesContainer extends Component {
     this.currentSelected = null;
     this.paramFields = null;
     return true;
-  }
+  };
 
   onSelect = (selected) => {
     // WIP
     if (this.currentSelected) {
       return;
     }
-    const {
-      name, state, index, item,
-    } = selected;
+    const { name, state, index, item } = selected;
 
     let title = name;
     let parameters = {};
@@ -114,7 +112,7 @@ class ServicesContainer extends Component {
       editor = displayProviderEditor;
       couldDelete = false;
       // console.log("ws");
-      if ((state === "select" || state === "create")) {
+      if (state === "select" || state === "create") {
         if (item.provider) {
           className = "mdl-dialog-extended";
           title = item.name;
@@ -133,28 +131,36 @@ class ServicesContainer extends Component {
         title = "Add a WebService";
         const items = this.getWebServices(true);
         items.push({
-          id: `${items.length + 1}`, name: "Add plugin", icon: "add", color: "gray",
+          id: `${items.length + 1}`,
+          name: "Add plugin",
+          icon: "add",
+          color: "gray",
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><ListComponent
-            className="list-content"
-            style={{ padding: "0px" }}
-            items={items}
-            selectedItem={-1}
-            onSelect={(i) => {
-              const it = items[i];
-              // const n = it.name;
-              // console.log("WIP select Web services =", n);
-              setTimeout(() => {
-                Zrmc.closeDialog();
-                that.onSelect({
-                  name: "Web services", index: i, item: it, state: "create",
-                });
-              }, 50);
-            }}
-          />
-          </div>);
+          <div style={{ height: "280px" }}>
+            <ListComponent
+              className="list-content"
+              style={{ padding: "0px" }}
+              items={items}
+              selectedItem={-1}
+              onSelect={(i) => {
+                const it = items[i];
+                // const n = it.name;
+                // console.log("WIP select Web services =", n);
+                setTimeout(() => {
+                  Zrmc.closeDialog();
+                  that.onSelect({
+                    name: "Web services",
+                    index: i,
+                    item: it,
+                    state: "create",
+                  });
+                }, 50);
+              }}
+            />
+          </div>
+        );
       }
     } else if (name === "AI/NLU providers") {
       // WIP
@@ -171,28 +177,36 @@ class ServicesContainer extends Component {
         title = "Add an AI/NLU provider";
         const items = this.getAIProviders(true);
         items.push({
-          id: items.length + 1, name: "Add plugin", icon: "add", color: "gray",
+          id: items.length + 1,
+          name: "Add plugin",
+          icon: "add",
+          color: "gray",
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><ListComponent
-            className="list-content"
-            style={{ padding: "0px" }}
-            items={items}
-            selectedItem={-1}
-            onSelect={(i) => {
-              const it = items[i];
-              // const n = it.name;
-              // console.log("WIP select AI/NLU providers =", n);
-              setTimeout(() => {
-                Zrmc.closeDialog();
-                that.onSelect({
-                  name: "AI/NLU providers", index: i, item: it, state: "create",
-                });
-              }, 50);
-            }}
-          />
-          </div>);
+          <div style={{ height: "280px" }}>
+            <ListComponent
+              className="list-content"
+              style={{ padding: "0px" }}
+              items={items}
+              selectedItem={-1}
+              onSelect={(i) => {
+                const it = items[i];
+                // const n = it.name;
+                // console.log("WIP select AI/NLU providers =", n);
+                setTimeout(() => {
+                  Zrmc.closeDialog();
+                  that.onSelect({
+                    name: "AI/NLU providers",
+                    index: i,
+                    item: it,
+                    state: "create",
+                  });
+                }, 50);
+              }}
+            />
+          </div>
+        );
       } else {
         this.currentSelected = null;
       }
@@ -211,28 +225,36 @@ class ServicesContainer extends Component {
         title = "Add a messaging platform";
         const items = this.getMessagingProviders(true);
         items.push({
-          id: items.length + 1, name: "Add plugin", icon: "add", color: "gray",
+          id: items.length + 1,
+          name: "Add plugin",
+          icon: "add",
+          color: "gray",
         });
         const that = this;
         content = (
-          <div style={{ height: "280px" }}><ListComponent
-            className="list-content"
-            style={{ padding: "0px" }}
-            items={items}
-            selectedItem={-1}
-            onSelect={(i) => {
-              const it = items[i];
-              // const n = it.name;
-              // console.log("WIP select messaging platform =", n);
-              setTimeout(() => {
-                Zrmc.closeDialog();
-                that.onSelect({
-                  name: "Messaging platforms", index: i, item: it, state: "create",
-                });
-              }, 50);
-            }}
-          />
-          </div>);
+          <div style={{ height: "280px" }}>
+            <ListComponent
+              className="list-content"
+              style={{ padding: "0px" }}
+              items={items}
+              selectedItem={-1}
+              onSelect={(i) => {
+                const it = items[i];
+                // const n = it.name;
+                // console.log("WIP select messaging platform =", n);
+                setTimeout(() => {
+                  Zrmc.closeDialog();
+                  that.onSelect({
+                    name: "Messaging platforms",
+                    index: i,
+                    item: it,
+                    state: "create",
+                  });
+                }, 50);
+              }}
+            />
+          </div>
+        );
       } else {
         this.currentSelected = null;
       }
@@ -241,12 +263,12 @@ class ServicesContainer extends Component {
     }
 
     if (this.currentSelected) {
-      if (state === "add" && state === "create" && (!className)) {
+      if (state === "add" && state === "create" && !className) {
         if (title) {
           title = `Add ${title} entry`;
           action = "Add";
         }
-      } else if (state === "select" && (!className)) {
+      } else if (state === "select" && !className) {
         if (services) {
           parameters = services[index];
           title = `Edit ${title} entry`;
@@ -264,11 +286,20 @@ class ServicesContainer extends Component {
       }
       if (editor) {
         this.paramFields = {};
-        editor(title, action, actionDef, parameters, (input, ref) => {
-          if (this.paramFields) {
-            this.paramFields[ref] = input;
-          }
-        }, this.onEditAction, content, className);
+        editor(
+          title,
+          action,
+          actionDef,
+          parameters,
+          (input, ref) => {
+            if (this.paramFields) {
+              this.paramFields[ref] = input;
+            }
+          },
+          this.onEditAction,
+          content,
+          className,
+        );
       } else if (state === "delete" && couldDelete) {
         Zrmc.showDialog({
           header: title,
@@ -280,19 +311,28 @@ class ServicesContainer extends Component {
       }
       // console.log("WIP WebServicesContainer.onSelect", selected);
     }
-  }
+  };
 
   getWebServices(all = false) {
-    const providers = this.props.pluginsManager.getPlugins({ type: "WebServices" });
+    const providers = this.props.pluginsManager.getPlugins({
+      type: "WebServices",
+    });
     const services = [];
     services.push({
-      id: 1, name: "JSON WebService", icon: "images/robot2.svg", color: "green",
+      id: 1,
+      name: "JSON WebService",
+      icon: "images/robot2.svg",
+      color: "green",
     });
     let id = 2;
     providers.forEach((p) => {
       if (all || p.isActive()) {
         services.push({
-          id, name: p.getTitle(), icon: p.getIcon(), color: p.getColor(), provider: p,
+          id,
+          name: p.getTitle(),
+          icon: p.getIcon(),
+          color: p.getColor(),
+          provider: p,
         });
       }
       id += 1;
@@ -301,13 +341,19 @@ class ServicesContainer extends Component {
   }
 
   getMessagingProviders(all = false) {
-    const providers = this.props.pluginsManager.getPlugins({ type: "MessengerConnector" });
+    const providers = this.props.pluginsManager.getPlugins({
+      type: "MessengerConnector",
+    });
     const messagings = [];
     let id = 1;
     providers.forEach((p) => {
       if (all || p.isActive()) {
         messagings.push({
-          id, name: p.getTitle(), icon: p.getIcon(), color: p.getColor(), provider: p,
+          id,
+          name: p.getTitle(),
+          icon: p.getIcon(),
+          color: p.getColor(),
+          provider: p,
         });
       }
       id += 1;
@@ -316,13 +362,19 @@ class ServicesContainer extends Component {
   }
 
   getAIProviders(all = false) {
-    const providers = this.props.pluginsManager.getPlugins({ type: "AIProvider" });
+    const providers = this.props.pluginsManager.getPlugins({
+      type: "AIProvider",
+    });
     const ais = [];
     let id = 1;
     providers.forEach((p) => {
       if (all || p.isActive()) {
         ais.push({
-          id, name: p.getTitle(), icon: p.getIcon(), status: "start", provider: p,
+          id,
+          name: p.getTitle(),
+          icon: p.getIcon(),
+          status: "start",
+          provider: p,
         });
       }
       id += 1;
@@ -365,13 +417,25 @@ class ServicesContainer extends Component {
     return (
       <div style={divCellStyle}>
         <Cell className="mdl-color--white" span={12}>
-          <ServicesList name="Messaging platforms" items={messagings} onSelect={this.onSelect} />
+          <ServicesList
+            name="Messaging platforms"
+            items={messagings}
+            onSelect={this.onSelect}
+          />
         </Cell>
         <Cell className="mdl-color--white" span={12}>
-          <ServicesList name="AI/NLU providers" items={ais} onSelect={this.onSelect} />
+          <ServicesList
+            name="AI/NLU providers"
+            items={ais}
+            onSelect={this.onSelect}
+          />
         </Cell>
         <Cell className="mdl-color--white" span={12}>
-          <ServicesList name="Web services" items={webservices} onSelect={this.onSelect} />
+          <ServicesList
+            name="Web services"
+            items={webservices}
+            onSelect={this.onSelect}
+          />
         </Cell>
       </div>
     );
@@ -401,7 +465,7 @@ const mapStateToProps = (state) => {
   return { middlewares, selectedBotId, isSignedIn };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   apiGetMiddlewaresRequest: (botId) => {
     dispatch(apiGetMiddlewaresRequest(botId));
   },

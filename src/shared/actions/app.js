@@ -14,7 +14,6 @@ import {
   APP_UPDATEPUBLISHER,
 } from "./constants";
 
-
 export function appSelectIntent(selectedBotId, selectedIntentIndex) {
   return { type: APP_SELECTINTENT, selectedBotId, selectedIntentIndex };
 }
@@ -27,9 +26,18 @@ export function appUpdateIntent(selectedBotId, intent) {
   return { type: APP_UPDATEINTENT, selectedBotId, intent };
 }
 
-export function appSetIntentAction(actionContainer, actionType, actionValue, selectedAction) {
+export function appSetIntentAction(
+  actionContainer,
+  actionType,
+  actionValue,
+  selectedAction,
+) {
   return {
-    type: APP_SETINTENTACTION, actionContainer, actionType, actionValue, selectedAction,
+    type: APP_SETINTENTACTION,
+    actionContainer,
+    actionType,
+    actionValue,
+    selectedAction,
   };
 }
 

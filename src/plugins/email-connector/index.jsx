@@ -51,6 +51,6 @@ export default class EmailPlugin {
   renderSettings(instance, onAction = null, publicUrl = null) {
     this.params.onAction = onAction;
     this.params.publicUrl = publicUrl;
-    return (<div>TODO</div>);
+    return <div>TODO</div>;
   }
 }

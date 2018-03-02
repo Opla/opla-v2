@@ -39,7 +39,7 @@ describe("containers/Dashboard", () => {
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
         metrics={metrics}
-      />
+      />,
     );
 
     const tree = component.toJSON();
@@ -55,7 +55,7 @@ describe("containers/Dashboard", () => {
         appSetTitle={jest.fn()}
         fetchMetrics={jest.fn()}
         isSignedIn={false}
-      />
+      />,
     );
 
     const tree = component.toJSON();
@@ -69,7 +69,7 @@ describe("containers/Dashboard", () => {
         fetchMetrics={jest.fn()}
         isSignedIn
         isLoading
-      />
+      />,
     );
 
     const tree = component.toJSON();
@@ -85,7 +85,7 @@ describe("containers/Dashboard", () => {
         fetchMetrics={jest.fn()}
         isSignedIn
         metrics={metrics}
-      />
+      />,
     );
 
     const tree = component.toJSON();

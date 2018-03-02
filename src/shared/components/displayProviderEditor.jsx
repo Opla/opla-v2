@@ -23,7 +23,11 @@ const displayProviderEditor = (
   }
 
   Zrmc.showDialog({
-    header: title, body: content, actions, onAction: onEditAction, className,
+    header: title,
+    body: content,
+    actions,
+    onAction: onEditAction,
+    className,
   });
 };
 

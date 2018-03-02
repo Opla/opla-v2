@@ -9,7 +9,6 @@ import auth from "zoapp-front/sagas/auth";
 
 import api from "./api";
 
-
 function takeAll(subRoot) {
   const takeList = [];
 

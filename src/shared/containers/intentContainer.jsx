@@ -21,7 +21,7 @@ import {
 class IntentContainer extends Component {
   onChangeAction = (/* actionText */) => {
     // console.log("IntentContainer.onChangeAction =", actionText);
-  }
+  };
 
   onEditAction = (dialog, editAction) => {
     if (editAction === "Change" || editAction === "Add") {
@@ -38,13 +38,16 @@ class IntentContainer extends Component {
         if (!value || value.length === 0) {
           value = null;
         }
-        if (name === null && ((!intent.output) || intent.output.length === 0)) {
+        if (name === null && (!intent.output || intent.output.length === 0)) {
           actionValue = text;
           actionType = null;
         } else if (name && text.length > 0) {
           const type = "item";
           actionValue = {
-            name, value, text, type,
+            name,
+            value,
+            text,
+            type,
           };
         }
       } else {
@@ -52,16 +55,21 @@ class IntentContainer extends Component {
       }
       /* console.log("WIP",
       `IntentContainer.onEditAction :${actionValue} / ${this.selectedAction}`); */
-      if ((!actionValue) || actionValue === "") {
+      if (!actionValue || actionValue === "") {
         return false;
       }
       this.props.appSetIntentAction(
         this.actionContainer,
-        actionType, actionValue, this.selectedAction,
+        actionType,
+        actionValue,
+        this.selectedAction,
       );
     } else if (editAction === "Delete") {
       // console.log("WIP", `IntentContainer.onDeleteAction :${this.selectedAction}`);
-      this.props.appDeleteIntentAction(this.actionContainer, this.selectedAction);
+      this.props.appDeleteIntentAction(
+        this.actionContainer,
+        this.selectedAction,
+      );
     } else if (editAction === "Topic") {
       // console.log("WIP", "IntentContainer.onTopic ");
       const topic = this.actionField.inputRef.value.trim();
@@ -78,7 +86,7 @@ class IntentContainer extends Component {
     this.actionContainer = undefined;
     this.actionType = undefined;
     return true;
-  }
+  };
 
   handleSaveIntent = () => {
     // console.log("WIP", "IntentContainer.handleSaveIntent");
@@ -92,11 +100,9 @@ class IntentContainer extends Component {
         // console.log("WIP", "IntentContainer.handleSaveIntent : intent already saved");
       }
     }
-  }
+  };
 
-  handleActions = ({
-    name, type, state, index,
-  }) => {
+  handleActions = ({ name, type, state, index }) => {
     if (this.actionContainer) {
       return;
     }
@@ -148,13 +154,25 @@ class IntentContainer extends Component {
     }
     if (editor) {
       const isInput = name === "input";
-      displayActionEditor(title, type, action, actionDef, parameters, (input, ref = null) => {
-        if (ref === "fieldParamName") {
-          this.paramNameField = input;
-        } else if (ref === "fieldParamValue") {
-          this.paramValueField = input;
-        } else { this.actionField = input; }
-      }, this.onEditAction, this.onChangeAction, isInput);
+      displayActionEditor(
+        title,
+        type,
+        action,
+        actionDef,
+        parameters,
+        (input, ref = null) => {
+          if (ref === "fieldParamName") {
+            this.paramNameField = input;
+          } else if (ref === "fieldParamValue") {
+            this.paramValueField = input;
+          } else {
+            this.actionField = input;
+          }
+        },
+        this.onEditAction,
+        this.onChangeAction,
+        isInput,
+      );
     } else {
       Zrmc.showDialog({
         header: "Action",
@@ -163,14 +181,19 @@ class IntentContainer extends Component {
         onAction: this.onEditAction,
       });
     }
-  }
+  };
 
   render() {
     const intent = this.props.selectedIntent;
     let name = "";
     if (intent) {
       const style = intent.notSaved ? {} : { display: "none" };
-      name = <span><span className="gray_dot" style={style} />{intent.name}</span>;
+      name = (
+        <span>
+          <span className="gray_dot" style={style} />
+          {intent.name}
+        </span>
+      );
       return (
         <div>
           <SubToolbar
@@ -210,24 +233,40 @@ IntentContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const selectedIntentIndex = state.app.selectedIntentIndex ? state.app.selectedIntentIndex : 0;
+  const selectedIntentIndex = state.app.selectedIntentIndex
+    ? state.app.selectedIntentIndex
+    : 0;
   let { selectedIntent } = state.app;
   if (!selectedIntent) {
-    selectedIntent = state.app.intents ? state.app.intents[selectedIntentIndex] : null;
+    selectedIntent = state.app.intents
+      ? state.app.intents[selectedIntentIndex]
+      : null;
   }
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   return { selectedIntent, selectedBotId };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   apiSendIntentRequest: (botId, intent) => {
     dispatch(apiSendIntentRequest(botId, intent));
   },
   appUpdateIntent: (botId, intent) => {
     dispatch(appUpdateIntent(botId, intent));
   },
-  appSetIntentAction: (actionContainer, actionType, actionValue, selectedAction) => {
-    dispatch(appSetIntentAction(actionContainer, actionType, actionValue, selectedAction));
+  appSetIntentAction: (
+    actionContainer,
+    actionType,
+    actionValue,
+    selectedAction,
+  ) => {
+    dispatch(
+      appSetIntentAction(
+        actionContainer,
+        actionType,
+        actionValue,
+        selectedAction,
+      ),
+    );
   },
   appDeleteIntentAction: (actionContainer, selectedAction) => {
     dispatch(appDeleteIntentAction(actionContainer, selectedAction));

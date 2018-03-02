@@ -53,7 +53,7 @@ export default class ExternalAppPlugin {
   onAction = (action) => {
     this.action = action;
     // console.log("onAction=", action);
-  }
+  };
 
   renderSettings(instance, onAction = null, publicUrl = null) {
     let oa = onAction;
@@ -62,10 +62,10 @@ export default class ExternalAppPlugin {
     }
     this.params.onAction = oa;
     this.params.publicUrl = publicUrl;
-    return (<AppSettings instance={instance} onAction={oa} />);
+    return <AppSettings instance={instance} onAction={oa} />;
   }
 
   renderTemplate() {
-    return (<AppTemplate onAction={this.onAction} />);
+    return <AppTemplate onAction={this.onAction} />;
   }
 }

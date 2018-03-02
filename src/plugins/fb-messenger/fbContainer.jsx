@@ -16,12 +16,13 @@ export default class FBContainer extends Component {
       fbInit: false,
       isStarted: false,
       isConnected: false,
-      message: "You need to connect your Facebook account. Or you could set a manual connection.",
+      message:
+        "You need to connect your Facebook account. Or you could set a manual connection.",
     };
   }
 
   componentDidMount() {
-    window.fbAsyncInit = (() => {
+    window.fbAsyncInit = () => {
       window.FB.init({
         appId: this.props.appId,
         cookie: true,
@@ -31,13 +32,16 @@ export default class FBContainer extends Component {
       window.FB.AppEvents.logPageView();
 
       window.FB.Event.subscribe("auth.logout", this.onLogout.bind(this));
-      window.FB.Event.subscribe("auth.statusChange", this.onStatusChange.bind(this));
+      window.FB.Event.subscribe(
+        "auth.statusChange",
+        this.onStatusChange.bind(this),
+      );
       this.setState({ fbInit: true });
       this.start();
-    });
+    };
 
     // Load the SDK asynchronously
-    (((d, s, id) => {
+    ((d, s, id) => {
       let js = null;
       const fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
@@ -45,10 +49,11 @@ export default class FBContainer extends Component {
         this.setState({ fbInit: true });
         return;
       }
-      js = d.createElement(s); js.id = id;
+      js = d.createElement(s);
+      js.id = id;
       js.src = "//connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk"));
+    })(document, "script", "facebook-jssdk");
   }
 
   onStatusChange(response) {
@@ -115,14 +120,17 @@ export default class FBContainer extends Component {
 
   login() {
     const that = this;
-    window.FB.login((response) => {
-      if (response.authResponse) {
-        // console.log("Welcome! Fetching your information.... ");
-        that.connected();
-      } else {
-        // console.log("User cancelled login or did not fully authorize.");
-      }
-    }, { scope: "public_profile,manage_pages" });
+    window.FB.login(
+      (response) => {
+        if (response.authResponse) {
+          // console.log("Welcome! Fetching your information.... ");
+          that.connected();
+        } else {
+          // console.log("User cancelled login or did not fully authorize.");
+        }
+      },
+      { scope: "public_profile,manage_pages" },
+    );
   }
 
   logout() {
@@ -140,17 +148,18 @@ export default class FBContainer extends Component {
   renderLogin(visibility) {
     const action = this.state.isConnected ? "Logout" : "Login";
     return (
-      <div style={{
-        visibility,
-        width: "320px",
-        height: "128px",
-        margin: "auto",
-        position: "absolute",
-        left: "0px",
-        right: "0px",
-        bottom: "0px",
-        top: "0px",
-      }}
+      <div
+        style={{
+          visibility,
+          width: "320px",
+          height: "128px",
+          margin: "auto",
+          position: "absolute",
+          left: "0px",
+          right: "0px",
+          bottom: "0px",
+          top: "0px",
+        }}
       >
         <div
           style={{
@@ -171,11 +180,20 @@ export default class FBContainer extends Component {
             this.onButtonAction(action);
           }}
         >
-          <div style={{
-            width: "16px", height: "16px", paddingTop: "3px", paddingLeft: "6px", float: "left",
-          }}
+          <div
+            style={{
+              width: "16px",
+              height: "16px",
+              paddingTop: "3px",
+              paddingLeft: "6px",
+              float: "left",
+            }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" color="#ffffff">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 216 216"
+              color="#ffffff"
+            >
               <path
                 fill="#ffffff"
                 d="M204.1 0H11.9C5.3 0 0 5.3 0 11.9v192.2c0 6.6 5.3 11.9 11.9
@@ -188,7 +206,15 @@ export default class FBContainer extends Component {
           </div>
           <div style={{ paddingTop: "4px", float: "center" }}>{action}</div>
         </div>
-        <div style={{ marginTop: "16px", marginBottom: "16px", textAlign: "center" }}>{this.state.message}</div>
+        <div
+          style={{
+            marginTop: "16px",
+            marginBottom: "16px",
+            textAlign: "center",
+          }}
+        >
+          {this.state.message}
+        </div>
         <Button
           style={{
             width: "200px",
@@ -198,24 +224,27 @@ export default class FBContainer extends Component {
             event.stopPropagation();
             this.onButtonAction("Manual");
           }}
-        >Manual connection
+        >
+          Manual connection
         </Button>
-      </div>);
+      </div>
+    );
   }
 
   renderConnect(visibility) {
     return (
-      <div style={{
-        visibility,
-        width: "320px",
-        height: "128px",
-        margin: "auto",
-        position: "absolute",
-        left: "0px",
-        right: "0px",
-        bottom: "0px",
-        top: "0px",
-      }}
+      <div
+        style={{
+          visibility,
+          width: "320px",
+          height: "128px",
+          margin: "auto",
+          position: "absolute",
+          left: "0px",
+          right: "0px",
+          bottom: "0px",
+          top: "0px",
+        }}
       >
         <Textfield
           defaultValue=""
@@ -224,7 +253,9 @@ export default class FBContainer extends Component {
           floatingLabel
           error=""
           style={{ width: "320px" }}
-          ref={(input) => { this.textField1 = input; }}
+          ref={(input) => {
+            this.textField1 = input;
+          }}
         />
         <Textfield
           defaultValue=""
@@ -233,9 +264,12 @@ export default class FBContainer extends Component {
           floatingLabel
           error=""
           style={{ width: "320px" }}
-          ref={(input) => { this.textField2 = input; }}
+          ref={(input) => {
+            this.textField2 = input;
+          }}
         />
-      </div>);
+      </div>
+    );
   }
 
   render() {
@@ -247,19 +281,22 @@ export default class FBContainer extends Component {
       return this.renderConnect(visibility);
     }
     return (
-      <div style={{
-        visibility,
-        width: "320px",
-        height: "128px",
-        margin: "auto",
-        position: "absolute",
-        left: "0px",
-        right: "0px",
-        bottom: "0px",
-        top: "0px",
-      }}
-      >{selectedStep} TODO
-      </div>);
+      <div
+        style={{
+          visibility,
+          width: "320px",
+          height: "128px",
+          margin: "auto",
+          position: "absolute",
+          left: "0px",
+          right: "0px",
+          bottom: "0px",
+          top: "0px",
+        }}
+      >
+        {selectedStep} TODO
+      </div>
+    );
   }
 }
 

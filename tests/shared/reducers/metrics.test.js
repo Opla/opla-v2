@@ -14,7 +14,7 @@ describe("reducers/metrics", () => {
   });
 
   it("stores metrics", () => {
-    const metrics = { some: 'metrics' };
+    const metrics = { some: "metrics" };
 
     const state = reducer(undefined, actions.apiGetMetricsSuccess(metrics));
     expect(state).toEqual({
@@ -24,7 +24,7 @@ describe("reducers/metrics", () => {
   });
 
   it("resets the state on fetch request", () => {
-    const metrics = { some: 'metrics' };
+    const metrics = { some: "metrics" };
 
     const prevState = reducer(undefined, actions.apiGetMetricsSuccess(metrics));
     expect(prevState).toEqual({
@@ -39,7 +39,7 @@ describe("reducers/metrics", () => {
     });
   });
 
-  it("resets the state on fetch request", () => {
+  it("resets the state on fetch failure", () => {
     const prevState = reducer(undefined, actions.apiGetMetricsRequest());
     expect(prevState).toEqual({
       ...initialState,

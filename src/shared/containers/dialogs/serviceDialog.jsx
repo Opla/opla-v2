@@ -6,7 +6,13 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Zrmc, { Button, DialogHeader, DialogBody, DialogFooter, Dialog } from "zrmc";
+import Zrmc, {
+  Button,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  Dialog,
+} from "zrmc";
 import { connect } from "react-redux";
 import { apiSetMiddlewareRequest } from "../../actions/api";
 import PluginsManager from "../../utils/pluginsManager";
@@ -40,13 +46,13 @@ class ServiceDialog extends Component {
     if (action === "save" && this.props.onAction) {
       this.props.onAction(title, service, instance);
     }
-  }
+  };
 
   handleOpenDialog = () => {
     this.setState({
       openDialog: true,
     });
-  }
+  };
 
   handleCloseDialog = () => {
     this.setState({
@@ -55,9 +61,11 @@ class ServiceDialog extends Component {
     if (this.props.onClosed instanceof Function) {
       this.props.onClosed();
     } else {
-      setTimeout(() => { Zrmc.closeDialog(); }, 300);
+      setTimeout(() => {
+        Zrmc.closeDialog();
+      }, 300);
     }
-  }
+  };
 
   updateMiddleware() {
     const origin = this.props.selectedBotId;
@@ -76,25 +84,41 @@ class ServiceDialog extends Component {
     const title = service.getTitle();
     let content = null;
     if (instance) {
-      content = service.renderSettings(instance, this.onAction, this.props.publicUrl);
+      content = service.renderSettings(
+        instance,
+        this.onAction,
+        this.props.publicUrl,
+      );
     } else {
       content = <div>Loading</div>;
     }
     const style = { width: "550px" };
     return (
-      <Dialog open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
+      <Dialog
+        open={this.state.openDialog}
+        style={style}
+        onClose={this.handleCloseDialog}
+      >
         <DialogHeader>{title}</DialogHeader>
         <DialogBody>{content}</DialogBody>
         <DialogFooter>
           <Button
             type="button"
-            onClick={(e) => { e.preventDefault(); this.onAction("save"); }}
-          >Save
+            onClick={(e) => {
+              e.preventDefault();
+              this.onAction("save");
+            }}
+          >
+            Save
           </Button>
           <Button
             type="button"
-            onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
-          >Cancel
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleCloseDialog();
+            }}
+          >
+            Cancel
           </Button>
         </DialogFooter>
       </Dialog>
@@ -130,11 +154,13 @@ const mapStateToProps = (state) => {
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const publicUrl = state.app ? state.app.admin.publicUrl : null;
   return {
-    lastMiddleware, selectedBotId, publicUrl,
+    lastMiddleware,
+    selectedBotId,
+    publicUrl,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   apiSetMiddlewareRequest: (botId, middleware) => {
     dispatch(apiSetMiddlewareRequest(botId, middleware));
   },

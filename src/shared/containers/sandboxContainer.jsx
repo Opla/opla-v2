@@ -12,11 +12,13 @@ import { SubToolbar } from "zoapp-ui";
 
 import MessengerBox from "../components/messengerBox";
 import {
-  apiGetSandboxMessagesRequest, apiSubscribeSandboxMessages,
-  apiUnsubscribeSandboxMessages, apiSendSandboxMessageRequest,
-  apiGetSandboxContextRequest, apiSandboxResetRequest,
+  apiGetSandboxMessagesRequest,
+  apiSubscribeSandboxMessages,
+  apiUnsubscribeSandboxMessages,
+  apiSendSandboxMessageRequest,
+  apiGetSandboxContextRequest,
+  apiSandboxResetRequest,
 } from "../actions/api";
-
 
 class SandboxContainer extends Component {
   constructor(props) {
@@ -41,7 +43,7 @@ class SandboxContainer extends Component {
       this.props.apiSandboxResetRequest(this.props.selectedBotId);
     }
     return true;
-  }
+  };
 
   subscribeSandboxMessages() {
     if (this.props.selectedBot && this.state.needToSubscribe) {
@@ -52,7 +54,7 @@ class SandboxContainer extends Component {
 
   handleMenu = (/* action */) => {
     Zrmc.showDialog({ header: "TODO", body: "SandboxContainer.handleMenu" });
-  }
+  };
 
   handleReset = () => {
     Zrmc.showDialog({
@@ -61,7 +63,7 @@ class SandboxContainer extends Component {
       actions: [{ name: "Reset" }, { name: "Cancel" }],
       onAction: this.onReset,
     });
-  }
+  };
 
   handleSend = (messageBody) => {
     const body = messageBody.trim();
@@ -69,40 +71,39 @@ class SandboxContainer extends Component {
       const message = { message: body, timestamp: Date.now() };
       this.props.apiSendSandboxMessageRequest(
         this.props.selectedBotId,
-        this.props.conversation.id, message,
+        this.props.conversation.id,
+        message,
       );
       return true;
     }
     // console.log("Error", "SandboxContainer.handleSend", this.props.conversation, body.length);
     return false;
-  }
+  };
 
-  handleDemo = () => {
+  handleDemo = () => {};
 
-  }
+  handleShare = () => {};
 
-  handleShare = () => {
-
-  }
-
-  handleSettings = () => {
-
-  }
+  handleSettings = () => {};
 
   handleAction = (action, defaultValue, data) => {
     this.props.onAction(action, defaultValue, data);
-  }
+  };
 
   renderMessenger(messages, users) {
-    const welcome = this.props.selectedBot.welcome || "Welcome fellow user! Here you could test your assistant, before you publish it.";
-    return (<MessengerBox
-      messages={messages}
-      users={users}
-      onSendMessage={this.handleSend}
-      onAction={this.handleAction}
-      welcome={welcome}
-      isSelectedIntent={this.props.isSelectedIntent}
-    />);
+    const welcome =
+      this.props.selectedBot.welcome ||
+      "Welcome fellow user! Here you could test your assistant, before you publish it.";
+    return (
+      <MessengerBox
+        messages={messages}
+        users={users}
+        onSendMessage={this.handleSend}
+        onAction={this.handleAction}
+        welcome={welcome}
+        isSelectedIntent={this.props.isSelectedIntent}
+      />
+    );
   }
 
   render() {
@@ -115,27 +116,39 @@ class SandboxContainer extends Component {
     }
     const users = {};
     if (this.props.userProfile) {
-      const userName = (this.props.userProfile.username).toLowerCase();
+      const userName = this.props.userProfile.username.toLowerCase();
       users[userName] = {
-        id: this.props.selectedBot.id, name: userName, dest: "you", icon: this.props.userProfile.avatar,
+        id: this.props.selectedBot.id,
+        name: userName,
+        dest: "you",
+        icon: this.props.userProfile.avatar,
       };
     } else {
       users.anonymous = {
-        id: "1", name: "anonymous", dest: "you", icon: "default",
+        id: "1",
+        name: "anonymous",
+        dest: "you",
+        icon: "default",
       };
     }
     if (this.props.selectedBot) {
       const bot = this.props.selectedBot;
-      const botName = (`bot_${bot.name}_${bot.id}`).toLowerCase();
+      const botName = `bot_${bot.name}_${bot.id}`.toLowerCase();
       users[botName] = {
-        id: this.props.selectedBot.id, name: botName, dest: "from", icon: botName,
+        id: this.props.selectedBot.id,
+        name: botName,
+        dest: "from",
+        icon: botName,
       };
       if (botName !== "opla") {
         users.opla = users[botName];
       }
     } else {
       users.bot = {
-        id: "2", name: "bot", dest: "from", icon: "bot",
+        id: "2",
+        name: "bot",
+        dest: "from",
+        icon: "bot",
       };
     }
     return (
@@ -157,7 +170,8 @@ class SandboxContainer extends Component {
           }}
         />
         {this.renderMessenger(messages, users)}
-      </div>);
+      </div>
+    );
   }
 }
 
@@ -172,8 +186,14 @@ SandboxContainer.defaultProps = {
 SandboxContainer.propTypes = {
   conversation: PropTypes.shape({ id: PropTypes.string }),
   selectedBotId: PropTypes.string,
-  selectedBot: PropTypes.shape({ id: PropTypes.string, welcome: PropTypes.string }),
-  userProfile: PropTypes.shape({ username: PropTypes.string, avatar: PropTypes.string }),
+  selectedBot: PropTypes.shape({
+    id: PropTypes.string,
+    welcome: PropTypes.string,
+  }),
+  userProfile: PropTypes.shape({
+    username: PropTypes.string,
+    avatar: PropTypes.string,
+  }),
   isSelectedIntent: PropTypes.bool,
   onAction: PropTypes.func.isRequired,
   apiSubscribeSandboxMessages: PropTypes.func.isRequired,
@@ -191,11 +211,17 @@ const mapStateToProps = (state) => {
   let conversation = null;
   /* const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading; */
-  const isSelectedIntent = !!(state.app.intents &&
-    state.app.intents.length > 0 && Number.isInteger(state.app.selectedIntentIndex));
+  const isSelectedIntent = !!(
+    state.app.intents &&
+    state.app.intents.length > 0 &&
+    Number.isInteger(state.app.selectedIntentIndex)
+  );
 
   if (sandbox && sandbox.conversations) {
-    conversation = sandbox.conversations.length > 0 ? sandbox.conversations[0] : { messages: [] };
+    conversation =
+      sandbox.conversations.length > 0
+        ? sandbox.conversations[0]
+        : { messages: [] };
   }
   return {
     sandbox,
@@ -207,7 +233,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   apiGetSandboxMessagesRequest: (botId) => {
     dispatch(apiGetSandboxMessagesRequest(botId));
   },

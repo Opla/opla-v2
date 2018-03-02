@@ -19,7 +19,7 @@ describe("components/TemplatesList", () => {
         items={items}
         selectedItem={0}
         onSelect={jest.fn()}
-      />
+      />,
     );
 
     const tree = component.toJSON();
@@ -27,16 +27,10 @@ describe("components/TemplatesList", () => {
   });
 
   it("renders some items", () => {
-    const items = [
-      { id: "template-1", name: "template 1" },
-    ];
+    const items = [{ id: "template-1", name: "template 1" }];
 
     const component = renderer.create(
-      <TemplatesList
-        items={items}
-        selectedItem={0}
-        onSelect={jest.fn()}
-      />
+      <TemplatesList items={items} selectedItem={0} onSelect={jest.fn()} />,
     );
 
     const tree = component.toJSON();
@@ -50,11 +44,7 @@ describe("components/TemplatesList", () => {
     ];
 
     const component = renderer.create(
-      <TemplatesList
-        items={items}
-        selectedItem={1}
-        onSelect={jest.fn()}
-      />
+      <TemplatesList items={items} selectedItem={1} onSelect={jest.fn()} />,
     );
 
     const tree = component.toJSON();
@@ -62,16 +52,10 @@ describe("components/TemplatesList", () => {
   });
 
   it("creates a form for the 'Import' special item", () => {
-    const items = [
-      { id: "import", name: "Import" },
-    ];
+    const items = [{ id: "import", name: "Import" }];
 
     const component = renderer.create(
-      <TemplatesList
-        items={items}
-        selectedItem={0}
-        onSelect={jest.fn()}
-      />
+      <TemplatesList items={items} selectedItem={0} onSelect={jest.fn()} />,
     );
 
     const tree = component.toJSON();

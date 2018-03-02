@@ -35,7 +35,11 @@ const cellStyle = {
 };
 
 const TemplatesList = ({
-  items, selectedItem, onSelect, onImport, acceptImport,
+  items,
+  selectedItem,
+  onSelect,
+  onImport,
+  acceptImport,
 }) => (
   <Grid>
     <Inner>
@@ -56,12 +60,12 @@ const TemplatesList = ({
             <div
               role="presentation"
               style={anchorStyle}
-              onClick={() => { onSelect(index); }}
+              onClick={() => {
+                onSelect(index);
+              }}
             >
               <div style={infoStyleC}>
-                <div style={cellStyle}>
-                  {item.name}
-                </div>
+                <div style={cellStyle}>{item.name}</div>
                 <div style={cellStyle}>
                   {item.name === "Import" ? (
                     <form style={{ width: "100%" }}>
@@ -90,9 +94,11 @@ TemplatesList.defaultProps = {
 };
 
 TemplatesList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-  })).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  ).isRequired,
   selectedItem: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
   onImport: PropTypes.func,

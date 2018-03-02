@@ -15,7 +15,8 @@ class MessengerBox extends Component {
 
   componentWillUpdate() {
     const node = this.messengerContent;
-    this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+    this.shouldScrollBottom =
+      node.scrollTop + node.offsetHeight === node.scrollHeight;
   }
 
   componentDidUpdate() {
@@ -27,7 +28,11 @@ class MessengerBox extends Component {
 
   render() {
     const {
-      messages, users, onSendMessage, welcome, inputValue = "",
+      messages,
+      users,
+      onSendMessage,
+      welcome,
+      inputValue = "",
     } = this.props;
     let sorted = null;
     if (messages && Array.isArray(messages)) {
@@ -52,7 +57,9 @@ class MessengerBox extends Component {
       <div className="mdl-cell mdl-cell--4-col messenger-box-test">
         <div className="messenger-box">
           <div
-            ref={(div) => { this.messengerContent = div; }}
+            ref={(div) => {
+              this.messengerContent = div;
+            }}
             className="messenger-content messenger-content-test bounceOutRight bounceInRight"
           >
             {sorted.map((message, index) => {
@@ -62,24 +69,42 @@ class MessengerBox extends Component {
                   <div>
                     <Button
                       raised
-                      onClick={(e) => { e.preventDefault(); this.props.onAction("createIntent", inputText, message); }}
-                    >create intent
+                      onClick={(e) => {
+                        e.preventDefault();
+                        this.props.onAction("createIntent", inputText, message);
+                      }}
+                    >
+                      create intent
                     </Button>
-                  </div>);
+                  </div>
+                );
                 if (this.props.isSelectedIntent) {
                   buttons = (
                     <div>
                       <Button
                         raised
-                        onClick={(e) => { e.preventDefault(); this.props.onAction("createIntent", inputText, message); }}
-                      >create intent
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.props.onAction(
+                            "createIntent",
+                            inputText,
+                            message,
+                          );
+                        }}
+                      >
+                        create intent
                       </Button>
                       <Button
                         raised
-                        onClick={(e) => { e.preventDefault(); this.props.onAction("addInput", inputText); }}
-                      >add input
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.props.onAction("addInput", inputText);
+                        }}
+                      >
+                        add input
                       </Button>
-                    </div>);
+                    </div>
+                  );
                 }
                 return (
                   <div key={message.id} className="message_error">
@@ -88,7 +113,8 @@ class MessengerBox extends Component {
                       I can&quot;t associate an intent with previous input.
                     </div>
                     {buttons}
-                  </div>);
+                  </div>
+                );
               } else if (message.welcome) {
                 const key = `wl_${index}`;
                 return (
@@ -96,10 +122,15 @@ class MessengerBox extends Component {
                     key={key}
                     role="presentation"
                     className="message_welcome"
-                    onKeyUp={() => { }}
-                    onClick={(e) => { e.preventDefault(); this.props.onAction("welcomeMessage", message.body); }}
-                  >{message.body}
-                  </div>);
+                    onKeyUp={() => {}}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.props.onAction("welcomeMessage", message.body);
+                    }}
+                  >
+                    {message.body}
+                  </div>
+                );
               }
               const from = message.from.toLowerCase();
               const user = users[from];
@@ -116,7 +147,9 @@ class MessengerBox extends Component {
                   <div className="circle-wrapper animated bounceIn" />
                   <div
                     className="text-wrapper animated fadeIn"
-                    dangerouslySetInnerHTML={MessengerBox.createMessage(message)}
+                    dangerouslySetInnerHTML={MessengerBox.createMessage(
+                      message,
+                    )}
                   />
                 </div>
               );
@@ -125,15 +158,29 @@ class MessengerBox extends Component {
           </div>
         </div>
         <div className="messenger-box__actions">
-          <Icon className="mdl-button-left" onClick={(e) => { e.preventDefault(); }} name="add" />
-          <Icon className="mdl-button-left" onClick={(e) => { e.preventDefault(); }} name="mic" />
+          <Icon
+            className="mdl-button-left"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            name="add"
+          />
+          <Icon
+            className="mdl-button-left"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            name="mic"
+          />
           <TextField
             type="text"
             id="chat-input-field"
             label="Your message"
             style={{ width: "440px", height: "24px", margin: "6px 8px" }}
             noFloatingLabel
-            ref={(input) => { chatInput = input; }}
+            ref={(input) => {
+              chatInput = input;
+            }}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
                 if (onSendMessage && onSendMessage(chatInput.inputRef.value)) {

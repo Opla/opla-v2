@@ -32,7 +32,7 @@ class TunnelBox extends Component {
     // TODO check if params are the same than props
     this.setState({ params, advanced });
     this.props.onChange(params);
-  }
+  };
 
   render() {
     const params = this.state.params || this.props.params;
@@ -40,7 +40,7 @@ class TunnelBox extends Component {
     const items = [{ id: 0, name: none }];
     if (params.providers) {
       params.providers.forEach((provider, index) => {
-        items.push({ id: (index + 1), name: provider.name });
+        items.push({ id: index + 1, name: provider.name });
       });
     }
     const active = params.active || {};
@@ -53,51 +53,80 @@ class TunnelBox extends Component {
     } else if (value) {
       advanced = (
         <Button
-          onClick={(e) => { e.preventDefault(); this.setState({ advanced: true }); }}
-        >Set parameters
-        </Button>);
+          onClick={(e) => {
+            e.preventDefault();
+            this.setState({ advanced: true });
+          }}
+        >
+          Set parameters
+        </Button>
+      );
     }
     return (
       <div style={{ width: "512px", margin: "auto" }}>
         <div>
           <Select
             label="Tunnel provider"
-            onChange={(e) => { this.onChange("provider", e.target.value); }}
-            ref={(input) => { this.fields.provider = input; }}
+            onChange={(e) => {
+              this.onChange("provider", e.target.value);
+            }}
+            ref={(input) => {
+              this.fields.provider = input;
+            }}
             value={value}
             style={{ width: "400px" }}
           >
-            {items.map(item => (<ListItem key={item.id} value={item.name}>{item.name}</ListItem>))}
+            {items.map((item) => (
+              <ListItem key={item.id} value={item.name}>
+                {item.name}
+              </ListItem>
+            ))}
           </Select>
         </div>
         {advanced}
         <form style={{ display: formDisplay }}>
-          <div><TextField
-            onChange={(e) => { this.onChange("subdomain", e.target.value); }}
-            label="Subdomain"
-            style={{ width: "400px" }}
-            value={active.subdomain}
-            ref={(input) => { this.fields.subdomain = input; }}
-          />
+          <div>
+            <TextField
+              onChange={(e) => {
+                this.onChange("subdomain", e.target.value);
+              }}
+              label="Subdomain"
+              style={{ width: "400px" }}
+              value={active.subdomain}
+              ref={(input) => {
+                this.fields.subdomain = input;
+              }}
+            />
           </div>
-          <div><TextField
-            onChange={(e) => { this.onChange("host", e.target.value); }}
-            label="Host"
-            style={{ width: "400px" }}
-            value={active.host}
-            ref={(input) => { this.fields.host = input; }}
-          />
+          <div>
+            <TextField
+              onChange={(e) => {
+                this.onChange("host", e.target.value);
+              }}
+              label="Host"
+              style={{ width: "400px" }}
+              value={active.host}
+              ref={(input) => {
+                this.fields.host = input;
+              }}
+            />
           </div>
-          <div><TextField
-            onChange={(e) => { this.onChange("localhost", e.target.value); }}
-            label="Localhost"
-            style={{ width: "400px" }}
-            value={active.localhost}
-            ref={(input) => { this.fields.localhost = input; }}
-          />
+          <div>
+            <TextField
+              onChange={(e) => {
+                this.onChange("localhost", e.target.value);
+              }}
+              label="Localhost"
+              style={{ width: "400px" }}
+              value={active.localhost}
+              ref={(input) => {
+                this.fields.localhost = input;
+              }}
+            />
           </div>
         </form>
-      </div>);
+      </div>
+    );
   }
 }
 
