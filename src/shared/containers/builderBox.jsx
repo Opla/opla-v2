@@ -13,7 +13,7 @@ import PublishDialog from "./dialogs/publishDialog";
 class BuilderBox extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {};
   }
 
   onAction = (action) => {
@@ -22,12 +22,14 @@ class BuilderBox extends Component {
       return false;
     }
     return true;
-  }
+  };
 
   handleOpenPublishDialog = () => {
-    const dialog = <PublishDialog open onAction={this.onAction} store={this.props.store} />;
+    const dialog = (
+      <PublishDialog open onAction={this.onAction} store={this.props.store} />
+    );
     Zrmc.showDialog(dialog);
-  }
+  };
 
   render() {
     if (this.props.isSignedIn) {
@@ -36,13 +38,17 @@ class BuilderBox extends Component {
         <div style={style}>
           <Button
             raised
-            onClick={(e) => { e.preventDefault(); this.handleOpenPublishDialog(); }}
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleOpenPublishDialog();
+            }}
           >
-          Publish
+            Publish
           </Button>
-        </div>);
+        </div>
+      );
     }
-    return (<div />);
+    return <div />;
   }
 }
 

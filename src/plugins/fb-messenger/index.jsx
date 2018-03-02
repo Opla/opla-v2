@@ -56,15 +56,17 @@ export default class FBMessengerPlugin {
   }
 
   renderTemplate() {
-    return (<FBTemplate appId={this.config.appId} onAction={this.onAction} />);
+    return <FBTemplate appId={this.config.appId} onAction={this.onAction} />;
   }
 
   renderSettings(instance, onAction, publicUrl = null) {
-    return (<FBSettings
-      instance={instance}
-      onAction={onAction}
-      publicUrl={publicUrl}
-      appId={this.config}
-    />);
+    return (
+      <FBSettings
+        instance={instance}
+        onAction={onAction}
+        publicUrl={publicUrl}
+        appId={this.config}
+      />
+    );
   }
 }

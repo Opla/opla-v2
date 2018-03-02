@@ -29,7 +29,7 @@ class FBTemplate extends Component {
       this.setSelectedStep(1, true);
     }
     this.props.onAction(action);
-  }
+  };
 
   setSelectedStep(index, editable = false) {
     const steps = [...this.state.steps];
@@ -61,7 +61,12 @@ class FBTemplate extends Component {
     const { steps, selectedStep } = this.state;
     return (
       <div>
-        <Stepper steps={steps} onSelect={(index) => { this.setSelectedStep(index, true); }} />
+        <Stepper
+          steps={steps}
+          onSelect={(index) => {
+            this.setSelectedStep(index, true);
+          }}
+        />
         <div className="mdl-color--grey-100" style={style}>
           <FBContainer
             appId={this.props.appId}

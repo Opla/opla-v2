@@ -53,7 +53,10 @@ export default class PluginsManager {
     const plugins = [];
     Object.keys(this.plugins).forEach((pluginName) => {
       const p = this.plugins[pluginName];
-      if ((type === null || p.isType(type)) && (activated === null || p.isActive() === activated)) {
+      if (
+        (type === null || p.isType(type)) &&
+        (activated === null || p.isActive() === activated)
+      ) {
         plugins.push(p);
       }
     }, this);

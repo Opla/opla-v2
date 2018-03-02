@@ -6,7 +6,13 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Zrmc, { Button, Dialog, DialogHeader, DialogBody, DialogFooter } from "zrmc";
+import Zrmc, {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "zrmc";
 import { connect } from "react-redux";
 import PluginsManager from "../../utils/pluginsManager";
 import MessagingsList from "../../components/messagingsList";
@@ -33,9 +39,7 @@ class PublishDialog extends Component {
     this.updateMiddlewares();
   }
 
-  onSelect = ({
-    /* name, */ state, /* index, */ item,
-  }) => {
+  onSelect = ({ /* name, */ state, /* index, */ item }) => {
     // console.log("WIP onSelected", name, state, index);
     const { service, instance } = item;
     if (state === "enable") {
@@ -60,10 +64,11 @@ class PublishDialog extends Component {
           instance={instance}
           onClosed={this.handleCloseDialog}
           store={this.props.store}
-        />);
+        />
+      );
       setTimeout(() => Zrmc.showDialog(sdialog), 100);
     }
-  }
+  };
 
   onAction = (/* action */) => {
     // console.log("WIP onAction=", action);
@@ -99,11 +104,13 @@ class PublishDialog extends Component {
         });
       }, 100);
     }
-  }
+  };
 
   handleCloseDialog = () => {
-    setTimeout(() => { Zrmc.closeDialog(); }, 100);
-  }
+    setTimeout(() => {
+      Zrmc.closeDialog();
+    }, 100);
+  };
 
   updateMiddlewares(needUpdate = false) {
     if (needUpdate) {
@@ -113,7 +120,7 @@ class PublishDialog extends Component {
         this.props.selectedBotId,
         "MessengerConnector",
       );
-    } else if (this.state.isLoading && (!this.props.isLoading)) {
+    } else if (this.state.isLoading && !this.props.isLoading) {
       this.setState({ isLoading: false });
     }
   }
@@ -125,7 +132,10 @@ class PublishDialog extends Component {
     } else {
       const actives = [];
       const pluginsManager = new PluginsManager();
-      const services = pluginsManager.getPlugins({ type: "MessengerConnector", activated: true });
+      const services = pluginsManager.getPlugins({
+        type: "MessengerConnector",
+        activated: true,
+      });
       const servicesEnabled = this.props.publishers;
       if (this.props.middlewares && this.props.middlewares.length > 0) {
         const { middlewares } = this.props;
@@ -191,30 +201,43 @@ class PublishDialog extends Component {
             name="Choose messaging platform(s) to publish to"
             onSelect={this.onSelect}
           />
-        </div>);
+        </div>
+      );
     }
 
     return content;
-  }
+  };
 
   render() {
     const title = "Publish";
     const content = this.renderDialog();
     const style = { width: "550px" };
     return (
-      <Dialog open={this.state.openDialog} style={style} onClose={this.handleCloseDialog}>
+      <Dialog
+        open={this.state.openDialog}
+        style={style}
+        onClose={this.handleCloseDialog}
+      >
         <DialogHeader>{title}</DialogHeader>
         <DialogBody>{content}</DialogBody>
         <DialogFooter>
           <Button
             type="button"
-            onClick={(e) => { e.preventDefault(); this.onAction("publish"); }}
-          >Publish
+            onClick={(e) => {
+              e.preventDefault();
+              this.onAction("publish");
+            }}
+          >
+            Publish
           </Button>
           <Button
             type="button"
-            onClick={(e) => { e.preventDefault(); this.handleCloseDialog(); }}
-          >Cancel
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleCloseDialog();
+            }}
+          >
+            Cancel
           </Button>
         </DialogFooter>
       </Dialog>
@@ -250,13 +273,16 @@ const mapStateToProps = (state) => {
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   // const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.app.loading;
-  const publishers = state.app.publishers || { };
+  const publishers = state.app.publishers || {};
   return {
-    middlewares, selectedBotId, isLoading, publishers,
+    middlewares,
+    selectedBotId,
+    isLoading,
+    publishers,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   appUpdatePublisher: (botId, publisher) => {
     dispatch(appUpdatePublisher(botId, publisher));
   },

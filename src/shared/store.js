@@ -12,11 +12,13 @@ import rootSaga from "./sagas";
 export default function configureStore(initialState = {}) {
   const sagaMiddleware = createSagaMiddleware();
   /* global window */
-  /* eslint-disable-next-line no-underscore-dangle */
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers =
+    /* eslint-disable-next-line no-underscore-dangle */
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
   const store = createStore(
-    reducers, initialState,
+    reducers,
+    initialState,
     composeEnhancers(applyMiddleware(sagaMiddleware)),
   );
 

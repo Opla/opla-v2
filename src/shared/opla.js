@@ -4,6 +4,7 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
+/* eslint react/display-name: 0 */
 import React from "react";
 import Front from "zoapp-front/front";
 import Screen from "zoapp-front/containers/screen";
@@ -40,7 +41,7 @@ const app = {
       name: "Dashboard",
       access: "auth",
       path: "/",
-      render: props => React.createElement(Home, props),
+      render: (props) => <Home {...props} />,
     },
     {
       id: "2",
@@ -51,7 +52,7 @@ const app = {
       access: "auth",
       panels: ["Intents", "Entities", "Flow"],
       toolbox: [{ title: "Publish", onAction: handleOpenPublishDialog }],
-      render: props => React.createElement(BotManager, props),
+      render: (props) => <BotManager {...props} />,
     },
     {
       id: "3",
@@ -61,14 +62,14 @@ const app = {
       path: "/admin",
       access: "auth",
       panels: ["General", "Extensions", "Users", "Advanced"],
-      render: props => React.createElement(AdminManager, props),
+      render: (props) => <AdminManager {...props} />,
     },
     {
       id: "4",
       name: "Create Assistant",
       path: "/create",
       access: "public",
-      render: props => React.createElement(CreateAssistant, props),
+      render: (props) => <CreateAssistant {...props} />,
     },
     {
       id: "5",
@@ -77,7 +78,7 @@ const app = {
       name: "Home",
       path: "*",
       access: "public",
-      render: props => React.createElement(Home, props),
+      render: (props) => <Home {...props} />,
     },
     {
       id: "6",
@@ -86,7 +87,7 @@ const app = {
       icon: "help",
       path: "/help",
       access: "all",
-      render: props => React.createElement(Screen, props, "Help"),
+      render: (props) => React.createElement(Screen, props, "Help"),
     },
   ],
 };
@@ -105,4 +106,3 @@ export default class Opla {
     this.front.start();
   }
 }
-

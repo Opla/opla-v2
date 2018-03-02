@@ -51,13 +51,20 @@ export function apiSaveBotRequest(botParams) {
 
 export function apiImportRequest(botId, data, options) {
   return {
-    type: API_IMPORT + FETCH_REQUEST, botId, data, options,
+    type: API_IMPORT + FETCH_REQUEST,
+    botId,
+    data,
+    options,
   };
 }
 
 export function apiPublishRequest(botId, channels, to = null, from = null) {
   return {
-    type: API_PUBLISH + FETCH_REQUEST, botId, channels, to, from,
+    type: API_PUBLISH + FETCH_REQUEST,
+    botId,
+    channels,
+    to,
+    from,
   };
 }
 
@@ -75,7 +82,11 @@ export function apiDeleteIntentRequest(botId, intent) {
 
 export function apiMoveIntentRequest(botId, intentId, from, to) {
   return {
-    type: API_MOVEINTENT + FETCH_REQUEST, botId, intentId, from, to,
+    type: API_MOVEINTENT + FETCH_REQUEST,
+    botId,
+    intentId,
+    from,
+    to,
   };
 }
 
@@ -93,7 +104,10 @@ export function apiUnsubscribeSandboxMessages(botId) {
 
 export function apiSendSandboxMessageRequest(botId, conversationId, message) {
   return {
-    type: API_SB_SENDMESSAGE + FETCH_REQUEST, botId, conversationId, message,
+    type: API_SB_SENDMESSAGE + FETCH_REQUEST,
+    botId,
+    conversationId,
+    message,
   };
 }
 

@@ -9,7 +9,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Zrmc from "zrmc";
 import { ListDragComponent, SubToolbar } from "zoapp-ui";
-import { apiGetIntentsRequest, apiSendIntentRequest, apiDeleteIntentRequest, apiMoveIntentRequest } from "../actions/api";
+import {
+  apiGetIntentsRequest,
+  apiSendIntentRequest,
+  apiDeleteIntentRequest,
+  apiMoveIntentRequest,
+} from "../actions/api";
 import { appSelectIntent } from "../actions/app";
 
 class ExplorerContainer extends Component {
@@ -17,12 +22,17 @@ class ExplorerContainer extends Component {
     // console.log("TODO", `ExplorerContainer.onDropIntent ${dragIndex} / ${dropIndex}`);
     const intent = this.props.intents[dragIndex];
     const intentId = intent.id;
-    this.props.apiMoveIntentRequest(this.props.selectedBotId, intentId, dragIndex, dropIndex);
-  }
+    this.props.apiMoveIntentRequest(
+      this.props.selectedBotId,
+      intentId,
+      dragIndex,
+      dropIndex,
+    );
+  };
 
   onSelectIntent = (selected) => {
     this.props.appSelectIntent(this.props.selectedBotId, selected);
-  }
+  };
 
   onAddIntent = (dialog, action) => {
     if (action === "Create") {
@@ -36,7 +46,7 @@ class ExplorerContainer extends Component {
       this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
-  }
+  };
 
   onRenameIntent = (dialog, action) => {
     if (action === "Rename") {
@@ -52,7 +62,7 @@ class ExplorerContainer extends Component {
       this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
-  }
+  };
 
   onDeleteIntent = (dialog, action) => {
     if (action === "Delete") {
@@ -62,43 +72,58 @@ class ExplorerContainer extends Component {
       this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
-  }
+  };
 
   handleAddIntent = () => {
     // console.log("WIP", "ExplorerContainer.handleAddIntent");
     const field = {
-      defaultValue: "", pattern: ".+", name: "Intent name", error: "Wrong name",
+      defaultValue: "",
+      pattern: ".+",
+      name: "Intent name",
+      error: "Wrong name",
     };
     Zrmc.showDialog({
-      header: "Add new intent", field, actions: [{ name: "Create" }, { name: "Cancel" }], onAction: this.onAddIntent,
+      header: "Add new intent",
+      field,
+      actions: [{ name: "Create" }, { name: "Cancel" }],
+      onAction: this.onAddIntent,
     });
-  }
+  };
 
   handleRename = () => {
     // console.log("TODO", "ExplorerContainer.handleRename");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
     const field = {
-      defaultValue: intent.name, pattern: ".+", name: "Intent name", error: "Wrong name",
+      defaultValue: intent.name,
+      pattern: ".+",
+      name: "Intent name",
+      error: "Wrong name",
     };
     Zrmc.showDialog({
-      header: "Rename intent", field, actions: [{ name: "Rename" }, { name: "Cancel" }], onAction: this.onRenameIntent,
+      header: "Rename intent",
+      field,
+      actions: [{ name: "Rename" }, { name: "Cancel" }],
+      onAction: this.onRenameIntent,
     });
-  }
+  };
 
   handleSynchronize = () => {
     // console.log("WIP", "ExplorerContainer.handleSynchronize");
     this.props.apiGetIntentsRequest(this.props.selectedBotId);
-  }
+  };
 
   handleDelete = () => {
     // console.log("WIP", "ExplorerContainer.handleDelete");
     const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
     Zrmc.showDialog({
-      header: "Intent", body: `${intent.name} Do you want to delete it ?`, actions: [{ name: "Delete" }, { name: "Cancel" }], onAction: this.onDeleteIntent,
+      header: "Intent",
+      body: `${intent.name} Do you want to delete it ?`,
+      actions: [{ name: "Delete" }, { name: "Cancel" }],
+      onAction: this.onDeleteIntent,
     });
-  }
+  };
 
   /* handleExportImport = () => {
     const dialog = <IODialog open store={this.props.store}
@@ -114,11 +139,21 @@ class ExplorerContainer extends Component {
     if (this.props.intents) {
       this.props.intents.forEach((intent) => {
         const { id } = intent;
-        const style = intent.notSaved ? {
-          marginRight: "4px", width: "8px", height: "8px", marginBottom: "2px",
-        } : { display: "none", marginRight: "2px" };
+        const style = intent.notSaved
+          ? {
+              marginRight: "4px",
+              width: "8px",
+              height: "8px",
+              marginBottom: "2px",
+            }
+          : { display: "none", marginRight: "2px" };
         const marginLeft = intent.notSaved ? "-14px" : "0px";
-        const n = <span style={{ marginLeft }}><span className="gray_dot" style={style} />{intent.name}</span>;
+        const n = (
+          <span style={{ marginLeft }}>
+            <span className="gray_dot" style={style} />
+            {intent.name}
+          </span>
+        );
         items.push({ id, name: n });
       });
     }
@@ -132,7 +167,13 @@ class ExplorerContainer extends Component {
               { name: "Rename", onSelect: this.handleRename },
               { name: "Delete", onSelect: this.handleDelete },
               /* { name: "Synchronize", onSelect: this.handleSynchronize }, */
-              { name: "Export / Import", onSelect: (() => { this.props.handleExportImport(); }) }],
+              {
+                name: "Export / Import",
+                onSelect: () => {
+                  this.props.handleExportImport();
+                },
+              },
+            ],
           }}
         />
         <div className="list-box">
@@ -144,7 +185,8 @@ class ExplorerContainer extends Component {
             onDrop={this.onDropIntent}
           />
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
@@ -173,11 +215,14 @@ const mapStateToProps = (state) => {
   const { admin } = state.app;
   const bot = admin ? admin.bots[0] : null;
   return {
-    intents, selectedIntentIndex, selectedBotId, bot,
+    intents,
+    selectedIntentIndex,
+    selectedBotId,
+    bot,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   apiGetIntentsRequest: (botId) => {
     dispatch(apiGetIntentsRequest(botId));
   },

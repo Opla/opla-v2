@@ -38,15 +38,17 @@ const data = {
 const options = {
   maintainAspectRatio: false,
   scales: {
-    xAxes: [{
-      gridLines: {
-        lineWidth: 0,
-        color: "rgba(0,0,0,0)",
-        drawBorder: false,
-        zeroLineWidth: 0,
-        zeroLineColor: "rgba(0,0,0,0)",
+    xAxes: [
+      {
+        gridLines: {
+          lineWidth: 0,
+          color: "rgba(0,0,0,0)",
+          drawBorder: false,
+          zeroLineWidth: 0,
+          zeroLineColor: "rgba(0,0,0,0)",
+        },
       },
-    }],
+    ],
   },
   legend: {
     display: true,

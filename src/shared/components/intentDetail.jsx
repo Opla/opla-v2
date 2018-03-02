@@ -21,7 +21,7 @@ const IntentDetail = ({ intent, onSelect }) => {
         <hr />
         <ActionsList name="output" actions={output} onSelect={onSelect} />
         <hr />
-        <ExpansionPanel label="Parameters" collapsed >
+        <ExpansionPanel label="Parameters" collapsed>
           <List>
             <ListItem icon="title">
               Topic
@@ -29,8 +29,14 @@ const IntentDetail = ({ intent, onSelect }) => {
                 <Button
                   ripple
                   className="mrb-action-button"
-                  onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "topic" }); } }}
-                >{topic}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelect) {
+                      onSelect({ name, state: "topic" });
+                    }
+                  }}
+                >
+                  {topic}
                 </Button>
               </ListItemMeta>
             </ListItem>
@@ -40,8 +46,14 @@ const IntentDetail = ({ intent, onSelect }) => {
                 <Button
                   ripple
                   className="mrb-action-button"
-                  onClick={(e) => { e.preventDefault(); if (onSelect) { onSelect({ name, state: "previous" }); } }}
-                >NONE
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onSelect) {
+                      onSelect({ name, state: "previous" });
+                    }
+                  }}
+                >
+                  NONE
                 </Button>
               </ListItemMeta>
             </ListItem>
@@ -82,9 +94,10 @@ export const displayActionEditor = (
           label={actionDef}
           error="Wrong value"
           style={{ width: "100%" }}
-          ref={input => setInput(input)}
+          ref={(input) => setInput(input)}
         />
-      </div>);
+      </div>
+    );
   } else {
     if (type === "condition") {
       text = parameters.text ? parameters.text : "";
@@ -100,10 +113,18 @@ export const displayActionEditor = (
               error="Wrong value"
               noFloatingLabel
               style={{ width: "100%", margin: "8px 0px", height: "24px" }}
-              ref={input => setInput(input, "fieldParamName")}
+              ref={(input) => setInput(input, "fieldParamName")}
             />
           </div>
-          <div style={{ fontWeight: "900", textAlign: "center", display: "table-cell" }}>=</div>
+          <div
+            style={{
+              fontWeight: "900",
+              textAlign: "center",
+              display: "table-cell",
+            }}
+          >
+            =
+          </div>
           <div style={{ display: "table-cell" }}>
             <TextField
               defaultValue={value}
@@ -112,23 +133,25 @@ export const displayActionEditor = (
               error="Wrong value"
               noFloatingLabel
               style={{ width: "100%", margin: "0px" }}
-              ref={input => setInput(input, "fieldParamValue")}
+              ref={(input) => setInput(input, "fieldParamValue")}
             />
           </div>
-        </div>);
+        </div>
+      );
     }
     content = (
-      <div>{condition}
+      <div>
+        {condition}
         <ActionEditor
           content={text}
           style={{ width: "100%" }}
           onChange={onChange}
           isInput={isInput}
-          ref={input => setInput(input)}
+          ref={(input) => setInput(input)}
         />
-      </div>);
+      </div>
+    );
   }
-
 
   Zrmc.showDialog({
     header: title,

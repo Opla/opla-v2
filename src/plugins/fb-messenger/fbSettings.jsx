@@ -14,7 +14,7 @@ export default class FBSettings extends Component {
       // TODO
     }
     this.props.onAction(action);
-  }
+  };
 
   render() {
     const instance = this.props.instance || {};
@@ -31,69 +31,86 @@ export default class FBSettings extends Component {
             pattern="[a-zA-Z0-9\.-]+"
             value={instance.botName}
             floatingLabel
-            onChange={() => { }}
+            onChange={() => {}}
             spellCheck={false}
             style={{ width: "320px" }}
             required
-            ref={(input) => { this.tfBotName = input; }}
+            ref={(input) => {
+              this.tfBotName = input;
+            }}
           />
           <Textfield
             label="Page Access Token"
             pattern="[a-zA-Z0-9\.-]+"
             floatingLabel
             value={instance.accessToken}
-            onChange={() => { }}
+            onChange={() => {}}
             spellCheck={false}
             style={{ width: "320px" }}
             required
-            ref={(input) => { this.tfAccessToken = input; }}
+            ref={(input) => {
+              this.tfAccessToken = input;
+            }}
           />
           <Textfield
             label="Verify Token"
             pattern="[a-zA-Z0-9\.-]+"
             floatingLabel
             value={instance.verifyToken}
-            onChange={() => { }}
+            onChange={() => {}}
             spellCheck={false}
             style={{ width: "320px" }}
             required
-            ref={(input) => { this.tfVerifyToken = input; }}
+            ref={(input) => {
+              this.tfVerifyToken = input;
+            }}
           />
-          <div style={{ width: "360px" }}><Textfield
-            label="Callback url"
-            floatingLabel
-            spellCheck={false}
-            error="You need an https public url !"
-            style={{ width: "320px" }}
-            disabled
-            ref={(input) => { this.tfCallback = input; }}
-          /><Icon name="mode_edit" />
+          <div style={{ width: "360px" }}>
+            <Textfield
+              label="Callback url"
+              floatingLabel
+              spellCheck={false}
+              error="You need an https public url !"
+              style={{ width: "320px" }}
+              disabled
+              ref={(input) => {
+                this.tfCallback = input;
+              }}
+            />
+            <Icon name="mode_edit" />
           </div>
         </div>
-        <div style={{
-          backgroundColor: "rgba(252, 234, 32, 0.4)", width: "478px", marginTop: "24px", padding: "12px",
-        }}
+        <div
+          style={{
+            backgroundColor: "rgba(252, 234, 32, 0.4)",
+            width: "478px",
+            marginTop: "24px",
+            padding: "12px",
+          }}
         >
           <i
             className="material-icons"
             style={{ float: "right", color: "gray", marginTop: "-2px" }}
-          >help_outline
+          >
+            help_outline
           </i>
           <a
             style={{ color: "gray" }}
             href="https://developers.facebook.com/docs/messenger-platform/getting-started/app-setup"
             target="_blank"
             rel="noopener noreferrer"
-          >How to setup Facebook messenger
+          >
+            How to setup Facebook messenger
           </a>
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
 FBSettings.defaultProps = {
   instance: null,
-  onAction: () => { },
+  onAction: () => {},
 };
 
 FBSettings.propTypes = {

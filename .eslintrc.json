@@ -1,11 +1,17 @@
 {
-    "extends": "airbnb",
+    "extends": [
+        "airbnb-base",
+        "plugin:import/errors",
+        "plugin:jest/recommended",
+        "plugin:react/recommended",
+        "prettier"
+    ],
     "env": {
-        "es6": true,
         "browser": true,
-        "node": false,
+        "es6": true,
+        "jest": true,
         "jquery": false,
-        "mocha": true
+        "node": false
     },
     "parser": "babel-eslint",
     "parserOptions": {
@@ -17,10 +23,9 @@
         "sourceType": "module"
     },
     "plugins": [
-        "import"
+        "prettier"
     ],
     "rules": {
-        "indent": [2, 2],
         "quotes": [
             "error",
             "double"
@@ -31,10 +36,17 @@
         ],
         "no-console": 1,
         "prefer-const": "error",
-        "no-var": "error"
+        "no-var": "error",
+        "prettier/prettier": ["error", {
+            "arrowParens": "always",
+            "trailingComma": "all"
+        }]
     },
     "settings": {
         "import/resolver": {
+            "jest": {
+                "jestConfigFile": false
+            },
             "webpack": {
                 "config": "webpack.common.js"
             }

@@ -76,7 +76,7 @@ class CreateAssistant extends Component {
     // TODO check if json
     const json = JSON.parse(data);
     this.onSelectTemplate(3, json);
-  }
+  };
 
   onSelectTemplate = (selected, data) => {
     let template = data;
@@ -84,7 +84,7 @@ class CreateAssistant extends Component {
       template = templates[selected];
     }
     this.setState({ selectedTemplate: selected, template });
-  }
+  };
 
   handleCloseCreateDialog = () => {
     this.setState({ loading: false });
@@ -92,7 +92,7 @@ class CreateAssistant extends Component {
     if (!this.props.error) {
       this.props.history.push("/builder");
     }
-  }
+  };
 
   handleCreate = () => {
     // Check textfields before processing
@@ -111,22 +111,29 @@ class CreateAssistant extends Component {
     ) {
       const { template } = this.state;
       const botParams = {
-        name, email, username, password, template, language,
+        name,
+        email,
+        username,
+        password,
+        template,
+        language,
       };
 
       this.setState({ loading: true });
 
-      Zrmc.showDialog(<ProcessingDialog open onClosed={this.handleCloseDialog} />);
+      Zrmc.showDialog(
+        <ProcessingDialog open onClosed={this.handleCloseDialog} />,
+      );
 
       this.props.createBot(botParams);
     } else {
       // TODO display errors in dialogs
     }
-  }
+  };
 
   handleLanguageChange = ({ props: itemProps }) => {
     this.setState({ language: itemProps.value });
-  }
+  };
 
   render() {
     const selected = this.state.selectedTemplate;
@@ -138,9 +145,9 @@ class CreateAssistant extends Component {
           <div style={headerStyle}>
             <h4 style={h4}>Opla !</h4>
             <div style={secText}>
-              Welcome to our five minutes installation process! Just fill in
-              the informations below and you will get the most powerfull
-              and extendable bot platform in the world.
+              Welcome to our five minutes installation process! Just fill in the
+              informations below and you will get the most powerfull and
+              extendable bot platform in the world.
             </div>
           </div>
         </section>
@@ -148,7 +155,7 @@ class CreateAssistant extends Component {
           <div style={headerStyle}>
             <h4 style={h4}>Templates</h4>
             <div style={secText}>
-              Choose a prebuild asssistant, import one  or select an empty model.
+              Choose a prebuild asssistant, import one or select an empty model.
             </div>
           </div>
           <TemplatesList
@@ -162,8 +169,8 @@ class CreateAssistant extends Component {
             <div style={secText}>
               Want more ?
               <br />
-              In a near future we will release our BotStore to find
-              the perfect bot from our community.
+              In a near future we will release our BotStore to find the perfect
+              bot from our community.
               <br />
             </div>
           </div>
@@ -172,41 +179,53 @@ class CreateAssistant extends Component {
           <div style={headerStyle}>
             <h4 style={h4}>Informations needed</h4>
             <div style={secText}>
-              Please provide the following information.
-              Don&apos;t worry. You can always change them later.
+              Please provide the following information. Don&apos;t worry. You
+              can always change them later.
             </div>
           </div>
           <form style={formStyle} autoComplete="new-password">
-            <div><TextField
-              onChange={this.handleNameChange}
-              label="Assistant name"
-              style={{ width: "400px" }}
-              ref={(input) => { this.nameField = input; }}
-            />
+            <div>
+              <TextField
+                onChange={this.handleNameChange}
+                label="Assistant name"
+                style={{ width: "400px" }}
+                ref={(input) => {
+                  this.nameField = input;
+                }}
+              />
             </div>
-            <div><TextField
-              onChange={this.handleEmailChange}
-              label="Username"
-              autoComplete="new-password"
-              style={{ width: "400px" }}
-              ref={(input) => { this.usernameField = input; }}
-            />
+            <div>
+              <TextField
+                onChange={this.handleEmailChange}
+                label="Username"
+                autoComplete="new-password"
+                style={{ width: "400px" }}
+                ref={(input) => {
+                  this.usernameField = input;
+                }}
+              />
             </div>
-            <div><TextField
-              onChange={this.handleEmailChange}
-              label="Password"
-              type="password"
-              autoComplete="new-password"
-              style={{ width: "400px" }}
-              ref={(input) => { this.passwordField = input; }}
-            />
+            <div>
+              <TextField
+                onChange={this.handleEmailChange}
+                label="Password"
+                type="password"
+                autoComplete="new-password"
+                style={{ width: "400px" }}
+                ref={(input) => {
+                  this.passwordField = input;
+                }}
+              />
             </div>
-            <div><TextField
-              onChange={this.handleEmailChange}
-              label="Your email"
-              style={{ width: "400px" }}
-              ref={(input) => { this.emailField = input; }}
-            />
+            <div>
+              <TextField
+                onChange={this.handleEmailChange}
+                label="Your email"
+                style={{ width: "400px" }}
+                ref={(input) => {
+                  this.emailField = input;
+                }}
+              />
             </div>
             <div>
               <Select
@@ -227,9 +246,12 @@ class CreateAssistant extends Component {
         <section style={boxStyle}>
           <Button
             raised
-            onClick={(e) => { e.preventDefault(); this.handleCreate(); }}
+            onClick={(e) => {
+              e.preventDefault();
+              this.handleCreate();
+            }}
           >
-          Let&apos;s go
+            Let&apos;s go
           </Button>
           <Button style={advancedStyle}>Advanced settings</Button>
         </section>
@@ -247,7 +269,8 @@ CreateAssistant.propTypes = {
   error: PropTypes.string,
   createBot: PropTypes.func.isRequired,
   appSetTitle: PropTypes.func.isRequired,
-  history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func }).isRequired,
+  history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
+    .isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -255,11 +278,14 @@ const mapStateToProps = (state) => {
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.app.loading || false;
   return {
-    admin, isLoading, isSignedIn, error,
+    admin,
+    isLoading,
+    isSignedIn,
+    error,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   createBot: (botParams) => {
     dispatch(apiCreateBot(botParams));
   },
@@ -268,4 +294,6 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateAssistant));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CreateAssistant),
+);

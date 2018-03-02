@@ -9,17 +9,15 @@ import PropTypes from "prop-types";
 import { List, ListItem, ListItemMeta, Icon, Switch } from "zrmc";
 
 const MessagingsList = (props) => {
-  const {
-    name, items, onSelect,
-  } = props;
+  const { name, items, onSelect } = props;
 
   return (
     <div className="mrb-sublist">
       <div className="mrb-subheader">
         <h4>{name}</h4>
       </div>
-      <List>{
-        items.map((item, index) => {
+      <List>
+        {items.map((item, index) => {
           let icon = null;
           if (item.icon) {
             let { color } = item;
@@ -36,10 +34,19 @@ const MessagingsList = (props) => {
             if (item.icon.endsWith(".svg")) {
               icon = (
                 <div style={style}>
-                  <img style={{ verticalAlign: "top" }} src={item.icon} alt={item.name} />
-                </div>);
+                  <img
+                    style={{ verticalAlign: "top" }}
+                    src={item.icon}
+                    alt={item.name}
+                  />
+                </div>
+              );
             } else {
-              icon = <div style={style}><Icon style={{ verticalAlign: "top" }} name={item.icon} /></div>;
+              icon = (
+                <div style={style}>
+                  <Icon style={{ verticalAlign: "top" }} name={item.icon} />
+                </div>
+              );
             }
           }
           const key = `li_${index}`;
@@ -52,9 +59,13 @@ const MessagingsList = (props) => {
               secondaryText="click to setup"
               onClick={(e) => {
                 // console.log("e.target", e.target.className);
-                if (onSelect && (e.target.className.indexOf("mdl-switch") < 0)) {
-                  e.preventDefault(); onSelect({
-                    name, state: "select", index, item,
+                if (onSelect && e.target.className.indexOf("mdl-switch") < 0) {
+                  e.preventDefault();
+                  onSelect({
+                    name,
+                    state: "select",
+                    index,
+                    item,
                   });
                 }
               }}
@@ -64,9 +75,13 @@ const MessagingsList = (props) => {
                 <Switch
                   checked={item.enabled}
                   onChange={(e) => {
-                    e.preventDefault(); if (onSelect) {
+                    e.preventDefault();
+                    if (onSelect) {
                       onSelect({
-                        name, state: "enable", index, item,
+                        name,
+                        state: "enable",
+                        index,
+                        item,
                       });
                     }
                   }}
@@ -74,13 +89,11 @@ const MessagingsList = (props) => {
               </ListItemMeta>
             </ListItem>
           );
-        })
-      }
+        })}
       </List>
     </div>
   );
 };
-
 
 MessagingsList.propTypes = {
   name: PropTypes.string.isRequired,

@@ -5,7 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import { Layout, Header, Drawer, Navigation, IconButton, Menu, MenuItem, HeaderTabs, Tab } from "zrmc";
+import {
+  Layout,
+  Header,
+  Drawer,
+  Navigation,
+  IconButton,
+  Menu,
+  MenuItem,
+  HeaderTabs,
+  Tab,
+} from "zrmc";
 import PropTypes from "prop-types";
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -36,6 +46,7 @@ class App extends React.Component {
     this.updateAdmin();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   componentWillUpdate() {
     const items = document.getElementsByClassName("mdl_closedrawer");
     for (let i = 0; i < items.length; i += 1) {
@@ -73,7 +84,7 @@ class App extends React.Component {
    */
   render() {
     let { isLoading } = this.props;
-    if ((!isLoading) && (!this.props.admin) && this.props.isSignedIn) {
+    if (!isLoading && !this.props.admin && this.props.isSignedIn) {
       isLoading = true;
     }
     let botName = "opla.ai";
@@ -94,14 +105,15 @@ class App extends React.Component {
             style={style}
             ripple
             activeTab={this.state.activeTab}
-            onChange={tabId => this.setState({ activeTab: tabId })}
+            onChange={(tabId) => this.setState({ activeTab: tabId })}
           >
             <Tab>Intents</Tab>
             <Tab>Entities</Tab>
             <Tab>Flows</Tab>
-          </HeaderTabs>);
+          </HeaderTabs>
+        );
         style = { paddingRight: "20%" };
-        toolbox = (<BuilderBox store={this.props.store} />);
+        toolbox = <BuilderBox store={this.props.store} />;
         style = { width: "30%", textAlign: "right" };
       } else if (this.props.titleName === "Admin") {
         style = { padding: "32px 80px 0px 0px", width: "620px" };
@@ -110,62 +122,130 @@ class App extends React.Component {
             style={style}
             ripple
             activeTab={this.state.activeTab}
-            onChange={tabId => this.setState({ activeTab: tabId })}
+            onChange={(tabId) => this.setState({ activeTab: tabId })}
           >
             <Tab>General</Tab>
             <Tab>Extensions</Tab>
             <Tab>Users</Tab>
             <Tab>Advanced</Tab>
-          </HeaderTabs>);
+          </HeaderTabs>
+        );
         style = { width: "30%", textAlign: "right" };
       }
       titleName = ` / ${this.props.titleName}`;
       let className = "mdl_closedrawer";
-      className += this.props.titleName === "Dashboard" ? " mdl-navigation__selectedlink" : "";
+      className +=
+        this.props.titleName === "Dashboard"
+          ? " mdl-navigation__selectedlink"
+          : "";
       items.push({
-        id: "1", to: "/", icon: "dashboard", name: "Dashboard", className,
+        id: "1",
+        to: "/",
+        icon: "dashboard",
+        name: "Dashboard",
+        className,
       });
       className = "mdl_closedrawer";
-      className += this.props.titleName === "Builder" ? " mdl-navigation__selectedlink" : "";
+      className +=
+        this.props.titleName === "Builder"
+          ? " mdl-navigation__selectedlink"
+          : "";
       items.push({
-        id: "2", to: "/builder", icon: "build", name: "Builder", className,
+        id: "2",
+        to: "/builder",
+        icon: "build",
+        name: "Builder",
+        className,
       });
       className = "mdl_closedrawer";
-      className += this.props.titleName === "Admin" ? " mdl-navigation__selectedlink" : "";
+      className +=
+        this.props.titleName === "Admin" ? " mdl-navigation__selectedlink" : "";
       items.push({
-        id: "3", to: "/admin", icon: "settings", name: "Admin", className,
+        id: "3",
+        to: "/admin",
+        icon: "settings",
+        name: "Admin",
+        className,
       });
     } else {
       items.push({
-        id: "4", to: "/", name: "Home", icon: "home", className: "mdl_closedrawer",
+        id: "4",
+        to: "/",
+        name: "Home",
+        icon: "home",
+        className: "mdl_closedrawer",
       });
     }
     items.push({
-      id: "5", to: "/", name: "Help", icon: "help", className: "mdl_closedrawer",
+      id: "5",
+      to: "/",
+      name: "Help",
+      icon: "help",
+      className: "mdl_closedrawer",
     });
 
     return (
       <div>
         <Layout fixedHeader>
-          <Header title={<span><span style={{ fontWeight: "900" }}>{botName}</span><span style={{ color: "#ddd" }}>{titleName}</span></span>}>
+          <Header
+            title={
+              <span>
+                <span style={{ fontWeight: "900" }}>{botName}</span>
+                <span style={{ color: "#ddd" }}>{titleName}</span>
+              </span>
+            }
+          >
             <Navigation>
               {navbox}
               {toolbox}
               <UserBox store={this.props.store} style={style} />
             </Navigation>
           </Header>
-          <Drawer title={<span>{botName}<IconButton name="" colored style={{ marginLeft: "124px" }} id="bot-menu" className={avatarClass} /></span>}>
+          <Drawer
+            title={
+              <span>
+                {botName}
+                <IconButton
+                  name=""
+                  colored
+                  style={{ marginLeft: "124px" }}
+                  id="bot-menu"
+                  className={avatarClass}
+                />
+              </span>
+            }
+          >
             <Menu target="bot-menu" align="right">
               <MenuItem disabled>Properties</MenuItem>
               <MenuItem className="mdl_closedrawer">Change Assistant</MenuItem>
             </Menu>
             <Navigation>
-              {items.map(item => (<Link key={item.id} href={`#${item.name}`} to={item.to} className={item.className}><i className="material-icons">{item.icon}</i>{item.name}</Link>))}
+              {items.map((item) => (
+                <Link
+                  key={item.id}
+                  href={`#${item.name}`}
+                  to={item.to}
+                  className={item.className}
+                >
+                  <i className="material-icons">{item.icon}</i>
+                  {item.name}
+                </Link>
+              ))}
             </Navigation>
           </Drawer>
           <Switch>
-            <Route path="/builder" render={props => <BotManager {...props} activeTab={this.state.activeTab} />} />
-            <Route path="/admin" render={props => <AdminManager {...props} activeTab={this.state.activeTab} />} />
+            <Route
+              path="/builder"
+              render={(props) => (
+                <BotManager {...props} activeTab={this.state.activeTab} />
+              )}
+            />
+            <Route
+              path="/admin"
+              render={(props) => (
+                <AdminManager {...props} activeTab={this.state.activeTab} />
+              )}
+            />
             <Route path="/create" component={CreateAssistant} />
             <Route path="*" component={Home} />
           </Switch>
@@ -197,23 +277,30 @@ const mapStateToProps = (state) => {
   const { admin } = state.app;
   const bot = admin ? admin.bots[0] : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const isLoading = (state.app && state.app.loading) ||
-    (state.auth && state.auth.loading) || (state.user && state.user.loading);
+  const isLoading =
+    (state.app && state.app.loading) ||
+    (state.auth && state.auth.loading) ||
+    (state.user && state.user.loading);
   const titleName = state.app ? state.app.titleName : "";
   let error = null;
   if (state.app && state.app.error) {
     ({ error } = state.app);
   } else if (state.auth && state.auth.error) {
     ({ error } = state.auth);
-  } else if ((!error) && state.user && state.user.error) {
+  } else if (!error && state.user && state.user.error) {
     ({ error } = state.user);
   }
   return {
-    admin, bot, isLoading, isSignedIn, titleName, error,
+    admin,
+    bot,
+    isLoading,
+    isSignedIn,
+    titleName,
+    error,
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   initAuthSettings: () => {
     dispatch(initAuthSettings());
   },
