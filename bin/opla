@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
+const figlet = require('figlet');
 const fs = require("fs-extra");
 const pkg = require("../package.json");
 const program = require("commander");
@@ -7,10 +8,10 @@ const request = require("request-promise-native");
 const { prompt } = require("inquirer");
 
 const CONFIG_FILE = "config/default.json";
+const DESCRIPTION = `Management tool for ${pkg.description}`;
 
 program
   .version(pkg.version)
-  .description(`Management tool for ${pkg.description}`);
 
 program
   .command("init")
@@ -119,6 +120,9 @@ program
       console.error(chalk.red(`An error has occured: ${errorMessage}`));
     }
   });
+
+console.log(chalk.yellow(figlet.textSync("Opla CE", { horizontalLayout: "full" })));
+console.log(`${DESCRIPTION}\n`);
 
 program.parse(process.argv);
 
