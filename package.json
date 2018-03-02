@@ -2,7 +2,7 @@
   "name": "opla-backend",
   "version": "0.9.0",
   "private": true,
-  "description": "Backend for Opla.ai",
+  "description": "Opla.ai Backend",
   "main": "index.js",
   "author": "Mik BRY <mik@opla.co>",
   "license": "GPL-2.0+",
@@ -24,6 +24,12 @@
     "OAuth2"
   ],
   "dependencies": {
+    "chalk": "^2.3.1",
+    "commander": "^2.14.1",
+    "deepmerge": "^2.0.1",
+    "figlet": "^1.2.0",
+    "fs-extra": "^5.0.0",
+    "inquirer": "^5.1.0",
     "zoapp-backend": "^0.10.0"
   },
   "devDependencies": {

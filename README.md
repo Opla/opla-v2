@@ -26,7 +26,8 @@ quickly.
     ```
 
 2. If you do not want to use Docker Compose, configure your MariaDB instance and
-   update the configuration in `src/config.js`, otherwise run:
+   run the `bin/opla init` command to configure this project. If you use Docker
+   Compose, run:
 
    ```
    $ docker-compose up -d
