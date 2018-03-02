@@ -11,8 +11,8 @@
     "compile": "yarn compile:dev && rm -r -f ./dist/config.j*",
     "compile:dev": "yarn clean-dist && babel src -s -D -d dist && cp -f ./package.json ./dist/package.json && cp -f ./LICENSE ./dist/LICENSE && cp -f ./README.md ./dist/README.md",
     "dev": "yarn compile:dev && yarn start:dev",
-    "lint": "eslint src",
-    "lint:dev": "eslint src --rule 'no-console: off' --fix",
+    "lint": "eslint src tests",
+    "lint:dev": "yarn lint --rule 'no-console: off' --fix",
     "prestart": "yarn run -s build",
     "start": "node dist",
     "start:dev": "nodemon -w src --exec \"babel-node src \"",
@@ -35,15 +35,20 @@
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "12.1.0",
-    "eslint-plugin-import": "2.8.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-jest": "^2.0.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-prettier": "^2.6.0",
     "jest": "^22.4.2",
     "nodemon": "^1.13.3",
+    "prettier": "^1.11.1",
     "regenerator-runtime": "^0.11.1",
     "supertest": "^3.0.0"
   },
   "jest": {
     "moduleNameMapper": {
-      "opla-backend/(.*)": "<rootDir>/src/$1"
+      "^opla-backend/(.*)$": "<rootDir>/src/$1"
     },
     "setupTestFrameworkScriptFile": "<rootDir>/tests/setupTests.js"
   }

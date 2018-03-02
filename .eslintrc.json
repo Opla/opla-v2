@@ -1,11 +1,16 @@
 {
-    "extends": "airbnb-base",
+    "extends": [
+        "airbnb-base",
+        "plugin:jest/recommended",
+        "plugin:import/errors",
+        "prettier"
+    ],
     "env": {
-        "es6": true,
         "browser": false,
-        "node": true,
+        "es6": true,
+        "jest": true,
         "jquery": false,
-        "mocha": true
+        "node": true
     },
     "globals": {
         "logger": true
@@ -14,16 +19,14 @@
     "parserOptions": {
         "ecmaVersion": 6,
         "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
+            "experimentalObjectRestSpread": true
         },
         "sourceType": "module"
     },
     "plugins": [
-        "import"
+        "prettier"
     ],
     "rules": {
-        "indent": [2, 2],
         "quotes": [
             "error",
             "double"
@@ -34,6 +37,17 @@
         ],
         "no-console": 1,
         "prefer-const": "error",
-        "no-var": "error"
+        "no-var": "error",
+        "prettier/prettier": ["error", {
+            "arrowParens": "always",
+            "trailingComma": "all"
+        }]
+    },
+    "settings": {
+        "import/resolver": {
+            "jest": {
+                "jestConfigFile": false
+            }
+        }
     }
 }

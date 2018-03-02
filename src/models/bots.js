@@ -37,7 +37,7 @@ export default class extends Model {
       const c = this.database.getTable("botUsers");
       const q = `botId=${botId} AND userId=${userId}`;
       const botUser = await c.getItem(q);
-      if ((!botUser)) {
+      if (!botUser) {
         // userId don't have access to bot
         logger.info("userId don't have access to bot");
         bot = null;
@@ -55,7 +55,11 @@ export default class extends Model {
         await collection.nextItem(async (u) => {
           // logger.info("u=", u);
           // logger.info("user=", user);
-          if (u.id === user.userId || u.email === user.email || u.username === user.username) {
+          if (
+            u.id === user.userId ||
+            u.email === user.email ||
+            u.username === user.username
+          ) {
             const bot = await self.getBot(u.botId);
             if (bot) {
               bots.push({ ...bot });
@@ -77,8 +81,13 @@ export default class extends Model {
     let userRet = null;
     if (collection) {
       await collection.nextItem(async (u) => {
-        if (botId === u.botId && (u.id === user.id || u.id === user.userId ||
-          u.email === user.email || u.username === user.username)) {
+        if (
+          botId === u.botId &&
+          (u.id === user.id ||
+            u.id === user.userId ||
+            u.email === user.email ||
+            u.username === user.username)
+        ) {
           userRet = u;
           return true;
         }
@@ -120,7 +129,11 @@ export default class extends Model {
     return b;
   }
 
-  async removeUser(botId, user, collection = this.database.getTable("botUsers")) {
+  async removeUser(
+    botId,
+    user,
+    collection = this.database.getTable("botUsers"),
+  ) {
     // WIP
     const u = await this.getUser(botId, user, collection);
     if (u) {
@@ -130,7 +143,7 @@ export default class extends Model {
 
   async getIntents(botId, versionId = null, query = null) {
     const collection = this.botsCache.getTable("intents");
-    const q = `botId=${botId} AND versionId=${(versionId || "NULL")}`;
+    const q = `botId=${botId} AND versionId=${versionId || "NULL"}`;
     if (query) {
       logger.info("TODO getIntents query");
     }
@@ -147,7 +160,7 @@ export default class extends Model {
     // logger.info("i", i, botId);
     if (intent.id && intent.botId === botId) {
       intentId = intent.id;
-    } else if ((!intent.id) && (!intent.botId)) {
+    } else if (!intent.id && !intent.botId) {
       i.id = this.generateId(48);
     } else {
       // Error botId doesn't match
@@ -237,7 +250,7 @@ export default class extends Model {
     const bot = await this.getBot(botId);
     if (bot) {
       const collection = this.botsCache.getTable("intents");
-      const query = `botId=${botId} AND versionId=${(version || "NULL")}`;
+      const query = `botId=${botId} AND versionId=${version || "NULL"}`;
       logger.info("Bots.removeAllIntents query=", query);
       await collection.deleteItems(query);
     }

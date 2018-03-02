@@ -30,7 +30,9 @@ export default class extends CommonRoutes {
     const me = await this.access(context);
     const { conversationId } = context.getParams();
     // logger.info("conversationId=" + conversationId);
-    const payload = await this.extensions.getMessenger().getConversation(me, conversationId);
+    const payload = await this.extensions
+      .getMessenger()
+      .getConversation(me, conversationId);
     if (payload === null) {
       return { error: `undefined conversation with id=${conversationId}` };
     }
@@ -40,7 +42,9 @@ export default class extends CommonRoutes {
   async newConversation(context) {
     const me = await this.access(context);
     const params = context.getBody();
-    const payload = await this.extensions.getMessenger().createConversation(me, params);
+    const payload = await this.extensions
+      .getMessenger()
+      .createConversation(me, params);
     if (payload === null) {
       return { error: "can't create conversation" };
     }
@@ -51,10 +55,9 @@ export default class extends CommonRoutes {
     const me = await this.access(context);
     const { conversationId } = context.getParams();
     const since = context.getQuery().since ? context.getQuery().since : 0;
-    const payload = await this.extensions.getMessenger().getConversationMessages(
-      me,
-      conversationId, since,
-    );
+    const payload = await this.extensions
+      .getMessenger()
+      .getConversationMessages(me, conversationId, since);
     if (payload === null) {
       return { error: "can't find conversation's messages" };
     }
@@ -71,11 +74,9 @@ export default class extends CommonRoutes {
     if (isMaster) {
       user = null;
     }
-    const payload = await this.extensions.getMessenger().createMessage(
-      user,
-      conversationId,
-      params,
-    );
+    const payload = await this.extensions
+      .getMessenger()
+      .createMessage(user, conversationId, params);
     if (payload === null) {
       return { error: "can't create message" };
     }

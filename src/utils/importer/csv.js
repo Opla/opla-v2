@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const CSVImporter = {
-
-  import(data, options = { }) {
+  import(data, options = {}) {
     const lines = data.split(/\r\n|\n/);
     const separator = options.separator || ",";
     const headers = lines.shift().split(separator);
@@ -25,7 +24,8 @@ const CSVImporter = {
             buf = "";
           }
           i += 1;
-        } else if (ch === "\"") {
+          // eslint-disable-next-line quotes
+        } else if (ch === '"') {
           open = !open;
         } else {
           buf += ch;
@@ -36,8 +36,6 @@ const CSVImporter = {
     });
     return items;
   },
-
-
 };
 
 export default CSVImporter;

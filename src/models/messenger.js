@@ -25,13 +25,19 @@ class MessengerModel extends Model {
 
   static buildParticipants(username, participants) {
     // remove duplicate
-    return [username, ...participants].filter((el, i, arr) => arr.indexOf(el) === i);
+    return [username, ...participants].filter(
+      (el, i, arr) => arr.indexOf(el) === i,
+    );
   }
 
   async deleteConversations(user, origin = null) {
     const collection = this.database.getTable("conversations");
     const coll = this.database.getTable("messages");
-    const conversations = await this.getAuthorConversations(user, origin, collection);
+    const conversations = await this.getAuthorConversations(
+      user,
+      origin,
+      collection,
+    );
     const c = [];
     const self = this;
     conversations.forEach(async (conversation) => {
@@ -42,14 +48,21 @@ class MessengerModel extends Model {
     return c;
   }
 
-  async getAuthorConversations(user, origin = null, collection = this.database.getTable("conversations")) {
+  async getAuthorConversations(
+    user,
+    origin = null,
+    collection = this.database.getTable("conversations"),
+  ) {
     const conversations = [];
     const { id: userId, username } = user;
     await collection.nextItem(async (conversation) => {
       const o =
-          origin === null ||
-          (conversation.origin && conversation.origin === origin);
-      if (o && (conversation.author === userId || conversation.author === username)) {
+        origin === null ||
+        (conversation.origin && conversation.origin === origin);
+      if (
+        o &&
+        (conversation.author === userId || conversation.author === username)
+      ) {
         conversations.push(conversation);
       }
     });
@@ -80,7 +93,8 @@ class MessengerModel extends Model {
           return b;
         }, this);
       } else if (
-        conversation.author === username || conversation.author === userId
+        conversation.author === username ||
+        conversation.author === userId
       ) {
         b = true;
       }
@@ -105,7 +119,9 @@ class MessengerModel extends Model {
         return conversation;
       }
     } else if (user) {
-      conversation = await collection.getItem(`author=${userId} OR author=${username}`);
+      conversation = await collection.getItem(
+        `author=${userId} OR author=${username}`,
+      );
     }
     // logger.info("gc sql=", collection.sql);
     let b = false;
@@ -119,7 +135,8 @@ class MessengerModel extends Model {
         return b;
       });
     } else if (
-      conversation && (conversation.author === username || conversation.author === userId)
+      conversation &&
+      (conversation.author === username || conversation.author === userId)
     ) {
       b = true;
     }
@@ -158,7 +175,10 @@ class MessengerModel extends Model {
     await collection.setItem(conversation.id, conversation);
   }
 
-  async deleteConversationMessages(conversationId, collection = this.database.getTable("messages")) {
+  async deleteConversationMessages(
+    conversationId,
+    collection = this.database.getTable("messages"),
+  ) {
     await collection.deleteItems(`conversationId=${conversationId}`);
   }
 
@@ -199,7 +219,7 @@ class MessengerModel extends Model {
     const msg = params;
     if (fromUser && (params.message || params.body || params.attachments)) {
       let { body } = params;
-      if ((!body) && params.message) {
+      if (!body && params.message) {
         body = params.message;
         delete msg.message;
       }

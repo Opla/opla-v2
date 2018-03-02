@@ -16,7 +16,11 @@ class ExtensionsController {
     this.config = config || {};
     this.database = zoapp.database;
     this.bots = new BotsController("Bots", this, "bot");
-    this.sandboxMessenger = new SandboxMessengerController("SandboxMessenger", this, "sandbox");
+    this.sandboxMessenger = new SandboxMessengerController(
+      "SandboxMessenger",
+      this,
+      "sandbox",
+    );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
   }
@@ -29,7 +33,11 @@ class ExtensionsController {
     const users = { count: 1 };
 
     return {
-      conversations, messages, users, bots, params,
+      conversations,
+      messages,
+      users,
+      bots,
+      params,
     };
   }
 
