@@ -51,8 +51,14 @@ class BotManager extends Component {
         dialog.invalidateField();
         return false;
       }
-      const data = dialog.getData();
-      const intent = { ...data, name: intentName };
+
+      const data = {};
+
+      const intent = {
+        ...data,
+        name: intentName,
+      };
+
       this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
@@ -192,12 +198,14 @@ class BotManager extends Component {
                   raised
                   style={{ marginRight: "32px" }}
                   onClick={(e) => { e.preventDefault(); this.handleAddIntent(); }}
-                >Create intent
+                >
+                  Create intent
                 </Button>
                 <Button
                   raised
                   onClick={(e) => { e.preventDefault(); this.handleExportImport(true); }}
-                >Import intents
+                >
+                  Import intents
                 </Button>
               </div>
             </div>

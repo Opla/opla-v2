@@ -11,7 +11,5 @@ opla.start();
 
 /* global module */
 if (module.hot) {
-  module.hot.accept("OplaLibs/opla", () => {
-    opla.restart();
-  });
+  module.hot.accept();
 }
