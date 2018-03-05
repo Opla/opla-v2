@@ -13,7 +13,7 @@
     "dev": "yarn compile:dev && yarn start:dev",
     "lint": "eslint src tests",
     "lint:dev": "yarn lint --rule 'no-console: off' --fix",
-    "prestart": "yarn run -s build",
+    "prestart": "yarn compile",
     "start": "node dist",
     "start:dev": "nodemon -w src --exec \"babel-node src \"",
     "test": "jest"

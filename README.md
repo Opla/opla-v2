@@ -25,13 +25,15 @@ quickly.
     $ yarn install
     ```
 
-2. If you do not want to use Docker Compose, configure your MariaDB instance and
-   run the `bin/opla init` command to configure this project. If you use Docker
-   Compose, run:
+2. Run the configuration tool:
 
    ```
-   $ docker-compose up -d
+   $ bin/opla init
    ```
+
+   **Important:** if you want to use Docker Compose, accept all the default
+   settings and run `docker-compose up -d`, otherwise configure your MariaDB
+   instance.
 
 3. Start the dev environment:
 
