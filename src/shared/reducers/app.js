@@ -38,7 +38,7 @@ import {
   APP_UPDATEPUBLISHER,
 } from "../actions/constants";
 
-const initialState = {
+export const initialState = {
   loading: false,
   admin: null,
   intents: null,
@@ -489,20 +489,28 @@ export default createReducer(initialState, {
     loading: true,
     error: null,
   }),
-  [API_MOVEINTENT + FETCH_SUCCESS]: (state, { response }) => {
-    // TODO move intent
-    const { toIndex, fromIndex } = response;
-    const intents = [...state.intents];
-    intents.splice(toIndex, 0, intents.splice(fromIndex, 1)[0]);
-    const selectedIntentIndex = toIndex;
-    const selectedIntent = intents[toIndex];
+  [API_MOVEINTENT + FETCH_SUCCESS]: (state, { from, to }) => {
+    const reorderedIntents = [];
+    const fromIntent = state.intents[from];
+    const toIntent = state.intents[to];
+
+    state.intents.forEach((intent, index) => {
+      if (index === from) {
+        reorderedIntents.push(toIntent);
+      } else if (index === to) {
+        reorderedIntents.push(fromIntent);
+      } else {
+        reorderedIntents.push(intent);
+      }
+    });
+
     return {
       ...state,
       loading: false,
       error: null,
-      intents,
-      selectedIntentIndex,
-      selectedIntent,
+      intents: reorderedIntents,
+      selectedIntent: reorderedIntents[to],
+      selectedIntentIndex: to,
     };
   },
   [API_MOVEINTENT + FETCH_FAILURE]: (state, { error }) => ({

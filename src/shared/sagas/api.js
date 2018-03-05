@@ -36,7 +36,14 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
 } from "../actions/constants";
-import { apiGetMetricsFailure, apiGetMetricsSuccess } from "../actions/api";
+import {
+  apiGetIntentsFailure,
+  apiGetIntentsSuccess,
+  apiGetMetricsFailure,
+  apiGetMetricsSuccess,
+  apiMoveIntentFailure,
+  apiMoveIntentSuccess,
+} from "../actions/api";
 
 function* getSandboxMessages(action) {
   const { botId } = action;
@@ -259,12 +266,10 @@ const api = [
       const { botId } = action;
       try {
         const response = yield getWebService().get(`bots/${botId}/intents`);
-        yield put({
-          type: `${API_GETINTENTS}${FETCH_SUCCESS}`,
-          intents: response.intents,
-        });
+
+        yield put(apiGetIntentsSuccess(response.intents));
       } catch (error) {
-        yield put({ type: `${API_GETINTENTS}${FETCH_FAILURE}`, error });
+        yield put(apiGetIntentsFailure(error));
       }
     },
   ],
@@ -299,24 +304,18 @@ const api = [
     API_MOVEINTENT + FETCH_REQUEST,
     function* f(action) {
       const { botId, intentId, from, to } = action;
-      const data = {
-        botId,
-        intentId,
-        from,
-        to,
-      };
+
       try {
-        const response = yield getWebService().put(
-          `bots/${botId}/intents/${intentId}/move`,
-          data,
-        );
-        yield put({
-          type: `${API_MOVEINTENT}${FETCH_SUCCESS}`,
-          loading: false,
-          response,
+        yield getWebService().put(`bots/${botId}/intents/${intentId}/move`, {
+          botId,
+          from,
+          intentId,
+          to,
         });
+
+        yield put(apiMoveIntentSuccess(from, to));
       } catch (error) {
-        yield put({ type: `${API_MOVEINTENT}${FETCH_FAILURE}`, error });
+        yield put(apiMoveIntentFailure(error));
       }
     },
   ],

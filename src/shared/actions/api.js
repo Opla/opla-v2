@@ -72,6 +72,14 @@ export function apiGetIntentsRequest(botId) {
   return { type: API_GETINTENTS + FETCH_REQUEST, botId };
 }
 
+export function apiGetIntentsSuccess(intents) {
+  return { type: API_GETINTENTS + FETCH_SUCCESS, intents };
+}
+
+export function apiGetIntentsFailure(error) {
+  return { type: API_GETINTENTS + FETCH_FAILURE, error };
+}
+
 export function apiSendIntentRequest(botId, intent) {
   return { type: API_SENDINTENT + FETCH_REQUEST, botId, intent };
 }
@@ -88,6 +96,18 @@ export function apiMoveIntentRequest(botId, intentId, from, to) {
     from,
     to,
   };
+}
+
+export function apiMoveIntentSuccess(from, to) {
+  return {
+    type: API_MOVEINTENT + FETCH_SUCCESS,
+    from,
+    to,
+  };
+}
+
+export function apiMoveIntentFailure(error) {
+  return { type: API_MOVEINTENT + FETCH_FAILURE, error };
 }
 
 export function apiGetSandboxMessagesRequest(botId) {
