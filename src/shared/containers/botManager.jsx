@@ -52,6 +52,7 @@ class BotManager extends Component {
   onAddIntent = (dialog, action) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
+
       if (intentName === "") {
         dialog.invalidateField();
         return false;
