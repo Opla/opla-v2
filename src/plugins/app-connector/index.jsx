@@ -13,7 +13,7 @@ export default class ExternalAppPlugin {
     this.connector = connector;
     this.params = {
       name: "app-connector",
-      title: "Native/Web App",
+      title: "Web page",
       icon: "devices",
       color: "gray",
       type: "MessengerConnector",
