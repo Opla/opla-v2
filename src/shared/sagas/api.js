@@ -261,7 +261,6 @@ const api = [
         const response = yield getWebService().get(`bots/${botId}/intents`);
         yield put({
           type: `${API_GETINTENTS}${FETCH_SUCCESS}`,
-          loading: false,
           intents: response.intents,
         });
       } catch (error) {
@@ -275,6 +274,7 @@ const api = [
     function* f(action) {
       const { botId } = action;
       const { intent } = action;
+
       try {
         let response;
         if (intent.id) {
@@ -287,7 +287,6 @@ const api = [
         }
         yield put({
           type: `${API_SENDINTENT}${FETCH_SUCCESS}`,
-          loading: false,
           data: response,
         });
       } catch (error) {
