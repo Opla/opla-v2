@@ -76,6 +76,7 @@ const MessagingsList = (props) => {
                   checked={item.enabled}
                   onChange={(e) => {
                     e.preventDefault();
+
                     if (onSelect) {
                       onSelect({
                         name,
