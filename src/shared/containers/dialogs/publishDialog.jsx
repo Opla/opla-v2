@@ -40,18 +40,20 @@ class PublishDialog extends Component {
   }
 
   onSelect = ({ /* name, */ state, /* index, */ item }) => {
-    // console.log("WIP onSelected", name, state, index);
     const { service, instance } = item;
+
     if (state === "enable") {
+      const serviceName = service.getName();
+      let publisher = this.props.publishers[serviceName];
+
       let status;
-      const n = service.getName();
-      let publisher = this.props.publishers[n];
       if (publisher) {
         ({ status } = publisher);
       } else {
-        publisher = { name: n };
+        publisher = { name: serviceName };
         ({ status } = service);
       }
+
       publisher.status = status === "start" ? null : "start";
       // console.log("status ", publisher.status, status);
       // this.setState({ servicesEnabled });
@@ -125,7 +127,7 @@ class PublishDialog extends Component {
     }
   }
 
-  renderDialog = () => {
+  renderDialog() {
     let content = null;
     if (this.state.isLoading) {
       content = <div>Loading</div>;
@@ -136,6 +138,7 @@ class PublishDialog extends Component {
         type: "MessengerConnector",
         activated: true,
       });
+
       const servicesEnabled = this.props.publishers;
       if (this.props.middlewares && this.props.middlewares.length > 0) {
         const { middlewares } = this.props;
@@ -159,6 +162,7 @@ class PublishDialog extends Component {
           });
         });
       }
+
       const items = [];
       services.forEach((service) => {
         // TODO check if the item is already pushed
@@ -191,9 +195,11 @@ class PublishDialog extends Component {
           });
         }
       });
+
       actives.forEach((active) => {
         items.push(active);
       });
+
       content = (
         <div style={{ marginBottom: "48px" }}>
           <MessagingsList
@@ -206,12 +212,12 @@ class PublishDialog extends Component {
     }
 
     return content;
-  };
+  }
 
   render() {
     const title = "Publish";
-    const content = this.renderDialog();
     const style = { width: "550px" };
+
     return (
       <Dialog
         open={this.state.openDialog}
@@ -219,7 +225,7 @@ class PublishDialog extends Component {
         onClose={this.handleCloseDialog}
       >
         <DialogHeader>{title}</DialogHeader>
-        <DialogBody>{content}</DialogBody>
+        <DialogBody>{this.renderDialog()}</DialogBody>
         <DialogFooter>
           <Button
             type="button"

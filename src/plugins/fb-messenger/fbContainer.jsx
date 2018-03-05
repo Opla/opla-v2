@@ -6,9 +6,9 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, Textfield } from "zrmc";
+import { Button, TextField } from "zrmc";
 
-export default class FBContainer extends Component {
+class FBContainer extends Component {
   constructor() {
     super();
     this.state = {
@@ -246,23 +246,15 @@ export default class FBContainer extends Component {
           top: "0px",
         }}
       >
-        <Textfield
-          defaultValue=""
-          pattern=""
+        <TextField
           label="Page Token"
-          floatingLabel
-          error=""
           style={{ width: "320px" }}
           ref={(input) => {
             this.textField1 = input;
           }}
         />
-        <Textfield
-          defaultValue=""
-          pattern=""
+        <TextField
           label="Verify Token"
-          floatingLabel
-          error=""
           style={{ width: "320px" }}
           ref={(input) => {
             this.textField2 = input;
@@ -305,3 +297,5 @@ FBContainer.propTypes = {
   selectedStep: PropTypes.number.isRequired,
   onAction: PropTypes.func.isRequired,
 };
+
+export default FBContainer;

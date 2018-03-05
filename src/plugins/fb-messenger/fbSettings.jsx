@@ -6,14 +6,17 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Textfield, Icon } from "zrmc";
+import { TextField, Icon } from "zrmc";
 
-export default class FBSettings extends Component {
+class FBSettings extends Component {
   onAction = (action) => {
     if (action === "Manual") {
       // TODO
     }
-    this.props.onAction(action);
+
+    if (this.props.onAction) {
+      this.props.onAction(action);
+    }
   };
 
   render() {
@@ -26,11 +29,10 @@ export default class FBSettings extends Component {
     return (
       <div style={style}>
         <div>
-          <Textfield
+          <TextField
             label="Bot name"
             pattern="[a-zA-Z0-9\.-]+"
             value={instance.botName}
-            floatingLabel
             onChange={() => {}}
             spellCheck={false}
             style={{ width: "320px" }}
@@ -39,10 +41,9 @@ export default class FBSettings extends Component {
               this.tfBotName = input;
             }}
           />
-          <Textfield
+          <TextField
             label="Page Access Token"
             pattern="[a-zA-Z0-9\.-]+"
-            floatingLabel
             value={instance.accessToken}
             onChange={() => {}}
             spellCheck={false}
@@ -52,10 +53,9 @@ export default class FBSettings extends Component {
               this.tfAccessToken = input;
             }}
           />
-          <Textfield
+          <TextField
             label="Verify Token"
             pattern="[a-zA-Z0-9\.-]+"
-            floatingLabel
             value={instance.verifyToken}
             onChange={() => {}}
             spellCheck={false}
@@ -66,9 +66,8 @@ export default class FBSettings extends Component {
             }}
           />
           <div style={{ width: "360px" }}>
-            <Textfield
+            <TextField
               label="Callback url"
-              floatingLabel
               spellCheck={false}
               error="You need an https public url !"
               style={{ width: "320px" }}
@@ -110,10 +109,12 @@ export default class FBSettings extends Component {
 
 FBSettings.defaultProps = {
   instance: null,
-  onAction: () => {},
+  onAction: null,
 };
 
 FBSettings.propTypes = {
   instance: PropTypes.shape({}),
   onAction: PropTypes.func,
 };
+
+export default FBSettings;
