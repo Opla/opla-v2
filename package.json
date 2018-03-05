@@ -51,7 +51,7 @@
     "zoapp-common": "0.1.0",
     "zoapp-front": "^0.6.0",
     "zoapp-ui": "^0.4.7",
-    "zrmc": "^0.6.0"
+    "zrmc": "^0.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
