@@ -19,9 +19,9 @@ import { appSelectIntent } from "../actions/app";
 
 class ExplorerContainer extends Component {
   onDropIntent = (dragIndex, dropIndex) => {
-    // console.log("TODO", `ExplorerContainer.onDropIntent ${dragIndex} / ${dropIndex}`);
     const intent = this.props.intents[dragIndex];
     const intentId = intent.id;
+
     this.props.apiMoveIntentRequest(
       this.props.selectedBotId,
       intentId,
@@ -37,14 +37,17 @@ class ExplorerContainer extends Component {
   onAddIntent = (dialog, action) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
-      // console.log("WIP", `ExplorerContainer.onAddIntent :${intentName}`);
+
       if (intentName === "") {
         dialog.invalidateField();
         return false;
       }
+
       const intent = { name: intentName };
+
       this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
     }
+
     return true;
   };
 
@@ -214,6 +217,7 @@ const mapStateToProps = (state) => {
   const intents = state.app.intents ? state.app.intents : null;
   const { admin } = state.app;
   const bot = admin ? admin.bots[0] : null;
+
   return {
     intents,
     selectedIntentIndex,
