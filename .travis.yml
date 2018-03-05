@@ -8,5 +8,6 @@ addons:
 
 cache: yarn
 script:
+  - bin/opla init --non-interactive
   - yarn lint
   - yarn test

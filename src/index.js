@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import App from "./app";
-import config from "./config";
+// eslint-disable-next-line import/no-unresolved
+import config from "../config/default.json";
 
 App(config).zoapp.start();
