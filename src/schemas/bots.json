@@ -160,6 +160,9 @@
                 "tags": {
                     "type": "array",
                     "arraytype": "string"
+                },
+                "order": {
+                  "type": "#Order"
                 }
             }
         }

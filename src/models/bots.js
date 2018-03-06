@@ -141,13 +141,15 @@ export default class extends Model {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   async getIntents(botId, versionId = null, query = null) {
     const collection = this.botsCache.getTable("intents");
     const q = `botId=${botId} AND versionId=${versionId || "NULL"}`;
-    if (query) {
-      logger.info("TODO getIntents query");
-    }
+
+    // TODO: use `query`
+
     const intents = await collection.getItems(q);
+
     return intents;
   }
 
@@ -156,21 +158,32 @@ export default class extends Model {
     if (intent.versionId !== versionId) {
       logger.info("putIntents", versionId, intent.versionId);
     }
+
     let i = { ...intent };
-    // logger.info("i", i, botId);
+
     if (intent.id && intent.botId === botId) {
       intentId = intent.id;
     } else if (!intent.id && !intent.botId) {
       i.id = this.generateId(48);
     } else {
-      // Error botId doesn't match
       i = null;
     }
+
     if (i) {
       i.botId = botId;
       i.versionId = versionId;
+
+      if (!intent.id) {
+        // compute the next order value for this new intent
+        const intents = await this.getIntents(botId, versionId);
+        const lastIntentOrder =
+          intents.length > 0 ? intents[intents.length - 1].order : 0;
+        i.order = lastIntentOrder + 1;
+      }
+
       await collection.setItem(intentId, i);
     }
+
     return i;
   }
 
@@ -219,16 +232,24 @@ export default class extends Model {
   async moveIntent(botId, intentId, fromIndex, toIndex) {
     const bot = await this.getBot(botId);
     let i = false;
-    // logger.info("bot=" + bot);
+
     if (bot) {
       const collection = this.botsCache.getTable("intents");
       const intent = await collection.getItem(intentId);
-      // logger.info("intent=" + intent + " id=" + intentId);
+
       if (intent && intent.botId === botId) {
-        // BUG this not the right way if we have multiple bots stored in same database
-        i = await collection.moveItem(intentId, fromIndex, toIndex);
+        // TODO: BUG this not the right way if we have multiple bots stored in
+        // same database
+        try {
+          i = await collection.moveItem(intentId, fromIndex, toIndex);
+        } catch (e) {
+          logger.error(e);
+
+          return false;
+        }
       }
     }
+
     return i;
   }
 
