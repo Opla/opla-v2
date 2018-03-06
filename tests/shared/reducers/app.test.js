@@ -71,6 +71,12 @@ describe("reducers/app", () => {
 
       ids = state.intents.map((intent) => intent.id);
       expect(ids).toEqual(["intent-2", "intent-3", "intent-1"]);
+
+      // move the third intent to the first position
+      state = reducer(state, actions.apiMoveIntentSuccess(2, 0));
+
+      ids = state.intents.map((intent) => intent.id);
+      expect(ids).toEqual(["intent-1", "intent-2", "intent-3"]);
     });
 
     it("stores the error on move intent failure", () => {

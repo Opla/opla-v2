@@ -490,26 +490,15 @@ export default createReducer(initialState, {
     error: null,
   }),
   [API_MOVEINTENT + FETCH_SUCCESS]: (state, { from, to }) => {
-    const reorderedIntents = [];
-    const fromIntent = state.intents[from];
-    const toIntent = state.intents[to];
-
-    state.intents.forEach((intent, index) => {
-      if (index === from) {
-        reorderedIntents.push(toIntent);
-      } else if (index === to) {
-        reorderedIntents.push(fromIntent);
-      } else {
-        reorderedIntents.push(intent);
-      }
-    });
+    const intents = [...state.intents];
+    intents.splice(to, 0, intents.splice(from, 1)[0]);
 
     return {
       ...state,
       loading: false,
       error: null,
-      intents: reorderedIntents,
-      selectedIntent: reorderedIntents[to],
+      intents,
+      selectedIntent: intents[to],
       selectedIntentIndex: to,
     };
   },
