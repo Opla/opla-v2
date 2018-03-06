@@ -308,9 +308,10 @@ const api = [
       try {
         yield getWebService().put(`bots/${botId}/intents/${intentId}/move`, {
           botId,
-          from,
           intentId,
-          to,
+          // the API is 1-based index
+          from: from + 1,
+          to: to + 1,
         });
 
         yield put(apiMoveIntentSuccess(from, to));
