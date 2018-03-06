@@ -135,24 +135,24 @@ export default class extends Controller {
   }
 
   async moveIntent(botId, intentId, fromIndex, toIndex) {
-    let ret = null;
-
     const ok = await this.model.moveIntent(botId, intentId, fromIndex, toIndex);
 
     if (ok) {
-      ret = {
+      const response = {
         botId,
         id: intentId,
         from: fromIndex,
         to: toIndex,
       };
 
-      this.dispatchIntentAction(botId, "moveIntents", ret);
-    } else {
-      ret = { error: `can't move this intent to ${toIndex}` };
+      this.dispatchIntentAction(botId, "moveIntents", response);
+
+      return response;
     }
 
-    return ret;
+    return {
+      error: `can't move this intent to ${toIndex}`,
+    };
   }
 
   async removeIntent(botId, intentId) {
