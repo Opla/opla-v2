@@ -35,13 +35,65 @@ quickly.
    settings and run `docker-compose up -d`, otherwise configure your MariaDB
    instance.
 
-3. Start the dev environment:
+3. Run the migrations:
+
+   ```
+   $ yarn db-migrate up
+   ```
+
+4. Start the dev environment:
 
     ```
     $ yarn dev
     ```
 
 This application should be available at: http://127.0.0.1:8081/.
+
+
+## Database migrations
+
+We use [db-migrate](http://db-migrate.readthedocs.io/en/latest/) to manage the
+database migrations with a specific configuration for this project. By using
+the `bin/opla` tool, this configuration is automatically generated. That is why
+you should always run `yarn db-migrate` to use this configuration, and never
+`db-migrate` directly (it should complain about not finding the configuration
+file anyway).
+
+### Creating a migration
+
+1. Run:
+
+   ```
+   $ yarn db-migrate create "short explanation of the migration"
+   ```
+
+   The `"short explanation of the migration"` will be used in the migration
+   filename (see the content of the [`migrations/`](migrations/) folder for some
+   examples). Choose something short and self-explanatory.
+
+   This command will create several files, all of them should be put into Git.
+   You should not have to care about the generated JavaScript files as writing
+   migrations in plain SQL is much easier. In addition, you should not deal with
+   the `down` migrations, since database rollbacks never work in practice, we
+   only go forward.
+
+2. Write your migration in plain SQL in the generated file:
+
+
+   ```
+   echo "<SQL STATEMENT>;" > migrations/sqls/20180307110023-short-explanation-of-the-migration-up.sql
+   ```
+
+   Then, you can apply this migration and make sure everything works as
+   intended.
+
+### Applying migrations
+
+To apply all migrations at once, run:
+
+   ```
+   $ yarn db-migrate up
+   ```
 
 
 ## Contributing
