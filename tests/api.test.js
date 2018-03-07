@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import request from "supertest";
-import App from "opla-backend/app";
+import createApp from "opla-backend/app";
 
 const mysqlConfig = {
   // Global Database
@@ -51,17 +51,19 @@ const initService = async (ctx, params, commons) => {
     ({ config } = commons);
   }
 
-  const app = App(config).zoapp;
-  await app.database.reset();
+  const app = createApp(config);
+
+  await app.getDatabase().reset();
   await app.start();
+
   context.app = app;
-  context.server = app.server.server;
+  context.server = app.zoapp.server.server;
 
   context.title = params.title;
 
   const password = params.password ? params.password : commons.password;
 
-  let r = await app.authServer.registerApplication({
+  let r = await app.getAuthServer().registerApplication({
     name: "Opla",
     grant_type: "password",
     redirect_uri: "localhost",
@@ -69,7 +71,7 @@ const initService = async (ctx, params, commons) => {
   });
   context.application = r.result;
 
-  r = await app.authServer.registerUser({
+  r = await app.getAuthServer().registerUser({
     client_id: context.application.client_id,
     username: "user1",
     password: "12345",
@@ -77,7 +79,7 @@ const initService = async (ctx, params, commons) => {
   });
   context.user1 = r.result;
 
-  r = await app.authServer.authorizeAccess({
+  r = await app.getAuthServer().authorizeAccess({
     client_id: context.application.client_id,
     username: context.user1.username,
     password,
@@ -85,7 +87,7 @@ const initService = async (ctx, params, commons) => {
     scope: "admin",
   });
 
-  r = await app.authServer.requestAccessToken({
+  r = await app.getAuthServer().requestAccessToken({
     client_id: context.application.client_id,
     username: context.user1.username,
     password,
@@ -94,7 +96,7 @@ const initService = async (ctx, params, commons) => {
   });
   context.authUser1 = r.result;
 
-  context.endpoint = app.endpoint;
+  context.endpoint = app.zoapp.endpoint;
 
   return context;
 };
@@ -155,13 +157,34 @@ const deleteAsync = async (context, route, token) => {
 };
 
 describe("API", () => {
-  // we run the same test suite for different datasets.
-  const datasets = [
-    { title: "MemDataset" },
-    { title: "MySQLDataset", config: mysqlConfig },
+  // we run the same test suite with different database drivers.
+  const databaseDrivers = [
+    {
+      title: "MemDatabase",
+      config: {
+        // MemDatabase should always build its SQL schema as we do not have
+        // migrations for this driver.
+        buildSchema: true,
+      },
+    },
+    {
+      title: "MySQLDatabase",
+      config: {
+        ...mysqlConfig,
+        // MySQLDatabase should build its SQL schema when running the tests
+        // locally (in dev mode), but we do not want MySQLDatabase to create
+        // its SQL schema on Travis CI because we want to use the schema
+        // created by the migration tool (cf. `.travis.yml`). That way we can
+        // test the migrations thanks to this test suite.
+        //
+        // The `CI` env variable is usually available on all CI platforms only,
+        // see: https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables.
+        buildSchema: process.env.CI === "true" ? false : true,
+      },
+    },
   ];
 
-  datasets.forEach((params) => {
+  databaseDrivers.forEach((params) => {
     describe(`with ${params.title}`, () => {
       const commons = { password: "12345" };
 
@@ -172,7 +195,7 @@ describe("API", () => {
       });
 
       afterAll(async () => {
-        await context.app.database.delete();
+        await context.app.getDatabase().delete();
         await context.app.close();
       });
 

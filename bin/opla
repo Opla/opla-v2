@@ -15,72 +15,95 @@ program
   .description(DESCRIPTION)
   .option("--non-interactive", "Do not prompt and use default settings");
 
+const configDefaults = {
+  databaseType: "mysql",
+  databaseHost: "127.0.0.1",
+  databaseName: "opla_dev",
+  databaseUser: "root",
+  databasePass: "",
+  apiEndpoint: "/api",
+  authEndpoint: "/auth",
+};
+
 program
   .command("init")
   .alias("i")
   .description("Initialize the project and create the configuration file")
-  .action(async () => {
-    const defaults = {
-      databaseType: "mysql",
-      databaseHost: "127.0.0.1",
-      databaseName: "opla_dev",
-      databaseUser: "root",
-      databasePass: "",
-      apiEndpoint: "/api",
-      authEndpoint: "/auth",
-    };
+  .option("--database-name [name]", "The database name", configDefaults.databaseName)
+  .action(async (options) => {
     const questions = [
       {
         type: "list",
         name: "databaseType",
         message: "Database engine",
         choices: ["mysql"],
-        default: [defaults.databaseType],
+        default: [configDefaults.databaseType],
       },
       {
         type: "input",
         name: "databaseHost",
         message: "Database host",
-        default: defaults.databaseHost,
+        default: configDefaults.databaseHost,
       },
       {
         type: "input",
         name: "databaseName",
         message: "Database name",
-        default: defaults.databaseName,
+        default: options.databaseName,
       },
       {
         type: "input",
         name: "databaseUser",
         message: "Database user",
-        default: defaults.databaseUser,
+        default: configDefaults.databaseUser,
       },
       {
         type: "password",
         name: "databasePass",
         message: "Database password",
-        default: defaults.databasePass,
+        default: configDefaults.databasePass,
       },
       {
         type: "input",
         name: "apiEndpoint",
         message: "Main API endpoint",
-        default: defaults.apiEndpoint,
+        default: configDefaults.apiEndpoint,
       },
       {
         type: "input",
         name: "authEndpoint",
         message: "Auth API endpoint",
-        default: defaults.authEndpoint,
+        default: configDefaults.authEndpoint,
       },
     ];
 
     try {
+      const fileExists = await fs.pathExists(CONFIG_FILE);
+
+      if (fileExists) {
+        questions.push(
+          {
+            type: "confirm",
+            name: "overwrite",
+            message:
+            "The configuration files already exist. Do you want to overwrite them?",
+            default: false,
+          },
+        );
+      }
+
       let answers;
       if (program.nonInteractive) {
-        answers = defaults;
+        answers = {
+          ...configDefaults,
+          databaseName: options.databaseName,
+        };
       } else {
         answers = await prompt(questions);
+      }
+
+      if (fileExists && !answers.overwrite) {
+        return;
       }
 
       // create the configuration
