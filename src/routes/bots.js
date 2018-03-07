@@ -265,14 +265,16 @@ export default class extends CommonRoutes {
     // const me = await this.access(context);
     const { botId, intentId } = context.getParams();
     // TODO check if me has access to botId
-    const { fromIndex, toIndex } = context.getBody();
-    // logger.info("botId=" + botId);
+    const { from, to } = context.getBody();
+
     const payload = await this.extensions
       .getBots()
-      .moveIntent(botId, intentId, fromIndex, toIndex);
+      .moveIntent(botId, intentId, from, to);
+
     if (payload) {
       return payload;
     }
+
     return { error: "can't move bot's intent" };
   }
 

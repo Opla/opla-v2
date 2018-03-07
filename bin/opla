@@ -7,6 +7,7 @@ const program = require("commander");
 const { prompt } = require("inquirer");
 
 const CONFIG_FILE = "config/default.json";
+const DB_MIGRATE_CONFIG_FILE = "config/db-migrate.json";
 const DESCRIPTION = `Management tool for ${pkg.description}`;
 
 program
@@ -152,7 +153,25 @@ program
         },
       };
 
+      // create configuration for "db-migrate" tool
+      // see: http://db-migrate.readthedocs.io/en/latest/Getting%20Started/configuration/
+      const dbMigrateConfig = {
+        defaultEnv: "local",
+        "sql-file": true,
+        local: {
+          driver: answers.databaseType,
+          host: answers.databaseHost,
+          database: answers.databaseName,
+          user: answers.databaseUser,
+          password: answers.databasePass,
+          multipleStatements: true,
+        },
+      };
+
       await fs.writeJson(CONFIG_FILE, config, { spaces: 2 });
+      await fs.writeJson(DB_MIGRATE_CONFIG_FILE, dbMigrateConfig, {
+        spaces: 2,
+      });
 
       console.log(chalk.green("Project successfully configured!"));
     } catch (err) {
@@ -161,7 +180,9 @@ program
     }
   });
 
-console.log(chalk.yellow(figlet.textSync("Opla CE", { horizontalLayout: "full" })));
+console.log(
+  chalk.yellow(figlet.textSync("Opla CE", { horizontalLayout: "full" })),
+);
 console.log(`${DESCRIPTION}\n`);
 
 program.parse(process.argv);

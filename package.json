@@ -16,7 +16,8 @@
     "prestart": "yarn compile",
     "start": "node dist",
     "start:dev": "nodemon -w src --exec \"babel-node src \"",
-    "test": "jest"
+    "test": "jest",
+    "db-migrate": "db-migrate --config config/db-migrate.json"
   },
   "keywords": [
     "Node",
@@ -26,11 +27,13 @@
   "dependencies": {
     "chalk": "^2.3.1",
     "commander": "^2.14.1",
+    "db-migrate": "^0.10.5",
+    "db-migrate-mysql": "^1.1.10",
     "deepmerge": "^2.0.1",
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
     "inquirer": "^5.1.0",
-    "zoapp-backend": "^0.11.0"
+    "zoapp-backend": "^0.12.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

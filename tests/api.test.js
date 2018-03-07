@@ -335,7 +335,7 @@ describe("API", () => {
           );
           // WIP
           expect(Object.keys(res).sort()).toEqual(
-            ["id", "botId", "name", "input", "output"].sort(),
+            ["id", "botId", "name", "input", "order", "output"].sort(),
           );
           context.intent1 = { ...res };
           // logger.info(`intentId=${context.intent1.id}`);
@@ -351,7 +351,7 @@ describe("API", () => {
           );
           // WIP
           expect(Object.keys(res).sort()).toEqual(
-            ["id", "botId", "name", "input", "output"].sort(),
+            ["id", "botId", "name", "input", "order", "output"].sort(),
           );
         });
 
