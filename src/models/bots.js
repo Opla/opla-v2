@@ -174,7 +174,10 @@ export default class extends Model {
       i.versionId = versionId;
 
       if (!intent.id) {
-        // compute the next order value for this new intent
+        // compute the next order value for this new intent. It works because
+        // `getIntents()` returns ordered intents (i.e. the last one is the
+        // intent with the highest order value) thanks to the `getItems()`
+        // implementation in zoapp-core.
         const intents = await this.getIntents(botId, versionId);
         const lastIntentOrder =
           intents.length > 0 ? intents[intents.length - 1].order : 0;
