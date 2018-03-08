@@ -468,6 +468,7 @@ hr {
 
 .mdl-layout__content {
   height: 100%;
+  width: 100%;
 }
 
 .mdc-list-item--two-line .mdc-list-item__secondary-text .mdl-list__item-icon {
