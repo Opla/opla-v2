@@ -8,8 +8,8 @@ addons:
 
 cache: yarn
 script:
-  - bin/opla init --non-interactive
-  - mysql -e 'CREATE DATABASE opla_dev;'
-  - yarn db-migrate up
+  - mysql -e 'CREATE DATABASE opla_test;'
+  - bin/opla init --non-interactive --database-name opla_test
+  - bin/opla migrations up
   - yarn lint
   - yarn test

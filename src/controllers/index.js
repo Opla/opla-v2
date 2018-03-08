@@ -13,7 +13,7 @@ class ExtensionsController {
   constructor(zoapp, config) {
     this.zoapp = zoapp;
     this.authServer = zoapp.authServer;
-    this.config = config || {};
+    this.config = config;
     this.database = zoapp.database;
     this.bots = new BotsController("Bots", this, "bot");
     this.sandboxMessenger = new SandboxMessengerController(

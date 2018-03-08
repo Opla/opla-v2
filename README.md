@@ -38,7 +38,7 @@ quickly.
 3. Run the migrations:
 
    ```
-   $ yarn db-migrate up
+   $ bin/opla migrations up
    ```
 
 4. Start the dev environment:
@@ -53,18 +53,17 @@ This application should be available at: http://127.0.0.1:8081/.
 ## Database migrations
 
 We use [db-migrate](http://db-migrate.readthedocs.io/en/latest/) to manage the
-database migrations with a specific configuration for this project. By using
-the `bin/opla` tool, this configuration is automatically generated. That is why
-you should always run `yarn db-migrate` to use this configuration, and never
-`db-migrate` directly (it should complain about not finding the configuration
-file anyway).
+database migrations with a specific configuration for this project. By using the
+`bin/opla` tool, this configuration is automatically generated and `db-migrate`
+is bound to the `bin/opla migrations` command. Do not run `db-migrate` directly
+(it should complain about not finding the configuration file anyway).
 
 ### Creating a migration
 
 1. Run:
 
    ```
-   $ yarn db-migrate create "short explanation of the migration"
+   $ bin/opla migrations create "short explanation of the migration"
    ```
 
    The `"short explanation of the migration"` will be used in the migration
@@ -92,7 +91,7 @@ file anyway).
 To apply all migrations at once, run:
 
    ```
-   $ yarn db-migrate up
+   $ bin/opla migrations up
    ```
 
 
