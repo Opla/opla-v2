@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
+const dbMigrate = require("db-migrate");
 const figlet = require("figlet");
 const fs = require("fs-extra");
-const pkg = require("../package.json");
+const path = require("path");
 const program = require("commander");
 const { prompt } = require("inquirer");
 
-const CONFIG_FILE = "config/default.json";
-const DB_MIGRATE_CONFIG_FILE = "config/db-migrate.json";
+const pkg = require("../package.json");
+
+const CONFIG_FILE = path.resolve(__dirname, "../config/default.json");
+const DB_MIGRATE_CONFIG_FILE = path.resolve(__dirname, "../config/db-migrate.json");
 const DESCRIPTION = `Management tool for ${pkg.description}`;
 
 program
@@ -207,8 +210,36 @@ program
 
       console.log(chalk.green("Project successfully configured!"));
     } catch (err) {
-      const errorMessage = err.message;
-      console.error(chalk.red(`An error has occured: ${errorMessage}`));
+      console.error(chalk.red(`An error has occured: ${err.message || err}`));
+      process.exit(1);
+    }
+  });
+
+program
+  .command("migrations")
+  .alias("m")
+  .description("Meta-command to manage the database migrations")
+  .action(async () => {
+    if (process.argv.length > 3) {
+      // We drop the "database" from the list of arguments to let db-migrate
+      // find the correct action. If we do not do that, it thinks "database" is
+      // the command to run... We do it only if an argument is provided after
+      // "database", so that it displays the default help if one only runs
+      // `bin/opla database`.
+      process.argv.splice(2, 1);
+    }
+
+    const db = dbMigrate.getInstance(true, {
+      config: DB_MIGRATE_CONFIG_FILE,
+    });
+
+    try {
+      await db.registerAPIHook();
+
+      db.run();
+    } catch (err) {
+      console.error(chalk.red(`An error has occured: ${err.message || err}`));
+      process.exit(1);
     }
   });
 

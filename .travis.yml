@@ -10,6 +10,6 @@ cache: yarn
 script:
   - mysql -e 'CREATE DATABASE opla_test;'
   - bin/opla init --non-interactive --database-name opla_test
-  - yarn db-migrate up
+  - bin/opla migrations up
   - yarn lint
   - yarn test

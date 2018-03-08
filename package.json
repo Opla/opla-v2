@@ -16,8 +16,7 @@
     "prestart": "yarn compile",
     "start": "node dist",
     "start:dev": "nodemon -w src --exec \"babel-node src \"",
-    "test": "jest",
-    "db-migrate": "db-migrate --config config/db-migrate.json"
+    "test": "jest"
   },
   "keywords": [
     "Node",
