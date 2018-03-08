@@ -50,6 +50,7 @@
             "webpack": {
                 "config": "webpack.common.js"
             }
-        }
+        },
+        "import/core-modules": ["zrmc"]
     }
 }
