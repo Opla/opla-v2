@@ -42,7 +42,7 @@
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "zoapp-common": "0.1.0",
-    "zoapp-front": "^0.7.1",
+    "zoapp-front": "^0.7.2",
     "zoapp-ui": "^0.4.7",
     "zrmc": "^0.8.1"
   },
