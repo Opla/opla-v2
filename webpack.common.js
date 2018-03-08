@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   context: path.resolve(__dirname, "./src/"),
@@ -16,7 +16,7 @@ module.exports = {
       OplaPlugins: path.resolve(__dirname, "./src/plugins/"),
       OplaLibs: path.resolve(__dirname, "./src/shared/"),
       OplaContainers: path.resolve(__dirname, "./src/shared/containers/"),
-      './config': path.resolve(__dirname, './config/default.json')
+      "./config": path.resolve(__dirname, "./config/default.json")
     },
     modules: [path.join(__dirname, "src"), "node_modules"]
   },
@@ -33,11 +33,6 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      {
-        from: "./public/css",
-        to: path.resolve(__dirname, "./dist/public/css"),
-        force: true
-      },
       {
         from: "./public/images",
         to: path.resolve(__dirname, "./dist/public/images"),

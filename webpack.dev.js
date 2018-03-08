@@ -9,6 +9,22 @@ module.exports = merge(commonConfig, {
     "webpack/hot/only-dev-server",
     "./client/index.jsx",
   ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+            },
+          },
+        ]
+      },
+    ]
+  },
   devtool: "inline-source-map",
   devServer: {
     contentBase: path.resolve(__dirname, "./dist/public"),
