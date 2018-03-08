@@ -179,7 +179,7 @@ describe("API", () => {
         //
         // The `CI` env variable is usually available on all CI platforms only,
         // see: https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables.
-        buildSchema: process.env.CI === "true" ? false : true,
+        buildSchema: process.env.CI !== "true",
       },
     },
   ];

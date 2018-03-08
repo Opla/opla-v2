@@ -13,8 +13,8 @@ import plugins from "./plugins";
 class App {
   constructor(config = {}) {
     // We force zoapp not to build the SQL schema by default.
-    const buildSchema = config.buildSchema === undefined ? false :
-      config.buildSchema;
+    const buildSchema =
+      config.buildSchema === undefined ? false : config.buildSchema;
 
     this.zoapp = createZoapp({
       ...config,
