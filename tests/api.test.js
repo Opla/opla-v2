@@ -305,8 +305,23 @@ describe("API", () => {
       });
 
       describe("/bots", () => {
-        // it("should list all bots linked to session's user on /bots GET");
-        // it("should get a SINGLE bot on /bots/:id GET");
+        it("should create a bot with a timezone", async () => {
+          const bot = await postAsync(
+            context,
+            "/bots",
+            context.authUser1.access_token,
+            {
+              name: "bot",
+              username: "user1",
+              password: "12345",
+              email: "user1@test.com",
+              timezone: "Europe/Paris",
+            },
+          );
+
+          expect(bot.timezone).toEqual("Europe/Paris");
+        });
+
         it("should create a SINGLE bot authentified on /bots POST", async () => {
           context.bot1 = await postAsync(
             context,
