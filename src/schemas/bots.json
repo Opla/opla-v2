@@ -55,6 +55,10 @@
                 },
                 "publishedVersionId": {
                     "type": "string"
+                },
+                "timezone": {
+                  "type": "string",
+                  "size": "40"
                 }
             }
         },
