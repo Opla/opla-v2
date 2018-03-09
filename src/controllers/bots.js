@@ -14,11 +14,11 @@ export default class extends Controller {
     this.model = new BotsModel(main.database, main.config);
   }
 
-  async getBots(user) {
+  async getBots(user = null) {
     return this.model.getBots(user);
   }
 
-  async getBot(botId, userId) {
+  async getBot(botId, userId = null) {
     return this.model.getBot(botId, userId);
   }
 
@@ -128,6 +128,10 @@ export default class extends Controller {
     return is;
   }
 
+  async getIntent(botId, intentId) {
+    return this.model.getIntent(botId, intentId);
+  }
+
   async setIntent(botId, intent, versionId) {
     const it = await this.model.setIntent(botId, intent, versionId);
     this.dispatchIntentAction(botId, "setIntents", [it]);
@@ -158,15 +162,15 @@ export default class extends Controller {
   async removeIntent(botId, intentId) {
     const intent = await this.model.removeIntent(botId, intentId);
     if (intent) {
-      this.dispatchIntentAction(botId, "removeIntents", intent);
+      this.dispatchIntentAction(botId, "removeIntents", [intent]);
       return true;
     }
     return false;
   }
 
-  async removeAllIntents(botId, version = null) {
-    await this.model.removeAllIntents(botId, version);
-    this.dispatchIntentAction(botId, "removeAllIntents", []);
+  async removeAllIntents(botId, versionId = null) {
+    await this.model.removeAllIntents(botId, versionId);
+    this.dispatchIntentAction(botId, "removeAllIntents", { botId, versionId });
     return true;
   }
 

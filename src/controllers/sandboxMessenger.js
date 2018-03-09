@@ -29,21 +29,40 @@ export default class extends MessengerController {
     return convs;
   }
 
+  async buildBotConversation(user, botId) {
+    const bot = await this.main.getBots().getBot(botId, user.id);
+    // logger.info("bot=", bot);
+    if (bot) {
+      const participants = Participants([
+        user,
+        { name: bot.name, id: bot.id, type: "bot" },
+      ]);
+      const conversation = await this.createConversation(user, {
+        participants,
+        origin: botId,
+      });
+      return conversation;
+    }
+    return null;
+  }
+
+  async getBotUserConversation(user, botId) {
+    const conversations = await this.getConversations(user, 0, botId, false);
+    let conversation = null;
+    if (conversations.length === 0) {
+      conversation = await this.buildBotConversation(user, botId);
+    } else {
+      [conversation] = conversations;
+    }
+    return conversation;
+  }
+
   async getFullBotConversations(user, botId, isAdmin = false) {
     const conversations = await this.getConversations(user, 0, botId, isAdmin);
-    logger.info("getFullBotConv", user.username, conversations);
+    // logger.info("getFullBotConv", user.username, conversations);
     if (conversations.length === 0) {
-      const bot = await this.main.getBots().getBot(botId, user.id, isAdmin);
-      // logger.info("bot=", bot);
-      if (bot) {
-        const participants = Participants([
-          user,
-          { name: bot.name, id: bot.id, type: "bot" },
-        ]);
-        const conversation = await this.createConversation(user, {
-          participants,
-          origin: botId,
-        });
+      const conversation = await this.buildBotConversation(user, botId);
+      if (conversation) {
         conversations.push(conversation);
       } else {
         return { error: "Can't get messages" };
@@ -67,8 +86,7 @@ export default class extends MessengerController {
           origin: conversation.origin,
           author: conversation.author,
           conversationId,
-          action: "newMessages",
-          messages: [],
+          action: "resetConversation",
         });
       }
       return { result: "ok" };

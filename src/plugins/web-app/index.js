@@ -39,18 +39,14 @@ class AppMessenger {
   }
 
   async register(middleware) {
-    // TODO
     logger.info("WIP register AppMessenger ", middleware);
     const { zoapp } = this.manager;
-    logger.info("grouik", this.manager);
     const { config } = this.manager;
     this.middleware = middleware;
-    logger.info("grouik1");
     if (!middleware.application) {
       // WIP create application
       const bot = await zoapp.extensions.getBots().getBot(middleware.origin);
       const { email } = bot; // WIP get email
-      logger.info("grouik2", email);
       const name = `${middleware.name}_${middleware.origin}`;
       // get a previously created app with same name
       let app = await zoapp.authServer.getApplicationByName(name);

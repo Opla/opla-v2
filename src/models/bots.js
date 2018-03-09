@@ -46,7 +46,7 @@ export default class extends Model {
     return bot;
   }
 
-  async getBots(user) {
+  async getBots(user = null) {
     let bots = [];
     if (user) {
       const collection = this.database.getTable("botUsers");
@@ -102,7 +102,7 @@ export default class extends Model {
     let b = true;
     const collection = this.database.getTable("botUsers");
     let u = await this.getUser(botId, user, collection);
-    logger.info("u", u);
+    // logger.info("u", u);
     let uId = null;
     if (!u) {
       u = {};
@@ -156,7 +156,7 @@ export default class extends Model {
   async putIntent(collection, intent, botId, versionId) {
     let intentId = null;
     if (intent.versionId !== versionId) {
-      logger.info("putIntents", versionId, intent.versionId);
+      logger.info("putIntents not same version: ", versionId, intent.versionId);
     }
 
     let i = { ...intent };
@@ -221,6 +221,16 @@ export default class extends Model {
     return array;
   }
 
+  async getIntent(botId, intentId) {
+    const collection = this.botsCache.getTable("intents");
+    const intent = await collection.getItem(intentId);
+
+    if (intent && intent.botId === botId) {
+      return intent;
+    }
+    return null;
+  }
+
   async setIntent(botId, intent, versionId = null) {
     const bot = await this.getBot(botId);
     // TODO versionning
@@ -247,7 +257,6 @@ export default class extends Model {
           i = await collection.moveItem(intentId, fromIndex, toIndex);
         } catch (e) {
           logger.error(e);
-
           return false;
         }
       }
@@ -275,7 +284,7 @@ export default class extends Model {
     if (bot) {
       const collection = this.botsCache.getTable("intents");
       const query = `botId=${botId} AND versionId=${version || "NULL"}`;
-      logger.info("Bots.removeAllIntents query=", query);
+      // logger.info("Bots.removeAllIntents query=", query);
       await collection.deleteItems(query);
     }
   }

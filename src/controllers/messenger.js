@@ -78,14 +78,14 @@ export default class extends Controller {
             action: "newMessages",
             messages: [message],
           };
-          logger.info(
+          /* logger.info(
             "createMessage dispatch start",
             this.className,
             message,
             payload,
-          );
+          ); */
           this.dispatch(this.className, payload);
-          logger.info("dispatch stop", message.body);
+          // logger.info("dispatch stop", message.body);
         }
         message = MessengerModel.exportMessage(message);
       } else {

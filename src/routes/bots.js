@@ -63,9 +63,9 @@ export default class extends CommonRoutes {
     if (botParams.username) {
       delete botParams.username;
     }
-    logger.info("this.extensions");
+    // logger.info("this.extensions");
     const bot = await this.extensions.getBots().setBot(botParams);
-    logger.info("bot=", bot);
+    // logger.info("bot=", bot);
     if (!bot.error) {
       // then associate owner to bot
       // logger.info("owner=" + JSON.stringify(owner));
@@ -113,9 +113,9 @@ export default class extends CommonRoutes {
   }
 
   async createBot(context) {
-    logger.info("createBot");
+    // logger.info("createBot");
     const me = await this.access(context);
-    logger.info("createBot", me);
+    // logger.info("createBot", me);
     const clientId =
       context.getQuery().client_id || context.req.get("client_id");
     const clientSecret =
@@ -188,14 +188,14 @@ export default class extends CommonRoutes {
       this.extensions.getBots(),
     );
     if (payload) {
-      logger.info("import payload=", payload);
+      // logger.info("import payload=", payload);
       return payload;
     }
     return { error: "doesn't import anything" };
   }
 
   async publish(context) {
-    logger.info("publish");
+    // logger.info("publish");
     // WIP get intents with version and put them in another version
     // and set them as published linked to a/several messaging platform/s
     const me = await this.access(context);
@@ -216,7 +216,7 @@ export default class extends CommonRoutes {
     // TODO check if me has access to botId
     const versionId = context.getParams().version;
     // const { query } = context.getQuery();
-    logger.info("intents version=", versionId);
+    // logger.info("intents version=", versionId);
     const intents = await this.extensions
       .getBots()
       .getIntents(botId, versionId);
@@ -307,12 +307,18 @@ export default class extends CommonRoutes {
     if (isMaster) {
       user = null;
     }
-    // const botId = context.getParams().botId;
+    const { botId } = context.getParams();
     // TODO check if me has access to botId
-    const { conversationId } = context.getParams();
-    // logger.info("conversationId=" + conversationId);
-    const params = context.getBody();
+    let { conversationId } = context.getParams();
     const messenger = this.extensions.getSandboxMessenger();
+    // logger.info(`conversationId=${conversationId} botId=${botId}`);
+    if (!conversationId || conversationId === "undefined") {
+      const conversation = await messenger.getBotUserConversation(user, botId);
+      if (conversation) {
+        conversationId = conversation.id;
+      }
+    }
+    const params = context.getBody();
     return messenger.createMessage(user, conversationId, params);
   }
 
