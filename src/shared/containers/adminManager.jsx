@@ -22,10 +22,14 @@ import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
 
 import { appSetTitle } from "../actions/app";
-import { apiSetAdminParametersRequest } from "../actions/api";
+import {
+  apiSaveBotRequest,
+  apiSetAdminParametersRequest,
+} from "../actions/api";
 import ServicesContainer from "./servicesContainer";
 import PluginsManager from "../utils/pluginsManager";
 import TunnelBox from "../components/tunnelBox";
+import timezones from "../utils/timezones";
 
 const infoStyleD = {
   fontSize: "16px",
@@ -35,6 +39,8 @@ const infoStyleD = {
   lineHeight: "1.1",
 };
 
+const FORM_WIDTH = "100%";
+
 class AdminManager extends Component {
   static onActionTunnel(/* dialog, action */) {
     Zrmc.closeDialog();
@@ -43,9 +49,10 @@ class AdminManager extends Component {
   constructor(props) {
     super(props);
     const pluginsManager = new PluginsManager();
+
     this.state = {
       pluginsManager,
-      botParams: null,
+      bot: props.bot,
       tunnelParams: null,
       backendParams: null,
       emailServerParams: null,
@@ -53,15 +60,23 @@ class AdminManager extends Component {
   }
 
   componentWillMount() {
-    this.updateParams();
+    this.props.appSetTitle("Admin");
   }
 
-  componentWillUpdate() {
-    this.updateParams();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.bot !== this.props.bot) {
+      this.setState({
+        bot: nextProps.bot,
+      });
+    }
   }
 
   onChangeTunnel = (tunnelParams) => {
     this.setState({ tunnelParams });
+  };
+
+  onSaveBotDetails = () => {
+    this.props.apiSaveBotRequest(this.state.bot);
   };
 
   onSaveBackend() {
@@ -71,10 +86,6 @@ class AdminManager extends Component {
       this.setState({ tunnelParams: null });
       this.props.apiSetAdminParametersRequest({ tunnel });
     }
-  }
-
-  updateParams() {
-    this.props.appSetTitle("Admin");
   }
 
   displayTunnelDialog() {
@@ -92,6 +103,46 @@ class AdminManager extends Component {
     });
   }
 
+  handleBotNameChange = (e) => {
+    const name = e.target.value;
+
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        name,
+      },
+    });
+  };
+
+  handleBotDescriptionChange = (e) => {
+    const description = e.target.value;
+
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        description,
+      },
+    });
+  };
+
+  handleLanguageChange = (language) => {
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        language,
+      },
+    });
+  };
+
+  handleTimezoneChange = (timezone) => {
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        timezone,
+      },
+    });
+  };
+
   render() {
     let { isLoading } = this.props;
     if (!isLoading && !this.props.admin && this.props.isSignedIn) {
@@ -105,7 +156,6 @@ class AdminManager extends Component {
     const active = this.props.activeTab;
     let content = "";
     if (active === 0) {
-      const saveDisabled = !this.state.botParams;
       content = (
         <Grid>
           <Inner>
@@ -129,30 +179,30 @@ class AdminManager extends Component {
                 <form style={infoStyleD}>
                   <div>
                     <TextField
-                      onChange={() => {}}
-                      label="Assistant name"
-                      style={{ width: "400px" }}
                       defaultValue={this.props.bot.name}
+                      label="Assistant name"
+                      onChange={this.handleBotNameChange}
+                      style={{ width: FORM_WIDTH }}
                     />
                   </div>
                   <div>
                     <TextField
-                      onChange={() => {}}
-                      label="Describe how your assistant is wonderfull !"
-                      rows={3}
                       defaultValue={this.props.bot.description}
-                      style={{ width: "400px" }}
+                      isTextarea
+                      label="Description"
+                      onChange={this.handleBotDescriptionChange}
+                      style={{ width: FORM_WIDTH }}
                     />
                   </div>
                   <div>
                     <Select
                       label="Language"
-                      onChange={this.handleLanguageChange}
-                      ref={(input) => {
-                        this.selectFieldLanguage = input;
-                      }}
-                      style={{ width: "400px" }}
-                      defaultValue={this.props.bot.language}
+                      onSelected={this.handleLanguageChange}
+                      style={{ width: FORM_WIDTH }}
+                      selectedIndex={["en", "fr"].findIndex(
+                        (language) =>
+                          language === (this.props.bot.language || null),
+                      )}
                     >
                       <MenuItem value="en">English</MenuItem>
                       <MenuItem value="fr">French</MenuItem>
@@ -161,23 +211,30 @@ class AdminManager extends Component {
                   <div>
                     <Select
                       label="Timezone"
-                      onChange={this.handleTimezoneChange}
-                      ref={(input) => {
-                        this.selectFieldTimezone = input;
-                      }}
-                      style={{ width: "400px" }}
+                      onSelected={this.handleTimezoneChange}
+                      style={{ width: FORM_WIDTH }}
+                      selectedIndex={this.props.timezones.findIndex(
+                        (tz) => tz === (this.props.bot.timezone || null),
+                      )}
                     >
-                      <MenuItem value="gmt">GMT</MenuItem>
-                      <MenuItem value="gmt+1">GMT+1</MenuItem>
+                      {this.props.timezones.map((timezone) => (
+                        <MenuItem key={timezone} value={timezone}>
+                          {timezone}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </div>
                 </form>
               </div>
               <div>
                 <Button
+                  disabled={
+                    !this.state.bot ||
+                    (this.state.bot && this.state.bot.name.length < 1)
+                  }
                   raised
-                  disabled={saveDisabled}
                   style={{ float: "right", margin: "24px" }}
+                  onClick={this.onSaveBotDetails}
                 >
                   SAVE
                 </Button>
@@ -266,7 +323,7 @@ class AdminManager extends Component {
                   <TextField
                     onChange={() => {}}
                     label="Public Api url"
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={backend.publicUrl}
                   />
                   <Icon
@@ -284,7 +341,7 @@ class AdminManager extends Component {
                     onChange={() => {}}
                     label="Api url"
                     disabled
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={backend.apiUrl}
                   />
                 </div>
@@ -293,7 +350,7 @@ class AdminManager extends Component {
                     onChange={() => {}}
                     label="Auth url"
                     disabled
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={backend.authUrl}
                   />
                 </div>
@@ -302,7 +359,7 @@ class AdminManager extends Component {
                     onChange={() => {}}
                     label="AppId"
                     disabled
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={backend.clientId}
                   />
                 </div>
@@ -311,7 +368,7 @@ class AdminManager extends Component {
                     onChange={() => {}}
                     label="Secret"
                     disabled
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={backend.clientSecret}
                   />
                 </div>
@@ -336,7 +393,7 @@ class AdminManager extends Component {
                   <TextField
                     onChange={() => {}}
                     label="Server address"
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={emailServer.url}
                   />
                 </div>
@@ -345,7 +402,7 @@ class AdminManager extends Component {
                     onChange={() => {}}
                     label="Username"
                     autoComplete="new-password"
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={emailServer.username}
                   />
                 </div>
@@ -355,7 +412,7 @@ class AdminManager extends Component {
                     label="Password"
                     autoComplete="new-password"
                     type="password"
-                    style={{ width: "400px" }}
+                    style={{ width: FORM_WIDTH }}
                     value={emailServer.password}
                   />
                 </div>
@@ -393,29 +450,33 @@ class AdminManager extends Component {
 }
 
 AdminManager.defaultProps = {
+  activeTab: 0,
   admin: null,
+  bot: null,
   isLoading: false,
   isSignedIn: false,
-  bot: null,
-  user: null,
   profile: {},
-  activeTab: 0,
+  timezones,
+  user: null,
 };
 
 AdminManager.propTypes = {
+  activeTab: PropTypes.number,
   admin: PropTypes.shape({ params: PropTypes.shape({}).isRequired }),
-  isLoading: PropTypes.bool,
-  isSignedIn: PropTypes.bool,
+  apiSaveBotRequest: PropTypes.func.isRequired,
+  apiSetAdminParametersRequest: PropTypes.func.isRequired,
+  appSetTitle: PropTypes.func.isRequired,
   bot: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
     language: PropTypes.string,
+    timezone: PropTypes.string,
   }),
-  user: PropTypes.shape({}),
-  activeTab: PropTypes.number,
-  appSetTitle: PropTypes.func.isRequired,
-  apiSetAdminParametersRequest: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  isSignedIn: PropTypes.bool,
   profile: PropTypes.shape({}),
+  timezones: PropTypes.arrayOf(PropTypes.string).isRequired,
+  user: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => {
@@ -425,8 +486,10 @@ const mapStateToProps = (state) => {
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const { user } = state;
   const profile = user ? user.profile : null;
+
   // TODO get selectedBot from selectBotId
   const bot = selectedBotId ? admin.bots[0] : null;
+
   return {
     admin,
     isLoading,
@@ -441,6 +504,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   appSetTitle: (titleName) => {
     dispatch(appSetTitle(titleName));
+  },
+  apiSaveBotRequest: (params) => {
+    dispatch(apiSaveBotRequest(params));
   },
   apiSetAdminParametersRequest: (params) => {
     dispatch(apiSetAdminParametersRequest(params));
