@@ -6,11 +6,14 @@
  */
 // TODO remove import and use dynamic loading
 import AppMessengerPlugin from "./web-app";
+import createOpenNLXConnector from "./openNLX";
 
 const plugins = (pluginsManager) => {
   const list = [];
   // TODO dynamic loading
-  const plugin = AppMessengerPlugin(pluginsManager);
+  let plugin = AppMessengerPlugin(pluginsManager);
+  list.push(plugin);
+  plugin = createOpenNLXConnector(pluginsManager);
   list.push(plugin);
   return list;
 };

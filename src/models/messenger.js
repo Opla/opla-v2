@@ -210,7 +210,7 @@ class MessengerModel extends Model {
       t += 1;
     }
     this.lastTimestamp = t;
-    logger.info("timestamp=", t);
+    // logger.info("timestamp=", t);
     return t;
   }
 

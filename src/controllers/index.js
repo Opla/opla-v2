@@ -8,6 +8,7 @@ import BotsController from "./bots";
 import MessengerController from "./messenger";
 import SandboxMessengerController from "./sandboxMessenger";
 import MetricsController from "./metrics";
+import initMiddlewares from "../middlewares";
 
 class ExtensionsController {
   constructor(zoapp, config) {
@@ -23,6 +24,10 @@ class ExtensionsController {
     );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
+    logger.info("will init");
+    if (zoapp.controllers) {
+      initMiddlewares(zoapp.controllers.getMiddlewares(), this);
+    }
   }
 
   async getAdminParameters(me, isMaster, params) {
