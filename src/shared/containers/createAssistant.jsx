@@ -15,10 +15,6 @@ import TemplatesList from "../components/templatesList";
 import { apiCreateBot } from "../actions/api";
 import { appSetTitle } from "../actions/app";
 
-const formStyle = {
-  paddingLeft: "16px",
-};
-
 const advancedStyle = {
   marginLeft: "16px",
   color: "rgba(0, 0, 0, 0.54)",
@@ -169,11 +165,7 @@ class CreateAssistant extends Component {
             </div>
           </div>
         </section>
-        <form
-          style={formStyle}
-          autoComplete="new-password"
-          onSubmit={this.handleCreate}
-        >
+        <form autoComplete="new-password" onSubmit={this.handleCreate}>
           <section
             className="mdl-color--white mdl-shadow--2dp"
             style={boxStyle}
@@ -184,69 +176,69 @@ class CreateAssistant extends Component {
                 Please provide the following information. Don&apos;t worry. You
                 can always change them later.
               </div>
-            </div>
-            <div>
-              <TextField
-                onChange={this.handleNameChange}
-                label="Assistant name"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.nameField = input;
-                }}
-                required
-              />
-            </div>
-            <div>
-              <TextField
-                onChange={this.handleEmailChange}
-                label="Username"
-                autoComplete="new-password"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.usernameField = input;
-                }}
-                required
-              />
-            </div>
-            <div>
-              <TextField
-                onChange={this.handleEmailChange}
-                label="Password"
-                type="password"
-                autoComplete="new-password"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.passwordField = input;
-                }}
-                required
-              />
-            </div>
-            <div>
-              <TextField
-                type="email"
-                onChange={this.handleEmailChange}
-                label="Your email"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.emailField = input;
-                }}
-                required
-              />
-            </div>
-            <div>
-              <Select
-                label="Choose language"
-                onSelected={this.handleLanguageChange}
-                style={{ width: "400px" }}
-                required
-              >
-                <MenuItem selected={this.state.language === "en"} value="en">
-                  English
-                </MenuItem>
-                <MenuItem selected={this.state.language === "fr"} value="fr">
-                  French
-                </MenuItem>
-              </Select>
+              <div>
+                <TextField
+                  onChange={this.handleNameChange}
+                  label="Assistant name"
+                  style={{ width: "400px" }}
+                  ref={(input) => {
+                    this.nameField = input;
+                  }}
+                  required
+                />
+              </div>
+              <div>
+                <TextField
+                  onChange={this.handleEmailChange}
+                  label="Username"
+                  autoComplete="new-password"
+                  style={{ width: "400px" }}
+                  ref={(input) => {
+                    this.usernameField = input;
+                  }}
+                  required
+                />
+              </div>
+              <div>
+                <TextField
+                  onChange={this.handleEmailChange}
+                  label="Password"
+                  type="password"
+                  autoComplete="new-password"
+                  style={{ width: "400px" }}
+                  ref={(input) => {
+                    this.passwordField = input;
+                  }}
+                  required
+                />
+              </div>
+              <div>
+                <TextField
+                  type="email"
+                  onChange={this.handleEmailChange}
+                  label="Your email"
+                  style={{ width: "400px" }}
+                  ref={(input) => {
+                    this.emailField = input;
+                  }}
+                  required
+                />
+              </div>
+              <div>
+                <Select
+                  label="Choose language"
+                  onSelected={this.handleLanguageChange}
+                  style={{ width: "400px" }}
+                  required
+                >
+                  <MenuItem selected={this.state.language === "en"} value="en">
+                    English
+                  </MenuItem>
+                  <MenuItem selected={this.state.language === "fr"} value="fr">
+                    French
+                  </MenuItem>
+                </Select>
+              </div>
             </div>
           </section>
           <section style={boxStyle}>
