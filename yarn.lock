@@ -5394,9 +5394,9 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zoapp-backend@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.15.0.tgz#9242f3da4f166378eb588f807b3163ee27d89e7a"
+zoapp-backend@0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.15.1.tgz#473d3d6c0c20c5a2ccc08e0f74bb2d223045dd53"
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"

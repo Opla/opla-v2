@@ -16,6 +16,8 @@ class OpenNLXMiddleware {
 
   async handleMessengerActions(data, version = null) {
     const bot = await this.mainControllers.getBots().getBot(data.origin);
+    // console.log("zoapp", this.mainControllers.zoapp.controllers);
+    const parameters = this.mainControllers.zoapp.controllers.getParameters();
     let v = version;
     let messenger;
     if (!version) {
@@ -27,17 +29,27 @@ class OpenNLXMiddleware {
     }
     if (data.action === "newConversation") {
       // WIP create Conversation / Context
-      const params = {};
-      openNLX.setContextParameters(bot.id, v, data.conversationId, params);
-      // TODO store in db parameters
+      const contextParams = {};
+      openNLX.setContextParameters(
+        bot.id,
+        v,
+        data.conversationId,
+        contextParams,
+      );
+      // WIP store in db parameters
+      await parameters.setValue(data.conversationId, contextParams);
+      logger.info("contextParams=", contextParams);
     } else if (data.action === "resetConversation") {
       // WIP reset Conversation / Context
       openNLX.deleteContext(bot.id, v, data.conversationId);
-      // TODO delete in db parameters
+      // WIP delete in db parameters
+      await parameters.deleteValue(data.conversationId);
       // logger.info("reset conversationId=", data.conversationId);
     } else if (data.action === "newMessages") {
       const fromBot = `bot_${bot.name}_${bot.id}`;
-      data.messages.forEach((message) => {
+      /* eslint-disable no-restricted-syntax */
+      /* eslint-disable no-await-in-loop */
+      for (const message of data.messages) {
         if (message.from !== fromBot) {
           // logger.info("message=", message);
           const msg = {
@@ -53,8 +65,16 @@ class OpenNLXMiddleware {
             from: fromBot,
             input: msg,
           };
-          // TODO get params from Db parameters
-          // TODO set context in OpenNLX
+          // WIP get params from Db parameters
+          let contextParams = await parameters.getValue(data.conversationId);
+          logger.info("contextParams=", contextParams);
+          // WIP set context in OpenNLX
+          openNLX.setContextParameters(
+            bot.id,
+            v,
+            data.conversationId,
+            contextParams,
+          );
           if (response && response.message) {
             params.message = response.message.text;
             messenger.createMessage(null, conversationId, params);
@@ -65,10 +85,19 @@ class OpenNLXMiddleware {
           } else {
             logger.info("error in response", response);
           }
-          // TODO get context from OpenNLX
-          // TODO store in Db parameters
+          // WIP get context from OpenNLX
+          contextParams = openNLX.setContextParameters(
+            bot.id,
+            v,
+            data.conversationId,
+          );
+          logger.info("contextParams=", contextParams);
+          // WIP store in Db parameters
+          await parameters.setValue(data.conversationId, contextParams);
         }
-      });
+      }
+      /* eslint-disable no-restricted-syntax */
+      /* eslint-disable no-await-in-loop */
     }
   }
   async onDispatch(className, data) {
