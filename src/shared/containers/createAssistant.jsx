@@ -46,7 +46,7 @@ const templates = [
   { id: 4, name: "Import" },
 ];
 
-class CreateAssistant extends Component {
+export class CreateAssistantBase extends Component {
   constructor(props) {
     super(props);
 
@@ -178,6 +178,7 @@ class CreateAssistant extends Component {
               </div>
               <div>
                 <TextField
+                  id="create-assistant-name"
                   onChange={this.handleNameChange}
                   label="Assistant name"
                   style={{ width: "400px" }}
@@ -189,6 +190,7 @@ class CreateAssistant extends Component {
               </div>
               <div>
                 <TextField
+                  id="create-assistant-username"
                   onChange={this.handleEmailChange}
                   label="Username"
                   autoComplete="new-password"
@@ -201,6 +203,7 @@ class CreateAssistant extends Component {
               </div>
               <div>
                 <TextField
+                  id="create-assistant-password"
                   onChange={this.handleEmailChange}
                   label="Password"
                   type="password"
@@ -214,6 +217,7 @@ class CreateAssistant extends Component {
               </div>
               <div>
                 <TextField
+                  id="create-assistant-email"
                   type="email"
                   onChange={this.handleEmailChange}
                   label="Your email"
@@ -255,11 +259,11 @@ class CreateAssistant extends Component {
   }
 }
 
-CreateAssistant.defaultProps = {
+CreateAssistantBase.defaultProps = {
   error: null,
 };
 
-CreateAssistant.propTypes = {
+CreateAssistantBase.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.string,
   createBot: PropTypes.func.isRequired,
@@ -290,5 +294,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CreateAssistant),
+  connect(mapStateToProps, mapDispatchToProps)(CreateAssistantBase),
 );

@@ -1,0 +1,644 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/CreateAssistant renders correctly 1`] = `
+<div
+  className="mdl-layout__content mdl-color--grey-100"
+>
+  <section
+    className="mdl-color--white mdl-shadow--2dp"
+    style={
+      Object {
+        "margin": "16px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "padding": "16px",
+        }
+      }
+    >
+      <h4
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.87)",
+            "fontSize": "16px",
+            "marginBottom": "16px",
+            "marginTop": "0px",
+          }
+        }
+      >
+        Opla !
+      </h4>
+      <div
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+          }
+        }
+      >
+        Welcome to our five minutes installation process! Just fill in the informations below and you will get the most powerfull and extendable bot platform in the world.
+      </div>
+    </div>
+  </section>
+  <section
+    className="mdl-color--white mdl-shadow--2dp"
+    style={
+      Object {
+        "margin": "16px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "padding": "16px",
+        }
+      }
+    >
+      <h4
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.87)",
+            "fontSize": "16px",
+            "marginBottom": "16px",
+            "marginTop": "0px",
+          }
+        }
+      >
+        Templates
+      </h4>
+      <div
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+          }
+        }
+      >
+        Choose a prebuild asssistant, import one or select an empty model.
+      </div>
+    </div>
+    <div
+      className="mdc-layout-grid"
+    >
+      <div
+        className="mdc-layout-grid__inner"
+      >
+        <div
+          className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+          style={
+            Object {
+              "height": "168px",
+            }
+          }
+        >
+          <div
+            onClick={[Function]}
+            role="presentation"
+            style={
+              Object {
+                "textDecoration": "none",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "color": "#666",
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "height": "87%",
+                  "lineHeight": "1.1",
+                  "padding": "16px",
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                Empty
+              </div>
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                <img
+                  alt="Empty"
+                  src="./images/robots/robot-0.svg"
+                  style={
+                    Object {
+                      "margin": "30px",
+                      "width": "40%",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+          style={
+            Object {
+              "height": "168px",
+            }
+          }
+        >
+          <div
+            onClick={[Function]}
+            role="presentation"
+            style={
+              Object {
+                "textDecoration": "none",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "color": "#666",
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "height": "87%",
+                  "lineHeight": "1.1",
+                  "padding": "16px",
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                HelloWorld
+              </div>
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                <img
+                  alt="HelloWorld"
+                  src="./images/robots/robot-1.svg"
+                  style={
+                    Object {
+                      "margin": "30px",
+                      "width": "40%",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+          style={
+            Object {
+              "height": "168px",
+            }
+          }
+        >
+          <div
+            onClick={[Function]}
+            role="presentation"
+            style={
+              Object {
+                "textDecoration": "none",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "color": "#666",
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "height": "87%",
+                  "lineHeight": "1.1",
+                  "padding": "16px",
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                Test1
+              </div>
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                <img
+                  alt="Test1"
+                  src="./images/robots/robot-2.svg"
+                  style={
+                    Object {
+                      "margin": "30px",
+                      "width": "40%",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+          style={
+            Object {
+              "height": "168px",
+            }
+          }
+        >
+          <div
+            onClick={[Function]}
+            role="presentation"
+            style={
+              Object {
+                "textDecoration": "none",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "color": "#666",
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "height": "87%",
+                  "lineHeight": "1.1",
+                  "padding": "16px",
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                Import
+              </div>
+              <div
+                style={
+                  Object {
+                    "display": "table-row",
+                    "textAlign": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                <form
+                  style={
+                    Object {
+                      "width": "100%",
+                    }
+                  }
+                >
+                  <div
+                    className="fileInput"
+                  >
+                    <i
+                      className="material-icons"
+                    >
+                      cloud_upload
+                    </i>
+                    <input
+                      accept="application/json"
+                      onChange={[Function]}
+                      type="file"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "padding": "16px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+          }
+        }
+      >
+        Want more ?
+        <br />
+        In a near future we will release our BotStore to find the perfect bot from our community.
+        <br />
+      </div>
+    </div>
+  </section>
+  <form
+    autoComplete="new-password"
+    onSubmit={[Function]}
+  >
+    <section
+      className="mdl-color--white mdl-shadow--2dp"
+      style={
+        Object {
+          "margin": "16px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "padding": "16px",
+          }
+        }
+      >
+        <h4
+          style={
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontSize": "16px",
+              "marginBottom": "16px",
+              "marginTop": "0px",
+            }
+          }
+        >
+          Informations needed
+        </h4>
+        <div
+          style={
+            Object {
+              "color": "rgba(0, 0, 0, 0.54)",
+            }
+          }
+        >
+          Please provide the following information. Don't worry. You can always change them later.
+        </div>
+        <div>
+          <div
+            className="mdc-text-field mdc-text-field--upgraded"
+            style={
+              Object {
+                "width": "400px",
+              }
+            }
+          >
+            <input
+              className="mdc-text-field__input"
+              defaultValue={null}
+              id="create-assistant-name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              type="text"
+            />
+            <label
+              className="mdc-floating-label"
+              focused="false"
+              htmlFor="create-assistant-name"
+              style={Object {}}
+            >
+              Assistant name
+            </label>
+            <div
+              className="mdc-text-field__bottom-line"
+            />
+          </div>
+        </div>
+        <div>
+          <div
+            className="mdc-text-field mdc-text-field--upgraded"
+            style={
+              Object {
+                "width": "400px",
+              }
+            }
+          >
+            <input
+              autoComplete="new-password"
+              className="mdc-text-field__input"
+              defaultValue={null}
+              id="create-assistant-username"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              type="text"
+            />
+            <label
+              className="mdc-floating-label"
+              focused="false"
+              htmlFor="create-assistant-username"
+              style={Object {}}
+            >
+              Username
+            </label>
+            <div
+              className="mdc-text-field__bottom-line"
+            />
+          </div>
+        </div>
+        <div>
+          <div
+            className="mdc-text-field mdc-text-field--upgraded"
+            style={
+              Object {
+                "width": "400px",
+              }
+            }
+          >
+            <input
+              autoComplete="new-password"
+              className="mdc-text-field__input"
+              defaultValue={null}
+              id="create-assistant-password"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              type="password"
+            />
+            <label
+              className="mdc-floating-label"
+              focused="false"
+              htmlFor="create-assistant-password"
+              style={Object {}}
+            >
+              Password
+            </label>
+            <div
+              className="mdc-text-field__bottom-line"
+            />
+          </div>
+        </div>
+        <div>
+          <div
+            className="mdc-text-field mdc-text-field--upgraded"
+            style={
+              Object {
+                "width": "400px",
+              }
+            }
+          >
+            <input
+              className="mdc-text-field__input"
+              defaultValue={null}
+              id="create-assistant-email"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              type="email"
+            />
+            <label
+              className="mdc-floating-label"
+              focused="false"
+              htmlFor="create-assistant-email"
+              style={Object {}}
+            >
+              Your email
+            </label>
+            <div
+              className="mdc-text-field__bottom-line"
+            />
+          </div>
+        </div>
+        <div>
+          <div
+            aria-hidden={true}
+            className="mdc-select"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="listbox"
+            style={
+              Object {
+                "width": "400px",
+              }
+            }
+          >
+            <div
+              className="mdc-select__surface"
+              tabIndex="0"
+            >
+              <div
+                className="mdc-select__label"
+              >
+                Choose language
+              </div>
+              <div
+                className="mdc-select__selected-text"
+              />
+              <div
+                className="mdc-select__bottom-line"
+              />
+            </div>
+            <div
+              className="mdc-select__menu mdc-menu"
+              tabIndex="-1"
+            >
+              <ul
+                aria-hidden="true"
+                className="mdc-menu__items mdc-list"
+                role="menu"
+              >
+                <li
+                  aria-selected="true"
+                  className="mdc-list-item"
+                  onClick={[Function]}
+                  onKeyUp={[Function]}
+                  role="option"
+                  tabIndex="0"
+                >
+                  English
+                </li>
+                <li
+                  className="mdc-list-item"
+                  onClick={[Function]}
+                  onKeyUp={[Function]}
+                  role="option"
+                  tabIndex="0"
+                >
+                  French
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      style={
+        Object {
+          "margin": "16px",
+        }
+      }
+    >
+      <button
+        className="mdc-button mdc-button--raised"
+        disabled={false}
+        onClick={null}
+      >
+        
+        Let's go
+      </button>
+      <button
+        className="mdc-button"
+        disabled={false}
+        onClick={null}
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "marginLeft": "16px",
+          }
+        }
+      >
+        
+        Advanced settings
+      </button>
+    </section>
+  </form>
+</div>
+`;
