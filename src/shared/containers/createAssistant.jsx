@@ -94,22 +94,16 @@ class CreateAssistant extends Component {
     }
   };
 
-  handleCreate = () => {
-    // Check textfields before processing
+  handleCreate = (e) => {
+    e.preventDefault();
+
     const name = this.nameField.inputRef.value;
     const email = this.emailField.inputRef.value;
     const username = this.usernameField.inputRef.value;
     const password = this.passwordField.inputRef.value;
-    const { language } = this.state;
+    const { language, template } = this.state;
 
-    if (
-      this.state.loading === false &&
-      name !== "" &&
-      email !== "" &&
-      username !== "" &&
-      password !== ""
-    ) {
-      const { template } = this.state;
+    if (this.state.loading === false) {
       const botParams = {
         name,
         email,
@@ -178,10 +172,7 @@ class CreateAssistant extends Component {
         <form
           style={formStyle}
           autoComplete="new-password"
-          onSubmit={(e) => {
-            e.preventDefault();
-            this.handleCreate();
-          }}
+          onSubmit={this.handleCreate}
         >
           <section
             className="mdl-color--white mdl-shadow--2dp"
