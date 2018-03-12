@@ -125,8 +125,8 @@ class CreateAssistant extends Component {
     }
   };
 
-  handleLanguageChange = ({ props: itemProps }) => {
-    this.setState({ language: itemProps.value });
+  handleLanguageChange = (language) => {
+    this.setState({ language });
   };
 
   render() {
