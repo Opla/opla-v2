@@ -26,9 +26,14 @@ class OpenNLXMiddleware {
       messenger = this.mainControllers.getSandboxMessenger();
     }
     if (data.action === "newConversation") {
-      // TODO create Conversation / Context
+      // WIP create Conversation / Context
+      const params = {};
+      openNLX.setContextParameters(bot.id, v, data.conversationId, params);
+      // TODO store in db parameters
     } else if (data.action === "resetConversation") {
-      // TODO reset Conversation / Context
+      // WIP reset Conversation / Context
+      openNLX.deleteContext(bot.id, v, data.conversationId);
+      // TODO delete in db parameters
       // logger.info("reset conversationId=", data.conversationId);
     } else if (data.action === "newMessages") {
       const fromBot = `bot_${bot.name}_${bot.id}`;
@@ -48,6 +53,8 @@ class OpenNLXMiddleware {
             from: fromBot,
             input: msg,
           };
+          // TODO get params from Db parameters
+          // TODO set context in OpenNLX
           if (response && response.message) {
             params.message = response.message.text;
             messenger.createMessage(null, conversationId, params);
@@ -58,6 +65,8 @@ class OpenNLXMiddleware {
           } else {
             logger.info("error in response", response);
           }
+          // TODO get context from OpenNLX
+          // TODO store in Db parameters
         }
       });
     }
@@ -127,7 +136,7 @@ class OpenNLXMiddleware {
     this.id = m.id;
     this.openNLX = openNLX;
     // logger.info("OpenNLX init", this);
-    // WIP add bots to openNLX
+    // Add bots to openNLX
     const botsController = this.mainControllers.getBots();
     const bots = await botsController.getBots();
     /* eslint-disable no-restricted-syntax */
@@ -135,11 +144,8 @@ class OpenNLXMiddleware {
     for (const bot of bots) {
       // logger.info("bot=", bot);
       openNLX.createAgent(bot);
-      // WIP add intents to openNLX
+      // Add intents to openNLX
       let intents = await botsController.getIntents(bot.id);
-      /* if (bot.id === "nRblp6hnGlYGVaKYhTBVS76fRzunaOUQgM2dyxliQMxjb2Id") {
-        intents.forEach((intent) => logger.info("intent=", intent));
-      } */
       openNLX.setIntents(bot.id, "default", intents);
       if (bot.publishedVersionId) {
         intents = await botsController.getIntents(
