@@ -175,15 +175,25 @@ class CreateAssistant extends Component {
             </div>
           </div>
         </section>
-        <section className="mdl-color--white mdl-shadow--2dp" style={boxStyle}>
-          <div style={headerStyle}>
-            <h4 style={h4}>Informations needed</h4>
-            <div style={secText}>
-              Please provide the following information. Don&apos;t worry. You
-              can always change them later.
+        <form
+          style={formStyle}
+          autoComplete="new-password"
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.handleCreate();
+          }}
+        >
+          <section
+            className="mdl-color--white mdl-shadow--2dp"
+            style={boxStyle}
+          >
+            <div style={headerStyle}>
+              <h4 style={h4}>Informations needed</h4>
+              <div style={secText}>
+                Please provide the following information. Don&apos;t worry. You
+                can always change them later.
+              </div>
             </div>
-          </div>
-          <form style={formStyle} autoComplete="new-password">
             <div>
               <TextField
                 onChange={this.handleNameChange}
@@ -192,6 +202,7 @@ class CreateAssistant extends Component {
                 ref={(input) => {
                   this.nameField = input;
                 }}
+                required
               />
             </div>
             <div>
@@ -203,6 +214,7 @@ class CreateAssistant extends Component {
                 ref={(input) => {
                   this.usernameField = input;
                 }}
+                required
               />
             </div>
             <div>
@@ -215,16 +227,19 @@ class CreateAssistant extends Component {
                 ref={(input) => {
                   this.passwordField = input;
                 }}
+                required
               />
             </div>
             <div>
               <TextField
+                type="email"
                 onChange={this.handleEmailChange}
                 label="Your email"
                 style={{ width: "400px" }}
                 ref={(input) => {
                   this.emailField = input;
                 }}
+                required
               />
             </div>
             <div>
@@ -232,6 +247,7 @@ class CreateAssistant extends Component {
                 label="Choose language"
                 onSelected={this.handleLanguageChange}
                 style={{ width: "400px" }}
+                required
               >
                 <MenuItem selected={this.state.language === "en"} value="en">
                   English
@@ -241,20 +257,16 @@ class CreateAssistant extends Component {
                 </MenuItem>
               </Select>
             </div>
-          </form>
-        </section>
-        <section style={boxStyle}>
-          <Button
-            raised
-            onClick={(e) => {
-              e.preventDefault();
-              this.handleCreate();
-            }}
-          >
-            Let&apos;s go
-          </Button>
-          <Button style={advancedStyle}>Advanced settings</Button>
-        </section>
+          </section>
+          <section style={boxStyle}>
+            <Button type="submit" raised>
+              Let&apos;s go
+            </Button>
+            <Button type="button" style={advancedStyle}>
+              Advanced settings
+            </Button>
+          </section>
+        </form>
       </div>
     );
   }
