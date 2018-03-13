@@ -16,7 +16,6 @@ class OpenNLXMiddleware {
 
   async handleMessengerActions(data, version = null) {
     const bot = await this.mainControllers.getBots().getBot(data.origin);
-    // console.log("zoapp", this.mainControllers.zoapp.controllers);
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     let v = version;
     let messenger;
@@ -28,7 +27,7 @@ class OpenNLXMiddleware {
       messenger = this.mainControllers.getSandboxMessenger();
     }
     if (data.action === "newConversation") {
-      // WIP create Conversation / Context
+      // create Conversation / Context
       const contextParams = {};
       openNLX.setContextParameters(
         bot.id,
@@ -36,13 +35,13 @@ class OpenNLXMiddleware {
         data.conversationId,
         contextParams,
       );
-      // WIP store in db parameters
+      // store in db parameters
       await parameters.setValue(data.conversationId, contextParams);
       logger.info("contextParams=", contextParams);
     } else if (data.action === "resetConversation") {
-      // WIP reset Conversation / Context
+      // reset Conversation / Context
       openNLX.deleteContext(bot.id, v, data.conversationId);
-      // WIP delete in db parameters
+      // delete in db parameters
       await parameters.deleteValue(data.conversationId);
       // logger.info("reset conversationId=", data.conversationId);
     } else if (data.action === "newMessages") {
@@ -65,10 +64,10 @@ class OpenNLXMiddleware {
             from: fromBot,
             input: msg,
           };
-          // WIP get params from Db parameters
+          // get params from Db parameters
           let contextParams = await parameters.getValue(data.conversationId);
           logger.info("contextParams=", contextParams);
-          // WIP set context in OpenNLX
+          // set context in OpenNLX
           openNLX.setContextParameters(
             bot.id,
             v,
@@ -85,14 +84,14 @@ class OpenNLXMiddleware {
           } else {
             logger.info("error in response", response);
           }
-          // WIP get context from OpenNLX
+          // get context from OpenNLX
           contextParams = openNLX.setContextParameters(
             bot.id,
             v,
             data.conversationId,
           );
           logger.info("contextParams=", contextParams);
-          // WIP store in Db parameters
+          // store in Db parameters
           await parameters.setValue(data.conversationId, contextParams);
         }
       }
