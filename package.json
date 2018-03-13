@@ -64,6 +64,8 @@
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "4.3.0",
     "css-loader": "^0.28.10",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "4.18.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -90,6 +92,7 @@
   "jest": {
     "moduleNameMapper": {
       "shared/(.*)": "<rootDir>/src/shared/$1"
-    }
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/setupTests.js"
   }
 }
