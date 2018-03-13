@@ -180,7 +180,11 @@ export class CreateAssistantBase extends Component {
             </div>
           </div>
         </section>
-        <form autoComplete="new-password" onSubmit={this.handleCreate}>
+        <form
+          id="create-assistant-form"
+          autoComplete="new-password"
+          onSubmit={this.handleCreate}
+        >
           <section
             className="mdl-color--white mdl-shadow--2dp"
             style={boxStyle}
@@ -253,7 +257,7 @@ export class CreateAssistantBase extends Component {
             </div>
           </section>
           <section style={boxStyle}>
-            <Button type="submit" id="create-assistant-submit" raised>
+            <Button type="submit" raised>
               Let&apos;s go
             </Button>
             <Button type="button" style={advancedStyle}>
