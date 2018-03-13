@@ -55,7 +55,7 @@ export class CreateAssistantBase extends Component {
     language: "en",
     loading: false,
     selectedTemplate: 0,
-    template: null,
+    template: templates[0],
   };
 
   componentWillMount() {
