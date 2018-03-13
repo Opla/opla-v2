@@ -47,16 +47,16 @@ const templates = [
 ];
 
 export class CreateAssistantBase extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      language: "en",
-      loading: false,
-      selectedTemplate: 0,
-      template: null,
-    };
-  }
+  state = {
+    name: "",
+    email: "",
+    username: "",
+    password: "",
+    language: "en",
+    loading: false,
+    selectedTemplate: 0,
+    template: null,
+  };
 
   componentWillMount() {
     this.props.appSetTitle("Create your virtual assistant");
@@ -93,13 +93,17 @@ export class CreateAssistantBase extends Component {
   handleCreate = (e) => {
     e.preventDefault();
 
-    const name = this.nameField.inputRef.value;
-    const email = this.emailField.inputRef.value;
-    const username = this.usernameField.inputRef.value;
-    const password = this.passwordField.inputRef.value;
-    const { language, template } = this.state;
+    const {
+      name,
+      email,
+      username,
+      password,
+      language,
+      template,
+      loading,
+    } = this.state;
 
-    if (this.state.loading === false) {
+    if (loading === false) {
       const botParams = {
         name,
         email,
@@ -125,8 +129,19 @@ export class CreateAssistantBase extends Component {
     this.setState({ language });
   };
 
+  createChangeHandler = (field) => (e) => {
+    this.setState({ [field]: e.target.value });
+  };
+
   render() {
-    const selected = this.state.selectedTemplate;
+    const {
+      name,
+      email,
+      username,
+      password,
+      selectedTemplate: selected,
+    } = this.state;
+
     // TODO json only for instance
     const acceptImport = "application/json";
     return (
@@ -179,39 +194,33 @@ export class CreateAssistantBase extends Component {
               <div>
                 <TextField
                   id="create-assistant-name"
-                  onChange={this.handleNameChange}
+                  onChange={this.createChangeHandler("name")}
+                  defaultValue={name}
                   label="Assistant name"
                   style={{ width: "400px" }}
-                  ref={(input) => {
-                    this.nameField = input;
-                  }}
                   required
                 />
               </div>
               <div>
                 <TextField
                   id="create-assistant-username"
-                  onChange={this.handleEmailChange}
+                  onChange={this.createChangeHandler("username")}
+                  defaultValue={username}
                   label="Username"
                   autoComplete="new-password"
                   style={{ width: "400px" }}
-                  ref={(input) => {
-                    this.usernameField = input;
-                  }}
                   required
                 />
               </div>
               <div>
                 <TextField
                   id="create-assistant-password"
-                  onChange={this.handleEmailChange}
+                  onChange={this.createChangeHandler("password")}
+                  defaultValue={password}
                   label="Password"
                   type="password"
                   autoComplete="new-password"
                   style={{ width: "400px" }}
-                  ref={(input) => {
-                    this.passwordField = input;
-                  }}
                   required
                 />
               </div>
@@ -219,12 +228,10 @@ export class CreateAssistantBase extends Component {
                 <TextField
                   id="create-assistant-email"
                   type="email"
-                  onChange={this.handleEmailChange}
+                  onChange={this.createChangeHandler("email")}
+                  defaultValue={email}
                   label="Your email"
                   style={{ width: "400px" }}
-                  ref={(input) => {
-                    this.emailField = input;
-                  }}
                   required
                 />
               </div>
@@ -246,7 +253,7 @@ export class CreateAssistantBase extends Component {
             </div>
           </section>
           <section style={boxStyle}>
-            <Button type="submit" raised>
+            <Button type="submit" id="create-assistant-submit" raised>
               Let&apos;s go
             </Button>
             <Button type="button" style={advancedStyle}>
