@@ -95,9 +95,11 @@ export default class extends CommonRoutes {
       },
       clientId,
     );
-    // logger.info("me=" + JSON.stringify(resp));
-    if (resp === null || resp.error) {
-      return resp === null ? { error: "Can't create user" } : resp;
+    // logger.info(`me=${JSON.stringify(resp)}`);
+    if (resp === null || resp.result.error) {
+      return resp === null
+        ? { error: "Can't create user" }
+        : { error: resp.result.error };
     }
     // TODO If first user then "admin" otherwise "owner"
     const user = { password, ...resp.result };
