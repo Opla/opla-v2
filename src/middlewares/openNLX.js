@@ -43,7 +43,11 @@ class OpenNLXMiddleware {
       // reset Conversation / Context
       openNLX.deleteContext(bot.id, v, data.conversationId);
       // delete in db parameters
-      await parameters.deleteValue(data.conversationId);
+      try {
+        await parameters.deleteValue(data.conversationId);
+      } catch (error) {
+        // Silent error
+      }
       // logger.info("reset conversationId=", data.conversationId);
     } else if (data.action === "newMessages") {
       const fromBot = `bot_${bot.name}_${bot.id}`;
