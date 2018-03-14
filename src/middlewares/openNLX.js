@@ -16,6 +16,7 @@ class OpenNLXMiddleware {
 
   async handleMessengerActions(data, version = null) {
     const bot = await this.mainControllers.getBots().getBot(data.origin);
+    if (!bot) return;
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     let v = version;
     let messenger;
@@ -85,7 +86,7 @@ class OpenNLXMiddleware {
             logger.info("error in response", response);
           }
           // get context from OpenNLX
-          contextParams = openNLX.setContextParameters(
+          contextParams = openNLX.getContextParameters(
             bot.id,
             v,
             data.conversationId,
@@ -126,10 +127,11 @@ class OpenNLXMiddleware {
         // logger.info("setIntents data.intents=", data.intents);
         if (data.intents && data.intents.length > 0) {
           const { botId, versionId } = data.intents[0];
+          const version = versionId || "default";
           const bots = this.mainControllers.getBots();
           const intents = await bots.getIntents(botId, versionId);
-          this.openNLX.deleteAllIntents(botId, versionId);
-          this.openNLX.setIntents(botId, versionId, intents);
+          this.openNLX.deleteAllIntents(botId, version);
+          this.openNLX.setIntents(botId, version, intents);
         }
       } else if (data.action === "moveIntents") {
         // WIP move Intents
@@ -138,22 +140,25 @@ class OpenNLXMiddleware {
         const intent = await bots.getIntent(botId, id);
         if (intent) {
           const { versionId } = intent;
-          this.openNLX.deleteAllIntents(botId, versionId);
+          const version = versionId || "default";
+          this.openNLX.deleteAllIntents(botId, version);
           const intents = await bots.getIntents(botId, versionId);
-          this.openNLX.setIntents(botId, versionId, intents);
+          this.openNLX.setIntents(botId, version, intents);
         }
       } else if (data.action === "removeIntents") {
         // WIP remove Intents
         if (data.intents && data.intents.length === 1) {
           const { botId, versionId, id } = data.intents[0];
-          this.openNLX.deleteIntent(botId, versionId, id);
+          const version = versionId || "default";
+          this.openNLX.deleteIntents(botId, version, id);
         } else {
           logger.info(" TODO RemoveIntents > 1");
         }
       } else if (data.action === "removeAllIntents") {
         // WIP remove all Intents
         const { botId, versionId } = data.intents;
-        this.openNLX.deleteAllIntents(botId, versionId);
+        const version = versionId || "default";
+        this.openNLX.deleteAllIntents(botId, version);
       }
     } else if (className === "messenger") {
       await this.handleMessengerActions(data);

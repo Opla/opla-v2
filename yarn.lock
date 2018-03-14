@@ -3747,9 +3747,9 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-opennlx@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/opennlx/-/opennlx-0.2.0.tgz#40fb3c265c1dfc06ba46fcb09960f097b91e7004"
+opennlx@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/opennlx/-/opennlx-0.2.1.tgz#88427ff2d9f95f1d4f9005cbdbc4845607bf9718"
 
 openurl@1.1.1:
   version "1.1.1"
