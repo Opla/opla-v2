@@ -16,6 +16,8 @@ class OpenNLXMiddleware {
 
   async handleMessengerActions(data, version = null) {
     const bot = await this.mainControllers.getBots().getBot(data.origin);
+    if (!bot) return;
+    const parameters = this.mainControllers.zoapp.controllers.getParameters();
     let v = version;
     let messenger;
     if (!version) {
@@ -26,13 +28,34 @@ class OpenNLXMiddleware {
       messenger = this.mainControllers.getSandboxMessenger();
     }
     if (data.action === "newConversation") {
-      // TODO create Conversation / Context
+      // create Conversation / Context
+      const contextParams = {};
+      openNLX.setContextParameters(
+        bot.id,
+        v,
+        data.conversationId,
+        contextParams,
+      );
+      // store in db parameters
+      await parameters.setValue(data.conversationId, contextParams);
+      logger.info("contextParams=", contextParams);
     } else if (data.action === "resetConversation") {
-      // TODO reset Conversation / Context
+      // reset Conversation / Context
+      openNLX.deleteContext(bot.id, v, data.conversationId);
+      // delete in db parameters
+      try {
+        await parameters.deleteValue(data.conversationId);
+      } catch (error) {
+        // Silent error :
+        // the context could be not stored in Parameters as not previously
+        // initialized/used by adding a message
+      }
       // logger.info("reset conversationId=", data.conversationId);
     } else if (data.action === "newMessages") {
       const fromBot = `bot_${bot.name}_${bot.id}`;
-      data.messages.forEach((message) => {
+      /* eslint-disable no-restricted-syntax */
+      /* eslint-disable no-await-in-loop */
+      for (const message of data.messages) {
         if (message.from !== fromBot) {
           // logger.info("message=", message);
           const msg = {
@@ -48,6 +71,16 @@ class OpenNLXMiddleware {
             from: fromBot,
             input: msg,
           };
+          // get params from Db parameters
+          let contextParams = await parameters.getValue(data.conversationId);
+          logger.info("contextParams=", contextParams);
+          // set context in OpenNLX
+          openNLX.setContextParameters(
+            bot.id,
+            v,
+            data.conversationId,
+            contextParams,
+          );
           if (response && response.message) {
             params.message = response.message.text;
             messenger.createMessage(null, conversationId, params);
@@ -58,8 +91,19 @@ class OpenNLXMiddleware {
           } else {
             logger.info("error in response", response);
           }
+          // get context from OpenNLX
+          contextParams = openNLX.getContextParameters(
+            bot.id,
+            v,
+            data.conversationId,
+          );
+          logger.info("contextParams=", contextParams);
+          // store in Db parameters
+          await parameters.setValue(data.conversationId, contextParams);
         }
-      });
+      }
+      /* eslint-disable no-restricted-syntax */
+      /* eslint-disable no-await-in-loop */
     }
   }
   async onDispatch(className, data) {
@@ -89,10 +133,11 @@ class OpenNLXMiddleware {
         // logger.info("setIntents data.intents=", data.intents);
         if (data.intents && data.intents.length > 0) {
           const { botId, versionId } = data.intents[0];
+          const version = versionId || "default";
           const bots = this.mainControllers.getBots();
           const intents = await bots.getIntents(botId, versionId);
-          this.openNLX.deleteAllIntents(botId, versionId);
-          this.openNLX.setIntents(botId, versionId, intents);
+          this.openNLX.deleteAllIntents(botId, version);
+          this.openNLX.setIntents(botId, version, intents);
         }
       } else if (data.action === "moveIntents") {
         // WIP move Intents
@@ -101,22 +146,25 @@ class OpenNLXMiddleware {
         const intent = await bots.getIntent(botId, id);
         if (intent) {
           const { versionId } = intent;
-          this.openNLX.deleteAllIntents(botId, versionId);
+          const version = versionId || "default";
+          this.openNLX.deleteAllIntents(botId, version);
           const intents = await bots.getIntents(botId, versionId);
-          this.openNLX.setIntents(botId, versionId, intents);
+          this.openNLX.setIntents(botId, version, intents);
         }
       } else if (data.action === "removeIntents") {
         // WIP remove Intents
         if (data.intents && data.intents.length === 1) {
           const { botId, versionId, id } = data.intents[0];
-          this.openNLX.deleteIntent(botId, versionId, id);
+          const version = versionId || "default";
+          this.openNLX.deleteIntents(botId, version, id);
         } else {
           logger.info(" TODO RemoveIntents > 1");
         }
       } else if (data.action === "removeAllIntents") {
         // WIP remove all Intents
         const { botId, versionId } = data.intents;
-        this.openNLX.deleteAllIntents(botId, versionId);
+        const version = versionId || "default";
+        this.openNLX.deleteAllIntents(botId, version);
       }
     } else if (className === "messenger") {
       await this.handleMessengerActions(data);
@@ -127,7 +175,7 @@ class OpenNLXMiddleware {
     this.id = m.id;
     this.openNLX = openNLX;
     // logger.info("OpenNLX init", this);
-    // WIP add bots to openNLX
+    // Add bots to openNLX
     const botsController = this.mainControllers.getBots();
     const bots = await botsController.getBots();
     /* eslint-disable no-restricted-syntax */
@@ -135,11 +183,8 @@ class OpenNLXMiddleware {
     for (const bot of bots) {
       // logger.info("bot=", bot);
       openNLX.createAgent(bot);
-      // WIP add intents to openNLX
+      // Add intents to openNLX
       let intents = await botsController.getIntents(bot.id);
-      /* if (bot.id === "nRblp6hnGlYGVaKYhTBVS76fRzunaOUQgM2dyxliQMxjb2Id") {
-        intents.forEach((intent) => logger.info("intent=", intent));
-      } */
       openNLX.setIntents(bot.id, "default", intents);
       if (bot.publishedVersionId) {
         intents = await botsController.getIntents(

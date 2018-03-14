@@ -32,8 +32,8 @@
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
     "inquirer": "^5.1.0",
-    "opennlx": "^0.1.7",
-    "zoapp-backend": "^0.15.0"
+    "opennlx": "0.2.1",
+    "zoapp-backend": "0.15.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
