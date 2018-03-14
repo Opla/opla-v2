@@ -46,7 +46,9 @@ class OpenNLXMiddleware {
       try {
         await parameters.deleteValue(data.conversationId);
       } catch (error) {
-        // Silent error
+        // Silent error :
+        // the context could be not stored in Parameters as not previously
+        // initialized/used by adding a message
       }
       // logger.info("reset conversationId=", data.conversationId);
     } else if (data.action === "newMessages") {
