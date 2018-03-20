@@ -5,10 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 import createReducer from "zoapp-front/reducers/createReducer";
+
+import {
+  initialState as zoappInitialState,
+  handlers as zoappHandlers,
+} from "zoapp-front/reducers/app";
+
 import {
   API_ADMIN,
-  API_SETADMINPARAMETERS,
-  APP_SETTITLE,
   AUTH_SIGNOUT,
   FETCH_FAILURE,
   FETCH_REQUEST,
@@ -39,23 +43,17 @@ import {
 } from "../actions/constants";
 
 export const initialState = {
-  loading: false,
-  admin: null,
+  ...zoappInitialState,
   intents: null,
   selectedBotId: null,
   selectedIntentIndex: 0,
   sandbox: null,
   loadingMessages: false,
-  titleName: "",
-  error: null,
 };
 
 export default createReducer(initialState, {
-  [API_ADMIN + FETCH_REQUEST]: (state) => ({
-    ...state,
-    loading: true,
-    error: null,
-  }),
+  ...zoappHandlers,
+
   [API_ADMIN + FETCH_SUCCESS]: (state, { admin }) => {
     let { selectedBotId } = state;
     if (selectedBotId == null && admin.bots && admin.bots.length > 0) {
@@ -65,36 +63,10 @@ export default createReducer(initialState, {
       ...state,
       loading: false,
       error: null,
-      admin: { ...admin },
+      admin,
       selectedBotId,
     };
   },
-  [API_ADMIN + FETCH_FAILURE]: (state, { error }) => ({
-    ...state,
-    loading: false,
-    error,
-  }),
-
-  [API_SETADMINPARAMETERS + FETCH_REQUEST]: (state) => ({
-    ...state,
-    loading: true,
-    error: null,
-  }),
-  [API_SETADMINPARAMETERS + FETCH_SUCCESS]: (state, { params }) => {
-    const admin = { ...state.admin };
-    admin.params = { ...params };
-    return {
-      ...state,
-      loading: false,
-      error: null,
-      admin,
-    };
-  },
-  [API_SETADMINPARAMETERS + FETCH_FAILURE]: (state, { error }) => ({
-    ...state,
-    loading: false,
-    error,
-  }),
 
   [API_GETMIDDLEWARES + FETCH_REQUEST]: (state) => ({
     ...state,
@@ -604,7 +576,6 @@ export default createReducer(initialState, {
   }),
 
   /* APP Section */
-  [APP_SETTITLE]: (state, { titleName }) => ({ ...state, titleName }),
   [APP_SELECTINTENT]: (state, { selectedBotId, selectedIntentIndex }) => {
     let selectedIntent = null;
     if (state.intents && selectedIntentIndex < state.intents.length) {
@@ -715,5 +686,10 @@ export default createReducer(initialState, {
       selectedIntent: { ...intent },
     };
   },
-  [AUTH_SIGNOUT + FETCH_SUCCESS]: () => ({ ...initialState }),
+
+  /* Auth section */
+  [AUTH_SIGNOUT + FETCH_SUCCESS]: (state) => ({
+    ...state,
+    ...initialState,
+  }),
 });

@@ -10,6 +10,7 @@ import initialize from "zoapp-front/reducers/initialize";
 import user from "zoapp-front/reducers/user";
 
 import app from "./app";
+import message from "./message";
 import metrics from "./metrics";
 
 export default combineReducers({
@@ -18,4 +19,5 @@ export default combineReducers({
   user,
   metrics,
   app,
+  message,
 });
