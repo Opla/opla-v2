@@ -256,7 +256,6 @@ class App extends React.Component {
 }
 
 App.defaultProps = {
-  error: null,
   admin: null,
   bot: null,
 };
@@ -266,7 +265,6 @@ App.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   titleName: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.shape({}),
   admin: PropTypes.shape({}),
   bot: PropTypes.shape({ name: PropTypes.string }),
   initAuthSettings: PropTypes.func.isRequired,
@@ -282,21 +280,12 @@ const mapStateToProps = (state) => {
     (state.auth && state.auth.loading) ||
     (state.user && state.user.loading);
   const titleName = state.app ? state.app.titleName : "";
-  let error = null;
-  if (state.app && state.app.error) {
-    ({ error } = state.app);
-  } else if (state.auth && state.auth.error) {
-    ({ error } = state.auth);
-  } else if (!error && state.user && state.user.error) {
-    ({ error } = state.user);
-  }
   return {
     admin,
     bot,
     isLoading,
     isSignedIn,
     titleName,
-    error,
   };
 };
 
