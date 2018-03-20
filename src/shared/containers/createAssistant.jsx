@@ -15,10 +15,6 @@ import TemplatesList from "../components/templatesList";
 import { apiCreateBot } from "../actions/api";
 import { appSetTitle } from "../actions/app";
 
-const formStyle = {
-  paddingLeft: "16px",
-};
-
 const advancedStyle = {
   marginLeft: "16px",
   color: "rgba(0, 0, 0, 0.54)",
@@ -50,17 +46,17 @@ const templates = [
   { id: 4, name: "Import" },
 ];
 
-class CreateAssistant extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      language: "en",
-      loading: false,
-      selectedTemplate: 0,
-      template: null,
-    };
-  }
+export class CreateAssistantBase extends Component {
+  state = {
+    name: "",
+    email: "",
+    username: "",
+    password: "",
+    language: "en",
+    loading: false,
+    selectedTemplate: 0,
+    template: templates[0],
+  };
 
   componentWillMount() {
     this.props.appSetTitle("Create your virtual assistant");
@@ -94,22 +90,20 @@ class CreateAssistant extends Component {
     }
   };
 
-  handleCreate = () => {
-    // Check textfields before processing
-    const name = this.nameField.inputRef.value;
-    const email = this.emailField.inputRef.value;
-    const username = this.usernameField.inputRef.value;
-    const password = this.passwordField.inputRef.value;
-    const { language } = this.state;
+  handleCreate = (e) => {
+    e.preventDefault();
 
-    if (
-      this.state.loading === false &&
-      name !== "" &&
-      email !== "" &&
-      username !== "" &&
-      password !== ""
-    ) {
-      const { template } = this.state;
+    const {
+      name,
+      email,
+      username,
+      password,
+      language,
+      template,
+      loading,
+    } = this.state;
+
+    if (loading === false) {
       const botParams = {
         name,
         email,
@@ -131,12 +125,23 @@ class CreateAssistant extends Component {
     }
   };
 
-  handleLanguageChange = ({ props: itemProps }) => {
-    this.setState({ language: itemProps.value });
+  handleLanguageChange = (language) => {
+    this.setState({ language });
+  };
+
+  createChangeHandler = (field) => (e) => {
+    this.setState({ [field]: e.target.value });
   };
 
   render() {
-    const selected = this.state.selectedTemplate;
+    const {
+      name,
+      email,
+      username,
+      password,
+      selectedTemplate: selected,
+    } = this.state;
+
     // TODO json only for instance
     const acceptImport = "application/json";
     return (
@@ -175,96 +180,101 @@ class CreateAssistant extends Component {
             </div>
           </div>
         </section>
-        <section className="mdl-color--white mdl-shadow--2dp" style={boxStyle}>
-          <div style={headerStyle}>
-            <h4 style={h4}>Informations needed</h4>
-            <div style={secText}>
-              Please provide the following information. Don&apos;t worry. You
-              can always change them later.
-            </div>
-          </div>
-          <form style={formStyle} autoComplete="new-password">
-            <div>
-              <TextField
-                onChange={this.handleNameChange}
-                label="Assistant name"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.nameField = input;
-                }}
-              />
-            </div>
-            <div>
-              <TextField
-                onChange={this.handleEmailChange}
-                label="Username"
-                autoComplete="new-password"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.usernameField = input;
-                }}
-              />
-            </div>
-            <div>
-              <TextField
-                onChange={this.handleEmailChange}
-                label="Password"
-                type="password"
-                autoComplete="new-password"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.passwordField = input;
-                }}
-              />
-            </div>
-            <div>
-              <TextField
-                onChange={this.handleEmailChange}
-                label="Your email"
-                style={{ width: "400px" }}
-                ref={(input) => {
-                  this.emailField = input;
-                }}
-              />
-            </div>
-            <div>
-              <Select
-                label="Choose language"
-                onSelected={this.handleLanguageChange}
-                style={{ width: "400px" }}
-              >
-                <MenuItem selected={this.state.language === "en"} value="en">
-                  English
-                </MenuItem>
-                <MenuItem selected={this.state.language === "fr"} value="fr">
-                  French
-                </MenuItem>
-              </Select>
-            </div>
-          </form>
-        </section>
-        <section style={boxStyle}>
-          <Button
-            raised
-            onClick={(e) => {
-              e.preventDefault();
-              this.handleCreate();
-            }}
+        <form
+          id="create-assistant-form"
+          autoComplete="new-password"
+          onSubmit={this.handleCreate}
+        >
+          <section
+            className="mdl-color--white mdl-shadow--2dp"
+            style={boxStyle}
           >
-            Let&apos;s go
-          </Button>
-          <Button style={advancedStyle}>Advanced settings</Button>
-        </section>
+            <div style={headerStyle}>
+              <h4 style={h4}>Informations needed</h4>
+              <div style={secText}>
+                Please provide the following information. Don&apos;t worry. You
+                can always change them later.
+              </div>
+              <div>
+                <TextField
+                  id="create-assistant-name"
+                  onChange={this.createChangeHandler("name")}
+                  defaultValue={name}
+                  label="Assistant name"
+                  style={{ width: "400px" }}
+                  required
+                />
+              </div>
+              <div>
+                <TextField
+                  id="create-assistant-username"
+                  onChange={this.createChangeHandler("username")}
+                  defaultValue={username}
+                  label="Username"
+                  autoComplete="new-password"
+                  style={{ width: "400px" }}
+                  required
+                />
+              </div>
+              <div>
+                <TextField
+                  id="create-assistant-password"
+                  onChange={this.createChangeHandler("password")}
+                  defaultValue={password}
+                  label="Password"
+                  type="password"
+                  autoComplete="new-password"
+                  style={{ width: "400px" }}
+                  required
+                />
+              </div>
+              <div>
+                <TextField
+                  id="create-assistant-email"
+                  type="email"
+                  onChange={this.createChangeHandler("email")}
+                  defaultValue={email}
+                  label="Your email"
+                  style={{ width: "400px" }}
+                  required
+                />
+              </div>
+              <div>
+                <Select
+                  label="Choose language"
+                  onSelected={this.handleLanguageChange}
+                  style={{ width: "400px" }}
+                  required
+                >
+                  <MenuItem selected={this.state.language === "en"} value="en">
+                    English
+                  </MenuItem>
+                  <MenuItem selected={this.state.language === "fr"} value="fr">
+                    French
+                  </MenuItem>
+                </Select>
+              </div>
+            </div>
+          </section>
+          <section style={boxStyle}>
+            <Button type="submit" raised>
+              Let&apos;s go
+            </Button>
+            <Button type="button" style={advancedStyle}>
+              Advanced settings
+            </Button>
+          </section>
+        </form>
       </div>
     );
   }
 }
 
-CreateAssistant.defaultProps = {
+CreateAssistantBase.defaultProps = {
   error: null,
 };
 
-CreateAssistant.propTypes = {
+CreateAssistantBase.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.string,
   createBot: PropTypes.func.isRequired,
@@ -295,5 +305,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CreateAssistant),
+  connect(mapStateToProps, mapDispatchToProps)(CreateAssistantBase),
 );
