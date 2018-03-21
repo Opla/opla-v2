@@ -95,7 +95,7 @@ class ActionsList extends Component {
       type = "condition";
     }
     const icon = name === "input" ? "format_quote" : "chat_bubble_outline";
-    const style = { padding: "0px 16px" };
+    const style = { padding: "16px" };
     const addText =
       name === "input" ? "Add an input sentence" : "Add an output response";
     const color =
@@ -106,7 +106,7 @@ class ActionsList extends Component {
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
         icon={icon}
-        style={{ color }}
+        style={{ color, padding: "0px 16px" }}
         onClick={(e) => {
           e.preventDefault();
           if (onSelect) {
@@ -123,7 +123,7 @@ class ActionsList extends Component {
         type = "condition";
         // WIP display condition list
         content = (
-          <List>
+          <List style={{ overflow: "auto", maxHeight: "26vh" }}>
             {children.map((action, index) => {
               const text = ActionsList.renderActions(action.text);
               let condition =
@@ -179,18 +179,17 @@ class ActionsList extends Component {
                 </ListItem>
               );
             })}
-            {addContent}
           </List>
         );
       } else {
         content = (
-          <List>
+          <List style={{ overflow: "auto", maxHeight: "26vh" }}>
             {actions.map((action, index) => {
               const text = ActionsList.renderActions(action);
               const key = `cd_${index}`;
               return (
                 <ListItem
-                  style={style}
+                  style={{ height: "100%", ...style }}
                   key={key}
                   icon={icon}
                   className="selectableListItem onFocusAction mdl-list_action"
@@ -215,16 +214,20 @@ class ActionsList extends Component {
                 </ListItem>
               );
             })}
-            {addContent}
           </List>
         );
       }
       // addDisabled = false;
     } else {
-      content = <List>{addContent}</List>;
+      content = <List />;
       // addDisabled = true;
     }
-    return <ExpansionPanel label={name}>{content}</ExpansionPanel>;
+    return (
+      <ExpansionPanel label={name}>
+        {content}
+        {addContent}
+      </ExpansionPanel>
+    );
   }
 }
 
