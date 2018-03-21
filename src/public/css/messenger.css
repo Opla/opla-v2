@@ -19,7 +19,7 @@
 
 .messenger-box {
 	/*overflow: scroll;*/
-	height: 79vh;
+	height: calc(100vh - 64px - 59px - 40px);
   /*min-height: 560px;
 	padding-top: 0px;*/
 	background: #f2f2f2;

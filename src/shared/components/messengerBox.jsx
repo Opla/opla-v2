@@ -165,13 +165,6 @@ class MessengerBox extends Component {
             }}
             name="add"
           />
-          <Icon
-            className="mdl-button-left"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-            name="mic"
-          />
           <TextField
             type="text"
             id="chat-input-field"

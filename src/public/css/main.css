@@ -386,7 +386,8 @@
  }
  
  .mrb-subheader-menu {
-   left: 20px;
+  margin-right: -8px;
+  margin-top: 12px;
  }
  
  .mrb-sublist {
@@ -527,7 +528,7 @@
    position: relative;
    overflow-x: hidden;
    overflow-y: auto;
-   height: 100%;
+   height: calc(100vh - 64px - 49px);
  }
  
  .service_start i {

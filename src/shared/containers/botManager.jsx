@@ -287,7 +287,10 @@ class BotManager extends Component {
     }
     return (
       <div className="mdl-color--grey-100">
-        <Grid style={{ margin: "0px", padding: "0px" }}>
+        <Grid
+          gutter={{ desktop: "0px", tablet: "0px", phone: "0px" }}
+          style={{ margin: "0px", padding: "0px" }}
+        >
           <Inner>
             {panel1}
             {panel2}
