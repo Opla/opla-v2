@@ -158,7 +158,7 @@
 }
 
 .message.you .circle-wrapper {
-  background-image: url("../images/default-avatar.png");
+  background-image: url("../images/default.png");
   background-size: 100%;
 }
 
@@ -174,7 +174,7 @@
 }
 
 .message.you.default .circle-wrapper {
-  background-image: url("../images/default-avatar.png");
+  background-image: url("../images/default.png");
   background-size: 100%;
 }
 
