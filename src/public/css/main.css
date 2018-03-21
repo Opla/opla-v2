@@ -9,6 +9,20 @@
 
 html, body {
   font-family: "Roboto","Helvetica", "Arial", sans-serif;
+  /* Should we put it in Zoapp ? */
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Should we put it in Zoapp ? */
+.app {
+  height: 100%;
+  overflow: hidden; 
+}
+
+.mdc-list {
+  padding: 0px;
 }
 
 .gray_dot {
@@ -174,6 +188,11 @@ a {
   /*position: fixed;*/
 }
 
+.mdc-toolbar-fixed-adjust {
+  overflow: auto;
+  height: calc(100vh - 64px);
+  width: 100%;
+}
 
 .mdc-list-item .mdc-list-item__secondary-text .mdl-list__item-icon {
   color: rgb(221,221,221);
@@ -495,7 +514,7 @@ hr {
 }
 
 .list-box {
-  height:84vh;
+  height:83vh;
 }
 
 .list-content {

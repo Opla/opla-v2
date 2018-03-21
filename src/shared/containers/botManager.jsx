@@ -292,7 +292,7 @@ class BotManager extends Component {
             {panel1}
             {panel2}
             <Cell
-              style={{ margin: "16px 24px" }}
+              style={{ margin: "0px" }}
               className="mdl-color--white mdl-shadow--2dp"
               span={4}
             >
