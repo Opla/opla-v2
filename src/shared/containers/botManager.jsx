@@ -202,7 +202,7 @@ class BotManager extends Component {
       );
       panel2 = (
         <Cell
-          style={{ margin: "0px" }}
+          style={{ margin: "0px", borderRight: "1px solid #e1e1e1" }}
           className="mdl-color--white mrb-panel"
           span={6}
         >
@@ -291,7 +291,7 @@ class BotManager extends Component {
           gutter={{ desktop: "0px", tablet: "0px", phone: "0px" }}
           style={{ margin: "0px", padding: "0px" }}
         >
-          <Inner>
+          <Inner style={{ gridGap: "0px" }}>
             {panel1}
             {panel2}
             <Cell
