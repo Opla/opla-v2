@@ -53,8 +53,6 @@ class IntentContainer extends Component {
       } else {
         actionValue = text;
       }
-      /* console.log("WIP",
-      `IntentContainer.onEditAction :${actionValue} / ${this.selectedAction}`); */
       if (!actionValue || actionValue === "") {
         return false;
       }
@@ -65,13 +63,11 @@ class IntentContainer extends Component {
         this.selectedAction,
       );
     } else if (editAction === "Delete") {
-      // console.log("WIP", `IntentContainer.onDeleteAction :${this.selectedAction}`);
       this.props.appDeleteIntentAction(
         this.actionContainer,
         this.selectedAction,
       );
     } else if (editAction === "Topic") {
-      // console.log("WIP", "IntentContainer.onTopic ");
       const topic = this.actionField.inputRef.value.trim();
       const { selectedIntent } = this.props;
       const currentTopic = selectedIntent.topic ? selectedIntent.topic : "";
@@ -89,8 +85,6 @@ class IntentContainer extends Component {
   };
 
   handleSaveIntent = () => {
-    // console.log("WIP", "IntentContainer.handleSaveIntent");
-    // Zrmc.open({ title: "TODO", content: "IntentContainer.handleSaveIntent" });
     if (this.props.selectedIntent) {
       const intent = { ...this.props.selectedIntent };
       if (intent.notSaved) {

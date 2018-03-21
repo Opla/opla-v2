@@ -25,7 +25,7 @@ const handleOpenPublishDialog = () => {
 };
 
 const app = {
-  name: "Opla.ai CE",
+  name: "Opla CE",
   version: "0.1.0",
   design: {
     drawer: {
