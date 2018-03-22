@@ -13,6 +13,8 @@
    height: 100%;
    overflow: hidden;
    margin: 0;
+   --mdc-theme-primary: var(--material-color-deeppurple-500, #673ab7);
+   --mdc-theme-secondary: var(--material-color-yellow-500, #ffeb3b);
  }
  
  /* Should we put it in Zoapp ? */
