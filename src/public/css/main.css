@@ -4,13 +4,9 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
- 
-#app {
-  height: 100%;
-  overflow: hidden; 
-}
+
+ @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+ @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
 
  .mdc-list {
    padding: 0px;
