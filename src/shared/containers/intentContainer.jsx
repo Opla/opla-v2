@@ -17,6 +17,7 @@ import {
   appSetIntentAction,
   appUpdateIntent,
 } from "../actions/app";
+import ActionsToolbox from "../components/actionsToolbox";
 
 class IntentContainer extends Component {
   onChangeAction = (/* actionText */) => {
@@ -192,7 +193,12 @@ class IntentContainer extends Component {
         <div>
           <SubToolbar
             titleIcon="question_answer"
-            titleName={name}
+            titleName={
+              <div>
+                name
+                <ActionsToolbox />
+              </div>
+            }
             icons={[{ name: "file_upload", onClick: this.handleSaveIntent }]}
           />
           <IntentDetail intent={intent} onSelect={this.handleActions} />
