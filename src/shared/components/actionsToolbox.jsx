@@ -189,7 +189,7 @@ class ActionsToolbox extends Component {
       backgroundColor: "#eee",
       marginBottom: "16px",
       display: "table", */
-      marginLeft: "24px",
+      marginLeft: "0px",
       height: "24px",
       float: "right",
     };
@@ -200,6 +200,9 @@ class ActionsToolbox extends Component {
       float: "left",
       height: "32px",
     };
+    const styleButton = {
+      margin: "0 4px",
+    };
     const { toolbox } = this.state;
     let extra = "";
     if (!this.props.isInput) {
@@ -207,6 +210,7 @@ class ActionsToolbox extends Component {
         <span>
           <Tooltip label="Insert code">
             <Icon
+              style={styleButton}
               /* colored={toolbox.code} */ onClick={(e) => {
                 this.onCodeSelected(e);
               }}
@@ -215,6 +219,7 @@ class ActionsToolbox extends Component {
           </Tooltip>
           <Tooltip label="Insert Linebreak">
             <Icon
+              style={styleButton}
               /* colored={toolbox.linebreak} */ onClick={(e) => {
                 this.onLineBreakSelected(e);
               }}
@@ -223,6 +228,7 @@ class ActionsToolbox extends Component {
           </Tooltip>
           <Tooltip label="Insert Button">
             <Icon
+              style={styleButton}
               /* colored={toolbox.button} */ onClick={(e) => {
                 this.onButtonSelected(e);
               }}
@@ -237,6 +243,7 @@ class ActionsToolbox extends Component {
         <div style={styleToolbar}>
           <Tooltip label="Insert text">
             <Icon
+              style={styleButton}
               /* colored={toolbox.text} */ onClick={(e) => {
                 this.onTextSelected(e);
               }}
@@ -245,6 +252,7 @@ class ActionsToolbox extends Component {
           </Tooltip>
           <Tooltip label="Insert block any">
             <Icon
+              style={styleButton}
               /* colored={toolbox.any} */ onClick={(e) => {
                 this.onAnySelected(e);
               }}
@@ -253,6 +261,7 @@ class ActionsToolbox extends Component {
           </Tooltip>
           <Tooltip label="Insert variable assignment">
             <Icon
+              style={styleButton}
               /* colored={toolbox.variable} */ onClick={(e) => {
                 this.onVariableSelected(e);
               }}
@@ -264,6 +273,7 @@ class ActionsToolbox extends Component {
         <div style={styleToolbar}>
           <Tooltip label="Delete selected item">
             <Icon
+              style={styleButton}
               disabled={toolbox.trash}
               onClick={(e) => {
                 this.onTrashSelected(e);
