@@ -195,7 +195,20 @@ class IntentContainer extends Component {
             titleIcon="question_answer"
             titleName={
               <div>
-                name
+                <div
+                  style={{
+                    float: "left",
+                    borderRight: "1px solid #ddd",
+                    paddingRight: "16px",
+                    width: "15vw",
+                    height: "48px",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  <span>{name}</span>
+                </div>
                 <ActionsToolbox />
               </div>
             }
