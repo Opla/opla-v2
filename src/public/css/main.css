@@ -7,22 +7,6 @@
  @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
  @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
  
- html, body {
-   font-family: "Roboto","Helvetica", "Arial", sans-serif;
-   /* Should we put it in Zoapp ? */
-   height: 100%;
-   overflow: hidden;
-   margin: 0;
-   --mdc-theme-primary: var(--material-color-deeppurple-500, #673ab7);
-   --mdc-theme-secondary: var(--material-color-yellow-500, #ffeb3b);
- }
- 
- /* Should we put it in Zoapp ? */
- .app {
-   height: 100%;
-   overflow: hidden; 
- }
- 
  .mdc-list {
    padding: 0px;
  }
