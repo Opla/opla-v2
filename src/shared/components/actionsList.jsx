@@ -49,13 +49,17 @@ class ActionsList extends Component {
           } else if (actionItem.type === "output_var") {
             return (
               <span className="mdl-chip" key={id} style={styleOut}>
-                <span className="mdl-chip__text_ex">{actionItem.text}</span>
+                <span className="mdl-chip__text_ex">
+                  {decodeURIComponent(actionItem.text)}
+                </span>
               </span>
             );
           } else if (actionItem.type === "variable") {
             return (
               <span className="mdl-chip" key={id} style={styleVar}>
-                <span className="mdl-chip__text_ex">{actionItem.text}</span>
+                <span className="mdl-chip__text_ex">
+                  {decodeURIComponent(actionItem.text)}
+                </span>
               </span>
             );
           } else if (actionItem.type === "br") {

@@ -11,22 +11,22 @@ import { ContentEditable, Tooltip } from "zoapp-ui";
 import ActionsTools from "../utils/actionsTools";
 
 class ActionEditor extends Component {
-  static buildFromHtml(children) {
+  static build(items, fromHtml) {
     // WIP convert back html to action syntax
     let actionText = "";
     // TODO append empty text span if first element is not a text
-    children.forEach((child, index) => {
-      const text = child.textContent;
-      const type = child.getAttribute("data");
+    items.forEach((child, index) => {
+      const text = fromHtml ? child.textContent : child.text;
+      const type = fromHtml ? child.getAttribute("data") : child.type;
       const t = text; // .trim();
       if (type === "any") {
         actionText += "*";
       } else if (type === "output_var") {
         // TODO check if t is empty and delete child
-        actionText += `{{${t}}}`;
+        actionText += `{{${encodeURIComponent(t)}}}`;
       } else if (type === "variable") {
         // TODO check if t is empty and delete child
-        actionText += `<<${t}>>`;
+        actionText += `<<${encodeURIComponent(t)}>>`;
       } else if (type === "br") {
         actionText += "<br/>";
       } else if (type === "button") {
@@ -66,17 +66,17 @@ class ActionEditor extends Component {
         // TODO add button to delete chip
         html += `data="${
           item.type
-        }" class="mdl-chip" style="${styleOut}" contentEditable=true><span class="mdl-chip__text_ex">${
-          item.text
-        }</span></span>`;
+        }" class="mdl-chip" style="${styleOut}" contentEditable=true><span class="mdl-chip__text_ex">${decodeURIComponent(
+          item.text,
+        )}</span></span>`;
         lastIsText = false;
       } else if (item.type === "variable") {
         // TODO add button to delete chip
         html += `data="${
           item.type
-        }" class="mdl-chip" style="${styleVar}" contentEditable=true><span class="mdl-chip__text_ex">${
-          item.text
-        }</span></span>`;
+        }" class="mdl-chip" style="${styleVar}" contentEditable=true><span class="mdl-chip__text_ex">${decodeURIComponent(
+          item.text,
+        )}</span></span>`;
         lastIsText = false;
       } else if (item.type === "br") {
         // TODO add button to delete chip
@@ -104,34 +104,6 @@ class ActionEditor extends Component {
       html += `<span tabIndex="${i}" data="text" style="${styleText}" contentEditable=true> </span>`;
     }
     return html;
-  }
-
-  static build(items) {
-    // WIP convert back html to action syntax
-    let actionText = "";
-    // TODO append empty text span if first element is not a text
-    items.forEach((child, index) => {
-      const { text, type } = child;
-      const t = text; // .trim();
-      if (type === "any") {
-        actionText += "*";
-      } else if (type === "output_var") {
-        // TODO check if t is empty and delete child
-        actionText += `{{${t}}}`;
-      } else if (type === "variable") {
-        // TODO check if t is empty and delete child
-        actionText += `<<${t}>>`;
-      } else if (type === "br") {
-        actionText += "<br/>";
-      } else if (type === "button") {
-        actionText += `<button>${t}</button>`;
-      } else if (type === "text") {
-        if (index > 0 || t.length > 0) {
-          actionText += text;
-        }
-      }
-    });
-    return actionText; // .trim();
   }
 
   constructor(props) {
@@ -257,7 +229,7 @@ class ActionEditor extends Component {
   }
 
   handleChange = (text, element) => {
-    const content = ActionEditor.buildFromHtml([...element.children]);
+    const content = ActionEditor.build([...element.children], true);
     this.props.onChange(content);
     const items = ActionsTools.parse(content);
     this.setState(() => ({ content, items }));
@@ -439,6 +411,7 @@ class ActionEditor extends Component {
           </div>
         </div>
         <ContentEditable
+          id="action-editor-content"
           content={content}
           onChange={this.handleChange}
           onFocusIn={this.onFocusIn}
