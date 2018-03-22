@@ -6,8 +6,7 @@
  */
 import Opla from "OplaLibs/opla";
 
-import "zrmc/compressed.css";
-import "zoapp-ui/compressed.css";
+import "zoapp-front/compressed.css";
 
 import "../public/css/main.css";
 import "../public/css/animate.min.css";
