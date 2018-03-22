@@ -193,6 +193,9 @@ class ActionsToolbox extends Component {
     const styleButton = {
       margin: "0 4px",
     };
+    const styleButton = {
+      margin: "0 4px",
+    };
     const { toolbox } = this.state;
     let extra = "";
     if (!this.props.isInput) {
