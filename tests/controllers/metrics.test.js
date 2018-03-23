@@ -4,21 +4,44 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import MetricsController from "opla-backend/controllers/metrics";
+import UsersModel from "zoapp-backend/models/users";
+import MetricsController from "../../src/controllers/metrics";
+import MessengerModel from "../../src/models/messenger";
+
+jest.mock("../../src/models/messenger");
+jest.mock("zoapp-backend/models/users");
+const fakeZoapp = {
+  controllers: {
+    getMiddlewares: () => ({
+      dispatchEvent: () => {},
+    }),
+  },
+};
 
 describe("controllers/metrics", () => {
+  beforeEach(() => {
+    UsersModel.mockClear();
+    MessengerModel.mockClear();
+  });
+
   describe("getAll()", () => {
-    it("returns the metrics", () => {
-      const controller = new MetricsController("Metrics", {});
+    it("returns the metrics", async () => {
+      const controller = new MetricsController(
+        "Metrics",
+        { zoapp: fakeZoapp },
+        "metrics",
+      );
 
-      const metrics = controller.getAll();
+      const response = await controller.getAll();
 
-      expect(metrics).toHaveProperty("users.count");
-      expect(metrics).toHaveProperty("conversations.count");
-      expect(metrics).toHaveProperty("conversations.messages_per_conversation");
-      expect(metrics).toHaveProperty("sessions.duration");
-      expect(metrics).toHaveProperty("errors.rate");
-      expect(metrics).toHaveProperty("responses.speed");
+      expect(response).toHaveProperty("users.count");
+      expect(response).toHaveProperty("conversations.count");
+      expect(response).toHaveProperty(
+        "conversations.messages_per_conversation",
+      );
+      expect(response).toHaveProperty("sessions.duration");
+      expect(response).toHaveProperty("errors.rate");
+      expect(response).toHaveProperty("responses.speed");
     });
   });
 });
