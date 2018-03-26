@@ -198,7 +198,7 @@ class ActionsToolbox extends Component {
       /* display: "table-cell", */
       padding: "8px",
       float: "left",
-      height: "32px",
+      height: "22px",
     };
     const styleButton = {
       margin: "0 4px",

@@ -201,7 +201,7 @@ class IntentContainer extends Component {
                     borderRight: "1px solid #ddd",
                     paddingRight: "16px",
                     width: "15vw",
-                    height: "48px",
+                    height: "36px",
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                     textOverflow: "ellipsis",

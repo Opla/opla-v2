@@ -4,9 +4,14 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
- @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
- @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
  
+#app {
+  height: 100%;
+  overflow: hidden; 
+}
+
  .mdc-list {
    padding: 0px;
  }
@@ -193,14 +198,14 @@
  }
  
  .mrb-panel-header {
-   padding: 0px;
-   background: white;
-   color: #757575;
-   font-size: 18px;
-   line-height: 48px;
-   height: 48px;
-   min-height: 48px;
-   border-bottom: 1px solid #e1e1e1;
+  padding: 0px;
+  background: white;
+  color: #757575;
+  font-size: 14px;
+  line-height: 36px;
+  height: 36px;
+  min-height: 36px;
+  border-bottom: 1px solid #e1e1e1;
  }
  
  .mrb-panel-empty {
@@ -224,8 +229,8 @@
  
  .mrb-panel-header-icon {
    font-size: 24px;
-   line-height: 48px;
-   width:32px;
+   line-height: 36px;
+   width:36px;
    float: left;
    margin-right: 2px;
    margin-left: 8px;
@@ -238,12 +243,12 @@
  }
  
  .mrb-panel-header .mdl-layout__header-row {
-   height: 48px;
+   height: 36px;
    padding: 0px;
  }
  
  .mrb-panel-header__actions {
-   height: 48px;
+   height: 36px;
    float: right;
    padding-right: 16px;
  }
@@ -347,11 +352,11 @@
  
  .mrb-subheader {
    text-transform: capitalize;
-   height: 48px;
+   height: 36px;
  }
  .mrb-subheader > div {
    padding-left: 18px;
-   line-height: 48px;
+   line-height: 36px;
    font-size: 15px;
    color: rgba(0,0,0, 0.87);
  }
@@ -373,7 +378,7 @@
  
  .mrb-subheader-menu {
   margin-right: -8px;
-  margin-top: 12px;
+  margin-top: 6px;
  }
  
  .mrb-sublist {
@@ -514,7 +519,7 @@
    position: relative;
    overflow-x: hidden;
    overflow-y: auto;
-   height: calc(100vh - 64px - 49px);
+   height: calc(100vh - 64px - 37px);
  }
  
  .service_start i {
