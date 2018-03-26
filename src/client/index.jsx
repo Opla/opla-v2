@@ -8,9 +8,9 @@ import Opla from "OplaLibs/opla";
 
 import "zoapp-front/compressed.css";
 
-import "../public/css/main.css";
 import "../public/css/animate.min.css";
 import "../public/css/messenger.css";
+import "../public/css/main.css";
 
 const opla = new Opla();
 opla.start();
