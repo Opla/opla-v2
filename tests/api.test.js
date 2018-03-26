@@ -7,18 +7,15 @@
 import request from "supertest";
 import createApp from "opla-backend/app";
 
+import { dbConfig } from "./test-config";
+
 const mysqlConfig = {
   // Global Database
   name: "Opla.ai test",
   version: "0.8.0",
   global: {
     database: {
-      datatype: "mysql",
-      host: "127.0.0.1",
-      name: "opla_test",
-      user: "root",
-      charset: "utf8mb4",
-      version: "2",
+      ...dbConfig,
     },
     api: {
       endpoint: "/api",
@@ -258,7 +255,7 @@ describe("API", () => {
           );
           // WIP
           expect(Object.keys(context.conversation).sort()).toEqual(
-            ["id", "created_time", "author", "participants"].sort(),
+            ["id", "created_time", "author", "last", "participants"].sort(),
           );
         });
 
@@ -269,7 +266,7 @@ describe("API", () => {
             context.authUser1.access_token,
           );
           expect(Object.keys(res).sort()).toEqual(
-            ["id", "created_time", "author", "participants"].sort(),
+            ["id", "created_time", "author", "last", "participants"].sort(),
           );
         });
 

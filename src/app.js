@@ -28,12 +28,12 @@ class App {
     buildRoutes(this.zoapp);
   }
 
-  start() {
-    this.zoapp.start();
+  async start() {
+    await this.zoapp.start();
   }
 
-  close() {
-    this.zoapp.close();
+  async close() {
+    await this.zoapp.close();
   }
 
   getDatabase() {
