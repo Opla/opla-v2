@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/actionEditor renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#f5f5f5",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#eee",
+        "display": "table",
+        "marginBottom": "16px",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "borderRight": "1px solid #ddd",
+          "display": "table-cell",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          text_fields
+        </i>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          all_out
+        </i>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          assignment
+        </i>
+      </div>
+      <span>
+        <div
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            code
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            keyboard_return
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            insert_link
+          </i>
+        </div>
+      </span>
+    </div>
+    <div
+      style={
+        Object {
+          "borderRight": "1px solid #ddd",
+          "display": "table-cell",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          disabled={true}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          delete
+        </i>
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label={null}
+    className="ContentEditable "
+    contentEditable={false}
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<span tabIndex=\\"1\\" key=\\"0\\"data=\\"text\\" style=\\"height: 32px; display: inline-block; margin: 2px 0px; padding: 0px 4px;\\" contentEditable=true>some content</span>",
+      }
+    }
+    onFocus={[Function]}
+    onInput={[Function]}
+    onKeyUp={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    spellCheck={false}
+    style={
+      Object {
+        "color": "#757575",
+        "fontSize": "16px",
+        "letterSpacing": "0.04em",
+        "lineHeight": "1",
+        "margin": "16px",
+        "overflow": "hidden",
+      }
+    }
+    tabIndex={0}
+  />
+</div>
+`;
