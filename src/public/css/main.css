@@ -17,7 +17,10 @@
  }
  
  .mdc-list-item {
-   padding: 8px 16px;
+  /* dense */
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: .812rem;
  }
  
  .gray_dot {
@@ -362,7 +365,9 @@
  }
  
  .list-content > .mdc-list-item {
-   font-size: 14px;
+   /* font-size: 14px; */
+   height: 40px;
+   padding: 0px 16px;
  }
  
  .mrb-subheader-right {

@@ -99,7 +99,7 @@ class ActionsList extends Component {
       type = "condition";
     }
     const icon = name === "input" ? "format_quote" : "chat_bubble_outline";
-    const style = { padding: "16px" };
+    const style = {}; /* padding: "16px" */
     const addText =
       name === "input" ? "Add an input sentence" : "Add an output response";
     const color =
