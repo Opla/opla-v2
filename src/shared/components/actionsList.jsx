@@ -11,11 +11,22 @@ import { ExpansionPanel } from "zoapp-ui";
 import ActionsEditable from "./actionsEditable";
 
 class ActionsList extends Component {
+<<<<<<< 08ce1c56efc838d11926df39fbd505214ca331b7
   constructor(props) {
     super(props);
     this.state = {
       selection: null,
       newContent: null,
+=======
+  static renderActions(actionText) {
+    const actions = ActionsTools.parse(actionText);
+    const styleText = {
+      /* lineHeight: "32px",
+      height: "32px", */
+      display: "inline-block",
+      /* margin: "2px 0", */
+      padding: "0 4px",
+>>>>>>> fix actionList texts position / size
     };
     this.editableComponent = null;
   }
