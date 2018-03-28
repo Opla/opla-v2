@@ -14,10 +14,10 @@ class ActionsList extends Component {
   static renderActions(actionText) {
     const actions = ActionsTools.parse(actionText);
     const styleText = {
-      lineHeight: "32px",
-      height: "32px",
+      /* lineHeight: "32px",
+      height: "32px", */
       display: "inline-block",
-      margin: "2px 0",
+      /* margin: "2px 0", */
       padding: "0 4px",
     };
     const styleVar = {
@@ -193,7 +193,7 @@ class ActionsList extends Component {
               const key = `cd_${index}`;
               return (
                 <ListItem
-                  style={{ height: "100%", ...style }}
+                  style={{ height: "100%", minHeight: "40px", ...style }}
                   key={key}
                   icon={icon}
                   className="selectableListItem onFocusAction mdl-list_action"
