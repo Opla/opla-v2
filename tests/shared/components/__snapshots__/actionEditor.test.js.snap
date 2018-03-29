@@ -161,30 +161,28 @@ exports[`components/actionEditor renders correctly 1`] = `
   </div>
   <div
     aria-label={null}
-    className="ContentEditable "
-    contentEditable={false}
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "<span tabIndex=\\"1\\" key=\\"0\\"data=\\"text\\" style=\\"height: 32px; display: inline-block; margin: 2px 0px; padding: 0px 4px;\\" contentEditable=true>some content</span>",
-      }
-    }
+    className="ContentEditable"
     onFocus={[Function]}
     onInput={[Function]}
     onKeyUp={[Function]}
     onMouseUp={[Function]}
     onTouchEnd={[Function]}
     spellCheck={false}
-    style={
-      Object {
-        "color": "#757575",
-        "fontSize": "16px",
-        "letterSpacing": "0.04em",
-        "lineHeight": "1",
-        "margin": "16px",
-        "overflow": "hidden",
-      }
-    }
     tabIndex={0}
-  />
+  >
+    <span>
+      <span
+        style={
+          Object {
+            "display": "inline-block",
+            "padding": "0 4px",
+          }
+        }
+        tabIndex={1}
+      >
+        some content
+      </span>
+    </span>
+  </div>
 </div>
 `;
