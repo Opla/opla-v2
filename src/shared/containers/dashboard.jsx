@@ -118,7 +118,7 @@ export class DashboardBase extends Component {
                   <Cell span={4}>
                     <div style={metricStyle}>
                       <span style={valueStyle}>
-                        {metrics.errors.rate * 100}%
+                        {(metrics.errors.rate * 100).toFixed(2)}%
                       </span>
                       <br />
                       <span style={legendStyle}>errors rate</span>

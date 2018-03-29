@@ -26,7 +26,7 @@ describe("containers/Dashboard", () => {
         duration: 5000,
       },
       errors: {
-        rate: 0.23,
+        rate: 0.230115,
       },
       responses: {
         speed: 40,
