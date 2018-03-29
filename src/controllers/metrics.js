@@ -8,7 +8,7 @@
 import { Controller } from "zoapp-backend";
 
 class MetricsController extends Controller {
-  getAll() {
+  async getForBot(botId) {
     // TODO: return real metrics
 
     return {

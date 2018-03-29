@@ -4,12 +4,10 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import UsersModel from "zoapp-backend/models/users";
 import MetricsController from "../../src/controllers/metrics";
 import MessengerModel from "../../src/models/messenger";
 
 jest.mock("../../src/models/messenger");
-jest.mock("zoapp-backend/models/users");
 const fakeZoapp = {
   controllers: {
     getMiddlewares: () => ({
@@ -20,19 +18,24 @@ const fakeZoapp = {
 
 describe("controllers/metrics", () => {
   beforeEach(() => {
-    UsersModel.mockClear();
     MessengerModel.mockClear();
   });
 
-  describe("getAll()", () => {
+  describe("getForBot()", () => {
     it("returns the metrics", async () => {
+
+      MessengerModel.mockImplementation(() => ({
+        getConversations: () => Promise.resolve([]),
+        getConversationMessages: () => Promise.resolve([]),
+      }));
+
       const controller = new MetricsController(
         "Metrics",
         { zoapp: fakeZoapp },
         "metrics",
       );
 
-      const response = await controller.getAll();
+      const response = await controller.getForBot("bot1");
 
       expect(response).toHaveProperty("users.count");
       expect(response).toHaveProperty("conversations.count");
