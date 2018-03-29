@@ -63,6 +63,7 @@ class OpenNLXMiddleware {
             from: message.from,
             conversationId: message.conversationId,
             id: message.id,
+            created_time: message.created_time,
           };
           const response = this.openNLX.parse(bot.id, v, msg);
           // logger.info("response=", JSON.stringify(response));
