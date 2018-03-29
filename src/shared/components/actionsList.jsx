@@ -6,87 +6,11 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta, Icon } from "zrmc";
+import { List, ListItem, ListItemMeta } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
-import ActionsTools from "../utils/actionsTools";
+import ActionsEditable from "./actionsEditable";
 
 class ActionsList extends Component {
-  static renderActions(actionText) {
-    const actions = ActionsTools.parse(actionText);
-    const styleText = {
-      /* lineHeight: "32px",
-      height: "32px", */
-      display: "inline-block",
-      /* margin: "2px 0", */
-      padding: "0 4px",
-    };
-    const styleVar = {
-      color: "white",
-      backgroundColor: "#552682",
-    };
-    const styleOut = {
-      color: "white",
-      backgroundColor: "#23b4bb",
-    };
-    const styleAny = {
-      color: "black",
-      backgroundColor: "#fcea20",
-    };
-    const styleHtml = {
-      color: "white",
-      backgroundColor: "#aaa",
-    };
-    return (
-      <span>
-        {actions.map((actionItem, index) => {
-          const id = `al_${index}`;
-          if (actionItem.type === "any") {
-            return (
-              <span className="mdl-chip" key={id} style={styleAny}>
-                <span className="mdl-chip__text_ex">any</span>
-              </span>
-            );
-          } else if (actionItem.type === "output_var") {
-            return (
-              <span className="mdl-chip" key={id} style={styleOut}>
-                <span className="mdl-chip__text_ex">
-                  {decodeURIComponent(actionItem.text)}
-                </span>
-              </span>
-            );
-          } else if (actionItem.type === "variable") {
-            return (
-              <span className="mdl-chip" key={id} style={styleVar}>
-                <span className="mdl-chip__text_ex">
-                  {decodeURIComponent(actionItem.text)}
-                </span>
-              </span>
-            );
-          } else if (actionItem.type === "br") {
-            return (
-              <span className="mdl-chip" key={id} style={styleHtml}>
-                <span className="mdl-chip__text_ex">
-                  <Icon name="keyboard_return" style={{ fontSize: "13px" }} />
-                </span>
-              </span>
-            );
-          } else if (actionItem.type === "button") {
-            return (
-              <span className="mdl-chip" key={id} style={styleHtml}>
-                <span className="mdl-chip__text_ex">{actionItem.text}</span>
-              </span>
-            );
-          }
-          return (
-            <span key={id} style={styleText}>
-              {actionItem.text}
-            </span>
-          );
-        })}
-      </span>
-    );
-  }
-
   render() {
     const { name, actions, onSelect, onDrop } = this.props;
     let content;
@@ -129,7 +53,7 @@ class ActionsList extends Component {
         content = (
           <List style={{ overflow: "auto", maxHeight: "26vh" }}>
             {children.map((action, index) => {
-              const text = ActionsList.renderActions(action.text);
+              const text = <ActionsEditable content={action.text} />;
               let condition =
                 action.name && action.name.length > 0
                   ? `${action.name} = `
@@ -189,7 +113,7 @@ class ActionsList extends Component {
         content = (
           <List style={{ overflow: "auto", maxHeight: "26vh" }}>
             {actions.map((action, index) => {
-              const text = ActionsList.renderActions(action);
+              const text = <ActionsEditable content={action} />;
               const key = `cd_${index}`;
               return (
                 <ListItem
