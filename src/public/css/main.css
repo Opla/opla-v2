@@ -160,11 +160,14 @@
   outline: 0px solid transparent;
 }
 
+<<<<<<< 00df45019c5781824b1e89f8e2f5e9d8dded4bb4
 
   .contenteditable {
     width: 100%;
   }
 
+=======
+>>>>>>> actionEditor use actionsEditable
  [contenteditable]:focus {
    outline: 0px solid transparent;
  }
