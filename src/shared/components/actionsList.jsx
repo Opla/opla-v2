@@ -11,6 +11,7 @@ import { ExpansionPanel } from "zoapp-ui";
 import ActionsEditable from "./actionsEditable";
 
 class ActionsList extends Component {
+<<<<<<< eda39f84cc5cdfec8a96d07f23ec63702dc51005
 <<<<<<< 08ce1c56efc838d11926df39fbd505214ca331b7
   constructor(props) {
     super(props);
@@ -126,6 +127,8 @@ class ActionsList extends Component {
     }
   }
 
+=======
+>>>>>>> use ActionsEditable in ActionsList
   render() {
     const { name, actions, onDrop } = this.props;
     let content;
