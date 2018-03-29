@@ -150,6 +150,10 @@
    cursor: pointer;
  }
  
+ :focus {
+  outline: 0px solid transparent;
+}
+
  [contenteditable]:focus {
    outline: 0px solid transparent;
  }

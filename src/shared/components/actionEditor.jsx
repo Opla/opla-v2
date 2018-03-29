@@ -7,105 +7,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Icon } from "zrmc";
-import { ContentEditable, Tooltip } from "zoapp-ui";
-import ActionsTools from "../utils/actionsTools";
+import { Tooltip } from "zoapp-ui";
+import ActionsEditable from "./actionsEditable";
 
 class ActionEditor extends Component {
-  static build(items, fromHtml) {
-    // WIP convert back html to action syntax
-    let actionText = "";
-    // TODO append empty text span if first element is not a text
-    items.forEach((child, index) => {
-      const text = fromHtml ? child.textContent : child.text;
-      const type = fromHtml ? child.getAttribute("data") : child.type;
-      const t = text; // .trim();
-      if (type === "any") {
-        actionText += "*";
-      } else if (type === "output_var") {
-        // TODO check if t is empty and delete child
-        actionText += `{{${encodeURIComponent(t)}}}`;
-      } else if (type === "variable") {
-        // TODO check if t is empty and delete child
-        actionText += `<<${encodeURIComponent(t)}>>`;
-      } else if (type === "br") {
-        actionText += "<br/>";
-      } else if (type === "button") {
-        actionText += `<button>${t}</button>`;
-      } else if (type === "text") {
-        if (index > 0 || t.length > 0) {
-          actionText += text;
-        }
-      }
-    });
-    return actionText; // .trim();
-  }
-
-  static renderAction(items) {
-    const styleAny = "color: black; background-color: #fcea20;";
-    const styleOut = "color: white; background-color: #23b4bb;";
-    const styleVar = "color: white; background-color: #552682;";
-    const styleHtml = "color: white; background-color: #aaa;";
-    const styleText =
-      "height: 32px; display: inline-block; margin: 2px 0px; padding: 0px 4px;";
-    let html = "";
-    let lastIsText = false;
-    let i = 1;
-    if (items.length < 1 || (items[0] && items[0].type !== "text")) {
-      html += `<span tabIndex="${i}" data="text" style="${styleText}" contentEditable=true> </span>`;
-      lastIsText = true;
-      i += 1;
-    }
-    items.forEach((item, index) => {
-      html += `<span tabIndex="${i}" key="${index}"`;
-      if (item.type === "any") {
-        html += `data="${
-          item.type
-        }" class="mdl-chip" style="${styleAny}" contentEditable=false><span class="mdl-chip__text_ex">any</span></span>`;
-        lastIsText = false;
-      } else if (item.type === "output_var") {
-        // TODO add button to delete chip
-        html += `data="${
-          item.type
-        }" class="mdl-chip" style="${styleOut}" contentEditable=true><span class="mdl-chip__text_ex">${decodeURIComponent(
-          item.text,
-        )}</span></span>`;
-        lastIsText = false;
-      } else if (item.type === "variable") {
-        // TODO add button to delete chip
-        html += `data="${
-          item.type
-        }" class="mdl-chip" style="${styleVar}" contentEditable=true><span class="mdl-chip__text_ex">${decodeURIComponent(
-          item.text,
-        )}</span></span>`;
-        lastIsText = false;
-      } else if (item.type === "br") {
-        // TODO add button to delete chip
-        html += `data="${
-          item.type
-        }" class="mdl-chip" style="${styleHtml}" contentEditable=false><span class="mdl-chip__text_ex"><i class="material-icons" style="font-size: 13px;">keyboard_return</i></span></span><br/>`;
-        lastIsText = false;
-      } else if (item.type === "button") {
-        // TODO add button to delete chip
-        html += `data="${
-          item.type
-        }" class="mdl-chip" style="${styleHtml}" contentEditable=true><span class="mdl-chip__text_ex">${
-          item.text
-        }</span></span>`;
-        lastIsText = false;
-      } else {
-        html += `data="text" style="${styleText}" contentEditable=true>${
-          item.text
-        }</span>`;
-        lastIsText = true;
-      }
-      i += 1;
-    });
-    if (!lastIsText) {
-      html += `<span tabIndex="${i}" data="text" style="${styleText}" contentEditable=true> </span>`;
-    }
-    return html;
-  }
-
   constructor(props) {
     super(props);
     const toolbox = {
@@ -117,45 +22,15 @@ class ActionEditor extends Component {
       button: false,
       trash: true,
     };
-    const { content } = this.props;
-    const items = ActionsTools.parse(content);
-    const selectedItem = items.length - 1;
-    const caretPosition = 0;
     this.state = {
       toolbox,
-      content,
-      items,
-      selectedItem,
-      caretPosition,
     };
+    this.editable = null;
   }
-
-  onFocusIn = (element /* , caretPosition */) => {
-    const type = element.getAttribute("data");
-    const key = element.getAttribute("key");
-    // console.log("onFocusIn", element.tabIndex, key, type, caretPosition);
-    if (type === "any") {
-      this.anySelect();
-    } else if (type === "variable") {
-      this.codeSelect();
-    } else if (type === "output_var") {
-      this.entitySelect();
-    } else if (type === "br") {
-      this.lineBreakSelect();
-    } else if (type === "button") {
-      this.buttonSelect();
-    } else {
-      this.textSelect();
-    }
-    const selectedItem = parseInt(key, 10);
-    if (this.state.selectedItem !== selectedItem) {
-      this.setState(() => ({ selectedItem }));
-    }
-  };
 
   onTextSelected() {
     this.textSelect();
-    this.insertItem(this.state.selectedItem + 1, {
+    this.editable.insertItem({
       type: "text",
       text: "text",
     });
@@ -163,12 +38,12 @@ class ActionEditor extends Component {
 
   onAnySelected() {
     this.anySelect();
-    this.insertItem(this.state.selectedItem + 1, { type: "any", text: "" });
+    this.editable.insertItem({ type: "any", text: "" });
   }
 
   onEntitySelected() {
     this.entitySelect();
-    this.insertItem(this.state.selectedItem + 1, {
+    this.editable.insertItem({
       type: "output_var",
       text: "entityname",
     });
@@ -176,7 +51,7 @@ class ActionEditor extends Component {
 
   onCodeSelected() {
     this.codeSelect();
-    this.insertItem(this.state.selectedItem + 1, {
+    this.editable.insertItem({
       type: "variable",
       text: "entityname=value",
     });
@@ -184,55 +59,27 @@ class ActionEditor extends Component {
 
   onLineBreakSelected() {
     this.lineBreakSelect();
-    this.insertItem(this.state.selectedItem + 1, { type: "br", text: "" });
+    this.editable.insertItem({ type: "br", text: "" });
   }
 
   onButtonSelected() {
     this.buttonSelect();
-    this.insertItem(this.state.selectedItem + 1, {
+    this.editable.insertItem({
       type: "button",
       text: "value",
     });
   }
 
   onTrashSelected() {
-    this.deleteItem(this.state.selectedItem);
+    this.editable.deleteItem();
   }
 
   getContent() {
     return this.state.content;
   }
 
-  insertItem(position, item) {
-    const { items } = this.state;
-    if (position < items.length) {
-      items.splice(position, 0, item);
-    } else {
-      items.push(item);
-    }
-    const selectedItem = position;
-    const content = ActionEditor.build(items);
-    this.setState(() => ({ content, items, selectedItem }));
-  }
-
-  deleteItem(position) {
-    const { items } = this.state;
-    if (position < items.length) {
-      delete items[position];
-      let selectedItem = position - 1;
-      if (selectedItem < 0) {
-        selectedItem = 0;
-      }
-      const content = ActionEditor.build(items);
-      this.setState(() => ({ content, items, selectedItem }));
-    }
-  }
-
-  handleChange = (text, element) => {
-    const content = ActionEditor.build([...element.children], true);
+  onChange = (content) => {
     this.props.onChange(content);
-    const items = ActionsTools.parse(content);
-    this.setState(() => ({ content, items }));
   };
 
   textSelect() {
@@ -313,11 +160,27 @@ class ActionEditor extends Component {
     this.setState(() => ({ toolbox }));
   }
 
+  handleSelected = (type) => {
+    if (type === "any") {
+      this.anySelect();
+    } else if (type === "variable") {
+      this.codeSelect();
+    } else if (type === "output_var") {
+      this.entitySelect();
+    } else if (type === "br") {
+      this.lineBreakSelect();
+    } else if (type === "button") {
+      this.buttonSelect();
+    } else {
+      this.textSelect();
+    }
+  };
+
+  handleChange = (content) => {
+    this.props.onChange(content);
+  };
+
   render() {
-    const content = ActionEditor.renderAction(
-      this.state.items,
-      this.state.selectedItem,
-    );
     const style = {
       overflow: "hidden",
       fontSize: "16px",
@@ -410,14 +273,17 @@ class ActionEditor extends Component {
             </Tooltip>
           </div>
         </div>
-        <ContentEditable
+        <ActionsEditable
           id="action-editor-content"
-          content={content}
+          editable={true}
+          content={this.props.content}
           onChange={this.handleChange}
-          onFocusIn={this.onFocusIn}
+          onSelected={this.handleSelected}
           style={style}
-          selectedItem={this.state.selectedItem}
-          caretPosition={this.state.caretPosition}
+          selectedItem={this.props.selectedItem}
+          ref={(e) => {
+            this.editable = e;
+          }}
         />
       </div>
     );
@@ -428,12 +294,16 @@ ActionEditor.defaultProps = {
   content: "",
   onChange: () => {},
   isInput: false,
+  selectedItem: -1,
+  caretPosition: 0,
 };
 
 ActionEditor.propTypes = {
   content: PropTypes.string,
   onChange: PropTypes.func,
   isInput: PropTypes.bool,
+  selectedItem: PropTypes.number,
+  caretPosition: PropTypes.number,
 };
 
 export default ActionEditor;
