@@ -6,8 +6,10 @@
  */
 import MetricsController from "../../src/controllers/metrics";
 import MessengerModel from "../../src/models/messenger";
+import BotsModel from "../../src/models/bots";
 
 jest.mock("../../src/models/messenger");
+jest.mock("../../src/models/bots");
 const fakeZoapp = {
   controllers: {
     getMiddlewares: () => ({
@@ -19,14 +21,17 @@ const fakeZoapp = {
 describe("controllers/metrics", () => {
   beforeEach(() => {
     MessengerModel.mockClear();
+    BotsModel.mockClear();
   });
 
   describe("getForBot()", () => {
     it("returns the metrics", async () => {
-
       MessengerModel.mockImplementation(() => ({
         getConversations: () => Promise.resolve([]),
         getConversationMessages: () => Promise.resolve([]),
+      }));
+      BotsModel.mockImplementation(() => ({
+        getBot: () => Promise.resolve({ id: "bot1", name: "bot1" }),
       }));
 
       const controller = new MetricsController(

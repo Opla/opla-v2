@@ -490,7 +490,7 @@ describe("API", () => {
         it("returns bot's metrics", async () => {
           const metrics = await getAsync(
             context,
-            "/metrics/bot1",
+            `/metrics/${context.bot1.id}`,
             context.authUser1.access_token,
           );
 
