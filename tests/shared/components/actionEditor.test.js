@@ -8,6 +8,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 import ActionEditor from "shared/components/actionEditor";
+import ActionsEditable from "shared/components/actionsEditable";
 
 describe("components/actionEditor", () => {
   it("renders correctly", () => {
@@ -24,7 +25,7 @@ describe("components/actionEditor", () => {
       `<<${encodeURIComponent("<<var>>")}>>`,
     ].join("");
 
-    const wrapper = shallow(<ActionEditor content={content} />);
+    const wrapper = shallow(<ActionsEditable content={content} />);
     expect(wrapper.state("items")).toHaveLength(2);
   });
 
@@ -38,7 +39,7 @@ describe("components/actionEditor", () => {
         { type: "button", text: "text" },
         { type: "text", text: "text" },
       ];
-      expect(ActionEditor.build(items)).toEqual(
+      expect(ActionsEditable.build(items)).toEqual(
         [
           "*",
           `{{${encodeURIComponent("{{text}}")}}}`,
