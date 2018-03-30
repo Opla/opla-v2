@@ -75,14 +75,10 @@ class ActionEditor extends Component {
   }
 
   getContent() {
-<<<<<<< 00df45019c5781824b1e89f8e2f5e9d8dded4bb4
     if (!this.editable) {
       return "";
     }
     return this.editable.state.content;
-=======
-    return this.state.content;
->>>>>>> actionEditor use actionsEditable
   }
 
   onChange = (content) => {
