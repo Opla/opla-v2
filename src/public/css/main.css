@@ -157,7 +157,11 @@
  [contenteditable]:focus {
    outline: 0px solid transparent;
  }
- 
+
+ .mdl-chip:focus {
+  border: 1px solid;
+ }
+
  .mdl-chip {
    height: 32px;
    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
