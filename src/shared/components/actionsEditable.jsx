@@ -67,7 +67,7 @@ class ActionsEditable extends Component {
   onFocus = (e) => {
     const element = e.target;
     if (element.tabIndex !== 0 && this.props.editable) {
-      const caretPosition = this.updateCaretPosition(element);
+      const caretPosition = this.updateCaretPosition();
       this.handleFocusIn(element, caretPosition);
     }
   };
@@ -97,19 +97,18 @@ class ActionsEditable extends Component {
   onMouseUp = (e) => {
     const element = e.target;
     if (element.tabIndex !== 0 && this.props.editable) {
-      this.updateCaretPosition(element);
+      this.updateCaretPosition();
     }
   };
 
-  onInput = (event) => {
+  onInput = () => {
     if (!this.props.editable) {
       return;
     }
     const element = this.node;
-    const text = element.textContent.trim();
-    const e = event.target;
-    const caretPosition = this.updateCaretPosition(e);
-    this.handleChange(text, element, { element: e, caretPosition });
+    if (this.handleChange(element)) {
+      this.updateCaretPosition();
+    }
   };
 
   handleFocusIn = (element) => {
@@ -129,13 +128,19 @@ class ActionsEditable extends Component {
     }
   };
 
-  handleChange = (text, element) => {
+  handleChange = (element) => {
     if (this.props.editable) {
-      const content = ActionsEditable.build([...element.children], true);
+      const span = element.children[0];
+      const content = ActionsEditable.build([...span.children], true);
+      // console.log("handleChange=", content);
       this.props.onChange(content);
       const items = ActionsTools.parse(content);
-      this.setState(() => ({ content, items }));
+      if (items.length !== this.state.items.length) {
+        // this.setState(() => ({ content, items }));
+        return true;
+      }
     }
+    return false;
   };
 
   setCE = (e) => {
@@ -150,8 +155,8 @@ class ActionsEditable extends Component {
     return range.startOffset;
   }
 
-  updateCaretPosition(element) {
-    const caretPosition = this.getCaretPosition(element);
+  updateCaretPosition() {
+    const caretPosition = this.getCaretPosition();
     if (this.state.caretPosition !== caretPosition) {
       this.setState(() => ({ caretPosition }));
     }
@@ -161,12 +166,16 @@ class ActionsEditable extends Component {
   navigate(e) {
     const element = e.target;
     if (element.tabIndex !== 0) {
-      this.updateCaretPosition(element);
+      this.updateCaretPosition();
     }
   }
 
   insertItem(item, position = this.state.selectedItem + 1) {
+    /* const span = this.node.children[0];
+    const content = ActionsEditable.build([...span.children], true);
+    const items = ActionsTools.parse(content); */
     const { items } = this.state;
+    // console.log("insert item ", position, item);
     if (position < items.length) {
       items.splice(position, 0, item);
     } else {
@@ -179,8 +188,11 @@ class ActionsEditable extends Component {
 
   deleteItem(position = this.state.selectedItem) {
     const { items } = this.state;
+    // console.log("delete item ", position);
     if (position < items.length) {
-      delete items[position];
+      if (position > -1) {
+        delete items[position];
+      }
       let selectedItem = position - 1;
       if (selectedItem < 0) {
         selectedItem = 0;
@@ -212,15 +224,14 @@ class ActionsEditable extends Component {
       color: "white",
       backgroundColor: "#aaa",
     };
-    let lastIsText = false;
     let i = 1;
     let list;
-    let pad;
+    let start;
     let id;
     if (this.props.editable) {
       if (actions.length < 1 || (actions[0] && actions[0].type !== "text")) {
         id = "ae_start";
-        pad = (
+        start = (
           <span
             id={id}
             tabIndex={i}
@@ -229,17 +240,30 @@ class ActionsEditable extends Component {
             ref={this.setCE}
           />
         );
-        lastIsText = true;
         i += 1;
       }
     }
 
     if (actions.length > 0) {
+      let end;
+      let l = actions.length - 1;
+      if (actions[l] && actions[l].type !== "text" && this.props.editable) {
+        id = "ae_end";
+        l = actions.length + i;
+        end = (
+          <span
+            id={id}
+            tabIndex={l}
+            data="text"
+            style={styleText}
+            ref={this.setCE}
+          />
+        );
+      }
       list = (
         <span>
-          {pad}
+          {start}
           {actions.map((actionItem, index) => {
-            lastIsText = false;
             id = `ae_${index}`;
             const p = i;
             i += 1;
@@ -318,7 +342,6 @@ class ActionsEditable extends Component {
                 </span>
               );
             }
-            lastIsText = true;
             return (
               <span
                 key={id}
@@ -332,20 +355,11 @@ class ActionsEditable extends Component {
               </span>
             );
           })}
+          {end}
         </span>
       );
-    }
-    if (!lastIsText && this.props.editable) {
-      id = "ae_end";
-      pad = (
-        <span
-          id={id}
-          tabIndex={i}
-          data="text"
-          style={styleText}
-          ref={this.setCE}
-        />
-      );
+    } else {
+      list = <span>{start}</span>;
     }
     return (
       <div
@@ -364,7 +378,6 @@ class ActionsEditable extends Component {
         }}
       >
         {list}
-        {pad}
       </div>
     );
   }
