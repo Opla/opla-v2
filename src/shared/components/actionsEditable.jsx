@@ -51,18 +51,13 @@ class ActionsEditable extends Component {
     };
   }
 
-  /*
-  shouldComponentUpdate(nextProps) {
-    const { content, selectedItem, caretPosition } = nextProps;
-    const items = ActionsTools.parse(content);
-    this.setState({
-      content,
-      items,
-      selectedItem,
-      caretPosition,
-    });
+  shouldComponentUpdate(nextProps, nextState) {
+    this.noUpdate = nextState.noUpdate;
+    if (nextState.noUpdate === true) {
+      return false;
+    }
     return true;
-  } */
+  }
 
   onFocus = (e) => {
     const element = e.target;
@@ -106,9 +101,7 @@ class ActionsEditable extends Component {
       return;
     }
     const element = this.node;
-    if (this.handleChange(element)) {
-      this.updateCaretPosition();
-    }
+    this.handleChange(element);
   };
 
   handleFocusIn = (element) => {
@@ -123,7 +116,8 @@ class ActionsEditable extends Component {
         selectedItem = parseInt(i, 10);
       }
       if (this.state.selectedItem !== selectedItem) {
-        this.setState(() => ({ selectedItem }));
+        const noUpdate = false;
+        this.setState(() => ({ noUpdate, selectedItem }));
       }
     }
   };
@@ -135,10 +129,8 @@ class ActionsEditable extends Component {
       // console.log("handleChange=", content);
       this.props.onChange(content);
       const items = ActionsTools.parse(content);
-      if (items.length !== this.state.items.length) {
-        // this.setState(() => ({ content, items }));
-        return true;
-      }
+      const noUpdate = true;
+      this.setState(() => ({ noUpdate, content, items }));
     }
     return false;
   };
@@ -183,7 +175,8 @@ class ActionsEditable extends Component {
     }
     const selectedItem = position;
     const content = ActionsEditable.build(items);
-    this.setState(() => ({ content, items, selectedItem }));
+    const noUpdate = false;
+    this.setState(() => ({ noUpdate, content, items, selectedItem }));
   }
 
   deleteItem(position = this.state.selectedItem) {
@@ -198,7 +191,8 @@ class ActionsEditable extends Component {
         selectedItem = 0;
       }
       const content = ActionsEditable.build(items);
-      this.setState(() => ({ content, items, selectedItem }));
+      const noUpdate = false;
+      this.setState(() => ({ noUpdate, content, items, selectedItem }));
     }
   }
 
