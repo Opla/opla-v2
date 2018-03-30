@@ -10,7 +10,7 @@ import renderer from "react-test-renderer";
 import { DashboardBase } from "shared/containers/dashboard";
 
 describe("containers/Dashboard", () => {
-  it("renders correctly", () => {
+  it("renders and update correctly", () => {
     const appSetTitleSpy = jest.fn();
     const fetchMetricsSpy = jest.fn();
 
@@ -46,7 +46,18 @@ describe("containers/Dashboard", () => {
     expect(tree).toMatchSnapshot();
 
     expect(appSetTitleSpy).toHaveBeenCalled();
-    expect(fetchMetricsSpy).toHaveBeenCalled();
+    expect(fetchMetricsSpy).not.toHaveBeenCalled();
+
+    component.update(
+      <DashboardBase
+        appSetTitle={appSetTitleSpy}
+        fetchMetrics={fetchMetricsSpy}
+        isSignedIn
+        selectedBotId={"bot1"}
+        metrics={metrics}
+      />,
+    );
+    expect(fetchMetricsSpy).toHaveBeenCalledWith("bot1");
   });
 
   it("renders a Loading component when user is not signed in", () => {

@@ -70,7 +70,7 @@ exports[`containers/Dashboard renders a Loading component when user is not signe
 </div>
 `;
 
-exports[`containers/Dashboard renders correctly 1`] = `
+exports[`containers/Dashboard renders and update correctly 1`] = `
 <div
   className="mdl-layout__content mdl-color--grey-100"
 >

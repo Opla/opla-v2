@@ -151,8 +151,8 @@ export function apiDeleteMiddlewareRequest(botId, middlewareId) {
   return { type: API_DELETEMIDDLEWARE + FETCH_REQUEST, botId, middlewareId };
 }
 
-export function apiGetMetricsRequest() {
-  return { type: API_GETMETRICS + FETCH_REQUEST };
+export function apiGetMetricsRequest(botId) {
+  return { type: API_GETMETRICS + FETCH_REQUEST, botId };
 }
 
 export function apiGetMetricsSuccess(metrics) {

@@ -38,7 +38,15 @@ const legendStyle = {
 export class DashboardBase extends Component {
   componentWillMount() {
     this.props.appSetTitle("Dashboard");
-    this.props.fetchMetrics();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.selectedBotId &&
+      this.props.selectedBotId !== prevProps.selectedBotId
+    ) {
+      this.props.fetchMetrics(this.props.selectedBotId);
+    }
   }
 
   render() {
@@ -154,6 +162,7 @@ DashboardBase.propTypes = {
   isLoading: PropTypes.bool,
   isSignedIn: PropTypes.bool,
   metrics: PropTypes.shape({}),
+  selectedBotId: PropTypes.string,
   appSetTitle: PropTypes.func.isRequired,
   fetchMetrics: PropTypes.func.isRequired,
 };
@@ -166,6 +175,7 @@ const mapStateToProps = (state) => {
   return {
     metrics: metrics.metrics,
     isLoading: metrics.loading,
+    selectedBotId: state.app.selectedBotId,
     isSignedIn,
   };
 };
@@ -174,7 +184,7 @@ const mapDispatchToProps = (dispatch) => ({
   appSetTitle: (titleName) => {
     dispatch(appSetTitle(titleName));
   },
-  fetchMetrics: () => dispatch(apiGetMetricsRequest()),
+  fetchMetrics: (botId) => dispatch(apiGetMetricsRequest(botId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardBase);
