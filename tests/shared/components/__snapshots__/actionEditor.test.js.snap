@@ -172,6 +172,8 @@ exports[`components/actionEditor renders correctly 1`] = `
   >
     <span>
       <span
+        data="text"
+        id="ae_0"
         style={
           Object {
             "display": "inline-block",
