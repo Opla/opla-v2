@@ -115,9 +115,14 @@ class ActionsEditable extends Component {
   handleFocusIn = (element) => {
     if (this.props.editable) {
       const type = element.getAttribute("data");
-      const key = element.getAttribute("key");
-      this.props.onSelected(key, type);
-      const selectedItem = parseInt(key, 10);
+      const key = element.id;
+      // console.log("handleFocusIn", key, type);
+      this.props.onSelected(type, key);
+      const i = key.substring(3);
+      let selectedItem = -1;
+      if (i !== "start" && i !== "end") {
+        selectedItem = parseInt(i, 10);
+      }
       if (this.state.selectedItem !== selectedItem) {
         this.setState(() => ({ selectedItem }));
       }
@@ -210,27 +215,44 @@ class ActionsEditable extends Component {
     let lastIsText = false;
     let i = 1;
     let list;
-    let end;
+    let pad;
+    let id;
     if (this.props.editable) {
       if (actions.length < 1 || (actions[0] && actions[0].type !== "text")) {
-        list = (
-          <span tabIndex={i} data="text" style={styleText} ref={this.setCE} />
+        id = "ae_start";
+        pad = (
+          <span
+            id={id}
+            tabIndex={i}
+            data="text"
+            style={styleText}
+            ref={this.setCE}
+          />
         );
         lastIsText = true;
         i += 1;
       }
     }
+
     if (actions.length > 0) {
       list = (
         <span>
+          {pad}
           {actions.map((actionItem, index) => {
             lastIsText = false;
-            const id = `al_${index}`;
+            id = `ae_${index}`;
             const p = i;
             i += 1;
             if (actionItem.type === "any") {
               return (
-                <span className="mdl-chip" key={id} style={styleAny}>
+                <span
+                  className="mdl-chip"
+                  key={id}
+                  id={id}
+                  style={styleAny}
+                  data="any"
+                  tabIndex={p}
+                >
                   <span className="mdl-chip__text_ex">any</span>
                 </span>
               );
@@ -239,8 +261,10 @@ class ActionsEditable extends Component {
                 <span
                   className="mdl-chip"
                   key={id}
+                  id={id}
                   style={styleOut}
                   ref={this.setCE}
+                  data="output_var"
                   tabIndex={p}
                 >
                   <span className="mdl-chip__text_ex">
@@ -253,8 +277,10 @@ class ActionsEditable extends Component {
                 <span
                   className="mdl-chip"
                   key={id}
+                  id={id}
                   style={styleVar}
                   ref={this.setCE}
+                  data="variable"
                   tabIndex={p}
                 >
                   <span className="mdl-chip__text_ex">
@@ -267,7 +293,9 @@ class ActionsEditable extends Component {
                 <span
                   className="mdl-chip"
                   key={id}
+                  id={id}
                   style={styleHtml}
+                  data="br"
                   tabIndex={p}
                 >
                   <span className="mdl-chip__text_ex">
@@ -280,8 +308,10 @@ class ActionsEditable extends Component {
                 <span
                   className="mdl-chip"
                   key={id}
+                  id={id}
                   style={styleHtml}
                   ref={this.setCE}
+                  data="button"
                   tabIndex={p}
                 >
                   <span className="mdl-chip__text_ex">{actionItem.text}</span>
@@ -290,7 +320,14 @@ class ActionsEditable extends Component {
             }
             lastIsText = true;
             return (
-              <span key={id} style={styleText} ref={this.setCE} tabIndex={p}>
+              <span
+                key={id}
+                id={id}
+                style={styleText}
+                data="text"
+                ref={this.setCE}
+                tabIndex={p}
+              >
                 {actionItem.text}
               </span>
             );
@@ -299,8 +336,15 @@ class ActionsEditable extends Component {
       );
     }
     if (!lastIsText && this.props.editable) {
-      end = (
-        <span tabIndex={i} data="text" style={styleText} ref={this.setCE} />
+      id = "ae_end";
+      pad = (
+        <span
+          id={id}
+          tabIndex={i}
+          data="text"
+          style={styleText}
+          ref={this.setCE}
+        />
       );
     }
     return (
@@ -320,7 +364,7 @@ class ActionsEditable extends Component {
         }}
       >
         {list}
-        {end}
+        {pad}
       </div>
     );
   }
