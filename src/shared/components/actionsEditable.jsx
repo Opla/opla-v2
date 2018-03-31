@@ -51,13 +51,20 @@ class ActionsEditable extends Component {
     };
   }
 
+  /* eslint-disable class-methods-use-this */
   shouldComponentUpdate(nextProps, nextState) {
-    this.noUpdate = nextState.noUpdate;
+    /*
+    noUpdate is a fix for React ContentEditable caret position bug
+    see:
+    https://github.com/facebook/react/issues/2047
+    https://github.com/Automattic/simplenote-electron/pull/549
+    */
     if (nextState.noUpdate === true) {
       return false;
     }
     return true;
   }
+  /* eslint-enable class-methods-use-this */
 
   onFocus = (e) => {
     const element = e.target;
