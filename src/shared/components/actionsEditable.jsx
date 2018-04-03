@@ -191,7 +191,7 @@ class ActionsEditable extends Component {
     // console.log("delete item ", position);
     if (position < items.length) {
       if (position > -1) {
-        delete items[position];
+        items.splice(position, 1);
       }
       let selectedItem = position - 1;
       if (selectedItem < 0) {
@@ -229,8 +229,10 @@ class ActionsEditable extends Component {
     let list;
     let start;
     let id;
+    const len = actions.length;
+    // console.log("length=", len);
     if (this.props.editable) {
-      if (actions.length < 1 || (actions[0] && actions[0].type !== "text")) {
+      if (len < 1 || (actions[0] && actions[0].type !== "text")) {
         id = "ae_start";
         start = (
           <span
@@ -245,12 +247,12 @@ class ActionsEditable extends Component {
       }
     }
 
-    if (actions.length > 0) {
+    if (len > 0) {
       let end;
-      let l = actions.length - 1;
+      let l = len - 1;
       if (actions[l] && actions[l].type !== "text" && this.props.editable) {
         id = "ae_end";
-        l = actions.length + i;
+        l = len + i;
         end = (
           <span
             id={id}
