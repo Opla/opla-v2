@@ -20,6 +20,11 @@ import {
 import ActionsToolbox from "../components/actionsToolbox";
 
 class IntentContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { editing: false };
+  }
+
   onChangeAction = (/* actionText */) => {
     // console.log("IntentContainer.onChangeAction =", actionText);
   };
@@ -82,6 +87,7 @@ class IntentContainer extends Component {
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
+    this.setState({ editing: false });
     return true;
   };
 
@@ -148,6 +154,7 @@ class IntentContainer extends Component {
       actionDef = action;
     }
     if (editor) {
+      this.setState({ editing: true });
       const isInput = name === "input";
       displayActionEditor(
         title,
@@ -189,6 +196,11 @@ class IntentContainer extends Component {
           {intent.name}
         </span>
       );
+      const { editing } = this.state;
+      let toolbox;
+      if (editing) {
+        toolbox = <ActionsToolbox />;
+      }
       return (
         <div>
           <SubToolbar
@@ -209,7 +221,7 @@ class IntentContainer extends Component {
                 >
                   <span>{name}</span>
                 </div>
-                <ActionsToolbox />
+                {toolbox}
               </div>
             }
             icons={[{ name: "file_upload", onClick: this.handleSaveIntent }]}
