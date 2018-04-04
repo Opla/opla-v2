@@ -162,9 +162,10 @@ exports[`components/actionEditor renders correctly 1`] = `
   <div
     aria-label={null}
     className="ContentEditable"
+    onBlur={[Function]}
     onFocus={[Function]}
     onInput={[Function]}
-    onKeyUp={[Function]}
+    onKeyPress={[Function]}
     onMouseUp={[Function]}
     onTouchEnd={[Function]}
     spellCheck={false}
