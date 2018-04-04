@@ -11,11 +11,36 @@ import { ExpansionPanel } from "zoapp-ui";
 import ActionsEditable from "./actionsEditable";
 
 class ActionsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selection: null,
+    };
+  }
+
+  handleFocusEditable = (focus) => {
+    if (!focus) {
+      this.setState({ selection: null });
+      this.props.onEdit(focus);
+    }
+  };
+
+  handleSelect = (e, state, selection) => {
+    e.preventDefault();
+    let editing = false;
+    if (state === "add") {
+      this.setState({ selection });
+      editing = true;
+    } else if (this.props.onSelect) {
+      this.props.onSelect(selection);
+    }
+    this.props.onEdit(editing);
+  };
+
   render() {
-    const { name, actions, onSelect, onDrop } = this.props;
+    const { name, actions, onDrop } = this.props;
     let content;
-    // let addDisabled;
-    let type = null;
+    let type;
     if (
       name === "output" &&
       (!actions || actions.length === 0 || actions[0].type === "condition")
@@ -23,32 +48,38 @@ class ActionsList extends Component {
       type = "condition";
     }
     const icon = name === "input" ? "format_quote" : "chat_bubble_outline";
-    const style = {}; /* padding: "16px" */
     const addText =
       name === "input" ? "Add an input sentence" : "Add an output response";
-    const color =
+    let color =
       !actions || actions.length === 0
         ? "rgb(213, 0, 0)"
         : "rgb(221, 221, 221)";
+    let editable = false;
+    if (this.state.selection && this.state.selection.state === "add") {
+      editable = true;
+      color = "rgb(0, 0, 0)";
+    }
     const addContent = (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
         icon={icon}
         style={{ color, padding: "0px 16px" }}
         onClick={(e) => {
-          e.preventDefault();
-          if (onSelect) {
-            onSelect({ name, type, state: "add" });
-          }
+          this.handleSelect(e, "add", { name, type, state: "add" });
         }}
       >
-        {addText}
+        <ActionsEditable
+          placeholder={addText}
+          editable={editable}
+          onFocus={this.handleFocusEditable}
+        />
       </ListItem>
     );
     if (actions && actions.length > 0) {
-      if (actions[0].type === "condition") {
+      const style = {}; /* padding: "16px" */
+      if (type === "condition") {
         const { children } = actions[0];
-        type = "condition";
+        // type = "condition";
         // WIP display condition list
         content = (
           <List style={{ overflow: "auto", maxHeight: "26vh" }}>
@@ -78,30 +109,24 @@ class ActionsList extends Component {
                   secondaryText={text}
                   onDrop={onDrop}
                   onClick={(e) => {
-                    e.preventDefault();
-                    if (onSelect) {
-                      onSelect({
-                        name,
-                        type: "condition",
-                        state: "select",
-                        index,
-                      });
-                    }
+                    this.handleSelect(e, "select", {
+                      name,
+                      type: "condition",
+                      state: "select",
+                      index,
+                    });
                   }}
                 >
                   {condition}
                   <ListItemMeta
                     icon="delete"
                     onClick={(e) => {
-                      e.preventDefault();
-                      if (onSelect) {
-                        onSelect({
-                          name,
-                          type: "condition",
-                          state: "delete",
-                          index,
-                        });
-                      }
+                      this.handleSelect(e, "delete", {
+                        name,
+                        type: "condition",
+                        state: "delete",
+                        index,
+                      });
                     }}
                   />
                 </ListItem>
@@ -123,20 +148,22 @@ class ActionsList extends Component {
                   className="selectableListItem onFocusAction mdl-list_action"
                   onDrop={onDrop}
                   onClick={(e) => {
-                    e.preventDefault();
-                    if (onSelect) {
-                      onSelect({ name, state: "select", index });
-                    }
+                    this.handleSelect(e, "select", {
+                      name,
+                      state: "select",
+                      index,
+                    });
                   }}
                 >
                   {text}
                   <ListItemMeta
                     icon="delete"
                     onClick={(e) => {
-                      e.preventDefault();
-                      if (onSelect) {
-                        onSelect({ name, state: "delete", index });
-                      }
+                      this.handleSelect(e, "delete", {
+                        name,
+                        state: "delete",
+                        index,
+                      });
                     }}
                   />
                 </ListItem>
@@ -145,10 +172,8 @@ class ActionsList extends Component {
           </List>
         );
       }
-      // addDisabled = false;
     } else {
       content = <List />;
-      // addDisabled = true;
     }
     return (
       <ExpansionPanel label={name}>
@@ -163,6 +188,7 @@ ActionsList.defaultProps = {
   actions: [],
   onSelect: null,
   onDrop: null,
+  onEdit: () => {},
 };
 
 ActionsList.propTypes = {
@@ -172,6 +198,7 @@ ActionsList.propTypes = {
   ),
   onSelect: PropTypes.func,
   onDrop: PropTypes.func,
+  onEdit: PropTypes.func,
 };
 
 export default ActionsList;

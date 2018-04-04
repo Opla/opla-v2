@@ -185,6 +185,10 @@ class IntentContainer extends Component {
     }
   };
 
+  handleEdit = (editing) => {
+    this.setState({ editing });
+  };
+
   render() {
     const intent = this.props.selectedIntent;
     let name = "";
@@ -226,7 +230,11 @@ class IntentContainer extends Component {
             }
             icons={[{ name: "file_upload", onClick: this.handleSaveIntent }]}
           />
-          <IntentDetail intent={intent} onSelect={this.handleActions} />
+          <IntentDetail
+            intent={intent}
+            onSelect={this.handleActions}
+            onEdit={this.handleEdit}
+          />
         </div>
       );
     }

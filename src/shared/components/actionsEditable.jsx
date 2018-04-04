@@ -48,6 +48,7 @@ class ActionsEditable extends Component {
       items,
       selectedItem,
       caretPosition,
+      noUpdate: false,
     };
     this.focusElement = null;
   }
@@ -67,6 +68,18 @@ class ActionsEditable extends Component {
   }
   /* eslint-enable class-methods-use-this */
 
+  componentWillReceiveProps(nextProps) {
+    const { content, selectedItem, caretPosition } = nextProps;
+    const items = ActionsTools.parse(content);
+    this.setState({
+      content,
+      items,
+      selectedItem,
+      caretPosition,
+      noUpdate: false,
+    });
+  }
+
   onFocus = (e) => {
     const element = e.target;
     if (element.id && element.id.indexOf("ae_") === 0 && this.props.editable) {
@@ -75,8 +88,20 @@ class ActionsEditable extends Component {
     }
   };
 
+  onBlur = () => {
+    // console.log("onBlur");
+    this.focusElement = null;
+    this.props.onFocus(false);
+  };
+
   onKeyPress = (e) => {
     if (!this.props.editable) {
+      return;
+    }
+    if (e.which === 13) {
+      // TODO handle save event
+      // console.log("enter key");
+      e.preventDefault();
       return;
     }
     switch (e.which) {
@@ -109,6 +134,7 @@ class ActionsEditable extends Component {
       return;
     }
     const element = this.node;
+    // console.log("handleChange");
     this.handleChange(element);
   };
 
@@ -253,16 +279,23 @@ class ActionsEditable extends Component {
     let start;
     let id;
     const len = actions.length;
+    let focus = false;
     if (this.props.editable) {
       if (len < 1 || (actions[0] && actions[0].type !== "text")) {
         id = "ae_start";
+        if (len < 1) {
+          styleText.width = "100wv";
+          focus = true;
+        }
         start = (
           <span
             id={id}
             tabIndex={i}
             data="text"
             style={styleText}
-            ref={this.setCE}
+            ref={(e) => {
+              this.setCE(e, true, focus);
+            }}
           />
         );
         i += 1;
@@ -275,13 +308,16 @@ class ActionsEditable extends Component {
       if (actions[l] && actions[l].type !== "text" && this.props.editable) {
         id = "ae_end";
         l = len + i;
+        focus = this.state.selectedItem === -1;
         end = (
           <span
             id={id}
             tabIndex={l}
             data="text"
             style={styleText}
-            ref={this.setCE}
+            ref={(e) => {
+              this.setCE(e, true, focus);
+            }}
           />
         );
       }
@@ -292,7 +328,7 @@ class ActionsEditable extends Component {
             id = `ae_${index}`;
             const p = i;
             i += 1;
-            const focus = index === this.state.selectedItem || false;
+            focus = index === this.state.selectedItem || false;
             const { type } = actionItem;
             if (type === "any") {
               return (
@@ -410,9 +446,10 @@ class ActionsEditable extends Component {
         aria-label={this.props.placeholder}
         spellCheck={false}
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         onMouseUp={this.onMouseUp}
         onTouchEnd={this.onMouseUp}
-        onKeyUp={this.onKeyPress}
+        onKeyPress={this.onKeyPress}
         onInput={this.onInput}
         ref={(node) => {
           this.node = node;
@@ -429,6 +466,7 @@ ActionsEditable.defaultProps = {
   placeholder: null,
   onChange: () => {},
   onSelected: () => {},
+  onFocus: () => {},
   editable: false,
   selectedItem: -1,
   caretPosition: 0,
@@ -440,6 +478,7 @@ ActionsEditable.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onSelected: PropTypes.func,
+  onFocus: PropTypes.func,
   editable: PropTypes.bool,
   selectedItem: PropTypes.number,
   caretPosition: PropTypes.number,
