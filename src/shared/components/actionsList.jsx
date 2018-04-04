@@ -11,23 +11,11 @@ import { ExpansionPanel } from "zoapp-ui";
 import ActionsEditable from "./actionsEditable";
 
 class ActionsList extends Component {
-<<<<<<< eda39f84cc5cdfec8a96d07f23ec63702dc51005
-<<<<<<< 08ce1c56efc838d11926df39fbd505214ca331b7
   constructor(props) {
     super(props);
     this.state = {
       selection: null,
       newContent: null,
-=======
-  static renderActions(actionText) {
-    const actions = ActionsTools.parse(actionText);
-    const styleText = {
-      /* lineHeight: "32px",
-      height: "32px", */
-      display: "inline-block",
-      /* margin: "2px 0", */
-      padding: "0 4px",
->>>>>>> fix actionList texts position / size
     };
     this.editableComponent = null;
   }
@@ -70,6 +58,13 @@ class ActionsList extends Component {
       this.props.onAction(p);
       console.log("handleAction");
       this.setState({ selection: null, newContent: null });
+    }
+  };
+
+  handleFocusEditable = (focus) => {
+    if (!focus) {
+      this.setState({ selection: null });
+      this.props.onEdit(focus);
     }
   };
 
@@ -127,8 +122,6 @@ class ActionsList extends Component {
     }
   }
 
-=======
->>>>>>> use ActionsEditable in ActionsList
   render() {
     const { name, actions, onDrop } = this.props;
     let content;
@@ -140,10 +133,6 @@ class ActionsList extends Component {
       type = "condition";
     }
     const icon = name === "input" ? "format_quote" : "chat_bubble_outline";
-<<<<<<< 59e3739897a88f40abf211b013bfd5cfc3fb5669
-=======
-    const style = {}; /* padding: "16px" */
->>>>>>> fix layout
     const addText =
       name === "input" ? "Add an input sentence" : "Add an output response";
     let color =
@@ -158,7 +147,6 @@ class ActionsList extends Component {
       editable = true;
       color = "rgb(0, 0, 0)";
     }
-    console.log("selection=", name, editable, this.state.selection);
     const addContent = (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
