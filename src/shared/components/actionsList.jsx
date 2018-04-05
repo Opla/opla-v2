@@ -68,6 +68,17 @@ class ActionsList extends Component {
     }
   };
 
+  handleAction = (text, index = undefined) => {
+    if (text) {
+      const { name } = this.props;
+      // TODO condition
+      const type = null;
+      const state = "add";
+      const p = { name, type, state, index, action: { text } };
+      this.props.onAction(p);
+    }
+  };
+
   handleSelect = (e, state, selection) => {
     e.preventDefault();
     let editing = false;
