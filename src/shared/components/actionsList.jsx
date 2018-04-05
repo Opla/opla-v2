@@ -25,6 +25,17 @@ class ActionsList extends Component {
     }
   };
 
+  handleAction = (text, index = undefined) => {
+    if (text) {
+      const { name } = this.props;
+      // TODO condition
+      const type = null;
+      const state = "add";
+      const p = { name, type, state, index, action: { text } };
+      this.props.onAction(p);
+    }
+  };
+
   handleSelect = (e, state, selection) => {
     e.preventDefault();
     let editing = false;
@@ -72,6 +83,7 @@ class ActionsList extends Component {
           placeholder={addText}
           editable={editable}
           onFocus={this.handleFocusEditable}
+          onAction={this.handleAction}
         />
       </ListItem>
     );
@@ -189,6 +201,7 @@ ActionsList.defaultProps = {
   onSelect: null,
   onDrop: null,
   onEdit: () => {},
+  onAction: () => {},
 };
 
 ActionsList.propTypes = {
@@ -199,6 +212,7 @@ ActionsList.propTypes = {
   onSelect: PropTypes.func,
   onDrop: PropTypes.func,
   onEdit: PropTypes.func,
+  onAction: PropTypes.func,
 };
 
 export default ActionsList;

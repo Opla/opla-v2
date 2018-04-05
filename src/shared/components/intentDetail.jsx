@@ -11,7 +11,7 @@ import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
 
-const IntentDetail = ({ intent, onSelect, onEdit }) => {
+const IntentDetail = ({ intent, onSelect, onEdit, onAction }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
   return (
@@ -22,6 +22,7 @@ const IntentDetail = ({ intent, onSelect, onEdit }) => {
           actions={input}
           onSelect={onSelect}
           onEdit={onEdit}
+          onAction={onAction}
         />
         <hr />
         <ActionsList
@@ -29,6 +30,7 @@ const IntentDetail = ({ intent, onSelect, onEdit }) => {
           actions={output}
           onSelect={onSelect}
           onEdit={onEdit}
+          onAction={onAction}
         />
         <hr />
         <ExpansionPanel label="Parameters" collapsed>
@@ -78,6 +80,7 @@ IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
   onSelect: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
+  onAction: PropTypes.func.isRequired,
 };
 
 export default IntentDetail;

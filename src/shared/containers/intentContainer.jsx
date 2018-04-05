@@ -25,6 +25,39 @@ class IntentContainer extends Component {
     this.state = { editing: false };
   }
 
+  changeAction(text, name, value) {
+    let actionValue = null;
+    const intent = this.props.selectedIntent;
+    let { actionType } = this;
+    if (actionType === "condition") {
+      if (name === null && (!intent.output || intent.output.length === 0)) {
+        actionValue = text;
+        actionType = null;
+      } else if (name && text.length > 0) {
+        const type = "item";
+        actionValue = {
+          name,
+          value,
+          text,
+          type,
+        };
+      }
+    } else {
+      actionValue = text;
+    }
+    if (!actionValue || actionValue === "") {
+      return false;
+    }
+    this.props.appSetIntentAction(
+      this.actionContainer,
+      actionType,
+      actionValue,
+      this.selectedAction,
+    );
+    this.reset();
+    return true;
+  }
+
   onChangeAction = (/* actionText */) => {
     // console.log("IntentContainer.onChangeAction =", actionText);
   };
@@ -32,42 +65,19 @@ class IntentContainer extends Component {
   onEditAction = (dialog, editAction) => {
     if (editAction === "Change" || editAction === "Add") {
       const text = this.actionField.getContent().trim();
-      let actionValue = null;
-      const intent = this.props.selectedIntent;
-      let { actionType } = this;
+      let name = null;
+      let value = null;
       if (this.actionType === "condition") {
-        let name = this.paramNameField.inputRef.value.trim();
+        name = this.paramNameField.inputRef.value.trim();
         if (!name || name.length === 0) {
           name = null;
         }
-        let value = this.paramValueField.inputRef.value.trim();
+        value = this.paramValueField.inputRef.value.trim();
         if (!value || value.length === 0) {
           value = null;
         }
-        if (name === null && (!intent.output || intent.output.length === 0)) {
-          actionValue = text;
-          actionType = null;
-        } else if (name && text.length > 0) {
-          const type = "item";
-          actionValue = {
-            name,
-            value,
-            text,
-            type,
-          };
-        }
-      } else {
-        actionValue = text;
       }
-      if (!actionValue || actionValue === "") {
-        return false;
-      }
-      this.props.appSetIntentAction(
-        this.actionContainer,
-        actionType,
-        actionValue,
-        this.selectedAction,
-      );
+      return this.changeAction(text, name, value);
     } else if (editAction === "Delete") {
       this.props.appDeleteIntentAction(
         this.actionContainer,
@@ -84,12 +94,16 @@ class IntentContainer extends Component {
     } else if (editAction === "Previous") {
       // console.log("TODO", "IntentContainer.onPrevious ");
     }
+    this.reset();
+    return true;
+  };
+
+  reset() {
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
     this.setState({ editing: false });
-    return true;
-  };
+  }
 
   handleSaveIntent = () => {
     if (this.props.selectedIntent) {
@@ -100,6 +114,18 @@ class IntentContainer extends Component {
       } else {
         // console.log("WIP", "IntentContainer.handleSaveIntent : intent already saved");
       }
+    }
+  };
+
+  handleDoActions = ({ name, type, state, index, action }) => {
+    if (this.actionContainer) {
+      return;
+    }
+    this.actionContainer = name;
+    this.actionType = type;
+    this.selectedAction = index;
+    if (state === "add" || state === "change") {
+      this.changeAction(action.text, action.name, action.value);
     }
   };
 
@@ -234,6 +260,7 @@ class IntentContainer extends Component {
             intent={intent}
             onSelect={this.handleActions}
             onEdit={this.handleEdit}
+            onAction={this.handleDoActions}
           />
         </div>
       );

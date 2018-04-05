@@ -106,9 +106,12 @@ class ActionsEditable extends Component {
       return;
     }
     if (e.which === 13) {
-      // TODO handle save event
-      // console.log("enter key");
+      // WIP handle save event
+      const text = this.state.content;
+
+      this.props.onAction(text);
       e.preventDefault();
+      this.unfocus();
       return;
     }
     switch (e.which) {
@@ -484,6 +487,7 @@ ActionsEditable.defaultProps = {
   onChange: () => {},
   onSelected: () => {},
   onFocus: () => {},
+  onAction: () => {},
   editable: false,
   selectedItem: -1,
   caretPosition: 0,
@@ -496,6 +500,7 @@ ActionsEditable.propTypes = {
   onChange: PropTypes.func,
   onSelected: PropTypes.func,
   onFocus: PropTypes.func,
+  onAction: PropTypes.func,
   editable: PropTypes.bool,
   selectedItem: PropTypes.number,
   caretPosition: PropTypes.number,
