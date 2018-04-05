@@ -90,8 +90,15 @@ class ActionsEditable extends Component {
 
   onBlur = () => {
     // console.log("onBlur");
-    this.focusElement = null;
-    this.props.onFocus(false);
+    this.unfocus();
+  };
+
+  onKeyDown = (e) => {
+    if (e.which === 27) {
+      // esc key
+      e.preventDefault();
+      this.unfocus();
+    }
   };
 
   onKeyPress = (e) => {
@@ -175,6 +182,15 @@ class ActionsEditable extends Component {
     }
     return false;
   };
+
+  unfocus() {
+    this.focusElement = null;
+    this.props.onFocus(false);
+    const noUpdate = false;
+    const selectedItem = -1;
+    const caretPosition = 0;
+    this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
+  }
 
   setCE = (e, editable = true, focus = false /* , type = "text" */) => {
     if (!e) return;
@@ -450,6 +466,7 @@ class ActionsEditable extends Component {
         onMouseUp={this.onMouseUp}
         onTouchEnd={this.onMouseUp}
         onKeyPress={this.onKeyPress}
+        onKeyDown={this.onKeyDown}
         onInput={this.onInput}
         ref={(node) => {
           this.node = node;
