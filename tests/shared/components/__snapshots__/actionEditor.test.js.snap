@@ -165,6 +165,7 @@ exports[`components/actionEditor renders correctly 1`] = `
     onBlur={[Function]}
     onFocus={[Function]}
     onInput={[Function]}
+    onKeyDown={[Function]}
     onKeyPress={[Function]}
     onMouseUp={[Function]}
     onTouchEnd={[Function]}
