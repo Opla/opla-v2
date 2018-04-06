@@ -26,9 +26,10 @@ class MetricsController extends Controller {
         [],
       )
       .filter((p) => p !== null && !p.startsWith("bot_"));
+    const dedupedParticipants = [...new Set(participants)];
 
     return {
-      count: participants.length,
+      count: dedupedParticipants.length,
     };
   }
 
