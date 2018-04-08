@@ -5424,15 +5424,15 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zoapp-backend@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.17.0.tgz#9d2d256da15909c321b088f16274f191180f226a"
+zoapp-backend@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.18.0.tgz#83a561f662cb46aed85c60c9bc6eaff28d8d9668"
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"
     localtunnel "1.9.0"
     ws "^3.3.3"
-    zoapp-core "^0.11.0"
+    zoapp-core "^0.12.0"
     zoauth-server "0.5.0"
 
 zoapp-core@^0.10.0:
@@ -5442,9 +5442,9 @@ zoapp-core@^0.10.0:
     mysql2 "^1.5.1"
     winston "2.4.0"
 
-zoapp-core@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/zoapp-core/-/zoapp-core-0.11.0.tgz#4c5ee942be88c4747cf093c33bafc42608fcc34a"
+zoapp-core@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/zoapp-core/-/zoapp-core-0.12.0.tgz#2eb1e6c12f2b14059016d66a62c980889bfe4379"
   dependencies:
     mysql2 "^1.5.1"
     winston "2.4.0"
