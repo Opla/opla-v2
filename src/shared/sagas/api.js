@@ -486,9 +486,10 @@ const api = [
   // Metrics
   [
     API_GETMETRICS + FETCH_REQUEST,
-    function* f() {
+    function* f(action) {
+      const { botId } = action;
       try {
-        const response = yield getWebService().get("/metrics");
+        const response = yield getWebService().get(`/metrics/${botId}`);
         yield put(apiGetMetricsSuccess(response));
       } catch (error) {
         yield put(apiGetMetricsFailure(error));
