@@ -9,12 +9,12 @@ import { CommonRoutes } from "zoapp-backend";
 class MetricsRoutes extends CommonRoutes {
   constructor(zoapp) {
     super(zoapp.extensions);
-
-    this.getAll = this.getAll.bind(this);
+    this.getForBot = this.getForBot.bind(this);
   }
 
-  getAll() {
-    return this.controller.getMetrics().getAll();
+  getForBot(context) {
+    const { botId } = context.getParams();
+    return this.controller.getMetrics().getForBot(botId);
   }
 }
 

@@ -231,6 +231,10 @@ class MessengerModel extends Model {
         created_time: Date.now(),
         timestamp: this.buildTimestamp(),
       };
+      if (params.input && params.input.created_time) {
+        message.response_speed =
+          message.created_time - params.input.created_time;
+      }
     }
     return message;
   }

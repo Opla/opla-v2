@@ -72,6 +72,9 @@
                 "relayed": {
                     "type": "boolean"
                 },
+                "response_speed": {
+                  "type": "integer"
+                },
                 "attachments": {
                     "type": "array",
                     "arraytype": "object",

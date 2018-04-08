@@ -7,9 +7,9 @@
 import MetricsRoutes from "opla-backend/routes/metrics";
 
 describe("routes/metrics", () => {
-  describe("getAll()", () => {
+  describe("getForBot()", () => {
     it("calls the controller", () => {
-      const getAllSpy = jest.fn();
+      const getForBotSpy = jest.fn();
       // we fake a zoapp instance, which should have an `extensions` controller.
       const fakeZoapp = {
         // we also fake the extensions controller, we are only interested in
@@ -17,16 +17,17 @@ describe("routes/metrics", () => {
         // metrics controller.
         extensions: {
           getMetrics: () => ({
-            getAll: getAllSpy,
+            getForBot: getForBotSpy,
           }),
         },
       };
 
       const routes = new MetricsRoutes(fakeZoapp);
-      expect(getAllSpy).not.toHaveBeenCalled();
+      expect(getForBotSpy).not.toHaveBeenCalled();
 
-      routes.getAll();
-      expect(getAllSpy).toHaveBeenCalled();
+      const getContextSpy = jest.fn().mockReturnValue({ botId: "bot1" });
+      routes.getForBot({ getParams: getContextSpy });
+      expect(getForBotSpy).toHaveBeenCalledWith("bot1");
     });
   });
 });
