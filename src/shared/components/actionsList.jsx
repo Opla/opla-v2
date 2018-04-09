@@ -65,6 +65,8 @@ class ActionsList extends Component {
     if (!focus) {
       this.setState({ selection: null });
       this.props.onEdit(focus);
+    } else {
+      // this.editable = editable;
     }
   };
 
@@ -76,6 +78,7 @@ class ActionsList extends Component {
       const state = "add";
       const p = { name, type, state, index, action: { text } };
       this.props.onAction(p);
+      this.setState({ selection: null, newContent: null });
     }
   };
 

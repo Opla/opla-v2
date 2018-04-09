@@ -4,19 +4,9 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-<<<<<<< 3e4a27c26f1acf42984202e71a29d3107197acf9
 
  @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
  @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
-=======
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
- 
-#app {
-  height: 100%;
-  overflow: hidden; 
-}
->>>>>>> fix layout, actionEditable
 
  .mdc-list {
    padding: 0px;
@@ -158,16 +148,8 @@
  
  :focus {
   outline: 0px solid transparent;
-}
+ }
 
-<<<<<<< 00df45019c5781824b1e89f8e2f5e9d8dded4bb4
-
-  .contenteditable {
-    width: 100%;
-  }
-
-=======
->>>>>>> actionEditor use actionsEditable
  [contenteditable]:focus {
    outline: 0px solid transparent;
  }
