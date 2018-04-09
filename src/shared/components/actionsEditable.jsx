@@ -49,6 +49,8 @@ class ActionsEditable extends Component {
       selectedItem,
       caretPosition,
       noUpdate: false,
+      startSpan: null,
+      endSpan: null,
     };
     this.focusElement = null;
   }
@@ -70,14 +72,16 @@ class ActionsEditable extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { content, selectedItem, caretPosition } = nextProps;
-    const items = ActionsTools.parse(content);
-    this.setState({
-      content,
-      items,
-      selectedItem,
-      caretPosition,
-      noUpdate: false,
-    });
+    if (content !== this.state.content) {
+      const items = ActionsTools.parse(content);
+      this.setState({
+        content,
+        items,
+        selectedItem,
+        caretPosition,
+        noUpdate: false,
+      });
+    }
   }
 
   onFocus = (e) => {
@@ -178,21 +182,23 @@ class ActionsEditable extends Component {
       const span = element.children[0];
       const content = ActionsEditable.build([...span.children], true);
       // console.log("handleChange=", content);
-      this.props.onChange(content);
       const items = ActionsTools.parse(content);
       const noUpdate = true;
-      this.setState(() => ({ noUpdate, content, items }));
+      this.setState({ noUpdate, content, items }, () => {
+        this.props.onChange(content);
+      });
     }
     return false;
   };
 
   unfocus() {
+    // console.log("unfocus=", this.state.content);
     this.focusElement = null;
-    this.props.onFocus(false);
     const noUpdate = false;
     const selectedItem = -1;
     const caretPosition = 0;
     this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
+    this.props.onFocus(false);
   }
 
   setCE = (e, editable = true, focus = false /* , type = "text" */) => {

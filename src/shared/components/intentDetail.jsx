@@ -23,6 +23,7 @@ const IntentDetail = ({ intent, onSelect, onEdit, onAction }) => {
           onSelect={onSelect}
           onEdit={onEdit}
           onAction={onAction}
+          intentId={intent.id}
         />
         <hr />
         <ActionsList
@@ -31,6 +32,7 @@ const IntentDetail = ({ intent, onSelect, onEdit, onAction }) => {
           onSelect={onSelect}
           onEdit={onEdit}
           onAction={onAction}
+          intentId={intent.id}
         />
         <hr />
         <ExpansionPanel label="Parameters" collapsed>
