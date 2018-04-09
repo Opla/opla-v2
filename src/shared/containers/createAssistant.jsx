@@ -221,10 +221,11 @@ export class CreateAssistantBase extends Component {
                   id="create-assistant-password"
                   onChange={this.createChangeHandler("password")}
                   defaultValue={password}
-                  label="Password"
+                  label="Password (min. 4 characters)"
                   type="password"
                   autoComplete="new-password"
                   style={{ width: "400px" }}
+                  minLength="4"
                   required
                 />
               </div>

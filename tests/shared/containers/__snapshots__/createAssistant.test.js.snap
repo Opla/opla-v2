@@ -496,6 +496,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
               className="mdc-text-field__input"
               defaultValue=""
               id="create-assistant-password"
+              minLength="4"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
@@ -508,7 +509,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
               htmlFor="create-assistant-password"
               style={Object {}}
             >
-              Password
+              Password (min. 4 characters)
             </label>
             <div
               className="mdc-text-field__bottom-line"
