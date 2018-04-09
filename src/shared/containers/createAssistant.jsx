@@ -259,6 +259,7 @@ export class CreateAssistantBase extends Component {
               </div>
               <div>
                 <Select
+                  id="create-assistant-language"
                   label="Choose language"
                   onSelected={this.handleLanguageChange}
                   style={{ width: "400px" }}

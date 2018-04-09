@@ -66,6 +66,9 @@ describe("containers/CreateAssistant", () => {
       .simulate("change", { target: { value: "fake-email@opla.ai" } });
     expect(wrapper.state("email")).toEqual("fake-email@opla.ai");
 
+    wrapper.find("#create-assistant-language").simulate("selected", "fr");
+    expect(wrapper.state("language")).toEqual("fr");
+
     wrapper
       .find("#create-assistant-form")
       .simulate("submit", createFakeEvent());
