@@ -10,7 +10,7 @@ import { Icon } from "zrmc";
 import ActionsTools from "../utils/actionsTools";
 
 class ActionsEditable extends Component {
-  static build(items, fromHtml) {
+  static build(items, fromHtml = false) {
     // WIP convert back html to action syntax
     let actionText = "";
     // TODO append empty text span if first element is not a text
@@ -84,20 +84,20 @@ class ActionsEditable extends Component {
     }
   }
 
-  onFocus = (e) => {
+  handleFocus = (e) => {
     const element = e.target;
     if (element.id && element.id.indexOf("ae_") === 0 && this.props.editable) {
-      this.handleFocusIn(element);
+      this.focus(element);
       this.focusElement = element;
     }
   };
 
-  onBlur = () => {
+  handleBlur = () => {
     // console.log("onBlur");
     this.unfocus();
   };
 
-  onKeyDown = (e) => {
+  handleKeyDown = (e) => {
     if (e.which === 27) {
       // esc key
       e.preventDefault();
@@ -105,14 +105,13 @@ class ActionsEditable extends Component {
     }
   };
 
-  onKeyPress = (e) => {
+  handleKeyPress = (e) => {
     if (!this.props.editable) {
       return;
     }
     if (e.which === 13) {
       // WIP handle save event
       const text = this.state.content;
-
       this.props.onAction(text);
       e.preventDefault();
       this.unfocus();
@@ -136,45 +135,20 @@ class ActionsEditable extends Component {
     }
   };
 
-  onMouseUp = (e) => {
+  handleMouseUp = (e) => {
     const element = e.target;
     if (element.tabIndex !== 0 && this.props.editable) {
       this.updateCaretPosition();
     }
   };
 
-  onInput = () => {
+  handleInput = () => {
     if (!this.props.editable) {
       return;
     }
     const element = this.node;
     // console.log("handleChange");
     this.handleChange(element);
-  };
-
-  handleFocusIn = (element) => {
-    if (this.props.editable) {
-      const type = element.getAttribute("data");
-      const key = element.id;
-      this.props.onSelected(type, key);
-      const i = key.substring(3);
-      let selectedItem = -1;
-      let caretPosition;
-      if (element.contentEditable) {
-        caretPosition = this.updateCaretPosition();
-      }
-      if (i !== "start" && i !== "end") {
-        selectedItem = parseInt(i, 10);
-      }
-      // console.log("handleFocusIn", key, type, caretPosition);
-      if (
-        this.state.selectedItem !== selectedItem ||
-        this.state.caretPosition !== caretPosition
-      ) {
-        const noUpdate = false;
-        this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
-      }
-    }
   };
 
   handleChange = (element) => {
@@ -191,6 +165,31 @@ class ActionsEditable extends Component {
     return false;
   };
 
+  focus(element) {
+    if (this.props.editable) {
+      const type = element.getAttribute("data");
+      const key = element.id;
+      this.props.onSelected(type, key, this);
+      const i = key.substring(3);
+      let selectedItem = -1;
+      let caretPosition;
+      if (element.contentEditable) {
+        caretPosition = this.updateCaretPosition();
+      }
+      if (i !== "start" && i !== "end") {
+        selectedItem = parseInt(i, 10);
+      }
+      // console.log("focus", key, type, caretPosition);
+      if (
+        this.state.selectedItem !== selectedItem ||
+        this.state.caretPosition !== caretPosition
+      ) {
+        const noUpdate = false;
+        this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
+      }
+    }
+  }
+
   unfocus() {
     // console.log("unfocus=", this.state.content);
     this.focusElement = null;
@@ -198,7 +197,7 @@ class ActionsEditable extends Component {
     const selectedItem = -1;
     const caretPosition = 0;
     this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
-    this.props.onFocus(false);
+    this.props.onFocus(false, this);
   }
 
   setCE = (e, editable = true, focus = false /* , type = "text" */) => {
@@ -257,7 +256,9 @@ class ActionsEditable extends Component {
     const selectedItem = p;
     const content = ActionsEditable.build(items);
     const noUpdate = false;
-    this.setState(() => ({ noUpdate, content, items, selectedItem }));
+    this.setState({ noUpdate, content, items, selectedItem }, () => {
+      this.props.onChange(content);
+    });
   }
 
   deleteItem(position = this.state.selectedItem) {
@@ -273,7 +274,9 @@ class ActionsEditable extends Component {
       const selectedItem = position - 1;
       const content = ActionsEditable.build(items);
       const noUpdate = false;
-      this.setState(() => ({ noUpdate, content, items, selectedItem }));
+      this.setState({ noUpdate, content, items, selectedItem }, () => {
+        this.props.onChange(content);
+      });
     }
   }
 
@@ -467,16 +470,16 @@ class ActionsEditable extends Component {
       <div
         tabIndex={0}
         key="0"
-        className="ContentEditable"
+        className="contenteditable"
         aria-label={this.props.placeholder}
         spellCheck={false}
-        onFocus={this.onFocus}
-        onBlur={this.onBlur}
-        onMouseUp={this.onMouseUp}
-        onTouchEnd={this.onMouseUp}
-        onKeyPress={this.onKeyPress}
-        onKeyDown={this.onKeyDown}
-        onInput={this.onInput}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        onMouseUp={this.handleMouseUp}
+        onTouchEnd={this.handleMouseUp}
+        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyDown}
+        onInput={this.handleInput}
         ref={(node) => {
           this.node = node;
         }}

@@ -154,6 +154,11 @@
   outline: 0px solid transparent;
 }
 
+
+  .contenteditable {
+    width: 100%;
+  }
+
  [contenteditable]:focus {
    outline: 0px solid transparent;
  }

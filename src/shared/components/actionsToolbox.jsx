@@ -26,10 +26,7 @@ class ActionsToolbox extends Component {
     };
   }
 
-  handleFocusIn = (type /* , caretPosition */) => {
-    /* const type = element.getAttribute("data");
-    const key = element.getAttribute("key"); */
-    // console.log("onFocusIn", element.tabIndex, key, type, caretPosition);
+  handleFocusIn = (type) => {
     if (type === "any") {
       this.anySelect();
     } else if (type === "variable") {
@@ -43,63 +40,40 @@ class ActionsToolbox extends Component {
     } else {
       this.textSelect();
     }
-    /* const selectedItem = parseInt(key, 10);
-    if (this.state.selectedItem !== selectedItem) {
-      this.setState(() => ({ selectedItem }));
-    } */
   };
 
   onTextSelected() {
     this.textSelect();
     this.props.onChange("text");
-    /* this.insertItem(this.state.selectedItem + 1, {
-      type: "text",
-      text: "text",
-    }); */
   }
 
   onAnySelected() {
     this.anySelect();
     this.props.onChange("any");
-    /* this.insertItem(this.state.selectedItem + 1, { type: "any", text: "" }); */
   }
 
   onVariableSelected() {
     this.variableSelect();
-    this.props.onChange("variable");
-    /* this.insertItem(this.state.selectedItem + 1, {
-      type: "output_var",
-      text: "variablename",
-    }); */
+    this.props.onChange("output_var");
   }
 
   onCodeSelected() {
     this.codeSelect();
-    this.props.onChange("code");
-    /* this.insertItem(this.state.selectedItem + 1, {
-      type: "variable",
-      text: "variablename=value",
-    }); */
+    this.props.onChange("variable");
   }
 
   onLineBreakSelected() {
     this.lineBreakSelect();
-    this.props.onChange("linebreak");
-    /* this.insertItem(this.state.selectedItem + 1, { type: "br", text: "" }); */
+    this.props.onChange("br");
   }
 
   onButtonSelected() {
     this.buttonSelect();
     this.props.onChange("button");
-    /* this.insertItem(this.state.selectedItem + 1, {
-      type: "button",
-      text: "value",
-    }); */
   }
 
   onTrashSelected() {
     this.props.onChange("trash");
-    /* this.deleteItem(this.state.selectedItem); */
   }
 
   handleFocus = (e) => {

@@ -161,7 +161,7 @@ exports[`components/actionEditor renders correctly 1`] = `
   </div>
   <div
     aria-label={null}
-    className="ContentEditable"
+    className="contenteditable"
     onBlur={[Function]}
     onFocus={[Function]}
     onInput={[Function]}
