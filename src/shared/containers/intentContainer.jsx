@@ -73,7 +73,7 @@ class IntentContainer extends Component {
       this.setState({ toolboxFocus: false });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
-      console.log("action=", action, this.actionsComponent);
+      // console.log("action=", action, this.actionsComponent);
       if (action !== "focus" && this.actionsComponent) {
         this.actionsComponent.appendAction(action);
       }
@@ -223,7 +223,7 @@ class IntentContainer extends Component {
   };
 
   handleEdit = (editing, actionsComponent) => {
-    console.log("editing=", editing, actionsComponent);
+    // console.log("editing=", editing, actionsComponent);
     if (this.state.editing !== editing && !this.timer) {
       // console.log("handle edit", editing);
       if (editing) {
