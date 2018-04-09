@@ -24,6 +24,15 @@ class IntentContainer extends Component {
     super(props);
     this.state = { editing: false, toolboxFocus: false };
     this.timer = null;
+    this.actionsComponent = null;
+  }
+
+  reset() {
+    this.actionsComponent = null;
+    this.selectedAction = undefined;
+    this.actionContainer = undefined;
+    this.actionType = undefined;
+    this.setState({ editing: false });
   }
 
   changeAction(text, name, value) {
@@ -59,16 +68,19 @@ class IntentContainer extends Component {
     return true;
   }
 
-  onChangeToolbox = (action) => {
-    // console.log("IntentContainer.onChangeToolbox =", action);
+  handleChangeToolbox = (action) => {
     if (action === "unfocus") {
       this.setState({ toolboxFocus: false });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
+      console.log("action=", action, this.actionsComponent);
+      if (action !== "focus" && this.actionsComponent) {
+        this.actionsComponent.appendAction(action);
+      }
     }
   };
 
-  onEditAction = (dialog, editAction) => {
+  handleEditAction = (dialog, editAction) => {
     if (editAction === "Change" || editAction === "Add") {
       const text = this.actionField.getContent().trim();
       let name = null;
@@ -103,13 +115,6 @@ class IntentContainer extends Component {
     this.reset();
     return true;
   };
-
-  reset() {
-    this.selectedAction = undefined;
-    this.actionContainer = undefined;
-    this.actionType = undefined;
-    this.setState({ editing: false });
-  }
 
   handleSaveIntent = () => {
     if (this.props.selectedIntent) {
@@ -203,7 +208,7 @@ class IntentContainer extends Component {
             this.actionField = input;
           }
         },
-        this.onEditAction,
+        this.handleEditAction,
         this.onChangeAction,
         isInput,
       );
@@ -212,14 +217,18 @@ class IntentContainer extends Component {
         header: "Action",
         body: "Do you want to delete it ?",
         actions: [{ name: "Delete" }, { name: "Cancel" }],
-        onAction: this.onEditAction,
+        onAction: this.handleEditAction,
       });
     }
   };
 
-  handleEdit = (editing) => {
+  handleEdit = (editing, actionsComponent) => {
+    console.log("editing=", editing, actionsComponent);
     if (this.state.editing !== editing && !this.timer) {
       // console.log("handle edit", editing);
+      if (editing) {
+        this.actionsComponent = actionsComponent;
+      }
       this.timer = setTimeout(() => {
         // console.log("set state", editing);
         this.setState({ editing });
@@ -242,7 +251,7 @@ class IntentContainer extends Component {
       const { editing, toolboxFocus } = this.state;
       let toolbox;
       if (editing || toolboxFocus) {
-        toolbox = <ActionsToolbox onChange={this.onChangeToolbox} />;
+        toolbox = <ActionsToolbox onChange={this.handleChangeToolbox} />;
       }
       return (
         <div>

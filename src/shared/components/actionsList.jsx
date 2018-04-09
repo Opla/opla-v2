@@ -17,10 +17,12 @@ class ActionsList extends Component {
       selection: null,
       newContent: null,
     };
+    this.editable = null;
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.intentId !== this.props.intentId) {
+      this.editable = null;
       this.setState({ selection: null, newContent: null });
     }
   }
@@ -29,10 +31,16 @@ class ActionsList extends Component {
     this.setState({ newContent });
   };
 
-  handleFocusEditable = (focus) => {
+  handleSelectedEditable = (type, key, editable) => {
+    this.editable = editable;
+  };
+
+  handleFocusEditable = (focus, editable) => {
     if (!focus) {
       this.setState({ selection: null });
       this.props.onEdit(focus);
+    } else {
+      this.editable = editable;
     }
   };
 
@@ -44,6 +52,7 @@ class ActionsList extends Component {
       const state = "add";
       const p = { name, type, state, index, action: { text } };
       this.props.onAction(p);
+      this.setState({ selection: null, newContent: null });
     }
   };
 
@@ -56,8 +65,48 @@ class ActionsList extends Component {
     } else if (this.props.onSelect) {
       this.props.onSelect(selection);
     }
-    this.props.onEdit(editing);
+    this.props.onEdit(editing, this);
   };
+
+  appendAction(action) {
+    const { editable } = this;
+    if (!editable) {
+      return;
+    }
+    if (action === "text") {
+      editable.insertItem({
+        type: "text",
+        text: "text",
+      });
+    } else if (action === "any") {
+      editable.insertItem({
+        type: "any",
+        text: "",
+      });
+    } else if (action === "output_var") {
+      editable.insertItem({
+        type: "output_var",
+        text: "variablename",
+      });
+    } else if (action === "variable") {
+      editable.insertItem({
+        type: "variable",
+        text: "variablename=value",
+      });
+    } else if (action === "br") {
+      editable.insertItem({
+        type: "br",
+        text: "",
+      });
+    } else if (action === "button") {
+      editable.insertItem({
+        type: "button",
+        text: "value",
+      });
+    } else if (action === "trash") {
+      editable.deleteItem();
+    }
+  }
 
   render() {
     const { name, actions, onDrop } = this.props;
@@ -97,6 +146,7 @@ class ActionsList extends Component {
           onFocus={this.handleFocusEditable}
           onAction={this.handleAction}
           onChange={this.handleChangeNew}
+          onSelected={this.handleSelectedEditable}
         />
       </ListItem>
     );
