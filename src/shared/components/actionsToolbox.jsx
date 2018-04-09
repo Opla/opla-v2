@@ -26,7 +26,7 @@ class ActionsToolbox extends Component {
     };
   }
 
-  onFocusIn = (type /* , caretPosition */) => {
+  handleFocusIn = (type /* , caretPosition */) => {
     /* const type = element.getAttribute("data");
     const key = element.getAttribute("key"); */
     // console.log("onFocusIn", element.tabIndex, key, type, caretPosition);
@@ -51,7 +51,7 @@ class ActionsToolbox extends Component {
 
   onTextSelected() {
     this.textSelect();
-    this.props.onChange("type");
+    this.props.onChange("text");
     /* this.insertItem(this.state.selectedItem + 1, {
       type: "text",
       text: "text",
@@ -101,6 +101,21 @@ class ActionsToolbox extends Component {
     this.props.onChange("trash");
     /* this.deleteItem(this.state.selectedItem); */
   }
+
+  handleFocus = (e) => {
+    const element = e.target;
+    const type = element.getAttribute("data");
+    // console.log("focus toolbox", type);
+    if (type) {
+      this.handleFocusIn(type);
+    }
+    this.props.onChange("focus");
+  };
+
+  handleBlur = () => {
+    // console.log("unfocus toolbox");
+    this.props.onChange("unfocus");
+  };
 
   textSelect() {
     const toolbox = {
@@ -239,7 +254,11 @@ class ActionsToolbox extends Component {
       );
     }
     return (
-      <div style={styleToolbox}>
+      <div
+        style={styleToolbox}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+      >
         <div style={styleToolbar}>
           <Tooltip label="Insert text">
             <Icon

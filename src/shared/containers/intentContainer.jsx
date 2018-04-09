@@ -22,7 +22,8 @@ import ActionsToolbox from "../components/actionsToolbox";
 class IntentContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { editing: false };
+    this.state = { editing: false, toolboxFocus: false };
+    this.timer = null;
   }
 
   changeAction(text, name, value) {
@@ -58,8 +59,13 @@ class IntentContainer extends Component {
     return true;
   }
 
-  onChangeAction = (/* actionText */) => {
-    // console.log("IntentContainer.onChangeAction =", actionText);
+  onChangeToolbox = (action) => {
+    // console.log("IntentContainer.onChangeToolbox =", action);
+    if (action === "unfocus") {
+      this.setState({ toolboxFocus: false });
+    } else {
+      this.setState({ editing: true, toolboxFocus: true });
+    }
   };
 
   onEditAction = (dialog, editAction) => {
@@ -212,7 +218,14 @@ class IntentContainer extends Component {
   };
 
   handleEdit = (editing) => {
-    this.setState({ editing });
+    if (this.state.editing !== editing && !this.timer) {
+      // console.log("handle edit", editing);
+      this.timer = setTimeout(() => {
+        // console.log("set state", editing);
+        this.setState({ editing });
+        this.timer = null;
+      }, 100);
+    }
   };
 
   render() {
@@ -226,10 +239,10 @@ class IntentContainer extends Component {
           {intent.name}
         </span>
       );
-      const { editing } = this.state;
+      const { editing, toolboxFocus } = this.state;
       let toolbox;
-      if (editing) {
-        toolbox = <ActionsToolbox />;
+      if (editing || toolboxFocus) {
+        toolbox = <ActionsToolbox onChange={this.onChangeToolbox} />;
       }
       return (
         <div>

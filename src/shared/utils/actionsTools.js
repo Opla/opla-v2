@@ -7,6 +7,9 @@
 const ActionsTools = {
   parse(actionText) {
     const actions = [];
+    if (!actionText) {
+      return actions;
+    }
     const chrs = Array.from(actionText);
     let buf = "";
     for (let i = 0; i < chrs.length; i += 1) {

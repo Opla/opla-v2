@@ -15,8 +15,19 @@ class ActionsList extends Component {
     super(props);
     this.state = {
       selection: null,
+      newContent: null,
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.intentId !== this.props.intentId) {
+      this.setState({ selection: null, newContent: null });
+    }
+  }
+
+  handleChangeNew = (newContent) => {
+    this.setState({ newContent });
+  };
 
   handleFocusEditable = (focus) => {
     if (!focus) {
@@ -80,10 +91,12 @@ class ActionsList extends Component {
         }}
       >
         <ActionsEditable
+          content={this.state.newContent}
           placeholder={addText}
           editable={editable}
           onFocus={this.handleFocusEditable}
           onAction={this.handleAction}
+          onChange={this.handleChangeNew}
         />
       </ListItem>
     );
@@ -202,6 +215,7 @@ ActionsList.defaultProps = {
   onDrop: null,
   onEdit: () => {},
   onAction: () => {},
+  intentId: null,
 };
 
 ActionsList.propTypes = {
@@ -213,6 +227,7 @@ ActionsList.propTypes = {
   onDrop: PropTypes.func,
   onEdit: PropTypes.func,
   onAction: PropTypes.func,
+  intentId: PropTypes.string,
 };
 
 export default ActionsList;
