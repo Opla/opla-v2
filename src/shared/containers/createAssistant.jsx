@@ -46,6 +46,11 @@ const templates = [
   { id: 4, name: "Import" },
 ];
 
+const languages = [
+  { id: "en", name: "English", default: true },
+  { id: "fr", name: "French", default: false },
+];
+
 export class CreateAssistantBase extends Component {
   state = {
     name: "",
@@ -142,6 +147,18 @@ export class CreateAssistantBase extends Component {
       selectedTemplate: selected,
     } = this.state;
 
+    let selectedLanguageIndex = 0;
+    const languagesItems = languages.map((language, index) => {
+      if (language.default === true) {
+        selectedLanguageIndex = index;
+      }
+      return (
+        <MenuItem key={index} selected={language.default} value={language.id}>
+          {language.name}
+        </MenuItem>
+      );
+    });
+
     // TODO json only for instance
     const acceptImport = "application/json";
     return (
@@ -221,10 +238,11 @@ export class CreateAssistantBase extends Component {
                   id="create-assistant-password"
                   onChange={this.createChangeHandler("password")}
                   defaultValue={password}
-                  label="Password"
+                  label="Password (min. 4 characters)"
                   type="password"
                   autoComplete="new-password"
                   style={{ width: "400px" }}
+                  minLength="4"
                   required
                 />
               </div>
@@ -241,17 +259,14 @@ export class CreateAssistantBase extends Component {
               </div>
               <div>
                 <Select
+                  id="create-assistant-language"
                   label="Choose language"
                   onSelected={this.handleLanguageChange}
                   style={{ width: "400px" }}
+                  selectedIndex={selectedLanguageIndex}
                   required
                 >
-                  <MenuItem selected={this.state.language === "en"} value="en">
-                    English
-                  </MenuItem>
-                  <MenuItem selected={this.state.language === "fr"} value="fr">
-                    French
-                  </MenuItem>
+                  {languagesItems}
                 </Select>
               </div>
             </div>
