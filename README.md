@@ -13,7 +13,7 @@ Opla.ai Backend using Node es7 react and redux.
 First of all, make sure you have [Node 8.x](https://nodejs.org/en/download/) and
 [Yarn](https://yarnpkg.com/en/docs/install) installed.
 
-You will also need [MariaDB 10.2](https://mariadb.org/). We provide a [Docker
+You will also need [MariaDB 10.2](https://mariadb.org/) or [mysql 5.7](https://www.mysql.com/). We provide a [Docker
 Compose](https://docs.docker.com/compose/) configuration to get you started
 quickly.
 
