@@ -10,19 +10,25 @@ import merge from "deepmerge";
 
 let client;
 
-export default class GatewayClient {
+class GatewayClient {
   constructor(url) {
     this.url = url;
     this.getTemplates = this.getTemplates.bind(this);
   }
 
   async getTemplates() {
-    const templates = await fetch(`${this.url}/templates`);
-    return templates;
+    return fetch(`${this.url}/templates`);
+  }
+
+  async getLanguages() {
+    return fetch(`${this.url}/languages`);
   }
 }
 
 export function getGatewayClient() {
+  if (client === null) {
+    throw new Error("client must be initialized before using it");
+  }
   return client;
 }
 

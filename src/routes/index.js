@@ -7,11 +7,13 @@
 import BotsRoutes from "./bots";
 import ConversationsRoutes from "./conversations";
 import MetricsRoutes from "./metrics";
+import AdminRoute from "./admin";
 
 export default (zoapp) => {
   const conversations = new ConversationsRoutes(zoapp);
   const bots = new BotsRoutes(zoapp);
   const metrics = new MetricsRoutes(zoapp);
+  const admin = new AdminRoute(zoapp);
 
   // /conversations routes
   // List all conversations linked to session
@@ -216,4 +218,8 @@ export default (zoapp) => {
   // /metrics routes
   route = zoapp.createRoute("/metrics");
   route.add("GET", "/:botId", ["*", "admin", "master"], metrics.getForBot);
+
+  // /admin routes
+  route = zoapp.createRoute("/admin");
+  route.add("GET", "/templates", ["open"], admin.getTemplates);
 };

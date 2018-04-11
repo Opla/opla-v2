@@ -8,6 +8,7 @@ import BotsController from "./bots";
 import MessengerController from "./messenger";
 import SandboxMessengerController from "./sandboxMessenger";
 import MetricsController from "./metrics";
+import AdminController from "./admin";
 import initMiddlewares from "../middlewares";
 
 class ExtensionsController {
@@ -24,6 +25,7 @@ class ExtensionsController {
     );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
+    this.admin = new AdminController("Admin", this);
     logger.info("will init");
     if (zoapp.controllers) {
       initMiddlewares(zoapp.controllers.getMiddlewares(), this);
@@ -50,12 +52,14 @@ class ExtensionsController {
     await this.bots.open();
     await this.sandboxMessenger.open();
     await this.messenger.open();
+    await this.admin.open();
   }
 
   async stop() {
     await this.bots.close();
     await this.sandboxMessenger.close();
     await this.messenger.close();
+    await this.admin.close();
   }
 
   getBots() {
@@ -72,6 +76,10 @@ class ExtensionsController {
 
   getMetrics() {
     return this.metrics;
+  }
+
+  getAdmin() {
+    return this.admin;
   }
 }
 
