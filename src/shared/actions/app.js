@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { appSetTitle } from "zoapp-front/actions/app";
+import { setMessage } from "zoapp-front/actions/message";
 
 import {
   APP_DELETEINTENTACTION,
@@ -45,4 +46,4 @@ export function appDeleteIntentAction(actionContainer, selectedAction) {
   return { type: APP_DELETEINTENTACTION, actionContainer, selectedAction };
 }
 
-export { appSetTitle };
+export { appSetTitle, setMessage };

@@ -13,7 +13,7 @@ import ProcessingDialog from "zoapp-front/containers/processingDialog";
 
 import TemplatesList from "../components/templatesList";
 import { apiCreateBot } from "../actions/api";
-import { appSetTitle } from "../actions/app";
+import { appSetTitle, setMessage } from "../actions/app";
 
 const advancedStyle = {
   marginLeft: "16px",
@@ -74,9 +74,12 @@ export class CreateAssistantBase extends Component {
   }
 
   onImportTemplate = (data) => {
-    // TODO check if json
-    const json = JSON.parse(data);
-    this.onSelectTemplate(3, json);
+    try {
+      const json = JSON.parse(data);
+      this.onSelectTemplate(3, json);
+    } catch (e) {
+      this.props.setMessage("imported template is not a valid JSON document");
+    }
   };
 
   onSelectTemplate = (selected, data) => {
@@ -294,6 +297,7 @@ CreateAssistantBase.propTypes = {
   error: PropTypes.string,
   createBot: PropTypes.func.isRequired,
   appSetTitle: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
   history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
     .isRequired,
 };
@@ -316,6 +320,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   appSetTitle: (titleName) => {
     dispatch(appSetTitle(titleName));
+  },
+  setMessage: (message) => {
+    dispatch(setMessage(message));
   },
 });
 

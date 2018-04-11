@@ -14,6 +14,7 @@ import { CreateAssistantBase } from "shared/containers/createAssistant";
 describe("containers/CreateAssistant", () => {
   it("renders correctly", () => {
     const appSetTitleSpy = jest.fn();
+    const setMessage = jest.fn();
     const createBotSpy = jest.fn();
     const historySpy = { length: 0, push: jest.fn() };
 
@@ -23,6 +24,7 @@ describe("containers/CreateAssistant", () => {
         createBot={createBotSpy}
         appSetTitle={appSetTitleSpy}
         history={historySpy}
+        setMessage={setMessage}
       />,
     );
 
@@ -32,6 +34,27 @@ describe("containers/CreateAssistant", () => {
     expect(appSetTitleSpy).toHaveBeenCalled();
     expect(createBotSpy).not.toHaveBeenCalled();
     expect(historySpy.push).not.toHaveBeenCalled();
+    expect(setMessage).not.toHaveBeenCalled();
+  });
+
+  it("sets a message if uploaded template is not a valid json", () => {
+    const setMessage = jest.fn();
+
+    const wrapper = shallow(
+      <CreateAssistantBase
+        isLoading={false}
+        createBot={jest.fn}
+        appSetTitle={jest.fn()}
+        setMessage={setMessage}
+        history={{ length: 0, push: jest.fn() }}
+      />,
+    );
+
+    wrapper.instance().onImportTemplate("this is not a json obviously");
+
+    expect(setMessage).toHaveBeenCalledWith(
+      "imported template is not a valid JSON document",
+    );
   });
 
   it("creates a bot with fullfilled form", () => {
@@ -42,6 +65,7 @@ describe("containers/CreateAssistant", () => {
         isLoading={false}
         createBot={createBotSpy}
         appSetTitle={jest.fn()}
+        setMessage={jest.fn()}
         history={{ length: 0, push: jest.fn() }}
       />,
     );
