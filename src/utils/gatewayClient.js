@@ -6,6 +6,7 @@
  */
 
 import fetch from "zoapp-backend/utils/fetch";
+import merge from "deepmerge";
 
 let client;
 
@@ -25,6 +26,16 @@ export function getGatewayClient() {
   return client;
 }
 
-export function initGatewayClient(url) {
-  client = new GatewayClient(url);
+export function initGatewayClient(config = {}) {
+  const defaultConfig = {
+    global: {
+      gateway: {
+        url: "",
+      },
+    },
+  };
+
+  const cfg = merge(defaultConfig, config);
+
+  client = new GatewayClient(cfg.global.gateway.url);
 }

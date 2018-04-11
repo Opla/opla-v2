@@ -27,7 +27,7 @@ class App {
     this.zoapp.addPlugins(plugins(this.zoapp.pluginsManager));
 
     buildRoutes(this.zoapp);
-    initGatewayClient(config.global.gateway.url);
+    initGatewayClient(config);
   }
 
   async start() {
