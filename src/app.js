@@ -9,7 +9,6 @@ import createZoapp from "zoapp-backend";
 import createExtensionsController from "./controllers";
 import buildRoutes from "./routes";
 import plugins from "./plugins";
-import { initGatewayClient } from "./utils/gatewayClient";
 
 class App {
   constructor(config = {}) {
@@ -27,7 +26,6 @@ class App {
     this.zoapp.addPlugins(plugins(this.zoapp.pluginsManager));
 
     buildRoutes(this.zoapp);
-    initGatewayClient(config);
   }
 
   async start() {

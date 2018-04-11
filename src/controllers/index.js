@@ -10,6 +10,7 @@ import SandboxMessengerController from "./sandboxMessenger";
 import MetricsController from "./metrics";
 import AdminController from "./admin";
 import initMiddlewares from "../middlewares";
+import { initGatewayClient } from "../utils/gatewayClient";
 
 class ExtensionsController {
   constructor(zoapp, config) {
@@ -30,6 +31,7 @@ class ExtensionsController {
     if (zoapp.controllers) {
       initMiddlewares(zoapp.controllers.getMiddlewares(), this);
     }
+    initGatewayClient(config);
   }
 
   async getAdminParameters(me, isMaster, params) {
