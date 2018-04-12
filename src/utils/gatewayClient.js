@@ -10,7 +10,7 @@ import merge from "deepmerge";
 
 let client;
 
-class GatewayClient {
+export class GatewayClient {
   constructor(url) {
     this.url = url;
     this.getTemplates = this.getTemplates.bind(this);
@@ -26,7 +26,7 @@ class GatewayClient {
 }
 
 export function getGatewayClient() {
-  if (client === null) {
+  if (!client) {
     throw new Error("client must be initialized before using it");
   }
   return client;
