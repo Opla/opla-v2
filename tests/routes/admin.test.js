@@ -24,4 +24,22 @@ describe("routes/admin", () => {
       expect(getTemplatesSpy).toHaveBeenCalled();
     });
   });
+
+  describe("getLanguages", () => {
+    it("calls the controller", () => {
+      const getLanguagesSpy = jest.fn();
+      const fakeZoapp = {
+        extensions: {
+          getAdmin: () => ({
+            getLanguages: getLanguagesSpy,
+          }),
+        },
+      };
+
+      const routes = new AdminRoutes(fakeZoapp);
+      expect(getLanguagesSpy).not.toHaveBeenCalled();
+      routes.getLanguages();
+      expect(getLanguagesSpy).toHaveBeenCalled();
+    });
+  });
 });

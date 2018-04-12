@@ -25,4 +25,23 @@ describe("controller/admin", () => {
       expect(getTemplatesSpy).toHaveBeenCalled();
     });
   });
+
+  describe("getLanguages", () => {
+    it("calls the gateway client", async () => {
+      const getLanguagesSpy = jest.fn();
+      const GatewayClient = {
+        getLanguages: getLanguagesSpy,
+      };
+
+      const controller = new AdminController(
+        "Admin",
+        {},
+        "admin",
+        GatewayClient,
+      );
+      expect(getLanguagesSpy).not.toHaveBeenCalled();
+      await controller.getLanguages();
+      expect(getLanguagesSpy).toHaveBeenCalled();
+    });
+  });
 });
