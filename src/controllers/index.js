@@ -10,7 +10,7 @@ import SandboxMessengerController from "./sandboxMessenger";
 import MetricsController from "./metrics";
 import AdminController from "./admin";
 import initMiddlewares from "../middlewares";
-import { initGatewayClient } from "../utils/gatewayClient";
+import { initGatewayClient, getGatewayClient } from "../utils/gatewayClient";
 
 class ExtensionsController {
   constructor(zoapp, config) {
@@ -26,12 +26,13 @@ class ExtensionsController {
     );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
-    this.admin = new AdminController("Admin", this);
+
     logger.info("will init");
     if (zoapp.controllers) {
       initMiddlewares(zoapp.controllers.getMiddlewares(), this);
     }
     initGatewayClient(config);
+    this.admin = new AdminController("Admin", this, null, getGatewayClient());
   }
 
   async getAdminParameters(me, isMaster, params) {

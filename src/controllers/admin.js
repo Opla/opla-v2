@@ -5,16 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { Controller } from "zoapp-backend";
-import { getGatewayClient } from "../utils/gatewayClient";
 
 export default class extends Controller {
-  constructor(name, main, className = null) {
+  constructor(name, main, className = null, GatewayClient) {
     super(name, main, className);
-    this.getGatewayClient = getGatewayClient;
+    this.GatewayClient = GatewayClient;
     this.getTemplates = this.getTemplates.bind(this);
   }
 
   async getTemplates() {
-    return this.getGatewayClient().getTemplates();
+    return this.GatewayClient.getTemplates();
   }
 }
