@@ -19,6 +19,7 @@ export default class extends CommonRoutes {
   }
 
   async getLanguages() {
-    return this.extensions.getAdmin().getLanguages();
+    const languages = await this.extensions.getAdmin().getLanguages();
+    return languages;
   }
 }

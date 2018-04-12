@@ -7,17 +7,17 @@
 import { Controller } from "zoapp-backend";
 
 export default class extends Controller {
-  constructor(name, main, className = null, GatewayClient) {
+  constructor(name, main, className = null, gatewayClient) {
     super(name, main, className);
-    this.GatewayClient = GatewayClient;
+    this.gatewayClient = gatewayClient;
     this.getTemplates = this.getTemplates.bind(this);
   }
 
   async getTemplates() {
-    return this.GatewayClient.getTemplates();
+    return this.gatewayClient.getTemplates();
   }
 
   async getLanguages() {
-    return this.GatewayClient.getLanguages();
+    return this.gatewayClient.getLanguages();
   }
 }
