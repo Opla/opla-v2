@@ -222,4 +222,5 @@ export default (zoapp) => {
   // /admin routes
   route = zoapp.createRoute("/admin");
   route.add("GET", "/templates", ["open"], admin.getTemplates);
+  route.add("GET", "/languages", ["open"], admin.getLanguages);
 };

@@ -16,4 +16,8 @@ export default class extends Controller {
   async getTemplates() {
     return this.GatewayClient.getTemplates();
   }
+
+  async getLanguages() {
+    return this.GatewayClient.getLanguages();
+  }
 }

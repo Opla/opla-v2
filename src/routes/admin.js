@@ -11,9 +11,14 @@ export default class extends CommonRoutes {
     super(zoapp.controllers);
     this.extensions = zoapp.extensions;
     this.getTemplates = this.getTemplates.bind(this);
+    this.getLanguages = this.getLanguages.bind(this);
   }
 
   async getTemplates() {
     return this.extensions.getAdmin().getTemplates();
+  }
+
+  async getLanguages() {
+    return this.extensions.getAdmin().getLanguages();
   }
 }
