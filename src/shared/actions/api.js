@@ -31,6 +31,7 @@ import {
   API_SB_SENDMESSAGE,
   API_SENDINTENT,
   API_SETMIDDLEWARE,
+  API_GETTEMPLATES,
 } from "./constants";
 
 export function apiAdminRequest() {
@@ -161,4 +162,16 @@ export function apiGetMetricsSuccess(metrics) {
 
 export function apiGetMetricsFailure(error) {
   return { type: API_GETMETRICS + FETCH_FAILURE, error };
+}
+
+export function apiGetTemplatesRequest() {
+  return { type: API_GETTEMPLATES + FETCH_REQUEST };
+}
+
+export function apiGetTemplatesSuccess(templates) {
+  return { type: API_GETTEMPLATES + FETCH_SUCCESS, templates };
+}
+
+export function apiGetTemplatesFailure(error) {
+  return { type: API_GETTEMPLATES + FETCH_FAILURE, error };
 }

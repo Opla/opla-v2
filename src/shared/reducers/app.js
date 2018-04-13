@@ -40,7 +40,10 @@ import {
   APP_SETINTENTACTION,
   APP_UPDATEINTENT,
   APP_UPDATEPUBLISHER,
+  API_GETTEMPLATES,
 } from "../actions/constants";
+
+const defaultTemplates = [{ name: "Empty" }, { name: "Import" }];
 
 export const initialState = {
   ...zoappInitialState,
@@ -49,6 +52,7 @@ export const initialState = {
   selectedIntentIndex: 0,
   sandbox: null,
   loadingMessages: false,
+  templates: defaultTemplates,
 };
 
 export default createReducer(initialState, {
@@ -691,5 +695,24 @@ export default createReducer(initialState, {
   [AUTH_SIGNOUT + FETCH_SUCCESS]: (state) => ({
     ...state,
     ...initialState,
+  }),
+
+  /* Api admin section */
+  [API_GETTEMPLATES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_GETTEMPLATES + FETCH_SUCCESS]: (state, { templates }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    templates: templates.concat(defaultTemplates),
+  }),
+  [API_GETTEMPLATES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error.message,
+    templates: defaultTemplates,
   }),
 });
