@@ -470,15 +470,6 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                 >
                   English
                 </li>
-                <li
-                  className="mdc-list-item"
-                  onClick={[Function]}
-                  onKeyUp={[Function]}
-                  role="option"
-                  tabIndex="0"
-                >
-                  French
-                </li>
               </ul>
             </div>
           </div>

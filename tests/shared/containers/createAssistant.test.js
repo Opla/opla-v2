@@ -17,6 +17,7 @@ describe("containers/CreateAssistant", () => {
     const setMessage = jest.fn();
     const createBotSpy = jest.fn();
     const apiGetTemplatesSpy = jest.fn();
+    const apiGetLanguagesSpy = jest.fn();
     const historySpy = { length: 0, push: jest.fn() };
 
     const component = renderer.create(
@@ -25,7 +26,9 @@ describe("containers/CreateAssistant", () => {
         createBot={createBotSpy}
         appSetTitle={appSetTitleSpy}
         apiGetTemplates={apiGetTemplatesSpy}
+        apiGetLanguages={apiGetLanguagesSpy}
         templates={[{ name: "Template 1" }, { name: "Import" }]}
+        languages={[{ id: "en", name: "English", default: true }]}
         history={historySpy}
         setMessage={setMessage}
       />,
@@ -50,6 +53,8 @@ describe("containers/CreateAssistant", () => {
         createBot={jest.fn}
         appSetTitle={jest.fn()}
         apiGetTemplates={jest.fn()}
+        apiGetLanguages={jest.fn()}
+        languages={[{ id: "en", name: "English", default: true }]}
         setMessage={setMessage}
         history={{ length: 0, push: jest.fn() }}
       />,
@@ -72,7 +77,9 @@ describe("containers/CreateAssistant", () => {
         appSetTitle={jest.fn()}
         setMessage={jest.fn()}
         apiGetTemplates={jest.fn()}
+        apiGetLanguages={jest.fn()}
         templates={[{ name: "Template 1" }, { name: "Import" }]}
+        languages={[{ id: "en", name: "English", default: true }]}
         history={{ length: 0, push: jest.fn() }}
       />,
     );
