@@ -8,7 +8,9 @@ import BotsController from "./bots";
 import MessengerController from "./messenger";
 import SandboxMessengerController from "./sandboxMessenger";
 import MetricsController from "./metrics";
+import AdminController from "./admin";
 import initMiddlewares from "../middlewares";
+import { initGatewayClient, getGatewayClient } from "../utils/gatewayClient";
 
 class ExtensionsController {
   constructor(zoapp, config) {
@@ -24,10 +26,13 @@ class ExtensionsController {
     );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
+
     logger.info("will init");
     if (zoapp.controllers) {
       initMiddlewares(zoapp.controllers.getMiddlewares(), this);
     }
+    initGatewayClient(config);
+    this.admin = new AdminController("Admin", this, null, getGatewayClient());
   }
 
   async getAdminParameters(me, isMaster, params) {
@@ -50,12 +55,14 @@ class ExtensionsController {
     await this.bots.open();
     await this.sandboxMessenger.open();
     await this.messenger.open();
+    await this.admin.open();
   }
 
   async stop() {
     await this.bots.close();
     await this.sandboxMessenger.close();
     await this.messenger.close();
+    await this.admin.close();
   }
 
   getBots() {
@@ -72,6 +79,10 @@ class ExtensionsController {
 
   getMetrics() {
     return this.metrics;
+  }
+
+  getAdmin() {
+    return this.admin;
   }
 }
 

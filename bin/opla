@@ -26,6 +26,7 @@ const configDefaults = {
   databasePass: "",
   apiEndpoint: "/api",
   authEndpoint: "/auth",
+  gatewayUrl: "https://gateway.opla.ai",
 };
 
 program
@@ -39,6 +40,7 @@ program
   .option("--database-pass [password]", "set the database password", configDefaults.databasePass)
   .option("--api-endpoint [endpoint]", "set the main API endpoint", configDefaults.apiEndpoint)
   .option("--auth-endpoint [endpoint]", "set the auth API endpoint", configDefaults.authEndpoint)
+  .option("--gateway-url [url]", "set the gateway url", configDefaults.gatewayUrl)
   .option("--overwrite", "overwrite existing configuration files", false)
   .action(async (options) => {
     const questions = [
@@ -84,6 +86,12 @@ program
         name: "authEndpoint",
         message: "Auth API endpoint",
         default: options.authEndpoint,
+      },
+      {
+        type: "input",
+        name: "gatewayUrl",
+        message: "Gateway api url",
+        default: options.gatewayUrl,
       },
     ];
 
@@ -139,6 +147,9 @@ program
           },
           botSite: {
             url: "http://127.0.0.1:8085/?b=",
+          },
+          gateway: {
+            url: answers.gatewayUrl,
           },
         },
         auth: {
