@@ -16,6 +16,7 @@ describe("containers/CreateAssistant", () => {
     const appSetTitleSpy = jest.fn();
     const setMessage = jest.fn();
     const createBotSpy = jest.fn();
+    const apiGetTemplatesSpy = jest.fn();
     const historySpy = { length: 0, push: jest.fn() };
 
     const component = renderer.create(
@@ -23,6 +24,8 @@ describe("containers/CreateAssistant", () => {
         isLoading={false}
         createBot={createBotSpy}
         appSetTitle={appSetTitleSpy}
+        apiGetTemplates={apiGetTemplatesSpy}
+        templates={[{ name: "Template 1" }, { name: "Import" }]}
         history={historySpy}
         setMessage={setMessage}
       />,
@@ -32,6 +35,7 @@ describe("containers/CreateAssistant", () => {
     expect(tree).toMatchSnapshot();
 
     expect(appSetTitleSpy).toHaveBeenCalled();
+    expect(apiGetTemplatesSpy).toHaveBeenCalled();
     expect(createBotSpy).not.toHaveBeenCalled();
     expect(historySpy.push).not.toHaveBeenCalled();
     expect(setMessage).not.toHaveBeenCalled();
@@ -45,6 +49,7 @@ describe("containers/CreateAssistant", () => {
         isLoading={false}
         createBot={jest.fn}
         appSetTitle={jest.fn()}
+        apiGetTemplates={jest.fn()}
         setMessage={setMessage}
         history={{ length: 0, push: jest.fn() }}
       />,
@@ -66,6 +71,8 @@ describe("containers/CreateAssistant", () => {
         createBot={createBotSpy}
         appSetTitle={jest.fn()}
         setMessage={jest.fn()}
+        apiGetTemplates={jest.fn()}
+        templates={[{ name: "Template 1" }, { name: "Import" }]}
         history={{ length: 0, push: jest.fn() }}
       />,
     );
@@ -92,6 +99,8 @@ describe("containers/CreateAssistant", () => {
 
     wrapper.find("#create-assistant-language").simulate("selected", "fr");
     expect(wrapper.state("language")).toEqual("fr");
+
+    wrapper.instance().onSelectTemplate(0);
 
     wrapper
       .find("#create-assistant-form")
