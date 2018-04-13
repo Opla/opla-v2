@@ -7,7 +7,7 @@
 import * as actions from "shared/actions/app";
 import * as apiActions from "shared/actions/api";
 import * as authActions from "zoapp-front/actions/auth";
-import reducer, { initialState } from "shared/reducers/app";
+import reducer, { initialState, defaultTemplates } from "shared/reducers/app";
 
 describe("reducers/app", () => {
   it("returns the initial state", () => {
@@ -116,6 +116,27 @@ describe("reducers/app", () => {
 
       const state = reducer(prevState, authActions.signOutComplete({}));
       expect(state).toEqual(initialState);
+    });
+  });
+
+  describe("templates", () => {
+    it("returns default templates when the request fails", () => {
+      const state = reducer(
+        initialState,
+        apiActions.apiGetTemplatesFailure("it fails"),
+      );
+
+      expect(state.templates).toEqual(defaultTemplates);
+    });
+
+    it("merges default templates with templates from the API", () => {
+      const templates = [{ name: "foo" }, { name: "bar" }];
+      const state = reducer(
+        initialState,
+        apiActions.apiGetTemplatesSuccess(templates),
+      );
+
+      expect(state.templates).toEqual(templates.concat(defaultTemplates));
     });
   });
 });

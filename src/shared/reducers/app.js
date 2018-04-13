@@ -43,7 +43,7 @@ import {
   API_GETTEMPLATES,
 } from "../actions/constants";
 
-const defaultTemplates = [{ name: "Empty" }, { name: "Import" }];
+export const defaultTemplates = [{ name: "Empty" }, { name: "Import" }];
 
 export const initialState = {
   ...zoappInitialState,
