@@ -31,6 +31,8 @@ import {
   API_SB_SENDMESSAGE,
   API_SENDINTENT,
   API_SETMIDDLEWARE,
+  API_GETTEMPLATES,
+  API_GETLANGUAGES,
 } from "./constants";
 
 export function apiAdminRequest() {
@@ -161,4 +163,28 @@ export function apiGetMetricsSuccess(metrics) {
 
 export function apiGetMetricsFailure(error) {
   return { type: API_GETMETRICS + FETCH_FAILURE, error };
+}
+
+export function apiGetTemplatesRequest() {
+  return { type: API_GETTEMPLATES + FETCH_REQUEST };
+}
+
+export function apiGetTemplatesSuccess(templates) {
+  return { type: API_GETTEMPLATES + FETCH_SUCCESS, templates };
+}
+
+export function apiGetTemplatesFailure(error) {
+  return { type: API_GETTEMPLATES + FETCH_FAILURE, error };
+}
+
+export function apiGetLanguagesRequest() {
+  return { type: API_GETLANGUAGES + FETCH_REQUEST };
+}
+
+export function apiGetLanguagesSuccess(languages) {
+  return { type: API_GETLANGUAGES + FETCH_SUCCESS, languages };
+}
+
+export function apiGetLanguagesFailure(error) {
+  return { type: API_GETLANGUAGES + FETCH_FAILURE, error };
 }

@@ -40,7 +40,15 @@ import {
   APP_SETINTENTACTION,
   APP_UPDATEINTENT,
   APP_UPDATEPUBLISHER,
+  API_GETTEMPLATES,
+  API_GETLANGUAGES,
 } from "../actions/constants";
+
+export const defaultTemplates = [
+  { id: "eb05e2a4-251a-4e11-a907-b1f3bcc20283", name: "Empty" },
+  { id: "571a2354-ec80-4423-8edb-94d0a934fbb6", name: "Import" },
+];
+export const defaultLanguages = [{ id: "en", name: "English", default: true }];
 
 export const initialState = {
   ...zoappInitialState,
@@ -49,6 +57,8 @@ export const initialState = {
   selectedIntentIndex: 0,
   sandbox: null,
   loadingMessages: false,
+  templates: defaultTemplates,
+  languages: defaultLanguages,
 };
 
 export default createReducer(initialState, {
@@ -691,5 +701,42 @@ export default createReducer(initialState, {
   [AUTH_SIGNOUT + FETCH_SUCCESS]: (state) => ({
     ...state,
     ...initialState,
+  }),
+
+  /* Api admin section */
+  [API_GETTEMPLATES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_GETTEMPLATES + FETCH_SUCCESS]: (state, { templates }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    templates: templates.concat(defaultTemplates),
+  }),
+  [API_GETTEMPLATES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error.message,
+    templates: defaultTemplates,
+  }),
+
+  [API_GETLANGUAGES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_GETLANGUAGES + FETCH_SUCCESS]: (state, { languages }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    languages,
+  }),
+  [API_GETLANGUAGES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error.message,
+    languages: defaultLanguages,
   }),
 });

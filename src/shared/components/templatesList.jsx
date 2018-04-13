@@ -44,6 +44,7 @@ const TemplatesList = ({
   <Grid>
     <Inner>
       {items.map((item, index) => {
+        const key = item.id ? item.id : `${index}${item.name}`;
         const isSelectedItem = selectedItem === index;
         const className = makeClassName("mdl-shadow--2dp", {
           selectableListItem: !isSelectedItem,
@@ -52,7 +53,7 @@ const TemplatesList = ({
 
         return (
           <Cell
-            key={item.id}
+            key={key}
             style={templateBoxStyle}
             className={className}
             span={2}
@@ -99,7 +100,7 @@ TemplatesList.propTypes = {
       name: PropTypes.string,
     }),
   ).isRequired,
-  selectedItem: PropTypes.number.isRequired,
+  selectedItem: PropTypes.number,
   onSelect: PropTypes.func.isRequired,
   onImport: PropTypes.func,
   acceptImport: PropTypes.string,

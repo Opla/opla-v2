@@ -10,12 +10,15 @@ import { shallow } from "enzyme";
 
 import { createFakeEvent } from "tests/helpers";
 import { CreateAssistantBase } from "shared/containers/createAssistant";
+import { defaultTemplates, defaultLanguages } from "shared/reducers/app";
 
 describe("containers/CreateAssistant", () => {
   it("renders correctly", () => {
     const appSetTitleSpy = jest.fn();
     const setMessage = jest.fn();
     const createBotSpy = jest.fn();
+    const apiGetTemplatesSpy = jest.fn();
+    const apiGetLanguagesSpy = jest.fn();
     const historySpy = { length: 0, push: jest.fn() };
 
     const component = renderer.create(
@@ -23,6 +26,10 @@ describe("containers/CreateAssistant", () => {
         isLoading={false}
         createBot={createBotSpy}
         appSetTitle={appSetTitleSpy}
+        apiGetTemplates={apiGetTemplatesSpy}
+        apiGetLanguages={apiGetLanguagesSpy}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
         history={historySpy}
         setMessage={setMessage}
       />,
@@ -32,6 +39,8 @@ describe("containers/CreateAssistant", () => {
     expect(tree).toMatchSnapshot();
 
     expect(appSetTitleSpy).toHaveBeenCalled();
+    expect(apiGetTemplatesSpy).toHaveBeenCalled();
+    expect(apiGetLanguagesSpy).toHaveBeenCalled();
     expect(createBotSpy).not.toHaveBeenCalled();
     expect(historySpy.push).not.toHaveBeenCalled();
     expect(setMessage).not.toHaveBeenCalled();
@@ -45,6 +54,10 @@ describe("containers/CreateAssistant", () => {
         isLoading={false}
         createBot={jest.fn}
         appSetTitle={jest.fn()}
+        apiGetTemplates={jest.fn()}
+        apiGetLanguages={jest.fn()}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
         setMessage={setMessage}
         history={{ length: 0, push: jest.fn() }}
       />,
@@ -66,6 +79,10 @@ describe("containers/CreateAssistant", () => {
         createBot={createBotSpy}
         appSetTitle={jest.fn()}
         setMessage={jest.fn()}
+        apiGetTemplates={jest.fn()}
+        apiGetLanguages={jest.fn()}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
         history={{ length: 0, push: jest.fn() }}
       />,
     );
@@ -92,6 +109,8 @@ describe("containers/CreateAssistant", () => {
 
     wrapper.find("#create-assistant-language").simulate("selected", "fr");
     expect(wrapper.state("language")).toEqual("fr");
+
+    wrapper.instance().onSelectTemplate(0);
 
     wrapper
       .find("#create-assistant-form")

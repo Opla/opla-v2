@@ -7,7 +7,11 @@
 import * as actions from "shared/actions/app";
 import * as apiActions from "shared/actions/api";
 import * as authActions from "zoapp-front/actions/auth";
-import reducer, { initialState } from "shared/reducers/app";
+import reducer, {
+  initialState,
+  defaultTemplates,
+  defaultLanguages,
+} from "shared/reducers/app";
 
 describe("reducers/app", () => {
   it("returns the initial state", () => {
@@ -117,5 +121,53 @@ describe("reducers/app", () => {
       const state = reducer(prevState, authActions.signOutComplete({}));
       expect(state).toEqual(initialState);
     });
+  });
+
+  describe("templates", () => {
+    it("returns default templates when the request fails", () => {
+      const state = reducer(
+        initialState,
+        apiActions.apiGetTemplatesFailure(Error("it fails")),
+      );
+
+      expect(state.templates).toEqual(defaultTemplates);
+      expect(state.error).toEqual("it fails");
+    });
+
+    it("merges default templates with templates from the API", () => {
+      const templates = [{ name: "foo" }, { name: "bar" }];
+      const state = reducer(
+        initialState,
+        apiActions.apiGetTemplatesSuccess(templates),
+      );
+
+      expect(state.templates).toEqual(templates.concat(defaultTemplates));
+    });
+  });
+
+  describe("languages", () => {
+    it("returns default languages when the request fails", () => {
+      const state = reducer(
+        initialState,
+        apiActions.apiGetLanguagesFailure(Error("it fails")),
+      );
+
+      expect(state.languages).toEqual(defaultLanguages);
+      expect(state.error).toEqual("it fails");
+    });
+  });
+
+  it("returns the languages sent by the api on success", () => {
+    const languages = [
+      { id: "en", name: "English", default: true },
+      { id: "fr", name: "French", default: false },
+    ];
+
+    const state = reducer(
+      initialState,
+      apiActions.apiGetLanguagesSuccess(languages),
+    );
+
+    expect(state.languages).toEqual(languages);
   });
 });

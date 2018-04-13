@@ -35,6 +35,8 @@ import {
   API_SB_SENDMESSAGE,
   API_SENDINTENT,
   API_SETMIDDLEWARE,
+  API_GETTEMPLATES,
+  API_GETLANGUAGES,
 } from "../actions/constants";
 import {
   apiGetIntentsFailure,
@@ -43,6 +45,10 @@ import {
   apiGetMetricsSuccess,
   apiMoveIntentFailure,
   apiMoveIntentSuccess,
+  apiGetTemplatesSuccess,
+  apiGetTemplatesFailure,
+  apiGetLanguagesSuccess,
+  apiGetLanguagesFailure,
 } from "../actions/api";
 
 function* getSandboxMessages(action) {
@@ -493,6 +499,29 @@ const api = [
         yield put(apiGetMetricsSuccess(response));
       } catch (error) {
         yield put(apiGetMetricsFailure(error));
+      }
+    },
+  ],
+  // Admin
+  [
+    API_GETTEMPLATES + FETCH_REQUEST,
+    function* f() {
+      try {
+        const response = yield getWebService().get("/admin/templates", false);
+        yield put(apiGetTemplatesSuccess(response));
+      } catch (error) {
+        yield put(apiGetTemplatesFailure(error));
+      }
+    },
+  ],
+  [
+    API_GETLANGUAGES + FETCH_REQUEST,
+    function* f() {
+      try {
+        const response = yield getWebService().get("/admin/languages", false);
+        yield put(apiGetLanguagesSuccess(response));
+      } catch (error) {
+        yield put(apiGetLanguagesFailure(error));
       }
     },
   ],

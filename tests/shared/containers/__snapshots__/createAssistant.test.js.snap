@@ -86,7 +86,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
         className="mdc-layout-grid__inner"
       >
         <div
-          className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
           style={
             Object {
               "height": "168px",
@@ -138,134 +138,6 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                 <img
                   alt="Empty"
                   src="./images/robots/robot-0.svg"
-                  style={
-                    Object {
-                      "margin": "30px",
-                      "width": "40%",
-                    }
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-          style={
-            Object {
-              "height": "168px",
-            }
-          }
-        >
-          <div
-            onClick={[Function]}
-            role="presentation"
-            style={
-              Object {
-                "textDecoration": "none",
-                "width": "100%",
-              }
-            }
-          >
-            <div
-              style={
-                Object {
-                  "color": "#666",
-                  "fontSize": "16px",
-                  "fontWeight": "400",
-                  "height": "87%",
-                  "lineHeight": "1.1",
-                  "padding": "16px",
-                }
-              }
-            >
-              <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
-              >
-                HelloWorld
-              </div>
-              <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
-              >
-                <img
-                  alt="HelloWorld"
-                  src="./images/robots/robot-1.svg"
-                  style={
-                    Object {
-                      "margin": "30px",
-                      "width": "40%",
-                    }
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-          style={
-            Object {
-              "height": "168px",
-            }
-          }
-        >
-          <div
-            onClick={[Function]}
-            role="presentation"
-            style={
-              Object {
-                "textDecoration": "none",
-                "width": "100%",
-              }
-            }
-          >
-            <div
-              style={
-                Object {
-                  "color": "#666",
-                  "fontSize": "16px",
-                  "fontWeight": "400",
-                  "height": "87%",
-                  "lineHeight": "1.1",
-                  "padding": "16px",
-                }
-              }
-            >
-              <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
-              >
-                Test1
-              </div>
-              <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
-              >
-                <img
-                  alt="Test1"
-                  src="./images/robots/robot-2.svg"
                   style={
                     Object {
                       "margin": "30px",
@@ -597,15 +469,6 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                   tabIndex="0"
                 >
                   English
-                </li>
-                <li
-                  className="mdc-list-item"
-                  onClick={[Function]}
-                  onKeyUp={[Function]}
-                  role="option"
-                  tabIndex="0"
-                >
-                  French
                 </li>
               </ul>
             </div>

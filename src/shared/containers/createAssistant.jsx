@@ -12,7 +12,11 @@ import { withRouter } from "react-router";
 import ProcessingDialog from "zoapp-front/containers/processingDialog";
 
 import TemplatesList from "../components/templatesList";
-import { apiCreateBot } from "../actions/api";
+import {
+  apiCreateBot,
+  apiGetTemplatesRequest,
+  apiGetLanguagesRequest,
+} from "../actions/api";
 import { appSetTitle, setMessage } from "../actions/app";
 
 const advancedStyle = {
@@ -38,30 +42,22 @@ const secText = {
   color: "rgba(0, 0, 0, 0.54)",
 };
 
-// TODO get templates from API
-const templates = [
-  { id: 1, name: "Empty" },
-  { id: 2, name: "HelloWorld" },
-  { id: 3, name: "Test1" },
-  { id: 4, name: "Import" },
-];
-
-const languages = [
-  { id: "en", name: "English", default: true },
-  { id: "fr", name: "French", default: false },
-];
-
 export class CreateAssistantBase extends Component {
   state = {
     name: "",
     email: "",
     username: "",
     password: "",
-    language: "en",
+    language: null,
     loading: false,
-    selectedTemplate: 0,
-    template: templates[0],
+    selectedTemplate: null,
+    template: null,
   };
+
+  componentDidMount() {
+    this.props.apiGetTemplates();
+    this.props.apiGetLanguages();
+  }
 
   componentWillMount() {
     this.props.appSetTitle("Create your virtual assistant");
@@ -85,7 +81,7 @@ export class CreateAssistantBase extends Component {
   onSelectTemplate = (selected, data) => {
     let template = data;
     if (!template) {
-      template = templates[selected];
+      template = this.props.templates[selected];
     }
     this.setState({ selectedTemplate: selected, template });
   };
@@ -110,6 +106,11 @@ export class CreateAssistantBase extends Component {
       template,
       loading,
     } = this.state;
+
+    if (template === null) {
+      this.props.setMessage("please select a template");
+      return;
+    }
 
     if (loading === false) {
       const botParams = {
@@ -151,12 +152,16 @@ export class CreateAssistantBase extends Component {
     } = this.state;
 
     let selectedLanguageIndex = 0;
-    const languagesItems = languages.map((language, index) => {
+    const languagesItems = this.props.languages.map((language, index) => {
       if (language.default === true) {
         selectedLanguageIndex = index;
       }
       return (
-        <MenuItem key={index} selected={language.default} value={language.id}>
+        <MenuItem
+          key={language.id}
+          selected={language.default}
+          value={language.id}
+        >
           {language.name}
         </MenuItem>
       );
@@ -183,13 +188,16 @@ export class CreateAssistantBase extends Component {
               Choose a prebuild asssistant, import one or select an empty model.
             </div>
           </div>
-          <TemplatesList
-            items={templates}
-            selectedItem={selected}
-            onSelect={this.onSelectTemplate}
-            onImport={this.onImportTemplate}
-            acceptImport={acceptImport}
-          />
+          {this.props.templates &&
+            this.props.templates.length > 0 && (
+              <TemplatesList
+                items={this.props.templates}
+                selectedItem={selected}
+                onSelect={this.onSelectTemplate}
+                onImport={this.onImportTemplate}
+                acceptImport={acceptImport}
+              />
+            )}
           <div style={headerStyle}>
             <div style={secText}>
               Want more ?
@@ -297,13 +305,17 @@ CreateAssistantBase.propTypes = {
   error: PropTypes.string,
   createBot: PropTypes.func.isRequired,
   appSetTitle: PropTypes.func.isRequired,
+  apiGetTemplates: PropTypes.func.isRequired,
+  apiGetLanguages: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
   history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
     .isRequired,
+  templates: PropTypes.array,
+  languages: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { admin, error } = state.app;
+  const { admin, error, templates, languages } = state.app;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.app.loading || false;
   return {
@@ -311,6 +323,8 @@ const mapStateToProps = (state) => {
     isLoading,
     isSignedIn,
     error,
+    templates,
+    languages,
   };
 };
 
@@ -323,6 +337,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setMessage: (message) => {
     dispatch(setMessage(message));
+  },
+  apiGetTemplates: () => {
+    dispatch(apiGetTemplatesRequest());
+  },
+  apiGetLanguages: () => {
+    dispatch(apiGetLanguagesRequest());
   },
 });
 
