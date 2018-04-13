@@ -15,6 +15,7 @@ import BotManager from "OplaContainers/botManager";
 import configureStore from "OplaLibs/store";
 import Zrmc from "zrmc";
 import PublishDialog from "OplaContainers/dialogs/publishDialog";
+import { defaultTemplates, defaultLanguages } from "OplaLibs/reducers/app";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
 
@@ -33,6 +34,8 @@ const app = {
       themeDark: true,
     },
   },
+  templates: defaultTemplates,
+  languages: defaultLanguages,
   screens: [
     {
       id: "1",
