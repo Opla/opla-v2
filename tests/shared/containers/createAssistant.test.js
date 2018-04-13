@@ -40,6 +40,7 @@ describe("containers/CreateAssistant", () => {
 
     expect(appSetTitleSpy).toHaveBeenCalled();
     expect(apiGetTemplatesSpy).toHaveBeenCalled();
+    expect(apiGetLanguagesSpy).toHaveBeenCalled();
     expect(createBotSpy).not.toHaveBeenCalled();
     expect(historySpy.push).not.toHaveBeenCalled();
     expect(setMessage).not.toHaveBeenCalled();
