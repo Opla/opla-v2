@@ -7,7 +7,11 @@
 import * as actions from "shared/actions/app";
 import * as apiActions from "shared/actions/api";
 import * as authActions from "zoapp-front/actions/auth";
-import reducer, { initialState, defaultTemplates } from "shared/reducers/app";
+import reducer, {
+  initialState,
+  defaultTemplates,
+  defaultLanguages,
+} from "shared/reducers/app";
 
 describe("reducers/app", () => {
   it("returns the initial state", () => {
@@ -138,5 +142,30 @@ describe("reducers/app", () => {
 
       expect(state.templates).toEqual(templates.concat(defaultTemplates));
     });
+  });
+
+  describe("languages", () => {
+    it("returns default languages when the request fails", () => {
+      const state = reducer(
+        initialState,
+        apiActions.apiGetLanguagesFailure("it fails"),
+      );
+
+      expect(state.languages).toEqual(defaultLanguages);
+    });
+  });
+
+  it("returns the languages sent by the api on success", () => {
+    const languages = [
+      { id: "en", name: "English", default: true },
+      { id: "fr", name: "French", default: false },
+    ];
+
+    const state = reducer(
+      initialState,
+      apiActions.apiGetLanguagesSuccess(languages),
+    );
+
+    expect(state.languages).toEqual(languages);
   });
 });
