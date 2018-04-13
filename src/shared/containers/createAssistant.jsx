@@ -48,7 +48,7 @@ export class CreateAssistantBase extends Component {
     email: "",
     username: "",
     password: "",
-    language: "en",
+    language: null,
     loading: false,
     selectedTemplate: null,
     template: null,
