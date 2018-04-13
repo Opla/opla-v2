@@ -10,6 +10,7 @@ import { shallow } from "enzyme";
 
 import { createFakeEvent } from "tests/helpers";
 import { CreateAssistantBase } from "shared/containers/createAssistant";
+import { defaultTemplates, defaultLanguages } from "shared/reducers/app";
 
 describe("containers/CreateAssistant", () => {
   it("renders correctly", () => {
@@ -27,8 +28,8 @@ describe("containers/CreateAssistant", () => {
         appSetTitle={appSetTitleSpy}
         apiGetTemplates={apiGetTemplatesSpy}
         apiGetLanguages={apiGetLanguagesSpy}
-        templates={[{ name: "Template 1" }, { name: "Import" }]}
-        languages={[{ id: "en", name: "English", default: true }]}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
         history={historySpy}
         setMessage={setMessage}
       />,
@@ -54,7 +55,8 @@ describe("containers/CreateAssistant", () => {
         appSetTitle={jest.fn()}
         apiGetTemplates={jest.fn()}
         apiGetLanguages={jest.fn()}
-        languages={[{ id: "en", name: "English", default: true }]}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
         setMessage={setMessage}
         history={{ length: 0, push: jest.fn() }}
       />,
@@ -78,8 +80,8 @@ describe("containers/CreateAssistant", () => {
         setMessage={jest.fn()}
         apiGetTemplates={jest.fn()}
         apiGetLanguages={jest.fn()}
-        templates={[{ name: "Template 1" }, { name: "Import" }]}
-        languages={[{ id: "en", name: "English", default: true }]}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
         history={{ length: 0, push: jest.fn() }}
       />,
     );

@@ -124,7 +124,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                   }
                 }
               >
-                Template 1
+                Empty
               </div>
               <div
                 style={
@@ -136,7 +136,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                 }
               >
                 <img
-                  alt="Template 1"
+                  alt="Empty"
                   src="./images/robots/robot-0.svg"
                   style={
                     Object {
