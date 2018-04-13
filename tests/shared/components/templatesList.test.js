@@ -58,4 +58,15 @@ describe("components/TemplatesList", () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("renders without selected template", () => {
+    const items = [{ name: "Template 1" }, { name: "Template 2" }];
+
+    const component = renderer.create(
+      <TemplatesList items={items} onSelect={jest.fn()} />,
+    );
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
