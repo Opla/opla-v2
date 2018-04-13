@@ -41,9 +41,11 @@ import {
   APP_UPDATEINTENT,
   APP_UPDATEPUBLISHER,
   API_GETTEMPLATES,
+  API_GETLANGUAGES,
 } from "../actions/constants";
 
 export const defaultTemplates = [{ name: "Empty" }, { name: "Import" }];
+export const defaultLanguages = [{ id: "en", name: "English", default: true }];
 
 export const initialState = {
   ...zoappInitialState,
@@ -53,6 +55,7 @@ export const initialState = {
   sandbox: null,
   loadingMessages: false,
   templates: defaultTemplates,
+  languages: defaultLanguages,
 };
 
 export default createReducer(initialState, {
@@ -714,5 +717,23 @@ export default createReducer(initialState, {
     loading: false,
     error: error.message,
     templates: defaultTemplates,
+  }),
+
+  [API_GETLANGUAGES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_GETLANGUAGES + FETCH_SUCCESS]: (state, { languages }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    languages,
+  }),
+  [API_GETLANGUAGES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error.message,
+    languages: defaultLanguages,
   }),
 });

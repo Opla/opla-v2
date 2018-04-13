@@ -32,6 +32,7 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
   API_GETTEMPLATES,
+  API_GETLANGUAGES,
 } from "./constants";
 
 export function apiAdminRequest() {
@@ -174,4 +175,16 @@ export function apiGetTemplatesSuccess(templates) {
 
 export function apiGetTemplatesFailure(error) {
   return { type: API_GETTEMPLATES + FETCH_FAILURE, error };
+}
+
+export function apiGetLanguagesRequest() {
+  return { type: API_GETLANGUAGES + FETCH_REQUEST };
+}
+
+export function apiGetLanguagesSuccess(languages) {
+  return { type: API_GETLANGUAGES + FETCH_SUCCESS, languages };
+}
+
+export function apiGetLanguagesFailure(error) {
+  return { type: API_GETLANGUAGES + FETCH_FAILURE, error };
 }
