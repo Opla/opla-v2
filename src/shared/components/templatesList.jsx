@@ -44,6 +44,7 @@ const TemplatesList = ({
   <Grid>
     <Inner>
       {items.map((item, index) => {
+        const key = `${index}${item.name}`;
         const isSelectedItem = selectedItem === index;
         const className = makeClassName("mdl-shadow--2dp", {
           selectableListItem: !isSelectedItem,
@@ -52,7 +53,7 @@ const TemplatesList = ({
 
         return (
           <Cell
-            key={index}
+            key={key}
             style={templateBoxStyle}
             className={className}
             span={2}
