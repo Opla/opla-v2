@@ -12,7 +12,11 @@ import { withRouter } from "react-router";
 import ProcessingDialog from "zoapp-front/containers/processingDialog";
 
 import TemplatesList from "../components/templatesList";
-import { apiCreateBot, apiGetTemplatesRequest } from "../actions/api";
+import {
+  apiCreateBot,
+  apiGetTemplatesRequest,
+  apiGetLanguagesRequest,
+} from "../actions/api";
 import { appSetTitle, setMessage } from "../actions/app";
 
 const advancedStyle = {
@@ -38,11 +42,6 @@ const secText = {
   color: "rgba(0, 0, 0, 0.54)",
 };
 
-const languages = [
-  { id: "en", name: "English", default: true },
-  { id: "fr", name: "French", default: false },
-];
-
 export class CreateAssistantBase extends Component {
   state = {
     name: "",
@@ -57,6 +56,7 @@ export class CreateAssistantBase extends Component {
 
   componentDidMount() {
     this.props.apiGetTemplates();
+    this.props.apiGetLanguages();
   }
 
   componentWillMount() {
@@ -152,12 +152,16 @@ export class CreateAssistantBase extends Component {
     } = this.state;
 
     let selectedLanguageIndex = 0;
-    const languagesItems = languages.map((language, index) => {
+    const languagesItems = this.props.languages.map((language, index) => {
       if (language.default === true) {
         selectedLanguageIndex = index;
       }
       return (
-        <MenuItem key={index} selected={language.default} value={language.id}>
+        <MenuItem
+          key={language.id}
+          selected={language.default}
+          value={language.id}
+        >
           {language.name}
         </MenuItem>
       );
@@ -302,14 +306,16 @@ CreateAssistantBase.propTypes = {
   createBot: PropTypes.func.isRequired,
   appSetTitle: PropTypes.func.isRequired,
   apiGetTemplates: PropTypes.func.isRequired,
+  apiGetLanguages: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
   history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
     .isRequired,
   templates: PropTypes.array,
+  languages: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { admin, error, templates } = state.app;
+  const { admin, error, templates, languages } = state.app;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.app.loading || false;
   return {
@@ -318,6 +324,7 @@ const mapStateToProps = (state) => {
     isSignedIn,
     error,
     templates,
+    languages,
   };
 };
 
@@ -333,6 +340,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiGetTemplates: () => {
     dispatch(apiGetTemplatesRequest());
+  },
+  apiGetLanguages: () => {
+    dispatch(apiGetLanguagesRequest());
   },
 });
 
