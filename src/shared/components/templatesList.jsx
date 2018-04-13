@@ -52,7 +52,7 @@ const TemplatesList = ({
 
         return (
           <Cell
-            key={item.id}
+            key={index}
             style={templateBoxStyle}
             className={className}
             span={2}
@@ -99,7 +99,7 @@ TemplatesList.propTypes = {
       name: PropTypes.string,
     }),
   ).isRequired,
-  selectedItem: PropTypes.number.isRequired,
+  selectedItem: PropTypes.number,
   onSelect: PropTypes.func.isRequired,
   onImport: PropTypes.func,
   acceptImport: PropTypes.string,
