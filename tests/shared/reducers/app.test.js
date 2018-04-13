@@ -127,10 +127,11 @@ describe("reducers/app", () => {
     it("returns default templates when the request fails", () => {
       const state = reducer(
         initialState,
-        apiActions.apiGetTemplatesFailure("it fails"),
+        apiActions.apiGetTemplatesFailure(Error("it fails")),
       );
 
       expect(state.templates).toEqual(defaultTemplates);
+      expect(state.error).toEqual("it fails");
     });
 
     it("merges default templates with templates from the API", () => {
@@ -148,10 +149,11 @@ describe("reducers/app", () => {
     it("returns default languages when the request fails", () => {
       const state = reducer(
         initialState,
-        apiActions.apiGetLanguagesFailure("it fails"),
+        apiActions.apiGetLanguagesFailure(Error("it fails")),
       );
 
       expect(state.languages).toEqual(defaultLanguages);
+      expect(state.error).toEqual("it fails");
     });
   });
 
