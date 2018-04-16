@@ -17,12 +17,13 @@ class ActionsList extends Component {
       selection: null,
       newContent: null,
     };
-    this.editable = null;
+    this.editableComponent = null;
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.intentId !== this.props.intentId) {
-      this.editable = null;
+      this.editableComponent = null;
+      console.log("componentWillReceiveProps reset");
       this.setState({ selection: null, newContent: null });
     }
   }
@@ -31,16 +32,19 @@ class ActionsList extends Component {
     this.setState({ newContent });
   };
 
-  handleSelectedEditable = (type, key, editable) => {
-    this.editable = editable;
+  handleSelectedEditable = (type, key, editableComponent) => {
+    console.log("handleSelectedEditable", editableComponent);
+    this.editableComponent = editableComponent;
   };
 
-  handleFocusEditable = (focus, editable) => {
+  handleFocusEditable = (focus, editableComponent) => {
+    console.log("handleFocusEditable", focus);
     if (!focus) {
       this.setState({ selection: null });
       this.props.onEdit(focus);
+      this.editableComponent = null;
     } else {
-      this.editable = editable;
+      this.editableComponent = editableComponent;
     }
   };
 
@@ -52,6 +56,7 @@ class ActionsList extends Component {
       const state = "add";
       const p = { name, type, state, index, action: { text } };
       this.props.onAction(p);
+      console.log("handleAction");
       this.setState({ selection: null, newContent: null });
     }
   };
@@ -60,51 +65,53 @@ class ActionsList extends Component {
     e.preventDefault();
     let editing = false;
     if (state === "add") {
+      console.log("handleSelect add", selection);
       this.setState({ selection });
       editing = true;
     } else if (this.props.onSelect) {
+      console.log("handleSelect onSelect", selection);
       this.props.onSelect(selection);
     }
     this.props.onEdit(editing, this);
   };
 
   appendAction(action) {
-    const { editable } = this;
-    if (!editable) {
+    const { editableComponent } = this;
+    if (!editableComponent) {
       return;
     }
     if (action === "text") {
-      editable.insertItem({
+      editableComponent.insertItem({
         type: "text",
         text: "text",
       });
     } else if (action === "any") {
-      editable.insertItem({
+      editableComponent.insertItem({
         type: "any",
         text: "",
       });
     } else if (action === "output_var") {
-      editable.insertItem({
+      editableComponent.insertItem({
         type: "output_var",
         text: "variablename",
       });
     } else if (action === "variable") {
-      editable.insertItem({
+      editableComponent.insertItem({
         type: "variable",
         text: "variablename=value",
       });
     } else if (action === "br") {
-      editable.insertItem({
+      editableComponent.insertItem({
         type: "br",
         text: "",
       });
     } else if (action === "button") {
-      editable.insertItem({
+      editableComponent.insertItem({
         type: "button",
         text: "value",
       });
     } else if (action === "trash") {
-      editable.deleteItem();
+      editableComponent.deleteItem();
     }
   }
 
@@ -126,10 +133,14 @@ class ActionsList extends Component {
         ? "rgb(213, 0, 0)"
         : "rgb(221, 221, 221)";
     let editable = false;
-    if (this.state.selection && this.state.selection.state === "add") {
+    if (
+      this.editableComponent ||
+      (this.state.selection && this.state.selection.state === "add")
+    ) {
       editable = true;
       color = "rgb(0, 0, 0)";
     }
+    console.log("selection=", name, editable, this.state.selection);
     const addContent = (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
