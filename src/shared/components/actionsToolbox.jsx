@@ -77,9 +77,10 @@ class ActionsToolbox extends Component {
   }
 
   handleFocus = (e) => {
+    // e.stopPropagation();
     const element = e.target;
-    const type = element.getAttribute("data");
-    // console.log("focus toolbox", type);
+    const type = element.id.substring(3);
+    // console.log("focus toolbox", type, element);
     if (type) {
       this.handleFocusIn(type);
     }
@@ -201,8 +202,10 @@ class ActionsToolbox extends Component {
             <Icon
               style={styleButton}
               /* colored={toolbox.code} */ onClick={(e) => {
+                // e.stopPropagation();
                 this.onCodeSelected(e);
               }}
+              id="atb_variable"
               name="code"
             />
           </Tooltip>
@@ -210,8 +213,10 @@ class ActionsToolbox extends Component {
             <Icon
               style={styleButton}
               /* colored={toolbox.linebreak} */ onClick={(e) => {
+                // e.stopPropagation();
                 this.onLineBreakSelected(e);
               }}
+              id="atb_br"
               name="keyboard_return"
             />
           </Tooltip>
@@ -219,8 +224,10 @@ class ActionsToolbox extends Component {
             <Icon
               style={styleButton}
               /* colored={toolbox.button} */ onClick={(e) => {
+                // e.stopPropagation();
                 this.onButtonSelected(e);
               }}
+              id="atb_button"
               name="insert_link"
             />
           </Tooltip>
@@ -238,8 +245,10 @@ class ActionsToolbox extends Component {
             <Icon
               style={styleButton}
               /* colored={toolbox.text} */ onClick={(e) => {
+                // e.stopPropagation();
                 this.onTextSelected(e);
               }}
+              id="atb_text"
               name="text_fields"
             />
           </Tooltip>
@@ -247,8 +256,10 @@ class ActionsToolbox extends Component {
             <Icon
               style={styleButton}
               /* colored={toolbox.any} */ onClick={(e) => {
+                // e.stopPropagation();
                 this.onAnySelected(e);
               }}
+              id="atb_any"
               name="all_out"
             />
           </Tooltip>
@@ -256,8 +267,10 @@ class ActionsToolbox extends Component {
             <Icon
               style={styleButton}
               /* colored={toolbox.variable} */ onClick={(e) => {
+                // e.stopPropagation();
                 this.onVariableSelected(e);
               }}
+              id="atb_output_var"
               name="assignment"
             />
           </Tooltip>
@@ -269,8 +282,10 @@ class ActionsToolbox extends Component {
               style={styleButton}
               disabled={toolbox.trash}
               onClick={(e) => {
+                // e.stopPropagation();
                 this.onTrashSelected(e);
               }}
+              id="atb_trash"
               name="delete"
             />
           </Tooltip>
