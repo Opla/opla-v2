@@ -162,10 +162,7 @@ exports[`components/actionEditor renders correctly 1`] = `
   <div
     aria-label={null}
     className="contenteditable"
-<<<<<<< 2c49ea9bf827d2d055c7268dabdce2457f96c2d3
     id="ae_content"
-=======
->>>>>>> Bind toolbox actions to editables
     onBlur={[Function]}
     onFocus={[Function]}
     onInput={[Function]}
