@@ -78,6 +78,7 @@ class ActionsList extends Component {
       const state = "add";
       const p = { name, type, state, index, action: { text } };
       this.props.onAction(p);
+      console.log("handleAction");
       this.setState({ selection: null, newContent: null });
     }
   };
@@ -161,6 +162,7 @@ class ActionsList extends Component {
       editable = true;
       color = "rgb(0, 0, 0)";
     }
+    console.log("selection=", name, editable, this.state.selection);
     const addContent = (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"

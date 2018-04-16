@@ -242,9 +242,6 @@ class ActionsEditable extends Component {
   }
 
   insertItem(item, position = this.state.selectedItem + 1) {
-    /* const span = this.node.children[0];
-    const content = ActionsEditable.build([...span.children], true);
-    const items = ActionsTools.parse(content); */
     const { items } = this.state;
     console.log("insert item ", position, this.focusItem);
 
