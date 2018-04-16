@@ -12,43 +12,58 @@ const DESCRIPTION = `Management tool for ${pkg.description}`;
 
 program
   .version(pkg.version)
+  .option("--non-interactive", "do not prompt and use default settings or values specified as options");
+
+const configDefaults = {
+  clientName: "Opla Front",
+  clientEmail: "opla@example.org",
+  apiHost: "127.0.0.1",
+  apiPort: "8081",
+  apiProtocol: "http",
+};
 
 program
   .command("init")
   .alias("i")
   .description("Initialize the project and create the configuration file")
-  .action(async () => {
+  .option("--client-name [name]", "set the client name", configDefaults.clientName)
+  .option("--client-email [email]", "set the client email", configDefaults.clientEmail)
+  .option("--api-host [host]", "set the backend api host", configDefaults.apiHost)
+  .option("--api-port [port]", "set the backend api port", configDefaults.apiPort)
+  .option("--api-protocol [protocol]", "set the backend api protocol", configDefaults.apiProtocol)
+  .option("--overwrite", "overwrite existing configuration files", false)
+  .action(async (options) => {
     const questions = [
       {
         type: "input",
         name: "clientName",
         message: "Client name",
-        default: "Opla Front",
+        default: options.clientName,
       },
       {
         type: "input",
         name: "clientEmail",
         message: "Client email",
-        default: "opla@example.org",
+        default: options.clientEmail,
       },
       {
         type: "input",
         name: "apiHost",
         message: "API host",
-        default: "127.0.0.1",
+        default: options.apiHost,
       },
       {
         type: "input",
         name: "apiPort",
         message: "API port",
-        default: "8081",
+        default: options.apiPort,
       },
       {
         type: "list",
         name: "apiProtocol",
         message: "API protocol",
         choices: ["http", "https"],
-        default: ["http"],
+        default: [options.apiProtocol],
       },
     ];
 
@@ -62,12 +77,19 @@ program
             name: "overwrite",
             message:
             "The configuration file already exists. Do you want to overwrite it?",
-            default: false,
+            default: !!options.overwrite,
           },
         );
       }
 
-      const answers = await prompt(questions);
+      let answers;
+      if (program.nonInteractive) {
+        answers = {
+          ...options,
+        };
+      } else {
+        answers = await prompt(questions);
+      }
 
       if (fileExists && !answers.overwrite) {
         return;
