@@ -21,7 +21,15 @@ const metricStyle = {
 const valueStyle = {
   fontSize: "34px",
   fontWeight: "500",
-  color: "#888",
+  color: "#888888",
+  padding: "16px 0",
+  lineHeight: "1.1",
+};
+
+const errorStyle = {
+  fontSize: "34px",
+  fontWeight: "500",
+  color: "#F44336",
   padding: "16px 0",
   lineHeight: "1.1",
 };
@@ -30,7 +38,7 @@ const legendStyle = {
   textAlign: "center",
   fontSize: "16px",
   fontWeight: "400",
-  color: "#666",
+  color: "#666666",
   padding: "60px 0",
   lineHeight: "1.1",
 };
@@ -74,7 +82,12 @@ export class DashboardBase extends Component {
                 <Inner>
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      <span style={valueStyle}>{metrics.users.count}</span>
+                      {Number.isNaN(Number(metrics.users.count)) ||
+                      metrics.users.count ? (
+                        <span style={errorStyle}>No data </span>
+                      ) : (
+                        <span style={valueStyle}>{metrics.users.count}</span>
+                      )}
                       <br />
                       <span style={legendStyle}>users</span>
                     </div>
@@ -82,9 +95,14 @@ export class DashboardBase extends Component {
 
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      <span style={valueStyle}>
-                        {metrics.conversations.count}
-                      </span>
+                      {Number.isNaN(Number(metrics.conversations.count)) ||
+                      metrics.conversations.count ? (
+                        <span style={errorStyle}>No data </span>
+                      ) : (
+                        <span style={valueStyle}>
+                          {metrics.conversations.count}
+                        </span>
+                      )}
                       <br />
                       <span style={legendStyle}>conversations</span>
                     </div>
@@ -92,9 +110,15 @@ export class DashboardBase extends Component {
 
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      <span style={valueStyle}>
-                        {metrics.conversations.messages_per_conversation}
-                      </span>
+                      {Number.isNaN(
+                        Number(metrics.conversations.messages_per_conversation),
+                      ) || metrics.conversations.messages_per_conversation ? (
+                        <span style={errorStyle}>No data </span>
+                      ) : (
+                        <span style={valueStyle}>
+                          {metrics.conversations.messages_per_conversation}
+                        </span>
+                      )}
                       <br />
                       <span style={legendStyle}>messages/conversations</span>
                     </div>
@@ -115,9 +139,14 @@ export class DashboardBase extends Component {
                 <Inner>
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      <span style={valueStyle}>
-                        {metrics.sessions.duration}ms
-                      </span>
+                      {Number.isNaN(Number(metrics.sessions.duration)) ||
+                      metrics.sessions.duration ? (
+                        <span style={errorStyle}>No data </span>
+                      ) : (
+                        <span style={valueStyle}>
+                          {metrics.sessions.duration}ms
+                        </span>
+                      )}
                       <br />
                       <span style={legendStyle}>session duration</span>
                     </div>
@@ -125,9 +154,14 @@ export class DashboardBase extends Component {
 
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      <span style={valueStyle}>
-                        {(metrics.errors.rate * 100).toFixed(2)}%
-                      </span>
+                      {Number.isNaN(Number(metrics.errors.rate)) ||
+                      metrics.errors.rate ? (
+                        <span style={errorStyle}>No data </span>
+                      ) : (
+                        <span style={valueStyle}>
+                          {(metrics.errors.rate * 100).toFixed(2)}%
+                        </span>
+                      )}
                       <br />
                       <span style={legendStyle}>errors rate</span>
                     </div>
@@ -135,9 +169,14 @@ export class DashboardBase extends Component {
 
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      <span style={valueStyle}>
-                        {metrics.responses.speed}ms
-                      </span>
+                      {Number.isNaN(Number(metrics.responses.speed)) ||
+                      metrics.responses.speed ? (
+                        <span style={errorStyle}>No data </span>
+                      ) : (
+                        <span style={valueStyle}>
+                          {metrics.responses.speed}ms
+                        </span>
+                      )}
                       <br />
                       <span style={legendStyle}>response time</span>
                     </div>
