@@ -4,7 +4,7 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import fetch from "zoapp-backend/utils/fetch";
+import fetch from "node-fetch";
 import {
   getGatewayClient,
   initGatewayClient,
@@ -25,7 +25,7 @@ describe("getGatewayClient", () => {
   });
 });
 
-jest.mock("zoapp-backend/utils/fetch");
+jest.mock("node-fetch");
 describe("GatewayClient", () => {
   beforeEach(() => {
     fetch.mockClear();

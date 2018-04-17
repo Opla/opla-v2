@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import fetch from "zoapp-backend/utils/fetch";
+import fetch from "node-fetch";
 import merge from "deepmerge";
 
 let client;
@@ -17,11 +17,13 @@ export class GatewayClient {
   }
 
   async getTemplates() {
-    return fetch(`${this.url}/templates`);
+    const response = await fetch(`${this.url}/templates`);
+    return response.json();
   }
 
   async getLanguages() {
-    return fetch(`${this.url}/languages`);
+    const response = await fetch(`${this.url}/languages`);
+    return response.json();
   }
 }
 
