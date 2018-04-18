@@ -4,8 +4,8 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import Express from "express";
-import path from "path";
+const Express = require("express");
+const path = require("path");
 
 const app = Express();
 const directory = "/public/";
