@@ -25,6 +25,7 @@
     "chart.js": "2.7.1",
     "classnames": "^2.2.5",
     "commander": "^2.14.1",
+    "express": "^4.16.2",
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
     "inquirer": "^5.1.0",
