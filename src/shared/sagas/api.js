@@ -507,7 +507,7 @@ const api = [
     API_GETTEMPLATES + FETCH_REQUEST,
     function* f() {
       try {
-        const response = yield getWebService().get("/admin/templates", false);
+        const response = yield getWebService().get("admin/templates", false);
         yield put(apiGetTemplatesSuccess(response));
       } catch (error) {
         yield put(apiGetTemplatesFailure(error));
@@ -518,7 +518,7 @@ const api = [
     API_GETLANGUAGES + FETCH_REQUEST,
     function* f() {
       try {
-        const response = yield getWebService().get("/admin/languages", false);
+        const response = yield getWebService().get("admin/languages", false);
         yield put(apiGetLanguagesSuccess(response));
       } catch (error) {
         yield put(apiGetLanguagesFailure(error));
