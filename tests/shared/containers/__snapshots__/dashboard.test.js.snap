@@ -123,6 +123,7 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
                   }
                 >
                   123
+                   
                 </span>
                 <br />
                 <span
@@ -164,6 +165,7 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
                   }
                 >
                   1200
+                   
                 </span>
                 <br />
                 <span
@@ -205,6 +207,7 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
                   }
                 >
                   4
+                   
                 </span>
                 <br />
                 <span
@@ -273,6 +276,7 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
                   }
                 >
                   5000
+                   
                   ms
                 </span>
                 <br />
@@ -315,6 +319,7 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
                   }
                 >
                   23.01
+                   
                   %
                 </span>
                 <br />
@@ -357,6 +362,7 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
                   }
                 >
                   40
+                   
                   ms
                 </span>
                 <br />
