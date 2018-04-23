@@ -10,11 +10,22 @@ import IntentDetail from "shared/components/intentDetail";
 
 describe("components/intentDetail", () => {
   it("renders correctly", () => {
-    const intent = {topic:"some intent"};
+    const intent = { topic: "some intent" };
     const component = renderer.create(<IntentDetail intent={intent} />);
 
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
+  it("can render intent with special characters correctly", () => {
+    const intentcontent = [
+      `{{${encodeURIComponent("{{text}}")}}}`,
+      `<<${encodeURIComponent("<<var>>")}>>`,
+    ].join("");
+    const intent = { topic: intentcontent };
+    const component = renderer.create(<IntentDetail intent={intent} />);
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

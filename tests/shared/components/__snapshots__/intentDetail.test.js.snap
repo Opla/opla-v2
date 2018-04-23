@@ -1,5 +1,217 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`components/intentDetail can render intent with special characters correctly 1`] = `
+<div
+  className="mrb-action-panel list-box"
+>
+  <div
+    className="list-content"
+  >
+    <div
+      className="mrb-sublist"
+    >
+      <div
+        className="mrb-subheader"
+      >
+        <i
+          className="mrb-subheader-right material-icons"
+          disabled={false}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          keyboard_arrow_up
+        </i>
+        <div>
+          input
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <ul
+          className="mdc-list"
+        />
+        <li
+          className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="menuitem"
+          style={
+            Object {
+              "color": "rgb(213, 0, 0)",
+              "padding": "0px 16px",
+            }
+          }
+        >
+          <i
+            aria-hidden="true"
+            className="mdc-list-item__graphic material-icons"
+          >
+            format_quote
+          </i>
+          Add an input sentence
+        </li>
+      </div>
+    </div>
+    <hr />
+    <div
+      className="mrb-sublist"
+    >
+      <div
+        className="mrb-subheader"
+      >
+        <i
+          className="mrb-subheader-right material-icons"
+          disabled={false}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          keyboard_arrow_up
+        </i>
+        <div>
+          output
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <ul
+          className="mdc-list"
+        />
+        <li
+          className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="menuitem"
+          style={
+            Object {
+              "color": "rgb(213, 0, 0)",
+              "padding": "0px 16px",
+            }
+          }
+        >
+          <i
+            aria-hidden="true"
+            className="mdc-list-item__graphic material-icons"
+          >
+            chat_bubble_outline
+          </i>
+          Add an output response
+        </li>
+      </div>
+    </div>
+    <hr />
+    <div
+      className="mrb-sublist"
+    >
+      <div
+        className="mrb-subheader"
+      >
+        <i
+          className="mrb-subheader-right material-icons"
+          disabled={false}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          keyboard_arrow_down
+        </i>
+        <div>
+          Parameters
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <ul
+          className="mdc-list"
+        >
+          <li
+            className="mdc-list-item"
+            onKeyPress={[Function]}
+            role="menuitem"
+          >
+            <i
+              aria-hidden="true"
+              className="mdc-list-item__graphic material-icons"
+            >
+              title
+            </i>
+            Topic
+            <span
+              className="mdc-list-item__meta"
+              onClick={null}
+              onKeyUp={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <button
+                className="mrb-action-button mdc-button"
+                disabled={false}
+                id={null}
+                onClick={[Function]}
+                type="button"
+              >
+                
+                {{%7B%7Btext%7D%7D}}&lt;&lt;%3C%3Cvar%3E%3E&gt;&gt;
+              </button>
+            </span>
+          </li>
+          <li
+            className="mdc-list-item"
+            onKeyPress={[Function]}
+            role="menuitem"
+          >
+            <i
+              aria-hidden="true"
+              className="mdc-list-item__graphic material-icons"
+            >
+              link
+            </i>
+            Previous
+            <span
+              className="mdc-list-item__meta"
+              onClick={null}
+              onKeyUp={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <button
+                className="mrb-action-button mdc-button"
+                disabled={false}
+                id={null}
+                onClick={[Function]}
+                type="button"
+              >
+                
+                NONE
+              </button>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`components/intentDetail renders correctly 1`] = `
 <div
   className="mrb-action-panel list-box"
