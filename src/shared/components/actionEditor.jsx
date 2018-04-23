@@ -22,8 +22,12 @@ class ActionEditor extends Component {
       button: false,
       trash: true,
     };
+    const { content } = props;
+    const selectedType = null;
     this.state = {
       toolbox,
+      content,
+      selectedType,
     };
     this.editable = null;
   }
@@ -81,106 +85,91 @@ class ActionEditor extends Component {
     return this.editable.state.content;
   }
 
-  onChange = (content) => {
-    this.props.onChange(content);
-  };
+  textSelect = () => ({
+    text: true,
+    any: false,
+    entity: false,
+    code: false,
+    linebreak: false,
+    button: false,
+    trash: true,
+  });
 
-  textSelect() {
-    const toolbox = {
-      text: true,
-      any: false,
-      entity: false,
-      code: false,
-      linebreak: false,
-      button: false,
-      trash: true,
-    };
-    this.setState(() => ({ toolbox }));
-  }
+  anySelect = () => ({
+    text: false,
+    any: true,
+    entity: false,
+    code: false,
+    linebreak: false,
+    button: false,
+    trash: false,
+  });
 
-  anySelect() {
-    const toolbox = {
-      text: false,
-      any: true,
-      entity: false,
-      code: false,
-      linebreak: false,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
+  entitySelect = () => ({
+    text: false,
+    any: false,
+    entity: true,
+    code: false,
+    linebreak: false,
+    button: false,
+    trash: false,
+  });
 
-  entitySelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      entity: true,
-      code: false,
-      linebreak: false,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
+  codeSelect = () => ({
+    text: false,
+    any: false,
+    entity: false,
+    code: true,
+    linebreak: false,
+    button: false,
+    trash: false,
+  });
 
-  codeSelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      entity: false,
-      code: true,
-      linebreak: false,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
+  lineBreakSelect = () => ({
+    text: false,
+    any: false,
+    entity: false,
+    code: false,
+    linebreak: true,
+    button: false,
+    trash: false,
+  });
 
-  lineBreakSelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      entity: false,
-      code: false,
-      linebreak: true,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
-
-  buttonSelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      entity: false,
-      code: false,
-      linebreak: false,
-      button: true,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
+  buttonSelect = () => ({
+    text: false,
+    any: false,
+    entity: false,
+    code: false,
+    linebreak: false,
+    button: true,
+    trash: false,
+  });
 
   handleSelected = (type) => {
-    if (type === "any") {
-      this.anySelect();
-    } else if (type === "variable") {
-      this.codeSelect();
-    } else if (type === "output_var") {
-      this.entitySelect();
-    } else if (type === "br") {
-      this.lineBreakSelect();
-    } else if (type === "button") {
-      this.buttonSelect();
-    } else {
-      this.textSelect();
+    if (type !== this.state.selectedType) {
+      let toolbox;
+      if (type === "any") {
+        toolbox = this.anySelect();
+      } else if (type === "variable") {
+        toolbox = this.codeSelect();
+      } else if (type === "output_var") {
+        toolbox = this.entitySelect();
+      } else if (type === "br") {
+        toolbox = this.lineBreakSelect();
+      } else if (type === "button") {
+        toolbox = this.buttonSelect();
+      } else {
+        toolbox = this.textSelect();
+      }
+      this.setState(() => ({ toolbox, selectedType: type }));
     }
   };
 
   handleChange = (content) => {
-    this.props.onChange(content);
+    // this.props.onChange(content);
+    if (this.state.content !== content) {
+      this.setState({ content });
+    }
   };
 
   render() {
@@ -279,7 +268,7 @@ class ActionEditor extends Component {
         <ActionsEditable
           id="action-editor-content"
           editable={true}
-          content={this.props.content}
+          content={this.state.content}
           onChange={this.handleChange}
           onSelected={this.handleSelected}
           style={style}

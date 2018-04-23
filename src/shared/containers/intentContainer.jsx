@@ -35,7 +35,7 @@ class IntentContainer extends Component {
     this.setState({ editing: false });
   }
 
-  changeAction(text, name, value) {
+  handleChangeAction = (text, name, value) => {
     let actionValue = null;
     const intent = this.props.selectedIntent;
     let { actionType } = this;
@@ -66,7 +66,7 @@ class IntentContainer extends Component {
     );
     this.reset();
     return true;
-  }
+  };
 
   handleChangeToolbox = (action) => {
     if (action === "unfocus") {
@@ -95,7 +95,7 @@ class IntentContainer extends Component {
           value = null;
         }
       }
-      return this.changeAction(text, name, value);
+      return this.handleChangeAction(text, name, value);
     } else if (editAction === "Delete") {
       this.props.appDeleteIntentAction(
         this.actionContainer,
@@ -136,7 +136,7 @@ class IntentContainer extends Component {
     this.actionType = type;
     this.selectedAction = index;
     if (state === "add" || state === "change") {
-      this.changeAction(action.text, action.name, action.value);
+      this.handleChangeAction(action.text, action.name, action.value);
     }
   };
 
@@ -209,7 +209,7 @@ class IntentContainer extends Component {
           }
         },
         this.handleEditAction,
-        this.onChangeAction,
+        this.handleChangeAction,
         isInput,
       );
     } else {
