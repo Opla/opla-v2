@@ -61,28 +61,6 @@ class ActionsList extends Component {
     }
   };
 
-  handleFocusEditable = (focus) => {
-    if (!focus) {
-      this.setState({ selection: null });
-      this.props.onEdit(focus);
-    } else {
-      // this.editable = editable;
-    }
-  };
-
-  handleAction = (text, index = undefined) => {
-    if (text) {
-      const { name } = this.props;
-      // TODO condition
-      const type = null;
-      const state = "add";
-      const p = { name, type, state, index, action: { text } };
-      this.props.onAction(p);
-      console.log("handleAction");
-      this.setState({ selection: null, newContent: null });
-    }
-  };
-
   handleSelect = (e, state, selection) => {
     e.preventDefault();
     let editing = false;
