@@ -23,7 +23,7 @@ class ActionsList extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.intentId !== this.props.intentId) {
       this.editableComponent = null;
-      console.log("componentWillReceiveProps reset");
+      // console.log("componentWillReceiveProps reset");
       this.setState({ selection: null, newContent: null });
     }
   }
@@ -33,12 +33,12 @@ class ActionsList extends Component {
   };
 
   handleSelectedEditable = (type, key, editableComponent) => {
-    console.log("handleSelectedEditable", editableComponent);
+    // console.log("handleSelectedEditable", editableComponent);
     this.editableComponent = editableComponent;
   };
 
   handleFocusEditable = (focus, editableComponent) => {
-    console.log("handleFocusEditable", focus);
+    // console.log("handleFocusEditable", focus);
     if (!focus) {
       this.setState({ selection: null });
       this.props.onEdit(focus);
@@ -56,7 +56,7 @@ class ActionsList extends Component {
       const state = "add";
       const p = { name, type, state, index, action: { text } };
       this.props.onAction(p);
-      console.log("handleAction");
+      // console.log("handleAction");
       this.setState({ selection: null, newContent: null });
     }
   };
@@ -65,11 +65,11 @@ class ActionsList extends Component {
     e.preventDefault();
     let editing = false;
     if (state === "add") {
-      console.log("handleSelect add", selection);
+      // console.log("handleSelect add", selection);
       this.setState({ selection });
       editing = true;
     } else if (this.props.onSelect) {
-      console.log("handleSelect onSelect", selection);
+      // console.log("handleSelect onSelect", selection);
       this.props.onSelect(selection);
     }
     this.props.onEdit(editing, this);
@@ -140,7 +140,7 @@ class ActionsList extends Component {
       editable = true;
       color = "rgb(0, 0, 0)";
     }
-    console.log("selection=", name, editable, this.state.selection);
+    // console.log("selection=", name, editable, this.state.selection);
     const addContent = (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
