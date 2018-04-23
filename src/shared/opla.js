@@ -53,7 +53,6 @@ const app = {
       name: "Builder",
       path: "/builder",
       access: "auth",
-      panels: ["Intents", "Entities", "Flow"],
       toolbox: [{ title: "Publish", onAction: handleOpenPublishDialog }],
       render: (props) => <BotManager {...props} />,
     },

@@ -152,7 +152,14 @@ class ExplorerContainer extends Component {
           : { display: "none", marginRight: "2px" };
         const marginLeft = intent.notSaved ? "-14px" : "0px";
         const n = (
-          <span style={{ marginLeft }}>
+          <span
+            style={{
+              marginLeft,
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+            }}
+          >
             <span className="gray_dot" style={style} />
             {intent.name}
           </span>

@@ -17,51 +17,85 @@ import {
   appSetIntentAction,
   appUpdateIntent,
 } from "../actions/app";
+import ActionsToolbox from "../components/actionsToolbox";
 
 class IntentContainer extends Component {
-  onChangeAction = (/* actionText */) => {
-    // console.log("IntentContainer.onChangeAction =", actionText);
+  constructor(props) {
+    super(props);
+    this.state = { editing: false, toolboxFocus: false };
+    this.timer = null;
+    this.actionsComponent = null;
+  }
+
+  reset() {
+    this.actionsComponent = null;
+    this.selectedAction = undefined;
+    this.actionContainer = undefined;
+    this.actionType = undefined;
+    this.setState({ editing: false });
+  }
+
+  handleChangeAction = (text, name, value) => {
+    let actionValue = null;
+    const intent = this.props.selectedIntent;
+    let { actionType } = this;
+    if (actionType === "condition") {
+      if (name === null && (!intent.output || intent.output.length === 0)) {
+        actionValue = text;
+        actionType = null;
+      } else if (name && text.length > 0) {
+        const type = "item";
+        actionValue = {
+          name,
+          value,
+          text,
+          type,
+        };
+      }
+    } else {
+      actionValue = text;
+    }
+    if (!actionValue || actionValue === "") {
+      return false;
+    }
+    this.props.appSetIntentAction(
+      this.actionContainer,
+      actionType,
+      actionValue,
+      this.selectedAction,
+    );
+    this.reset();
+    return true;
   };
 
-  onEditAction = (dialog, editAction) => {
+  handleChangeToolbox = (action) => {
+    if (action === "unfocus") {
+      this.setState({ toolboxFocus: false });
+    } else {
+      this.setState({ editing: true, toolboxFocus: true });
+      // console.log("action=", action, this.actionsComponent);
+      if (action !== "focus" && this.actionsComponent) {
+        this.actionsComponent.appendAction(action);
+      }
+    }
+  };
+
+  handleEditAction = (dialog, editAction) => {
     if (editAction === "Change" || editAction === "Add") {
       const text = this.actionField.getContent().trim();
-      let actionValue = null;
-      const intent = this.props.selectedIntent;
-      let { actionType } = this;
+      let name = null;
+      let value = null;
       if (this.actionType === "condition") {
-        let name = this.paramNameField.inputRef.value.trim();
+        name = this.paramNameField.inputRef.value.trim();
         if (!name || name.length === 0) {
           name = null;
         }
-        let value = this.paramValueField.inputRef.value.trim();
+        value = this.paramValueField.inputRef.value.trim();
         if (!value || value.length === 0) {
           value = null;
         }
-        if (name === null && (!intent.output || intent.output.length === 0)) {
-          actionValue = text;
-          actionType = null;
-        } else if (name && text.length > 0) {
-          const type = "item";
-          actionValue = {
-            name,
-            value,
-            text,
-            type,
-          };
-        }
-      } else {
-        actionValue = text;
       }
-      if (!actionValue || actionValue === "") {
-        return false;
-      }
-      this.props.appSetIntentAction(
-        this.actionContainer,
-        actionType,
-        actionValue,
-        this.selectedAction,
-      );
+      return this.handleChangeAction(text, name, value);
     } else if (editAction === "Delete") {
       this.props.appDeleteIntentAction(
         this.actionContainer,
@@ -78,9 +112,7 @@ class IntentContainer extends Component {
     } else if (editAction === "Previous") {
       // console.log("TODO", "IntentContainer.onPrevious ");
     }
-    this.selectedAction = undefined;
-    this.actionContainer = undefined;
-    this.actionType = undefined;
+    this.reset();
     return true;
   };
 
@@ -93,6 +125,18 @@ class IntentContainer extends Component {
       } else {
         // console.log("WIP", "IntentContainer.handleSaveIntent : intent already saved");
       }
+    }
+  };
+
+  handleDoActions = ({ name, type, state, index, action }) => {
+    if (this.actionContainer) {
+      return;
+    }
+    this.actionContainer = name;
+    this.actionType = type;
+    this.selectedAction = index;
+    if (state === "add" || state === "change") {
+      this.handleChangeAction(action.text, action.name, action.value);
     }
   };
 
@@ -147,6 +191,7 @@ class IntentContainer extends Component {
       actionDef = action;
     }
     if (editor) {
+      this.setState({ editing: true });
       const isInput = name === "input";
       displayActionEditor(
         title,
@@ -163,8 +208,8 @@ class IntentContainer extends Component {
             this.actionField = input;
           }
         },
-        this.onEditAction,
-        this.onChangeAction,
+        this.handleEditAction,
+        this.handleChangeAction,
         isInput,
       );
     } else {
@@ -172,8 +217,23 @@ class IntentContainer extends Component {
         header: "Action",
         body: "Do you want to delete it ?",
         actions: [{ name: "Delete" }, { name: "Cancel" }],
-        onAction: this.onEditAction,
+        onAction: this.handleEditAction,
       });
+    }
+  };
+
+  handleEdit = (editing, actionsComponent) => {
+    // console.log("editing=", editing, actionsComponent);
+    if (this.state.editing !== editing && !this.timer) {
+      // console.log("handle edit", editing);
+      if (editing) {
+        this.actionsComponent = actionsComponent;
+      }
+      this.timer = setTimeout(() => {
+        // console.log("set state", editing);
+        this.setState({ editing });
+        this.timer = null;
+      }, 100);
     }
   };
 
@@ -188,14 +248,42 @@ class IntentContainer extends Component {
           {intent.name}
         </span>
       );
+      const { editing, toolboxFocus } = this.state;
+      let toolbox;
+      if (editing || toolboxFocus) {
+        toolbox = <ActionsToolbox onChange={this.handleChangeToolbox} />;
+      }
       return (
         <div>
           <SubToolbar
             titleIcon="question_answer"
-            titleName={name}
+            titleName={
+              <div>
+                <div
+                  style={{
+                    float: "left",
+                    borderRight: "1px solid #ddd",
+                    paddingRight: "16px",
+                    width: "15vw",
+                    height: "36px",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  <span>{name}</span>
+                </div>
+                {toolbox}
+              </div>
+            }
             icons={[{ name: "file_upload", onClick: this.handleSaveIntent }]}
           />
-          <IntentDetail intent={intent} onSelect={this.handleActions} />
+          <IntentDetail
+            intent={intent}
+            onSelect={this.handleActions}
+            onEdit={this.handleEdit}
+            onAction={this.handleDoActions}
+          />
         </div>
       );
     }

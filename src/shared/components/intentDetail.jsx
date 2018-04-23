@@ -11,15 +11,29 @@ import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
 
-const IntentDetail = ({ intent, onSelect }) => {
+const IntentDetail = ({ intent, onSelect, onEdit, onAction }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
   return (
     <div className="mrb-action-panel list-box">
       <div className="list-content">
-        <ActionsList name="input" actions={input} onSelect={onSelect} />
+        <ActionsList
+          name="input"
+          actions={input}
+          onSelect={onSelect}
+          onEdit={onEdit}
+          onAction={onAction}
+          intentId={intent.id}
+        />
         <hr />
-        <ActionsList name="output" actions={output} onSelect={onSelect} />
+        <ActionsList
+          name="output"
+          actions={output}
+          onSelect={onSelect}
+          onEdit={onEdit}
+          onAction={onAction}
+          intentId={intent.id}
+        />
         <hr />
         <ExpansionPanel label="Parameters" collapsed>
           <List>
@@ -67,6 +81,8 @@ const IntentDetail = ({ intent, onSelect }) => {
 IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
   onSelect: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onAction: PropTypes.func.isRequired,
 };
 
 export default IntentDetail;
