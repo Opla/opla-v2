@@ -6,16 +6,16 @@
  */
 import React from "react";
 import renderer from "react-test-renderer";
-import IntentDetail from "shared/components/intentDetail";
-import displayActionEditor from "shared/components/intentDetail";
+import IntentDetail, {
+  displayActionEditor,
+} from "shared/components/intentDetail";
 
 describe("components/intentDetail", () => {
   it("renders correctly", () => {
     const intent = { topic: "some intent" };
-    const component = renderer.create(<IntentDetail 
-    	intent={intent}
-    	onSelect={jest.fn()}
-    />);
+    const component = renderer.create(
+      <IntentDetail intent={intent} onSelect={jest.fn()} />,
+    );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -26,22 +26,32 @@ describe("components/intentDetail", () => {
       `<<${encodeURIComponent("<<var>>")}>>`,
     ].join("");
     const intent = { topic: intentcontent };
-    const component = renderer.create(<IntentDetail 
-    	intent={intent}
-    	onSelect={jest.fn()} 
-    />);
+    const component = renderer.create(
+      <IntentDetail intent={intent} onSelect={jest.fn()} />,
+    );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
- 	describe("displayActionEditor()", () => {
+  describe("displayActionEditor()", () => {
     it("should escape special characters like `{`, `}`, `<` and `>`", () => {
-    	const title = "foobar";
-  		const type = "condition";
-  		const action = "foo";
-	  	const actionDef = "Topic";//["Topic","Previous"];
-	  	const parameters = {name:"foo",value:"foobar",text:"bar"};
- 			const isInput = true;
+      const title = "foobar";
+      const type = "condition";
+      const action = "Add";
+      const actionDef = "Topic"; // ["Topic","Previous"];
+      const parameters = { name: "foo", value: "foobar", text: "bar" };
+      const isInput = title === "input";
+      displayActionEditor(
+        title,
+        type,
+        action,
+        actionDef,
+        parameters,
+        jest.fn(),
+        jest.fn(),
+        jest.fn(),
+        isInput,
+      );
     });
   });
 });
