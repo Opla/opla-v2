@@ -34,7 +34,7 @@
     "inquirer": "^5.1.0",
     "node-fetch": "^2.1.2",
     "opennlx": "0.2.2",
-    "zoapp-backend": "^0.19.0"
+    "zoapp-backend": "^0.19.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
