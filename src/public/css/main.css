@@ -357,37 +357,10 @@
    padding: 0px;
  }
  
- .mrb-subheader {
-   text-transform: capitalize;
-   height: 36px;
- }
- .mrb-subheader > div {
-   padding-left: 18px;
-   line-height: 36px;
-   font-size: 15px;
-   color: rgba(0,0,0, 0.87);
- }
- 
  .list-content > .mdc-list-item {
    /* font-size: 14px; */
    height: 40px;
    padding: 0px 16px;
- }
- 
- .mrb-subheader-right {
-   float: right;
-   margin-right: 16px;
-   margin-top: 4px;
-   color: rgba(0,0,0,0.38);
- }
- 
- .mrb-subheader-right i {
-   line-height: 32px;
- }
- 
- .mrb-subheader-menu {
-  margin-right: -8px;
-  margin-top: 6px;
  }
  
  .mrb-sublist {

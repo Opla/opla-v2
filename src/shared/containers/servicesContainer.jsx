@@ -78,7 +78,7 @@ class ServicesContainer extends Component {
         const webservices = this.getMiddlewares("WebService");
         const wh = webservices[index];
         const botId = this.props.selectedBotId;
-        this.props.apiDeleteMiddlewareRequest(botId, wh.id);
+        this.props.apiDeleteMiddlewareRequest(botId, wh);
         this.setState({ needUpdate: true });
       }
     }
@@ -90,10 +90,6 @@ class ServicesContainer extends Component {
   };
 
   onSelect = (selected) => {
-    // WIP
-    if (this.currentSelected) {
-      return;
-    }
     const { name, state, index, item } = selected;
 
     let title = name;
@@ -110,7 +106,6 @@ class ServicesContainer extends Component {
     if (name === "Web services") {
       services = this.getMiddlewares("WebService");
       editor = displayProviderEditor;
-      couldDelete = false;
       // console.log("ws");
       if (state === "select" || state === "create") {
         if (item.provider) {
@@ -263,7 +258,7 @@ class ServicesContainer extends Component {
     }
 
     if (this.currentSelected) {
-      if (state === "add" && state === "create" && !className) {
+      if ((state === "add" || state === "create") && !className) {
         if (title) {
           title = `Add ${title} entry`;
           action = "Add";
