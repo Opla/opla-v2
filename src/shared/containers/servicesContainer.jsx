@@ -78,7 +78,7 @@ class ServicesContainer extends Component {
         const webservices = this.getMiddlewares("WebService");
         const wh = webservices[index];
         const botId = this.props.selectedBotId;
-        this.props.apiDeleteMiddlewareRequest(botId, wh.id);
+        this.props.apiDeleteMiddlewareRequest(botId, wh);
         this.setState({ needUpdate: true });
       }
     }
