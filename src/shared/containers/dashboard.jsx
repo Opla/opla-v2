@@ -65,7 +65,8 @@ export class DashboardBase extends Component {
     } else {
       res = (
         <span style={valueStyle}>
-          {value} {unit}
+          {value}
+          {unit}
         </span>
       );
     }
