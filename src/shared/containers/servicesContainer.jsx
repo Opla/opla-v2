@@ -259,7 +259,7 @@ class ServicesContainer extends Component {
     }
 
     if (this.currentSelected) {
-      if (state === "add" && state === "create" && !className) {
+      if ((state === "add" || state === "create") && !className) {
         if (title) {
           title = `Add ${title} entry`;
           action = "Add";
