@@ -106,7 +106,6 @@ class ServicesContainer extends Component {
     if (name === "Web services") {
       services = this.getMiddlewares("WebService");
       editor = displayProviderEditor;
-      couldDelete = false;
       // console.log("ws");
       if (state === "select" || state === "create") {
         if (item.provider) {
