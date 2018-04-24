@@ -11,7 +11,7 @@ describe("components/actionsToolbox", () => {
   });
 
   it("can be typed", () => {
-  	const types = "any";
+    const types = "any";
     const component = renderer.create(<ActionsToolbox type={types} />);
 
     const tree = component.toJSON();
@@ -19,7 +19,6 @@ describe("components/actionsToolbox", () => {
   });
 
   it("can be an input", () => {
-  	const types = "any";
     const component = renderer.create(<ActionsToolbox isInput />);
 
     const tree = component.toJSON();
@@ -27,7 +26,6 @@ describe("components/actionsToolbox", () => {
   });
 
   it("can be disabled", () => {
-  	const types = "any";
     const component = renderer.create(<ActionsToolbox disable />);
 
     const tree = component.toJSON();
