@@ -1,0 +1,536 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/actionsToolbox can be an input 1`] = `
+<div
+  onBlur={[Function]}
+  onFocus={[Function]}
+  style={
+    Object {
+      "float": "right",
+      "height": "24px",
+      "marginLeft": "0px",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "borderRight": "1px solid #ddd",
+        "float": "left",
+        "height": "22px",
+        "padding": "8px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_text"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        text_fields
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_any"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        all_out
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_output_var"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        assignment
+      </i>
+    </div>
+    
+  </div>
+  <div
+    style={
+      Object {
+        "borderRight": "1px solid #ddd",
+        "float": "left",
+        "height": "22px",
+        "padding": "8px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        disabled={true}
+        id="atb_trash"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        delete
+      </i>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/actionsToolbox can be disabled 1`] = `<div />`;
+
+exports[`components/actionsToolbox can be typed 1`] = `
+<div
+  onBlur={[Function]}
+  onFocus={[Function]}
+  style={
+    Object {
+      "float": "right",
+      "height": "24px",
+      "marginLeft": "0px",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "borderRight": "1px solid #ddd",
+        "float": "left",
+        "height": "22px",
+        "padding": "8px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_text"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        text_fields
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_any"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        all_out
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_output_var"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        assignment
+      </i>
+    </div>
+    <span>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          id="atb_variable"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          style={
+            Object {
+              "margin": "0 4px",
+            }
+          }
+          tabIndex="0"
+        >
+          code
+        </i>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          id="atb_br"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          style={
+            Object {
+              "margin": "0 4px",
+            }
+          }
+          tabIndex="0"
+        >
+          keyboard_return
+        </i>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          id="atb_button"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          style={
+            Object {
+              "margin": "0 4px",
+            }
+          }
+          tabIndex="0"
+        >
+          insert_link
+        </i>
+      </div>
+    </span>
+  </div>
+  <div
+    style={
+      Object {
+        "borderRight": "1px solid #ddd",
+        "float": "left",
+        "height": "22px",
+        "padding": "8px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        disabled={true}
+        id="atb_trash"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        delete
+      </i>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/actionsToolbox can have differents behavior on change 1`] = `
+<div
+  onBlur={[Function]}
+  onFocus={[Function]}
+  style={
+    Object {
+      "float": "right",
+      "height": "24px",
+      "marginLeft": "0px",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "borderRight": "1px solid #ddd",
+        "float": "left",
+        "height": "22px",
+        "padding": "8px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_text"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        text_fields
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_any"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        all_out
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_output_var"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        assignment
+      </i>
+    </div>
+    <span>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          id="atb_variable"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          style={
+            Object {
+              "margin": "0 4px",
+            }
+          }
+          tabIndex="0"
+        >
+          code
+        </i>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          id="atb_br"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          style={
+            Object {
+              "margin": "0 4px",
+            }
+          }
+          tabIndex="0"
+        >
+          keyboard_return
+        </i>
+      </div>
+      <div
+        style={
+          Object {
+            "display": "inline-block",
+          }
+        }
+      >
+        <i
+          className="material-icons"
+          id="atb_button"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          style={
+            Object {
+              "margin": "0 4px",
+            }
+          }
+          tabIndex="0"
+        >
+          insert_link
+        </i>
+      </div>
+    </span>
+  </div>
+  <div
+    style={
+      Object {
+        "borderRight": "1px solid #ddd",
+        "float": "left",
+        "height": "22px",
+        "padding": "8px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        disabled={true}
+        id="atb_trash"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        delete
+      </i>
+    </div>
+  </div>
+</div>
+`;
