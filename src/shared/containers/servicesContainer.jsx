@@ -90,10 +90,6 @@ class ServicesContainer extends Component {
   };
 
   onSelect = (selected) => {
-    // WIP
-    if (this.currentSelected) {
-      return;
-    }
     const { name, state, index, item } = selected;
 
     let title = name;
