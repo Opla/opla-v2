@@ -89,6 +89,7 @@ const MessagingsList = ({ name, items, onSelect }) => {
 
               <ListItemMeta>
                 <Switch
+                  id="unique-component-id"
                   checked={item.enabled}
                   onChange={(e) => handleOnSwitchClick(e, index, item)}
                 />
