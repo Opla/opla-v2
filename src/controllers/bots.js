@@ -25,9 +25,9 @@ export default class extends Controller {
   async setBot(bot) {
     const b = await this.model.setBot(bot);
     if (b) {
-      let action = "updateBot";
+      let action = "createBot";
       if (bot.id) {
-        action = "createBot";
+        action = "updateBot";
       }
       this.dispatchBotAction(b.id, action, b);
     }
