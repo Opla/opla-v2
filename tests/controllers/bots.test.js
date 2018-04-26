@@ -74,4 +74,72 @@ describe("controllers/bots", () => {
       });
     });
   });
+
+  describe("setBot", () => {
+    it("should dispatch a updateBot action", async () => {
+      BotsModel.mockImplementation(() => ({
+        setBot: () => Promise.resolve({ id: "foo", name: "test" }),
+      }));
+
+      const dispatchMock = jest.fn();
+      const zoapp = {
+        controllers: {
+          getMiddlewares: () => ({
+            dispatchEvent: dispatchMock,
+          }),
+        },
+      };
+
+      const bot = {
+        id: "foo",
+        name: "test",
+      };
+
+      const controller = new BotsController("Bots", { zoapp }, "bots");
+
+      await controller.setBot(bot);
+      expect(dispatchMock).toHaveBeenCalledWith(
+        "bots",
+        {
+          botId: "foo",
+          action: "updateBot",
+          bot,
+        },
+        null,
+      );
+    });
+
+    it("should dispatch a createBot action", async () => {
+      const createdBot = { id: "foo", name: "test" };
+      BotsModel.mockImplementation(() => ({
+        setBot: () => Promise.resolve(createdBot),
+      }));
+
+      const dispatchMock = jest.fn();
+      const zoapp = {
+        controllers: {
+          getMiddlewares: () => ({
+            dispatchEvent: dispatchMock,
+          }),
+        },
+      };
+
+      const bot = {
+        name: "test",
+      };
+
+      const controller = new BotsController("Bots", { zoapp }, "bots");
+
+      await controller.setBot(bot);
+      expect(dispatchMock).toHaveBeenCalledWith(
+        "bots",
+        {
+          botId: "foo",
+          action: "createBot",
+          bot: createdBot,
+        },
+        null,
+      );
+    });
+  });
 });
