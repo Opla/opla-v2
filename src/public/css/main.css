@@ -687,17 +687,17 @@
  }
  
  /* templatesList (tpl) Component Style */
+.tpl-templateBox {
+  height: 250px;
+  outline: 1px solid transparent;
+  text-decoration: "none";
+}
+
  .tpl-infoC {
   font-size: 16px;
   font-weight: 300;
   color: #FFF;
   height: 180px;
-}
-
-.tpl-templateBox {
-  height: 250px;
-  outline: 1px solid transparent;
-  text-decoration: "none";
 }
 
 .tpl-anchor {
@@ -743,5 +743,5 @@
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  margin: 0 !important;
+  margin: 0;
 }
