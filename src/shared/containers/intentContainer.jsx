@@ -224,7 +224,11 @@ class IntentContainer extends Component {
 
   handleEdit = (editing, actionsComponent) => {
     // console.log("editing=", editing, actionsComponent);
-    if (this.state.editing !== editing && !this.timer) {
+    if (
+      (this.state.editing !== editing ||
+        this.actionsComponent !== actionsComponent) &&
+      !this.timer
+    ) {
       // console.log("handle edit", editing);
       if (editing) {
         this.actionsComponent = actionsComponent;
