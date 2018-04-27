@@ -31,7 +31,7 @@ const TemplatesList = ({
           <Cell key={key} className="tpl-templateBox" span={2}>
             <div
               role="presentation"
-              className="tpl-anchor"
+              style={{ width: "100%" }}
               onClick={() => {
                 onSelect(index);
               }}
@@ -43,11 +43,20 @@ const TemplatesList = ({
                       <FileInput onLoad={onImport} accept={acceptImport} />
                     </form>
                   ) : (
-                    <img
-                      src={`./images/robots/robot-${index}.svg`}
-                      className="tpl-img"
-                      alt={item.name}
-                    />
+                    <div
+                      className="tpl-backgroundCell"
+                      style={{
+                        backgroundImage: `url(./images/robots/robot-${index}.svg)`,
+                      }}
+                    >
+                      <div className="tpl-imgMask">
+                        <img
+                          src={`./images/robots/robot-${index}.svg`}
+                          className="tpl-img"
+                          alt={item.name}
+                        />
+                      </div>
+                    </div>
                   )}
                 </div>
                 <div className="tpl-textCell">

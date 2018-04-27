@@ -11,9 +11,13 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
       className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
-        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="tpl-infoC selectedListItem"
@@ -63,9 +67,13 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
-        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="tpl-infoC selectableListItem"
@@ -73,11 +81,24 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
           <div
             className="tpl-imgCell"
           >
-            <img
-              alt="template 1"
-              className="tpl-img"
-              src="./images/robots/robot-0.svg"
-            />
+            <div
+              className="tpl-backgroundCell"
+              style={
+                Object {
+                  "backgroundImage": "url(./images/robots/robot-0.svg)",
+                }
+              }
+            >
+              <div
+                className="tpl-imgMask"
+              >
+                <img
+                  alt="template 1"
+                  className="tpl-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
           </div>
           <div
             className="tpl-textCell"
@@ -93,9 +114,13 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
-        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="tpl-infoC selectedListItem"
@@ -103,11 +128,24 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
           <div
             className="tpl-imgCell"
           >
-            <img
-              alt="template 2"
-              className="tpl-img"
-              src="./images/robots/robot-1.svg"
-            />
+            <div
+              className="tpl-backgroundCell"
+              style={
+                Object {
+                  "backgroundImage": "url(./images/robots/robot-1.svg)",
+                }
+              }
+            >
+              <div
+                className="tpl-imgMask"
+              >
+                <img
+                  alt="template 2"
+                  className="tpl-img"
+                  src="./images/robots/robot-1.svg"
+                />
+              </div>
+            </div>
           </div>
           <div
             className="tpl-textCell"
@@ -144,9 +182,13 @@ exports[`components/TemplatesList renders some items 1`] = `
       className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
-        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="tpl-infoC selectedListItem"
@@ -154,11 +196,24 @@ exports[`components/TemplatesList renders some items 1`] = `
           <div
             className="tpl-imgCell"
           >
-            <img
-              alt="template 1"
-              className="tpl-img"
-              src="./images/robots/robot-0.svg"
-            />
+            <div
+              className="tpl-backgroundCell"
+              style={
+                Object {
+                  "backgroundImage": "url(./images/robots/robot-0.svg)",
+                }
+              }
+            >
+              <div
+                className="tpl-imgMask"
+              >
+                <img
+                  alt="template 1"
+                  className="tpl-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
           </div>
           <div
             className="tpl-textCell"
@@ -185,9 +240,13 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
-        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="tpl-infoC selectableListItem"
@@ -195,11 +254,24 @@ exports[`components/TemplatesList renders without selected template 1`] = `
           <div
             className="tpl-imgCell"
           >
-            <img
-              alt="Template 1"
-              className="tpl-img"
-              src="./images/robots/robot-0.svg"
-            />
+            <div
+              className="tpl-backgroundCell"
+              style={
+                Object {
+                  "backgroundImage": "url(./images/robots/robot-0.svg)",
+                }
+              }
+            >
+              <div
+                className="tpl-imgMask"
+              >
+                <img
+                  alt="Template 1"
+                  className="tpl-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
           </div>
           <div
             className="tpl-textCell"
@@ -215,9 +287,13 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
-        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <div
           className="tpl-infoC selectableListItem"
@@ -225,11 +301,24 @@ exports[`components/TemplatesList renders without selected template 1`] = `
           <div
             className="tpl-imgCell"
           >
-            <img
-              alt="Template 2"
-              className="tpl-img"
-              src="./images/robots/robot-1.svg"
-            />
+            <div
+              className="tpl-backgroundCell"
+              style={
+                Object {
+                  "backgroundImage": "url(./images/robots/robot-1.svg)",
+                }
+              }
+            >
+              <div
+                className="tpl-imgMask"
+              >
+                <img
+                  alt="Template 2"
+                  className="tpl-img"
+                  src="./images/robots/robot-1.svg"
+                />
+              </div>
+            </div>
           </div>
           <div
             className="tpl-textCell"
