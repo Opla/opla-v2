@@ -69,6 +69,22 @@ export class CreateAssistantBase extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.templates !== this.props.templates &&
+      this.state.selectedTemplate === null
+    ) {
+      const selectedTemplate = nextProps.templates.findIndex(
+        (template) => template.name === "Empty",
+      );
+
+      this.onSelectTemplate(
+        selectedTemplate,
+        nextProps.templates[selectedTemplate],
+      );
+    }
+  }
+
   onImportTemplate = (data) => {
     try {
       const json = JSON.parse(data);

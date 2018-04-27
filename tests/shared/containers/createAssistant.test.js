@@ -70,6 +70,33 @@ describe("containers/CreateAssistant", () => {
     );
   });
 
+  it("selects empty template once complete template list loaded", () => {
+    const wrapper = shallow(
+      <CreateAssistantBase
+        isLoading={false}
+        createBot={jest.fn}
+        appSetTitle={jest.fn()}
+        apiGetTemplates={jest.fn()}
+        apiGetLanguages={jest.fn()}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
+        setMessage={jest.fn()}
+        history={{ length: 0, push: jest.fn() }}
+      />,
+    );
+
+    const templates = defaultTemplates.slice();
+    templates.push({
+      id: "foo",
+      name: "loaded template",
+    });
+
+    wrapper.setProps({ templates });
+
+    expect(wrapper.state("template")).not.toBeNull();
+    expect(wrapper.state("selectedTemplate")).not.toBeNull();
+  });
+
   it("creates a bot with fullfilled form", () => {
     const createBotSpy = jest.fn();
 
