@@ -11,7 +11,8 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
       className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "height": "168px",
+          "height": "250px",
+          "position": "relative",
         }
       }
     >
@@ -28,30 +29,21 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
         <div
           style={
             Object {
-              "color": "#666",
+              "color": "#FFF",
               "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
+              "fontWeight": "300",
+              "height": "180px",
+              "lineHeight": "1.6",
+              "position": "relative",
             }
           }
         >
           <div
             style={
               Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            Import
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
+                "background-color": "#f5f5f5",
+                "height": "180px",
+                "padding-top": "30px",
                 "textAlign": "center",
                 "width": "100%",
               }
@@ -60,7 +52,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
             <form
               style={
                 Object {
-                  "width": "100%",
+                  "margin-left": "30px",
                 }
               }
             >
@@ -80,6 +72,18 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
               </div>
             </form>
           </div>
+          <div
+            style={
+              Object {
+                "background-color": "#455a64",
+                "padding": "16px",
+              }
+            }
+          >
+            <b>
+              Import
+            </b>
+          </div>
         </div>
       </div>
     </div>
@@ -98,7 +102,8 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "height": "168px",
+          "height": "250px",
+          "position": "relative",
         }
       }
     >
@@ -115,30 +120,21 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
         <div
           style={
             Object {
-              "color": "#666",
+              "color": "#FFF",
               "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
+              "fontWeight": "300",
+              "height": "180px",
+              "lineHeight": "1.6",
+              "position": "relative",
             }
           }
         >
           <div
             style={
               Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            template 1
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
+                "background-color": "#f5f5f5",
+                "height": "180px",
+                "padding-top": "30px",
                 "textAlign": "center",
                 "width": "100%",
               }
@@ -149,11 +145,28 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               src="./images/robots/robot-0.svg"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "-ms-transform": "translate(-50%, -50%)",
+                  "left": "50%",
+                  "margin": "0",
+                  "position": "absolute",
+                  "top": "50%",
+                  "transform": "translate(-50%, -50%)",
+                  "width": "80px",
                 }
               }
             />
+          </div>
+          <div
+            style={
+              Object {
+                "background-color": "#455a64",
+                "padding": "16px",
+              }
+            }
+          >
+            <b>
+              template 1
+            </b>
           </div>
         </div>
       </div>
@@ -162,7 +175,8 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "height": "168px",
+          "height": "250px",
+          "position": "relative",
         }
       }
     >
@@ -179,30 +193,21 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
         <div
           style={
             Object {
-              "color": "#666",
+              "color": "#FFF",
               "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
+              "fontWeight": "300",
+              "height": "180px",
+              "lineHeight": "1.6",
+              "position": "relative",
             }
           }
         >
           <div
             style={
               Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            template 2
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
+                "background-color": "#f5f5f5",
+                "height": "180px",
+                "padding-top": "30px",
                 "textAlign": "center",
                 "width": "100%",
               }
@@ -213,11 +218,28 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               src="./images/robots/robot-1.svg"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "-ms-transform": "translate(-50%, -50%)",
+                  "left": "50%",
+                  "margin": "0",
+                  "position": "absolute",
+                  "top": "50%",
+                  "transform": "translate(-50%, -50%)",
+                  "width": "80px",
                 }
               }
             />
+          </div>
+          <div
+            style={
+              Object {
+                "background-color": "#455a64",
+                "padding": "16px",
+              }
+            }
+          >
+            <b>
+              template 2
+            </b>
           </div>
         </div>
       </div>
@@ -247,7 +269,8 @@ exports[`components/TemplatesList renders some items 1`] = `
       className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "height": "168px",
+          "height": "250px",
+          "position": "relative",
         }
       }
     >
@@ -264,30 +287,21 @@ exports[`components/TemplatesList renders some items 1`] = `
         <div
           style={
             Object {
-              "color": "#666",
+              "color": "#FFF",
               "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
+              "fontWeight": "300",
+              "height": "180px",
+              "lineHeight": "1.6",
+              "position": "relative",
             }
           }
         >
           <div
             style={
               Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            template 1
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
+                "background-color": "#f5f5f5",
+                "height": "180px",
+                "padding-top": "30px",
                 "textAlign": "center",
                 "width": "100%",
               }
@@ -298,11 +312,28 @@ exports[`components/TemplatesList renders some items 1`] = `
               src="./images/robots/robot-0.svg"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "-ms-transform": "translate(-50%, -50%)",
+                  "left": "50%",
+                  "margin": "0",
+                  "position": "absolute",
+                  "top": "50%",
+                  "transform": "translate(-50%, -50%)",
+                  "width": "80px",
                 }
               }
             />
+          </div>
+          <div
+            style={
+              Object {
+                "background-color": "#455a64",
+                "padding": "16px",
+              }
+            }
+          >
+            <b>
+              template 1
+            </b>
           </div>
         </div>
       </div>
@@ -322,7 +353,8 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "height": "168px",
+          "height": "250px",
+          "position": "relative",
         }
       }
     >
@@ -339,30 +371,21 @@ exports[`components/TemplatesList renders without selected template 1`] = `
         <div
           style={
             Object {
-              "color": "#666",
+              "color": "#FFF",
               "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
+              "fontWeight": "300",
+              "height": "180px",
+              "lineHeight": "1.6",
+              "position": "relative",
             }
           }
         >
           <div
             style={
               Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            Template 1
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
+                "background-color": "#f5f5f5",
+                "height": "180px",
+                "padding-top": "30px",
                 "textAlign": "center",
                 "width": "100%",
               }
@@ -373,11 +396,28 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               src="./images/robots/robot-0.svg"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "-ms-transform": "translate(-50%, -50%)",
+                  "left": "50%",
+                  "margin": "0",
+                  "position": "absolute",
+                  "top": "50%",
+                  "transform": "translate(-50%, -50%)",
+                  "width": "80px",
                 }
               }
             />
+          </div>
+          <div
+            style={
+              Object {
+                "background-color": "#455a64",
+                "padding": "16px",
+              }
+            }
+          >
+            <b>
+              Template 1
+            </b>
           </div>
         </div>
       </div>
@@ -386,7 +426,8 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
       style={
         Object {
-          "height": "168px",
+          "height": "250px",
+          "position": "relative",
         }
       }
     >
@@ -403,30 +444,21 @@ exports[`components/TemplatesList renders without selected template 1`] = `
         <div
           style={
             Object {
-              "color": "#666",
+              "color": "#FFF",
               "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
+              "fontWeight": "300",
+              "height": "180px",
+              "lineHeight": "1.6",
+              "position": "relative",
             }
           }
         >
           <div
             style={
               Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            Template 2
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
+                "background-color": "#f5f5f5",
+                "height": "180px",
+                "padding-top": "30px",
                 "textAlign": "center",
                 "width": "100%",
               }
@@ -437,11 +469,28 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               src="./images/robots/robot-1.svg"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "-ms-transform": "translate(-50%, -50%)",
+                  "left": "50%",
+                  "margin": "0",
+                  "position": "absolute",
+                  "top": "50%",
+                  "transform": "translate(-50%, -50%)",
+                  "width": "80px",
                 }
               }
             />
+          </div>
+          <div
+            style={
+              Object {
+                "background-color": "#455a64",
+                "padding": "16px",
+              }
+            }
+          >
+            <b>
+              Template 2
+            </b>
           </div>
         </div>
       </div>

@@ -9,18 +9,20 @@ import PropTypes from "prop-types";
 import { Grid, Inner, Cell } from "zrmc";
 import makeClassName from "classnames";
 import FileInput from "zoapp-front/components/fileInput";
+import { relative } from "path";
 
 const infoStyleC = {
+  position: "relative",
   fontSize: "16px",
-  fontWeight: "400",
-  color: "#666",
-  lineHeight: "1.1",
-  padding: "16px",
-  height: "87%",
+  fontWeight: "300",
+  color: "#FFF",
+  lineHeight: "1.6",
+  height: "180px",
 };
 
 const templateBoxStyle = {
-  height: "168px",
+  position: "relative",
+  height: "250px",
 };
 
 const anchorStyle = {
@@ -28,10 +30,26 @@ const anchorStyle = {
   width: "100%",
 };
 
-const cellStyle = {
-  display: "table-row",
+const imgStyle = {
+  position: "absolute",
+  margin: "0",
+  top: "50%",
+  left: "50%",
+  "-ms-transform": "translate(-50%, -50%)",
+  transform: "translate(-50%, -50%)",
+  width: "80px",
+};
+
+const formStyle = {
+  "margin-left": "30px",
+};
+
+const imgCellStyle = {
   textAlign: "center",
   width: "100%",
+  height: "180px",
+  "padding-top": "30px",
+  "background-color": "#f5f5f5",
 };
 
 const TemplatesList = ({
@@ -66,19 +84,25 @@ const TemplatesList = ({
               }}
             >
               <div style={infoStyleC}>
-                <div style={cellStyle}>{item.name}</div>
-                <div style={cellStyle}>
+                <div style={imgCellStyle}>
                   {item.name === "Import" ? (
-                    <form style={{ width: "100%" }}>
-                      <FileInput onLoad={onImport} accept={acceptImport} />
+                    <form style={formStyle}>
+                      <FileInput
+                        onLoad={onImport}
+                        accept={acceptImport}
+                        style={{ margin: "0px !important" }}
+                      />
                     </form>
                   ) : (
                     <img
                       src={`./images/robots/robot-${index}.svg`}
-                      style={{ width: "40%", margin: "30px" }}
+                      style={imgStyle}
                       alt={item.name}
                     />
                   )}
+                </div>
+                <div style={{ padding: "16px", "background-color": "#455a64" }}>
+                  <b>{item.name}</b>
                 </div>
               </div>
             </div>
