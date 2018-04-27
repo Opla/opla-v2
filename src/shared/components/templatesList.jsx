@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import { Grid, Inner, Cell } from "zrmc";
 import makeClassName from "classnames";
 import FileInput from "zoapp-front/components/fileInput";
-import { relative } from "path";
 
 const infoStyleC = {
   position: "relative",
@@ -38,10 +37,6 @@ const imgStyle = {
   "-ms-transform": "translate(-50%, -50%)",
   transform: "translate(-50%, -50%)",
   width: "80px",
-};
-
-const formStyle = {
-  "margin-left": "30px",
 };
 
 const imgCellStyle = {
@@ -86,7 +81,7 @@ const TemplatesList = ({
               <div style={infoStyleC}>
                 <div style={imgCellStyle}>
                   {item.name === "Import" ? (
-                    <form style={formStyle}>
+                    <form>
                       <FileInput
                         onLoad={onImport}
                         accept={acceptImport}

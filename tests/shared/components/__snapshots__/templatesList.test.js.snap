@@ -49,13 +49,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
               }
             }
           >
-            <form
-              style={
-                Object {
-                  "margin-left": "30px",
-                }
-              }
-            >
+            <form>
               <div
                 className="fileInput"
               >
