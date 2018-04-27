@@ -8,46 +8,18 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "250px",
-          "position": "relative",
-        }
-      }
+      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
+        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
-        style={
-          Object {
-            "textDecoration": "none",
-            "width": "100%",
-          }
-        }
       >
         <div
-          style={
-            Object {
-              "color": "#FFF",
-              "fontSize": "16px",
-              "fontWeight": "300",
-              "height": "180px",
-              "lineHeight": "1.6",
-              "position": "relative",
-            }
-          }
+          className="tpl-infoC selectedListItem"
         >
           <div
-            style={
-              Object {
-                "background-color": "#f5f5f5",
-                "height": "180px",
-                "padding-top": "30px",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="tpl-imgCell"
           >
             <form>
               <div
@@ -67,12 +39,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
             </form>
           </div>
           <div
-            style={
-              Object {
-                "background-color": "#455a64",
-                "padding": "16px",
-              }
-            }
+            className="tpl-textCell"
           >
             <b>
               Import
@@ -93,70 +60,27 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "250px",
-          "position": "relative",
-        }
-      }
+      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
+        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
-        style={
-          Object {
-            "textDecoration": "none",
-            "width": "100%",
-          }
-        }
       >
         <div
-          style={
-            Object {
-              "color": "#FFF",
-              "fontSize": "16px",
-              "fontWeight": "300",
-              "height": "180px",
-              "lineHeight": "1.6",
-              "position": "relative",
-            }
-          }
+          className="tpl-infoC selectableListItem"
         >
           <div
-            style={
-              Object {
-                "background-color": "#f5f5f5",
-                "height": "180px",
-                "padding-top": "30px",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="tpl-imgCell"
           >
             <img
               alt="template 1"
+              className="tpl-img"
               src="./images/robots/robot-0.svg"
-              style={
-                Object {
-                  "-ms-transform": "translate(-50%, -50%)",
-                  "left": "50%",
-                  "margin": "0",
-                  "position": "absolute",
-                  "top": "50%",
-                  "transform": "translate(-50%, -50%)",
-                  "width": "80px",
-                }
-              }
             />
           </div>
           <div
-            style={
-              Object {
-                "background-color": "#455a64",
-                "padding": "16px",
-              }
-            }
+            className="tpl-textCell"
           >
             <b>
               template 1
@@ -166,70 +90,27 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       </div>
     </div>
     <div
-      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "250px",
-          "position": "relative",
-        }
-      }
+      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
+        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
-        style={
-          Object {
-            "textDecoration": "none",
-            "width": "100%",
-          }
-        }
       >
         <div
-          style={
-            Object {
-              "color": "#FFF",
-              "fontSize": "16px",
-              "fontWeight": "300",
-              "height": "180px",
-              "lineHeight": "1.6",
-              "position": "relative",
-            }
-          }
+          className="tpl-infoC selectedListItem"
         >
           <div
-            style={
-              Object {
-                "background-color": "#f5f5f5",
-                "height": "180px",
-                "padding-top": "30px",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="tpl-imgCell"
           >
             <img
               alt="template 2"
+              className="tpl-img"
               src="./images/robots/robot-1.svg"
-              style={
-                Object {
-                  "-ms-transform": "translate(-50%, -50%)",
-                  "left": "50%",
-                  "margin": "0",
-                  "position": "absolute",
-                  "top": "50%",
-                  "transform": "translate(-50%, -50%)",
-                  "width": "80px",
-                }
-              }
             />
           </div>
           <div
-            style={
-              Object {
-                "background-color": "#455a64",
-                "padding": "16px",
-              }
-            }
+            className="tpl-textCell"
           >
             <b>
               template 2
@@ -260,70 +141,27 @@ exports[`components/TemplatesList renders some items 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "250px",
-          "position": "relative",
-        }
-      }
+      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
+        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
-        style={
-          Object {
-            "textDecoration": "none",
-            "width": "100%",
-          }
-        }
       >
         <div
-          style={
-            Object {
-              "color": "#FFF",
-              "fontSize": "16px",
-              "fontWeight": "300",
-              "height": "180px",
-              "lineHeight": "1.6",
-              "position": "relative",
-            }
-          }
+          className="tpl-infoC selectedListItem"
         >
           <div
-            style={
-              Object {
-                "background-color": "#f5f5f5",
-                "height": "180px",
-                "padding-top": "30px",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="tpl-imgCell"
           >
             <img
               alt="template 1"
+              className="tpl-img"
               src="./images/robots/robot-0.svg"
-              style={
-                Object {
-                  "-ms-transform": "translate(-50%, -50%)",
-                  "left": "50%",
-                  "margin": "0",
-                  "position": "absolute",
-                  "top": "50%",
-                  "transform": "translate(-50%, -50%)",
-                  "width": "80px",
-                }
-              }
             />
           </div>
           <div
-            style={
-              Object {
-                "background-color": "#455a64",
-                "padding": "16px",
-              }
-            }
+            className="tpl-textCell"
           >
             <b>
               template 1
@@ -344,70 +182,27 @@ exports[`components/TemplatesList renders without selected template 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "250px",
-          "position": "relative",
-        }
-      }
+      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
+        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
-        style={
-          Object {
-            "textDecoration": "none",
-            "width": "100%",
-          }
-        }
       >
         <div
-          style={
-            Object {
-              "color": "#FFF",
-              "fontSize": "16px",
-              "fontWeight": "300",
-              "height": "180px",
-              "lineHeight": "1.6",
-              "position": "relative",
-            }
-          }
+          className="tpl-infoC selectableListItem"
         >
           <div
-            style={
-              Object {
-                "background-color": "#f5f5f5",
-                "height": "180px",
-                "padding-top": "30px",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="tpl-imgCell"
           >
             <img
               alt="Template 1"
+              className="tpl-img"
               src="./images/robots/robot-0.svg"
-              style={
-                Object {
-                  "-ms-transform": "translate(-50%, -50%)",
-                  "left": "50%",
-                  "margin": "0",
-                  "position": "absolute",
-                  "top": "50%",
-                  "transform": "translate(-50%, -50%)",
-                  "width": "80px",
-                }
-              }
             />
           </div>
           <div
-            style={
-              Object {
-                "background-color": "#455a64",
-                "padding": "16px",
-              }
-            }
+            className="tpl-textCell"
           >
             <b>
               Template 1
@@ -417,70 +212,27 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       </div>
     </div>
     <div
-      className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "250px",
-          "position": "relative",
-        }
-      }
+      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
+        className="tpl-anchor"
         onClick={[Function]}
         role="presentation"
-        style={
-          Object {
-            "textDecoration": "none",
-            "width": "100%",
-          }
-        }
       >
         <div
-          style={
-            Object {
-              "color": "#FFF",
-              "fontSize": "16px",
-              "fontWeight": "300",
-              "height": "180px",
-              "lineHeight": "1.6",
-              "position": "relative",
-            }
-          }
+          className="tpl-infoC selectableListItem"
         >
           <div
-            style={
-              Object {
-                "background-color": "#f5f5f5",
-                "height": "180px",
-                "padding-top": "30px",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="tpl-imgCell"
           >
             <img
               alt="Template 2"
+              className="tpl-img"
               src="./images/robots/robot-1.svg"
-              style={
-                Object {
-                  "-ms-transform": "translate(-50%, -50%)",
-                  "left": "50%",
-                  "margin": "0",
-                  "position": "absolute",
-                  "top": "50%",
-                  "transform": "translate(-50%, -50%)",
-                  "width": "80px",
-                }
-              }
             />
           </div>
           <div
-            style={
-              Object {
-                "background-color": "#455a64",
-                "padding": "16px",
-              }
-            }
+            className="tpl-textCell"
           >
             <b>
               Template 2
