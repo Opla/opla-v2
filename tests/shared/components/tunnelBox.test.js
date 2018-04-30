@@ -6,13 +6,16 @@
  */
 import React from "react";
 import renderer from "react-test-renderer";
-import ActionsList from "shared/components/actionsList";
+import TunnelBox from "shared/components/tunnelBox";
 
-describe("components/actionsList", () => {
+describe("components/tunnelBox", () => {
   it("renders correctly", () => {
-    const param = { active: true, providers: [1, 2, 3, 4] };
+    const param = {
+      active: { foo: true, bar: false },
+      providers: { 1: "foo", 2: "bar", 3: "foobar" },
+    };
     const component = renderer.create(
-      <ActionsList params={param} onChange={jest.fn()} />,
+      <TunnelBox params={param} onChange={jest.fn()} />,
     );
 
     const tree = component.toJSON();

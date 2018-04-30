@@ -6,7 +6,7 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { TextField, Button, Select, ListItem } from "zrmc";
+import { TextField, Button, Select, MenuItem } from "zrmc";
 
 class TunnelBox extends Component {
   constructor(props) {
@@ -39,8 +39,8 @@ class TunnelBox extends Component {
     const none = "None";
     const items = [{ id: 0, name: none }];
     if (params.providers) {
-      params.providers.forEach((provider, index) => {
-        items.push({ id: index + 1, name: provider.name });
+      Object.values(params.providers).forEach((provider, index) => {
+        items.push({ id: index + 1, name: provider });
       });
     }
     const active = params.active || {};
@@ -73,13 +73,14 @@ class TunnelBox extends Component {
             ref={(input) => {
               this.fields.provider = input;
             }}
+            id="unique-component-id"
             value={value}
             style={{ width: "400px" }}
           >
             {items.map((item) => (
-              <ListItem key={item.id} value={item.name}>
+              <MenuItem key={item.id} value={item.name}>
                 {item.name}
-              </ListItem>
+              </MenuItem>
             ))}
           </Select>
         </div>
@@ -90,6 +91,7 @@ class TunnelBox extends Component {
               onChange={(e) => {
                 this.onChange("subdomain", e.target.value);
               }}
+              id="unique-component-id"
               label="Subdomain"
               style={{ width: "400px" }}
               value={active.subdomain}
@@ -103,6 +105,7 @@ class TunnelBox extends Component {
               onChange={(e) => {
                 this.onChange("host", e.target.value);
               }}
+              id="unique-component-id"
               label="Host"
               style={{ width: "400px" }}
               value={active.host}
@@ -116,6 +119,7 @@ class TunnelBox extends Component {
               onChange={(e) => {
                 this.onChange("localhost", e.target.value);
               }}
+              id="unique-component-id"
               label="Localhost"
               style={{ width: "400px" }}
               value={active.localhost}
