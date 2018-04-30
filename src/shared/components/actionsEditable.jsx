@@ -205,12 +205,20 @@ class ActionsEditable extends Component {
 
   unfocus = () => {
     // console.log("unfocus=");
-    /* this.focusElement = null;
+    this.focusElement = null;
     const noUpdate = false;
     const selectedItem = -1;
     const caretPosition = 0;
-    this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
-    this.props.onFocus(false, this); */
+    const content = "";
+    const items = ActionsTools.parse(content);
+    this.setState(() => ({
+      noUpdate,
+      selectedItem,
+      caretPosition,
+      content,
+      items,
+    }));
+    this.props.onFocus(false, this);
   };
 
   setCE = (e, editable = true, itemIndex = null) => {
