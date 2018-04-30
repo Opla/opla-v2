@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/messagingsList renders correctly 1`] = `
+<div
+  className="mrb-sublist"
+>
+  <div
+    className="mrb-subheader"
+  >
+    <h4>
+      foo
+    </h4>
+  </div>
+  <ul
+    className="mdc-list"
+  >
+    <li
+      className="selectableListItem switchListItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "height": "40px",
+        }
+      }
+    >
+      <span
+        className="mdc-list-item__text"
+      >
+        foo
+        <span
+          className="mdc-list-item__secondary-text"
+        >
+          click to setup
+        </span>
+      </span>
+      <span
+        className="mdc-list-item__meta"
+        onClick={null}
+        onKeyUp={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <div
+          className="mdc-switch"
+        >
+          <input
+            checked={false}
+            className="mdc-switch__native-control"
+            disabled={false}
+            id="unique-component-id"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="mdc-switch__background"
+          >
+            <div
+              className="mdc-switch__knob"
+            />
+          </div>
+        </div>
+      </span>
+    </li>
+    <li
+      className="selectableListItem switchListItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "height": "40px",
+        }
+      }
+    >
+      <span
+        className="mdc-list-item__text"
+      >
+        bar
+        <span
+          className="mdc-list-item__secondary-text"
+        >
+          click to setup
+        </span>
+      </span>
+      <span
+        className="mdc-list-item__meta"
+        onClick={null}
+        onKeyUp={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <div
+          className="mdc-switch"
+        >
+          <input
+            checked={false}
+            className="mdc-switch__native-control"
+            disabled={false}
+            id="unique-component-id"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="mdc-switch__background"
+          >
+            <div
+              className="mdc-switch__knob"
+            />
+          </div>
+        </div>
+      </span>
+    </li>
+    <li
+      className="selectableListItem switchListItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "height": "40px",
+        }
+      }
+    >
+      <span
+        className="mdc-list-item__text"
+      >
+        title
+        <span
+          className="mdc-list-item__secondary-text"
+        >
+          click to setup
+        </span>
+      </span>
+      <span
+        className="mdc-list-item__meta"
+        onClick={null}
+        onKeyUp={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <div
+          className="mdc-switch"
+        >
+          <input
+            checked={false}
+            className="mdc-switch__native-control"
+            disabled={false}
+            id="unique-component-id"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="mdc-switch__background"
+          >
+            <div
+              className="mdc-switch__knob"
+            />
+          </div>
+        </div>
+      </span>
+    </li>
+  </ul>
+</div>
+`;
