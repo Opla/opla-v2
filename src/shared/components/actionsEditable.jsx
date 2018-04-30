@@ -154,12 +154,16 @@ class ActionsEditable extends Component {
 
   handleChange = (element) => {
     if (this.props.editable) {
+      let { selectedItem } = this.state;
       const span = element.children[0];
       const content = ActionsEditable.build([...span.children], true);
       // console.log("handleChange=", content);
       const items = ActionsTools.parse(content);
       const noUpdate = true;
-      this.setState({ noUpdate, content, items }, () => {
+      if (this.state.selectedItem < 0 && items.length > 0) {
+        selectedItem += 1;
+      }
+      this.setState({ noUpdate, content, items, selectedItem }, () => {
         this.props.onChange(content);
       });
     }

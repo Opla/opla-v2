@@ -192,6 +192,7 @@ class ActionsToolbox extends Component {
     };
     const styleButton = {
       margin: "0 4px",
+      cursor: "pointer",
     };
     const { toolbox } = this.state;
     let extra = "";
