@@ -6,6 +6,7 @@
  */
 import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
+import signoutMiddleware from "zoapp-front/middleware/signoutMiddleware";
 import reducers from "./reducers";
 import rootSaga from "./sagas";
 
@@ -19,7 +20,7 @@ export default function configureStore(initialState = {}) {
   const store = createStore(
     reducers,
     initialState,
-    composeEnhancers(applyMiddleware(sagaMiddleware)),
+    composeEnhancers(applyMiddleware(sagaMiddleware, signoutMiddleware)),
   );
 
   sagaMiddleware.run(rootSaga);
