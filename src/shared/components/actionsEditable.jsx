@@ -524,7 +524,7 @@ ActionsEditable.defaultProps = {
 };
 
 ActionsEditable.propTypes = {
-  content: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onSelected: PropTypes.func,
