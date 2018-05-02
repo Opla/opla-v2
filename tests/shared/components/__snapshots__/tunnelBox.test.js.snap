@@ -1,69 +1,195 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/actionsList renders correctly 1`] = `
+exports[`components/tunnelBox renders correctly 1`] = `
 <div
-  className="mrb-sublist"
+  style={
+    Object {
+      "margin": "auto",
+      "width": "512px",
+    }
+  }
 >
-  <div
-    className="mrb-subheader"
-  >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
+  <div>
+    <div
+      aria-hidden={true}
+      className="mdc-select"
       onClick={[Function]}
       onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
-    >
-      keyboard_arrow_up
-    </i>
-    <div />
-  </div>
-  <div
-    style={
-      Object {
-        "display": "block",
-      }
-    }
-  >
-    <ul
-      className="mdc-list"
-    />
-    <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="menuitem"
+      role="listbox"
       style={
         Object {
-          "color": "rgb(213, 0, 0)",
-          "padding": "0px 16px",
+          "width": "400px",
         }
       }
     >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
       <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
-        tabIndex={0}
+        className="mdc-select__surface"
+        tabIndex="0"
       >
-        <span />
+        <div
+          className="mdc-select__label"
+        >
+          Tunnel provider
+        </div>
+        <div
+          className="mdc-select__selected-text"
+        />
+        <div
+          className="mdc-select__bottom-line"
+        />
       </div>
-    </li>
+      <div
+        className="mdc-select__menu mdc-menu"
+        tabIndex="-1"
+      >
+        <ul
+          aria-hidden="true"
+          className="mdc-menu__items mdc-list"
+          role="menu"
+        >
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            None
+          </li>
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            foo
+          </li>
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            bar
+          </li>
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            foobar
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
+  <form
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <div>
+      <div
+        className="mdc-text-field mdc-text-field--upgraded"
+        style={
+          Object {
+            "width": "400px",
+          }
+        }
+      >
+        <input
+          className="mdc-text-field__input"
+          defaultValue={null}
+          id="unique-component-id"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+          value={undefined}
+        />
+        <label
+          className="mdc-floating-label"
+          focused="false"
+          htmlFor="unique-component-id"
+          style={Object {}}
+        >
+          Subdomain
+        </label>
+        <div
+          className="mdc-text-field__bottom-line"
+        />
+      </div>
+    </div>
+    <div>
+      <div
+        className="mdc-text-field mdc-text-field--upgraded"
+        style={
+          Object {
+            "width": "400px",
+          }
+        }
+      >
+        <input
+          className="mdc-text-field__input"
+          defaultValue={null}
+          id="unique-component-id"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+          value={undefined}
+        />
+        <label
+          className="mdc-floating-label"
+          focused="false"
+          htmlFor="unique-component-id"
+          style={Object {}}
+        >
+          Host
+        </label>
+        <div
+          className="mdc-text-field__bottom-line"
+        />
+      </div>
+    </div>
+    <div>
+      <div
+        className="mdc-text-field mdc-text-field--upgraded"
+        style={
+          Object {
+            "width": "400px",
+          }
+        }
+      >
+        <input
+          className="mdc-text-field__input"
+          defaultValue={null}
+          id="unique-component-id"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+          value={undefined}
+        />
+        <label
+          className="mdc-floating-label"
+          focused="false"
+          htmlFor="unique-component-id"
+          style={Object {}}
+        >
+          Localhost
+        </label>
+        <div
+          className="mdc-text-field__bottom-line"
+        />
+      </div>
+    </div>
+  </form>
 </div>
 `;

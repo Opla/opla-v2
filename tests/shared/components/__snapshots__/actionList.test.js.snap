@@ -461,21 +461,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span>
-            <span
-              data="text"
-              id="ae_0"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
-                }
-              }
-              tabIndex={1}
-            >
-              any
-            </span>
-          </span>
+          <span />
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -520,21 +506,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span>
-            <span
-              data="text"
-              id="ae_0"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
-                }
-              }
-              tabIndex={1}
-            >
-              output_var
-            </span>
-          </span>
+          <span />
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -579,21 +551,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span>
-            <span
-              data="text"
-              id="ae_0"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
-                }
-              }
-              tabIndex={1}
-            >
-              variable
-            </span>
-          </span>
+          <span />
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -638,21 +596,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span>
-            <span
-              data="text"
-              id="ae_0"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
-                }
-              }
-              tabIndex={1}
-            >
-              br
-            </span>
-          </span>
+          <span />
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -697,21 +641,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span>
-            <span
-              data="text"
-              id="ae_0"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
-                }
-              }
-              tabIndex={1}
-            >
-              button
-            </span>
-          </span>
+          <span />
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -756,21 +686,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span>
-            <span
-              data="text"
-              id="ae_0"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
-                }
-              }
-              tabIndex={1}
-            >
-              trash
-            </span>
-          </span>
+          <span />
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -815,21 +731,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span>
-            <span
-              data="text"
-              id="ae_0"
-              style={
-                Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
-                }
-              }
-              tabIndex={1}
-            >
-              bar
-            </span>
-          </span>
+          <span />
         </div>
         <i
           className="mdc-list-item__meta material-icons"

@@ -6,16 +6,11 @@
  */
 import React from "react";
 import DonutChart from "shared/components/donutChart";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 
 describe("components/donutChart", () => {
   it("renders correctly", () => {
     const wrapper = shallow(<DonutChart title="foobar" dataset={0} />);
     expect(wrapper).toHaveLength(1);
-  });
-  it("renders properties correctly", () => {
-    const wrapper = mount(<DonutChart title="foobar" dataset={1} />);
-    expect(wrapper.prop("title")).toEqual("foobar");
-    expect(wrapper.prop("dataset")).toEqual(1);
   });
 });
