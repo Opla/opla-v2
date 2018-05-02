@@ -224,7 +224,7 @@ class ActionsList extends Component {
         content = (
           <List style={{ overflow: "auto", maxHeight: "26vh" }}>
             {actions.map((action, index) => {
-              const text = <ActionsEditable content={action.text} />;
+              const text = <ActionsEditable content={action} />;
               const key = `cd_${index}`;
               return (
                 <ListItem
