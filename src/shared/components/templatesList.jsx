@@ -10,30 +10,6 @@ import { Grid, Inner, Cell } from "zrmc";
 import makeClassName from "classnames";
 import FileInput from "zoapp-front/components/fileInput";
 
-const infoStyleC = {
-  fontSize: "16px",
-  fontWeight: "400",
-  color: "#666",
-  lineHeight: "1.1",
-  padding: "16px",
-  height: "87%",
-};
-
-const templateBoxStyle = {
-  height: "168px",
-};
-
-const anchorStyle = {
-  textDecoration: "none",
-  width: "100%",
-};
-
-const cellStyle = {
-  display: "table-row",
-  textAlign: "center",
-  width: "100%",
-};
-
 const TemplatesList = ({
   items,
   selectedItem,
@@ -46,39 +22,45 @@ const TemplatesList = ({
       {items.map((item, index) => {
         const key = item.id ? item.id : `${index}${item.name}`;
         const isSelectedItem = selectedItem === index;
-        const className = makeClassName("mdl-shadow--2dp", {
+        const className = makeClassName({
           selectableListItem: !isSelectedItem,
           selectedListItem: isSelectedItem,
         });
 
         return (
-          <Cell
-            key={key}
-            style={templateBoxStyle}
-            className={className}
-            span={2}
-          >
+          <Cell key={key} className="opla_template-templateBox" span={2}>
             <div
               role="presentation"
-              style={anchorStyle}
+              style={{ width: "100%" }}
               onClick={() => {
                 onSelect(index);
               }}
             >
-              <div style={infoStyleC}>
-                <div style={cellStyle}>{item.name}</div>
-                <div style={cellStyle}>
+              <div className={`opla_template-infoC ${className}`}>
+                <div className="opla_template-imgCell">
                   {item.name === "Import" ? (
-                    <form style={{ width: "100%" }}>
+                    <form>
                       <FileInput onLoad={onImport} accept={acceptImport} />
                     </form>
                   ) : (
-                    <img
-                      src={`./images/robots/robot-${index}.svg`}
-                      style={{ width: "40%", margin: "30px" }}
-                      alt={item.name}
-                    />
+                    <div
+                      className="opla_template-backgroundCell"
+                      style={{
+                        backgroundImage: `url(./images/robots/robot-${index}.svg)`,
+                      }}
+                    >
+                      <div className="opla_template-imgMask">
+                        <img
+                          src={`./images/robots/robot-${index}.svg`}
+                          className="opla_template-img"
+                          alt={item.name}
+                        />
+                      </div>
+                    </div>
                   )}
+                </div>
+                <div className="opla_template-textCell">
+                  <b>{item.name}</b>
                 </div>
               </div>
             </div>

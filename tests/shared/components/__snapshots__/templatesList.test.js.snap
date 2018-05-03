@@ -8,62 +8,24 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "168px",
-        }
-      }
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
         role="presentation"
         style={
           Object {
-            "textDecoration": "none",
             "width": "100%",
           }
         }
       >
         <div
-          style={
-            Object {
-              "color": "#666",
-              "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
-            }
-          }
+          className="opla_template-infoC selectedListItem"
         >
           <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="opla_template-imgCell"
           >
-            Import
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            <form
-              style={
-                Object {
-                  "width": "100%",
-                }
-              }
-            >
+            <form>
               <div
                 className="fileInput"
               >
@@ -80,6 +42,13 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
               </div>
             </form>
           </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              Import
+            </b>
+          </div>
         </div>
       </div>
     </div>
@@ -95,129 +64,95 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "168px",
-        }
-      }
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
         role="presentation"
         style={
           Object {
-            "textDecoration": "none",
             "width": "100%",
           }
         }
       >
         <div
-          style={
-            Object {
-              "color": "#666",
-              "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
-            }
-          }
+          className="opla_template-infoC selectableListItem"
         >
           <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="opla_template-imgCell"
           >
-            template 1
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            <img
-              alt="template 1"
-              src="./images/robots/robot-0.svg"
+            <div
+              className="opla_template-backgroundCell"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "backgroundImage": "url(./images/robots/robot-0.svg)",
                 }
               }
-            />
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="template 1"
+                  className="opla_template-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              template 1
+            </b>
           </div>
         </div>
       </div>
     </div>
     <div
-      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "168px",
-        }
-      }
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
         role="presentation"
         style={
           Object {
-            "textDecoration": "none",
             "width": "100%",
           }
         }
       >
         <div
-          style={
-            Object {
-              "color": "#666",
-              "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
-            }
-          }
+          className="opla_template-infoC selectedListItem"
         >
           <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="opla_template-imgCell"
           >
-            template 2
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            <img
-              alt="template 2"
-              src="./images/robots/robot-1.svg"
+            <div
+              className="opla_template-backgroundCell"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "backgroundImage": "url(./images/robots/robot-1.svg)",
                 }
               }
-            />
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="template 2"
+                  className="opla_template-img"
+                  src="./images/robots/robot-1.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              template 2
+            </b>
           </div>
         </div>
       </div>
@@ -244,65 +179,48 @@ exports[`components/TemplatesList renders some items 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectedListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "168px",
-        }
-      }
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
         role="presentation"
         style={
           Object {
-            "textDecoration": "none",
             "width": "100%",
           }
         }
       >
         <div
-          style={
-            Object {
-              "color": "#666",
-              "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
-            }
-          }
+          className="opla_template-infoC selectedListItem"
         >
           <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="opla_template-imgCell"
           >
-            template 1
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            <img
-              alt="template 1"
-              src="./images/robots/robot-0.svg"
+            <div
+              className="opla_template-backgroundCell"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "backgroundImage": "url(./images/robots/robot-0.svg)",
                 }
               }
-            />
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="template 1"
+                  className="opla_template-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              template 1
+            </b>
           </div>
         </div>
       </div>
@@ -319,129 +237,95 @@ exports[`components/TemplatesList renders without selected template 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "168px",
-        }
-      }
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
         role="presentation"
         style={
           Object {
-            "textDecoration": "none",
             "width": "100%",
           }
         }
       >
         <div
-          style={
-            Object {
-              "color": "#666",
-              "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
-            }
-          }
+          className="opla_template-infoC selectableListItem"
         >
           <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="opla_template-imgCell"
           >
-            Template 1
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            <img
-              alt="Template 1"
-              src="./images/robots/robot-0.svg"
+            <div
+              className="opla_template-backgroundCell"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "backgroundImage": "url(./images/robots/robot-0.svg)",
                 }
               }
-            />
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="Template 1"
+                  className="opla_template-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              Template 1
+            </b>
           </div>
         </div>
       </div>
     </div>
     <div
-      className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-      style={
-        Object {
-          "height": "168px",
-        }
-      }
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
         role="presentation"
         style={
           Object {
-            "textDecoration": "none",
             "width": "100%",
           }
         }
       >
         <div
-          style={
-            Object {
-              "color": "#666",
-              "fontSize": "16px",
-              "fontWeight": "400",
-              "height": "87%",
-              "lineHeight": "1.1",
-              "padding": "16px",
-            }
-          }
+          className="opla_template-infoC selectableListItem"
         >
           <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
+            className="opla_template-imgCell"
           >
-            Template 2
-          </div>
-          <div
-            style={
-              Object {
-                "display": "table-row",
-                "textAlign": "center",
-                "width": "100%",
-              }
-            }
-          >
-            <img
-              alt="Template 2"
-              src="./images/robots/robot-1.svg"
+            <div
+              className="opla_template-backgroundCell"
               style={
                 Object {
-                  "margin": "30px",
-                  "width": "40%",
+                  "backgroundImage": "url(./images/robots/robot-1.svg)",
                 }
               }
-            />
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="Template 2"
+                  className="opla_template-img"
+                  src="./images/robots/robot-1.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              Template 2
+            </b>
           </div>
         </div>
       </div>

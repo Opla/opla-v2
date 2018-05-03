@@ -29,7 +29,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           }
         }
       >
-        Opla !
+        Welcome
       </h4>
       <div
         style={
@@ -38,7 +38,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           }
         }
       >
-        Welcome to our five minutes installation process! Just fill in the informations below and you will get the most powerfull and extendable bot platform in the world.
+        Create your open conversational robot at the speed of light. Just follow the instructions, no coding required !
       </div>
     </div>
   </section>
@@ -86,126 +86,71 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
         className="mdc-layout-grid__inner"
       >
         <div
-          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-          style={
-            Object {
-              "height": "168px",
-            }
-          }
+          className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
         >
           <div
             onClick={[Function]}
             role="presentation"
             style={
               Object {
-                "textDecoration": "none",
                 "width": "100%",
               }
             }
           >
             <div
-              style={
-                Object {
-                  "color": "#666",
-                  "fontSize": "16px",
-                  "fontWeight": "400",
-                  "height": "87%",
-                  "lineHeight": "1.1",
-                  "padding": "16px",
-                }
-              }
+              className="opla_template-infoC selectableListItem"
             >
               <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
+                className="opla_template-imgCell"
               >
-                Empty
-              </div>
-              <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
-              >
-                <img
-                  alt="Empty"
-                  src="./images/robots/robot-0.svg"
+                <div
+                  className="opla_template-backgroundCell"
                   style={
                     Object {
-                      "margin": "30px",
-                      "width": "40%",
+                      "backgroundImage": "url(./images/robots/robot-0.svg)",
                     }
                   }
-                />
+                >
+                  <div
+                    className="opla_template-imgMask"
+                  >
+                    <img
+                      alt="Empty"
+                      className="opla_template-img"
+                      src="./images/robots/robot-0.svg"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                className="opla_template-textCell"
+              >
+                <b>
+                  Empty
+                </b>
               </div>
             </div>
           </div>
         </div>
         <div
-          className="mdl-shadow--2dp selectableListItem mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
-          style={
-            Object {
-              "height": "168px",
-            }
-          }
+          className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
         >
           <div
             onClick={[Function]}
             role="presentation"
             style={
               Object {
-                "textDecoration": "none",
                 "width": "100%",
               }
             }
           >
             <div
-              style={
-                Object {
-                  "color": "#666",
-                  "fontSize": "16px",
-                  "fontWeight": "400",
-                  "height": "87%",
-                  "lineHeight": "1.1",
-                  "padding": "16px",
-                }
-              }
+              className="opla_template-infoC selectableListItem"
             >
               <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
+                className="opla_template-imgCell"
               >
-                Import
-              </div>
-              <div
-                style={
-                  Object {
-                    "display": "table-row",
-                    "textAlign": "center",
-                    "width": "100%",
-                  }
-                }
-              >
-                <form
-                  style={
-                    Object {
-                      "width": "100%",
-                    }
-                  }
-                >
+                <form>
                   <div
                     className="fileInput"
                   >
@@ -222,29 +167,16 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                   </div>
                 </form>
               </div>
+              <div
+                className="opla_template-textCell"
+              >
+                <b>
+                  Import
+                </b>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div
-      style={
-        Object {
-          "padding": "16px",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-          }
-        }
-      >
-        Want more ?
-        <br />
-        In a near future we will release our BotStore to find the perfect bot from our community.
-        <br />
       </div>
     </div>
   </section>
@@ -483,32 +415,24 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
         }
       }
     >
-      <button
-        className="mdc-button mdc-button--raised"
-        disabled={false}
-        id={null}
-        onClick={null}
-        type="submit"
-      >
-        
-        Let's go
-      </button>
-      <button
-        className="mdc-button"
-        disabled={false}
-        id={null}
-        onClick={null}
+      <div
         style={
           Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "marginLeft": "16px",
+            "padding": "16px",
           }
         }
-        type="button"
       >
-        
-        Advanced settings
-      </button>
+        <button
+          className="mdc-button mdc-button--raised"
+          disabled={false}
+          id={null}
+          onClick={null}
+          type="submit"
+        >
+          
+          Opla !
+        </button>
+      </div>
     </section>
   </form>
 </div>
