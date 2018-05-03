@@ -29,7 +29,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           }
         }
       >
-        Opla !
+        Welcome
       </h4>
       <div
         style={
@@ -38,7 +38,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           }
         }
       >
-        Welcome to our five minutes installation process! Just fill in the informations below and you will get the most powerfull and extendable bot platform in the world.
+        Create your open conversational robot at the speed of light. Just follow the instructions, no coding required !
       </div>
     </div>
   </section>

@@ -170,7 +170,8 @@ export class CreateAssistantBase extends Component {
           <div style={headerStyle}>
             <h4 style={h4}>Welcome</h4>
             <div style={secText}>
-              Create your open conversational robot at the speed of light. Just follow the instructions, no coding required !
+              Create your open conversational robot at the speed of light. Just
+              follow the instructions, no coding required !
             </div>
           </div>
         </section>
