@@ -168,11 +168,9 @@ export class CreateAssistantBase extends Component {
       <div className="mdl-layout__content mdl-color--grey-100">
         <section className="mdl-color--white mdl-shadow--2dp" style={boxStyle}>
           <div style={headerStyle}>
-            <h4 style={h4}>Opla !</h4>
+            <h4 style={h4}>Welcome</h4>
             <div style={secText}>
-              Welcome to our five minutes installation process! Just fill in the
-              informations below and you will get the most powerfull and
-              extendable bot platform in the world.
+              Create your open conversational robot at the speed of light. Just follow the instructions, no coding required !
             </div>
           </div>
         </section>
