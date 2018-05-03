@@ -19,11 +19,6 @@ import {
 } from "../actions/api";
 import { appSetTitle, setMessage } from "../actions/app";
 
-const advancedStyle = {
-  marginLeft: "16px",
-  color: "rgba(0, 0, 0, 0.54)",
-};
-
 const boxStyle = {
   margin: "16px",
 };
@@ -60,7 +55,7 @@ export class CreateAssistantBase extends Component {
   }
 
   componentWillMount() {
-    this.props.appSetTitle("Create your virtual assistant");
+    this.props.appSetTitle("Create your conversational robot");
   }
 
   componentDidUpdate() {
@@ -198,15 +193,6 @@ export class CreateAssistantBase extends Component {
                 acceptImport={acceptImport}
               />
             )}
-          <div style={headerStyle}>
-            <div style={secText}>
-              Want more ?
-              <br />
-              In a near future we will release our BotStore to find the perfect
-              bot from our community.
-              <br />
-            </div>
-          </div>
         </section>
         <form
           id="create-assistant-form"
@@ -283,12 +269,11 @@ export class CreateAssistantBase extends Component {
             </div>
           </section>
           <section style={boxStyle}>
-            <Button type="submit" raised>
-              Let&apos;s go
-            </Button>
-            <Button type="button" style={advancedStyle}>
-              Advanced settings
-            </Button>
+            <div style={headerStyle}>
+              <Button type="submit" raised>
+                Opla !
+              </Button>
+            </div>
           </section>
         </form>
       </div>

@@ -86,7 +86,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
         className="mdc-layout-grid__inner"
       >
         <div
-          className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+          className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
         >
           <div
             onClick={[Function]}
@@ -98,13 +98,13 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
             }
           >
             <div
-              className="tpl-infoC selectableListItem"
+              className="opla_template-infoC selectableListItem"
             >
               <div
-                className="tpl-imgCell"
+                className="opla_template-imgCell"
               >
                 <div
-                  className="tpl-backgroundCell"
+                  className="opla_template-backgroundCell"
                   style={
                     Object {
                       "backgroundImage": "url(./images/robots/robot-0.svg)",
@@ -112,18 +112,18 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                   }
                 >
                   <div
-                    className="tpl-imgMask"
+                    className="opla_template-imgMask"
                   >
                     <img
                       alt="Empty"
-                      className="tpl-img"
+                      className="opla_template-img"
                       src="./images/robots/robot-0.svg"
                     />
                   </div>
                 </div>
               </div>
               <div
-                className="tpl-textCell"
+                className="opla_template-textCell"
               >
                 <b>
                   Empty
@@ -133,7 +133,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+          className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
         >
           <div
             onClick={[Function]}
@@ -145,10 +145,10 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
             }
           >
             <div
-              className="tpl-infoC selectableListItem"
+              className="opla_template-infoC selectableListItem"
             >
               <div
-                className="tpl-imgCell"
+                className="opla_template-imgCell"
               >
                 <form>
                   <div
@@ -168,7 +168,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                 </form>
               </div>
               <div
-                className="tpl-textCell"
+                className="opla_template-textCell"
               >
                 <b>
                   Import
@@ -177,26 +177,6 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div
-      style={
-        Object {
-          "padding": "16px",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-          }
-        }
-      >
-        Want more ?
-        <br />
-        In a near future we will release our BotStore to find the perfect bot from our community.
-        <br />
       </div>
     </div>
   </section>
@@ -435,32 +415,24 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
         }
       }
     >
-      <button
-        className="mdc-button mdc-button--raised"
-        disabled={false}
-        id={null}
-        onClick={null}
-        type="submit"
-      >
-        
-        Let's go
-      </button>
-      <button
-        className="mdc-button"
-        disabled={false}
-        id={null}
-        onClick={null}
+      <div
         style={
           Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "marginLeft": "16px",
+            "padding": "16px",
           }
         }
-        type="button"
       >
-        
-        Advanced settings
-      </button>
+        <button
+          className="mdc-button mdc-button--raised"
+          disabled={false}
+          id={null}
+          onClick={null}
+          type="submit"
+        >
+          
+          Opla !
+        </button>
+      </div>
     </section>
   </form>
 </div>

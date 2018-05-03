@@ -28,7 +28,7 @@ const TemplatesList = ({
         });
 
         return (
-          <Cell key={key} className="tpl-templateBox" span={2}>
+          <Cell key={key} className="opla_template-templateBox" span={2}>
             <div
               role="presentation"
               style={{ width: "100%" }}
@@ -36,30 +36,30 @@ const TemplatesList = ({
                 onSelect(index);
               }}
             >
-              <div className={`tpl-infoC ${className}`}>
-                <div className="tpl-imgCell">
+              <div className={`opla_template-infoC ${className}`}>
+                <div className="opla_template-imgCell">
                   {item.name === "Import" ? (
                     <form>
                       <FileInput onLoad={onImport} accept={acceptImport} />
                     </form>
                   ) : (
                     <div
-                      className="tpl-backgroundCell"
+                      className="opla_template-backgroundCell"
                       style={{
                         backgroundImage: `url(./images/robots/robot-${index}.svg)`,
                       }}
                     >
-                      <div className="tpl-imgMask">
+                      <div className="opla_template-imgMask">
                         <img
                           src={`./images/robots/robot-${index}.svg`}
-                          className="tpl-img"
+                          className="opla_template-img"
                           alt={item.name}
                         />
                       </div>
                     </div>
                   )}
                 </div>
-                <div className="tpl-textCell">
+                <div className="opla_template-textCell">
                   <b>{item.name}</b>
                 </div>
               </div>

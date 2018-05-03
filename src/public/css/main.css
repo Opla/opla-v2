@@ -686,41 +686,41 @@
    margin-right: 20px;
  }
  
- /* templatesList (tpl) Component Style */
-.tpl-templateBox {
+ /* templatesList (.opla_template) Component Style */
+.opla_template-templateBox {
   height: 250px;
   outline: 5px solid transparent;
   text-decoration: "none";
 }
 
- .tpl-infoC {
+ .opla_template-infoC {
   font-size: 16px;
   font-weight: 300;
   color: #FFF;
   height: 180px;
 }
 
-.tpl-imgCell {
+.opla_template-imgCell {
   position: relative;
   width: 100%;
   height: 180px;
   background-color: rgb(245, 245, 245);
 }
 
-.tpl-backgroundCell{
+.opla_template-backgroundCell{
   background-size: 10000%; /* Not very beautiful but work */
-  background-position: center top; 
+  background-position: center right; 
   width: 100%;
   height: 100%;
 }
 
-.tpl-imgMask{
+.opla_template-imgMask{
   background-color: rgba(255, 255, 255, 0.2);
   width: 100%;
   height: 100%;
 }
 
-.tpl-img {
+.opla_template-img {
   width: 80px;position: absolute;  
   text-align: center;
   margin: 0;
@@ -730,26 +730,26 @@
   transform: translate(-50%, -50%);
 }
 
-.tpl-templateBox:hover .tpl-imgCell {
+.opla_template-templateBox:hover .opla_template-imgCell {
   background-color: #EEE;
 }
 
-.tpl-templateBox:hover .tpl-imgMask {
+.opla_template-templateBox:hover .opla_template-imgMask {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
-.tpl-textCell {
+.opla_template-textCell {
   padding: 16px;
   line-height: "1.6";
   background-color: rgb(69, 90, 100);
 }
 
-.tpl-templateBox .selectedListItem {
+.opla_template-templateBox .selectedListItem {
   outline: 5px solid rgba(86, 38, 130, 0.80);
 }
 
 /* Override fileInput */
-.tpl-templateBox .fileInput {
+.opla_template-templateBox .fileInput {
   position: absolute;  
   text-align: center;
   top: 50%;

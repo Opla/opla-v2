@@ -8,7 +8,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
     className="mdc-layout-grid__inner"
   >
     <div
-      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
@@ -20,10 +20,10 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
         }
       >
         <div
-          className="tpl-infoC selectedListItem"
+          className="opla_template-infoC selectedListItem"
         >
           <div
-            className="tpl-imgCell"
+            className="opla_template-imgCell"
           >
             <form>
               <div
@@ -43,7 +43,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
             </form>
           </div>
           <div
-            className="tpl-textCell"
+            className="opla_template-textCell"
           >
             <b>
               Import
@@ -64,7 +64,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
@@ -76,13 +76,13 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
         }
       >
         <div
-          className="tpl-infoC selectableListItem"
+          className="opla_template-infoC selectableListItem"
         >
           <div
-            className="tpl-imgCell"
+            className="opla_template-imgCell"
           >
             <div
-              className="tpl-backgroundCell"
+              className="opla_template-backgroundCell"
               style={
                 Object {
                   "backgroundImage": "url(./images/robots/robot-0.svg)",
@@ -90,18 +90,18 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               }
             >
               <div
-                className="tpl-imgMask"
+                className="opla_template-imgMask"
               >
                 <img
                   alt="template 1"
-                  className="tpl-img"
+                  className="opla_template-img"
                   src="./images/robots/robot-0.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="tpl-textCell"
+            className="opla_template-textCell"
           >
             <b>
               template 1
@@ -111,7 +111,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       </div>
     </div>
     <div
-      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
@@ -123,13 +123,13 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
         }
       >
         <div
-          className="tpl-infoC selectedListItem"
+          className="opla_template-infoC selectedListItem"
         >
           <div
-            className="tpl-imgCell"
+            className="opla_template-imgCell"
           >
             <div
-              className="tpl-backgroundCell"
+              className="opla_template-backgroundCell"
               style={
                 Object {
                   "backgroundImage": "url(./images/robots/robot-1.svg)",
@@ -137,18 +137,18 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               }
             >
               <div
-                className="tpl-imgMask"
+                className="opla_template-imgMask"
               >
                 <img
                   alt="template 2"
-                  className="tpl-img"
+                  className="opla_template-img"
                   src="./images/robots/robot-1.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="tpl-textCell"
+            className="opla_template-textCell"
           >
             <b>
               template 2
@@ -179,7 +179,7 @@ exports[`components/TemplatesList renders some items 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
@@ -191,13 +191,13 @@ exports[`components/TemplatesList renders some items 1`] = `
         }
       >
         <div
-          className="tpl-infoC selectedListItem"
+          className="opla_template-infoC selectedListItem"
         >
           <div
-            className="tpl-imgCell"
+            className="opla_template-imgCell"
           >
             <div
-              className="tpl-backgroundCell"
+              className="opla_template-backgroundCell"
               style={
                 Object {
                   "backgroundImage": "url(./images/robots/robot-0.svg)",
@@ -205,18 +205,18 @@ exports[`components/TemplatesList renders some items 1`] = `
               }
             >
               <div
-                className="tpl-imgMask"
+                className="opla_template-imgMask"
               >
                 <img
                   alt="template 1"
-                  className="tpl-img"
+                  className="opla_template-img"
                   src="./images/robots/robot-0.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="tpl-textCell"
+            className="opla_template-textCell"
           >
             <b>
               template 1
@@ -237,7 +237,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
@@ -249,13 +249,13 @@ exports[`components/TemplatesList renders without selected template 1`] = `
         }
       >
         <div
-          className="tpl-infoC selectableListItem"
+          className="opla_template-infoC selectableListItem"
         >
           <div
-            className="tpl-imgCell"
+            className="opla_template-imgCell"
           >
             <div
-              className="tpl-backgroundCell"
+              className="opla_template-backgroundCell"
               style={
                 Object {
                   "backgroundImage": "url(./images/robots/robot-0.svg)",
@@ -263,18 +263,18 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               }
             >
               <div
-                className="tpl-imgMask"
+                className="opla_template-imgMask"
               >
                 <img
                   alt="Template 1"
-                  className="tpl-img"
+                  className="opla_template-img"
                   src="./images/robots/robot-0.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="tpl-textCell"
+            className="opla_template-textCell"
           >
             <b>
               Template 1
@@ -284,7 +284,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       </div>
     </div>
     <div
-      className="tpl-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
     >
       <div
         onClick={[Function]}
@@ -296,13 +296,13 @@ exports[`components/TemplatesList renders without selected template 1`] = `
         }
       >
         <div
-          className="tpl-infoC selectableListItem"
+          className="opla_template-infoC selectableListItem"
         >
           <div
-            className="tpl-imgCell"
+            className="opla_template-imgCell"
           >
             <div
-              className="tpl-backgroundCell"
+              className="opla_template-backgroundCell"
               style={
                 Object {
                   "backgroundImage": "url(./images/robots/robot-1.svg)",
@@ -310,18 +310,18 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               }
             >
               <div
-                className="tpl-imgMask"
+                className="opla_template-imgMask"
               >
                 <img
                   alt="Template 2"
-                  className="tpl-img"
+                  className="opla_template-img"
                   src="./images/robots/robot-1.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="tpl-textCell"
+            className="opla_template-textCell"
           >
             <b>
               Template 2
