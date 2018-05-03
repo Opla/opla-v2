@@ -53,6 +53,7 @@ describe("containers/Dashboard", () => {
         appSetTitle={appSetTitleSpy}
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
+        renderingValue
         selectedBotId={"bot1"}
         metrics={metrics}
       />,
@@ -95,6 +96,7 @@ describe("containers/Dashboard", () => {
         appSetTitle={jest.fn()}
         fetchMetrics={jest.fn()}
         isSignedIn
+        renderingValue
         metrics={metrics}
       />,
     );
