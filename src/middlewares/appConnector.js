@@ -9,10 +9,10 @@ export default class AppConnectorMiddleware {
     this.controllers = controllers;
     this.classes = ["bot"];
     this.name = "app-connector";
+    this.onDispatch = this.onDispatch.bind(this);
   }
 
   async onDispatch(className, data) {
-    logger.info("app-connector onDispatch", className, data.action);
     switch (data.action) {
       case "publishBot":
         await this.publishBot(data);
@@ -30,6 +30,12 @@ export default class AppConnectorMiddleware {
       (middleware) => middleware.name === "app-connector",
     );
 
+    if (appConnector === undefined) {
+      throw new Error(
+        "app-connector must be registered before trying to publish a bot",
+      );
+    }
+
     appConnector.status = "start";
     await controller.register(appConnector);
   }
@@ -43,7 +49,7 @@ export default class AppConnectorMiddleware {
       name: this.name,
       classes: this.classes,
       status: "start",
-      onDispatch: this.onDispatch.bind(this),
+      onDispatch: this.onDispatch,
     };
   }
 }
