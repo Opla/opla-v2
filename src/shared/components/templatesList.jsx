@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { Grid, Inner, Cell } from "zrmc";
 import makeClassName from "classnames";
 import FileInput from "zoapp-front/components/fileInput";
+import { robotsColors} from "../utils/robotsColors";
 
 const TemplatesList = ({
   items,
@@ -28,7 +29,12 @@ const TemplatesList = ({
         });
 
         return (
-          <Cell key={key} className="opla_template-templateBox" span={2}>
+          <Cell
+            key={key}
+            className="opla_template-templateBox"
+            span={1}
+            order={item.name === "Empty" ? 1 : 2}
+          >
             <div
               role="presentation"
               style={{ width: "100%" }}
@@ -46,7 +52,8 @@ const TemplatesList = ({
                     <div
                       className="opla_template-backgroundCell"
                       style={{
-                        backgroundImage: `url(./images/robots/robot-${index}.svg)`,
+                        backgroundColor:
+                          robotsColors[`robot-${index}`].mainColor,
                       }}
                     >
                       <div className="opla_template-imgMask">
