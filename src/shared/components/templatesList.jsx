@@ -32,7 +32,7 @@ const TemplatesList = ({
           <Cell
             key={key}
             className="opla_template-templateBox"
-            span={1}
+            spanDevice={{ desktop: 2, tablet: 4, phone: 6 }}
             order={item.name === "Empty" ? 1 : 2}
           >
             <div
