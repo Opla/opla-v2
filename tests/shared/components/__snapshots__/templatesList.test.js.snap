@@ -8,7 +8,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -64,7 +64,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -85,7 +85,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               className="opla_template-backgroundCell"
               style={
                 Object {
-                  "backgroundImage": "url(./images/robots/robot-0.svg)",
+                  "backgroundColor": "#4cdbc4",
                 }
               }
             >
@@ -111,7 +111,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       </div>
     </div>
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -132,7 +132,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               className="opla_template-backgroundCell"
               style={
                 Object {
-                  "backgroundImage": "url(./images/robots/robot-1.svg)",
+                  "backgroundColor": "#54c0eb",
                 }
               }
             >
@@ -179,7 +179,7 @@ exports[`components/TemplatesList renders some items 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -200,7 +200,7 @@ exports[`components/TemplatesList renders some items 1`] = `
               className="opla_template-backgroundCell"
               style={
                 Object {
-                  "backgroundImage": "url(./images/robots/robot-0.svg)",
+                  "backgroundColor": "#4cdbc4",
                 }
               }
             >
@@ -237,7 +237,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -258,7 +258,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               className="opla_template-backgroundCell"
               style={
                 Object {
-                  "backgroundImage": "url(./images/robots/robot-0.svg)",
+                  "backgroundColor": "#4cdbc4",
                 }
               }
             >
@@ -284,7 +284,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       </div>
     </div>
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2"
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -305,7 +305,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               className="opla_template-backgroundCell"
               style={
                 Object {
-                  "backgroundImage": "url(./images/robots/robot-1.svg)",
+                  "backgroundColor": "#54c0eb",
                 }
               }
             >
