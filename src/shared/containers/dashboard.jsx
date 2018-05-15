@@ -48,12 +48,18 @@ export class DashboardBase extends Component {
     this.props.appSetTitle("Dashboard");
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.selectedBotId &&
-      this.props.selectedBotId !== prevProps.selectedBotId
-    ) {
+  componentDidMount() {
+    if (this.props.selectedBotId) {
       this.props.fetchMetrics(this.props.selectedBotId);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.selectedBotId &&
+      this.props.selectedBotId !== nextProps.selectedBotId
+    ) {
+      this.props.fetchMetrics(nextProps.selectedBotId);
     }
   }
 
