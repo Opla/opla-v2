@@ -29,7 +29,7 @@ describe("containers/Dashboard", () => {
         rate: 0.230115,
       },
       responses: {
-        speed: 40,
+        speed: 40.219032,
       },
     };
 

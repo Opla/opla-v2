@@ -156,7 +156,10 @@ export class DashboardBase extends Component {
 
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      {this.renderingValue(metrics.responses.speed, "ms")}
+                      {this.renderingValue(
+                        metrics.responses.speed.toFixed(2),
+                        "ms",
+                      )}
                       <br />
                       <span style={legendStyle}>response time</span>
                     </div>
