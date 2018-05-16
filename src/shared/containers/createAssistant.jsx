@@ -10,7 +10,7 @@ import Zrmc, { Select, MenuItem, Button, TextField } from "zrmc";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ProcessingDialog from "zoapp-front/containers/processingDialog";
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitle, setMessage } from "zoapp-front/actions/app";
 
 import TemplatesList from "../components/templatesList";
 import {
@@ -18,7 +18,6 @@ import {
   apiGetTemplatesRequest,
   apiGetLanguagesRequest,
 } from "../actions/api";
-import { setMessage } from "../actions/app";
 
 const advancedStyle = {
   marginLeft: "16px",
