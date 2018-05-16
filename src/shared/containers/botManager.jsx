@@ -114,7 +114,7 @@ class BotManager extends Component {
     Zrmc.showDialog({
       header: "Add new intent",
       field,
-      actions: [{ name: "Create" }, { name: "Cancel" }],
+      actions: [{ name: "Cancel" }, { name: "Create" }],
       onAction: this.onAddIntent,
       data,
     });
@@ -146,7 +146,7 @@ class BotManager extends Component {
       Zrmc.showDialog({
         header: "Edit Bot",
         field,
-        actions: [{ name: "Save" }, { name: "Cancel" }],
+        actions: [{ name: "Cancel" }, { name: "Save" }],
         onAction: this.onEditWelcome,
         data,
       });

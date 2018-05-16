@@ -18,8 +18,8 @@ const displayProviderEditor = (
 ) => {
   const actions = [];
   if (action) {
-    actions.push({ title: action, name: actionDef });
     actions.push({ name: "Cancel" });
+    actions.push({ title: action, name: actionDef });
   }
 
   Zrmc.showDialog({

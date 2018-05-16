@@ -60,7 +60,7 @@ class SandboxContainer extends Component {
     Zrmc.showDialog({
       header: "Sandbox",
       body: "Do you want to reset conversation and context ?",
-      actions: [{ name: "Reset" }, { name: "Cancel" }],
+      actions: [{ name: "Cancel" }, { name: "Reset" }],
       onAction: this.onReset,
     });
   };
