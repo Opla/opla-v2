@@ -18,9 +18,9 @@ import { connect } from "react-redux";
 import Dashboard from "./dashboard";
 
 const titleStyle = {
-  "text-align": "center",
+  textAlign: "center",
   padding: "15px 10px 0px 10px",
-  "font-weight": "300",
+  fontWeight: "300",
 };
 
 const Home = ({ isSignedIn }) => {
@@ -36,7 +36,7 @@ const Home = ({ isSignedIn }) => {
             <h1 style={titleStyle}>Your open conversational robot</h1>
           </CardTitle>
           <CardMedia src="images/bg.jpg" style={{ height: "240px" }} />
-          <CardText style={{ "padding-top": "20px" }}>
+          <CardText style={{ paddingTop: "20px" }}>
             It is easy and fast. In less than 5 min, your bot will be ready!
           </CardText>
           <CardActions>
