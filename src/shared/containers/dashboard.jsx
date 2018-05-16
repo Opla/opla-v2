@@ -48,12 +48,18 @@ export class DashboardBase extends Component {
     this.props.appSetTitle("Dashboard");
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.selectedBotId &&
-      this.props.selectedBotId !== prevProps.selectedBotId
-    ) {
+  componentDidMount() {
+    if (this.props.selectedBotId) {
       this.props.fetchMetrics(this.props.selectedBotId);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.selectedBotId &&
+      this.props.selectedBotId !== nextProps.selectedBotId
+    ) {
+      this.props.fetchMetrics(nextProps.selectedBotId);
     }
   }
 
@@ -156,7 +162,10 @@ export class DashboardBase extends Component {
 
                   <Cell span={4}>
                     <div style={metricStyle}>
-                      {this.renderingValue(metrics.responses.speed, "ms")}
+                      {this.renderingValue(
+                        metrics.responses.speed.toFixed(2),
+                        "ms",
+                      )}
                       <br />
                       <span style={legendStyle}>response time</span>
                     </div>
