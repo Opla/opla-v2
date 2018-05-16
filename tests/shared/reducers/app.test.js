@@ -4,9 +4,9 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import * as actions from "shared/actions/app";
 import * as apiActions from "shared/actions/api";
 import * as authActions from "zoapp-front/actions/auth";
+import { appSetTitle } from "zoapp-front/actions/app";
 import reducer, {
   initialState,
   defaultTemplates,
@@ -102,7 +102,7 @@ describe("reducers/app", () => {
       const prevState = reducer(undefined, {});
       expect(prevState).toEqual(initialState);
 
-      const state = reducer(prevState, actions.appSetTitle(title));
+      const state = reducer(prevState, appSetTitle(title));
       expect(state).toEqual({
         ...prevState,
         titleName: title,
@@ -112,7 +112,7 @@ describe("reducers/app", () => {
     it("resets the state when user signs out", () => {
       const title = "some title";
 
-      const prevState = reducer(undefined, actions.appSetTitle(title));
+      const prevState = reducer(undefined, appSetTitle(title));
       expect(prevState).toEqual({
         ...initialState,
         titleName: title,

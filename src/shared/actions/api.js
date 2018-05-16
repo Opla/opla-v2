@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import {
-  API_ADMIN,
-  API_SETADMINPARAMETERS,
   FETCH_FAILURE,
   FETCH_REQUEST,
   FETCH_SUCCESS,
@@ -34,14 +32,6 @@ import {
   API_GETTEMPLATES,
   API_GETLANGUAGES,
 } from "./constants";
-
-export function apiAdminRequest() {
-  return { type: API_ADMIN + FETCH_REQUEST };
-}
-
-export function apiSetAdminParametersRequest(params) {
-  return { type: API_SETADMINPARAMETERS + FETCH_REQUEST, params };
-}
 
 export function apiCreateBot(botParams) {
   return { type: API_CREATEBOT + FETCH_REQUEST, botParams };

@@ -4,9 +4,6 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { appSetTitle } from "zoapp-front/actions/app";
-import { setMessage } from "zoapp-front/actions/message";
-
 import {
   APP_DELETEINTENTACTION,
   APP_SELECTINTENT,
@@ -45,5 +42,3 @@ export function appSetIntentAction(
 export function appDeleteIntentAction(actionContainer, selectedAction) {
   return { type: APP_DELETEINTENTACTION, actionContainer, selectedAction };
 }
-
-export { appSetTitle, setMessage };

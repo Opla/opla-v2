@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import Zrmc, { Grid, Inner, Cell, Button } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
+import { appSetTitle } from "zoapp-front/actions/app";
 
 import {
   apiGetIntentsRequest,
@@ -17,7 +18,7 @@ import {
   apiSaveBotRequest,
   apiImportRequest,
 } from "../actions/api";
-import { appUpdateIntent, appSetTitle } from "../actions/app";
+import { appUpdateIntent } from "../actions/app";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";
 import SandboxContainer from "./sandboxContainer";
