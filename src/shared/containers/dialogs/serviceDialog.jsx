@@ -106,19 +106,19 @@ class ServiceDialog extends Component {
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              this.onAction("save");
+              this.handleCloseDialog();
             }}
           >
-            Save
+            Cancel
           </Button>
           <Button
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              this.handleCloseDialog();
+              this.onAction("save");
             }}
           >
-            Cancel
+            Save
           </Button>
         </DialogFooter>
       </Dialog>

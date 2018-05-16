@@ -299,7 +299,7 @@ class ServicesContainer extends Component {
         Zrmc.showDialog({
           header: title,
           body: "Do you want to delete it ?",
-          actions: [{ name: "Delete" }, { name: "Cancel" }],
+          actions: [{ name: "Cancel" }, { name: "Delete" }],
           onAction: this.onEditAction,
           className,
         });

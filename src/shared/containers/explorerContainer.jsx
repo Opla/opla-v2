@@ -88,7 +88,7 @@ class ExplorerContainer extends Component {
     Zrmc.showDialog({
       header: "Add new intent",
       field,
-      actions: [{ name: "Create" }, { name: "Cancel" }],
+      actions: [{ name: "Cancel" }, { name: "Create" }],
       onAction: this.onAddIntent,
     });
   };
@@ -106,7 +106,7 @@ class ExplorerContainer extends Component {
     Zrmc.showDialog({
       header: "Rename intent",
       field,
-      actions: [{ name: "Rename" }, { name: "Cancel" }],
+      actions: [{ name: "Cancel" }, { name: "Rename" }],
       onAction: this.onRenameIntent,
     });
   };
@@ -123,7 +123,7 @@ class ExplorerContainer extends Component {
     Zrmc.showDialog({
       header: "Intent",
       body: `${intent.name} Do you want to delete it ?`,
-      actions: [{ name: "Delete" }, { name: "Cancel" }],
+      actions: [{ name: "Cancel" }, { name: "Delete" }],
       onAction: this.onDeleteIntent,
     });
   };

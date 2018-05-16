@@ -137,19 +137,19 @@ class IODialog extends Component {
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                this.handleImport();
+                this.handleCloseDialog();
               }}
             >
-              Import
+              Cancel
             </Button>
             <Button
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                this.handleCloseDialog();
+                this.handleImport();
               }}
             >
-              Cancel
+              Import
             </Button>
           </DialogFooter>
         </Dialog>
@@ -181,19 +181,19 @@ class IODialog extends Component {
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              this.handleImport();
+              this.handleCloseDialog();
             }}
           >
-            Import
+            Cancel
           </Button>
           <Button
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              this.handleCloseDialog();
+              this.handleImport();
             }}
           >
-            Cancel
+            Import
           </Button>
         </DialogFooter>
       );

@@ -231,19 +231,19 @@ class PublishDialog extends Component {
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              this.onAction("publish");
+              this.handleCloseDialog();
             }}
           >
-            Publish
+            Cancel
           </Button>
           <Button
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              this.handleCloseDialog();
+              this.onAction("publish");
             }}
           >
-            Cancel
+            Publish
           </Button>
         </DialogFooter>
       </Dialog>

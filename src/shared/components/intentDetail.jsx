@@ -172,7 +172,7 @@ export const displayActionEditor = (
   Zrmc.showDialog({
     header: title,
     body: content,
-    actions: [{ name: actionDef, title: action }, { name: "Cancel" }],
+    actions: [{ name: "Cancel" }, { name: actionDef, title: action }],
     onAction: onEditAction,
     style: { width: "720px" },
   });

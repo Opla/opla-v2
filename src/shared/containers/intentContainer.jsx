@@ -216,7 +216,7 @@ class IntentContainer extends Component {
       Zrmc.showDialog({
         header: "Action",
         body: "Do you want to delete it ?",
-        actions: [{ name: "Delete" }, { name: "Cancel" }],
+        actions: [{ name: "Cancel" }, { name: "Delete" }],
         onAction: this.handleEditAction,
       });
     }
