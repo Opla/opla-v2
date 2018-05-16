@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 
-import { appSetTitle } from "../actions/app";
+import { appSetTitle } from "zoapp-front/actions/app";
 import { apiGetMetricsRequest } from "../actions/api";
 
 const metricStyle = {

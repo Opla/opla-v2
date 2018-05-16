@@ -22,7 +22,7 @@ import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
 import { apiSetAdminParametersRequest } from "zoapp-front/actions/api";
 
-import { appSetTitle } from "../actions/app";
+import { appSetTitle } from "zoapp-front/actions/app";
 import { apiSaveBotRequest } from "../actions/api";
 import ServicesContainer from "./servicesContainer";
 import PluginsManager from "../utils/pluginsManager";
