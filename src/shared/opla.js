@@ -13,6 +13,7 @@ import CreateAssistant from "OplaContainers/createAssistant";
 import AdminManager from "OplaContainers/adminManager";
 import BotManager from "OplaContainers/botManager";
 import configureStore from "OplaLibs/store";
+import DrawerFooter from "OplaContainers/drawerFooter";
 import Zrmc from "zrmc";
 import PublishDialog from "OplaContainers/dialogs/publishDialog";
 import { defaultTemplates, defaultLanguages } from "OplaLibs/reducers/app";
@@ -32,6 +33,7 @@ const app = {
     drawer: {
       type: "persistent",
       themeDark: true,
+      renderFooter: (props) => <DrawerFooter {...props} />,
     },
   },
   templates: defaultTemplates,
@@ -85,11 +87,20 @@ const app = {
     {
       id: "6",
       isDrawerItem: true,
-      name: "Help",
-      icon: "help",
-      path: "/help",
+      name: "Documentation",
+      icon: "book",
+      path: "/documentation",
       access: "all",
-      render: (props) => React.createElement(Screen, props, "Help"),
+      render: (props) => React.createElement(Screen, props, "Documentation"),
+    },
+    {
+      id: "7",
+      isDrawerItem: true,
+      name: "Support",
+      icon: "help",
+      path: "/support",
+      access: "all",
+      render: (props) => React.createElement(Screen, props, "Support"),
     },
   ],
 };
