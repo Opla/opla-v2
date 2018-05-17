@@ -25,11 +25,19 @@ class PublishContainer extends Component {
       return null;
     }
 
-    adminParameters.host = config.backend.api.host;
-    adminParameters.port = config.backend.api.port;
-    adminParameters.secure = config.backend.secure;
+    const parameters = {
+      botId: adminParameters.botId,
+      appId: adminParameters.application.id,
+      appSecret: adminParameters.application.secret,
+      host: config.backend.api.host,
+      port: config.backend.api.port,
+      secure: config.backend.secure,
+      anonymous_secret: adminParameters.application.policies.anonymous_secret,
+      path: "/",
+      language: "fr",
+    };
 
-    const params = encodeURI(JSON.stringify(adminParameters));
+    const params = encodeURI(JSON.stringify(parameters));
 
     return (
       <iframe
