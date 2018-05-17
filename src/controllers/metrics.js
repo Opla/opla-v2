@@ -56,10 +56,10 @@ class MetricsController extends Controller {
   }
 
   async getSessionsMetrics(conversationsMessages) {
-    const sessionDurationSum = conversationsMessages.reduce(
-      (sum, c) => sum + (c.last - c.created_time),
-      0,
-    );
+    const sessionDurationSum = conversationsMessages.reduce((sum, c) => {
+      const sessionDuration = c.last > 0 ? c.last - c.created_time : 0;
+      return sum + sessionDuration;
+    }, 0);
 
     let averageSessionTime = 0;
     if (conversationsMessages.length > 0) {

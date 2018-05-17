@@ -75,4 +75,34 @@ describe("controllers/metrics", () => {
       expect(response.responses.speed).toEqual(57.5);
     });
   });
+
+  describe("getSessionsMetrics", () => {
+    it("should compute average session duration even without messages", async () => {
+      const conversationsMessages = [
+        {
+          id: "1",
+          participants: ["user1", "user2", "bot_bot1_123"],
+          created_time: new Date(Date.now() - 100),
+          last: 0,
+        },
+        {
+          id: "2",
+          participants: ["user1", "user3", "bot_bot1_123"],
+          created_time: new Date(Date.now() - 200),
+          last: new Date(Date.now()),
+        },
+      ];
+
+      const controller = new MetricsController(
+        "Metrics",
+        { zoapp: fakeZoapp },
+        "metrics",
+      );
+
+      const sessionsMetrics = await controller.getSessionsMetrics(
+        conversationsMessages,
+      );
+      expect(sessionsMetrics.duration).toEqual(100);
+    });
+  });
 });
