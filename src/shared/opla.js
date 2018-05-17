@@ -12,6 +12,7 @@ import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
 import AdminManager from "OplaContainers/adminManager";
 import BotManager from "OplaContainers/botManager";
+import PublishContainer from "OplaContainers/publishContainer";
 import configureStore from "OplaLibs/store";
 import DrawerFooter from "OplaContainers/drawerFooter";
 import Zrmc from "zrmc";
@@ -101,6 +102,14 @@ const app = {
       path: "/support",
       access: "all",
       render: (props) => React.createElement(Screen, props, "Support"),
+    },
+    {
+      id: "7",
+      isDrawerItem: false,
+      name: "chatbot",
+      path: "/publish/:name",
+      access: "all",
+      render: (props) => <PublishContainer {...props} />,
     },
   ],
 };
