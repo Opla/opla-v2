@@ -15,7 +15,9 @@ class OpenNLXMiddleware {
   }
 
   async handleMessengerActions(data, version = null) {
-    const bot = await this.mainControllers.getBots().getBot(data.origin);
+    const bot = await this.mainControllers
+      .getBots()
+      .getBot(data.conversationOrigin);
     if (!bot) return;
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     let v = version;
