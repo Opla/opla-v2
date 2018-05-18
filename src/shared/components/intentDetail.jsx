@@ -6,7 +6,14 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-import Zrmc, { List, ListItem, ListItemMeta, TextField, Button } from "zrmc";
+import Zrmc, {
+  DialogManager,
+  List,
+  ListItem,
+  ListItemMeta,
+  TextField,
+  Button,
+} from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
@@ -174,6 +181,10 @@ export const displayActionEditor = (
     body: content,
     actions: [{ name: "Cancel" }, { name: actionDef, title: action }],
     onAction: onEditAction,
+    onClose: () => {
+      onEditAction(null, "Cancel");
+      DialogManager.close();
+    },
     style: { width: "720px" },
   });
 };
