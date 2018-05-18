@@ -48,6 +48,8 @@ import {
   apiGetLanguagesFailure,
 } from "../actions/api";
 
+let sandboxSocketClient = null;
+
 function* getSandboxMessages(action) {
   const { botId } = action;
   try {
@@ -111,19 +113,25 @@ function subscribe(socketClient, action) {
 }
 
 function* subscribeSandboxMessages(action) {
-  const socketClient = createSocketService("bots/sandbox/messages");
-  if (socketClient) {
-    yield socketClient.start();
-    const channel = yield call(subscribe, socketClient, action);
+  if (sandboxSocketClient) {
+    subscribedSandboxMessages = false;
+    yield sandboxSocketClient.send("unsubscribe");
+    yield sandboxSocketClient.close();
+    sandboxSocketClient = null;
+  }
+  sandboxSocketClient = createSocketService("bots/sandbox/messages");
+  if (sandboxSocketClient) {
+    yield sandboxSocketClient.start();
+    const channel = yield call(subscribe, sandboxSocketClient, action);
     if (subscribedSandboxMessages) return;
     subscribedSandboxMessages = true;
     while (subscribedSandboxMessages) {
       const a = yield take(channel);
       yield put(a);
     }
-    yield socketClient.send("unsubscribe");
-    yield socketClient.close();
-
+    yield sandboxSocketClient.send("unsubscribe");
+    yield sandboxSocketClient.close();
+    sandboxSocketClient = null;
     return;
   }
   pollSandboxMessages(action);
@@ -310,6 +318,11 @@ const api = [
     API_SB_GETMESSAGES + UNSUBSCRIBE,
     function* f() {
       yield (subscribedSandboxMessages = false);
+      if (sandboxSocketClient) {
+        yield sandboxSocketClient.send("unsubscribe");
+        yield sandboxSocketClient.close();
+        sandboxSocketClient = null;
+      }
     },
   ],
   [API_SB_GETMESSAGES + FETCH_REQUEST, getSandboxMessages],
