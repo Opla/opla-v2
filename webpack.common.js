@@ -47,6 +47,11 @@ module.exports = {
         from: path.resolve(__dirname, "./package.json"),
         to: path.resolve(__dirname, "./dist/package.json"),
         force: true
+      },
+      {
+        from: "./public/bot.html",
+        to: path.resolve(__dirname, "./dist/public/bot.html"),
+        force: true
       }
     ]),
     new HtmlWebpackPlugin({

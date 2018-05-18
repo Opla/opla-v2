@@ -39,12 +39,7 @@ class PublishContainer extends Component {
 
     const params = encodeURI(JSON.stringify(parameters));
 
-    return (
-      <iframe
-        src={`http://127.0.0.1:9000/index.html?config=${params}`}
-        width="100%"
-      />
-    );
+    return <iframe src={`/bot.html?config=${params}`} width="100%" />;
   }
 }
 
