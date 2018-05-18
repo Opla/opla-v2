@@ -27,16 +27,22 @@ export default class AppSettings extends Component {
     }
     let botUrl = "";
     if (instance.url) {
+      let { url } = instance;
+      const regex = /^(http|https).*$/;
+      if (regex.test(url) === false) {
+        url = `${window.location.origin}${url}`;
+      }
+
       botUrl = (
         <a
           style={{
             width: "100%",
             marginBottom: "24px",
           }}
-          href={instance.url}
+          href={url}
           target="_blank"
         >
-          {instance.url}
+          {url}
         </a>
       );
     }
