@@ -19,7 +19,8 @@ import MessagingsList from "../../components/messagingsList";
 import ServiceDialog from "./serviceDialog";
 import {
   apiGetMiddlewaresRequest,
-  /* apiSetMiddlewareRequest, apiDeleteMiddlewareRequest, */
+  apiSetMiddlewareRequest,
+  /* apiDeleteMiddlewareRequest, */
   apiPublishRequest,
 } from "../../actions/api";
 import { appUpdatePublisher } from "../../actions/app";
@@ -57,6 +58,18 @@ class PublishDialog extends Component {
       publisher.status = status === "start" ? null : "start";
       // console.log("status ", publisher.status, status);
       // this.setState({ servicesEnabled });
+      if (publisher.status === "start" && instance === undefined) {
+        const name = service.getName();
+        const pluginsManager = new PluginsManager();
+        const newInstance = pluginsManager.instanciate(
+          name,
+          this.props.selectedBotId,
+        );
+        this.props.apiSetMiddlewareRequest(
+          this.props.selectedBotId,
+          newInstance,
+        );
+      }
       this.props.appUpdatePublisher(this.props.selectedBotId, publisher);
     } else {
       const sdialog = (
@@ -270,8 +283,8 @@ PublishDialog.propTypes = {
   appUpdatePublisher: PropTypes.func.isRequired,
   apiGetMiddlewaresRequest: PropTypes.func.isRequired,
   apiPublishRequest: PropTypes.func.isRequired,
-  /* apiSetMiddlewareRequest: PropTypes.func.isRequired,
-  apiDeleteMiddlewareRequest: PropTypes.func.isRequired, */
+  apiSetMiddlewareRequest: PropTypes.func.isRequired,
+  // apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -298,10 +311,10 @@ const mapDispatchToProps = (dispatch) => ({
   apiGetMiddlewaresRequest: (botId, type) => {
     dispatch(apiGetMiddlewaresRequest(botId, type));
   },
-  /* apiSetMiddlewareRequest: (botId, middleware) => {
+  apiSetMiddlewareRequest: (botId, middleware) => {
     dispatch(apiSetMiddlewareRequest(botId, middleware));
   },
-  apiDeleteMiddlewareRequest: (botId, middleware) => {
+  /* apiDeleteMiddlewareRequest: (botId, middleware) => {
     dispatch(apiDeleteMiddlewareRequest(botId, middleware));
   }, */
 });

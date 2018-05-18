@@ -70,7 +70,7 @@ class ServiceDialog extends Component {
   updateMiddleware() {
     const origin = this.props.selectedBotId;
     const { service } = this.props;
-    if (origin && service) {
+    if (origin && service && this.state.instance === null) {
       const name = service.getName();
       const pluginsManager = new PluginsManager();
       const instance = pluginsManager.instanciate(name, origin);

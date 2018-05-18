@@ -19,8 +19,9 @@ import Dashboard from "./dashboard";
 
 const titleStyle = {
   textAlign: "center",
-  padding: "15px 10px 0px 10px",
+  padding: "25px 10px 10px 10px",
   fontWeight: "300",
+  fontSize: "1.5rem",
 };
 
 const Home = ({ isSignedIn }) => {
@@ -32,8 +33,8 @@ const Home = ({ isSignedIn }) => {
     <div className="mdl-layout__content mdl-color--grey-100">
       <section className="text-section" style={{ margin: "40px" }}>
         <Card shadow={0} style={{ width: "512px", margin: "auto" }}>
-          <CardTitle>
-            <h1 style={titleStyle}>Your open conversational robot</h1>
+          <CardTitle style={titleStyle}>
+            Your open conversational robot
           </CardTitle>
           <CardMedia src="images/bg.jpg" style={{ height: "240px" }} />
           <CardText style={{ paddingTop: "20px" }}>
