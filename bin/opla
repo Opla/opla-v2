@@ -146,7 +146,7 @@ program
             port: 8081,
           },
           botSite: {
-            url: "http://127.0.0.1:8085/?b=",
+            url: "/publish/",
           },
           gateway: {
             url: answers.gatewayUrl,
