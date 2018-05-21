@@ -240,13 +240,13 @@ class ActionsEditable extends Component {
 
   insertItem(item, position = this.state.selectedItem + 1) {
     const { items } = this.state;
-    // console.log("insert item ", position, this.focusItem);
+    // console.log("insert item: ", item, position, this.focusElement);
 
     let p = position;
-    if (this.focusItem) {
-      if (this.focusItem === "ae_start") {
+    if (this.focusElement) {
+      if (this.focusElement.id === "ae_start") {
         p = 0;
-      } else if (this.focusItem === "ae_end") {
+      } else if (this.focusElement.id === "ae_end") {
         p = items.length;
       }
     }
@@ -265,9 +265,12 @@ class ActionsEditable extends Component {
 
   deleteItem(position = this.state.selectedItem) {
     const { items } = this.state;
-    if (this.focusItem) {
-      if (this.focusItem === "ae_start" || this.focusItem === "ae_end") {
-        this.focusItem.innerHtml = "";
+    if (this.focusElement) {
+      if (
+        this.focusElement.id === "ae_start" ||
+        this.focusElement.id === "ae_end"
+      ) {
+        this.focusElement.id.innerHtml = "";
       }
     }
     // console.log("delete item ", position);
