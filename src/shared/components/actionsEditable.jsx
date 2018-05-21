@@ -51,8 +51,10 @@ class ActionsEditable extends Component {
       noUpdate: false,
       startSpan: null,
       endSpan: null,
+      itemToFocus: null,
     };
     this.focusElement = null;
+    this.itemsElementRefs = [];
   }
 
   /* eslint-disable class-methods-use-this */
@@ -209,9 +211,12 @@ class ActionsEditable extends Component {
     this.props.onFocus(false, this); */
   };
 
-  setCE = (e, editable = true) => {
+  setCE = (e, editable = true, itemIndex = null) => {
     if (!e) return;
-    // console.log("setCE editable=", editable, e.id);
+    // save items refs
+    if (itemIndex !== null) {
+      this.itemsElementRefs[itemIndex] = e;
+    }
     if (editable) {
       e.contentEditable = this.props.editable;
     }
@@ -255,12 +260,16 @@ class ActionsEditable extends Component {
     } else {
       items.push(item);
     }
+
     const selectedItem = p;
     const content = ActionsEditable.build(items);
     const noUpdate = false;
-    this.setState({ noUpdate, content, items, selectedItem }, () => {
-      this.props.onChange(content);
-    });
+    this.setState(
+      { noUpdate, content, items, selectedItem, itemToFocus: p },
+      () => {
+        this.props.onChange(content);
+      },
+    );
   }
 
   deleteItem(position = this.state.selectedItem) {
@@ -370,7 +379,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleAny}
                   ref={(e) => {
-                    this.setCE(e, false);
+                    this.setCE(e, false, index);
                   }}
                   data="any"
                   tabIndex={p}
@@ -386,7 +395,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleOut}
                   ref={(e) => {
-                    this.setCE(e, true);
+                    this.setCE(e, true, index);
                   }}
                   data="output_var"
                   tabIndex={p}
@@ -404,7 +413,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleVar}
                   ref={(e) => {
-                    this.setCE(e, true);
+                    this.setCE(e, true, index);
                   }}
                   data="variable"
                   tabIndex={p}
@@ -422,7 +431,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleHtml}
                   ref={(e) => {
-                    this.setCE(e, false);
+                    this.setCE(e, false, index);
                   }}
                   data="br"
                   tabIndex={p}
@@ -440,7 +449,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleHtml}
                   ref={(e) => {
-                    this.setCE(e, true);
+                    this.setCE(e, true, index);
                   }}
                   data="button"
                   tabIndex={p}
@@ -456,7 +465,7 @@ class ActionsEditable extends Component {
                 style={styleText}
                 data="text"
                 ref={(e) => {
-                  this.setCE(e, true);
+                  this.setCE(e, true, index);
                 }}
                 tabIndex={p}
               >
@@ -492,6 +501,16 @@ class ActionsEditable extends Component {
         {list}
       </div>
     );
+  }
+
+  componentDidUpdate() {
+    const { itemToFocus } = this.state;
+    if (itemToFocus !== null) {
+      // call focus on item reference
+      const element = this.itemsElementRefs[itemToFocus];
+      element.focus();
+      this.setState({ itemToFocus: null });
+    }
   }
 }
 
