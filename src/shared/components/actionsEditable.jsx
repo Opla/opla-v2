@@ -209,17 +209,11 @@ class ActionsEditable extends Component {
     this.props.onFocus(false, this); */
   };
 
-  setCE = (e, editable = true, focus = false /* , type = "text" */) => {
+  setCE = (e, editable = true) => {
     if (!e) return;
-    // console.log("setCE editable=", editable, focus, e.id);
+    // console.log("setCE editable=", editable, e.id);
     if (editable) {
       e.contentEditable = this.props.editable;
-    }
-    if (focus) {
-      if (e) {
-        this.focusElement = e;
-        e.focus();
-      }
     }
   };
 
@@ -319,10 +313,8 @@ class ActionsEditable extends Component {
       // console.log("render", this.state.selectedItem, len);
       if (len < 1 || (actions[0] && actions[0].type !== "text")) {
         id = "ae_start";
-        let f = false;
         if (len < 1) {
-          styleText.width = "100wv";
-          f = true;
+          styleText.width = "100vw";
         }
         start = (
           <span
@@ -331,7 +323,7 @@ class ActionsEditable extends Component {
             data="text"
             style={styleText}
             ref={(e) => {
-              this.setCE(e, true, f);
+              this.setCE(e, true);
             }}
           />
         );
@@ -345,8 +337,6 @@ class ActionsEditable extends Component {
       if (actions[l] && actions[l].type !== "text" && this.props.editable) {
         id = "ae_end";
         l = len + i;
-        const f = this.state.selectedItem === -1;
-        // console.log("ae_end focus=", f);
         end = (
           <span
             id={id}
@@ -354,15 +344,10 @@ class ActionsEditable extends Component {
             data="text"
             style={styleText}
             ref={(e) => {
-              this.setCE(e, true, f);
+              this.setCE(e, true);
             }}
           />
         );
-      }
-      // console.log("focus", focus);
-      let { selectedItem } = this.state;
-      if (this.props.editable && this.state.selectedItem === -1) {
-        selectedItem = len - 1;
       }
       list = (
         <span>
@@ -371,11 +356,6 @@ class ActionsEditable extends Component {
             id = `ae_${index}`;
             const p = i;
             i += 1;
-            let focus = false;
-            if (index === selectedItem) {
-              focus = true;
-            }
-            // console.log(id, " focus", focus);
             const { type } = actionItem;
             if (type === "any") {
               return (
@@ -385,7 +365,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleAny}
                   ref={(e) => {
-                    this.setCE(e, false, focus, type);
+                    this.setCE(e, false);
                   }}
                   data="any"
                   tabIndex={p}
@@ -401,7 +381,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleOut}
                   ref={(e) => {
-                    this.setCE(e, true, focus, type);
+                    this.setCE(e, true);
                   }}
                   data="output_var"
                   tabIndex={p}
@@ -419,7 +399,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleVar}
                   ref={(e) => {
-                    this.setCE(e, true, focus, type);
+                    this.setCE(e, true);
                   }}
                   data="variable"
                   tabIndex={p}
@@ -437,7 +417,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleHtml}
                   ref={(e) => {
-                    this.setCE(e, false, focus, type);
+                    this.setCE(e, false);
                   }}
                   data="br"
                   tabIndex={p}
@@ -455,7 +435,7 @@ class ActionsEditable extends Component {
                   id={id}
                   style={styleHtml}
                   ref={(e) => {
-                    this.setCE(e, true, focus, type);
+                    this.setCE(e, true);
                   }}
                   data="button"
                   tabIndex={p}
@@ -471,7 +451,7 @@ class ActionsEditable extends Component {
                 style={styleText}
                 data="text"
                 ref={(e) => {
-                  this.setCE(e, true, focus);
+                  this.setCE(e, true);
                 }}
                 tabIndex={p}
               >
