@@ -322,6 +322,7 @@ class ActionsEditable extends Component {
         start = (
           <span
             id={id}
+            key={id}
             tabIndex={i}
             data="text"
             style={styleText}
@@ -343,6 +344,7 @@ class ActionsEditable extends Component {
         end = (
           <span
             id={id}
+            key={id}
             tabIndex={l}
             data="text"
             style={styleText}
@@ -364,7 +366,7 @@ class ActionsEditable extends Component {
               return (
                 <span
                   className="mdl-chip"
-                  key={id}
+                  key={id + type}
                   id={id}
                   style={styleAny}
                   ref={(e) => {
@@ -380,7 +382,7 @@ class ActionsEditable extends Component {
               return (
                 <span
                   className="mdl-chip"
-                  key={id}
+                  key={id + type}
                   id={id}
                   style={styleOut}
                   ref={(e) => {
@@ -394,11 +396,11 @@ class ActionsEditable extends Component {
                   </span>
                 </span>
               );
-            } else if (actionItem.type === "variable") {
+            } else if (type === "variable") {
               return (
                 <span
                   className="mdl-chip"
-                  key={id}
+                  key={id + type}
                   id={id}
                   style={styleVar}
                   ref={(e) => {
@@ -412,11 +414,11 @@ class ActionsEditable extends Component {
                   </span>
                 </span>
               );
-            } else if (actionItem.type === "br") {
+            } else if (type === "br") {
               return (
                 <span
                   className="mdl-chip"
-                  key={id}
+                  key={id + type}
                   id={id}
                   style={styleHtml}
                   ref={(e) => {
@@ -430,11 +432,11 @@ class ActionsEditable extends Component {
                   </span>
                 </span>
               );
-            } else if (actionItem.type === "button") {
+            } else if (type === "button") {
               return (
                 <span
                   className="mdl-chip"
-                  key={id}
+                  key={id + type}
                   id={id}
                   style={styleHtml}
                   ref={(e) => {
@@ -449,7 +451,7 @@ class ActionsEditable extends Component {
             }
             return (
               <span
-                key={id}
+                key={id + type}
                 id={id}
                 style={styleText}
                 data="text"
