@@ -98,6 +98,8 @@ class ActionsEditable extends Component {
 
   handleBlur = () => {
     // console.log("onBlur");
+    // forceUpdate to sync state and actions span rendered
+    this.forceUpdate();
     this.unfocus();
   };
 
@@ -248,12 +250,8 @@ class ActionsEditable extends Component {
     // console.log("insert item: ", item, position, this.focusElement);
 
     let p = position;
-    if (this.focusElement) {
-      if (this.focusElement.id === "ae_start") {
-        p = 0;
-      } else if (this.focusElement.id === "ae_end") {
-        p = items.length;
-      }
+    if (this.focusElement && this.focusElement.id === "ae_end") {
+      p = items.length;
     }
     if (p < items.length) {
       items.splice(p, 0, item);
@@ -274,18 +272,19 @@ class ActionsEditable extends Component {
 
   deleteItem(position = this.state.selectedItem) {
     const { items } = this.state;
-    if (this.focusElement) {
-      if (
-        this.focusElement.id === "ae_start" ||
-        this.focusElement.id === "ae_end"
-      ) {
-        this.focusElement.id.innerHtml = "";
-      }
+    let deletePosition = position;
+    // if focus on ae_end and last action is a text, remove text
+    if (
+      this.focusElement &&
+      this.focusElement.id === "ae_end" &&
+      items[items.length - 1].type === "text"
+    ) {
+      deletePosition = items.length - 1;
     }
-    // console.log("delete item ", position);
-    if (position > -1 && position < items.length) {
-      items.splice(position, 1);
-      const selectedItem = position - 1;
+    // console.log("delete item ", deletePosition);
+    if (deletePosition > -1 && deletePosition < items.length) {
+      items.splice(deletePosition, 1);
+      const selectedItem = deletePosition - 1;
       const content = ActionsEditable.build(items);
       const noUpdate = false;
       this.setState({ noUpdate, content, items, selectedItem }, () => {
