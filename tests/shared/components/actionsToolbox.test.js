@@ -56,6 +56,28 @@ describe("components/actionsToolbox", () => {
     });
   });
 
+  it("should call onChange with icon clicked", () => {
+    const onChangeSpy = jest.fn();
+    const wrapper = shallow(
+      <ActionsToolbox {...defaultProps} onChange={onChangeSpy} />,
+    );
+    expect(
+      wrapper
+        .find("Tooltip")
+        .at(1)
+        .dive()
+        .find("#atb_any"),
+    ).toHaveLength(1);
+    wrapper
+      .find("Tooltip")
+      .at(1)
+      .dive()
+      .find("#atb_any")
+      .simulate("click");
+    expect(onChangeSpy).toHaveBeenCalled();
+    expect(onChangeSpy).toHaveBeenCalledWith("any");
+  });
+
   it("can be typed", () => {
     const types = "any";
     const component = renderer.create(<ActionsToolbox type={types} />);
