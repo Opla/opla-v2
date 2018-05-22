@@ -28,14 +28,6 @@
    display: inline-block;
  }
  
- .mdl-textfield__input {
-   font-family: "Roboto","Helvetica", "Arial", sans-serif;
- }
- 
- /*.mdl-list_action {
-   height: 58px !important;
- }*/
- 
  .fileInput {
    overflow: hidden;
    position: relative;
@@ -65,73 +57,6 @@
    width: 100%;
    z-index: 4;
  }
- /* https://codepen.io/mupkie/pen/LkdaEV */
- .mdl-select__arrow {
-   background:
-   linear-gradient(45deg, transparent 50%, rgba(0,0,0, 0.26) 50%),
-   linear-gradient(135deg, rgba(0,0,0, 0.26) 50%, transparent 50%),
-   linear-gradient(to right, transparent, transparent);
-   background-position:
-   calc(100% - 10px) calc(1em - 4px),
-   calc(100% - 5px) calc(1em - 4px),
-   100% 0;
-   background-size:
-   5px 5px, 5px 5px;
-   background-repeat: no-repeat;
- }
- 
- a {
-   color: rgba(34, 190, 196, 1);
-   font-weight: 500;
- }
- 
- .mdl-layout__drawer > .mdl-layout__title, .mdl-layout__drawer > .mdl-layout-title {
-   font-weight: 900;
-   color: rgb(85, 38, 130);
- }
- 
- .mdl-layout__tab-bar {
-   background-color: transparent;
-   padding: 32px 300px 0px 0px;
-   height: 100%;
-   width: 480px;
- }
- .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
-   padding-left: 48px;
- }
- .mdl-layout__drawer .mdl-navigation .mdl-navigation__link > i {
-   position: absolute;
-   left: 10px;
- }
- 
- .mdl-navigation__selectedlink {
-   background: rgba(34, 190, 196, 1);
-   color: white !important;
-   font-weight: 500;
- }
- 
- .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
-   background: rgb(85, 38, 130);
-   color: white;
- }
- 
- .mdl-layout__drawer .mdl-navigation {
-   padding-top: 0px;
- }
- 
- .mdl-layout.is-upgraded .mdl-layout__tab.is-active {
-   color: #757575;
- }
- 
- .mdl-layout__tab {
-   color: rgb(221, 221, 221);
- }
- 
- .mdl-layout.is-upgraded .mdl-layout__tab.is-active::after {
-   background: rgb(85, 38, 130);
- }
- 
- /* Example stylistic flourishes */
  
  .fileInput {
    background: #bbb;
@@ -145,7 +70,12 @@
  .fileInput [type=file] {
    cursor: pointer;
  }
- 
+
+ a {
+  color: rgba(34, 190, 196, 1);
+  font-weight: 500;
+ }
+
  :focus {
   outline: 0px solid transparent;
  }
@@ -183,22 +113,6 @@
    font-size: 13px;
    vertical-align: initial;
  }
- 
- .dialog_bg {
-   width: 100%;
-   height: 100%;
-   /*position: fixed;*/
- }
- 
- .mdc-toolbar-fixed-adjust {
-   overflow: auto;
-   height: calc(100vh - 64px);
-   width: 100%;
- }
- 
- .mdc-list-item .mdc-list-item__secondary-text .mdl-list__item-icon {
-   color: rgb(221,221,221);
- }
 
  .messenger-box-test {
    width: 100%;
@@ -215,6 +129,10 @@
    background-color: #F2F2F2;
  }
  
+ .mdc-list-item .mdc-list-item__secondary-text .mdl-list__item-icon {
+  color: rgb(221,221,221);
+ }
+
  .mdc-list-item .mdc-list-item__secondary-text {
    overflow: hidden;
    white-space: nowrap;
@@ -268,25 +186,6 @@
    color: #757575 !important;
  }
  
- .mdl-switch.is-checked .mdl-switch__track {
-   background: rgba(85,38,130, 0.5);
- }
- .mdl-switch.is-checked .mdl-switch__thumb {
-   background: #552682;
- }
- 
- .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
-   background: #552682;
- }
- 
- .mdl-checkbox.is-checked .mdl-checkbox__box-outline {
-   border: 2px solid #552682;
- }
- 
- .mdl-checkbox__ripple-container .mdl-ripple {
-   background: #552682;
- }
- 
  .mrb-sublist .mdl-list {
    margin: 0px;
    padding: 0px;
@@ -309,30 +208,6 @@
    color: #757575;
  }
  
- .mdl-button--accent.mdl-button--accent.mdl-button--raised, .mdl-button--accent.mdl-button--accent.mdl-button--fab {
-   color: rgb(255,255,255);
-   background-color: rgba(34, 190, 196, 1);
- }
- 
- .mdl-layout__header .mdl-layout__drawer-button {
-   color: rgba(0,0,0, 0.87);
- }
- .mdl-layout__header {
-   color: #212121;
-   background-color: rgba(255, 255, 255, 1);
- }
- .mdl-layout__header-row {
-   color: #212121;
- }
- 
- .mdl-layout__drawer {
-   border-right: 1px solid rgba(66, 66, 66, 0.25);
-   background: #263238;
- }
- .mdl-layout__drawer > .mdl-layout__title, .mdl-layout__drawer > .mdl-layout-title {
-   background-color: #fcea20;
- }
- 
  .mdl-dialog-extended {
    width: 550px;
  }
@@ -345,30 +220,6 @@
    padding: 0px;
  }
  
- .mdl-button--raised.mdl-button--colored {
-   background-color: #552682;
-   color: white;
- }
- .mdl-button--raised.mdl-button--colored:hover {
-   background-color: #552682;
-   color: white;
- }
- .mdl-button.mdl-button--colored > i {
-   color: #552682;
- }
- .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
- .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
- .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
-   color: #552682;
- }
- .mdl-textfield__label:after {
-   background-color: #552682;
- }
-
- .mdl-checkbox.is-upgraded {
-     padding-left: 20px;
- }
- 
  hr {
    /* For white theme */
    border-top: 1px solid #e1e1e1;
@@ -376,14 +227,10 @@
    -webkit-margin-after: 0;
  }
  
- .mdl-layout__content {
-   height: 100%;
-   width: 100%;
- }
- 
  .mdc-list-item--two-line .mdc-list-item__secondary-text .mdl-list__item-icon {
    height: 100%;
  }
+
  .mdc-list-item .mdc-list-item__text {
    width: 80%;
  }
