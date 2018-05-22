@@ -101,6 +101,16 @@ class PublishDialog extends Component {
     }
     if (ready) {
       this.props.apiPublishRequest(this.props.selectedBotId, publishers);
+      const pluginsManager = new PluginsManager();
+      keys.forEach((key) => {
+        const instance = pluginsManager.instanciate(
+          publishers[key].name,
+          this.props.selectedBotId,
+        );
+        instance.status = "start";
+        this.props.apiSetMiddlewareRequest(this.props.selectedBotId, instance);
+      });
+
       // TODO display published dialog with links to service's messenger
       setTimeout(() => {
         Zrmc.closeDialog();
