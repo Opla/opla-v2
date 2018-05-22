@@ -299,6 +299,12 @@ class ActionsEditable extends Component {
       display: "inline-block",
       padding: "0 4px",
     };
+    const styleStartEnd = {
+      ...styleText,
+      verticalAlign: "middle",
+      minHeight: "20px",
+      minWidth: "4px",
+    };
     const styleVar = {
       color: "white",
       backgroundColor: "#552682",
@@ -324,8 +330,11 @@ class ActionsEditable extends Component {
       // console.log("render", this.state.selectedItem, len);
       if (len < 1 || (actions[0] && actions[0].type !== "text")) {
         id = "ae_start";
+        const style = {
+          ...styleStartEnd,
+        };
         if (len < 1) {
-          styleText.width = "100vw";
+          style.width = "100vw";
         }
         start = (
           <span
@@ -333,7 +342,7 @@ class ActionsEditable extends Component {
             key={id}
             tabIndex={i}
             data="text"
-            style={styleText}
+            style={style}
             ref={(e) => {
               this.setCE(e, true);
             }}
@@ -355,7 +364,7 @@ class ActionsEditable extends Component {
             key={id}
             tabIndex={l}
             data="text"
-            style={styleText}
+            style={styleStartEnd}
             ref={(e) => {
               this.setCE(e, true);
             }}
