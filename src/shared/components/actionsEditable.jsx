@@ -6,8 +6,8 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "zrmc";
 import ActionsTools from "../utils/actionsTools";
+import ActionEditable from "./actionEditable";
 
 class ActionsEditable extends Component {
   static build(items, fromHtml = false) {
@@ -303,197 +303,57 @@ class ActionsEditable extends Component {
 
   render() {
     const actions = this.state.items;
-    const styleText = {
-      display: "inline-block",
-      padding: "0 4px",
-    };
-    const styleStartEnd = {
-      ...styleText,
-      verticalAlign: "middle",
-      minHeight: "20px",
-      minWidth: "4px",
-    };
-    const styleVar = {
-      color: "white",
-      backgroundColor: "#552682",
-    };
-    const styleOut = {
-      color: "white",
-      backgroundColor: "#23b4bb",
-    };
-    const styleAny = {
-      color: "black",
-      backgroundColor: "#fcea20",
-    };
-    const styleHtml = {
-      color: "white",
-      backgroundColor: "#aaa",
-    };
-    let i = 1;
-    let list;
+    const isEditable = this.props.editable;
     let start;
+    let list;
+    let end;
+    let i = 1;
     let id;
     const len = actions.length;
-    if (this.props.editable) {
-      // console.log("render", this.state.selectedItem, len);
-      if (len < 1 || (actions[0] && actions[0].type !== "text")) {
-        id = "ae_start";
-        const style = {
-          ...styleStartEnd,
-        };
-        if (len < 1) {
-          style.width = "100vw";
-        }
-        start = (
-          <span
-            id={id}
-            key={id}
-            tabIndex={i}
-            data="text"
-            style={style}
-            ref={(e) => {
-              this.setCE(e, true);
-            }}
-          />
-        );
-        i += 1;
-      }
+
+    // create a start action if empty or first item is not a text
+    if (isEditable && (len < 1 || (actions[0] && actions[0].type !== "text"))) {
+      // if intent empty start action take all the space
+      const style = len < 1 ? { width: "100vw" } : {};
+      start = (
+        <ActionEditable
+          actionId={"ae_start"}
+          tabIndex={i}
+          type="text"
+          editable={isEditable}
+          style={style}
+        />
+      );
+      i += 1;
     }
 
     if (len > 0) {
-      let end;
-      let l = len - 1;
-      if (actions[l] && actions[l].type !== "text" && this.props.editable) {
-        id = "ae_end";
-        l = len + i;
+      list = actions.map((actionItem, index) => {
+        id = `ae_${index}`;
+        const p = i;
+        i += 1;
+        const { type } = actionItem;
+        return (
+          <ActionEditable
+            key={index}
+            actionId={id}
+            tabIndex={p}
+            type={type}
+            text={actionItem.text}
+            editable={isEditable}
+          />
+        );
+      });
+      if (isEditable && actions[len - 1] && actions[len - 1].type !== "text") {
         end = (
-          <span
-            id={id}
-            key={id}
-            tabIndex={l}
-            data="text"
-            style={styleStartEnd}
-            ref={(e) => {
-              this.setCE(e, true);
-            }}
+          <ActionEditable
+            actionId={"ae_end"}
+            tabIndex={i}
+            type="text"
+            editable={isEditable}
           />
         );
       }
-      list = (
-        <span>
-          {start}
-          {actions.map((actionItem, index) => {
-            id = `ae_${index}`;
-            const p = i;
-            i += 1;
-            const { type } = actionItem;
-            if (type === "any") {
-              return (
-                <span
-                  className="mdl-chip"
-                  key={id + type}
-                  id={id}
-                  style={styleAny}
-                  ref={(e) => {
-                    this.setCE(e, false, index);
-                  }}
-                  data="any"
-                  tabIndex={p}
-                >
-                  <span className="mdl-chip__text_ex">any</span>
-                </span>
-              );
-            } else if (type === "output_var") {
-              return (
-                <span
-                  className="mdl-chip"
-                  key={id + type}
-                  id={id}
-                  style={styleOut}
-                  ref={(e) => {
-                    this.setCE(e, true, index);
-                  }}
-                  data="output_var"
-                  tabIndex={p}
-                >
-                  <span className="mdl-chip__text_ex">
-                    {decodeURIComponent(actionItem.text)}
-                  </span>
-                </span>
-              );
-            } else if (type === "variable") {
-              return (
-                <span
-                  className="mdl-chip"
-                  key={id + type}
-                  id={id}
-                  style={styleVar}
-                  ref={(e) => {
-                    this.setCE(e, true, index);
-                  }}
-                  data="variable"
-                  tabIndex={p}
-                >
-                  <span className="mdl-chip__text_ex">
-                    {decodeURIComponent(actionItem.text)}
-                  </span>
-                </span>
-              );
-            } else if (type === "br") {
-              return (
-                <span
-                  className="mdl-chip"
-                  key={id + type}
-                  id={id}
-                  style={styleHtml}
-                  ref={(e) => {
-                    this.setCE(e, false, index);
-                  }}
-                  data="br"
-                  tabIndex={p}
-                >
-                  <span className="mdl-chip__text_ex">
-                    <Icon name="keyboard_return" style={{ fontSize: "13px" }} />
-                  </span>
-                </span>
-              );
-            } else if (type === "button") {
-              return (
-                <span
-                  className="mdl-chip"
-                  key={id + type}
-                  id={id}
-                  style={styleHtml}
-                  ref={(e) => {
-                    this.setCE(e, true, index);
-                  }}
-                  data="button"
-                  tabIndex={p}
-                >
-                  <span className="mdl-chip__text_ex">{actionItem.text}</span>
-                </span>
-              );
-            }
-            return (
-              <span
-                key={id + type}
-                id={id}
-                style={styleText}
-                data="text"
-                ref={(e) => {
-                  this.setCE(e, true, index);
-                }}
-                tabIndex={p}
-              >
-                {actionItem.text}
-              </span>
-            );
-          })}
-          {end}
-        </span>
-      );
-    } else {
-      list = <span>{start}</span>;
     }
     return (
       <div
@@ -514,7 +374,11 @@ class ActionsEditable extends Component {
           this.node = node;
         }}
       >
-        {list}
+        <span>
+          {start}
+          {list}
+          {end}
+        </span>
       </div>
     );
   }
