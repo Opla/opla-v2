@@ -55,7 +55,22 @@ exports[`components/intentDetail can render intent with special characters corre
           >
             format_quote
           </i>
-          Add an input sentence
+          <div
+            aria-label="Add an input sentence"
+            className="contenteditable"
+            id="ae_content"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onInput={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            tabIndex={0}
+          >
+            <span />
+          </div>
         </li>
       </div>
     </div>
@@ -108,7 +123,22 @@ exports[`components/intentDetail can render intent with special characters corre
           >
             chat_bubble_outline
           </i>
-          Add an output response
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onInput={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            tabIndex={0}
+          >
+            <span />
+          </div>
         </li>
       </div>
     </div>
@@ -267,7 +297,22 @@ exports[`components/intentDetail renders correctly 1`] = `
           >
             format_quote
           </i>
-          Add an input sentence
+          <div
+            aria-label="Add an input sentence"
+            className="contenteditable"
+            id="ae_content"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onInput={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            tabIndex={0}
+          >
+            <span />
+          </div>
         </li>
       </div>
     </div>
@@ -320,7 +365,22 @@ exports[`components/intentDetail renders correctly 1`] = `
           >
             chat_bubble_outline
           </i>
-          Add an output response
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onInput={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            tabIndex={0}
+          >
+            <span />
+          </div>
         </li>
       </div>
     </div>
