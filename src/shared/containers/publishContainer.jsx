@@ -7,32 +7,30 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { apiGetAdminParametersRequest } from "zoapp-front/actions/api";
+import { apiGetBotParametersRequest } from "OplaLibs/actions/api";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../../config/default.json";
 
 class PublishContainer extends Component {
   componentDidMount() {
-    this.props.apiGetAdminParametersRequest(
-      this.props.match.params.name,
-      "botParams",
-    );
+    this.props.apiGetBotParametersRequest(this.props.match.params.name);
   }
 
   render() {
-    const { adminParameters } = this.props;
-    if (adminParameters === null || adminParameters === undefined) {
+    const { botParameters } = this.props;
+
+    if (botParameters === null || botParameters === undefined) {
       return null;
     }
 
     const parameters = {
-      botId: adminParameters.botId,
-      appId: adminParameters.application.id,
-      appSecret: adminParameters.application.secret,
+      botId: botParameters.botId,
+      appId: botParameters.application.id,
+      appSecret: botParameters.application.secret,
       host: config.backend.api.host,
       port: config.backend.api.port,
       secure: config.backend.secure,
-      anonymous_secret: adminParameters.application.policies.anonymous_secret,
+      anonymous_secret: botParameters.application.policies.anonymous_secret,
       path: "/",
       language: "fr",
     };
@@ -45,19 +43,19 @@ class PublishContainer extends Component {
 
 PublishContainer.propTypes = {
   match: PropTypes.object.isRequired,
-  apiGetAdminParametersRequest: PropTypes.func.isRequired,
-  adminParameters: PropTypes.object,
+  apiGetBotParametersRequest: PropTypes.func.isRequired,
+  botParameters: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
-  const { adminParameters } = state.app;
+  const { botParameters } = state.app;
 
-  return { adminParameters };
+  return { botParameters };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  apiGetAdminParametersRequest: (name, type) =>
-    dispatch(apiGetAdminParametersRequest(name, type)),
+  apiGetBotParametersRequest: (name) =>
+    dispatch(apiGetBotParametersRequest(name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublishContainer);

@@ -42,6 +42,7 @@ import {
   APP_UPDATEPUBLISHER,
   API_GETTEMPLATES,
   API_GETLANGUAGES,
+  API_BOTS_PARAMETERS,
 } from "../actions/constants";
 
 export const defaultTemplates = [
@@ -59,6 +60,7 @@ export const initialState = {
   loadingMessages: false,
   templates: defaultTemplates,
   languages: defaultLanguages,
+  botParameters: null,
 };
 
 export default createReducer(initialState, {
@@ -738,5 +740,22 @@ export default createReducer(initialState, {
     loading: false,
     error: error.message,
     languages: defaultLanguages,
+  }),
+  [API_BOTS_PARAMETERS + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOTS_PARAMETERS + FETCH_SUCCESS]: (state, { params }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botParameters: params,
+  }),
+  [API_BOTS_PARAMETERS + FETCH_FAILURE]: (state, error) => ({
+    ...state,
+    loading: false,
+    error,
+    botParameters: null,
   }),
 });

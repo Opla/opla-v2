@@ -34,6 +34,7 @@ import {
   API_SETMIDDLEWARE,
   API_GETTEMPLATES,
   API_GETLANGUAGES,
+  API_BOTS_PARAMETERS,
 } from "../actions/constants";
 import {
   apiGetIntentsFailure,
@@ -46,6 +47,8 @@ import {
   apiGetTemplatesFailure,
   apiGetLanguagesSuccess,
   apiGetLanguagesFailure,
+  apiGetBotParametersSucess,
+  apiGetBotParametersFailure,
 } from "../actions/api";
 
 let sandboxSocketClient = null;
@@ -174,6 +177,17 @@ const api = [
         });
       } catch (error) {
         yield put({ type: `${API_SAVEBOT}${FETCH_FAILURE}`, error });
+      }
+    },
+  ],
+  [
+    API_BOTS_PARAMETERS + FETCH_REQUEST,
+    function* f({ name }) {
+      try {
+        const response = yield getWebService().get(`bots/params/${name}`);
+        yield put(apiGetBotParametersSucess(response));
+      } catch (error) {
+        yield put(apiGetBotParametersFailure(error));
       }
     },
   ],
