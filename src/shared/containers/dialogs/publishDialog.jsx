@@ -42,7 +42,6 @@ class PublishDialog extends Component {
 
   onSelect = ({ /* name, */ state, /* index, */ item }) => {
     const { service, instance } = item;
-
     if (state === "enable") {
       const serviceName = service.getName();
       let publisher = this.props.publishers[serviceName];
@@ -88,29 +87,10 @@ class PublishDialog extends Component {
   onAction = (/* action */) => {
     // console.log("WIP onAction=", action);
     // TODO check if services are available
-    let ready = false;
-    const { publishers } = this.props;
+    const { publishers, middlewares } = this.props;
     const keys = Object.keys(publishers);
-    if (keys && keys.length > 0) {
-      keys.forEach((k) => {
-        const pub = publishers[k];
-        if (pub.status === "start") {
-          ready = true;
-        }
-      });
-    }
-    if (ready) {
-      this.props.apiPublishRequest(this.props.selectedBotId, publishers);
-      // TODO display published dialog with links to service's messenger
-      setTimeout(() => {
-        Zrmc.closeDialog();
-        Zrmc.showDialog({
-          header: "Published",
-          body: "Published to:",
-          onAction: this.handleCloseDialog,
-        });
-      }, 100);
-    } else {
+
+    if (keys.length === 0) {
       setTimeout(() => {
         Zrmc.showDialog({
           header: "Error",
@@ -119,6 +99,58 @@ class PublishDialog extends Component {
         });
       }, 100);
     }
+
+    const unpublish = {};
+    if (keys && keys.length > 0) {
+      keys.forEach((k) => {
+        const pub = publishers[k];
+        if (pub.status !== "start") {
+          unpublish[k] = pub;
+          delete publishers[k];
+          const index = middlewares.findIndex(
+            (middleware) => middleware.name === k,
+          );
+
+          if (index > -1) {
+            delete middlewares[index];
+          }
+        }
+      });
+    }
+
+    if (Object.keys(publishers).length > 0) {
+      this.props.apiPublishRequest(this.props.selectedBotId, publishers);
+    }
+
+    const updateMiddleware = (plugins) => {
+      const pluginsManager = new PluginsManager();
+      const pluginsKey = Object.keys(plugins);
+      pluginsKey.forEach((key) => {
+        const instance = pluginsManager.instanciate(
+          plugins[key].name,
+          this.props.selectedBotId,
+        );
+        if (plugins[key].status) {
+          instance.status = "start";
+        }
+
+        this.props.apiSetMiddlewareRequest(this.props.selectedBotId, instance);
+      });
+    };
+
+    updateMiddleware(publishers);
+    updateMiddleware(unpublish);
+    this.updateMiddlewares(true);
+
+    // TODO display published dialog with links to service's messenger
+    setTimeout(() => {
+      Zrmc.closeDialog();
+      Zrmc.showDialog({
+        header: "Published",
+        body: "modification made",
+        onAction: this.handleCloseDialog,
+      });
+    }, 100);
   };
 
   handleCloseDialog = () => {
@@ -175,7 +207,6 @@ class PublishDialog extends Component {
           });
         });
       }
-
       const items = [];
       services.forEach((service) => {
         // TODO check if the item is already pushed
@@ -256,7 +287,7 @@ class PublishDialog extends Component {
               this.onAction("publish");
             }}
           >
-            Publish
+            Validate
           </Button>
         </DialogFooter>
       </Dialog>
