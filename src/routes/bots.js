@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { CommonRoutes } from "zoapp-backend";
+import ApiError from "zoauth-server/Error/ApiError";
 import Importer from "../utils/importer";
 
 export default class extends CommonRoutes {
@@ -28,6 +29,7 @@ export default class extends CommonRoutes {
     this.sandboxNewMessage = this.sandboxNewMessage.bind(this);
     this.sandboxGetContext = this.sandboxGetContext.bind(this);
     this.sandboxReset = this.sandboxReset.bind(this);
+    this.getParameters = this.getParameters.bind(this);
   }
 
   async authorizeAccess(context) {
@@ -340,5 +342,19 @@ export default class extends CommonRoutes {
     const messenger = this.extensions.getSandboxMessenger();
     await messenger.resetConversations(me, botId, isAdmin);
     return { result: "ok" };
+  }
+
+  async getParameters(context) {
+    const { name } = context.getParams();
+
+    const value = await this.controller
+      .getParameters()
+      .getValue(name, "botParams");
+
+    if (value === null) {
+      throw new ApiError(404, `parameter with name ${name} does not exists`);
+    }
+
+    return value;
   }
 }
