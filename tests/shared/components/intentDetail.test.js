@@ -17,6 +17,15 @@ describe("components/intentDetail", () => {
     onAction: () => {},
   };
 
+  const populatedIntent = {
+    id: "T4Zs",
+    botId: "HZAw",
+    name: "Barquette alimentaire",
+    input: ["*barquette", "barquette*", "*barquette*"],
+    output: ["Attention, les barquettes alimentaires ne peuvent..."],
+    order: 7,
+  };
+
   it("renders correctly", () => {
     const intent = { topic: "some intent" };
     const component = renderer.create(
@@ -27,15 +36,9 @@ describe("components/intentDetail", () => {
   });
 
   it("Should render input intents", () => {
-    const intent = {
-      id: "T4Zs",
-      botId: "HZAw",
-      name: "Barquette alimentaire",
-      input: ["*barquette", "barquette*", "*barquette*"],
-      output: ["Attention, les barquettes alimentaires ne peuvent..."],
-      order: 7,
-    };
-    const wrapper = shallow(<IntentDetail {...defaultProps} intent={intent} />);
+    const wrapper = shallow(
+      <IntentDetail {...defaultProps} intent={populatedIntent} />,
+    );
 
     expect(wrapper.find("ActionsList")).toHaveLength(2);
     expect(
@@ -53,7 +56,31 @@ describe("components/intentDetail", () => {
         .find("ActionsEditable")
         .at(2)
         .prop("content"),
-    ).toEqual(intent.input[2]);
+    ).toEqual(populatedIntent.input[2]);
+  });
+
+  it("Should render output intents", () => {
+    const wrapper = shallow(
+      <IntentDetail {...defaultProps} intent={populatedIntent} />,
+    );
+
+    expect(wrapper.find("ActionsList")).toHaveLength(2);
+    expect(
+      wrapper
+        .find("ActionsList")
+        .at(1)
+        .dive()
+        .find("ActionsEditable"),
+    ).toHaveLength(2);
+    expect(
+      wrapper
+        .find("ActionsList")
+        .at(1)
+        .dive()
+        .find("ActionsEditable")
+        .at(0)
+        .prop("content"),
+    ).toEqual(populatedIntent.output[0]);
   });
 
   it("can render intent with special characters correctly", () => {
