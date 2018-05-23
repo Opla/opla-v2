@@ -95,4 +95,32 @@ describe("components/intentDetail", () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("Should call onSelect on Topic parameters click", () => {
+    const onSelectSpy = jest.fn();
+    const callArg = {
+      name: populatedIntent.name,
+      state: "topic",
+    };
+    const wrapper = shallow(
+      <IntentDetail
+        {...defaultProps}
+        intent={populatedIntent}
+        onSelect={onSelectSpy}
+      />,
+    );
+
+    expect(wrapper.find("ExpansionPanel")).toHaveLength(1);
+
+    const buttonsWrapper = wrapper
+      .find("ExpansionPanel")
+      .dive()
+      .find("Button");
+    expect(buttonsWrapper).toHaveLength(2);
+
+    buttonsWrapper.at(0).simulate("click", { preventDefault: () => {} });
+
+    expect(onSelectSpy).toHaveBeenCalled();
+    expect(onSelectSpy.mock.calls[0][0]).toEqual(callArg);
+  });
 });
