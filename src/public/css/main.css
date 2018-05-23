@@ -259,6 +259,7 @@
    position: relative;
    overflow-x: hidden;
    overflow-y: auto;
+   width: 100%;
    height: calc(100vh - 64px - 37px);
  }
  
