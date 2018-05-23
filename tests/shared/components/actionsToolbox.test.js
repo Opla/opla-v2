@@ -78,14 +78,6 @@ describe("components/actionsToolbox", () => {
     expect(onChangeSpy).toHaveBeenCalledWith("any");
   });
 
-  it("can be typed", () => {
-    const types = "any";
-    const component = renderer.create(<ActionsToolbox type={types} />);
-
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
   it("can be an input", () => {
     const component = renderer.create(<ActionsToolbox isInput />);
 
@@ -120,5 +112,11 @@ describe("components/actionsToolbox", () => {
 
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it("should not render actions if disabled", () => {
+    const wrapper = shallow(<ActionsToolbox {...defaultProps} disable />);
+
+    expect(wrapper.find("Tooltip")).toHaveLength(0);
   });
 });
