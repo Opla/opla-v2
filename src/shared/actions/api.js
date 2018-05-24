@@ -31,6 +31,7 @@ import {
   API_SETMIDDLEWARE,
   API_GETTEMPLATES,
   API_GETLANGUAGES,
+  API_BOTS_PARAMETERS,
 } from "./constants";
 
 export function apiCreateBot(botParams) {
@@ -39,6 +40,18 @@ export function apiCreateBot(botParams) {
 
 export function apiSaveBotRequest(botParams) {
   return { type: API_SAVEBOT + FETCH_REQUEST, botParams };
+}
+
+export function apiGetBotParametersRequest(name) {
+  return { type: API_BOTS_PARAMETERS + FETCH_REQUEST, name };
+}
+
+export function apiGetBotParametersSucess(params) {
+  return { type: API_BOTS_PARAMETERS + FETCH_SUCCESS, params };
+}
+
+export function apiGetBotParametersFailure(error) {
+  return { type: API_BOTS_PARAMETERS + FETCH_FAILURE, error };
 }
 
 export function apiImportRequest(botId, data, options) {
