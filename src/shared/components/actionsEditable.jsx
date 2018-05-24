@@ -100,14 +100,12 @@ class ActionsEditable extends Component {
     // console.log("onBlur");
     // forceUpdate to sync state and actions span rendered
     this.forceUpdate();
-    this.unfocus();
   };
 
   handleKeyDown = (e) => {
     if (e.which === 27) {
       // esc key
       e.preventDefault();
-      this.unfocus();
     }
   };
 
@@ -120,7 +118,9 @@ class ActionsEditable extends Component {
       const text = this.state.content;
       this.props.onAction(text);
       e.preventDefault();
-      this.unfocus();
+      if (this.props.isNew) {
+        this.clear();
+      }
       return;
     }
     switch (e.which) {
@@ -203,14 +203,22 @@ class ActionsEditable extends Component {
     return el;
   }
 
-  unfocus = () => {
-    // console.log("unfocus=");
-    /* this.focusElement = null;
+  clear = () => {
+    this.focusElement = null;
     const noUpdate = false;
     const selectedItem = -1;
     const caretPosition = 0;
-    this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
-    this.props.onFocus(false, this); */
+    const content = "";
+    const items = ActionsTools.parse(content);
+    this.setState(() => ({
+      noUpdate,
+      selectedItem,
+      caretPosition,
+      content,
+      items,
+      itemToFocus: null,
+    }));
+    this.props.onFocus(false, this);
   };
 
   setCE = (e, editable = true, itemIndex = null) => {
@@ -533,6 +541,7 @@ ActionsEditable.defaultProps = {
   selectedItem: -1,
   caretPosition: 0,
   style: null,
+  isNew: false,
 };
 
 ActionsEditable.propTypes = {
@@ -546,6 +555,7 @@ ActionsEditable.propTypes = {
   selectedItem: PropTypes.number,
   caretPosition: PropTypes.number,
   style: PropTypes.objectOf(PropTypes.string),
+  isNew: PropTypes.bool,
 };
 
 export default ActionsEditable;
