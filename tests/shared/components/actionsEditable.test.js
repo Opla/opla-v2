@@ -117,4 +117,50 @@ describe("components/actionsEditable", () => {
     expect(wrapper.find("#ae_2").text()).toEqual("any");
     expect(wrapper.find("#ae_3")).toHaveLength(0);
   });
+
+  it("should call clear() on Enter key pressed", () => {
+    const clearSpy = jest.fn();
+    const wrapper = shallow(
+      <ActionsEditable {...defaultProps} content={null} isNew />,
+    );
+    wrapper.instance().clear = clearSpy;
+    wrapper.instance().handleKeyPress({ which: 13, preventDefault: () => {} });
+    expect(clearSpy).toHaveBeenCalled();
+  });
+
+  it("should clear state content on clear()", () => {
+    const wrapper = shallow(
+      <ActionsEditable {...defaultProps} content={null} isNew />,
+    );
+
+    // no content rendered
+    expect(wrapper.state("items")).toHaveLength(0);
+
+    // set state to simulate actionsEditable updates
+    const state = {
+      content: "* bons gestes composteur *",
+      items: [
+        { type: "any", text: "*" },
+        { type: "text", text: " bons gestes composteur " },
+        { type: "any", text: "*" },
+      ],
+      selectedItem: 1,
+      caretPosition: 3,
+      noUpdate: false,
+      startSpan: null,
+      endSpan: null,
+      itemToFocus: null,
+    };
+    wrapper.setState(state);
+
+    // after state update, 3 items are rendered
+    expect(wrapper.state("items")).toHaveLength(3);
+    expect(wrapper.find("#ae_content")).toHaveLength(1);
+    expect(wrapper.find("#ae_1")).toHaveLength(1);
+    expect(wrapper.find("#ae_1").text()).toEqual(" bons gestes composteur ");
+
+    wrapper.instance().clear();
+    // after clear no content rendered
+    expect(wrapper.state("items")).toHaveLength(0);
+  });
 });

@@ -158,6 +158,7 @@ class ActionsList extends Component {
           onAction={this.handleAction}
           onChange={this.handleChangeNew}
           onSelected={this.handleSelectedEditable}
+          isNew
         />
       </ListItem>
     );
