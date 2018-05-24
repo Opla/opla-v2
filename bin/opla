@@ -18,6 +18,7 @@ const configDefaults = {
   clientName: "Opla Front",
   clientEmail: "opla@example.org",
   apiHost: "127.0.0.1",
+  apiDomain: "127.0.0.1",
   apiPort: "8081",
   apiProtocol: "http",
 };
@@ -28,6 +29,7 @@ program
   .description("Initialize the project and create the configuration file")
   .option("--client-name [name]", "set the client name", configDefaults.clientName)
   .option("--client-email [email]", "set the client email", configDefaults.clientEmail)
+  .option("--api-domain [domain]", "set the backend api domain that is advertised to the client", configDefaults.apiDomain)
   .option("--api-host [host]", "set the backend api host", configDefaults.apiHost)
   .option("--api-port [port]", "set the backend api port", configDefaults.apiPort)
   .option("--api-protocol [protocol]", "set the backend api protocol", configDefaults.apiProtocol)
@@ -49,8 +51,14 @@ program
       {
         type: "input",
         name: "apiHost",
-        message: "API host",
+        message: "API host for configuration",
         default: options.apiHost,
+      },
+      {
+        type: "input",
+        name: "apiDomain",
+        message: "API advertised domain for the client",
+        default: options.apiDomain,
       },
       {
         type: "input",
@@ -115,14 +123,14 @@ program
       const config = {
         backend: {
           api: {
-            host: answers.apiHost,
+            host: answers.apiDomain,
             path: "api/v1/",
             port: answers.apiPort,
           },
           auth: {
             clientId: response.client_id,
             clientSecret: response.client_secret,
-            host: answers.apiHost,
+            host: answers.apiDomain,
             path: "auth/",
             port: answers.apiPort,
           },

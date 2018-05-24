@@ -1,6 +1,7 @@
 const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const webpack = require("webpack");
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const commonConfig = require("./webpack.common.js");
 
@@ -61,6 +62,9 @@ module.exports = merge(commonConfig, {
       parallel: true,
       // Enable file caching
       cache: true,
+    }),
+    new HardSourceWebpackPlugin({
+      cacheDirectory: '../../node_modules/.cache/hard-source/[confighash]',
     }),
   ]
 });

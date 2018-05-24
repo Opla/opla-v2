@@ -1,0 +1,4 @@
+front:
+  domain: front.master.opla.ai
+api:
+  domain: api.master.opla.ai
