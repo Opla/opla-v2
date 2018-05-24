@@ -32,6 +32,15 @@ describe("containers/IntentContainerBase", () => {
     },
   };
 
+  const newSelectedIntent = {
+    id: "a34Dg",
+    botId: "Wc34w",
+    name: "Carton",
+    input: ["* carton", "* Emballages carton*"],
+    output: ["Les emballages carton..."],
+    order: 3,
+  };
+
   it("should render", () => {
     const wrapper = mount(<IntentContainerBase {...defaultProps} />);
     wrapper.update();
@@ -42,5 +51,16 @@ describe("containers/IntentContainerBase", () => {
         .at(0)
         .props().content,
     ).toEqual(defaultProps.selectedIntent.input[0]);
+  });
+
+  it("should reset when props.selectedIntent change", () => {
+    const resetSpy = jest.fn();
+    const wrapper = mount(<IntentContainerBase {...defaultProps} />);
+    wrapper.instance().reset = resetSpy;
+    wrapper.update();
+    wrapper.setProps({
+      selectedIntent: newSelectedIntent,
+    });
+    expect(resetSpy).toHaveBeenCalled();
   });
 });
