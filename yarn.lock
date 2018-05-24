@@ -2330,6 +2330,10 @@ has-ansi@^2.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
+has-flag@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-1.0.0.tgz#9d9e793165ce017a00f00418c43f942a7b1d11fa"
+
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
@@ -3633,6 +3637,10 @@ node-pre-gyp@^0.6.39:
     semver "^5.3.0"
     tar "^2.2.1"
     tar-pack "^3.4.0"
+
+nodemailer@^4.6.5:
+  version "4.6.5"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.6.5.tgz#306ce18c4543f3f06e5f76665d3cb6277f872f53"
 
 nodemon@^1.13.3:
   version "1.17.1"
@@ -5194,6 +5202,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+validate.js@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/validate.js/-/validate.js-0.12.0.tgz#17f989e37c192ea2f826bbf19bf4e97e6e4be68f"
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
@@ -5424,14 +5436,16 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zoapp-backend@0.20.1:
-  version "0.20.1"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.20.1.tgz#e332e02a2ca9a444b29136fb91744e3fc0509f50"
+zoapp-backend@0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.21.0.tgz#45021f0a4de86442081a3c5582f9e401ead210d0"
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"
     localtunnel "1.9.0"
     node-fetch "^2.1.2"
+    nodemailer "^4.6.5"
+    validate.js "^0.12.0"
     ws "^3.3.3"
     zoapp-core "^0.12.1"
     zoauth-server "^0.6.0"
