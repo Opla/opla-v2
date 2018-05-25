@@ -526,4 +526,33 @@ describe("containers/IntentContainerBase", () => {
       });
     });
   });
+
+  describe("handleChangeToolbox", () => {
+    it("should update state when toolbox is unfocus", () => {
+      const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
+      wrapper.instance().handleChangeToolbox("unfocus");
+      expect(wrapper.state().toolboxFocus).toBe(false);
+    });
+
+    it("should update state when action is not unfocus", () => {
+      const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
+      wrapper.instance().handleChangeToolbox("foo");
+      expect(wrapper.state().toolboxFocus).toBe(true);
+      expect(wrapper.state().editing).toBe(true);
+    });
+
+    it("should call actionsComponent.appendAction when action is not focus", () => {
+      const appendActionSpy = jest.fn();
+      const actionsComponentMock = {
+        appendAction: appendActionSpy,
+      };
+      const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
+      wrapper.instance().actionsComponent = actionsComponentMock;
+      wrapper.instance().handleChangeToolbox("foo");
+      expect(wrapper.state().toolboxFocus).toBe(true);
+      expect(wrapper.state().editing).toBe(true);
+      expect(appendActionSpy).toHaveBeenCalled();
+      expect(appendActionSpy).toHaveBeenCalledWith("foo");
+    });
+  });
 });

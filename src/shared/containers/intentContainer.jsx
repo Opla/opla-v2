@@ -263,9 +263,12 @@ class IntentContainer extends Component {
       let toolbox;
       if (editing || toolboxFocus) {
         // TODO dont use stored component
-        const isInput = this.actionsComponent
-          ? this.actionsComponent.props.name === "input"
-          : false;
+        const isInput =
+          this.actionsComponent &&
+          this.actionsComponent.props &&
+          this.actionsComponent.props.name
+            ? this.actionsComponent.props.name === "input"
+            : false;
         toolbox = (
           <ActionsToolbox
             onChange={this.handleChangeToolbox}
