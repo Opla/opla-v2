@@ -145,7 +145,7 @@ const app = {
       name: "chatbot",
       path: "/publish/:name",
       access: "all",
-      displayToolbar: false,
+      isFullscreen: true,
       render: (props) => <PublishContainer {...props} />,
     },
   ],
