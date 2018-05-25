@@ -12,6 +12,10 @@ import ActionsEditable from "shared/components/actionsEditable";
 import * as intentDetail from "shared/components/intentDetail";
 import Zrmc from "zrmc";
 
+beforeAll(() => {
+  Zrmc.showDialog = jest.fn();
+});
+
 describe("containers/IntentContainerBase", () => {
   const defaultProps = {
     appUpdateIntent: () => {},
