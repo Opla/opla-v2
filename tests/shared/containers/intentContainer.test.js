@@ -16,6 +16,8 @@ beforeAll(() => {
   Zrmc.showDialog = jest.fn();
 });
 
+jest.useFakeTimers();
+
 describe("containers/IntentContainerBase", () => {
   const defaultProps = {
     appUpdateIntent: () => {},
@@ -143,6 +145,118 @@ describe("containers/IntentContainerBase", () => {
     });
 
     // TODO find the case where this.actionType === "condition" and test it
+  });
+
+  describe("handleEdit", () => {
+    describe("on intentDetail new/add item selected", () => {
+      const args = {
+        editing: true,
+        actionsComponent: {
+          props: {
+            name: "input",
+          },
+        },
+      };
+
+      it("should set component fields and state", () => {
+        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
+        wrapper.update();
+        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+
+        expect(wrapper.state().editing).toBe(false);
+        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+
+        // should set this.actionsComponent
+        expect(wrapper.instance().actionsComponent).toEqual(
+          args.actionsComponent,
+        );
+
+        // should set editing state
+        expect(wrapper.state().editing).toBe(false);
+        jest.runAllTimers();
+        wrapper.update();
+        expect(wrapper.state().editing).toBe(true);
+      });
+
+      // TODO move to general render test drived by state and props only
+      it("should display limited Toolbox", () => {
+        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
+        wrapper.update();
+        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+
+        expect(wrapper.state().editing).toBe(false);
+        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+        jest.runAllTimers();
+        wrapper.update();
+
+        expect(wrapper.find("Tooltip")).toHaveLength(4);
+        const isInputActionIds = [
+          "#atb_text",
+          "#atb_any",
+          "#atb_output_var",
+          "#atb_trash",
+        ];
+
+        isInputActionIds.forEach((actionId, index) => {
+          try {
+            expect(
+              wrapper
+                .find("Tooltip")
+                .at(index)
+                .find(`Icon${actionId}`),
+            ).toHaveLength(1);
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error("at index", index, "cant find actionId", actionId);
+            throw e;
+          }
+        });
+      });
+    });
+
+    describe("on intentDetail first item selected", () => {
+      const args = {
+        editing: false,
+        actionsComponent: {
+          props: {
+            name: "input",
+          },
+        },
+      };
+
+      it("should set component fields and state editing", () => {
+        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
+        wrapper.update();
+        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+
+        expect(wrapper.state().editing).toBe(false);
+        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+
+        // should NOT set this.actionsComponent
+        expect(wrapper.instance().actionsComponent).not.toEqual(
+          args.actionsComponent,
+        );
+
+        // should set editing state
+        jest.runAllTimers();
+        wrapper.update();
+        expect(wrapper.state().editing).toBe(false);
+      });
+
+      // TODO move to general render test drived by state and props only
+      it("should not display Toolbox", () => {
+        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
+        wrapper.update();
+        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+
+        expect(wrapper.state().editing).toBe(false);
+        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+        jest.runAllTimers();
+        wrapper.update();
+
+        expect(wrapper.find("Tooltip")).toHaveLength(0);
+      });
+    });
   });
 
   describe("handleActions", () => {
