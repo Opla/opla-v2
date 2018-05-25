@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 import { IntentContainerBase } from "shared/containers/intentContainer";
 import ActionsEditable from "shared/components/actionsEditable";
@@ -63,7 +63,7 @@ describe("containers/IntentContainerBase", () => {
 
   it("should reset when props.selectedIntent change", () => {
     const resetSpy = jest.fn();
-    const wrapper = mount(<IntentContainerBase {...defaultProps} />);
+    const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
     wrapper.instance().reset = resetSpy;
     wrapper.update();
     wrapper.setProps({
@@ -75,7 +75,7 @@ describe("containers/IntentContainerBase", () => {
   describe("handleChangeAction", () => {
     it("should not call appSetIntentAction when new intent action doesnt have a value", () => {
       const appSetIntentActionSpy = jest.fn();
-      const wrapper = mount(
+      const wrapper = shallow(
         <IntentContainerBase
           {...defaultProps}
           appSetIntentAction={appSetIntentActionSpy}
@@ -96,7 +96,7 @@ describe("containers/IntentContainerBase", () => {
 
     it("sould call appSetIntentAction when intent action is edited", () => {
       const appSetIntentActionSpy = jest.fn();
-      const wrapper = mount(
+      const wrapper = shallow(
         <IntentContainerBase
           {...defaultProps}
           appSetIntentAction={appSetIntentActionSpy}
@@ -121,7 +121,7 @@ describe("containers/IntentContainerBase", () => {
 
     it("should call appSetIntentAction when new intent action saved", () => {
       const appSetIntentActionSpy = jest.fn();
-      const wrapper = mount(
+      const wrapper = shallow(
         <IntentContainerBase
           {...defaultProps}
           appSetIntentAction={appSetIntentActionSpy}
@@ -159,9 +159,7 @@ describe("containers/IntentContainerBase", () => {
       };
 
       it("should set component fields and state", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         expect(wrapper.state().editing).toBe(false);
         wrapper.instance().handleEdit(args.editing, args.actionsComponent);
@@ -225,9 +223,7 @@ describe("containers/IntentContainerBase", () => {
       };
 
       it("should set component fields and state editing", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         expect(wrapper.state().editing).toBe(false);
         wrapper.instance().handleEdit(args.editing, args.actionsComponent);
@@ -269,9 +265,7 @@ describe("containers/IntentContainerBase", () => {
       };
 
       it("should set component fields and state", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
@@ -296,9 +290,7 @@ describe("containers/IntentContainerBase", () => {
         const displayActionEditorSpy = jest.fn();
         // eslint-disable-next-line import/namespace
         intentDetail.displayActionEditor = displayActionEditorSpy;
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
@@ -347,9 +339,7 @@ describe("containers/IntentContainerBase", () => {
       };
 
       it("should set component fields and state", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
@@ -372,9 +362,7 @@ describe("containers/IntentContainerBase", () => {
       it("should call Zrmc.showDialog", () => {
         const showDialogSpy = jest.fn();
         Zrmc.showDialog = showDialogSpy;
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
@@ -398,9 +386,7 @@ describe("containers/IntentContainerBase", () => {
       };
 
       it("should set component fields and state", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
@@ -425,9 +411,7 @@ describe("containers/IntentContainerBase", () => {
         const displayActionEditorSpy = jest.fn();
         // eslint-disable-next-line import/namespace
         intentDetail.displayActionEditor = displayActionEditorSpy;
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
@@ -477,9 +461,7 @@ describe("containers/IntentContainerBase", () => {
       };
 
       it("should set component fields and state", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
@@ -504,9 +486,7 @@ describe("containers/IntentContainerBase", () => {
         const displayActionEditorSpy = jest.fn();
         // eslint-disable-next-line import/namespace
         intentDetail.displayActionEditor = displayActionEditorSpy;
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
+        const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         // set this.actionContainer
         wrapper.instance().actionContainer = undefined;
