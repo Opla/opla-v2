@@ -140,11 +140,12 @@ const app = {
       render: (props) => React.createElement(Screen, props, "Support"),
     },
     {
-      id: "7",
+      id: "8",
       isDrawerItem: false,
       name: "chatbot",
       path: "/publish/:name",
       access: "all",
+      displayToolbar: false,
       render: (props) => <PublishContainer {...props} />,
     },
   ],
