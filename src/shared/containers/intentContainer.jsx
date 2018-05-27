@@ -27,6 +27,13 @@ class IntentContainer extends Component {
     this.actionsComponent = null;
   }
 
+  componentDidUpdate(prevProps) {
+    // reset when a new intent is selected
+    if (prevProps.selectedIntent !== this.props.selectedIntent) {
+      this.reset();
+    }
+  }
+
   reset() {
     this.actionsComponent = null;
     this.selectedAction = undefined;
@@ -255,7 +262,19 @@ class IntentContainer extends Component {
       const { editing, toolboxFocus } = this.state;
       let toolbox;
       if (editing || toolboxFocus) {
-        toolbox = <ActionsToolbox onChange={this.handleChangeToolbox} />;
+        // TODO dont use stored component
+        const isInput =
+          this.actionsComponent &&
+          this.actionsComponent.props &&
+          this.actionsComponent.props.name
+            ? this.actionsComponent.props.name === "input"
+            : false;
+        toolbox = (
+          <ActionsToolbox
+            onChange={this.handleChangeToolbox}
+            isInput={isInput}
+          />
+        );
       }
       return (
         <div>
@@ -359,4 +378,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+export { IntentContainer as IntentContainerBase };
 export default connect(mapStateToProps, mapDispatchToProps)(IntentContainer);
