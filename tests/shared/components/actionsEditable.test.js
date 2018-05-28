@@ -73,6 +73,24 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_4", 0);
   });
 
+  it("should request to move focus after item inserted", () => {
+    const wrapper = shallow(<ActionsEditable {...defaultProps} />);
+    expect(wrapper.state("items")).toHaveLength(3);
+
+    const focusElement = {
+      id: "ae_1",
+      innerHTML: " bons gestes composteur ",
+      tabindex: 3,
+      contenteditable: true,
+    };
+    wrapper.instance().focusElement = focusElement;
+    wrapper.instance().insertItem({ text: "*", type: "any" }, 2);
+    wrapper.update();
+    expect(wrapper.state("items")).toHaveLength(4);
+    expect(wrapper.state("itemToFocus")).toEqual(2);
+    wrapper.update();
+  });
+
   it("should insert an item at end", () => {
     const wrapper = shallow(
       <ActionsEditable {...defaultProps} content="* bons gestes composteur " />,
