@@ -8,10 +8,17 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { apiGetBotParametersRequest } from "OplaLibs/actions/api";
+import { appSetTitle } from "zoapp-front/actions/app";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../../config/default.json";
 
 class PublishContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.props.appSetTitle("chatbot");
+  }
+
   componentDidMount() {
     this.props.apiGetBotParametersRequest(this.props.match.params.name);
   }
@@ -37,7 +44,9 @@ class PublishContainer extends Component {
 
     const params = encodeURI(JSON.stringify(parameters));
 
-    return <iframe src={`/bot.html?config=${params}`} width="100%" />;
+    return (
+      <iframe frameBorder="0" src={`/bot.html?config=${params}`} width="100%" />
+    );
   }
 }
 
@@ -45,6 +54,7 @@ PublishContainer.propTypes = {
   match: PropTypes.object.isRequired,
   apiGetBotParametersRequest: PropTypes.func.isRequired,
   botParameters: PropTypes.object,
+  appSetTitle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -54,6 +64,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  appSetTitle: (titleName) => {
+    dispatch(appSetTitle(titleName));
+  },
   apiGetBotParametersRequest: (name) =>
     dispatch(apiGetBotParametersRequest(name)),
 });

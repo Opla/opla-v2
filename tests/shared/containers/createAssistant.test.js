@@ -11,6 +11,11 @@ import { shallow } from "enzyme";
 import { createFakeEvent } from "tests/helpers";
 import { CreateAssistantBase } from "shared/containers/createAssistant";
 import { defaultTemplates, defaultLanguages } from "shared/reducers/app";
+import Zrmc from "zrmc";
+
+beforeAll(() => {
+  Zrmc.showDialog = jest.fn();
+});
 
 describe("containers/CreateAssistant", () => {
   it("renders correctly", () => {
