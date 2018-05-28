@@ -232,6 +232,12 @@ class ActionsEditable extends Component {
     }
   };
 
+  saveActionEditableRef = (e, itemIndex = null) => {
+    if (e && itemIndex !== null) {
+      this.itemsElementRefs[itemIndex] = e;
+    }
+  };
+
   getCaretPosition() {
     const range = window.getSelection().getRangeAt(0);
     this.range = range;
@@ -341,6 +347,9 @@ class ActionsEditable extends Component {
             type={type}
             text={actionItem.text}
             editable={isEditable}
+            ref={(e) => {
+              this.saveActionEditableRef(e, index);
+            }}
           />
         );
       });

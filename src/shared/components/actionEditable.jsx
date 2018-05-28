@@ -59,16 +59,23 @@ const types = {
 };
 
 class ActionEditable extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = null;
+  }
+
   setCE = (e, editable = true) => {
     if (!e) return;
-    // save items refs
-    // if (itemIndex !== null) {
-    //   this.itemsElementRefs[itemIndex] = e;
-    // }
     if (editable) {
       e.contentEditable = this.props.editable;
     }
   };
+
+  focus() {
+    if (this.ref !== null) {
+      this.ref.focus();
+    }
+  }
 
   render() {
     const { actionId, type, tabIndex, text } = this.props;
@@ -88,6 +95,7 @@ class ActionEditable extends Component {
         style={style}
         ref={(e) => {
           this.setCE(e, editable);
+          this.ref = e;
         }}
       >
         {type === "any" && <span className="mdl-chip__text_ex">any</span>}
