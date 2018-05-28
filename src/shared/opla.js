@@ -10,14 +10,19 @@ import Front from "zoapp-front/front";
 import Screen from "zoapp-front/containers/screen";
 import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
-import AdminManager from "OplaContainers/adminManager";
+import AdminManager from "zoapp-front/containers/adminManager";
 import BotManager from "OplaContainers/botManager";
 import PublishContainer from "OplaContainers/publishContainer";
 import configureStore from "OplaLibs/store";
 import DrawerFooter from "OplaContainers/drawerFooter";
-import Zrmc from "zrmc";
+import Zrmc, { Inner, Cell, Button } from "zrmc";
 import PublishDialog from "OplaContainers/dialogs/publishDialog";
 import { defaultTemplates, defaultLanguages } from "OplaLibs/reducers/app";
+import Extension from "OplaContainers/admin/extensions";
+import GeneralAdmin from "OplaContainers/admin/generalAdmin";
+import Users from "zoapp-front/containers/admin/users";
+import Advanced from "zoapp-front/containers/admin/advanced";
+import { infoStyleD } from "OplaContainers/admin/styles";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
 
@@ -67,7 +72,38 @@ const app = {
       path: "/admin",
       access: "auth",
       panels: ["General", "Extensions", "Users", "Advanced"],
-      render: (props) => <AdminManager {...props} />,
+      render: (props) => (
+        <AdminManager
+          tabs={[
+            <GeneralAdmin key="general" />,
+            <Extension key="extension" />,
+            <Users key="users" />,
+            <Advanced key="advanced">
+              <Inner>
+                <Cell className="mdl-color--white" span={12}>
+                  <div style={infoStyleD}>
+                    <span style={{ color: "#d50000" }}>
+                      Delete this assistant
+                    </span>
+                    <Button
+                      raised
+                      style={{
+                        float: "right",
+                        marginBottom: "24px",
+                        backgroundColor: "#d50000",
+                      }}
+                    >
+                      DELETE
+                    </Button>
+                  </div>
+                  <div />
+                </Cell>
+              </Inner>
+            </Advanced>,
+          ]}
+          {...props}
+        />
+      ),
     },
     {
       id: "4",
