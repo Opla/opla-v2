@@ -1,8 +1,45 @@
-language: node_js
-node_js:
-  - "8"
-  - "9"
-
-script:
+_test_script: &nodetest
+  language: node_js
+  script:
   - yarn lint
   - yarn test
+
+jobs:
+  include:
+    - stage: test
+      <<: *nodetest 
+      node_js: '8'
+
+    - stage: test
+      <<: *nodetest 
+      node_js: '9'
+
+    - stage: publish
+      language: ruby
+      provider: script
+      services:
+        - docker
+      script: ./travis/publish.sh
+   
+    - stage: "deploy to QA :rocket:"
+      language: ruby
+      services:
+        - docker
+      if: type IN (push) and branch in (master, feature/dockerfile)
+      env:
+        - GCLOUD_CLUSTER_ID=qa
+        - GCLOUD_CLUSTER_ZONE=europe-west1-b
+        - GCLOUD_PROJECT_ID=opla-200809
+      install: ./travis/setup_k8s.sh
+      script:
+        - helm upgrade --install --debug front ./k8s --set front.image.tag=$TRAVIS_COMMIT -f k8s/values.yaml -f k8s/values.qa.yaml
+
+stages:
+- test
+- publish
+- "deploy to QA :rocket:"
+
+env:
+  global:
+  - secure: Gg9DGLKjP7jTxdPwZmzAFI0+dqzIC9Guh1URkDefc+YvHAcpCBBiP22eY3Nyf3oakNL2JSd+Zdwi83ruWGDMjH2KL5wWdPYqWj4PG/atNde6o/lc2S9EZZKqziC1J//FN2IWQyITvDMXlCs4idCu3KTdOttB40KfHHtax8zz/pTqBnmQqCRd6CLTN0sZLP1vt02ORFhiXufVvMtfngjYl7ZEQYn3JNGsj+TDjUswXtvZ97qYauARo01V8ql4uHLeapU0kkoDmRMTFmE5p8fiNPQOLHuH3iJNX5VOZilfI5/ljpgLy84Y+R238ehAhqBZ4bUiPHQrgBP3uADyR0d7Yi3Khw2TF8P60vBX0JqK0R0Be+FINaOIgQ/YxOa5ut2lhkTlRIIkvinl0cuY+nxyNJTfxevaQB4GKphyuhdcbj4QqCDPcu3qsBnAYMInqySmRAlZPvnQd6z0tV0aTKd+ICz7v1vcC1tbjaq/dyrZf9pqdReTs1YQgpPC7TY2oMCMHiIJAJZQXw+7OWJRFrWJhN7f2lmNmk8tmBMccoct2KaQ2jYUW/hJpMAy8F5vzoHEnlQfZUa+EL+6gaC+OTCxsbvL9RGEHvvvgomDtzreVq7GEbPXgk/88p+QOeFvUMDH/DzJwpoTRpwxL03DSjB4gN6tSYbQbELGkD14Ab9qy9Q=
+  - secure: Uk3D7/n+vN6X4YjmVShiccyL9bynmkyL9fWuH5IHn5wGc3vNYfHM180aReVT2LSphRvyO1uWG0bzQ8MM8gkuTc6A/DsrjBaSgKVpuvEFwBwo3rt9ZSyGcPFu7YJCRqlHHhiMkYCP5gzQ9mShjSO/KduVAZ3ktSVRokr/e4sfCNxHexmUciU3Y00U/govAh8/G8vN51y57r5iU2kO+z8UcxmwNbc8BsAu6hOKLfLVc/xQyGYqoqGqjjfvO5tNsAySuhhkLDW5taHQOMfy/E4pzGguze+Z42FH1fEYXibZDHPp+0D65VzwUhVQba2lha+FYq2v/VQgjb04xWmeel1l7jDexmhAp1cwZJ1uxr6H94xcsb1Fckip8JOY4ObQRDZpwRU7SrdIuNRPBmGPhOfejhhkNSLlCWieYxK8xHdsLy1W6CR9SU8Z/lDmEqOV0jda/zsd8Yv6kwhPyj36jpx1HP+q1wanzyDpG4Eksryp7hF/5VKvzRTFZ5zhYCv0X4hfXL+pJaFwkbe0jDCOK3CusXpZfSOC/aQr8TkmHR3MRlcl6K1GRPkhbs/fXua3E2TWO8Wd5XT2xyZY/N92Tji491+LSxW8ApXnQZguo6cPDfuLZ52RfyZ6rfTJ29Ta2Bg9HmilsC3bWG5bLh6UmsUEIUqr9T5gYpozfFrJD9UBvtU=

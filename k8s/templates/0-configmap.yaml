@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  config.json: |-
+      {
+          "backend": {
+              "api": {
+                  "host": "{{ .Values.api.domain }}",
+                  "path": "api/v1/",
+                  "port": "443"
+              },
+              "auth": {
+                  "clientId": "xxmtlkZAre2aEj6AgVtat31wStpehwthfT0bpMRBEJ3lmb683ZBwbclxDiIWxG4u",
+                  "clientSecret": "301oRBhGKGeo6AxBVdhi1YmZ2q2xILynWFsP1oOq4Q5zuJ1r3gqRUFwz1wFPHmp5",
+                  "host": "{{ .Values.api.domain }}",
+                  "path": "auth/",
+                  "port": "443"
+              },
+              "secure": true
+          }
+      }

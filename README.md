@@ -53,6 +53,15 @@ Conduct](http://contributor-covenant.org/). By participating in this project you
 agree to abide by its terms. See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) file.
 
 
+## Docker Image
+
+By default, on docker run, the app will run opla/bin init to try to connect to the backend and register a new app. Please populate `OPLA_API_DOMAIN` and `OPLA_FRONT_CLIENT_NAME` env variables for the frontend to be able to register the backend app properly.
+
+### Configuration
+You have 2 options: 
+    1. pass ENV variables to override config properties one by one. See Dockerfile `ENV` statement for available environment variables.
+    2. override `default.json` by mounting your own `/src/config/config.json` file. You can create such a file for a specific backend instance, by running `bin/opla init` locally, provided that you can connect to that backend.
+
 ## License
 
 opla-front is released under the GPL v2.0+ License. See the bundled

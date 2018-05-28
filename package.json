@@ -11,6 +11,7 @@
   "scripts": {
     "clean-dist": "rm -r -f dist && mkdir dist",
     "build:prod": "yarn clean-dist && webpack --env=prod --progress --profile --colors",
+    "rebuild:prod": "webpack --env=prod --progress --profile --colors",
     "compile:dev": "yarn clean-dist && webpack --env=dev --progress --profile --colors",
     "dev": "yarn compile:dev && yarn start:dev",
     "lint:dev": "yarn lint --rule 'no-console: 1' --fix",
@@ -28,6 +29,7 @@
     "express": "^4.16.2",
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
+    "hard-source-webpack-plugin": "^0.6.9",
     "inquirer": "^5.1.0",
     "prop-types": "^15.6.1",
     "react": "16.2.0",
