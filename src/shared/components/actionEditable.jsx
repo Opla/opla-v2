@@ -14,7 +14,7 @@ const types = {
       display: "inline-block",
       padding: "0 4px",
     },
-    className: null,
+    className: undefined,
   },
   any: {
     style: {

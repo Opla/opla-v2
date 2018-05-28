@@ -30,19 +30,31 @@ describe("components/actionsEditable", () => {
     // caretPosition: 0
   };
 
+  const testActionIdAndContent = (wrapper, id, length, text) => {
+    const selector = `ActionEditable[actionId="${id}"]`;
+    expect(wrapper.find(selector)).toHaveLength(length);
+    if (text) {
+      expect(wrapper.find(selector).props().text).toEqual(text);
+    }
+  };
+
   it("renders correctly", () => {
     const wrapper = shallow(<ActionsEditable {...defaultProps} />);
     expect(wrapper.state("items")).toHaveLength(3);
     expect(wrapper.find("#ae_content")).toHaveLength(1);
-    expect(wrapper.find("#ae_1")).toHaveLength(1);
-    expect(wrapper.find("#ae_1").text()).toEqual(" bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 1, "*");
+    testActionIdAndContent(wrapper, "ae_3", 0);
   });
 
   it("should insert an item", () => {
     const wrapper = shallow(<ActionsEditable {...defaultProps} />);
     expect(wrapper.state("items")).toHaveLength(3);
-    expect(wrapper.find("#ae_1")).toHaveLength(1);
-    expect(wrapper.find("#ae_1").text()).toEqual(" bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 1, "*");
+    testActionIdAndContent(wrapper, "ae_3", 0);
 
     const focusElement = {
       id: "ae_1",
@@ -54,21 +66,22 @@ describe("components/actionsEditable", () => {
     wrapper.instance().insertItem({ text: "*", type: "any" }, 2);
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(4);
-    expect(wrapper.find("#ae_2")).toHaveLength(1);
-    expect(wrapper.find("#ae_2").text()).toEqual("any");
-    expect(wrapper.find("#ae_3")).toHaveLength(1);
-    expect(wrapper.find("#ae_3").text()).toEqual("any");
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 1, "*");
+    testActionIdAndContent(wrapper, "ae_3", 1, "*");
+    testActionIdAndContent(wrapper, "ae_4", 0);
   });
 
   it("should insert an item at end", () => {
     const wrapper = shallow(
       <ActionsEditable {...defaultProps} content="* bons gestes composteur " />,
     );
+
     expect(wrapper.state("items")).toHaveLength(2);
-    expect(wrapper.find("#ae_0")).toHaveLength(1);
-    expect(wrapper.find("#ae_0").text()).toEqual("any");
-    expect(wrapper.find("#ae_1")).toHaveLength(1);
-    expect(wrapper.find("#ae_1").text()).toEqual(" bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 0);
 
     const focusElement = {
       id: "ae_end",
@@ -80,13 +93,10 @@ describe("components/actionsEditable", () => {
     wrapper.instance().insertItem({ text: "*", type: "any" }, 0);
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(3);
-    expect(wrapper.find("#ae_0")).toHaveLength(1);
-    expect(wrapper.find("#ae_0").text()).toEqual("any");
-    expect(wrapper.find("#ae_1")).toHaveLength(1);
-    expect(wrapper.find("#ae_1").text()).toEqual(" bons gestes composteur ");
-    expect(wrapper.find("#ae_2")).toHaveLength(1);
-    expect(wrapper.find("#ae_2").text()).toEqual("any");
-    expect(wrapper.find("#ae_3")).toHaveLength(0);
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 1, "*");
+    testActionIdAndContent(wrapper, "ae_3", 0);
   });
 
   it("should delete an item", () => {
@@ -97,12 +107,11 @@ describe("components/actionsEditable", () => {
       />,
     );
     expect(wrapper.state("items")).toHaveLength(4);
-    expect(wrapper.find("#ae_1")).toHaveLength(1);
-    expect(wrapper.find("#ae_1").text()).toEqual(" bons gestes composteur ");
-    expect(wrapper.find("#ae_2")).toHaveLength(1);
-    expect(wrapper.find("#ae_2").text()).toEqual("any");
-    expect(wrapper.find("#ae_3")).toHaveLength(1);
-    expect(wrapper.find("#ae_3").text()).toEqual("any");
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 1, "*");
+    testActionIdAndContent(wrapper, "ae_3", 1, "*");
+    testActionIdAndContent(wrapper, "ae_4", 0);
 
     const focusElement = {
       id: "ae_2",
@@ -113,9 +122,10 @@ describe("components/actionsEditable", () => {
     wrapper.instance().deleteItem(2);
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(3);
-    expect(wrapper.find("#ae_2")).toHaveLength(1);
-    expect(wrapper.find("#ae_2").text()).toEqual("any");
-    expect(wrapper.find("#ae_3")).toHaveLength(0);
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 1, "*");
+    testActionIdAndContent(wrapper, "ae_3", 0);
   });
 
   it("should call clear() on Enter key pressed", () => {
@@ -156,8 +166,7 @@ describe("components/actionsEditable", () => {
     // after state update, 3 items are rendered
     expect(wrapper.state("items")).toHaveLength(3);
     expect(wrapper.find("#ae_content")).toHaveLength(1);
-    expect(wrapper.find("#ae_1")).toHaveLength(1);
-    expect(wrapper.find("#ae_1").text()).toEqual(" bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
 
     wrapper.instance().clear();
     // after clear no content rendered
