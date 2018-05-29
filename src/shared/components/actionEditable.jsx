@@ -86,6 +86,19 @@ class ActionEditable extends Component {
   focus() {
     if (this.ref !== null) {
       this.ref.focus();
+      // move caret to last position
+      const index = this.props.text.length;
+      this.moveCaretPosition(this.ref, index);
+    }
+  }
+
+  moveCaretPosition(refs, index) {
+    if (refs.childNodes[0] && refs.childNodes[0].nodeName === "SPAN") {
+      this.moveCaretPosition(refs.childNodes[0], index);
+    } else {
+      const selection = window.getSelection();
+      const range = selection.getRangeAt(0);
+      range.setStart(refs.childNodes[0], index);
     }
   }
 
