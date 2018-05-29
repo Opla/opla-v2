@@ -138,13 +138,26 @@ class ActionsEditable extends Component {
   };
 
   handleEntityChange = (itemIndex, actionId, content) => {
+    // add a text item when ae_start or ae_end are edited
+    if (itemIndex < 0) {
+      this.insertItem({ type: "text", text: content });
+      return;
+    }
     const newItems = [...this.state.items];
     newItems[itemIndex].text = content;
     this.setState({
       items: newItems,
     });
+    const newContent = ActionsEditable.build(newItems, false);
+    const noUpdate = true;
+    this.setState({ noUpdate, content: newContent }, () => {
+      this.props.onChange(newContent);
+    });
   };
 
+  updateContent = () => {};
+
+  // TODO remove
   handleChange = (element) => {
     if (this.props.editable) {
       let { selectedItem } = this.state;
@@ -234,7 +247,7 @@ class ActionsEditable extends Component {
 
   insertItem(item, position = this.state.selectedItem + 1) {
     const { items } = this.state;
-    // console.log("insert item: ", item, position, this.focusElement);
+    // console.log("insert item: ", item, position);
 
     let p = position;
     if (this.state.selectedItem === -2) {
@@ -300,6 +313,9 @@ class ActionsEditable extends Component {
           type="text"
           editable={isEditable}
           style={style}
+          onChange={(...args) => {
+            this.handleEntityChange(-1, ...args);
+          }}
           onSelect={(e) => {
             this.handleEntitySelect(-1, "text", "ae_start", e);
           }}
@@ -341,6 +357,9 @@ class ActionsEditable extends Component {
             tabIndex={i}
             type="text"
             editable={isEditable}
+            onChange={(...args) => {
+              this.handleEntityChange(-2, ...args);
+            }}
             onSelect={(e) => {
               this.handleEntitySelect(-2, "text", "ae_end", e);
             }}
