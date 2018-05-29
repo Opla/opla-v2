@@ -39,6 +39,11 @@ module.exports = {
         force: true
       },
       {
+        from: "./public/favicon.ico",
+        to: path.resolve(__dirname, "./dist/public/favicon.ico"),
+        force: true
+      },
+      {
         from: "./server",
         to: path.resolve(__dirname, "./dist"),
         force: true
