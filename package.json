@@ -34,8 +34,8 @@
     "inquirer": "^5.1.0",
     "node-fetch": "^2.1.2",
     "opennlx": "0.2.2",
-    "zoapp-backend": "0.21.0",
-    "zoauth-server": "^0.6.0"
+    "zoapp-backend": "0.23.0",
+    "zoauth-server": "0.9.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
