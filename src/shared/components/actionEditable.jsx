@@ -64,6 +64,13 @@ class ActionEditable extends Component {
     this.ref = null;
   }
 
+  static sanitizeType(typesList, type) {
+    if (!typesList.includes(type)) {
+      return "text";
+    }
+    return type;
+  }
+
   setCE = (e, editable = true) => {
     if (!e) return;
     if (editable) {
@@ -78,7 +85,11 @@ class ActionEditable extends Component {
   }
 
   render() {
-    const { actionId, type, tabIndex, text } = this.props;
+    const { actionId, tabIndex, text } = this.props;
+    const type = ActionEditable.sanitizeType(
+      Object.keys(types),
+      this.props.type,
+    );
     const { className, editable } = types[type];
     // compose style with type style and props style
     const style = {
