@@ -10,13 +10,21 @@ import { connect } from "react-redux";
 
 const DrawerFooter = (props) => (
   <React.Fragment>
-    <a href="https://github.com/Opla/community-edition/issues">
+    <a
+      href="https://github.com/Opla/community-edition/issues"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
       Report an issue
     </a>
     <br />
-    <a href="https://gitter.im/Opla">Open community chat</a>
+    <a href="https://gitter.im/Opla" target="_blank" rel="noreferrer noopener">
+      Open community chat
+    </a>
     <p>
-      {props.name} {props.version}
+      {props.name}
+      <br />
+      v{props.version}
     </p>
   </React.Fragment>
 );
