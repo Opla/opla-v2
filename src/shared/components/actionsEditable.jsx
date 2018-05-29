@@ -51,9 +51,9 @@ class ActionsEditable extends Component {
       noUpdate: false,
       startSpan: null,
       endSpan: null,
+      itemFocused: -1,
       itemToFocus: null,
     };
-    this.focusElement = null;
     this.itemsElementRefs = [];
   }
 
@@ -86,16 +86,6 @@ class ActionsEditable extends Component {
     }
   }
 
-  handleFocus = (e) => {
-    const element = e.target;
-    // console.log("handlefocus", element.id, this.props.editable);
-    if (element.id && element.id.indexOf("ae_") === 0 && this.props.editable) {
-      e.preventDefault();
-      this.focusElement = this.focus(element);
-      // console.log("focus", this.focusElement.id);
-    }
-  };
-
   handleBlur = () => {
     // console.log("onBlur");
     // forceUpdate to sync state and actions span rendered
@@ -106,22 +96,6 @@ class ActionsEditable extends Component {
     if (e.which === 27) {
       // esc key
       e.preventDefault();
-    }
-  };
-
-  handleKeyPress = (e) => {
-    if (!this.props.editable) {
-      return;
-    }
-    if (e.which === 13) {
-      // WIP handle save event
-      const text = this.state.content;
-      this.props.onAction(text);
-      e.preventDefault();
-      if (this.props.isNew) {
-        this.clear();
-      }
-      return;
     }
     switch (e.which) {
       case 38:
@@ -141,6 +115,21 @@ class ActionsEditable extends Component {
     }
   };
 
+  handleKeyPress = (e) => {
+    if (!this.props.editable) {
+      return;
+    }
+    if (e.which === 13) {
+      // WIP handle save event
+      const text = this.state.content;
+      this.props.onAction(text);
+      e.preventDefault();
+      if (this.props.isNew) {
+        this.clear();
+      }
+    }
+  };
+
   handleMouseUp = (e) => {
     const element = e.target;
     if (element.tabIndex !== 0 && this.props.editable) {
@@ -148,12 +137,12 @@ class ActionsEditable extends Component {
     }
   };
 
-  handleInput = () => {
-    if (this.props.editable) {
-      const element = this.node;
-      // console.log("handleChange");
-      this.handleChange(element);
-    }
+  handleEntityChange = (itemIndex, actionId, content) => {
+    const newItems = [...this.state.items];
+    newItems[itemIndex].text = content;
+    this.setState({
+      items: newItems,
+    });
   };
 
   handleChange = (element) => {
@@ -174,37 +163,21 @@ class ActionsEditable extends Component {
     return false;
   };
 
-  focus(element) {
-    let el = null;
+  // TODO Move focus to last item when ae_content focus
+
+  handleEntitySelect(itemIndex, type, id, e) {
+    this.setState({
+      selectedItem: itemIndex,
+    });
+
     if (this.props.editable) {
-      el = element;
-      if (element.id === "ae_content") {
-        el = element.children[0].lastChild;
-        // console.log("ae_content", el.id);
-      }
-      const type = el.getAttribute("data");
-      const key = el.id;
-      this.props.onSelected(type, key, this);
-      const i = key.substring(3);
-      let selectedItem = -1;
-      let caretPosition;
-      if (el.contentEditable) {
-        caretPosition = this.updateCaretPosition();
-      }
-      if (i !== "start" && i !== "end" && i !== "content") {
-        selectedItem = parseInt(i, 10);
-      }
-      // console.log("focus", key, type, caretPosition);
-      if (this.state.selectedItem !== selectedItem) {
-        const noUpdate = false;
-        this.setState(() => ({ noUpdate, selectedItem, caretPosition }));
-      }
+      this.props.onSelected(type, id, e);
     }
-    return el;
+    // TODO get caret position
+    // TODO set state selectedItem and caretPosition
   }
 
   clear = () => {
-    this.focusElement = null;
     const noUpdate = false;
     const selectedItem = -1;
     const caretPosition = 0;
@@ -264,7 +237,7 @@ class ActionsEditable extends Component {
     // console.log("insert item: ", item, position, this.focusElement);
 
     let p = position;
-    if (this.focusElement && this.focusElement.id === "ae_end") {
+    if (this.state.selectedItem === -2) {
       p = items.length;
     }
     if (p < items.length) {
@@ -289,8 +262,7 @@ class ActionsEditable extends Component {
     let deletePosition = position;
     // if focus on ae_end and last action is a text, remove text
     if (
-      this.focusElement &&
-      this.focusElement.id === "ae_end" &&
+      this.state.selectedItem === -2 &&
       items[items.length - 1].type === "text"
     ) {
       deletePosition = items.length - 1;
@@ -328,6 +300,9 @@ class ActionsEditable extends Component {
           type="text"
           editable={isEditable}
           style={style}
+          onSelect={(e) => {
+            this.handleEntitySelect(-1, "text", "ae_start", e);
+          }}
         />
       );
       i += 1;
@@ -350,6 +325,12 @@ class ActionsEditable extends Component {
             ref={(e) => {
               this.saveActionEditableRef(e, index);
             }}
+            onChange={(...args) => {
+              this.handleEntityChange(index, ...args);
+            }}
+            onSelect={(e) => {
+              this.handleEntitySelect(index, type, id, e);
+            }}
           />
         );
       });
@@ -360,6 +341,9 @@ class ActionsEditable extends Component {
             tabIndex={i}
             type="text"
             editable={isEditable}
+            onSelect={(e) => {
+              this.handleEntitySelect(-2, "text", "ae_end", e);
+            }}
           />
         );
       }
@@ -372,13 +356,11 @@ class ActionsEditable extends Component {
         className="contenteditable"
         aria-label={this.props.placeholder}
         spellCheck={false}
-        onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onMouseUp={this.handleMouseUp}
         onTouchEnd={this.handleMouseUp}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyDown}
-        onInput={this.handleInput}
         ref={(node) => {
           this.node = node;
         }}

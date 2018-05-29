@@ -71,6 +71,11 @@ class ActionEditable extends Component {
     return type;
   }
 
+  // avoid caret reset position when editing
+  shouldComponentUpdate(nextProps) {
+    return nextProps.text !== this.ref.innerText;
+  }
+
   setCE = (e, editable = true) => {
     if (!e) return;
     if (editable) {
@@ -83,6 +88,14 @@ class ActionEditable extends Component {
       this.ref.focus();
     }
   }
+
+  handleChange = (e) => {
+    // TODO check if type is editable
+    const { actionId } = this.props;
+    if (this.props.editable) {
+      this.props.onChange(actionId, e.target.innerText);
+    }
+  };
 
   render() {
     const { actionId, tabIndex, text } = this.props;
@@ -108,6 +121,10 @@ class ActionEditable extends Component {
           this.setCE(e, editable);
           this.ref = e;
         }}
+        // onInput={(e)=>{this.handleChange(this.props.actionId, e);}}
+        onInput={this.handleChange}
+        // onClick={(e)=>{this.props.onSelect();}}
+        onClick={this.props.onSelect}
       >
         {type === "any" && <span className="mdl-chip__text_ex">any</span>}
         {(type === "output_var" || type === "variable") && (
@@ -137,6 +154,8 @@ ActionEditable.propTypes = {
   text: PropTypes.string,
   editable: PropTypes.bool,
   style: PropTypes.object,
+  onChange: PropTypes.func,
+  onSelect: PropTypes.func,
 };
 
 export default ActionEditable;

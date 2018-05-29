@@ -113,13 +113,6 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_2", 1, "*");
     testActionIdAndContent(wrapper, "ae_3", 0);
 
-    const focusElement = {
-      id: "ae_1",
-      innerHTML: " bons gestes composteur ",
-      tabindex: 3,
-      contenteditable: true,
-    };
-    wrapper.instance().focusElement = focusElement;
     wrapper.instance().insertItem({ text: "*", type: "any" }, 2);
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(4);
@@ -134,18 +127,31 @@ describe("components/actionsEditable", () => {
     const wrapper = shallow(<ActionsEditable {...defaultProps} />);
     expect(wrapper.state("items")).toHaveLength(3);
 
-    const focusElement = {
-      id: "ae_1",
-      innerHTML: " bons gestes composteur ",
-      tabindex: 3,
-      contenteditable: true,
-    };
-    wrapper.instance().focusElement = focusElement;
     wrapper.instance().insertItem({ text: "*", type: "any" }, 2);
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(4);
     expect(wrapper.state("itemToFocus")).toEqual(2);
     wrapper.update();
+  });
+
+  it("should insert an item at beginning", () => {
+    const wrapper = shallow(
+      <ActionsEditable {...defaultProps} content="* bons gestes composteur " />,
+    );
+
+    expect(wrapper.state("items")).toHaveLength(2);
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 0);
+
+    wrapper.setState({ selectedItem: -1 });
+    wrapper.instance().insertItem({ text: "*", type: "any" }, 0);
+    wrapper.update();
+    expect(wrapper.state("items")).toHaveLength(3);
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, "*");
+    testActionIdAndContent(wrapper, "ae_2", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_3", 0);
   });
 
   it("should insert an item at end", () => {
@@ -158,13 +164,7 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
     testActionIdAndContent(wrapper, "ae_2", 0);
 
-    const focusElement = {
-      id: "ae_end",
-      innerHTML: "",
-      tabindex: 7,
-      contenteditable: true,
-    };
-    wrapper.instance().focusElement = focusElement;
+    wrapper.setState({ selectedItem: -2 });
     wrapper.instance().insertItem({ text: "*", type: "any" }, 0);
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(3);
@@ -188,12 +188,6 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_3", 1, "*");
     testActionIdAndContent(wrapper, "ae_4", 0);
 
-    const focusElement = {
-      id: "ae_2",
-      tabindex: 3,
-      contenteditable: true,
-    };
-    wrapper.instance().focusElement = focusElement;
     wrapper.instance().deleteItem(2);
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(3);
