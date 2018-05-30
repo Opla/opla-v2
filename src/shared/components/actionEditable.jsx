@@ -86,9 +86,12 @@ class ActionEditable extends Component {
   focus() {
     if (this.ref !== null) {
       this.ref.focus();
-      // move caret to last position
-      const index = this.props.text.length;
-      this.moveCaretPosition(this.ref, index);
+      // move caret to last position it entity have text
+      if (this.props.text) {
+        const index = this.props.text.length;
+        this.moveCaretPosition(this.ref, index);
+      }
+      this.props.onSelect();
     }
   }
 

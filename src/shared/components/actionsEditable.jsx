@@ -176,8 +176,6 @@ class ActionsEditable extends Component {
     return false;
   };
 
-  // TODO Move focus to last item when ae_content focus
-
   handleEntitySelect(itemIndex, type, id, e) {
     this.setState({
       selectedItem: itemIndex,
@@ -205,6 +203,22 @@ class ActionsEditable extends Component {
       itemToFocus: null,
     }));
     this.props.onFocus(false, this);
+  };
+
+  handleContainerClick = (e) => {
+    if (e && e.target && e.target.id === "ae_content") {
+      // focus on last item or ae_start if items empty
+      const itemsLength = this.state.items.length;
+      let itemToFocus;
+      if (this.endRef != null) {
+        itemToFocus = -2; // ae_end index
+      } else if (itemsLength > 0) {
+        itemToFocus = itemsLength - 1; // last item index
+      } else {
+        itemToFocus = -1; // ae_start index
+      }
+      this.setState({ itemToFocus });
+    }
   };
 
   setCE = (e, editable = true, itemIndex = null) => {
@@ -259,15 +273,11 @@ class ActionsEditable extends Component {
       items.push(item);
     }
 
-    const selectedItem = p;
     const content = ActionsEditable.build(items);
     const noUpdate = false;
-    this.setState(
-      { noUpdate, content, items, selectedItem, itemToFocus: p },
-      () => {
-        this.props.onChange(content);
-      },
-    );
+    this.setState({ noUpdate, content, items, itemToFocus: p }, () => {
+      this.props.onChange(content);
+    });
   }
 
   deleteItem(position = this.state.selectedItem) {
@@ -283,10 +293,9 @@ class ActionsEditable extends Component {
     // console.log("delete item ", deletePosition);
     if (deletePosition > -1 && deletePosition < items.length) {
       items.splice(deletePosition, 1);
-      const selectedItem = deletePosition - 1;
       const content = ActionsEditable.build(items);
       const noUpdate = false;
-      this.setState({ noUpdate, content, items, selectedItem }, () => {
+      this.setState({ noUpdate, content, items }, () => {
         this.props.onChange(content);
       });
     }
@@ -313,6 +322,9 @@ class ActionsEditable extends Component {
           type="text"
           editable={isEditable}
           style={style}
+          ref={(e) => {
+            this.startRef = e;
+          }}
           onChange={(...args) => {
             this.handleEntityChange(-1, ...args);
           }}
@@ -357,6 +369,9 @@ class ActionsEditable extends Component {
             tabIndex={i}
             type="text"
             editable={isEditable}
+            ref={(e) => {
+              this.endRef = e;
+            }}
             onChange={(...args) => {
               this.handleEntityChange(-2, ...args);
             }}
@@ -375,6 +390,7 @@ class ActionsEditable extends Component {
         className="contenteditable"
         aria-label={this.props.placeholder}
         spellCheck={false}
+        onClick={this.handleContainerClick}
         onBlur={this.handleBlur}
         onMouseUp={this.handleMouseUp}
         onTouchEnd={this.handleMouseUp}
@@ -393,12 +409,27 @@ class ActionsEditable extends Component {
     );
   }
 
+  moveFocus(index) {
+    let element;
+    switch (index) {
+      case -2:
+        element = this.endRef;
+        break;
+      case -1:
+        element = this.startRef;
+        break;
+      default:
+        element = this.itemsElementRefs[index];
+    }
+    // call focus on element reference
+    element.focus();
+  }
+
   componentDidUpdate() {
     const { itemToFocus } = this.state;
+    // Move focus
     if (itemToFocus !== null) {
-      // call focus on item reference
-      const element = this.itemsElementRefs[itemToFocus];
-      element.focus();
+      this.moveFocus(itemToFocus);
       this.setState({ itemToFocus: null });
     }
   }
