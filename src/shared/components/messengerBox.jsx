@@ -9,8 +9,82 @@ import { TextField, Icon, Button } from "zrmc";
 import PropTypes from "prop-types";
 
 class MessengerBox extends Component {
-  static createMessage(message) {
-    return { __html: message.body };
+  createMessage(message) {
+    let html = null;
+    if (message.body && message.body.indexOf("<b") >= 0) {
+      /* eslint-disable no-restricted-syntax */
+      const elements = [];
+      let tag = false;
+      let end = false;
+      let buf = "";
+      let element = {};
+      for (const ch of message.body) {
+        if (ch === "<") {
+          if (tag) {
+            element.value = buf;
+            buf = "";
+          } else {
+            if (buf.length > 0) {
+              elements.push({ value: buf, type: "text" });
+            }
+            buf = "";
+            tag = true;
+            end = false;
+            element = {};
+          }
+        } else if (ch === "/") {
+          end = true;
+        } else if (end && ch === ">") {
+          // <tag /> or </tag>
+          element.type = buf.trim();
+          elements.push(element);
+          element = {};
+          tag = false;
+          buf = "";
+        } else if (tag && ch === ">") {
+          element.type = buf.trim();
+          buf = "";
+        } else {
+          buf += ch;
+        }
+      }
+      if (buf.length > 0) {
+        elements.push({ value: buf, type: "text" });
+      }
+      html = (
+        <span>
+          {elements.map((el, i) => {
+            // button and br
+            // TODO link / img
+            if (el.type === "button") {
+              return (
+                <Button
+                  key={i}
+                  style={{ margin: " 0 8px" }}
+                  dense
+                  raised
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (el.value) {
+                      this.props.onSendMessage(el.value);
+                    }
+                  }}
+                >
+                  {el.value}
+                </Button>
+              );
+            } else if (el.type === "br") {
+              return <br key={i} />;
+            }
+            return el.value;
+          })}
+        </span>
+      );
+      /* eslint-enable no-restricted-syntax */
+    } else {
+      html = <span>{message.body}</span>;
+    }
+    return html;
   }
 
   componentWillUpdate() {
@@ -134,26 +208,19 @@ class MessengerBox extends Component {
               }
               const from = message.from.toLowerCase();
               const user = users[from];
-              // // console.log("from=", from, user);
               let dest = "you";
               let icon = "default";
               if (user) {
                 ({ dest, icon } = user);
               }
-              // previous = message;
-              /* eslint-disable react/no-danger */
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
-                  <div
-                    className="text-wrapper animated fadeIn"
-                    dangerouslySetInnerHTML={MessengerBox.createMessage(
-                      message,
-                    )}
-                  />
+                  <div className="text-wrapper animated fadeIn">
+                    {this.createMessage(message)}
+                  </div>
                 </div>
               );
-              /* eslint-enable react/no-danger */
             })}
           </div>
         </div>
