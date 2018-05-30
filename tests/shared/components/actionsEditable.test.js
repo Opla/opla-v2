@@ -164,8 +164,8 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
     testActionIdAndContent(wrapper, "ae_2", 0);
 
-    wrapper.setState({ selectedItem: -2 });
-    wrapper.instance().insertItem({ text: "*", type: "any" }, 0);
+    wrapper.setState({ selectedItem: 1 });
+    wrapper.instance().insertItem({ text: "*", type: "any" });
     wrapper.update();
     expect(wrapper.state("items")).toHaveLength(3);
     testActionIdAndContent(wrapper, "ae_0", 1, "*");
