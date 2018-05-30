@@ -164,6 +164,7 @@ exports[`components/actionEditor renders correctly 1`] = `
     className="contenteditable"
     id="ae_content"
     onBlur={[Function]}
+    onClick={[Function]}
     onKeyDown={[Function]}
     onKeyPress={[Function]}
     onMouseUp={[Function]}
