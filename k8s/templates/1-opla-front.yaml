@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: node
-        image: "opla/front:{{ .Values.front.image.tag }}"
+        image: "opla/front:{{ .Values.image.tag }}"
         ports:
         - containerPort: 80
         env:

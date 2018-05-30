@@ -1,4 +1,11 @@
+image:
+  tag: ${COMMIT_ID}
+
 front:
   domain: front.master.opla.ai
 api:
   domain: api.master.opla.ai
+
+auth:
+  clientId: ${QA_CLIENT_ID}
+  secret: ${QA_CLIENT_SECRET}

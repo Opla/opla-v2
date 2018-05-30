@@ -4,6 +4,7 @@ kind: Ingress
 metadata:
   name: front-ingress
   annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
     certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"

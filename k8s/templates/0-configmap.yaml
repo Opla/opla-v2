@@ -13,8 +13,8 @@ data:
                   "port": "443"
               },
               "auth": {
-                  "clientId": "xxmtlkZAre2aEj6AgVtat31wStpehwthfT0bpMRBEJ3lmb683ZBwbclxDiIWxG4u",
-                  "clientSecret": "301oRBhGKGeo6AxBVdhi1YmZ2q2xILynWFsP1oOq4Q5zuJ1r3gqRUFwz1wFPHmp5",
+                  "clientId": "{{ .Values.auth.clientId }}",
+                  "clientSecret": "{{ .Values.auth.secret }}",
                   "host": "{{ .Values.api.domain }}",
                   "path": "auth/",
                   "port": "443"

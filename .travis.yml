@@ -29,10 +29,13 @@ jobs:
       env:
         - GCLOUD_CLUSTER_ID=qa
         - GCLOUD_CLUSTER_ZONE=europe-west1-b
-        - GCLOUD_PROJECT_ID=opla-200809
+        - COMMIT_ID=$TRAVIS_COMMIT
+        - K8S_ENV=qa
+        - secure: "aezc24cmaaqRWklrsdPz0rjeMbQRUAJZ7jtHOnCOohDvtODzPmtxRtNQ8bf02i8T2YL3K30NoyzokgPHdomYoFb8Zx8WIsJJ7IcParUScfFe8B68ZOKXYzbohKo5w1UKLLSyyIc189fY7enRrrtubN2Qmj5BEeyooZ3KfxIkVltXEfv4d0vE2ET4Z8M8UHpY/8iepGTLANYHPMp1Cul50odLFj8c/zjoDdtg0MPONk8cn6GIdX3/tRzIdw5hEtD/lWDM2tGLqC2Hwlx9RCtjYOa/C5g6eUrOy8RtSnSPqUJrc0EhLuTwDOnGrjVPpdtpVnv1+7yR3VbnNspyRRA7Wlaqd2goF6SMR8oiixoTQYitNx1u8+OtsfxrfgE51jAleeLcPZbE1IxKDBSpQllNDWgx8YrFNkVTznF2pDintf2lpiBuxzyXcPHnPh/QcMe3JtKsrUBciMKskC/EkgRipKzZn5iAvZ2uV55nDJ5b7RdkgXto74TShgQ5OIg269HCptWzH96BVxKkB2G6ee9ZXGLaixpteiUcYRM0KMM4Vn6Y54enLAb6nVrHe5REl7YU7viGlRqXIKMv/HGhXKmmQ7/rTzAGi5M0dR8jJh/suwv9six/bAgNd0JitqJpp7PsAEGRBSjCHtumNq3LZ9iwdcRnmsCfDCsSFXBh/zgBfnE="
+        - secure: "XFM1kXneaHgX3Rn9E6mfw5u8OfG6Id/Wrm/B6JaH5nWS3uSS7uBNgSTIZ4qmAfoUPtf7FCQUQ9J98qZx1r4KFtY9CB0KR2tB3vhozgZIXRg6auqBhCNKzmBmz8xfivMSgJgKoCGF9ABlGZTyzFZY6cLhGRF9CQQPxj2oKUYN001isRCq8yRldDZCnlO7hOgx2YG7YWsVxSQkbEtGEeeB+ugiJOOOTT3m0djZL4/FIxgD63hUJ44zpzruCZtBMnr7EEHy6rhbIPYD2CJwniOYLal0CCgQLB4QnjTeOoi2CoiGgL9HdAcUYHYSESgaOuzITsGL150Pz6EXFuqqErGDBw0+09XFzVnWLjQ1/olyYpV2O8TP574KuprsPtiaA+c+fKOokUECjV+E/7mKqIL8bQsqyJUMb2YXIMSeyKyvjQB+WeT3y5/Pc5iH0AewDelHC672P4qn1crMen3g/MOmG9BFyjUTpfJQMVteYJOl51pP7kK1GS5zUTgEeq/yTwZ24DWwEuReJNlKhzdEM2NSwTR7rdlvSeuJaIRuUtH1atQzljAXfLXyJLiczkQD0V1X5dvSFMskdt8VA7TWnOd8X1IppERsMtqkDcrgKdNACmXSFjfnsm7AbIMbUb3JswRi7bdorlXEgLqqtpZdeoK4TPjg+HnMMBYyb7BiDC2yl1o="
+        - secure: "FVz4Y+6ryHbAG1y6K5TlWlD3VCFLcd4M4axoLAi/mbh6wHL/8FeAgGr/2BlCHhP/LIkmmNesmJptlFazmRwdWhTqhZQ8yEDNXpqpisL5CfnPL7VA+zTHMcKkpZn3fOKQ4C8GgkX5pfsYvOuEyMVgcUX0MtqI41oRZs5YSPiwsiVH3ohijxhCyq2zOVEdmj8g1+Sn3p6lMmS0PMa985Cj0gpjkAZwAYmSH3STsVqMpzzpf1LXWJ87BJUEW7yZPY0GJYc5tkvZmdUPTMCQuM5T5j6xR/cUeQuuAc0th2EH7exK41YpfZ57ciE/OhNhOL1RbaC6b8SJJO502g5FblwSA54SVgtVWoqv7WexAOTO/bV1z41gm70fHHMhtoQaj3/Qix/7c4s5Yn452CcRyKTsCddVhXI7iaxUMjgUR0THFSKx7IJ+r7aT/P++Sh33S1BxOh4yv7J+RyVfYVI4rbah+TS+wNXT0ZYCcL9Wt1aTPuFt4LQDLUpTaWrbXBMUyAAbzcu7rmiRBpHCyD2OmQ6Io/BcS7YrmnF5ri1soweSpaPXo5IDtb08PzI+aYvAe4XWrHg67nxu5doma71QOtkTuoAaNLA8+O8QyHls2tSklJ1/QyDaqtYhmdqfyY+Go2WDIEOB53LD0vAXH/rVKrU88xxQqAU/yrGWBuU1s6JDVkw="
       install: ./travis/setup_k8s.sh
-      script:
-        - helm upgrade --install --debug front ./k8s --set front.image.tag=$TRAVIS_COMMIT -f k8s/values.yaml -f k8s/values.qa.yaml
+      script: make deploy
 
 stages:
 - test
