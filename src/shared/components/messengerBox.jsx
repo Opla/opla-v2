@@ -10,7 +10,25 @@ import PropTypes from "prop-types";
 
 class MessengerBox extends Component {
   static createMessage(message) {
-    return { __html: message.body };
+    let html = null;
+    if (message.body && message.body.indexOf("<b") >= 0) {
+      /* eslint-disable no-restricted-syntax */
+      html = (
+        <span>
+          {[...message.body].forEach((ch) => {
+            console.log("ch");
+            return ch;
+          })}
+        </span>
+      );
+      /* eslint-enable no-restricted-syntax */
+      html = <span>{message.body}</span>;
+      // TODO parse message
+    } else {
+      html = <span>{message.body}</span>;
+    }
+    return html;
+    // return { __html: message.body };
   }
 
   componentWillUpdate() {
@@ -141,19 +159,14 @@ class MessengerBox extends Component {
                 ({ dest, icon } = user);
               }
               // previous = message;
-              /* eslint-disable react/no-danger */
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
-                  <div
-                    className="text-wrapper animated fadeIn"
-                    dangerouslySetInnerHTML={MessengerBox.createMessage(
-                      message,
-                    )}
-                  />
+                  <div className="text-wrapper animated fadeIn">
+                    {MessengerBox.createMessage(message)}
+                  </div>
                 </div>
               );
-              /* eslint-enable react/no-danger */
             })}
           </div>
         </div>
