@@ -35,13 +35,14 @@ class MessengerBox extends Component {
         } else if (ch === "/") {
           end = true;
         } else if (end && ch === ">") {
-          // />
+          // <tag /> or </tag>
+          element.type = buf.trim();
           elements.push(element);
           element = {};
           tag = false;
           buf = "";
         } else if (tag && ch === ">") {
-          element.type = buf;
+          element.type = buf.trim();
           buf = "";
         } else {
           buf += ch;
@@ -53,7 +54,8 @@ class MessengerBox extends Component {
       html = (
         <span>
           {elements.map((el, i) => {
-            // console.log("el ", el.type, el.value);
+            // button and br
+            // TODO link / img
             if (el.type === "button") {
               return (
                 <Button
@@ -79,13 +81,10 @@ class MessengerBox extends Component {
         </span>
       );
       /* eslint-enable no-restricted-syntax */
-      // html = <span>{message.body}</span>;
-      // TODO parse message
     } else {
       html = <span>{message.body}</span>;
     }
     return html;
-    // return { __html: message.body };
   }
 
   componentWillUpdate() {
@@ -209,13 +208,11 @@ class MessengerBox extends Component {
               }
               const from = message.from.toLowerCase();
               const user = users[from];
-              // // console.log("from=", from, user);
               let dest = "you";
               let icon = "default";
               if (user) {
                 ({ dest, icon } = user);
               }
-              // previous = message;
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
