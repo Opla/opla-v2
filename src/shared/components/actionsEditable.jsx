@@ -51,7 +51,6 @@ class ActionsEditable extends Component {
       noUpdate: false,
       startSpan: null,
       endSpan: null,
-      itemFocused: -1,
       itemToFocus: null,
     };
     this.itemsElementRefs = [];
@@ -85,12 +84,6 @@ class ActionsEditable extends Component {
       });
     }
   }
-
-  handleBlur = () => {
-    // console.log("onBlur");
-    // forceUpdate to sync state and actions span rendered
-    this.forceUpdate();
-  };
 
   handleKeyDown = (e) => {
     if (e.which === 27) {
@@ -155,26 +148,8 @@ class ActionsEditable extends Component {
     });
   };
 
+  // TODO
   updateContent = () => {};
-
-  // TODO remove
-  handleChange = (element) => {
-    if (this.props.editable) {
-      let { selectedItem } = this.state;
-      const span = element.children[0];
-      const content = ActionsEditable.build([...span.children], true);
-      // console.log("handleChange=", content);
-      const items = ActionsTools.parse(content);
-      const noUpdate = true;
-      if (this.state.selectedItem < 0 && items.length > 0) {
-        selectedItem += 1;
-      }
-      this.setState({ noUpdate, content, items, selectedItem }, () => {
-        this.props.onChange(content);
-      });
-    }
-    return false;
-  };
 
   handleEntitySelect(itemIndex, type, id, e) {
     this.setState({
@@ -185,7 +160,7 @@ class ActionsEditable extends Component {
       this.props.onSelected(type, id, e);
     }
     // TODO get caret position
-    // TODO set state selectedItem and caretPosition
+    // TODO set state caretPosition
   }
 
   clear = () => {
@@ -263,39 +238,39 @@ class ActionsEditable extends Component {
     const { items } = this.state;
     // console.log("insert item: ", item, position);
 
-    let p = position;
-    if (this.state.selectedItem === -2) {
-      p = items.length;
+    if (position === -2) {
+      // recursive call on last item position
+      this.insertItem(item, items.length);
+      return;
     }
-    if (p < items.length) {
-      items.splice(p, 0, item);
+    if (position < items.length) {
+      items.splice(position, 0, item);
     } else {
       items.push(item);
     }
 
     const content = ActionsEditable.build(items);
     const noUpdate = false;
-    this.setState({ noUpdate, content, items, itemToFocus: p }, () => {
+    this.setState({ noUpdate, content, items, itemToFocus: position }, () => {
       this.props.onChange(content);
     });
   }
 
   deleteItem(position = this.state.selectedItem) {
     const { items } = this.state;
-    let deletePosition = position;
     // if focus on ae_end and last action is a text, remove text
-    if (
-      this.state.selectedItem === -2 &&
-      items[items.length - 1].type === "text"
-    ) {
-      deletePosition = items.length - 1;
+    if (position === -2 && items[items.length - 1].type === "text") {
+      // recursive call on last item position
+      this.deleteItem(items.lenght - 1);
+      return;
     }
     // console.log("delete item ", deletePosition);
-    if (deletePosition > -1 && deletePosition < items.length) {
-      items.splice(deletePosition, 1);
+    if (position > -1 && position < items.length) {
+      items.splice(position, 1);
       const content = ActionsEditable.build(items);
       const noUpdate = false;
-      this.setState({ noUpdate, content, items }, () => {
+      const itemToFocus = position > 0 ? position - 1 : position; // move focus to previous item
+      this.setState({ noUpdate, content, items, itemToFocus }, () => {
         this.props.onChange(content);
       });
     }
@@ -391,7 +366,6 @@ class ActionsEditable extends Component {
         aria-label={this.props.placeholder}
         spellCheck={false}
         onClick={this.handleContainerClick}
-        onBlur={this.handleBlur}
         onMouseUp={this.handleMouseUp}
         onTouchEnd={this.handleMouseUp}
         onKeyPress={this.handleKeyPress}
@@ -422,7 +396,9 @@ class ActionsEditable extends Component {
         element = this.itemsElementRefs[index];
     }
     // call focus on element reference
-    element.focus();
+    if (element != null) {
+      element.focus();
+    }
   }
 
   componentDidUpdate() {
