@@ -3,3 +3,6 @@ config/
 dist/
 lib/
 node_modules/
+.vscode/
+/k8s/tmp/
+values.dev.yaml
