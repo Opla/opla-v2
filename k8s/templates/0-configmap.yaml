@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-scripts
+data:
+{{ (.Files.Glob "tmp/migrations/*.sql").AsConfig | indent 2 }}
+  90-create-application.sql: |-
+{{ include ( print $.Template.BasePath "/_90-create-application.sql") . | indent 4 }}
+  91-insert-admin.sql: |-
+{{ include ( print $.Template.BasePath "/_91-insert-admin.sql") . | indent 4 }}

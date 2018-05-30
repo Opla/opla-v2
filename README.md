@@ -106,6 +106,12 @@ Please note that this project is released with a [Contributor Code of
 Conduct](http://contributor-covenant.org/). By participating in this project you
 agree to abide by its terms. See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) file.
 
+## Docker Image
+
+### Configuration
+You have 2 options: 
+    - pass ENV variables to override config properties one by one. See Dockerfile `ENV` statement for available environment variables.
+    - override `default.json` by mounting your own `/src/config/config.json` file. You can create such a file by running `bin/opla init` locally.
 
 ## License
 
