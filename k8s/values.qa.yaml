@@ -2,9 +2,9 @@ image:
   tag: ${COMMIT_ID}
 
 front:
-  domain: front.master.opla.ai
+  domain: ${FRONT_DOMAIN}
 api:
-  domain: api.master.opla.ai
+  domain: ${API_DOMAIN}
 
 auth:
   clientId: ${QA_CLIENT_ID}
