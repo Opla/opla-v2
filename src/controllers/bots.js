@@ -29,7 +29,7 @@ export default class extends Controller {
       if (bot.id) {
         action = "updateBot";
       }
-      this.dispatchBotAction(b.id, action, b);
+      await this.dispatchBotAction(b.id, action, b);
     }
     // TODO error handling
     return b;
@@ -82,7 +82,7 @@ export default class extends Controller {
       await this.model.setBot(bot);
       const action = "publishBot";
       // this.dispatchIntentAction(botId, action, { bot, publisher });
-      this.dispatch(this.className, {
+      await this.dispatch(this.className, {
         botId,
         action,
         bot,
@@ -124,7 +124,7 @@ export default class extends Controller {
 
   async setIntents(botId, intents, versionId) {
     const is = await this.model.setIntents(botId, intents, versionId);
-    this.dispatchIntentAction(botId, "setIntents", is);
+    await this.dispatchIntentAction(botId, "setIntents", is);
     return is;
   }
 
@@ -134,7 +134,7 @@ export default class extends Controller {
 
   async setIntent(botId, intent, versionId) {
     const it = await this.model.setIntent(botId, intent, versionId);
-    this.dispatchIntentAction(botId, "setIntents", [it]);
+    await this.dispatchIntentAction(botId, "setIntents", [it]);
     return it;
   }
 
@@ -149,7 +149,7 @@ export default class extends Controller {
         to: toIndex,
       };
 
-      this.dispatchIntentAction(botId, "moveIntents", response);
+      await this.dispatchIntentAction(botId, "moveIntents", response);
 
       return response;
     }
@@ -162,7 +162,7 @@ export default class extends Controller {
   async removeIntent(botId, intentId) {
     const intent = await this.model.removeIntent(botId, intentId);
     if (intent) {
-      this.dispatchIntentAction(botId, "removeIntents", [intent]);
+      await this.dispatchIntentAction(botId, "removeIntents", [intent]);
       return true;
     }
     return false;
@@ -170,15 +170,15 @@ export default class extends Controller {
 
   async removeAllIntents(botId, versionId = null) {
     await this.model.removeAllIntents(botId, versionId);
-    this.dispatchIntentAction(botId, "removeAllIntents", { botId, versionId });
+    await this.dispatchIntentAction(botId, "removeAllIntents", { botId, versionId });
     return true;
   }
 
-  dispatchIntentAction(botId, action, intents) {
-    this.dispatch(this.className, { botId, action, intents });
+  async dispatchIntentAction(botId, action, intents) {
+    await this.dispatch(this.className, { botId, action, intents });
   }
 
-  dispatchBotAction(botId, action, bot) {
-    this.dispatch(this.className, { botId, action, bot });
+  async dispatchBotAction(botId, action, bot) {
+    await this.dispatch(this.className, { botId, action, bot });
   }
 }

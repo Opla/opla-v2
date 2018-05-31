@@ -82,7 +82,7 @@ export default class extends MessengerController {
       const conversation = conversations[0];
       const conversationId = conversation.id;
       if (this.className) {
-        this.dispatch(this.className, {
+        await this.dispatch(this.className, {
           origin: conversation.origin,
           author: conversation.author,
           conversationId,
