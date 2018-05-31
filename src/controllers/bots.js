@@ -170,7 +170,10 @@ export default class extends Controller {
 
   async removeAllIntents(botId, versionId = null) {
     await this.model.removeAllIntents(botId, versionId);
-    await this.dispatchIntentAction(botId, "removeAllIntents", { botId, versionId });
+    await this.dispatchIntentAction(botId, "removeAllIntents", {
+      botId,
+      versionId,
+    });
     return true;
   }
 
