@@ -151,13 +151,13 @@ class ActionsEditable extends Component {
   // TODO
   updateContent = () => {};
 
-  handleEntitySelect(itemIndex, type, id, e) {
+  handleEntitySelect(itemIndex) {
     this.setState({
       selectedItem: itemIndex,
     });
 
     if (this.props.editable) {
-      this.props.onSelected(type, id, e);
+      this.props.onSelected(this);
     }
     // TODO get caret position
     // TODO set state caretPosition
@@ -303,8 +303,8 @@ class ActionsEditable extends Component {
           onChange={(...args) => {
             this.handleEntityChange(-1, ...args);
           }}
-          onSelect={(e) => {
-            this.handleEntitySelect(-1, "text", "ae_start", e);
+          onSelect={() => {
+            this.handleEntitySelect(-1);
           }}
         />
       );
@@ -331,8 +331,8 @@ class ActionsEditable extends Component {
             onChange={(...args) => {
               this.handleEntityChange(index, ...args);
             }}
-            onSelect={(e) => {
-              this.handleEntitySelect(index, type, id, e);
+            onSelect={() => {
+              this.handleEntitySelect(index);
             }}
           />
         );
@@ -350,8 +350,8 @@ class ActionsEditable extends Component {
             onChange={(...args) => {
               this.handleEntityChange(-2, ...args);
             }}
-            onSelect={(e) => {
-              this.handleEntitySelect(-2, "text", "ae_end", e);
+            onSelect={() => {
+              this.handleEntitySelect(-2);
             }}
           />
         );
