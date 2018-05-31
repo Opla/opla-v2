@@ -84,7 +84,7 @@ export default class extends Controller {
             message,
             payload,
           ); */
-          this.dispatch(this.className, payload);
+          await this.dispatch(this.className, payload);
           // logger.info("dispatch stop", message.body);
         }
         message = MessengerModel.exportMessage(message);
