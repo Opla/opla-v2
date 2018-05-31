@@ -156,22 +156,27 @@ describe("components/actionsEditable", () => {
 
   it("should insert an item at end", () => {
     const wrapper = shallow(
-      <ActionsEditable {...defaultProps} content="* bons gestes composteur " />,
+      <ActionsEditable
+        {...defaultProps}
+        content="* bons gestes composteur *"
+      />,
     );
 
-    expect(wrapper.state("items")).toHaveLength(2);
-    testActionIdAndContent(wrapper, "ae_0", 1, "*");
-    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
-    testActionIdAndContent(wrapper, "ae_2", 0);
-
-    wrapper.setState({ selectedItem: 1 });
-    wrapper.instance().insertItem({ text: "*", type: "any" });
-    wrapper.update();
     expect(wrapper.state("items")).toHaveLength(3);
     testActionIdAndContent(wrapper, "ae_0", 1, "*");
     testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
     testActionIdAndContent(wrapper, "ae_2", 1, "*");
     testActionIdAndContent(wrapper, "ae_3", 0);
+
+    wrapper.setState({ selectedItem: -2 });
+    wrapper.instance().insertItem({ text: "foo", type: "text" });
+    wrapper.update();
+    expect(wrapper.state("items")).toHaveLength(4);
+    testActionIdAndContent(wrapper, "ae_0", 1, "*");
+    testActionIdAndContent(wrapper, "ae_1", 1, " bons gestes composteur ");
+    testActionIdAndContent(wrapper, "ae_2", 1, "*");
+    testActionIdAndContent(wrapper, "ae_3", 1, "foo");
+    testActionIdAndContent(wrapper, "ae_4", 0);
   });
 
   it("should delete an item", () => {
