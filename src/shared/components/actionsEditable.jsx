@@ -234,10 +234,23 @@ class ActionsEditable extends Component {
     }
   }
 
-  insertItem(item, position = this.state.selectedItem + 1) {
+  insertItem(item, position) {
     const { items } = this.state;
     // console.log("insert item: ", item, position);
-
+    if (position == null) {
+      const newIndex =
+        this.state.selectedItem < 0
+          ? this.state.selectedItem
+          : this.state.selectedItem + 1;
+      // recursive call on new position
+      this.insertItem(item, newIndex);
+      return;
+    }
+    if (position === -1) {
+      // recursive call on last item position
+      this.insertItem(item, 0);
+      return;
+    }
     if (position === -2) {
       // recursive call on last item position
       this.insertItem(item, items.length);
