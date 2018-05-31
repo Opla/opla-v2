@@ -10,7 +10,7 @@ build: ## builds docker image
 deploy: ## deploys to kubernetes
 	make _prepare
 	(envsubst <k8s/values.yaml; envsubst <k8s/values.$(K8S_ENV).yaml) \
-	| helm upgrade --install --debug $(APPLICATION_NAME) ./k8s -f -
+	| helm upgrade --install --debug $(APPLICATION_NAME) ./k8s $(HELM_XTRA_ARGS) -f -
 
 preview: ## preview the YAMLs that are about to get deployed to kubernetes
 	make _prepare
