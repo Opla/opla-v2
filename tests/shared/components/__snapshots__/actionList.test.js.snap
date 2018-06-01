@@ -59,9 +59,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -104,9 +102,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -149,9 +145,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -194,9 +188,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -239,9 +231,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -284,9 +274,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -329,9 +317,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -375,9 +361,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
@@ -451,9 +435,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -463,8 +445,11 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         >
           <span>
             <span
+              className={undefined}
               data="text"
               id="ae_0"
+              onClick={[Function]}
+              onInput={[Function]}
               style={
                 Object {
                   "display": "inline-block",
@@ -510,9 +495,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -522,8 +505,11 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         >
           <span>
             <span
+              className={undefined}
               data="text"
               id="ae_0"
+              onClick={[Function]}
+              onInput={[Function]}
               style={
                 Object {
                   "display": "inline-block",
@@ -569,9 +555,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -581,8 +565,11 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         >
           <span>
             <span
+              className={undefined}
               data="text"
               id="ae_0"
+              onClick={[Function]}
+              onInput={[Function]}
               style={
                 Object {
                   "display": "inline-block",
@@ -628,9 +615,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -640,8 +625,11 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         >
           <span>
             <span
+              className={undefined}
               data="text"
               id="ae_0"
+              onClick={[Function]}
+              onInput={[Function]}
               style={
                 Object {
                   "display": "inline-block",
@@ -687,9 +675,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -699,8 +685,11 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         >
           <span>
             <span
+              className={undefined}
               data="text"
               id="ae_0"
+              onClick={[Function]}
+              onInput={[Function]}
               style={
                 Object {
                   "display": "inline-block",
@@ -746,9 +735,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -758,8 +745,11 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         >
           <span>
             <span
+              className={undefined}
               data="text"
               id="ae_0"
+              onClick={[Function]}
+              onInput={[Function]}
               style={
                 Object {
                   "display": "inline-block",
@@ -805,9 +795,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           aria-label={null}
           className="contenteditable"
           id="ae_content"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onInput={[Function]}
+          onClick={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onMouseUp={[Function]}
@@ -817,8 +805,11 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         >
           <span>
             <span
+              className={undefined}
               data="text"
               id="ae_0"
+              onClick={[Function]}
+              onInput={[Function]}
               style={
                 Object {
                   "display": "inline-block",
@@ -865,9 +856,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
@@ -935,9 +924,7 @@ exports[`components/actionsList can have an unique id 1`] = `
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
@@ -1005,9 +992,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
@@ -1075,9 +1060,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
@@ -1145,9 +1128,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
@@ -1215,9 +1196,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
@@ -1285,9 +1264,7 @@ exports[`components/actionsList renders correctly 1`] = `
         aria-label="Add an output response"
         className="contenteditable"
         id="ae_content"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onInput={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
         onKeyPress={[Function]}
         onMouseUp={[Function]}
