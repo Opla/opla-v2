@@ -130,6 +130,17 @@ class ActionsEditable extends Component {
     }
   };
 
+  updateItemsAndContent = (items, noUpdate) => {
+    const content = ActionsEditable.build(items, false);
+    this.setState({ items, content, noUpdate }, () => {
+      this.props.onChange(content);
+    });
+  };
+
+  changeFocus = (itemIndex) => {
+    this.setState({ itemToFocus: itemIndex });
+  };
+
   handleEntityChange = (itemIndex, actionId, content) => {
     // add a text item when ae_start or ae_end are edited
     if (itemIndex < 0) {
@@ -138,18 +149,8 @@ class ActionsEditable extends Component {
     }
     const newItems = [...this.state.items];
     newItems[itemIndex].text = content;
-    this.setState({
-      items: newItems,
-    });
-    const newContent = ActionsEditable.build(newItems, false);
-    const noUpdate = true;
-    this.setState({ noUpdate, content: newContent }, () => {
-      this.props.onChange(newContent);
-    });
+    this.updateItemsAndContent(newItems, true);
   };
-
-  // TODO
-  updateContent = () => {};
 
   handleEntitySelect(itemIndex) {
     this.setState({
@@ -192,7 +193,7 @@ class ActionsEditable extends Component {
       } else {
         itemToFocus = -1; // ae_start index
       }
-      this.setState({ itemToFocus });
+      this.changeFocus(itemToFocus);
     }
   };
 
@@ -262,11 +263,8 @@ class ActionsEditable extends Component {
       items.push(item);
     }
 
-    const content = ActionsEditable.build(items);
-    const noUpdate = false;
-    this.setState({ noUpdate, content, items, itemToFocus: position }, () => {
-      this.props.onChange(content);
-    });
+    this.updateItemsAndContent(items, false);
+    this.changeFocus(position);
   }
 
   deleteItem(position = this.state.selectedItem) {
@@ -280,12 +278,9 @@ class ActionsEditable extends Component {
     // console.log("delete item ", deletePosition);
     if (position > -1 && position < items.length) {
       items.splice(position, 1);
-      const content = ActionsEditable.build(items);
-      const noUpdate = false;
+      this.updateItemsAndContent(items, false);
       const itemToFocus = position > 0 ? position - 1 : position; // move focus to previous item
-      this.setState({ noUpdate, content, items, itemToFocus }, () => {
-        this.props.onChange(content);
-      });
+      this.changeFocus(itemToFocus);
     }
   }
 
