@@ -32,10 +32,20 @@ class ActionsList extends Component {
     this.setState({ newContent });
   };
 
-  handleSelectedEditable = (editableComponent) => {
-    // console.log("handleSelectedEditable set editablecomponent", editableComponent);
+  handleSelectedEditable = (type, key, editableComponent) => {
+    // console.log("handleSelectedEditable", editableComponent);
     this.editableComponent = editableComponent;
-    this.props.onEdit(true, this);
+  };
+
+  handleFocusEditable = (focus, editableComponent) => {
+    // console.log("handleFocusEditable", focus);
+    if (!focus) {
+      this.setState({ selection: null });
+      this.props.onEdit(focus);
+      this.editableComponent = null;
+    } else {
+      this.editableComponent = editableComponent;
+    }
   };
 
   handleAction = (text, index = undefined) => {
@@ -57,7 +67,6 @@ class ActionsList extends Component {
     if (state === "add") {
       // console.log("handleSelect add", selection);
       this.setState({ selection });
-      // this.props.onSelect(selection);
       editing = true;
     } else if (this.props.onSelect) {
       // console.log("handleSelect onSelect", selection);
@@ -145,6 +154,7 @@ class ActionsList extends Component {
           content={this.state.newContent}
           placeholder={addText}
           editable={editable}
+          onFocus={this.handleFocusEditable}
           onAction={this.handleAction}
           onChange={this.handleChangeNew}
           onSelected={this.handleSelectedEditable}

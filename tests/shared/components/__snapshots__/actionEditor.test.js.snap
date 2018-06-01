@@ -163,7 +163,9 @@ exports[`components/actionEditor renders correctly 1`] = `
     aria-label={null}
     className="contenteditable"
     id="ae_content"
-    onClick={[Function]}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onInput={[Function]}
     onKeyDown={[Function]}
     onKeyPress={[Function]}
     onMouseUp={[Function]}
@@ -173,11 +175,8 @@ exports[`components/actionEditor renders correctly 1`] = `
   >
     <span>
       <span
-        className={undefined}
         data="text"
         id="ae_0"
-        onClick={[Function]}
-        onInput={[Function]}
         style={
           Object {
             "display": "inline-block",
