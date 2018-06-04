@@ -5,10 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 import * as apiActions from "shared/actions/api";
+import * as appActions from "shared/actions/app";
 import reducer, { initialState } from "shared/reducers/app";
 
 describe("reducers/app", () => {
-  describe("intents", () => {
+  const defaultIntents = [
+    {
+      id: "intent-1",
+      botId: "bot-123",
+      name: "intent 1",
+    },
+    {
+      id: "intent-2",
+      botId: "bot-223",
+      name: "intent 2",
+    },
+    {
+      id: "intent-3",
+      botId: "bot-323",
+      name: "intent 3",
+    },
+  ];
+
+  describe("intents api actions", () => {
     it("enables loading on move intent request", () => {
       const state = reducer(
         undefined,
@@ -26,25 +45,10 @@ describe("reducers/app", () => {
     });
 
     it("swaps intents on apiMoveIntentSuccess()", () => {
-      const intents = [
-        {
-          id: "intent-1",
-          botId: "bot-123",
-          name: "intent 1",
-        },
-        {
-          id: "intent-2",
-          botId: "bot-223",
-          name: "intent 2",
-        },
-        {
-          id: "intent-3",
-          botId: "bot-323",
-          name: "intent 3",
-        },
-      ];
-
-      let state = reducer(undefined, apiActions.apiGetIntentsSuccess(intents));
+      let state = reducer(
+        undefined,
+        apiActions.apiGetIntentsSuccess(defaultIntents),
+      );
 
       let ids = state.intents.map((intent) => intent.id);
       expect(ids).toEqual(["intent-1", "intent-2", "intent-3"]);
@@ -83,6 +87,44 @@ describe("reducers/app", () => {
         loading: false,
         error: e,
       });
+    });
+  });
+
+  describe("intents app actions", () => {
+    it("set selectedIntentIndex", () => {
+      const state = reducer(
+        undefined,
+        appActions.appSelectIntent("bot-1", "intent-1"),
+      );
+      expect(state.selectedBotId).toEqual("bot-1");
+      expect(state.selectedIntentIndex).toEqual("intent-1");
+    });
+
+    it("update an intent", () => {
+      // TODO remove selectedIntentIndex need
+      const previousState = {
+        selectedIntentIndex: 1,
+      };
+
+      let state = reducer(
+        previousState,
+        apiActions.apiGetIntentsSuccess(defaultIntents),
+      );
+      let names = state.intents.map((intent) => intent.name);
+      expect(names).toEqual(["intent 1", "intent 2", "intent 3"]);
+
+      const updatedIntent = {
+        id: "intent-2",
+        botId: "bot-223",
+        name: "intent updated",
+      };
+      state = reducer(
+        state,
+        appActions.appUpdateIntent("bot-223", updatedIntent),
+      );
+      expect(state.intents[1].notSaved).toEqual(true);
+      names = state.intents.map((intent) => intent.name);
+      expect(names).toEqual(["intent 1", "intent updated", "intent 3"]);
     });
   });
 });
