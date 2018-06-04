@@ -68,8 +68,24 @@ export default createReducer(initialState, {
 
   [API_ADMIN + FETCH_SUCCESS]: (state, { admin }) => {
     let { selectedBotId } = state;
-    if (selectedBotId == null && admin.bots && admin.bots.length > 0) {
-      selectedBotId = admin.bots[0].id;
+    let project = state.project ? state.project : {};
+    let { selectedIndex } = project;
+    if (admin && admin.bots) {
+      if (!selectedIndex || admin.bots.length > selectedIndex) {
+        selectedIndex = 0;
+      }
+      if (selectedBotId == null && admin.bots.length > selectedIndex) {
+        selectedBotId = admin.bots[selectedIndex].id;
+      }
+      let bot = {};
+      if (admin.bots.length > selectedIndex) {
+        bot = admin.bots[selectedIndex];
+      }
+      project = {
+        name: bot.name,
+        selectedIndex,
+        icon: bot.icon ? bot.icon : "./images/opla-avatar.png",
+      };
     }
     return {
       ...state,
@@ -77,6 +93,7 @@ export default createReducer(initialState, {
       error: null,
       admin,
       selectedBotId,
+      project,
     };
   },
 
@@ -188,12 +205,20 @@ export default createReducer(initialState, {
       bots.push({ ...bot });
       admin.bots = bots;
     }
+    // TODO selectedIndex
+    const selectedIndex = 0;
+    const project = {
+      name: bot.name,
+      selectedIndex,
+      icon: bot.icon ? bot.icon : "./images/opla-avatar.png",
+    };
     return {
       ...state,
       loading: false,
       error,
       admin,
       selectedBotId,
+      project,
     };
   },
   [API_CREATEBOT + FETCH_FAILURE]: (state, { error }) => ({
@@ -231,11 +256,19 @@ export default createReducer(initialState, {
       }
       admin.bots = bots;
     }
+    // TODO selectedIndex
+    const selectedIndex = 0;
+    const project = {
+      name: bot.name,
+      selectedIndex,
+      icon: bot.icon ? bot.icon : "./images/opla-avatar.png",
+    };
     return {
       ...state,
       loading: false,
       error,
       admin,
+      project,
     };
   },
   [API_SAVEBOT + FETCH_FAILURE]: (state, { error }) => ({
