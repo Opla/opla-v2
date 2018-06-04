@@ -64,5 +64,20 @@ module.exports = {
       path: path.resolve(__dirname, "./dist/public"),
       template: "./public/index.html",
     }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'Dev'),
+        APP: {
+          subname: JSON.stringify(process.env.APP_SUBNAME),
+          version: JSON.stringify(process.env.APP_VERSION),
+          build: JSON.stringify(process.env.APP_BUILD),
+          instance: {
+            name: JSON.stringify(process.env.APP_INSTANCE_NAME),
+            color: JSON.stringify(process.env.APP_INSTANCE_COLOR),
+            description: JSON.stringify(process.env.APP_INSTANCE_DESCRIPTION),
+          },
+        },
+      },
+    }),
   ]
 };

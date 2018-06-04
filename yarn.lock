@@ -1844,6 +1844,16 @@ cross-spawn@^5.0.1, cross-spawn@^5.1.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
+cross-spawn@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
+  dependencies:
+    nice-try "^1.0.4"
+    path-key "^2.0.1"
+    semver "^5.5.0"
+    shebang-command "^1.2.0"
+    which "^1.2.9"
+
 cryptiles@2.x.x:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/cryptiles/-/cryptiles-2.0.5.tgz#3bdfecdc608147c1c67202fa291e7dca59eaa3b8"
@@ -2361,6 +2371,12 @@ enhanced-resolve@~0.9.0:
 entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
+
+env-cmd@8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/env-cmd/-/env-cmd-8.0.2.tgz#e3bf53b8e4676781bdc3a0b1a2f7612cbcda4da4"
+  dependencies:
+    cross-spawn "^6.0.5"
 
 enzyme-adapter-react-16@^1.1.1:
   version "1.1.1"
@@ -5023,6 +5039,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+nice-try@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.4.tgz#d93962f6c52f2c1558c0fbda6d512819f1efe1c4"
+
 no-case@^2.2.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
@@ -5465,7 +5485,7 @@ path-is-inside@^1.0.1, path-is-inside@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/path-is-inside/-/path-is-inside-1.0.2.tgz#365417dede44430d1c11af61027facf074bdfc53"
 
-path-key@^2.0.0:
+path-key@^2.0.0, path-key@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
@@ -6606,7 +6626,7 @@ selfsigned@^1.9.1:
   dependencies:
     node-forge "0.7.1"
 
-"semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1:
+"semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
@@ -7894,9 +7914,9 @@ zoapp-common@0.3.0:
     whatwg-fetch "^2.0.4"
     winston "2.4.0"
 
-zoapp-front@0.21.0:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.21.0.tgz#96ad8353af384825a37561ff000b4593b7015590"
+zoapp-front@0.22.1:
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.22.1.tgz#d65320910701c61e1b6704dc1e5a3814b8646787"
   dependencies:
     babel-runtime "^6.26.0"
     prop-types "15.6.0"
@@ -7910,7 +7930,7 @@ zoapp-front@0.21.0:
     redux-saga "0.16.0"
     zoapp-common "0.3.0"
     zoapp-ui "0.6.2"
-    zrmc "0.10.3"
+    zrmc "0.10.4"
 
 zoapp-ui@0.6.2:
   version "0.6.2"
@@ -7939,6 +7959,16 @@ zrmc@0.10.2:
 zrmc@0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/zrmc/-/zrmc-0.10.3.tgz#4095a8a9843677e7d7d076bc2c42f7954b72459f"
+  dependencies:
+    dialog-polyfill "^0.4.9"
+    prop-types "15.6.0"
+    react "16.2.0"
+    react-dom "16.2.0"
+    react-hot-loader "3.1.3"
+
+zrmc@0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/zrmc/-/zrmc-0.10.4.tgz#3db9761ed08759ad99a632ecd1d5cfbc016e0d3e"
   dependencies:
     dialog-polyfill "^0.4.9"
     prop-types "15.6.0"

@@ -4,3 +4,4 @@ node_modules
 .vscode
 config
 values.dev.yaml
+.env

@@ -14,7 +14,7 @@ import AdminManager from "zoapp-front/containers/adminManager";
 import BotManager from "OplaContainers/botManager";
 import PublishContainer from "OplaContainers/publishContainer";
 import configureStore from "OplaLibs/store";
-import DrawerFooter from "OplaContainers/drawerFooter";
+import DrawerFooter from "zoapp-front/containers/drawerFooter";
 import Zrmc, { Inner, Cell, Button } from "zrmc";
 import PublishDialog from "OplaContainers/dialogs/publishDialog";
 import { defaultTemplates, defaultLanguages } from "OplaLibs/reducers/app";
@@ -32,10 +32,17 @@ const handleOpenPublishDialog = () => {
   Zrmc.showDialog(dialog);
 };
 
-const app = {
-  name: "Opla CE",
+const appProps = {
+  name: "Opla",
+  subname: "CE",
   version: "0.1.0",
+  instance: {
+    name: "Dev",
+    color: "#f05545",
+    description: "A warning message",
+  },
   design: {
+    minTitleName: true,
     drawer: {
       type: "persistent",
       themeDark: true,
@@ -133,14 +140,30 @@ const app = {
     {
       id: "7",
       isDrawerItem: true,
-      name: "Support",
-      icon: "help",
-      path: "/support",
+      name: "Community chat",
+      icon: "chat",
+      href: "https://gitter.im/Opla",
       access: "all",
-      render: (props) => React.createElement(Screen, props, "Support"),
     },
     {
       id: "8",
+      isDrawerItem: true,
+      name: "Issues",
+      icon: "bug_report",
+      href: "https://github.com/Opla/community-edition/issues",
+      access: "all",
+    },
+    {
+      id: "9",
+      isDrawerItem: true,
+      name: "About",
+      icon: "info",
+      path: "/about",
+      access: "all",
+      render: (props) => React.createElement(Screen, props, "About"),
+    },
+    {
+      id: "10",
       isDrawerItem: false,
       name: "chatbot",
       path: "/publish/:name",
@@ -153,8 +176,12 @@ const app = {
 
 export default class Opla {
   constructor() {
+    /* eslint-disable no-undef */
+    const env = process.env.APP;
+    /* eslint-enable no-undef */
+    const app = Front.combinePropsEnv(appProps, env);
     store = configureStore({ app });
-    this.front = new Front("app", app, config, { store });
+    this.front = new Front("app", app, config, env, { store });
   }
 
   restart() {
