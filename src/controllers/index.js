@@ -28,9 +28,6 @@ class ExtensionsController {
     this.metrics = new MetricsController("Metrics", this);
 
     logger.info("will init");
-    if (zoapp.controllers) {
-      initMiddlewares(zoapp.controllers.getMiddlewares(), this);
-    }
     initGatewayClient(config);
     this.admin = new AdminController("Admin", this, null, getGatewayClient());
   }
@@ -56,6 +53,9 @@ class ExtensionsController {
     await this.sandboxMessenger.open();
     await this.messenger.open();
     await this.admin.open();
+    if (this.zoapp.controllers) {
+      initMiddlewares(this.zoapp.controllers.getMiddlewares(), this);
+    }
   }
 
   async stop() {

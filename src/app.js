@@ -20,15 +20,17 @@ class App {
       ...config,
       buildSchema,
     });
+    logger.info("add Plugins");
+    this.zoapp.addPlugins(plugins(this.zoapp.pluginsManager));
+    logger.info("add Controller extensions");
     this.zoapp.addControllerExtensions(
       createExtensionsController(this.zoapp, config),
     );
-    this.zoapp.addPlugins(plugins(this.zoapp.pluginsManager));
-
     buildRoutes(this.zoapp);
   }
 
   async start() {
+    logger.info("start");
     await this.zoapp.start();
   }
 
