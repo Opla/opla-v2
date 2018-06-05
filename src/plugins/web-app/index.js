@@ -43,43 +43,50 @@ class AppMessenger {
     const { zoapp } = this.manager;
     const { config } = this.manager;
     this.middleware = middleware;
-    if (!middleware.application) {
-      // WIP create application
-      const bot = await zoapp.extensions.getBots().getBot(middleware.origin);
-      const { email } = bot; // WIP get email
-      const name = `${middleware.name}_${middleware.origin}`;
-      // get a previously created app with same name
-      let app = await zoapp.authServer.getApplicationByName(name);
-      if (!app) {
-        // TODO generate anonymous_secret
-        const params = {
-          name,
-          grant_type: "password",
-          email,
-          redirect_uri: "localhost",
-          policies: { authorizeAnonymous: true, anonymous_secret: "koko" },
+    if (middleware.origin) {
+      if (!middleware.application) {
+        const name = `${middleware.name}_${middleware.origin}`;
+        // get a previously created app with same name
+        let app = await zoapp.authServer.getApplicationByName(name);
+        if (!app) {
+          // TODO generate anonymous_secret
+          // WIP create application
+          const bot = await zoapp.extensions
+            .getBots()
+            .getBot(middleware.origin);
+          const { email } = bot; // WIP get email
+          const params = {
+            name,
+            grant_type: "password",
+            email,
+            redirect_uri: "localhost",
+            policies: { authorizeAnonymous: true, anonymous_secret: "koko" },
+          };
+          app = await zoapp.authServer.registerApplication(params);
+        }
+        if (app) {
+          this.middleware.application = app;
+        }
+      }
+      if (!middleware.url) {
+        // WIP create url
+        const params = zoapp.controllers.getParameters();
+        const botParams = {
+          botId: middleware.origin,
+          application: {
+            id: middleware.application.id,
+            secret: middleware.application.secret,
+            policies: middleware.application.policies,
+          },
         };
-        app = await zoapp.authServer.registerApplication(params);
+        const name = await params.generateName(4, "botParams");
+        await params.setValue(name, botParams, "botParams");
+        this.middleware.url = `${config.global.botSite.url}${name}`;
       }
-      if (app) {
-        this.middleware.application = app;
-      }
+    } else {
+      logger.info("No origin for AppMessenger ", middleware.id);
     }
-    if (!middleware.url) {
-      // WIP create url
-      const params = zoapp.controllers.getParameters();
-      const botParams = {
-        botId: middleware.origin,
-        application: {
-          id: middleware.application.id,
-          secret: middleware.application.secret,
-          policies: middleware.application.policies,
-        },
-      };
-      const name = await params.generateName(4, "botParams");
-      await params.setValue(name, botParams, "botParams");
-      this.middleware.url = `${config.global.botSite.url}${name}`;
-    }
+
     return middleware;
   }
 
