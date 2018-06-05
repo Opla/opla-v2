@@ -30,7 +30,7 @@ export default class extends Model {
   async getBot(botId, userId = null) {
     const collection = this.database.getTable("bots");
     let bot = null;
-    if (collection) {
+    if (collection && botId) {
       bot = await collection.getItem(botId);
     }
     if (bot && userId) {

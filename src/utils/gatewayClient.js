@@ -18,12 +18,12 @@ export class GatewayClient {
 
   async getTemplates() {
     const response = await fetch(`${this.url}/templates`);
-    return response.json();
+    return response ? response.json() : [];
   }
 
   async getLanguages() {
     const response = await fetch(`${this.url}/languages`);
-    return response.json();
+    return response ? response.json() : [];
   }
 }
 
