@@ -133,9 +133,8 @@ const appProps = {
       isDrawerItem: true,
       name: "Documentation",
       icon: "book",
-      path: "/documentation",
+      href: "https://opla.github.io/docs/",
       access: "all",
-      render: (props) => React.createElement(Screen, props, "Documentation"),
     },
     {
       id: "7",
@@ -156,7 +155,7 @@ const appProps = {
     {
       id: "9",
       isDrawerItem: true,
-      name: "About",
+      name: "About Opla",
       icon: "info",
       path: "/about",
       access: "all",
