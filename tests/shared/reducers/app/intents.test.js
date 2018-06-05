@@ -9,23 +9,44 @@ import * as appActions from "shared/actions/app";
 import reducer, { initialState } from "shared/reducers/app";
 
 describe("reducers/app", () => {
+  const defaultInputActions = [
+    "input action 1",
+    "input action 2",
+    "input action 3",
+  ];
+  const defaultOutputActions = [
+    "output action 1",
+    "output action 2",
+    "output action 3",
+  ];
   const defaultIntents = [
     {
       id: "intent-1",
       botId: "bot-123",
       name: "intent 1",
+      input: [...defaultInputActions],
+      output: [...defaultOutputActions],
     },
     {
       id: "intent-2",
       botId: "bot-223",
       name: "intent 2",
+      input: [...defaultInputActions],
+      output: [...defaultOutputActions],
     },
     {
       id: "intent-3",
       botId: "bot-323",
       name: "intent 3",
+      input: [...defaultInputActions],
+      output: [...defaultOutputActions],
     },
   ];
+
+  it("returns the initial state", () => {
+    const state = reducer(undefined, {});
+    expect(state).toEqual(initialState);
+  });
 
   describe("intents api actions", () => {
     it("enables loading on move intent request", () => {
@@ -120,6 +141,64 @@ describe("reducers/app", () => {
       expect(state.intents[1].notSaved).toEqual(true);
       names = state.intents.map((intent) => intent.name);
       expect(names).toEqual(["intent 1", "intent updated", "intent 3"]);
+    });
+
+    it("Set Intent Action", () => {
+      // TODO remove selectedIntentIndex need
+      const previousState = {
+        selectedIntentIndex: 1,
+      };
+      let state = reducer(
+        previousState,
+        apiActions.apiGetIntentsSuccess([...defaultIntents]),
+      );
+      expect(state.intents[1].input).toEqual(defaultInputActions);
+      // add an intent action
+      state = reducer(
+        state,
+        appActions.appSetIntentAction("input", undefined, "input action 4", 3),
+      );
+      expect(state.intents[1].input[3]).toEqual("input action 4");
+      // update an intent action
+      state = reducer(
+        state,
+        appActions.appSetIntentAction("input", undefined, "updated action", 1),
+      );
+      expect(state.intents[1].input[1]).toEqual("updated action");
+
+      // TODO
+      // // should not mutate the initial state
+      // expect(state.intents[1].input).toEqual([
+      //   "input action 1",
+      //   "updated action",
+      //   "input action 3",
+      //   "input action 4",
+      // ]);
+      // expect(defaultIntents[1].input).toEqual([
+      //   "input action 1",
+      //   "input action 2",
+      //   "input action 3",
+      // ]);
+    });
+
+    it("delete intent Action", () => {
+      // TODO remove selectedIntentIndex need
+      const previousState = {
+        selectedIntentIndex: 2,
+      };
+      let state = reducer(
+        previousState,
+        apiActions.apiGetIntentsSuccess([...defaultIntents]),
+      );
+      expect(state.intents[2].output).toEqual(defaultOutputActions);
+      expect(state.intents[2].output).toHaveLength(3);
+      // delete an intent action
+      state = reducer(state, appActions.appDeleteIntentAction("output", 2));
+      expect(state.intents[2].output).toHaveLength(2);
+      expect(state.intents[2].output).toEqual([
+        "output action 1",
+        "output action 2",
+      ]);
     });
   });
 });
