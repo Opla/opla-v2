@@ -101,13 +101,8 @@ describe("reducers/app", () => {
     });
 
     it("update an intent", () => {
-      // TODO remove selectedIntentIndex need
-      const previousState = {
-        selectedIntentIndex: 1,
-      };
-
       let state = reducer(
-        previousState,
+        undefined,
         apiActions.apiGetIntentsSuccess(defaultIntents),
       );
       let names = state.intents.map((intent) => intent.name);

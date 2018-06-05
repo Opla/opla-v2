@@ -231,20 +231,18 @@ export const handlers = {
 
   // UPDATE INTENT
   [APP_UPDATEINTENT]: (state, { selectedBotId, intent }) => {
-    const selectedIntentIndex =
-      state.selectedIntentIndex !== undefined ? state.selectedIntentIndex : 0;
+    const index = state.intents.findIndex((i) => i.id === intent.id);
     const intents = [...state.intents];
     let selectedIntent = null;
-    if (intents.length > 0 && selectedIntentIndex < intents.length) {
+    if (intents.length > 0 && index < intents.length) {
       selectedIntent = { ...intent };
-      intents[selectedIntentIndex] = selectedIntent;
+      intents[index] = selectedIntent;
       selectedIntent.notSaved = true;
     }
     return {
       ...state,
       selectedBotId,
       intents,
-      selectedIntentIndex,
       selectedIntent,
     };
   },
