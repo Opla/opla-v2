@@ -18,7 +18,7 @@ VALUES
     '{{ .Values.auth.clientId }}-{{ .Values.auth.userId }}',
     '{{ .Values.auth.userId }}',
     '{{ .Values.auth.clientId }}',
-    'owner',
+    'admin',
     'localhost');
 
  INSERT INTO `bots` (`id`,`idx`,`name`,`email`,`author`,`creation_date`) 

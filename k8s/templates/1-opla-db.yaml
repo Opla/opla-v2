@@ -28,8 +28,8 @@ spec:
     metadata:
       labels:
         app: db
-    annotations:
-      checksum/configMap: {{ include (print $.Template.BasePath "/0-configmap.yaml") . | sha256sum }}
+      annotations:
+        checksum/configMap: {{ include (print $.Template.BasePath "/0-configmap.yaml") . | sha256sum }}
 
     spec:
       containers:
