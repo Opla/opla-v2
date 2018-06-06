@@ -7,9 +7,8 @@ _test_script: &nodetest
 jobs:
   include:
     - stage: test
-      <<: *nodetest 
+      <<: *nodetest
       node_js: '8'
-
     - stage: test
       <<: *nodetest 
       node_js: '9'
@@ -43,6 +42,7 @@ jobs:
         - secure: "KbvDLAeY+1BI5SUrHbyXudYIMxqeFt79iD/wWPtyb4n3G8XGY+3g+Iy1AYIKHsiFzeiM5+nkE7yJtTtua+Qt/Bx2ClwPDVa3MGunKfkKwa7Pf7RyQQeTi/GP+gPlrjNsMiP0lL9X2zVpdk7/2vpHpQm9g9vgHtFMDLcAviQL3cLzwM8RMQp0bH7mY/rQU81Q3J/2E2MlE78T+2qbxvATzynokcswyZgK5NMY1LYJVebNsJrMSCGi2x41KTc6bNtSW00RQiQWtRgqJjzOAKVyRv6RnlB7gLTGM7ssN7ZEULCugKVW24Pf1VQmjWnMUi+7S0NEt1Dk90CR/Pk0Ohe6jdzqk+cGTJln/FFt9XEn9yl8/1eeOFBiqePfScScHGXSS8SPJOTT2xkAOPs9gSEtYPMn5ckRD9GTO6qGL6O6NN+LD0pf9Yb0+JcY74pHc7rUgbIx+nPAdgVriZQtrfq390/rN5EUDSeBAT8xYYeUNuNpCbwNdvt+OCNjnkNQ5sGLR6uVI0j3kq2UDOVd8DWHmqfmKPB/Q/sbsP8gQ/AdjD9iIvh27iSmxbcVOc+6CwfhkVHv3fsBfhMaJF7Zu++xUXosAWdAXF93s4l9iQXzsBHAwb7X0JJ3ZCcoLnR9Pmcn8Q38mGHnUBjqpkPYN1NMuGtA/c72MIFt8+1W8k0rboQ="
       install: ./travis/setup_k8s.sh
       script: make deploy
+      after_script: ./travis/slack/notify.sh
 
 stages:
 - test
@@ -55,3 +55,5 @@ env:
   - secure: Gg9DGLKjP7jTxdPwZmzAFI0+dqzIC9Guh1URkDefc+YvHAcpCBBiP22eY3Nyf3oakNL2JSd+Zdwi83ruWGDMjH2KL5wWdPYqWj4PG/atNde6o/lc2S9EZZKqziC1J//FN2IWQyITvDMXlCs4idCu3KTdOttB40KfHHtax8zz/pTqBnmQqCRd6CLTN0sZLP1vt02ORFhiXufVvMtfngjYl7ZEQYn3JNGsj+TDjUswXtvZ97qYauARo01V8ql4uHLeapU0kkoDmRMTFmE5p8fiNPQOLHuH3iJNX5VOZilfI5/ljpgLy84Y+R238ehAhqBZ4bUiPHQrgBP3uADyR0d7Yi3Khw2TF8P60vBX0JqK0R0Be+FINaOIgQ/YxOa5ut2lhkTlRIIkvinl0cuY+nxyNJTfxevaQB4GKphyuhdcbj4QqCDPcu3qsBnAYMInqySmRAlZPvnQd6z0tV0aTKd+ICz7v1vcC1tbjaq/dyrZf9pqdReTs1YQgpPC7TY2oMCMHiIJAJZQXw+7OWJRFrWJhN7f2lmNmk8tmBMccoct2KaQ2jYUW/hJpMAy8F5vzoHEnlQfZUa+EL+6gaC+OTCxsbvL9RGEHvvvgomDtzreVq7GEbPXgk/88p+QOeFvUMDH/DzJwpoTRpwxL03DSjB4gN6tSYbQbELGkD14Ab9qy9Q=
   #DOCKER_PASS
   - secure: Uk3D7/n+vN6X4YjmVShiccyL9bynmkyL9fWuH5IHn5wGc3vNYfHM180aReVT2LSphRvyO1uWG0bzQ8MM8gkuTc6A/DsrjBaSgKVpuvEFwBwo3rt9ZSyGcPFu7YJCRqlHHhiMkYCP5gzQ9mShjSO/KduVAZ3ktSVRokr/e4sfCNxHexmUciU3Y00U/govAh8/G8vN51y57r5iU2kO+z8UcxmwNbc8BsAu6hOKLfLVc/xQyGYqoqGqjjfvO5tNsAySuhhkLDW5taHQOMfy/E4pzGguze+Z42FH1fEYXibZDHPp+0D65VzwUhVQba2lha+FYq2v/VQgjb04xWmeel1l7jDexmhAp1cwZJ1uxr6H94xcsb1Fckip8JOY4ObQRDZpwRU7SrdIuNRPBmGPhOfejhhkNSLlCWieYxK8xHdsLy1W6CR9SU8Z/lDmEqOV0jda/zsd8Yv6kwhPyj36jpx1HP+q1wanzyDpG4Eksryp7hF/5VKvzRTFZ5zhYCv0X4hfXL+pJaFwkbe0jDCOK3CusXpZfSOC/aQr8TkmHR3MRlcl6K1GRPkhbs/fXua3E2TWO8Wd5XT2xyZY/N92Tji491+LSxW8ApXnQZguo6cPDfuLZ52RfyZ6rfTJ29Ta2Bg9HmilsC3bWG5bLh6UmsUEIUqr9T5gYpozfFrJD9UBvtU=
+  #SLACK_HOOK
+  - secure: aJiThswU8xDmcbOIyGiTBZ2wKOWYCUUauYrP5gfJVFicwHB3BSWTTO4VT9KnLDhnZcYYonohZYk8X7YO8AH8vQSp+ahGrKb9bdb+5/A2M3/l4RjtskhTRz+L0822eVIf41Gfg2XOFoKv3LgA5NWHSPK8Lxet3gu5WRmrsvdvSB/MpZ4xiHm9DbYHX0ZIKFgPNnqgtuxyxttIpL16/j9Rbf3WACoOJXCxTxP7JE0rMMX/X9DafNz4N6ZsIRB+okl1Cxufnbz7p+Y3WVVPBAGayz5RP4zlhfCiSzT9m6u2h4iyHM+r6toP8z8cbZeMxgFvIDDUb5fbFpepB1h2W/f+s4n3rPZ6xA2LiIWKO2Fe7oHIQjZU9TZ4S5EZpabNjMMAoLD6Csr1LOFPzcbE9PLxML6iQvPaN37SXaiLpwRZrD4s18PFl1G6GOy7M0Vq2Ki2XuPOKDwX2MQc9YG800QqeUzO7Y3cvkg+1d/ka1nOYZBOikwFg0Mb3QmM1h6M1keyLFT8MXyeyuCIKjZ+OilrUA+Ew8Zvu7//OOr9rGTTiCt9pEJnJero2/BDqJEtywwBD8KyN2gKFRA32QDLNEQ7KrRLH7rgoUHlewCfmUiUq6jCzABMfulbvu/Gy6yGm/4jNxh7Mg7HfzFVRXFhVJ3P/wcqR7iaJleSvgrSoMo9QFg=
