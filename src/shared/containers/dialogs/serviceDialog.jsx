@@ -82,16 +82,11 @@ class ServiceDialog extends Component {
     const { service } = this.props;
     const { instance } = this.state;
     const title = service.getTitle();
-    let content = null;
-    if (instance) {
-      content = service.renderSettings(
-        instance,
-        this.onAction,
-        this.props.publicUrl,
-      );
-    } else {
-      content = <div>Loading</div>;
-    }
+    const content = service.renderSettings(
+      instance,
+      this.onAction,
+      this.props.publicUrl,
+    );
     const style = { width: "550px" };
     return (
       <Dialog
@@ -99,7 +94,7 @@ class ServiceDialog extends Component {
         style={style}
         onClose={this.handleCloseDialog}
       >
-        <DialogHeader>{title}</DialogHeader>
+        <DialogHeader>{title} - settings</DialogHeader>
         <DialogBody>{content}</DialogBody>
         <DialogFooter>
           <Button
