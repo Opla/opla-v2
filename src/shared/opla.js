@@ -178,9 +178,8 @@ export default class Opla {
     /* eslint-disable no-undef */
     const env = process.env.APP;
     /* eslint-enable no-undef */
-    const app = Front.combinePropsEnv(appProps, env);
-    store = configureStore({ app });
-    this.front = new Front("app", app, config, env, { store });
+    store = configureStore();
+    this.front = new Front("app", appProps, config, env, { store });
   }
 
   restart() {
