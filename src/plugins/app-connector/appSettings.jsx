@@ -18,14 +18,8 @@ export default class AppSettings extends Component {
   renderCreateApp() {
     const { instance } = this.props;
     // console.log("instance=", instance);
-    const app = instance.application;
-    let appId = "";
-    let appSecret = "";
-    if (app) {
-      appId = app.id;
-      appSecret = app.secret;
-    }
-    let botUrl = "";
+    // const app = instance.application;
+    /* let botUrl = "";
     if (instance.url) {
       let { url } = instance;
       const regex = /^(http|https).*$/;
@@ -45,9 +39,16 @@ export default class AppSettings extends Component {
           {url}
         </a>
       );
-    }
-    const botId = instance.origin;
-
+    } */
+    const token = instance.token || "TOKEN";
+    const api = "API_URL";
+    let script = "<script>\r\n";
+    script += ` opla = { config: { token: '${token}',url: '${api}', }};\r\n`;
+    script +=
+      "(function(o,p,l,a,i){a=p.createElement(l),i=p.getElementsByTagName(l)[0];";
+    script += "a.async=1;a.src=o;i.parentNode.insertBefore(a,i)})";
+    script +=
+      "('https://bots.opla.ai/js/app.js',document,'script');\r\n</script>";
     return (
       <div
         style={{
@@ -61,51 +62,21 @@ export default class AppSettings extends Component {
           top: "0px",
         }}
       >
-        <div style={{ marginTop: "8px", textAlign: "center" }}>
-          Link to webapp :
-        </div>
-        <div
-          style={{
-            width: "390px",
-            paddingTop: "8px",
-            margin: "auto",
-          }}
-        >
-          {botUrl}
-        </div>
+        <div style={{ marginTop: "8px" }}>Use embedded publish webchat</div>
 
-        <div style={{ marginTop: "12px", textAlign: "center" }}>
-          Or install SDK and set these parameters :
+        <div style={{ marginTop: "12px", marginBottom: "8px" }}>
+          Or add this script to an html page with TOKEN and API_URL :
         </div>
         <div
           style={{
             marginTop: "0px",
-            marginBottom: "0px",
+            padding: "10px",
             fontSize: "10px",
             color: "black",
+            background: "#eee",
           }}
         >
-          botId : {botId}
-        </div>
-        <div
-          style={{
-            marginTop: "0px",
-            marginBottom: "0px",
-            fontSize: "10px",
-            color: "black",
-          }}
-        >
-          appId : {appId}
-        </div>
-        <div
-          style={{
-            marginTop: "0px",
-            marginBottom: "12px",
-            fontSize: "10px",
-            color: "black",
-          }}
-        >
-          appSecret : {appSecret}
+          <code>{script}</code>
         </div>
       </div>
     );
