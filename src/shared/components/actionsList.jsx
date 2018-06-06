@@ -63,13 +63,6 @@ class ActionsList extends Component {
   render() {
     const { name, actions, newAction, onDrop } = this.props;
     let content;
-    let type;
-    if (
-      name === "output" &&
-      (!actions || actions.length === 0 || actions[0].type === "condition")
-    ) {
-      type = "condition";
-    }
     const icon = name === "input" ? "format_quote" : "chat_bubble_outline";
     const addText =
       name === "input" ? "Add an input sentence" : "Add an output response";
@@ -107,114 +100,55 @@ class ActionsList extends Component {
     );
     if (actions && actions.length > 0) {
       const style = {}; /* padding: "16px" */
-      if (type === "condition") {
-        const { children } = actions[0];
-        // type = "condition";
-        // WIP display condition list
-        content = (
-          <List style={{ overflow: "auto", maxHeight: "26vh" }}>
-            {children.map((action, index) => {
-              const text = <ActionsEditable content={action.text} />;
-              let condition =
-                action.name && action.name.length > 0
-                  ? `${action.name} = `
-                  : "";
-              if (condition.length > 0) {
-                condition += `${
-                  action.value && action.value.length > 0
-                    ? action.value
-                    : "undefined"
-                } ?`;
-              }
-              if (condition.length === 0) {
-                condition = "default";
-              }
-              const key = `cd_${index}`;
-              return (
-                <ListItem
-                  style={style}
-                  key={key}
-                  className="selectableListItem onFocusAction mdl-list_action"
-                  icon={icon}
-                  secondaryText={text}
-                  onDrop={onDrop}
+      content = (
+        <List style={{ overflow: "auto", maxHeight: "26vh" }}>
+          {actions.map((action, index) => {
+            const text = (
+              <ActionsEditable
+                containerName={this.props.name}
+                onAddAction={this.handleAction}
+                onChange={this.handleAction}
+                ref={(e) => {
+                  this.actionsEditableRefs[index] = e;
+                }}
+                content={action}
+              />
+            );
+            const key = `cd_${index}`;
+            return (
+              <ListItem
+                style={{ height: "100%", minHeight: "40px", ...style }}
+                key={key}
+                icon={icon}
+                className="selectableListItem onFocusAction mdl-list_action"
+                onDrop={onDrop}
+                onClick={(e) => {
+                  this.props.onSelectActionsComponent(
+                    this.actionsEditableRefs[index],
+                  );
+                  this.handleSelect(e, "select", {
+                    name,
+                    state: "select",
+                    index,
+                  });
+                }}
+              >
+                {text}
+                <ListItemMeta
+                  icon="delete"
                   onClick={(e) => {
-                    this.handleSelect(e, "select", {
+                    this.handleSelect(e, "delete", {
                       name,
-                      type: "condition",
-                      state: "select",
+                      state: "delete",
                       index,
                     });
                   }}
-                >
-                  {condition}
-                  <ListItemMeta
-                    icon="delete"
-                    onClick={(e) => {
-                      this.handleSelect(e, "delete", {
-                        name,
-                        type: "condition",
-                        state: "delete",
-                        index,
-                      });
-                    }}
-                  />
-                </ListItem>
-              );
-            })}
-          </List>
-        );
-      } else {
-        content = (
-          <List style={{ overflow: "auto", maxHeight: "26vh" }}>
-            {actions.map((action, index) => {
-              const text = (
-                <ActionsEditable
-                  containerName={this.props.name}
-                  onAddAction={this.handleAction}
-                  onChange={this.handleAction}
-                  ref={(e) => {
-                    this.actionsEditableRefs[index] = e;
-                  }}
-                  content={action}
                 />
-              );
-              const key = `cd_${index}`;
-              return (
-                <ListItem
-                  style={{ height: "100%", minHeight: "40px", ...style }}
-                  key={key}
-                  icon={icon}
-                  className="selectableListItem onFocusAction mdl-list_action"
-                  onDrop={onDrop}
-                  onClick={(e) => {
-                    this.props.onSelectActionsComponent(
-                      this.actionsEditableRefs[index],
-                    );
-                    this.handleSelect(e, "select", {
-                      name,
-                      state: "select",
-                      index,
-                    });
-                  }}
-                >
-                  {text}
-                  <ListItemMeta
-                    icon="delete"
-                    onClick={(e) => {
-                      this.handleSelect(e, "delete", {
-                        name,
-                        state: "delete",
-                        index,
-                      });
-                    }}
-                  />
-                </ListItem>
-              );
-            })}
-          </List>
-        );
-      }
+              </ListItem>
+            );
+          })}
+        </List>
+      );
     } else {
       content = <List />;
     }
