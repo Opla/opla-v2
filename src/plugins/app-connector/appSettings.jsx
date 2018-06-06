@@ -6,6 +6,7 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { TextField } from "zrmc";
 
 export default class AppSettings extends Component {
   onAction = (action) => {
@@ -15,19 +16,18 @@ export default class AppSettings extends Component {
     this.props.onAction(action);
   };
 
-  renderCreateApp() {
-    const { instance } = this.props;
+  static renderCreateApp(instance) {
     // console.log("instance=", instance);
     // const app = instance.application;
-    /* let botUrl = "";
-    if (instance.url) {
+    let botUrl = "Need a first publishing";
+    if (instance && instance.url) {
       let { url } = instance;
       const regex = /^(http|https).*$/;
       if (regex.test(url) === false) {
         url = `${window.location.origin}${url}`;
       }
 
-      botUrl = (
+      /* botUrl = (
         <a
           style={{
             width: "100%",
@@ -38,8 +38,9 @@ export default class AppSettings extends Component {
         >
           {url}
         </a>
-      );
-    } */
+      ); */
+      botUrl = url;
+    }
     const token = instance.token || "TOKEN";
     const api = "API_URL";
     let script = "<script>\r\n";
@@ -52,8 +53,8 @@ export default class AppSettings extends Component {
     return (
       <div
         style={{
-          width: "420px",
-          height: "200px",
+          width: "480px",
+          height: "220px",
           margin: "auto",
           position: "absolute",
           left: "0px",
@@ -62,7 +63,20 @@ export default class AppSettings extends Component {
           top: "0px",
         }}
       >
-        <div style={{ marginTop: "8px" }}>Use embedded publish webchat</div>
+        <div style={{ marginTop: "0px" }}>
+          Published URL <br />
+          <TextField
+            onChange={() => {
+              // TODO
+            }}
+            style={{ width: "480px", marginTop: "0px", height: "36px" }}
+            value={botUrl}
+            disabled
+            ref={(input) => {
+              this.fieldUrl = input;
+            }}
+          />
+        </div>
 
         <div style={{ marginTop: "12px", marginBottom: "8px" }}>
           Or add this script to an html page with TOKEN and API_URL :
@@ -88,10 +102,10 @@ export default class AppSettings extends Component {
       width: "502px",
       position: "relative",
     };
-    let container = <div>Loading...</div>;
-    if (this.props.instance && this.props.instance.application) {
+    const container = AppSettings.renderCreateApp(this.props.instance);
+    /* if (this.props.instance && this.props.instance.application) {
       container = this.renderCreateApp();
-    }
+    } */
     return (
       <div>
         <div className="mdl-color--grey-100" style={style}>
