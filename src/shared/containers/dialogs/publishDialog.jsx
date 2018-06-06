@@ -12,6 +12,8 @@ import Zrmc, {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  List,
+  ListItem,
 } from "zrmc";
 import { connect } from "react-redux";
 import PluginsManager from "../../utils/pluginsManager";
@@ -145,9 +147,36 @@ class PublishDialog extends Component {
     // TODO display published dialog with links to service's messenger
     setTimeout(() => {
       Zrmc.closeDialog();
+      const pluginsManager = new PluginsManager();
+      const items = this.getActives(pluginsManager, true);
       Zrmc.showDialog({
-        header: "Published",
-        body: "modification made",
+        header: "Published to platforms",
+        body: (
+          <List twoLine>
+            {items.map((item) => {
+              let url = "";
+              if (item.instance) {
+                ({ url } = item.instance);
+                const regex = /^(http|https).*$/;
+                if (regex.test(url) === false) {
+                  url = `${window.location.origin}${url}`;
+                }
+              }
+
+              return (
+                <ListItem
+                  key={item.name}
+                  secondaryText={url}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  {item.name}
+                </ListItem>
+              );
+            })}
+          </List>
+        ),
         onAction: this.handleCloseDialog,
       });
     }, 100);
@@ -172,30 +201,21 @@ class PublishDialog extends Component {
     }
   }
 
-  renderDialog() {
-    let content = null;
-    if (this.state.isLoading) {
-      content = <div>Loading</div>;
-    } else {
-      const actives = [];
-      const pluginsManager = new PluginsManager();
-      const services = pluginsManager.getPlugins({
-        type: "MessengerConnector",
-        activated: true,
-      });
-
-      const servicesEnabled = this.props.publishers;
-      if (this.props.middlewares && this.props.middlewares.length > 0) {
-        const { middlewares } = this.props;
-        middlewares.forEach((instance) => {
-          const service = pluginsManager.getPlugin(instance.name);
-          let status;
-          if (servicesEnabled[instance.name]) {
-            ({ status } = servicesEnabled[instance.name]);
-          } else {
-            ({ status } = instance);
-          }
-          const enabled = status === "start";
+  getActives(pluginsManager, startedOnly = false) {
+    const servicesEnabled = this.props.publishers;
+    const actives = [];
+    if (this.props.middlewares && this.props.middlewares.length > 0) {
+      const { middlewares } = this.props;
+      middlewares.forEach((instance) => {
+        const service = pluginsManager.getPlugin(instance.name);
+        let status;
+        if (servicesEnabled[instance.name]) {
+          ({ status } = servicesEnabled[instance.name]);
+        } else {
+          ({ status } = instance);
+        }
+        const enabled = status === "start";
+        if (enabled || !startedOnly) {
           actives.push({
             name: service.getTitle(),
             icon: service.getIcon(),
@@ -205,41 +225,61 @@ class PublishDialog extends Component {
             enabled,
             status: instance.status,
           });
-        });
-      }
-      const items = [];
-      services.forEach((service) => {
-        // TODO check if the item is already pushed
-        let active = null;
-        let i = 0;
-        for (; i < actives.length; i += 1) {
-          if (actives[i].service.getName() === service.getName()) {
-            active = actives[i];
-            break;
-          }
-        }
-        if (active) {
-          items.push(active);
-          actives.splice(i, 1);
-        } else {
-          let status;
-          if (servicesEnabled[service.getName()]) {
-            ({ status } = servicesEnabled[service.getName()]);
-          } else {
-            status = "closed";
-          }
-          const enabled = status === "start";
-          items.push({
-            name: service.getTitle(),
-            icon: service.getIcon(),
-            color: service.getColor(),
-            service,
-            enabled,
-            status,
-          });
         }
       });
+    }
+    return actives;
+  }
 
+  getItemsServices(pluginsManager, actives = []) {
+    const services = pluginsManager.getPlugins({
+      type: "MessengerConnector",
+      activated: true,
+    });
+    const servicesEnabled = this.props.publishers;
+    const items = [];
+    services.forEach((service) => {
+      // TODO check if the item is already pushed
+      let active = null;
+      let i = 0;
+      for (; i < actives.length; i += 1) {
+        if (actives[i].service.getName() === service.getName()) {
+          active = actives[i];
+          break;
+        }
+      }
+      if (active) {
+        items.push(active);
+        actives.splice(i, 1);
+      } else {
+        let status;
+        if (servicesEnabled[service.getName()]) {
+          ({ status } = servicesEnabled[service.getName()]);
+        } else {
+          status = "closed";
+        }
+        const enabled = status === "start";
+        items.push({
+          name: service.getTitle(),
+          icon: service.getIcon(),
+          color: service.getColor(),
+          service,
+          enabled,
+          status,
+        });
+      }
+    });
+    return items;
+  }
+
+  renderDialog() {
+    let content = null;
+    if (this.state.isLoading) {
+      content = <div>Loading</div>;
+    } else {
+      const pluginsManager = new PluginsManager();
+      const actives = this.getActives(pluginsManager);
+      const items = this.getItemsServices(pluginsManager, actives);
       actives.forEach((active) => {
         items.push(active);
       });
