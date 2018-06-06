@@ -21,11 +21,13 @@ import {
   APP_UPDATEINTENT,
   APP_SETINTENTACTION,
   APP_DELETEINTENTACTION,
+  APP_SETNEWACTIONS,
 } from "../../actions/constants";
 
 export const initialState = {
   intents: null,
   selectedIntentIndex: 0,
+  newActions: { input: "", output: "" },
 };
 
 export const handlers = {
@@ -320,6 +322,16 @@ export const handlers = {
       intents,
       selectedIntentIndex,
       selectedIntent: { ...intent },
+    };
+  },
+
+  // SET NEW ACTIONS
+  [APP_SETNEWACTIONS]: (state, { actionContainer, actionValue }) => {
+    const newActions = { ...state.newActions };
+    newActions[actionContainer] = actionValue;
+    return {
+      ...state,
+      newActions,
     };
   },
 };

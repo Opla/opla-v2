@@ -17,24 +17,18 @@ class ActionsList extends Component {
       selection: null,
       newContent: null,
     };
-    this.editableComponent = null;
+    this.actionsEditableRefs = [];
+    this.newActionsEditableRefs = undefined;
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.intentId !== this.props.intentId) {
-      this.editableComponent = null;
       // console.log("componentWillReceiveProps reset");
       this.setState({ selection: null, newContent: null });
     }
   }
 
-  handleChangeNew = (newContent) => {
-    this.setState({ newContent });
-  };
-
-  handleSelectedEditable = (editableComponent) => {
-    // console.log("handleSelectedEditable set editablecomponent", editableComponent);
-    this.editableComponent = editableComponent;
+  handleSelectedEditable = () => {
     this.props.onEdit(true, this);
   };
 
@@ -66,48 +60,8 @@ class ActionsList extends Component {
     this.props.onEdit(editing, this);
   };
 
-  appendAction(action) {
-    const { editableComponent } = this;
-    if (!editableComponent) {
-      return;
-    }
-    if (action === "text") {
-      editableComponent.insertItem({
-        type: "text",
-        text: "text",
-      });
-    } else if (action === "any") {
-      editableComponent.insertItem({
-        type: "any",
-        text: "",
-      });
-    } else if (action === "output_var") {
-      editableComponent.insertItem({
-        type: "output_var",
-        text: "variablename",
-      });
-    } else if (action === "variable") {
-      editableComponent.insertItem({
-        type: "variable",
-        text: "variablename=value",
-      });
-    } else if (action === "br") {
-      editableComponent.insertItem({
-        type: "br",
-        text: "",
-      });
-    } else if (action === "button") {
-      editableComponent.insertItem({
-        type: "button",
-        text: "value",
-      });
-    } else if (action === "trash") {
-      editableComponent.deleteItem();
-    }
-  }
-
   render() {
-    const { name, actions, onDrop } = this.props;
+    const { name, actions, newAction, onDrop } = this.props;
     let content;
     let type;
     if (
@@ -119,35 +73,34 @@ class ActionsList extends Component {
     const icon = name === "input" ? "format_quote" : "chat_bubble_outline";
     const addText =
       name === "input" ? "Add an input sentence" : "Add an output response";
-    let color =
-      !actions || actions.length === 0
+    const color =
+      (!actions || actions.length === 0) && !newAction
         ? "rgb(213, 0, 0)"
-        : "rgb(221, 221, 221)";
-    let editable = false;
-    if (
-      this.editableComponent ||
-      (this.state.selection && this.state.selection.state === "add")
-    ) {
-      editable = true;
-      color = "rgb(0, 0, 0)";
-    }
+        : "rgb(0, 0, 0)";
+    const editable = true;
     // console.log("selection=", name, editable, this.state.selection);
     const addContent = (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
         icon={icon}
         style={{ color, padding: "0px 16px" }}
-        onClick={(e) => {
-          this.handleSelect(e, "add", { name, type, state: "add" });
+        onClick={() => {
+          this.props.onSelectActionsComponent(this.newActionsEditableRefs);
         }}
       >
         <ActionsEditable
-          content={this.state.newContent}
+          containerName={this.props.name}
+          content={newAction}
           placeholder={addText}
           editable={editable}
-          onAction={this.handleAction}
-          onChange={this.handleChangeNew}
+          onAddAction={this.handleAction}
+          onChange={(newContent) => {
+            this.props.onNewActionsChange(this.props.name, newContent);
+          }}
           onSelected={this.handleSelectedEditable}
+          ref={(e) => {
+            this.newActionsEditableRefs = e;
+          }}
           isNew
         />
       </ListItem>
@@ -215,7 +168,17 @@ class ActionsList extends Component {
         content = (
           <List style={{ overflow: "auto", maxHeight: "26vh" }}>
             {actions.map((action, index) => {
-              const text = <ActionsEditable content={action} />;
+              const text = (
+                <ActionsEditable
+                  containerName={this.props.name}
+                  onAddAction={this.handleAction}
+                  onChange={this.handleAction}
+                  ref={(e) => {
+                    this.actionsEditableRefs[index] = e;
+                  }}
+                  content={action}
+                />
+              );
               const key = `cd_${index}`;
               return (
                 <ListItem
@@ -225,6 +188,9 @@ class ActionsList extends Component {
                   className="selectableListItem onFocusAction mdl-list_action"
                   onDrop={onDrop}
                   onClick={(e) => {
+                    this.props.onSelectActionsComponent(
+                      this.actionsEditableRefs[index],
+                    );
                     this.handleSelect(e, "select", {
                       name,
                       state: "select",
@@ -263,11 +229,14 @@ class ActionsList extends Component {
 
 ActionsList.defaultProps = {
   actions: [],
+  newAction: "",
   onSelect: null,
   onDrop: null,
   onEdit: () => {},
   onAction: () => {},
   intentId: null,
+  onSelectActionsComponent: () => {},
+  onNewActionsChange: () => {},
 };
 
 ActionsList.propTypes = {
@@ -280,6 +249,9 @@ ActionsList.propTypes = {
   onEdit: PropTypes.func,
   onAction: PropTypes.func,
   intentId: PropTypes.string,
+  newAction: PropTypes.string,
+  onSelectActionsComponent: PropTypes.func.isRequired,
+  onNewActionsChange: PropTypes.func.isRequired,
 };
 
 export default ActionsList;

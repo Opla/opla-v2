@@ -15,6 +15,10 @@ describe("components/intentDetail", () => {
     onSelect: () => {},
     onEdit: () => {},
     onAction: () => {},
+    newActions: {
+      input: undefined,
+      output: undefined,
+    },
   };
 
   const populatedIntent = {

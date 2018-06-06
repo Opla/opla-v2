@@ -346,7 +346,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       role="menuitem"
       style={
         Object {
-          "color": "rgb(221, 221, 221)",
+          "color": "rgb(0, 0, 0)",
           "padding": "0px 16px",
         }
       }
@@ -369,7 +369,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>
@@ -841,7 +857,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       role="menuitem"
       style={
         Object {
-          "color": "rgb(221, 221, 221)",
+          "color": "rgb(0, 0, 0)",
           "padding": "0px 16px",
         }
       }
@@ -864,7 +880,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>
@@ -932,7 +964,23 @@ exports[`components/actionsList can have an unique id 1`] = `
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>
@@ -1000,7 +1048,23 @@ exports[`components/actionsList can have different behavior on action 1`] = `
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>
@@ -1068,7 +1132,23 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>
@@ -1136,7 +1216,23 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>
@@ -1204,7 +1300,23 @@ exports[`components/actionsList can have different behavior on select 1`] = `
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>
@@ -1272,7 +1384,23 @@ exports[`components/actionsList renders correctly 1`] = `
         spellCheck={false}
         tabIndex={0}
       >
-        <span />
+        <span>
+          <span
+            className={undefined}
+            data="text"
+            id="ae_start"
+            onClick={[Function]}
+            onInput={[Function]}
+            style={
+              Object {
+                "display": "inline-block",
+                "padding": "0 4px",
+                "width": "100vw",
+              }
+            }
+            tabIndex={1}
+          />
+        </span>
       </div>
     </li>
   </div>

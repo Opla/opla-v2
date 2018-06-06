@@ -16,6 +16,7 @@ import {
   appDeleteIntentAction,
   appSetIntentAction,
   appUpdateIntent,
+  appSetNewActions,
 } from "../actions/app";
 import ActionsToolbox from "../components/actionsToolbox";
 
@@ -25,11 +26,12 @@ class IntentContainer extends Component {
     this.state = { editing: false, toolboxFocus: false };
     this.timer = null;
     this.actionsComponent = null;
+    this.selectedActionsComponent = null;
   }
 
   componentDidUpdate(prevProps) {
     // reset when a new intent is selected
-    if (prevProps.selectedIntent !== this.props.selectedIntent) {
+    if (prevProps.selectedIntent.id !== this.props.selectedIntent.id) {
       this.reset();
     }
   }
@@ -71,8 +73,46 @@ class IntentContainer extends Component {
       actionValue,
       this.selectedAction,
     );
-    this.reset();
     return true;
+  };
+
+  appendAction = (editableComponent, action) => {
+    if (!editableComponent) {
+      return;
+    }
+    if (action === "text") {
+      editableComponent.insertItem({
+        type: "text",
+        text: "text",
+      });
+    } else if (action === "any") {
+      editableComponent.insertItem({
+        type: "any",
+        text: "",
+      });
+    } else if (action === "output_var") {
+      editableComponent.insertItem({
+        type: "output_var",
+        text: "variablename",
+      });
+    } else if (action === "variable") {
+      editableComponent.insertItem({
+        type: "variable",
+        text: "variablename=value",
+      });
+    } else if (action === "br") {
+      editableComponent.insertItem({
+        type: "br",
+        text: "",
+      });
+    } else if (action === "button") {
+      editableComponent.insertItem({
+        type: "button",
+        text: "value",
+      });
+    } else if (action === "trash") {
+      editableComponent.deleteItem();
+    }
   };
 
   handleChangeToolbox = (action) => {
@@ -81,8 +121,8 @@ class IntentContainer extends Component {
     } else {
       this.setState({ editing: true, toolboxFocus: true });
       // console.log("action=", action, this.actionsComponent);
-      if (action !== "focus" && this.actionsComponent) {
-        this.actionsComponent.appendAction(action);
+      if (action !== "focus" && this.selectedActionsComponent) {
+        this.appendAction(this.selectedActionsComponent, action);
       }
     }
   };
@@ -136,9 +176,6 @@ class IntentContainer extends Component {
   };
 
   handleDoActions = ({ name, type, state, index, action }) => {
-    if (this.actionContainer) {
-      return;
-    }
     this.actionContainer = name;
     this.actionType = type;
     this.selectedAction = index;
@@ -229,6 +266,17 @@ class IntentContainer extends Component {
     }
   };
 
+  handleSelectActionsComponent = (selectedActionsComponent) => {
+    this.selectedActionsComponent = selectedActionsComponent;
+    if (!this.state.editing) {
+      this.setState({ editing: true });
+    }
+  };
+
+  handleNewActionsChange = (container, value) => {
+    this.props.appSetNewActions(container, value);
+  };
+
   handleEdit = (editing, actionsComponent) => {
     // console.log("handleEdit editing=", editing, actionsComponent);
     if (
@@ -264,10 +312,10 @@ class IntentContainer extends Component {
       if (editing || toolboxFocus) {
         // TODO dont use stored component
         const isInput =
-          this.actionsComponent &&
-          this.actionsComponent.props &&
-          this.actionsComponent.props.name
-            ? this.actionsComponent.props.name === "input"
+          this.selectedActionsComponent &&
+          this.selectedActionsComponent.props &&
+          this.selectedActionsComponent.props.containerName
+            ? this.selectedActionsComponent.props.containerName === "input"
             : false;
         toolbox = (
           <ActionsToolbox
@@ -303,9 +351,12 @@ class IntentContainer extends Component {
           />
           <IntentDetail
             intent={intent}
+            newActions={this.props.newActions}
             onSelect={this.handleActions}
             onEdit={this.handleEdit}
             onAction={this.handleDoActions}
+            onSelectActionsComponent={this.handleSelectActionsComponent}
+            onNewActionsChange={this.handleNewActionsChange}
           />
         </div>
       );
@@ -330,11 +381,15 @@ IntentContainer.defaultProps = {
 
 IntentContainer.propTypes = {
   selectedBotId: PropTypes.string,
-  selectedIntent: PropTypes.shape({}),
+  selectedIntent: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+  newActions: PropTypes.shape({}).isRequired,
   apiSendIntentRequest: PropTypes.func.isRequired,
   appDeleteIntentAction: PropTypes.func.isRequired,
   appSetIntentAction: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
+  appSetNewActions: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -348,7 +403,8 @@ const mapStateToProps = (state) => {
       : null;
   }
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  return { selectedIntent, selectedBotId };
+  const { newActions } = state.app;
+  return { selectedIntent, selectedBotId, newActions };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -375,6 +431,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   appDeleteIntentAction: (actionContainer, selectedAction) => {
     dispatch(appDeleteIntentAction(actionContainer, selectedAction));
+  },
+  appSetNewActions: (actionContainer, actionValue) => {
+    dispatch(appSetNewActions(actionContainer, actionValue));
   },
 });
 
