@@ -16,7 +16,7 @@ class PublishContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.props.appSetTitle("chatbot");
+    this.props.appSetTitle("Webchat");
   }
 
   componentDidMount() {
@@ -28,6 +28,27 @@ class PublishContainer extends Component {
 
     if (botParameters === null || botParameters === undefined) {
       return null;
+    } else if (
+      !botParameters.application ||
+      !botParameters.application.id ||
+      !botParameters.application.secret ||
+      !botParameters.application.policies
+    ) {
+      return (
+        <div
+          style={{
+            padding: "8px",
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            color: "red",
+            background: "lightgray",
+          }}
+        >
+          {" "}
+          Publication failed !<br />You need to republish it in Opla
+        </div>
+      );
     }
 
     const parameters = {

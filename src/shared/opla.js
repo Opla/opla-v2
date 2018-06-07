@@ -164,7 +164,7 @@ const appProps = {
     {
       id: "10",
       isDrawerItem: false,
-      name: "chatbot",
+      name: "Webchat",
       path: "/publish/:name",
       access: "all",
       isFullscreen: true,
