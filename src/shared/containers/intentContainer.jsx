@@ -28,8 +28,26 @@ class IntentContainer extends Component {
       toolboxFocus: false,
       toolboxDisplayMode: "",
     };
-    this.timer = null;
     this.selectedActionsComponent = null;
+  }
+
+  // handle click outside intent container component
+  // inspired by https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-react-component-5604830beb7f
+  componentWillMount() {
+    document.addEventListener("mousedown", this.handleDocumentClick, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleDocumentClick, false);
+  }
+
+  handleDocumentClick = (e) => {
+    if (!this.node.contains(e.target)) {
+      this.handleClickOutside();
+    }
+  };
+
+  handleClickOutside() {
+    this.updateToolboxDisplay(false);
   }
 
   componentDidUpdate(prevProps) {
@@ -44,6 +62,8 @@ class IntentContainer extends Component {
     this.actionContainer = undefined;
     this.actionType = undefined;
     this.setState({ editing: false });
+    this.props.appSetNewActions("input", "");
+    this.props.appSetNewActions("output", "");
   }
 
   handleDeleteActionClick = (containerName, index) => {
@@ -312,7 +332,6 @@ class IntentContainer extends Component {
       const { editing, toolboxFocus } = this.state;
       let toolbox;
       if (editing || toolboxFocus) {
-        // TODO dont use stored component
         const isInput = this.state.toolboxDisplayMode === "input";
         toolbox = (
           <ActionsToolbox
@@ -322,7 +341,11 @@ class IntentContainer extends Component {
         );
       }
       return (
-        <div>
+        <div
+          ref={(node) => {
+            this.node = node;
+          }}
+        >
           <SubToolbar
             titleIcon="question_answer"
             titleName={
