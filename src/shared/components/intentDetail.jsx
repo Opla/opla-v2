@@ -22,7 +22,6 @@ const IntentDetail = ({
   intent,
   newActions,
   onSelect,
-  onEdit,
   onAction,
   onSelectActionsComponent,
   onNewActionsChange,
@@ -38,7 +37,6 @@ const IntentDetail = ({
           actions={input}
           newAction={newActions.input}
           onSelect={onSelect}
-          onEdit={onEdit}
           onAction={onAction}
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
@@ -51,7 +49,6 @@ const IntentDetail = ({
           actions={output}
           newAction={newActions.output}
           onSelect={onSelect}
-          onEdit={onEdit}
           onAction={onAction}
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
@@ -111,7 +108,6 @@ IntentDetail.defaultProps = {
 IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
   onSelect: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
   onAction: PropTypes.func.isRequired,
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,

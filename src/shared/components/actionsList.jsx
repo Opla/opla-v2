@@ -13,35 +13,26 @@ import ActionsEditable from "./actionsEditable";
 class ActionsList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selection: null,
-      newContent: null,
-    };
     this.actionsEditableRefs = [];
     this.newActionsEditableRefs = undefined;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.intentId !== this.props.intentId) {
-      // console.log("componentWillReceiveProps reset");
-      this.setState({ selection: null, newContent: null });
-    }
-  }
-
-  handleSelectedEditable = () => {
-    this.props.onEdit(true, this);
+  handleAddAction = (text) => {
+    this.handleAction("add", text);
   };
 
-  handleAction = (text, index = undefined) => {
-    if (text) {
+  handleChangeAction = (text, index) => {
+    this.handleAction("change", text, index);
+  };
+
+  // private methode
+  handleAction = (state, text, index = undefined) => {
+    if (state && text) {
       const { name } = this.props;
       // TODO condition
       const type = null;
-      const state = "add";
       const p = { name, type, state, index, action: { text } };
       this.props.onAction(p);
-      // console.log("handleAction");
-      this.setState({ selection: null, newContent: null });
     }
   };
 
@@ -49,19 +40,8 @@ class ActionsList extends Component {
     this.props.onDeleteActionClick(this.props.name, index);
   };
 
-  handleSelect = (e, state, selection) => {
-    e.preventDefault();
-    let editing = false;
-    if (state === "add") {
-      // console.log("handleSelect add", selection);
-      this.setState({ selection });
-      // this.props.onSelect(selection);
-      editing = true;
-    } else if (this.props.onSelect) {
-      // console.log("handleSelect onSelect", selection);
-      this.props.onSelect(selection);
-    }
-    this.props.onEdit(editing, this);
+  handleActionsEditableSelected = (ref) => {
+    this.props.onSelectActionsComponent(ref);
   };
 
   render() {
@@ -75,28 +55,28 @@ class ActionsList extends Component {
         ? "rgb(213, 0, 0)"
         : "rgb(0, 0, 0)";
     const editable = true;
-    // console.log("selection=", name, editable, this.state.selection);
     const addContent = (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
         icon={icon}
         style={{ color, padding: "0px 16px" }}
         onClick={() => {
-          this.props.onSelectActionsComponent(this.newActionsEditableRefs);
+          this.handleActionsEditableSelected(this.newActionsEditableRefs);
         }}
       >
         <ActionsEditable
           containerName={this.props.name}
           content={newAction}
           editable={editable}
-          onAddAction={this.handleAction}
+          onAddAction={this.handleAddAction}
           placeholder={addText}
           onChange={(newContent) => {
             this.props.onNewActionsChange(this.props.name, newContent);
           }}
-          onSelected={this.handleSelectedEditable}
           ref={(e) => {
-            this.newActionsEditableRefs = e;
+            if (e) {
+              this.newActionsEditableRefs = e;
+            }
           }}
           isNew
         />
@@ -112,13 +92,14 @@ class ActionsList extends Component {
                 containerName={this.props.name}
                 content={action}
                 editable={editable}
-                onAddAction={this.handleAction}
+                onAddAction={this.handleAddAction}
                 onChange={(newContent) => {
-                  this.handleAction(newContent, index);
+                  this.handleChangeAction(newContent, index);
                 }}
-                onSelected={this.handleSelectedEditable}
                 ref={(e) => {
-                  this.actionsEditableRefs[index] = e;
+                  if (e) {
+                    this.actionsEditableRefs[index] = e;
+                  }
                 }}
               />
             );
@@ -131,7 +112,7 @@ class ActionsList extends Component {
                 className="selectableListItem onFocusAction mdl-list_action"
                 onDrop={onDrop}
                 onClick={() => {
-                  this.props.onSelectActionsComponent(
+                  this.handleActionsEditableSelected(
                     this.actionsEditableRefs[index],
                   );
                 }}
@@ -165,7 +146,6 @@ ActionsList.defaultProps = {
   newAction: "",
   onSelect: null,
   onDrop: null,
-  onEdit: () => {},
   onAction: () => {},
   intentId: null,
   onSelectActionsComponent: () => {},
@@ -180,7 +160,6 @@ ActionsList.propTypes = {
   ),
   onSelect: PropTypes.func,
   onDrop: PropTypes.func,
-  onEdit: PropTypes.func,
   onAction: PropTypes.func,
   intentId: PropTypes.string,
   newAction: PropTypes.string,

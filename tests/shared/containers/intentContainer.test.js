@@ -209,15 +209,12 @@ describe("containers/IntentContainerBase", () => {
         });
       });
     });
-  });
 
-  describe("handleEdit", () => {
     describe("on intentDetail first item selected", () => {
       const args = {
-        editing: false,
-        actionsComponent: {
+        selectedActionsComponent: {
           props: {
-            name: "input",
+            containerName: "input",
           },
         },
       };
@@ -226,31 +223,17 @@ describe("containers/IntentContainerBase", () => {
         const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         expect(wrapper.state().editing).toBe(false);
-        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+        wrapper
+          .instance()
+          .handleSelectActionsComponent(args.selectedActionsComponent);
 
-        // should NOT set this.actionsComponent
-        expect(wrapper.instance().actionsComponent).not.toEqual(
-          args.actionsComponent,
+        // should set this.selectedActionsComponent
+        expect(wrapper.instance().selectedActionsComponent).toEqual(
+          args.selectedActionsComponent,
         );
 
         // should set editing state
-        jest.runAllTimers();
-        wrapper.update();
-        expect(wrapper.state().editing).toBe(false);
-      });
-
-      // TODO move to general render test drived by state and props only
-      it("should not display Toolbox", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
-
-        expect(wrapper.state().editing).toBe(false);
-        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
-        jest.runAllTimers();
-        wrapper.update();
-
-        expect(wrapper.find("Tooltip")).toHaveLength(0);
+        expect(wrapper.state().editing).toBe(true);
       });
     });
   });

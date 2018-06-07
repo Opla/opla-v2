@@ -135,13 +135,10 @@ class ActionsEditable extends Component {
   };
 
   handleEntitySelect(itemIndex) {
+    this.props.onSelected();
     this.setState({
       selectedItem: itemIndex,
     });
-
-    if (this.props.editable) {
-      this.props.onSelected(this);
-    }
     // TODO get caret position
     // TODO set state caretPosition
   }

@@ -23,9 +23,12 @@ import ActionsToolbox from "../components/actionsToolbox";
 class IntentContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { editing: false, toolboxFocus: false };
+    this.state = {
+      editing: false,
+      toolboxFocus: false,
+      toolboxDisplayMode: "",
+    };
     this.timer = null;
-    this.actionsComponent = null;
     this.selectedActionsComponent = null;
   }
 
@@ -37,7 +40,6 @@ class IntentContainer extends Component {
   }
 
   reset() {
-    this.actionsComponent = null;
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
@@ -131,7 +133,6 @@ class IntentContainer extends Component {
       this.setState({ toolboxFocus: false });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
-      // console.log("action=", action, this.actionsComponent);
       if (action !== "focus" && this.selectedActionsComponent) {
         this.appendAction(this.selectedActionsComponent, action);
       }
@@ -277,34 +278,24 @@ class IntentContainer extends Component {
     }
   };
 
+  // mode: "", "input" or "output"
+  updateToolboxDisplay(editing, mode = "") {
+    if (this.state.editing !== editing || this.state.mode !== mode) {
+      this.setState({ editing, toolboxDisplayMode: mode });
+    }
+  }
+
   handleSelectActionsComponent = (selectedActionsComponent) => {
     this.selectedActionsComponent = selectedActionsComponent;
-    if (!this.state.editing) {
-      this.setState({ editing: true });
-    }
+    const containerName =
+      this.selectedActionsComponent && this.selectedActionsComponent.props
+        ? this.selectedActionsComponent.props.containerName
+        : "";
+    this.updateToolboxDisplay(true, containerName);
   };
 
   handleNewActionsChange = (container, value) => {
     this.props.appSetNewActions(container, value);
-  };
-
-  handleEdit = (editing, actionsComponent) => {
-    // console.log("handleEdit editing=", editing, actionsComponent);
-    if (
-      (this.state.editing !== editing ||
-        this.actionsComponent !== actionsComponent) &&
-      !this.timer
-    ) {
-      // console.log("handle edit", editing);
-      if (editing) {
-        this.actionsComponent = actionsComponent;
-      }
-      this.timer = setTimeout(() => {
-        // console.log("set state", editing);
-        this.setState({ editing });
-        this.timer = null;
-      }, 100);
-    }
   };
 
   render() {
@@ -322,12 +313,7 @@ class IntentContainer extends Component {
       let toolbox;
       if (editing || toolboxFocus) {
         // TODO dont use stored component
-        const isInput =
-          this.selectedActionsComponent &&
-          this.selectedActionsComponent.props &&
-          this.selectedActionsComponent.props.containerName
-            ? this.selectedActionsComponent.props.containerName === "input"
-            : false;
+        const isInput = this.state.toolboxDisplayMode === "input";
         toolbox = (
           <ActionsToolbox
             onChange={this.handleChangeToolbox}
@@ -364,7 +350,6 @@ class IntentContainer extends Component {
             intent={intent}
             newActions={this.props.newActions}
             onSelect={this.handleActions}
-            onEdit={this.handleEdit}
             onAction={this.handleDoActions}
             onSelectActionsComponent={this.handleSelectActionsComponent}
             onNewActionsChange={this.handleNewActionsChange}
