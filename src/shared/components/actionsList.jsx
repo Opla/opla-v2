@@ -45,6 +45,10 @@ class ActionsList extends Component {
     }
   };
 
+  handleDeleteClick = (index) => {
+    this.props.onDeleteActionClick(this.props.name, index);
+  };
+
   handleSelect = (e, state, selection) => {
     e.preventDefault();
     let editing = false;
@@ -84,9 +88,9 @@ class ActionsList extends Component {
         <ActionsEditable
           containerName={this.props.name}
           content={newAction}
-          placeholder={addText}
           editable={editable}
           onAddAction={this.handleAction}
+          placeholder={addText}
           onChange={(newContent) => {
             this.props.onNewActionsChange(this.props.name, newContent);
           }}
@@ -106,12 +110,16 @@ class ActionsList extends Component {
             const text = (
               <ActionsEditable
                 containerName={this.props.name}
+                content={action}
+                editable={editable}
                 onAddAction={this.handleAction}
-                onChange={this.handleAction}
+                onChange={(newContent) => {
+                  this.handleAction(newContent, index);
+                }}
+                onSelected={this.handleSelectedEditable}
                 ref={(e) => {
                   this.actionsEditableRefs[index] = e;
                 }}
-                content={action}
               />
             );
             const key = `cd_${index}`;
@@ -122,26 +130,17 @@ class ActionsList extends Component {
                 icon={icon}
                 className="selectableListItem onFocusAction mdl-list_action"
                 onDrop={onDrop}
-                onClick={(e) => {
+                onClick={() => {
                   this.props.onSelectActionsComponent(
                     this.actionsEditableRefs[index],
                   );
-                  this.handleSelect(e, "select", {
-                    name,
-                    state: "select",
-                    index,
-                  });
                 }}
               >
                 {text}
                 <ListItemMeta
                   icon="delete"
-                  onClick={(e) => {
-                    this.handleSelect(e, "delete", {
-                      name,
-                      state: "delete",
-                      index,
-                    });
+                  onClick={() => {
+                    this.handleDeleteClick(index);
                   }}
                 />
               </ListItem>
@@ -171,6 +170,7 @@ ActionsList.defaultProps = {
   intentId: null,
   onSelectActionsComponent: () => {},
   onNewActionsChange: () => {},
+  onDeleteActionClick: () => {},
 };
 
 ActionsList.propTypes = {
@@ -186,6 +186,7 @@ ActionsList.propTypes = {
   newAction: PropTypes.string,
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
+  onDeleteActionClick: PropTypes.func.isRequired,
 };
 
 export default ActionsList;

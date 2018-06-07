@@ -44,6 +44,17 @@ class IntentContainer extends Component {
     this.setState({ editing: false });
   }
 
+  handleDeleteActionClick = (containerName, index) => {
+    this.actionContainer = containerName;
+    this.selectedAction = index;
+    Zrmc.showDialog({
+      header: "Action",
+      body: "Do you want to delete it ?",
+      actions: [{ name: "Cancel" }, { name: "Delete" }],
+      onAction: this.handleEditAction,
+    });
+  };
+
   handleChangeAction = (text, name, value) => {
     let actionValue = null;
     const intent = this.props.selectedIntent;
@@ -357,6 +368,7 @@ class IntentContainer extends Component {
             onAction={this.handleDoActions}
             onSelectActionsComponent={this.handleSelectActionsComponent}
             onNewActionsChange={this.handleNewActionsChange}
+            onDeleteActionClick={this.handleDeleteActionClick}
           />
         </div>
       );

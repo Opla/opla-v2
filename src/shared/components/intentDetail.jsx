@@ -26,6 +26,7 @@ const IntentDetail = ({
   onAction,
   onSelectActionsComponent,
   onNewActionsChange,
+  onDeleteActionClick,
 }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
@@ -42,6 +43,7 @@ const IntentDetail = ({
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
+          onDeleteActionClick={onDeleteActionClick}
         />
         <hr />
         <ActionsList
@@ -54,6 +56,7 @@ const IntentDetail = ({
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
+          onDeleteActionClick={onDeleteActionClick}
         />
         <hr />
         <ExpansionPanel label="Parameters" collapsed>
@@ -102,6 +105,7 @@ const IntentDetail = ({
 IntentDetail.defaultProps = {
   onNewActionsChange: () => {},
   onSelectActionsComponent: () => {},
+  onDeleteActionClick: () => {},
 };
 
 IntentDetail.propTypes = {
@@ -111,6 +115,7 @@ IntentDetail.propTypes = {
   onAction: PropTypes.func.isRequired,
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
+  onDeleteActionClick: PropTypes.func.isRequired,
   newActions: PropTypes.shape({
     input: PropTypes.string,
     output: PropTypes.string,

@@ -67,7 +67,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span />
+          <span>
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "padding": "0 4px",
+                  "width": "100vw",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -110,7 +126,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span />
+          <span>
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "padding": "0 4px",
+                  "width": "100vw",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -153,7 +185,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span />
+          <span>
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "padding": "0 4px",
+                  "width": "100vw",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -196,7 +244,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span />
+          <span>
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "padding": "0 4px",
+                  "width": "100vw",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -239,7 +303,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span />
+          <span>
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "padding": "0 4px",
+                  "width": "100vw",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -282,7 +362,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span />
+          <span>
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "padding": "0 4px",
+                  "width": "100vw",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -325,7 +421,23 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           spellCheck={false}
           tabIndex={0}
         >
-          <span />
+          <span>
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "padding": "0 4px",
+                  "width": "100vw",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
