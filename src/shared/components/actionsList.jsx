@@ -19,20 +19,22 @@ class ActionsList extends Component {
   }
 
   handleAddAction = (text) => {
-    this.handleAction("add", text);
+    this.handleAction("add", { text });
   };
 
   handleChangeAction = (text, index) => {
-    this.handleAction("change", text, index);
+    this.handleAction("change", { text }, null, index);
+  };
+
+  handleChangeActionCondition = (actionCondition, index) => {
+    this.handleAction("change", actionCondition, "condition", index);
   };
 
   // private methode
-  handleAction = (state, text, index = undefined) => {
-    if (state && text) {
+  handleAction = (state, content, type = null, index = undefined) => {
+    if (state && content) {
       const { name } = this.props;
-      // TODO condition
-      const type = null;
-      const p = { name, type, state, index, action: { text } };
+      const p = { name, type, state, index, action: content };
       this.props.onAction(p);
     }
   };
@@ -101,9 +103,9 @@ class ActionsList extends Component {
                 editable={editable}
                 onAddAction={this.handleAddAction}
                 onChange={(newContent) => {
-                  this.handleChangeAction(newContent, index);
+                  this.handleChangeActionCondition(newContent, index);
                 }}
-                ref={(e) => {
+                onActionsEditableRefchange={(e) => {
                   if (e) {
                     this.actionsEditableRefs[index] = e;
                   }

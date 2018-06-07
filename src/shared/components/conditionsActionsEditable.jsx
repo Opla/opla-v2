@@ -6,18 +6,41 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { TextField } from "zrmc";
 import ActionsEditable from "./actionsEditable";
 
 class ConditionsActionsEditable extends Component {
+  updateContent = (newContent) => {
+    this.props.onChange({
+      ...this.props.content,
+      ...newContent,
+    });
+  };
+
   render() {
     return (
       <div>
         <div>
-          {this.props.content.name}
+          <TextField
+            onChange={(e) => {
+              this.updateContent({ name: e.target.value });
+            }}
+            defaultValue={this.props.content.name}
+          />
           =
-          {this.props.content.value}
+          <TextField
+            onChange={(e) => {
+              this.updateContent({ value: e.target.value });
+            }}
+            defaultValue={this.props.content.value}
+          />
         </div>
-        <ActionsEditable {...this.props} content={this.props.content.text} />
+        <ActionsEditable
+          {...this.props}
+          content={this.props.content.text}
+          onChange={this.handleTextChange}
+          ref={this.props.onActionsEditableRefchange}
+        />
       </div>
     );
   }
@@ -35,6 +58,7 @@ ConditionsActionsEditable.defaultProps = {
   caretPosition: 0,
   style: null,
   isNew: false,
+  onActionsEditableRefchange: () => {},
 };
 
 ConditionsActionsEditable.propTypes = {
@@ -54,6 +78,7 @@ ConditionsActionsEditable.propTypes = {
   style: PropTypes.objectOf(PropTypes.string),
   isNew: PropTypes.bool,
   containerName: PropTypes.string,
+  onActionsEditableRefchange: PropTypes.func.isRequired,
 };
 
 export default ConditionsActionsEditable;

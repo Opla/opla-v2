@@ -213,6 +213,7 @@ class ActionsEditable extends Component {
     }
   }
 
+  // public method
   insertItem(item, position) {
     const { items } = this.state;
     // console.log("insert item: ", item, position);
@@ -246,6 +247,7 @@ class ActionsEditable extends Component {
     this.changeFocus(position);
   }
 
+  // public method
   deleteItem(position = this.state.selectedItem) {
     const { items } = this.state;
     // if focus on ae_end and last action is a text, remove text
