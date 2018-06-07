@@ -9,3 +9,10 @@ api:
 auth:
   clientId: ${QA_CLIENT_ID}
   secret: ${QA_CLIENT_SECRET}
+
+tls: true
+
+instance:
+  color: "#7f0000"
+  name: "QA Instance"
+  description: "Not for production use."

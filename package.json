@@ -29,7 +29,6 @@
     "express": "^4.16.2",
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
-    "hard-source-webpack-plugin": "^0.6.9",
     "inquirer": "^5.1.0",
     "prop-types": "^15.6.1",
     "react": "16.2.0",

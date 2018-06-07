@@ -4,11 +4,20 @@ help:
 
 K8S_ENV ?= dev
 APPLICATION_NAME ?= front
+COMMIT ?= latest
+BUILD ?= dev
+REPO ?= opla/front
+APP_VERSION=`jq -r .version <package.json`
 
 build: ## builds docker image
+	echo $(APP_VERSION)
+	docker build \
+		-t $(REPO):$(COMMIT) \
+		--build-arg APP_VERSION=$(APP_VERSION) \
+		--build-arg APP_BUILD=$(BUILD) \
+		.
 
 deploy: ## deploys to kubernetes
-	make _prepare
 	(envsubst <k8s/values.yaml; envsubst <k8s/values.$(K8S_ENV).yaml) \
 	| helm upgrade --install --debug $(APPLICATION_NAME) ./k8s -f -
 
@@ -17,5 +26,3 @@ preview: ## preview the YAMLs that are about to get deployed to kubernetes
 	(envsubst <k8s/values.yaml; envsubst <k8s/values.$(K8S_ENV).yaml) \
 	| helm template ./k8s -f -
 	echo "release_name: $(APPLICATION_NAME)"
-
-_prepare:
