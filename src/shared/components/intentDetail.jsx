@@ -18,7 +18,15 @@ import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
 
-const IntentDetail = ({ intent, onSelect, onEdit, onAction }) => {
+const IntentDetail = ({
+  intent,
+  newActions,
+  onSelect,
+  onAction,
+  onSelectActionsComponent,
+  onNewActionsChange,
+  onDeleteActionClick,
+}) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
   return (
@@ -27,19 +35,25 @@ const IntentDetail = ({ intent, onSelect, onEdit, onAction }) => {
         <ActionsList
           name="input"
           actions={input}
+          newAction={newActions.input}
           onSelect={onSelect}
-          onEdit={onEdit}
           onAction={onAction}
           intentId={intent.id}
+          onSelectActionsComponent={onSelectActionsComponent}
+          onNewActionsChange={onNewActionsChange}
+          onDeleteActionClick={onDeleteActionClick}
         />
         <hr />
         <ActionsList
           name="output"
           actions={output}
+          newAction={newActions.output}
           onSelect={onSelect}
-          onEdit={onEdit}
           onAction={onAction}
           intentId={intent.id}
+          onSelectActionsComponent={onSelectActionsComponent}
+          onNewActionsChange={onNewActionsChange}
+          onDeleteActionClick={onDeleteActionClick}
         />
         <hr />
         <ExpansionPanel label="Parameters" collapsed>
@@ -85,11 +99,23 @@ const IntentDetail = ({ intent, onSelect, onEdit, onAction }) => {
   );
 };
 
+IntentDetail.defaultProps = {
+  onNewActionsChange: () => {},
+  onSelectActionsComponent: () => {},
+  onDeleteActionClick: () => {},
+};
+
 IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
   onSelect: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
   onAction: PropTypes.func.isRequired,
+  onSelectActionsComponent: PropTypes.func.isRequired,
+  onNewActionsChange: PropTypes.func.isRequired,
+  onDeleteActionClick: PropTypes.func.isRequired,
+  newActions: PropTypes.shape({
+    input: PropTypes.string,
+    output: PropTypes.string,
+  }).isRequired,
 };
 
 export default IntentDetail;

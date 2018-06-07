@@ -67,7 +67,23 @@ exports[`components/intentDetail can render intent with special characters corre
             spellCheck={false}
             tabIndex={0}
           >
-            <span />
+            <span>
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                    "width": "100vw",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
           </div>
         </li>
       </div>
@@ -133,7 +149,23 @@ exports[`components/intentDetail can render intent with special characters corre
             spellCheck={false}
             tabIndex={0}
           >
-            <span />
+            <span>
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                    "width": "100vw",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
           </div>
         </li>
       </div>
@@ -305,7 +337,23 @@ exports[`components/intentDetail renders correctly 1`] = `
             spellCheck={false}
             tabIndex={0}
           >
-            <span />
+            <span>
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                    "width": "100vw",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
           </div>
         </li>
       </div>
@@ -371,7 +419,23 @@ exports[`components/intentDetail renders correctly 1`] = `
             spellCheck={false}
             tabIndex={0}
           >
-            <span />
+            <span>
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                    "width": "100vw",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
           </div>
         </li>
       </div>

@@ -10,7 +10,7 @@ import signoutMiddleware from "zoapp-front/middleware/signoutMiddleware";
 import reducers from "./reducers";
 import rootSaga from "./sagas";
 
-export default function configureStore(initialState = {}) {
+export default function configureStore(preloadedState = {}) {
   const sagaMiddleware = createSagaMiddleware();
   /* global window */
   const composeEnhancers =
@@ -19,7 +19,7 @@ export default function configureStore(initialState = {}) {
 
   const store = createStore(
     reducers,
-    initialState,
+    preloadedState,
     composeEnhancers(applyMiddleware(sagaMiddleware, signoutMiddleware)),
   );
 

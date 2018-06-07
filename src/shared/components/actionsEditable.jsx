@@ -48,7 +48,6 @@ class ActionsEditable extends Component {
       items,
       selectedItem,
       caretPosition,
-      noUpdate: false,
       startSpan: null,
       endSpan: null,
       itemToFocus: null,
@@ -56,31 +55,14 @@ class ActionsEditable extends Component {
     this.itemsElementRefs = [];
   }
 
-  /* eslint-disable class-methods-use-this */
-  shouldComponentUpdate(nextProps, nextState) {
-    /*
-    noUpdate is a fix for React ContentEditable caret position bug
-    see:
-    https://github.com/facebook/react/issues/2047
-    https://github.com/Automattic/simplenote-electron/pull/549
-    */
-    if (nextState.noUpdate === true) {
-      return false;
-    }
-    return true;
-  }
-  /* eslint-enable class-methods-use-this */
-
   componentWillReceiveProps(nextProps) {
-    const { content, selectedItem, caretPosition } = nextProps;
+    const { content, caretPosition } = nextProps;
     if (content !== this.state.content) {
       const items = ActionsTools.parse(content);
       this.setState({
         content,
         items,
-        selectedItem,
         caretPosition,
-        noUpdate: false,
       });
     }
   }
@@ -115,9 +97,10 @@ class ActionsEditable extends Component {
     if (e.which === 13) {
       // WIP handle save event
       const text = this.state.content;
-      this.props.onAction(text);
       e.preventDefault();
       if (this.props.isNew) {
+        this.props.onAddAction(text);
+        this.props.onChange("");
         this.clear();
       }
     }
@@ -130,11 +113,10 @@ class ActionsEditable extends Component {
     }
   };
 
-  updateItemsAndContent = (items, noUpdate) => {
+  updateItemsAndContent = (items) => {
     const content = ActionsEditable.build(items, false);
-    this.setState({ items, content, noUpdate }, () => {
-      this.props.onChange(content);
-    });
+    // console.log("content", content);
+    this.props.onChange(content);
   };
 
   changeFocus = (itemIndex) => {
@@ -153,25 +135,20 @@ class ActionsEditable extends Component {
   };
 
   handleEntitySelect(itemIndex) {
+    this.props.onSelected();
     this.setState({
       selectedItem: itemIndex,
     });
-
-    if (this.props.editable) {
-      this.props.onSelected(this);
-    }
     // TODO get caret position
     // TODO set state caretPosition
   }
 
   clear = () => {
-    const noUpdate = false;
     const selectedItem = -1;
     const caretPosition = 0;
     const content = "";
     const items = ActionsTools.parse(content);
     this.setState(() => ({
-      noUpdate,
       selectedItem,
       caretPosition,
       content,
@@ -182,6 +159,7 @@ class ActionsEditable extends Component {
   };
 
   handleContainerClick = (e) => {
+    // console.log("ActionsEditable div onClick");
     if (e && e.target && e.target.id === "ae_content") {
       // focus on last item or ae_start if items empty
       const itemsLength = this.state.items.length;
@@ -262,8 +240,9 @@ class ActionsEditable extends Component {
     } else {
       items.push(item);
     }
+    // console.log("items", items);
 
-    this.updateItemsAndContent(items, false);
+    this.updateItemsAndContent(items);
     this.changeFocus(position);
   }
 
@@ -278,7 +257,7 @@ class ActionsEditable extends Component {
     // console.log("delete item ", deletePosition);
     if (position > -1 && position < items.length) {
       items.splice(position, 1);
-      this.updateItemsAndContent(items, false);
+      this.updateItemsAndContent(items);
       const itemToFocus = position > 0 ? position - 1 : position; // move focus to previous item
       this.changeFocus(itemToFocus);
     }
@@ -425,7 +404,7 @@ ActionsEditable.defaultProps = {
   onChange: () => {},
   onSelected: () => {},
   onFocus: () => {},
-  onAction: () => {},
+  onAddAction: () => {},
   editable: false,
   selectedItem: -1,
   caretPosition: 0,
@@ -439,12 +418,13 @@ ActionsEditable.propTypes = {
   onChange: PropTypes.func,
   onSelected: PropTypes.func,
   onFocus: PropTypes.func,
-  onAction: PropTypes.func,
+  onAddAction: PropTypes.func,
   editable: PropTypes.bool,
   selectedItem: PropTypes.number,
   caretPosition: PropTypes.number,
   style: PropTypes.objectOf(PropTypes.string),
   isNew: PropTypes.bool,
+  containerName: PropTypes.string,
 };
 
 export default ActionsEditable;

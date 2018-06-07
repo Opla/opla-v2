@@ -46,7 +46,9 @@ class BotManager extends Component {
   }
 
   componentDidUpdate() {
-    this.props.appSetTitle("Builder");
+    if (this.props.titleName !== "Builder") {
+      this.props.appSetTitle("Builder");
+    }
     this.updateIntents();
   }
 
@@ -329,6 +331,7 @@ BotManager.propTypes = {
   intents: PropTypes.arrayOf(PropTypes.shape({})),
   selectedIntent: PropTypes.shape({}),
   store: PropTypes.shape({}),
+  titleName: PropTypes.string.isRequired,
   appSetTitle: PropTypes.func.isRequired,
   apiGetIntentsRequest: PropTypes.func.isRequired,
   apiSendIntentRequest: PropTypes.func.isRequired,
@@ -352,6 +355,7 @@ const mapStateToProps = (state) => {
       ? state.app.intents[selectedIntentIndex]
       : null;
   }
+  const titleName = state.app ? state.app.titleName : "";
   return {
     selectedBotId,
     bot,
@@ -359,6 +363,7 @@ const mapStateToProps = (state) => {
     isLoading,
     isSignedIn,
     selectedIntent,
+    titleName,
   };
 };
 

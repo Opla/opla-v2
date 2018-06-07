@@ -37,7 +37,7 @@ const errorTypes = [
   API_SB_RESET + FETCH_FAILURE,
 ];
 
-describe("reducers/app", () => {
+describe("reducers/message", () => {
   it("returns the initial state", () => {
     const state = reducer(undefined, {});
     expect(state).toEqual(initialState);

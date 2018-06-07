@@ -16,31 +16,66 @@ import {
   appDeleteIntentAction,
   appSetIntentAction,
   appUpdateIntent,
+  appSetNewActions,
 } from "../actions/app";
 import ActionsToolbox from "../components/actionsToolbox";
 
 class IntentContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { editing: false, toolboxFocus: false };
-    this.timer = null;
-    this.actionsComponent = null;
+    this.state = {
+      editing: false,
+      toolboxFocus: false,
+      toolboxDisplayMode: "",
+    };
+    this.selectedActionsComponent = null;
+  }
+
+  // handle click outside intent container component
+  // inspired by https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-react-component-5604830beb7f
+  componentWillMount() {
+    document.addEventListener("mousedown", this.handleDocumentClick, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleDocumentClick, false);
+  }
+
+  handleDocumentClick = (e) => {
+    if (!this.node.contains(e.target)) {
+      this.handleClickOutside();
+    }
+  };
+
+  handleClickOutside() {
+    this.updateToolboxDisplay(false);
   }
 
   componentDidUpdate(prevProps) {
     // reset when a new intent is selected
-    if (prevProps.selectedIntent !== this.props.selectedIntent) {
+    if (prevProps.selectedIntent.id !== this.props.selectedIntent.id) {
       this.reset();
     }
   }
 
   reset() {
-    this.actionsComponent = null;
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
     this.setState({ editing: false });
+    this.props.appSetNewActions("input", "");
+    this.props.appSetNewActions("output", "");
   }
+
+  handleDeleteActionClick = (containerName, index) => {
+    this.actionContainer = containerName;
+    this.selectedAction = index;
+    Zrmc.showDialog({
+      header: "Action",
+      body: "Do you want to delete it ?",
+      actions: [{ name: "Cancel" }, { name: "Delete" }],
+      onAction: this.handleEditAction,
+    });
+  };
 
   handleChangeAction = (text, name, value) => {
     let actionValue = null;
@@ -71,8 +106,46 @@ class IntentContainer extends Component {
       actionValue,
       this.selectedAction,
     );
-    this.reset();
     return true;
+  };
+
+  appendAction = (editableComponent, action) => {
+    if (!editableComponent) {
+      return;
+    }
+    if (action === "text") {
+      editableComponent.insertItem({
+        type: "text",
+        text: "text",
+      });
+    } else if (action === "any") {
+      editableComponent.insertItem({
+        type: "any",
+        text: "",
+      });
+    } else if (action === "output_var") {
+      editableComponent.insertItem({
+        type: "output_var",
+        text: "variablename",
+      });
+    } else if (action === "variable") {
+      editableComponent.insertItem({
+        type: "variable",
+        text: "variablename=value",
+      });
+    } else if (action === "br") {
+      editableComponent.insertItem({
+        type: "br",
+        text: "",
+      });
+    } else if (action === "button") {
+      editableComponent.insertItem({
+        type: "button",
+        text: "value",
+      });
+    } else if (action === "trash") {
+      editableComponent.deleteItem();
+    }
   };
 
   handleChangeToolbox = (action) => {
@@ -80,9 +153,8 @@ class IntentContainer extends Component {
       this.setState({ toolboxFocus: false });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
-      // console.log("action=", action, this.actionsComponent);
-      if (action !== "focus" && this.actionsComponent) {
-        this.actionsComponent.appendAction(action);
+      if (action !== "focus" && this.selectedActionsComponent) {
+        this.appendAction(this.selectedActionsComponent, action);
       }
     }
   };
@@ -136,9 +208,6 @@ class IntentContainer extends Component {
   };
 
   handleDoActions = ({ name, type, state, index, action }) => {
-    if (this.actionContainer) {
-      return;
-    }
     this.actionContainer = name;
     this.actionType = type;
     this.selectedAction = index;
@@ -229,23 +298,24 @@ class IntentContainer extends Component {
     }
   };
 
-  handleEdit = (editing, actionsComponent) => {
-    // console.log("handleEdit editing=", editing, actionsComponent);
-    if (
-      (this.state.editing !== editing ||
-        this.actionsComponent !== actionsComponent) &&
-      !this.timer
-    ) {
-      // console.log("handle edit", editing);
-      if (editing) {
-        this.actionsComponent = actionsComponent;
-      }
-      this.timer = setTimeout(() => {
-        // console.log("set state", editing);
-        this.setState({ editing });
-        this.timer = null;
-      }, 100);
+  // mode: "", "input" or "output"
+  updateToolboxDisplay(editing, mode = "") {
+    if (this.state.editing !== editing || this.state.mode !== mode) {
+      this.setState({ editing, toolboxDisplayMode: mode });
     }
+  }
+
+  handleSelectActionsComponent = (selectedActionsComponent) => {
+    this.selectedActionsComponent = selectedActionsComponent;
+    const containerName =
+      this.selectedActionsComponent && this.selectedActionsComponent.props
+        ? this.selectedActionsComponent.props.containerName
+        : "";
+    this.updateToolboxDisplay(true, containerName);
+  };
+
+  handleNewActionsChange = (container, value) => {
+    this.props.appSetNewActions(container, value);
   };
 
   render() {
@@ -262,13 +332,7 @@ class IntentContainer extends Component {
       const { editing, toolboxFocus } = this.state;
       let toolbox;
       if (editing || toolboxFocus) {
-        // TODO dont use stored component
-        const isInput =
-          this.actionsComponent &&
-          this.actionsComponent.props &&
-          this.actionsComponent.props.name
-            ? this.actionsComponent.props.name === "input"
-            : false;
+        const isInput = this.state.toolboxDisplayMode === "input";
         toolbox = (
           <ActionsToolbox
             onChange={this.handleChangeToolbox}
@@ -277,7 +341,11 @@ class IntentContainer extends Component {
         );
       }
       return (
-        <div>
+        <div
+          ref={(node) => {
+            this.node = node;
+          }}
+        >
           <SubToolbar
             titleIcon="question_answer"
             titleName={
@@ -303,9 +371,12 @@ class IntentContainer extends Component {
           />
           <IntentDetail
             intent={intent}
+            newActions={this.props.newActions}
             onSelect={this.handleActions}
-            onEdit={this.handleEdit}
             onAction={this.handleDoActions}
+            onSelectActionsComponent={this.handleSelectActionsComponent}
+            onNewActionsChange={this.handleNewActionsChange}
+            onDeleteActionClick={this.handleDeleteActionClick}
           />
         </div>
       );
@@ -330,11 +401,15 @@ IntentContainer.defaultProps = {
 
 IntentContainer.propTypes = {
   selectedBotId: PropTypes.string,
-  selectedIntent: PropTypes.shape({}),
+  selectedIntent: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+  newActions: PropTypes.shape({}).isRequired,
   apiSendIntentRequest: PropTypes.func.isRequired,
   appDeleteIntentAction: PropTypes.func.isRequired,
   appSetIntentAction: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
+  appSetNewActions: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -348,7 +423,8 @@ const mapStateToProps = (state) => {
       : null;
   }
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  return { selectedIntent, selectedBotId };
+  const { newActions } = state.app;
+  return { selectedIntent, selectedBotId, newActions };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -375,6 +451,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   appDeleteIntentAction: (actionContainer, selectedAction) => {
     dispatch(appDeleteIntentAction(actionContainer, selectedAction));
+  },
+  appSetNewActions: (actionContainer, actionValue) => {
+    dispatch(appSetNewActions(actionContainer, actionValue));
   },
 });
 

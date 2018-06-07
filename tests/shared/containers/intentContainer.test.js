@@ -24,6 +24,7 @@ describe("containers/IntentContainerBase", () => {
     appSetIntentAction: () => {},
     appDeleteIntentAction: () => {},
     apiSendIntentRequest: () => {},
+    appSetNewActions: () => {},
     selectedIntent: {
       id: "Nq421",
       botId: "HZAw",
@@ -38,6 +39,7 @@ describe("containers/IntentContainerBase", () => {
       output: ["La plupart des emballages de produits ménagers se placent..."],
       order: 10,
     },
+    newActions: {},
   };
 
   const newSelectedIntent = {
@@ -147,13 +149,12 @@ describe("containers/IntentContainerBase", () => {
     // TODO find the case where this.actionType === "condition" and test it
   });
 
-  describe("handleEdit", () => {
+  describe("handleSelectActionsComponent", () => {
     describe("on intentDetail new/add item selected", () => {
       const args = {
-        editing: true,
         actionsComponent: {
           props: {
-            name: "input",
+            containerName: "input",
           },
         },
       };
@@ -162,17 +163,14 @@ describe("containers/IntentContainerBase", () => {
         const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         expect(wrapper.state().editing).toBe(false);
-        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+        wrapper.instance().handleSelectActionsComponent(args.actionsComponent);
 
-        // should set this.actionsComponent
-        expect(wrapper.instance().actionsComponent).toEqual(
+        // should set this.selectedActionsComponent
+        expect(wrapper.instance().selectedActionsComponent).toEqual(
           args.actionsComponent,
         );
 
         // should set editing state
-        expect(wrapper.state().editing).toBe(false);
-        jest.runAllTimers();
-        wrapper.update();
         expect(wrapper.state().editing).toBe(true);
       });
 
@@ -183,7 +181,7 @@ describe("containers/IntentContainerBase", () => {
         expect(wrapper.find(ActionsEditable)).toHaveLength(8);
 
         expect(wrapper.state().editing).toBe(false);
-        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+        wrapper.instance().handleSelectActionsComponent(args.actionsComponent);
         jest.runAllTimers();
         wrapper.update();
 
@@ -214,10 +212,9 @@ describe("containers/IntentContainerBase", () => {
 
     describe("on intentDetail first item selected", () => {
       const args = {
-        editing: false,
-        actionsComponent: {
+        selectedActionsComponent: {
           props: {
-            name: "input",
+            containerName: "input",
           },
         },
       };
@@ -226,31 +223,17 @@ describe("containers/IntentContainerBase", () => {
         const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
 
         expect(wrapper.state().editing).toBe(false);
-        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
+        wrapper
+          .instance()
+          .handleSelectActionsComponent(args.selectedActionsComponent);
 
-        // should NOT set this.actionsComponent
-        expect(wrapper.instance().actionsComponent).not.toEqual(
-          args.actionsComponent,
+        // should set this.selectedActionsComponent
+        expect(wrapper.instance().selectedActionsComponent).toEqual(
+          args.selectedActionsComponent,
         );
 
         // should set editing state
-        jest.runAllTimers();
-        wrapper.update();
-        expect(wrapper.state().editing).toBe(false);
-      });
-
-      // TODO move to general render test drived by state and props only
-      it("should not display Toolbox", () => {
-        const wrapper = mount(<IntentContainerBase {...defaultProps} />);
-        wrapper.update();
-        expect(wrapper.find(ActionsEditable)).toHaveLength(8);
-
-        expect(wrapper.state().editing).toBe(false);
-        wrapper.instance().handleEdit(args.editing, args.actionsComponent);
-        jest.runAllTimers();
-        wrapper.update();
-
-        expect(wrapper.find("Tooltip")).toHaveLength(0);
+        expect(wrapper.state().editing).toBe(true);
       });
     });
   });
@@ -543,16 +526,14 @@ describe("containers/IntentContainerBase", () => {
 
     it("should call actionsComponent.appendAction when action is not focus", () => {
       const appendActionSpy = jest.fn();
-      const actionsComponentMock = {
-        appendAction: appendActionSpy,
-      };
       const wrapper = shallow(<IntentContainerBase {...defaultProps} />);
-      wrapper.instance().actionsComponent = actionsComponentMock;
+      wrapper.instance().selectedActionsComponent = {};
+      wrapper.instance().appendAction = appendActionSpy;
       wrapper.instance().handleChangeToolbox("foo");
       expect(wrapper.state().toolboxFocus).toBe(true);
       expect(wrapper.state().editing).toBe(true);
       expect(appendActionSpy).toHaveBeenCalled();
-      expect(appendActionSpy).toHaveBeenCalledWith("foo");
+      expect(appendActionSpy).toBeCalledWith({}, "foo");
     });
   });
 });
