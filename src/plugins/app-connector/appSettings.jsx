@@ -20,6 +20,7 @@ export default class AppSettings extends Component {
     // console.log("instance=", instance);
     // const app = instance.application;
     let botUrl = "Need a first publishing";
+    let token = "TOKEN";
     if (instance && instance.url) {
       let { url } = instance;
       const regex = /^(http|https).*$/;
@@ -41,7 +42,9 @@ export default class AppSettings extends Component {
       ); */
       botUrl = url;
     }
-    const token = instance.token || "TOKEN";
+    if (instance && instance.token) {
+      ({ token } = instance);
+    }
     const api = "API_URL";
     let script = "<script>\r\n";
     script += ` opla = { config: { token: '${token}',url: '${api}', }};\r\n`;
