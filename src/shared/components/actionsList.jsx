@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { List, ListItem, ListItemMeta } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsEditable from "./actionsEditable";
+import ConditionsActionsEditable from "./conditionsActionsEditable";
 
 class ActionsList extends Component {
   constructor(props) {
@@ -83,11 +84,32 @@ class ActionsList extends Component {
       </ListItem>
     );
     if (actions && actions.length > 0) {
+      let actionsDisplayed = actions;
+      let isCondition = false;
+      if (actions[0].type && actions[0].type === "condition") {
+        isCondition = true;
+        actionsDisplayed = actions[0].children;
+      }
       const style = {}; /* padding: "16px" */
       content = (
         <List style={{ overflow: "auto", maxHeight: "26vh" }}>
-          {actions.map((action, index) => {
-            const text = (
+          {actionsDisplayed.map((action, index) => {
+            const text = isCondition ? (
+              <ConditionsActionsEditable
+                containerName={this.props.name}
+                content={action}
+                editable={editable}
+                onAddAction={this.handleAddAction}
+                onChange={(newContent) => {
+                  this.handleChangeAction(newContent, index);
+                }}
+                ref={(e) => {
+                  if (e) {
+                    this.actionsEditableRefs[index] = e;
+                  }
+                }}
+              />
+            ) : (
               <ActionsEditable
                 containerName={this.props.name}
                 content={action}
