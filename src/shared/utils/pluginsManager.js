@@ -6,7 +6,9 @@
  */
 import loadPlugin from "OplaPlugins";
 
-export default class PluginsManager {
+let pluginsManager = null;
+
+class PluginsManager {
   constructor(app = null) {
     this.app = app;
     this.plugins = {};
@@ -49,6 +51,7 @@ export default class PluginsManager {
     instance.status = "disabled";
     return instance;
   }
+
   getPlugins({ type = null, activated = null }) {
     const plugins = [];
     Object.keys(this.plugins).forEach((pluginName) => {
@@ -63,3 +66,10 @@ export default class PluginsManager {
     return plugins;
   }
 }
+
+export default () => {
+  if (!pluginsManager) {
+    pluginsManager = new PluginsManager();
+  }
+  return pluginsManager;
+};

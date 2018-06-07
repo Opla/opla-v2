@@ -61,7 +61,7 @@ class PublishDialog extends Component {
       // this.setState({ servicesEnabled });
       if (publisher.status === "start" && instance === undefined) {
         const name = service.getName();
-        const pluginsManager = new PluginsManager();
+        const pluginsManager = PluginsManager();
         const newInstance = pluginsManager.instanciate(
           name,
           this.props.selectedBotId,
@@ -125,7 +125,7 @@ class PublishDialog extends Component {
     }
 
     const updateMiddleware = (plugins) => {
-      const pluginsManager = new PluginsManager();
+      const pluginsManager = PluginsManager();
       const pluginsKey = Object.keys(plugins);
       pluginsKey.forEach((key) => {
         const instance = pluginsManager.instanciate(
@@ -147,7 +147,7 @@ class PublishDialog extends Component {
     // TODO display published dialog with links to service's messenger
     setTimeout(() => {
       Zrmc.closeDialog();
-      const pluginsManager = new PluginsManager();
+      const pluginsManager = PluginsManager();
       const items = this.getActives(pluginsManager, true);
       Zrmc.showDialog({
         header: "Published to platforms",
@@ -277,7 +277,7 @@ class PublishDialog extends Component {
     if (this.state.isLoading) {
       content = <div>Loading</div>;
     } else {
-      const pluginsManager = new PluginsManager();
+      const pluginsManager = PluginsManager();
       const actives = this.getActives(pluginsManager);
       const items = this.getItemsServices(pluginsManager, actives);
       actives.forEach((active) => {
