@@ -12,6 +12,7 @@ class OpenNLXMiddleware {
     this.name = "openNLX";
     this.classes = ["messenger", "bot", "sandbox"];
     this.mainControllers = controllers;
+    logger.info("OpenNLXMiddleware");
   }
 
   async handleMessengerActions(data, version = null) {

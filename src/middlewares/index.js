@@ -6,7 +6,7 @@
  */
 // TODO remove import and use dynamic loading
 import OpenNLXMiddleware from "./openNLX";
-import AppConnectorMiddleware from "./appConnector";
+import PublishConnectorMiddleware from "./publishConnector";
 
 const initMiddlewares = (middlewaresManager, controllers) => {
   // TODO dynamic loading
@@ -16,7 +16,7 @@ const initMiddlewares = (middlewaresManager, controllers) => {
     .attach(middleware.getProperties())
     .then((m) => middleware.init(m));
 
-  const appConnectorMiddleware = new AppConnectorMiddleware(controllers);
-  middlewaresManager.attach(appConnectorMiddleware.getProperties());
+  const connectorMiddleware = new PublishConnectorMiddleware(controllers);
+  middlewaresManager.attach(connectorMiddleware.getProperties());
 };
 export default initMiddlewares;

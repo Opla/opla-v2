@@ -200,7 +200,7 @@ export default class extends CommonRoutes {
 
   async publish(context) {
     // logger.info("publish");
-    // WIP get intents with version and put them in another version
+    // get intents with version and put them in another version
     // and set them as published linked to a/several messaging platform/s
     const me = await this.access(context);
     const { botId } = context.getParams();

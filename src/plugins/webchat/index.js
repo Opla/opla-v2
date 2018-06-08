@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-class AppMessenger {
+class WebChat {
   constructor(pluginManager) {
     this.workers = {};
     this.listener = null;
     this.manager = pluginManager;
-    this.name = "app-connector";
+    this.name = "webchat-connector";
     this.type = "MessengerConnector";
     this.classes = ["messenger"];
   }
@@ -32,19 +32,19 @@ class AppMessenger {
   }
 
   fireEvent(eventName) {
-    logger.info("AppMessenger fireEvent", eventName);
+    logger.info("WebChat fireEvent", eventName);
     if (this.listener) {
       this.listener.fireEvent(eventName, this);
     }
   }
 
   async register(middleware) {
-    logger.info("WIP register AppMessenger ", middleware);
+    logger.info("WIP register WebChat ", middleware.name, middleware.token);
     const { zoapp } = this.manager;
     const { config } = this.manager;
     this.middleware = middleware;
     if (middleware.origin) {
-      if (!middleware.application) {
+      if (!middleware.application || !middleware.application.id) {
         const name = `${middleware.name}_${middleware.origin}`;
         // get a previously created app with same name
         let app = await zoapp.authServer.getApplicationByName(name);
@@ -62,7 +62,10 @@ class AppMessenger {
             redirect_uri: "localhost",
             policies: { authorizeAnonymous: true, anonymous_secret: "koko" },
           };
-          app = await zoapp.authServer.registerApplication(params);
+          const payload = await zoapp.authServer.registerApplication(params);
+          if (payload && payload.result) {
+            app = await zoapp.authServer.getApplicationByName(name);
+          }
         }
         if (app) {
           this.middleware.application = app;
@@ -82,28 +85,33 @@ class AppMessenger {
         const name = await params.generateName(4, "botParams");
         await params.setValue(name, botParams, "botParams");
         this.middleware.url = `${config.global.botSite.url}${name}`;
+        this.middleware.token = name;
       }
     } else {
-      logger.info("No origin for AppMessenger ", middleware.id);
+      logger.info("No origin for WebChat ", middleware.id);
     }
 
     return middleware;
   }
 
   async unregister(middleware) {
-    // TODO
+    // WIP
+    logger.info("WIP unregister WebChat ", middleware.token);
+    const { zoapp } = this.manager;
     this.middleware = null;
+    const params = zoapp.controllers.getParameters();
+    await params.deleteValue(middleware.token, "botParams");
     return middleware;
   }
 }
 
 let instance = null;
 
-const AppMessengerPlugin = (pluginManager) => {
+const createWebChatPlugin = (pluginManager) => {
   if (!instance) {
-    instance = new AppMessenger(pluginManager);
+    instance = new WebChat(pluginManager);
   }
   return instance;
 };
 
-export default AppMessengerPlugin;
+export default createWebChatPlugin;
