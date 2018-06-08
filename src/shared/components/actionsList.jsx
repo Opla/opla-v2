@@ -17,6 +17,25 @@ class ActionsList extends Component {
     this.newActionsEditableRefs = undefined;
   }
 
+  handleAddNewAction = (content, isCondition = false) => {
+    let newContent = content;
+    if (isCondition && (content.name || content.value)) {
+      this.handleAddActionCondition(newContent);
+      // clear new
+      this.props.onNewActionsChange(this.props.name, {
+        name: "",
+        value: "",
+        text: "",
+      });
+    } else {
+      if (isCondition) {
+        newContent = content.text;
+      }
+      this.handleAddAction(newContent);
+      this.props.onNewActionsChange(this.props.name, "");
+    }
+  };
+
   handleAddAction = (text) => {
     this.handleAction("add", { text });
   };
@@ -64,22 +83,7 @@ class ActionsList extends Component {
         action={newAction}
         editable={editable}
         onAddAction={(content) => {
-          let newContent = content;
-          if (isCondition && (content.name || content.value)) {
-            this.handleAddActionCondition(newContent);
-            // clear new
-            this.props.onNewActionsChange(this.props.name, {
-              name: "",
-              value: "",
-              text: "",
-            });
-          } else {
-            if (isCondition) {
-              newContent = content.text;
-            }
-            this.handleAddAction(newContent);
-            this.props.onNewActionsChange(this.props.name, "");
-          }
+          this.handleAddNewAction(content, isCondition);
         }}
         onActionChange={(newContent) => {
           this.props.onNewActionsChange(this.props.name, newContent);
