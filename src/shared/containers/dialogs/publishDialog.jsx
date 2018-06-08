@@ -119,7 +119,7 @@ class PublishDialog extends Component {
         }
       });
     } */
-
+    console.log("publisher", publishers);
     if (Object.keys(publishers).length > 0) {
       this.props.apiPublishRequest(this.props.selectedBotId, publishers);
     }

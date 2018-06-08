@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import FBMessengerPlugin from "./fb-messenger";
-import ExternalAppPlugin from "./app-connector";
+import WebChatPlugin from "./webchat-connector";
 import WPPlugin from "./wp-connector";
 import SlackPlugin from "./slack-connector";
 import SMSPlugin from "./sms-connector";
@@ -21,7 +21,7 @@ import DummyPlugin from "./dummy-plugin";
 export default (manager, callback) => {
   // TODO dynamic importing plugins
   callback(new FBMessengerPlugin(manager, { appId: "1908982232707706" }));
-  callback(new ExternalAppPlugin(manager));
+  callback(new WebChatPlugin(manager));
   callback(new SlackPlugin(manager));
   callback(new WPPlugin(manager));
   callback(new SMSPlugin(manager));
