@@ -27,7 +27,7 @@ import {
 export const initialState = {
   intents: null,
   selectedIntentIndex: 0,
-  newActions: { input: "", output: "" },
+  newActions: {},
 };
 
 export const handlers = {
