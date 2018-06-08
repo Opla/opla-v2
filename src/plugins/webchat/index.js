@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-class AppMessenger {
+class WebChat {
   constructor(pluginManager) {
     this.workers = {};
     this.listener = null;
     this.manager = pluginManager;
-    this.name = "app-connector";
+    this.name = "webchat-connector";
     this.type = "MessengerConnector";
     this.classes = ["messenger"];
   }
@@ -32,14 +32,14 @@ class AppMessenger {
   }
 
   fireEvent(eventName) {
-    logger.info("AppMessenger fireEvent", eventName);
+    logger.info("WebChat fireEvent", eventName);
     if (this.listener) {
       this.listener.fireEvent(eventName, this);
     }
   }
 
   async register(middleware) {
-    logger.info("WIP register AppMessenger ", middleware);
+    logger.info("WIP register WebChat ", middleware);
     const { zoapp } = this.manager;
     const { config } = this.manager;
     this.middleware = middleware;
@@ -88,7 +88,7 @@ class AppMessenger {
         this.middleware.token = name;
       }
     } else {
-      logger.info("No origin for AppMessenger ", middleware.id);
+      logger.info("No origin for WebChat ", middleware.id);
     }
 
     return middleware;
@@ -103,11 +103,11 @@ class AppMessenger {
 
 let instance = null;
 
-const createAppMessengerPlugin = (pluginManager) => {
+const createWebChatPlugin = (pluginManager) => {
   if (!instance) {
-    instance = new AppMessenger(pluginManager);
+    instance = new WebChat(pluginManager);
   }
   return instance;
 };
 
-export default createAppMessengerPlugin;
+export default createWebChatPlugin;

@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 // TODO remove import and use dynamic loading
-import createAppMessengerPlugin from "./web-app";
+import createWebChatPlugin from "./webchat";
 import createOpenNLXConnector from "./openNLX";
 
 const plugins = (pluginsManager) => {
   const list = [];
   // TODO dynamic loading
-  let plugin = createAppMessengerPlugin(pluginsManager);
+  let plugin = createWebChatPlugin(pluginsManager);
   list.push(plugin);
   plugin = createOpenNLXConnector(pluginsManager);
   list.push(plugin);
