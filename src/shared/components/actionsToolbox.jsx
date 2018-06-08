@@ -196,7 +196,21 @@ class ActionsToolbox extends Component {
     };
     const { toolbox } = this.state;
     let extra = "";
-    if (!this.props.isInput) {
+    if (this.props.isInput) {
+      extra = (
+        <Tooltip label="Insert block any">
+          <Icon
+            style={styleButton}
+            /* colored={toolbox.any} */ onClick={(e) => {
+              // e.stopPropagation();
+              this.onAnySelected(e);
+            }}
+            id="atb_any"
+            name="all_out"
+          />
+        </Tooltip>
+      );
+    } else {
       extra = (
         <span>
           <Tooltip label="Insert code">
@@ -251,17 +265,6 @@ class ActionsToolbox extends Component {
               }}
               id="atb_text"
               name="text_fields"
-            />
-          </Tooltip>
-          <Tooltip label="Insert block any">
-            <Icon
-              style={styleButton}
-              /* colored={toolbox.any} */ onClick={(e) => {
-                // e.stopPropagation();
-                this.onAnySelected(e);
-              }}
-              id="atb_any"
-              name="all_out"
             />
           </Tooltip>
           <Tooltip label="Insert variable assignment">

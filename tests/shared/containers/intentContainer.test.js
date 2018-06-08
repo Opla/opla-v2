@@ -188,8 +188,8 @@ describe("containers/IntentContainerBase", () => {
         expect(wrapper.find("Tooltip")).toHaveLength(4);
         const isInputActionIds = [
           "#atb_text",
-          "#atb_any",
           "#atb_output_var",
+          "#atb_any",
           "#atb_trash",
         ];
 

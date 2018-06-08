@@ -19,14 +19,13 @@ describe("components/actionsToolbox", () => {
 
   const isInputActionIds = [
     "#atb_text",
-    "#atb_any",
     "#atb_output_var",
+    "#atb_any",
     "#atb_trash",
   ];
 
-  const allActionIds = [
+  const outputActionIds = [
     "#atb_text",
-    "#atb_any",
     "#atb_output_var",
     "#atb_variable",
     "#atb_br",
@@ -34,12 +33,12 @@ describe("components/actionsToolbox", () => {
     "#atb_trash",
   ];
 
-  it("should render all actions", () => {
+  it("should render outputs actions", () => {
     const wrapper = shallow(<ActionsToolbox {...defaultProps} />);
 
-    expect(wrapper.find("Tooltip")).toHaveLength(7);
+    expect(wrapper.find("Tooltip")).toHaveLength(6);
 
-    allActionIds.forEach((actionId, index) => {
+    outputActionIds.forEach((actionId, index) => {
       try {
         expect(
           wrapper
@@ -59,18 +58,18 @@ describe("components/actionsToolbox", () => {
   it("should call onChange with icon clicked", () => {
     const onChangeSpy = jest.fn();
     const wrapper = shallow(
-      <ActionsToolbox {...defaultProps} onChange={onChangeSpy} />,
+      <ActionsToolbox {...defaultProps} isInput onChange={onChangeSpy} />,
     );
     expect(
       wrapper
         .find("Tooltip")
-        .at(1)
+        .at(2)
         .dive()
         .find("#atb_any"),
     ).toHaveLength(1);
     wrapper
       .find("Tooltip")
-      .at(1)
+      .at(2)
       .dive()
       .find("#atb_any")
       .simulate("click");

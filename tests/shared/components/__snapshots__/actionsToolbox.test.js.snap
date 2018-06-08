@@ -55,30 +55,6 @@ exports[`components/actionsToolbox can be an input 1`] = `
     >
       <i
         className="material-icons"
-        id="atb_any"
-        onClick={[Function]}
-        onKeyUp={[Function]}
-        role="button"
-        style={
-          Object {
-            "cursor": "pointer",
-            "margin": "0 4px",
-          }
-        }
-        tabIndex="0"
-      >
-        all_out
-      </i>
-    </div>
-    <div
-      style={
-        Object {
-          "display": "inline-block",
-        }
-      }
-    >
-      <i
-        className="material-icons"
         id="atb_output_var"
         onClick={[Function]}
         onKeyUp={[Function]}
@@ -94,7 +70,30 @@ exports[`components/actionsToolbox can be an input 1`] = `
         assignment
       </i>
     </div>
-    
+    <div
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="material-icons"
+        id="atb_any"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "cursor": "pointer",
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        all_out
+      </i>
+    </div>
   </div>
   <div
     style={
