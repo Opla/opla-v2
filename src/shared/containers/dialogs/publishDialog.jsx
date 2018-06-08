@@ -61,7 +61,7 @@ class PublishDialog extends Component {
       // this.setState({ servicesEnabled });
       if (publisher.status === "start" && instance === undefined) {
         const name = service.getName();
-        const pluginsManager = new PluginsManager();
+        const pluginsManager = PluginsManager();
         const newInstance = pluginsManager.instanciate(
           name,
           this.props.selectedBotId,
@@ -86,6 +86,21 @@ class PublishDialog extends Component {
     }
   };
 
+  getInstance(name) {
+    const { middlewares } = this.props;
+    const pluginsManager = PluginsManager();
+    const index = middlewares.findIndex(
+      (middleware) => middleware.name === name,
+    );
+    let instance = null;
+    if (index > -1) {
+      instance = middlewares[index];
+    } else {
+      instance = pluginsManager.instanciate(name, this.props.selectedBotId);
+    }
+    return instance;
+  }
+
   onAction = (/* action */) => {
     // console.log("WIP onAction=", action);
     // TODO check if services are available
@@ -102,7 +117,7 @@ class PublishDialog extends Component {
       }, 100);
     }
 
-    const unpublish = {};
+    /* const unpublish = {};
     if (keys && keys.length > 0) {
       keys.forEach((k) => {
         const pub = publishers[k];
@@ -118,65 +133,73 @@ class PublishDialog extends Component {
           }
         }
       });
-    }
-
-    if (Object.keys(publishers).length > 0) {
-      this.props.apiPublishRequest(this.props.selectedBotId, publishers);
+    } */
+    // console.log("publisher", publishers);
+    // console.log("middlewares", middlewares);
+    const publishersKey = Object.keys(publishers);
+    if (publishersKey.length > 0 || (middlewares && middlewares.length > 0)) {
+      const channels = [];
+      publishersKey.forEach((key) => {
+        const instance = this.getInstance(key, middlewares);
+        instance.status = publishers[key].status;
+        channels.push(instance);
+      });
+      // console.log("channels", channels);
+      this.props.apiPublishRequest(this.props.selectedBotId, channels);
     }
 
     const updateMiddleware = (plugins) => {
-      const pluginsManager = new PluginsManager();
       const pluginsKey = Object.keys(plugins);
       pluginsKey.forEach((key) => {
-        const instance = pluginsManager.instanciate(
-          plugins[key].name,
-          this.props.selectedBotId,
-        );
+        // console.log("plugin=", plugins[key]);
+        const instance = this.getInstance(key);
         if (plugins[key].status) {
-          instance.status = "start";
+          instance.status = plugins[key].status;
         }
-
         this.props.apiSetMiddlewareRequest(this.props.selectedBotId, instance);
       });
     };
 
     updateMiddleware(publishers);
-    updateMiddleware(unpublish);
+    // updateMiddleware(unpublish);
     this.updateMiddlewares(true);
 
     // TODO display published dialog with links to service's messenger
     setTimeout(() => {
       Zrmc.closeDialog();
-      const pluginsManager = new PluginsManager();
+      const pluginsManager = PluginsManager();
       const items = this.getActives(pluginsManager, true);
       Zrmc.showDialog({
         header: "Published to platforms",
-        body: (
-          <List twoLine>
-            {items.map((item) => {
-              let url = "";
-              if (item.instance) {
-                ({ url } = item.instance);
-                const regex = /^(http|https).*$/;
-                if (regex.test(url) === false) {
-                  url = `${window.location.origin}${url}`;
+        body:
+          items.length > 0 ? (
+            <List twoLine>
+              {items.map((item) => {
+                let url = "";
+                if (item.instance) {
+                  ({ url } = item.instance);
+                  const regex = /^(http|https).*$/;
+                  if (regex.test(url) === false) {
+                    url = `${window.location.origin}${url}`;
+                  }
                 }
-              }
 
-              return (
-                <ListItem
-                  key={item.name}
-                  secondaryText={url}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  {item.name}
-                </ListItem>
-              );
-            })}
-          </List>
-        ),
+                return (
+                  <ListItem
+                    key={item.name}
+                    secondaryText={url}
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    {item.name}
+                  </ListItem>
+                );
+              })}
+            </List>
+          ) : (
+            <div>Nothing published</div>
+          ),
         onAction: this.handleCloseDialog,
       });
     }, 100);
@@ -277,7 +300,7 @@ class PublishDialog extends Component {
     if (this.state.isLoading) {
       content = <div>Loading</div>;
     } else {
-      const pluginsManager = new PluginsManager();
+      const pluginsManager = PluginsManager();
       const actives = this.getActives(pluginsManager);
       const items = this.getItemsServices(pluginsManager, actives);
       actives.forEach((active) => {

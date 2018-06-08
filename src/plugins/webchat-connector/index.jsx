@@ -12,7 +12,7 @@ export default class ExternalAppPlugin {
   constructor(connector) {
     this.connector = connector;
     this.params = {
-      name: "app-connector",
+      name: "webchat-connector",
       title: "WebChat",
       icon: "devices",
       color: "gray",

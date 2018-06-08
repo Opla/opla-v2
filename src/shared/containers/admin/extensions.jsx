@@ -12,7 +12,7 @@ import PluginsManager from "../../utils/pluginsManager";
 export default class Extension extends Component {
   constructor(props) {
     super(props);
-    const pluginsManager = new PluginsManager();
+    const pluginsManager = PluginsManager();
 
     this.state = {
       pluginsManager,

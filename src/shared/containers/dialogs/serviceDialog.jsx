@@ -72,7 +72,7 @@ class ServiceDialog extends Component {
     const { service } = this.props;
     if (origin && service && this.state.instance === null) {
       const name = service.getName();
-      const pluginsManager = new PluginsManager();
+      const pluginsManager = PluginsManager();
       const instance = pluginsManager.instanciate(name, origin);
       this.props.apiSetMiddlewareRequest(origin, instance);
     }
