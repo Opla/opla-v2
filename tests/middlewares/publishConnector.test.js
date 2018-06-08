@@ -4,12 +4,12 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import AppConnectorMiddleware from "opla-backend/middlewares/appConnector";
+import PublishConnectorMiddleware from "opla-backend/middlewares/publishConnector";
 import MiddlewaresController from "zoapp-backend/controllers/middlewares";
 
 jest.mock("zoapp-backend/controllers/middlewares");
 
-describe("AppConnectorMiddleware", () => {
+describe("PublishConnectorMiddleware", () => {
   beforeEach(() => {
     MiddlewaresController.mockClear();
   });
@@ -18,11 +18,11 @@ describe("AppConnectorMiddleware", () => {
     it("return a property object", () => {
       const controllers = {};
 
-      const middleware = new AppConnectorMiddleware(controllers);
+      const middleware = new PublishConnectorMiddleware(controllers);
       const properties = middleware.getProperties();
 
       expect(properties).toMatchObject({
-        name: expect.stringContaining("app-connector"),
+        name: expect.stringContaining("publish-channel"),
         status: expect.stringContaining("start"),
         classes: expect.arrayContaining(["bot"]),
         onDispatch: expect.anything(),
@@ -32,10 +32,10 @@ describe("AppConnectorMiddleware", () => {
 
   describe("onDispatch", () => {
     describe("publishBot", () => {
-      it("start app-connector middleware", async () => {
+      it("start publish-channel middleware", async () => {
         const listMock = jest.fn();
         const registeredMiddleware = {
-          name: "app-connector",
+          name: "publish-channel",
         };
         listMock.mockReturnValue([registeredMiddleware]);
         const registerMock = jest.fn();
@@ -57,13 +57,12 @@ describe("AppConnectorMiddleware", () => {
           },
         };
 
-        const middleware = new AppConnectorMiddleware(controllers);
+        const middleware = new PublishConnectorMiddleware(controllers);
         await middleware.onDispatch("foo", data);
 
         expect(listMock).toHaveBeenCalledWith("foo", "MessengerConnector");
         expect(registerMock).toHaveBeenCalledWith({
           ...registeredMiddleware,
-          status: "start",
         });
       });
 
@@ -90,7 +89,7 @@ describe("AppConnectorMiddleware", () => {
           },
         };
 
-        const middleware = new AppConnectorMiddleware(controllers);
+        const middleware = new PublishConnectorMiddleware(controllers);
         try {
           await middleware.onDispatch("foo", data);
         } catch (error) {

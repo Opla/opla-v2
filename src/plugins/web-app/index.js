@@ -44,7 +44,7 @@ class AppMessenger {
     const { config } = this.manager;
     this.middleware = middleware;
     if (middleware.origin) {
-      if (!middleware.application) {
+      if (!middleware.application || !middleware.application.id) {
         const name = `${middleware.name}_${middleware.origin}`;
         // get a previously created app with same name
         let app = await zoapp.authServer.getApplicationByName(name);
@@ -62,7 +62,10 @@ class AppMessenger {
             redirect_uri: "localhost",
             policies: { authorizeAnonymous: true, anonymous_secret: "koko" },
           };
-          app = await zoapp.authServer.registerApplication(params);
+          const payload = await zoapp.authServer.registerApplication(params);
+          if (payload && payload.result) {
+            app = await zoapp.authServer.getApplicationByName(name);
+          }
         }
         if (app) {
           this.middleware.application = app;
@@ -82,6 +85,7 @@ class AppMessenger {
         const name = await params.generateName(4, "botParams");
         await params.setValue(name, botParams, "botParams");
         this.middleware.url = `${config.global.botSite.url}${name}`;
+        this.middleware.token = name;
       }
     } else {
       logger.info("No origin for AppMessenger ", middleware.id);
@@ -99,11 +103,11 @@ class AppMessenger {
 
 let instance = null;
 
-const AppMessengerPlugin = (pluginManager) => {
+const createAppMessengerPlugin = (pluginManager) => {
   if (!instance) {
     instance = new AppMessenger(pluginManager);
   }
   return instance;
 };
 
-export default AppMessengerPlugin;
+export default createAppMessengerPlugin;
