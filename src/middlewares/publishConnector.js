@@ -10,7 +10,7 @@ export default class PublishConnectorMiddleware {
     this.classes = ["bot"];
     this.name = "publish-channel";
     this.onDispatch = this.onDispatch.bind(this);
-    // logger.info("Publish-channels");
+    logger.info("Publish-channels");
     this.initChannels();
   }
 
@@ -41,32 +41,34 @@ export default class PublishConnectorMiddleware {
     const middlewares = await controller.list(data.botId, "MessengerConnector");
     // logger.info("publishBot register channels=", data.channels);
     if (Array.isArray(data.channels) && data.channels.length > 0) {
-      data.chanels.array.forEach((channel) => {
-        // logger.info("publishBot register channel=", index, channel);
-        let c = middlewares.find((middleware) => middleware.id === channel.id);
-        if (!c) {
-          // logger.info("publishBot register prev channel=", channel);
-          c = {};
+      const actions = [];
+      data.channels.forEach((channel, index) => {
+        logger.info(
+          "publishBot register channel=",
+          index,
+          channel.id,
+          channel.status,
+        );
+        const m = middlewares.find(
+          (middleware) => middleware.id === channel.id,
+        );
+        logger.info("publishBot registered middleware=", m.status);
+        if (m) {
+          if (m.status !== channel.status) {
+            if (channel.status !== "start") {
+              actions.push(controller.unregister(channel.id));
+            } else {
+              actions.push(controller.register(channel));
+            }
+          }
+        } else {
+          actions.push(controller.register(channel));
         }
       });
+      Promise.all(actions);
     } else {
       // logger.info("No channels to publish to");
     }
-    // throw new Error("No channels to publish to");
-    /*
-    const appConnector = middlewares.find(
-      (middleware) => middleware.type === "MessengerConnector",
-    );
-
-    if (!appConnector) {
-      throw new Error(
-        "app-connector must be registered before trying to publish a bot",
-      );
-    }
-    logger.info("publishBot register appConnector=", appConnector);
-    logger.info("publishBot register data.channels=", data.channels);
-    appConnector.status = "start";
-    await controller.register(appConnector); */
   }
 
   getMiddlewaresController() {

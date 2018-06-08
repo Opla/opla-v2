@@ -7,4 +7,6 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import setupLogger from "zoapp-core/helpers/logger";
 
-setupLogger("test");
+beforeAll(async () => {
+  setupLogger("test");
+});

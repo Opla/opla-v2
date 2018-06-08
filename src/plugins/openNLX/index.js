@@ -36,13 +36,13 @@ class OpenNLXConnector {
   }
 
   async register(middleware) {
-    logger.info("OpenNLX register", middleware);
+    logger.info("OpenNLX register", middleware.id);
     this.middleware = middleware;
     return middleware;
   }
 
   async unregister(middleware) {
-    logger.info("OpenNLX register", middleware);
+    logger.info("OpenNLX unregister", middleware.id);
     this.middleware = null;
     return middleware;
   }
