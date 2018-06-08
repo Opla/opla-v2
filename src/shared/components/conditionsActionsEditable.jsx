@@ -35,23 +35,26 @@ class ConditionsActionsEditable extends Component {
   };
 
   render() {
+    const style = { marginTop: "0px", height: "auto" };
     return (
       <div>
         <div onKeyPress={this.handleKeyPress}>
           <TextField
-            id="name"
+            id="conditionName"
             onChange={(e) => {
               this.updateContent({ name: e.target.value });
             }}
             value={this.props.content.name}
+            style={style}
           />
           =
           <TextField
-            id="value"
+            id="conditionValue"
             onChange={(e) => {
               this.updateContent({ value: e.target.value });
             }}
             value={this.props.content.value}
+            style={style}
           />
         </div>
         <ActionsEditable
@@ -62,6 +65,7 @@ class ConditionsActionsEditable extends Component {
             this.updateContent({ text });
           }}
           ref={this.props.onActionsEditableRefchange}
+          style={{ minHeight: "32px" }}
         />
       </div>
     );

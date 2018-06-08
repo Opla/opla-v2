@@ -35,12 +35,12 @@ class ActionsItem extends Component {
     //     ? "rgb(213, 0, 0)"
     //     : "rgb(0, 0, 0)";
     // const style = {}; /* padding: "16px" */
-    let style = { color, padding: "0px 16px" };
+    let style = { color, height: "100%", padding: "0px 16px" };
     if (isNew) {
-      style = { height: "100%", minHeight: "40px", ...style };
+      style = { ...style, minHeight: "40px" };
     }
     if (isCondition) {
-      style = { padding: "0px", minHeight: "100px", ...style };
+      style = { ...style, height: "auto", padding: "16px" };
     }
 
     const icon =

@@ -45,9 +45,9 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "height": "auto",
               "minHeight": "40px",
-              "padding": "0px 16px",
+              "padding": "16px",
             }
           }
         >
@@ -130,9 +130,9 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "height": "auto",
               "minHeight": "40px",
-              "padding": "0px 16px",
+              "padding": "16px",
             }
           }
         >
@@ -148,11 +148,17 @@ exports[`components/intentDetail can render intent with special characters corre
             >
               <div
                 className="mdc-text-field mdc-text-field--upgraded"
+                style={
+                  Object {
+                    "height": "auto",
+                    "marginTop": "0px",
+                  }
+                }
               >
                 <input
                   className="mdc-text-field__input"
                   defaultValue={null}
-                  id="name"
+                  id="conditionName"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -162,7 +168,7 @@ exports[`components/intentDetail can render intent with special characters corre
                 <label
                   className="mdc-floating-label"
                   focused="false"
-                  htmlFor="name"
+                  htmlFor="conditionName"
                   style={Object {}}
                 />
                 <div
@@ -172,11 +178,17 @@ exports[`components/intentDetail can render intent with special characters corre
               =
               <div
                 className="mdc-text-field mdc-text-field--upgraded"
+                style={
+                  Object {
+                    "height": "auto",
+                    "marginTop": "0px",
+                  }
+                }
               >
                 <input
                   className="mdc-text-field__input"
                   defaultValue={null}
-                  id="value"
+                  id="conditionValue"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -186,7 +198,7 @@ exports[`components/intentDetail can render intent with special characters corre
                 <label
                   className="mdc-floating-label"
                   focused="false"
-                  htmlFor="value"
+                  htmlFor="conditionValue"
                   style={Object {}}
                 />
                 <div
@@ -374,9 +386,9 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "height": "auto",
               "minHeight": "40px",
-              "padding": "0px 16px",
+              "padding": "16px",
             }
           }
         >
@@ -459,9 +471,9 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "height": "auto",
               "minHeight": "40px",
-              "padding": "0px 16px",
+              "padding": "16px",
             }
           }
         >
@@ -477,11 +489,17 @@ exports[`components/intentDetail renders correctly 1`] = `
             >
               <div
                 className="mdc-text-field mdc-text-field--upgraded"
+                style={
+                  Object {
+                    "height": "auto",
+                    "marginTop": "0px",
+                  }
+                }
               >
                 <input
                   className="mdc-text-field__input"
                   defaultValue={null}
-                  id="name"
+                  id="conditionName"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -491,7 +509,7 @@ exports[`components/intentDetail renders correctly 1`] = `
                 <label
                   className="mdc-floating-label"
                   focused="false"
-                  htmlFor="name"
+                  htmlFor="conditionName"
                   style={Object {}}
                 />
                 <div
@@ -501,11 +519,17 @@ exports[`components/intentDetail renders correctly 1`] = `
               =
               <div
                 className="mdc-text-field mdc-text-field--upgraded"
+                style={
+                  Object {
+                    "height": "auto",
+                    "marginTop": "0px",
+                  }
+                }
               >
                 <input
                   className="mdc-text-field__input"
                   defaultValue={null}
-                  id="value"
+                  id="conditionValue"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -515,7 +539,7 @@ exports[`components/intentDetail renders correctly 1`] = `
                 <label
                   className="mdc-floating-label"
                   focused="false"
-                  htmlFor="value"
+                  htmlFor="conditionValue"
                   style={Object {}}
                 />
                 <div
