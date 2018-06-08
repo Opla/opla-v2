@@ -102,7 +102,7 @@ class PublishDialog extends Component {
       }, 100);
     }
 
-    const unpublish = {};
+    /* const unpublish = {};
     if (keys && keys.length > 0) {
       keys.forEach((k) => {
         const pub = publishers[k];
@@ -118,7 +118,7 @@ class PublishDialog extends Component {
           }
         }
       });
-    }
+    } */
 
     if (Object.keys(publishers).length > 0) {
       this.props.apiPublishRequest(this.props.selectedBotId, publishers);
@@ -128,20 +128,30 @@ class PublishDialog extends Component {
       const pluginsManager = PluginsManager();
       const pluginsKey = Object.keys(plugins);
       pluginsKey.forEach((key) => {
-        const instance = pluginsManager.instanciate(
-          plugins[key].name,
-          this.props.selectedBotId,
+        // console.log("plugin=", plugins[key]);
+        const index = middlewares.findIndex(
+          (middleware) => middleware.name === key,
         );
-        if (plugins[key].status) {
-          instance.status = "start";
+        let instance = null;
+        if (index > -1) {
+          instance = middlewares[index];
+          // console.log("middleware=", middlewares[index]);
+        } else {
+          instance = pluginsManager.instanciate(
+            plugins[key].name,
+            this.props.selectedBotId,
+          );
         }
 
+        if (plugins[key].status) {
+          instance.status = plugins[key].status;
+        }
         this.props.apiSetMiddlewareRequest(this.props.selectedBotId, instance);
       });
     };
 
     updateMiddleware(publishers);
-    updateMiddleware(unpublish);
+    // updateMiddleware(unpublish);
     this.updateMiddlewares(true);
 
     // TODO display published dialog with links to service's messenger
