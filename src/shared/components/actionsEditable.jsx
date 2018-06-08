@@ -17,15 +17,15 @@ class ActionsEditable extends Component {
     items.forEach((child, index) => {
       const text = fromHtml ? child.textContent : child.text;
       const type = fromHtml ? child.getAttribute("data") : child.type;
-      const t = text; // .trim();
+      const t = fromHtml ? encodeURIComponent(text) : text; // .trim();
       if (type === "any") {
         actionText += "*";
       } else if (type === "output_var") {
         // TODO check if t is empty and delete child
-        actionText += `{{${encodeURIComponent(t)}}}`;
+        actionText += `{{${t}}}`;
       } else if (type === "variable") {
         // TODO check if t is empty and delete child
-        actionText += `<<${encodeURIComponent(t)}>>`;
+        actionText += `<<${t}>>`;
       } else if (type === "br") {
         actionText += "<br/>";
       } else if (type === "button") {

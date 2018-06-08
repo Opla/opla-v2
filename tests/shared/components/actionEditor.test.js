@@ -28,25 +28,4 @@ describe("components/actionEditor", () => {
     const wrapper = shallow(<ActionsEditable content={content} />);
     expect(wrapper.state("items")).toHaveLength(2);
   });
-
-  describe("build()", () => {
-    it("should escape special characters like `{`, `}`, `<` and `>`", () => {
-      const items = [
-        { type: "any" },
-        { type: "output_var", text: "{{text}}" },
-        { type: "variable", text: "<<var>>" },
-        { type: "br" },
-        { type: "button", text: "text" },
-        { type: "text", text: "text" },
-      ];
-      expect(ActionsEditable.build(items)).toEqual(
-        [
-          "*",
-          `{{${encodeURIComponent("{{text}}")}}}`,
-          `<<${encodeURIComponent("<<var>>")}>>`,
-          "<br/><button>text</button>text",
-        ].join(""),
-      );
-    });
-  });
 });

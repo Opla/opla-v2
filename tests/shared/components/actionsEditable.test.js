@@ -48,62 +48,101 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_3", 0);
   });
 
-  it("should build an intent from html items", () => {
-    const items = [
-      {
-        textContent: "",
-        getAttribute: () => "text", // mock function
-      },
-      {
-        textContent: "any",
-        getAttribute: () => "any", // mock function
-      },
-      {
-        textContent: " bon gestes ",
-        getAttribute: () => "text", // mock function
-      },
-      {
-        textContent: "any",
-        getAttribute: () => "any", // mock function
-      },
-      {
-        textContent: "",
-        getAttribute: () => "text", // mock function
-      },
-    ];
-    expect(ActionsEditable.build(items, true)).toEqual("* bon gestes *");
-  });
+  describe("build()", () => {
+    it("should build an intent from html items", () => {
+      const items = [
+        {
+          textContent: "",
+          getAttribute: () => "text", // mock function
+        },
+        {
+          textContent: "any",
+          getAttribute: () => "any", // mock function
+        },
+        {
+          textContent: " bon gestes ",
+          getAttribute: () => "text", // mock function
+        },
+        {
+          textContent: "any",
+          getAttribute: () => "any", // mock function
+        },
+        {
+          textContent: "",
+          getAttribute: () => "text", // mock function
+        },
+      ];
+      expect(ActionsEditable.build(items, true)).toEqual("* bon gestes *");
+    });
 
-  it("should build an intent from html items with entityname", () => {
-    const items = [
-      {
-        textContent: "Vous pouvez ",
-        getAttribute: () => "text", // mock function
-      },
-      {
-        textContent: "entityname=value",
-        getAttribute: () => "variable", // mock function
-      },
-    ];
-    expect(ActionsEditable.build(items, true)).toEqual(
-      "Vous pouvez <<entityname%3Dvalue>>",
-    );
-  });
+    it("should build an intent from html items with entityname", () => {
+      const items = [
+        {
+          textContent: "Vous pouvez ",
+          getAttribute: () => "text", // mock function
+        },
+        {
+          textContent: "entityname=value",
+          getAttribute: () => "variable", // mock function
+        },
+      ];
+      expect(ActionsEditable.build(items, true)).toEqual(
+        "Vous pouvez <<entityname%3Dvalue>>",
+      );
+    });
 
-  // TODO check test items and fix bug
-  // it("should build an intent from items with entityname", () => {
-  //   const items = [
-  //     {
-  //       text: "Vous pouvez ",
-  //       type: "text", //mock function
-  //     },
-  //     {
-  //       text: "entityname%3Dvalue",
-  //       type: "variable", //mock function
-  //     },
-  //   ]
-  //   expect (ActionsEditable.build(items, false)).toEqual("Vous pouvez <<entityname%3Dvalue>>");
-  // });
+    it("should escape special characters like `{`, `}`, `<` and `>`", () => {
+      const items = [
+        {
+          textContent: "any",
+          getAttribute: () => "any", // mock function
+        },
+        {
+          textContent: "{{text}}",
+          getAttribute: () => "output_var", // mock function
+        },
+        {
+          textContent: "<<var>>",
+          getAttribute: () => "variable", // mock function
+        },
+        {
+          getAttribute: () => "br", // mock function
+        },
+        {
+          textContent: "text",
+          getAttribute: () => "button", // mock function
+        },
+        {
+          textContent: "text",
+          getAttribute: () => "text", // mock function
+        },
+      ];
+      expect(ActionsEditable.build(items, true)).toEqual(
+        [
+          "*",
+          `{{${encodeURIComponent("{{text}}")}}}`,
+          `<<${encodeURIComponent("<<var>>")}>>`,
+          "<br/><button>text</button>text",
+        ].join(""),
+      );
+    });
+
+    it("should build an intent from items with entityname", () => {
+      const items = [
+        {
+          text: "Vous pouvez ",
+          type: "text", // mock function
+        },
+        {
+          text: "entityname%3Dvalue",
+          type: "variable", // mock function
+        },
+      ];
+      expect(ActionsEditable.build(items, false)).toEqual(
+        "Vous pouvez <<entityname%3Dvalue>>",
+      );
+    });
+  });
 
   it("should insert an item", () => {
     const wrapper = shallow(<ActionsEditable {...defaultProps} />);
