@@ -171,32 +171,35 @@ class PublishDialog extends Component {
       const items = this.getActives(pluginsManager, true);
       Zrmc.showDialog({
         header: "Published to platforms",
-        body: (
-          <List twoLine>
-            {items.map((item) => {
-              let url = "";
-              if (item.instance) {
-                ({ url } = item.instance);
-                const regex = /^(http|https).*$/;
-                if (regex.test(url) === false) {
-                  url = `${window.location.origin}${url}`;
+        body:
+          items.length > 0 ? (
+            <List twoLine>
+              {items.map((item) => {
+                let url = "";
+                if (item.instance) {
+                  ({ url } = item.instance);
+                  const regex = /^(http|https).*$/;
+                  if (regex.test(url) === false) {
+                    url = `${window.location.origin}${url}`;
+                  }
                 }
-              }
 
-              return (
-                <ListItem
-                  key={item.name}
-                  secondaryText={url}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  {item.name}
-                </ListItem>
-              );
-            })}
-          </List>
-        ),
+                return (
+                  <ListItem
+                    key={item.name}
+                    secondaryText={url}
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    {item.name}
+                  </ListItem>
+                );
+              })}
+            </List>
+          ) : (
+            <div>Nothing published</div>
+          ),
         onAction: this.handleCloseDialog,
       });
     }, 100);
