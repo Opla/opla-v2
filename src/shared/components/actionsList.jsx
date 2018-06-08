@@ -6,10 +6,9 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta } from "zrmc";
+import { List } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
-import ActionsEditable from "./actionsEditable";
-import ConditionsActionsEditable from "./conditionsActionsEditable";
+import ActionsItem from "./actionsItem";
 
 class ActionsList extends Component {
   constructor(props) {
@@ -22,11 +21,15 @@ class ActionsList extends Component {
     this.handleAction("add", { text });
   };
 
-  handleChangeAction = (text, index) => {
+  handleAddActionCondition = (actionCondition) => {
+    this.handleAction("add", actionCondition, "condition");
+  };
+
+  handleActionChange = (text, index) => {
     this.handleAction("change", { text }, null, index);
   };
 
-  handleChangeActionCondition = (actionCondition, index) => {
+  handleActionConditionChange = (actionCondition, index) => {
     this.handleAction("change", actionCondition, "condition", index);
   };
 
@@ -43,122 +46,83 @@ class ActionsList extends Component {
     this.props.onDeleteActionClick(this.props.name, index);
   };
 
-  handleActionsEditableSelected = (ref) => {
-    this.props.onSelectActionsComponent(ref);
-  };
-
   render() {
-    const { name, actions, newAction, onDrop } = this.props;
-    let content;
-    const icon = name === "input" ? "format_quote" : "chat_bubble_outline";
-    const addText =
-      name === "input" ? "Add an input sentence" : "Add an output response";
-    const color =
-      (!actions || actions.length === 0) && !newAction
-        ? "rgb(213, 0, 0)"
-        : "rgb(0, 0, 0)";
+    const {
+      name,
+      actions,
+      newAction,
+      onDrop,
+      onSelectActionsComponent,
+    } = this.props;
+    let contentList;
+    const isCondition =
+      !actions || actions.length === 0 || actions[0].type === "condition";
     const editable = true;
     const addContent = (
-      <ListItem
-        className="selectableListItem onFocusAction mdl-list_action"
-        icon={icon}
-        style={{ color, padding: "0px 16px" }}
-        onClick={() => {
-          this.handleActionsEditableSelected(this.newActionsEditableRefs);
-        }}
-      >
-        <ActionsEditable
-          containerName={this.props.name}
-          content={newAction}
-          editable={editable}
-          onAddAction={this.handleAddAction}
-          placeholder={addText}
-          onChange={(newContent) => {
-            this.props.onNewActionsChange(this.props.name, newContent);
-          }}
-          ref={(e) => {
-            if (e) {
-              this.newActionsEditableRefs = e;
+      <ActionsItem
+        containerName={name}
+        action={newAction}
+        editable={editable}
+        onAddAction={(content) => {
+          let newContent = content;
+          if (isCondition && (content.name || content.value)) {
+            this.handleAddActionCondition(newContent);
+            // clear new
+            this.props.onNewActionsChange(this.props.name, {
+              name: "",
+              value: "",
+              text: "",
+            });
+          } else {
+            if (isCondition) {
+              newContent = content.text;
             }
-          }}
-          isNew
-        />
-      </ListItem>
+            this.handleAddAction(newContent);
+            this.props.onNewActionsChange(this.props.name, "");
+          }
+        }}
+        onActionChange={(newContent) => {
+          this.props.onNewActionsChange(this.props.name, newContent);
+        }}
+        onSelectActionsComponent={onSelectActionsComponent}
+        isNew
+        isCondition={isCondition}
+      />
     );
     if (actions && actions.length > 0) {
-      let actionsDisplayed = actions;
-      let isCondition = false;
-      if (actions[0].type && actions[0].type === "condition") {
-        isCondition = true;
-        actionsDisplayed = actions[0].children;
-      }
-      const style = {}; /* padding: "16px" */
-      content = (
+      const actionsDisplayed = isCondition ? actions[0].children : actions;
+      contentList = (
         <List style={{ overflow: "auto", maxHeight: "26vh" }}>
-          {actionsDisplayed.map((action, index) => {
-            const text = isCondition ? (
-              <ConditionsActionsEditable
-                containerName={this.props.name}
-                content={action}
-                editable={editable}
-                onAddAction={this.handleAddAction}
-                onChange={(newContent) => {
-                  this.handleChangeActionCondition(newContent, index);
-                }}
-                onActionsEditableRefchange={(e) => {
-                  if (e) {
-                    this.actionsEditableRefs[index] = e;
-                  }
-                }}
-              />
-            ) : (
-              <ActionsEditable
-                containerName={this.props.name}
-                content={action}
-                editable={editable}
-                onAddAction={this.handleAddAction}
-                onChange={(newContent) => {
-                  this.handleChangeAction(newContent, index);
-                }}
-                ref={(e) => {
-                  if (e) {
-                    this.actionsEditableRefs[index] = e;
-                  }
-                }}
-              />
-            );
-            const key = `cd_${index}`;
-            return (
-              <ListItem
-                style={{ height: "100%", minHeight: "40px", ...style }}
-                key={key}
-                icon={icon}
-                className="selectableListItem onFocusAction mdl-list_action"
-                onDrop={onDrop}
-                onClick={() => {
-                  this.handleActionsEditableSelected(
-                    this.actionsEditableRefs[index],
-                  );
-                }}
-              >
-                {text}
-                <ListItemMeta
-                  icon="delete"
-                  onClick={() => {
-                    this.handleDeleteClick(index);
-                  }}
-                />
-              </ListItem>
-            );
-          })}
+          {actionsDisplayed.map((action, index) => (
+            <ActionsItem
+              containerName={name}
+              action={action}
+              index={index}
+              onDrop={onDrop}
+              key={index}
+              itemKey={`cd_${index}`}
+              onActionChange={(newContent) => {
+                if (isCondition) {
+                  this.handleActionConditionChange(newContent, index);
+                } else {
+                  this.handleActionChange(newContent, index);
+                }
+              }}
+              onSelectActionsComponent={onSelectActionsComponent}
+              onDeleteActionClick={() => {
+                this.handleDeleteClick(index);
+              }}
+              isCondition={isCondition}
+            />
+          ))}
         </List>
       );
     } else {
-      content = <List />;
+      contentList = <List />;
     }
     return (
       <ExpansionPanel label={name}>
-        {content}
+        {contentList}
         {addContent}
       </ExpansionPanel>
     );
@@ -167,7 +131,6 @@ class ActionsList extends Component {
 
 ActionsList.defaultProps = {
   actions: [],
-  newAction: "",
   onSelect: null,
   onDrop: null,
   onAction: () => {},
@@ -186,7 +149,7 @@ ActionsList.propTypes = {
   onDrop: PropTypes.func,
   onAction: PropTypes.func,
   intentId: PropTypes.string,
-  newAction: PropTypes.string,
+  newAction: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,

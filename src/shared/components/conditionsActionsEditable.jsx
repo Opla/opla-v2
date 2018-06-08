@@ -17,28 +17,50 @@ class ConditionsActionsEditable extends Component {
     });
   };
 
+  handleKeyPress = (e) => {
+    if (!this.props.editable) {
+      return;
+    }
+    if (e.which === 13) {
+      // WIP handle save event
+      e.preventDefault();
+      if (this.props.isNew) {
+        this.handleAddAction();
+      }
+    }
+  };
+
+  handleAddAction = () => {
+    this.props.onAddAction(this.props.content);
+  };
+
   render() {
     return (
       <div>
-        <div>
+        <div onKeyPress={this.handleKeyPress}>
           <TextField
+            id="name"
             onChange={(e) => {
               this.updateContent({ name: e.target.value });
             }}
-            defaultValue={this.props.content.name}
+            value={this.props.content.name}
           />
           =
           <TextField
+            id="value"
             onChange={(e) => {
               this.updateContent({ value: e.target.value });
             }}
-            defaultValue={this.props.content.value}
+            value={this.props.content.value}
           />
         </div>
         <ActionsEditable
           {...this.props}
           content={this.props.content.text}
-          onChange={this.handleTextChange}
+          onAddAction={this.handleAddAction}
+          onChange={(text) => {
+            this.updateContent({ text });
+          }}
           ref={this.props.onActionsEditableRefchange}
         />
       </div>

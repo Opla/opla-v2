@@ -50,16 +50,16 @@ describe("components/intentDetail", () => {
         .find("ActionsList")
         .at(0)
         .dive()
-        .find("ActionsEditable"),
+        .find("ActionsItem"),
     ).toHaveLength(4);
     expect(
       wrapper
         .find("ActionsList")
         .at(0)
         .dive()
-        .find("ActionsEditable")
+        .find("ActionsItem")
         .at(2)
-        .prop("content"),
+        .prop("action"),
     ).toEqual(populatedIntent.input[2]);
   });
 
@@ -74,16 +74,16 @@ describe("components/intentDetail", () => {
         .find("ActionsList")
         .at(1)
         .dive()
-        .find("ActionsEditable"),
+        .find("ActionsItem"),
     ).toHaveLength(2);
     expect(
       wrapper
         .find("ActionsList")
         .at(1)
         .dive()
-        .find("ActionsEditable")
+        .find("ActionsItem")
         .at(0)
-        .prop("content"),
+        .prop("action"),
     ).toEqual(populatedIntent.output[0]);
   });
 

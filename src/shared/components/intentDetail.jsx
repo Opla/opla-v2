@@ -113,8 +113,8 @@ IntentDetail.propTypes = {
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,
   newActions: PropTypes.shape({
-    input: PropTypes.string,
-    output: PropTypes.string,
+    input: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
+    output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   }).isRequired,
 };
 

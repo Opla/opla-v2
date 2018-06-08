@@ -100,7 +100,6 @@ class ActionsEditable extends Component {
       e.preventDefault();
       if (this.props.isNew) {
         this.props.onAddAction(text);
-        this.props.onChange("");
         this.clear();
       }
     }
