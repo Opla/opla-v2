@@ -86,6 +86,21 @@ class PublishDialog extends Component {
     }
   };
 
+  getInstance(name) {
+    const { middlewares } = this.props;
+    const pluginsManager = PluginsManager();
+    const index = middlewares.findIndex(
+      (middleware) => middleware.name === name,
+    );
+    let instance = null;
+    if (index > -1) {
+      instance = middlewares[index];
+    } else {
+      instance = pluginsManager.instanciate(name, this.props.selectedBotId);
+    }
+    return instance;
+  }
+
   onAction = (/* action */) => {
     // console.log("WIP onAction=", action);
     // TODO check if services are available
@@ -119,30 +134,25 @@ class PublishDialog extends Component {
         }
       });
     } */
-    console.log("publisher", publishers);
-    if (Object.keys(publishers).length > 0) {
-      this.props.apiPublishRequest(this.props.selectedBotId, publishers);
+    // console.log("publisher", publishers);
+    // console.log("middlewares", middlewares);
+    const publishersKey = Object.keys(publishers);
+    if (publishersKey.length > 0 || (middlewares && middlewares.length > 0)) {
+      const channels = [];
+      publishersKey.forEach((key) => {
+        const instance = this.getInstance(key, middlewares);
+        instance.status = publishers[key].status;
+        channels.push(instance);
+      });
+      // console.log("channels", channels);
+      this.props.apiPublishRequest(this.props.selectedBotId, channels);
     }
 
     const updateMiddleware = (plugins) => {
-      const pluginsManager = PluginsManager();
       const pluginsKey = Object.keys(plugins);
       pluginsKey.forEach((key) => {
         // console.log("plugin=", plugins[key]);
-        const index = middlewares.findIndex(
-          (middleware) => middleware.name === key,
-        );
-        let instance = null;
-        if (index > -1) {
-          instance = middlewares[index];
-          // console.log("middleware=", middlewares[index]);
-        } else {
-          instance = pluginsManager.instanciate(
-            plugins[key].name,
-            this.props.selectedBotId,
-          );
-        }
-
+        const instance = this.getInstance(key);
         if (plugins[key].status) {
           instance.status = plugins[key].status;
         }
