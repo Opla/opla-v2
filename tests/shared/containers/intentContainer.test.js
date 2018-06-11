@@ -551,4 +551,26 @@ describe("containers/IntentContainerBase", () => {
       expect(appendActionSpy).toBeCalledWith({}, "foo");
     });
   });
+
+  describe("toggleCondition", () => {
+    it("should change newActions Type", () => {
+      const appSetNewActionsSpy = jest.fn();
+      const wrapper = shallow(
+        <IntentContainerBase
+          {...defaultProps}
+          newActions={{ output: "foo" }}
+          appSetNewActions={appSetNewActionsSpy}
+        />,
+      );
+      wrapper.instance().toggleCondition();
+      expect(appSetNewActionsSpy.mock.calls[0][0]).toEqual("output");
+      expect(appSetNewActionsSpy.mock.calls[0][1]).toEqual({ text: "foo" });
+
+      wrapper.setProps({ newActions: { output: { text: "foo" } } });
+      wrapper.instance().toggleCondition();
+      expect(appSetNewActionsSpy.mock.calls[1][0]).toEqual("output");
+      expect(appSetNewActionsSpy.mock.calls[1][1]).toEqual("foo");
+      expect(appSetNewActionsSpy).toHaveBeenCalledWith("output", "foo");
+    });
+  });
 });
