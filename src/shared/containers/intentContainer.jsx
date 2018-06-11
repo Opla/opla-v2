@@ -27,7 +27,7 @@ class IntentContainer extends Component {
       editing: false,
       toolboxFocus: false,
       toolboxDisplayMode: "",
-      displayCondition: true,
+      displayCondition: false,
     };
     this.selectedActionsComponent = null;
   }
@@ -62,7 +62,7 @@ class IntentContainer extends Component {
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
-    this.setState({ editing: false });
+    this.setState({ editing: false, displayCondition: false });
   }
 
   handleDeleteActionClick = (containerName, index) => {
