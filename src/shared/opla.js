@@ -7,7 +7,7 @@
 /* eslint react/display-name: 0 */
 import React from "react";
 import Front from "zoapp-front/front";
-import Screen from "zoapp-front/containers/screen";
+import About from "OplaContainers/about";
 import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
 import AdminManager from "zoapp-front/containers/adminManager";
@@ -159,7 +159,7 @@ const appProps = {
       icon: "info",
       path: "/about",
       access: "all",
-      render: (props) => React.createElement(Screen, props, "About"),
+      render: (props) => <About {...props} />,
     },
     {
       id: "10",
