@@ -11,6 +11,7 @@ import {
   APP_UPDATEINTENT,
   APP_UPDATEPUBLISHER,
   APP_SETNEWACTIONS,
+  APP_DELETENEWACTIONS,
 } from "./constants";
 
 export function appSelectIntent(selectedBotId, selectedIntentIndex) {
@@ -49,5 +50,11 @@ export function appSetNewActions(actionContainer, actionValue) {
     type: APP_SETNEWACTIONS,
     actionContainer,
     actionValue,
+  };
+}
+
+export function appDeleteNewActions() {
+  return {
+    type: APP_DELETENEWACTIONS,
   };
 }

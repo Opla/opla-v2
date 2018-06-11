@@ -15,7 +15,7 @@ import {
   apiDeleteIntentRequest,
   apiMoveIntentRequest,
 } from "../actions/api";
-import { appSelectIntent } from "../actions/app";
+import { appSelectIntent, appDeleteNewActions } from "../actions/app";
 
 class ExplorerContainer extends Component {
   onDropIntent = (dragIndex, dropIndex) => {
@@ -247,6 +247,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(apiMoveIntentRequest(botId, intentId, from, to));
   },
   appSelectIntent: (botId, intentIndex) => {
+    dispatch(appDeleteNewActions());
     dispatch(appSelectIntent(botId, intentIndex));
   },
 });

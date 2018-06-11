@@ -62,8 +62,6 @@ class IntentContainer extends Component {
     this.actionContainer = undefined;
     this.actionType = undefined;
     this.setState({ editing: false });
-    this.props.appSetNewActions("input", "");
-    this.props.appSetNewActions("output", "");
   }
 
   handleDeleteActionClick = (containerName, index) => {

@@ -75,7 +75,8 @@ class ActionsList extends Component {
     } = this.props;
     let contentList;
     const isCondition =
-      !actions || actions.length === 0 || actions[0].type === "condition";
+      name === "output" &&
+      (!actions || actions.length === 0 || actions[0].type === "condition");
     const editable = true;
     const addContent = (
       <ActionsItem

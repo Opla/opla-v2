@@ -1074,9 +1074,9 @@ exports[`components/actionsList can have an unique id 1`] = `
       style={
         Object {
           "color": "rgb(0, 0, 0)",
-          "height": "auto",
+          "height": "100%",
           "minHeight": "40px",
-          "padding": "16px",
+          "padding": "0px 16px",
         }
       }
     >
@@ -1161,9 +1161,9 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       style={
         Object {
           "color": "rgb(0, 0, 0)",
-          "height": "auto",
+          "height": "100%",
           "minHeight": "40px",
-          "padding": "16px",
+          "padding": "0px 16px",
         }
       }
     >
@@ -1248,9 +1248,9 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       style={
         Object {
           "color": "rgb(0, 0, 0)",
-          "height": "auto",
+          "height": "100%",
           "minHeight": "40px",
-          "padding": "16px",
+          "padding": "0px 16px",
         }
       }
     >
@@ -1335,9 +1335,9 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       style={
         Object {
           "color": "rgb(0, 0, 0)",
-          "height": "auto",
+          "height": "100%",
           "minHeight": "40px",
-          "padding": "16px",
+          "padding": "0px 16px",
         }
       }
     >
@@ -1422,9 +1422,9 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       style={
         Object {
           "color": "rgb(0, 0, 0)",
-          "height": "auto",
+          "height": "100%",
           "minHeight": "40px",
-          "padding": "16px",
+          "padding": "0px 16px",
         }
       }
     >
@@ -1509,9 +1509,9 @@ exports[`components/actionsList renders correctly 1`] = `
       style={
         Object {
           "color": "rgb(0, 0, 0)",
-          "height": "auto",
+          "height": "100%",
           "minHeight": "40px",
-          "padding": "16px",
+          "padding": "0px 16px",
         }
       }
     >
