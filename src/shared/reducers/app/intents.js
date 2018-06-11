@@ -22,6 +22,7 @@ import {
   APP_SETINTENTACTION,
   APP_DELETEINTENTACTION,
   APP_SETNEWACTIONS,
+  APP_DELETENEWACTIONS,
 } from "../../actions/constants";
 
 export const initialState = {
@@ -334,4 +335,10 @@ export const handlers = {
       newActions,
     };
   },
+
+  // DELETE NEW ACTIONS
+  [APP_DELETENEWACTIONS]: (state) => ({
+    ...state,
+    newActions: initialState.newActions,
+  }),
 };

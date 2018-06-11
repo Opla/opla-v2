@@ -60,7 +60,7 @@ class ActionsItem extends Component {
           this.handleActionsEditableSelected(this.actionsEditableRef);
         }}
       >
-        {isCondition && containerName === "output" ? (
+        {isCondition ? (
           <ConditionsActionsEditable
             containerName={this.props.containerName}
             content={action}
