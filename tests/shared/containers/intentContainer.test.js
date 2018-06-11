@@ -185,28 +185,43 @@ describe("containers/IntentContainerBase", () => {
         jest.runAllTimers();
         wrapper.update();
 
+        // limited toolbox
         expect(wrapper.find("Tooltip")).toHaveLength(4);
-        const isInputActionIds = [
-          "#atb_text",
-          "#atb_output_var",
-          "#atb_any",
-          "#atb_trash",
-        ];
+        expect(wrapper.find("#atb_text").exists()).toEqual(true);
+        expect(wrapper.find("#atb_output_var").exists()).toEqual(true);
+        expect(wrapper.find("#atb_any").exists()).toEqual(true);
+        expect(wrapper.find("#atb_trash").exists()).toEqual(true);
+      });
 
-        isInputActionIds.forEach((actionId, index) => {
-          try {
-            expect(
-              wrapper
-                .find("Tooltip")
-                .at(index)
-                .find(`Icon${actionId}`),
-            ).toHaveLength(1);
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.error("at index", index, "cant find actionId", actionId);
-            throw e;
-          }
-        });
+      it("should conditionally display Toolbox condition button", () => {
+        const actionsComponent = {
+          props: {
+            containerName: "output",
+          },
+        };
+
+        const emptySelectedIntent = { output: [] };
+        const conditionSeletedIntent = {
+          output: [{ type: "condition", children: [] }],
+        };
+        const wrapper = mount(
+          <IntentContainerBase
+            {...defaultProps}
+            selectedIntent={emptySelectedIntent}
+          />,
+        );
+        wrapper.update();
+        wrapper.instance().handleSelectActionsComponent(actionsComponent);
+        jest.runAllTimers();
+        wrapper.update();
+
+        expect(wrapper.find("Tooltip")).toHaveLength(7);
+        expect(wrapper.find("#atb_condition").exists()).toEqual(true);
+
+        wrapper.setProps({ selectedIntent: conditionSeletedIntent });
+
+        expect(wrapper.find("Tooltip")).toHaveLength(6);
+        expect(wrapper.find("#atb_condition").exists()).toEqual(false);
       });
     });
 
