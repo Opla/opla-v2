@@ -18,20 +18,28 @@ class ActionsList extends Component {
   }
 
   handleAddNewAction = (content, isCondition = false) => {
-    let newContent = content;
-    if (isCondition && (content.name || content.value)) {
-      this.handleAddActionCondition(newContent);
-      // clear new
-      this.props.onNewActionsChange(this.props.name, {
-        name: "",
-        value: "",
-        text: "",
-      });
-    } else {
-      if (isCondition) {
-        newContent = content.text;
+    if (isCondition) {
+      // add action condition
+      if (content.text && (content.name || content.value)) {
+        this.handleAddActionCondition(content);
+        // clear new
+        this.props.onNewActionsChange(this.props.name, {
+          name: "",
+          value: "",
+          text: "",
+        });
+        // add condition as string action if actions list and condition values are empty
+      } else if (
+        this.props.actions.length === 0 &&
+        content.text &&
+        !content.name &&
+        !content.value
+      ) {
+        this.handleAddNewAction(content.text, false);
       }
-      this.handleAddAction(newContent);
+      // add string action
+    } else {
+      this.handleAddAction(content);
       this.props.onNewActionsChange(this.props.name, "");
     }
   };

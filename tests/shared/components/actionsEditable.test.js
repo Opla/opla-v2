@@ -241,16 +241,6 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_3", 0);
   });
 
-  it("should call clear() on Enter key pressed", () => {
-    const clearSpy = jest.fn();
-    const wrapper = shallow(
-      <ActionsEditable {...defaultProps} content={null} isNew />,
-    );
-    wrapper.instance().clear = clearSpy;
-    wrapper.instance().handleKeyPress({ which: 13, preventDefault: () => {} });
-    expect(clearSpy).toHaveBeenCalled();
-  });
-
   it("should clear state content on clear()", () => {
     const wrapper = shallow(
       <ActionsEditable {...defaultProps} content={null} isNew />,
