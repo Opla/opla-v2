@@ -153,14 +153,23 @@ class IntentContainer extends Component {
     } else {
       this.setState({ editing: true, toolboxFocus: true });
       if (action === "condition") {
-        this.toggleDisplayCondition();
+        this.toggleCondition();
       } else if (action !== "focus" && this.selectedActionsComponent) {
         this.appendAction(this.selectedActionsComponent, action);
       }
     }
   };
 
-  toggleDisplayCondition = () => {
+  toggleCondition = () => {
+    const { newActions } = this.props;
+    // change newActions type
+    if (newActions.output && typeof newActions.output === "string") {
+      this.handleNewActionsChange("output", { text: newActions.output });
+    } else if (newActions.output && typeof newActions.output === "object") {
+      this.handleNewActionsChange("output", newActions.output.text);
+    }
+
+    // change condition display
     this.setState({
       displayCondition: !this.state.displayCondition,
     });
