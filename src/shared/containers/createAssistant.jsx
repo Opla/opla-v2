@@ -302,7 +302,7 @@ CreateAssistantBase.defaultProps = {
 
 CreateAssistantBase.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   createBot: PropTypes.func.isRequired,
   appSetTitle: PropTypes.func.isRequired,
   apiGetTemplates: PropTypes.func.isRequired,
