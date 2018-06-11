@@ -14,6 +14,7 @@ describe("components/actionsToolbox", () => {
     onChange: () => {},
     type: null,
     isInput: false,
+    condition: true,
     disable: false,
   };
 
