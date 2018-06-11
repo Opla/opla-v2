@@ -44,7 +44,7 @@ class ConditionsActionsEditable extends Component {
             onChange={(e) => {
               this.updateContent({ name: e.target.value });
             }}
-            value={this.props.content.name}
+            value={this.props.content.name || ""}
             style={style}
           />
           =
@@ -53,7 +53,7 @@ class ConditionsActionsEditable extends Component {
             onChange={(e) => {
               this.updateContent({ value: e.target.value });
             }}
-            value={this.props.content.value}
+            value={this.props.content.value || ""}
             style={style}
           />
         </div>
@@ -73,7 +73,7 @@ class ConditionsActionsEditable extends Component {
 }
 
 ConditionsActionsEditable.defaultProps = {
-  content: {},
+  content: { name: "", value: "", text: "" },
   placeholder: null,
   onChange: () => {},
   onSelected: () => {},
@@ -92,7 +92,7 @@ ConditionsActionsEditable.propTypes = {
     name: PropTypes.string,
     value: PropTypes.string,
     text: PropTypes.string,
-  }),
+  }).isRequired,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onSelected: PropTypes.func,

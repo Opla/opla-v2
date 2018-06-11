@@ -84,7 +84,7 @@ class IntentContainer extends Component {
       if (name === null && (!intent.output || intent.output.length === 0)) {
         actionValue = text;
         actionType = null;
-      } else if (name && text.length > 0) {
+      } else if (name != null && text.length > 0) {
         const type = "item";
         actionValue = {
           name,
@@ -164,7 +164,11 @@ class IntentContainer extends Component {
     const { newActions } = this.props;
     // change newActions type
     if (newActions.output && typeof newActions.output === "string") {
-      this.handleNewActionsChange("output", { text: newActions.output });
+      this.handleNewActionsChange("output", {
+        name: "",
+        value: "",
+        text: newActions.output,
+      });
     } else if (newActions.output && typeof newActions.output === "object") {
       this.handleNewActionsChange("output", newActions.output.text);
     }
