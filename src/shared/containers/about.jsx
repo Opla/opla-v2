@@ -22,7 +22,7 @@ const infoStyle = {
   paddingBottom: "20px",
 };
 
-export class About extends Component {
+class About extends Component {
   componentWillMount() {
     this.props.appSetTitle("About");
   }
@@ -34,7 +34,7 @@ export class About extends Component {
       <div style={aboutStyle}>
         <div style={infoStyle}>{isLoading ? "" : null} </div>
         <p>
-          We are Opla, the mightly volcanic team ! Since 2015 we started
+          We are Opla, the mighty volcanic team ! Since 2015 we started
           developing this deeptech chatbot solution. We are truly commited to
           OpenSource. And we are fully involved in creating the best and
           complete tool for conversational interface, user oriented.
