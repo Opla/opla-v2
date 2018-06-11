@@ -84,8 +84,9 @@ class ActionsList extends Component {
     } = this.props;
     let contentList;
     const isActionsEmpty = !actions || actions.length === 0;
-    const isActionsCondition = !isActionsEmpty && actions[0].type === "condition";
-    const isActionsString = !isActionsEmpty && !isActionsCondition;
+    const isActionsCondition =
+      !isActionsEmpty && actions[0].type === "condition";
+    // const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
     const addContent = (
       <ActionsItem
@@ -100,11 +101,16 @@ class ActionsList extends Component {
         }}
         onSelectActionsComponent={onSelectActionsComponent}
         isNew
-        isCondition={name==="output" && (isActionsCondition || (isActionsEmpty && displayCondition))}
+        isCondition={
+          name === "output" &&
+          (isActionsCondition || (isActionsEmpty && displayCondition))
+        }
       />
     );
     if (actions && actions.length > 0) {
-      const actionsDisplayed = isActionsCondition ? actions[0].children : actions;
+      const actionsDisplayed = isActionsCondition
+        ? actions[0].children
+        : actions;
       contentList = (
         <List style={{ overflow: "auto", maxHeight: "26vh" }}>
           {actionsDisplayed.map((action, index) => (
@@ -162,6 +168,7 @@ ActionsList.propTypes = {
   onSelect: PropTypes.func,
   onDrop: PropTypes.func,
   onAction: PropTypes.func,
+  displayCondition: PropTypes.bool,
   intentId: PropTypes.string,
   newAction: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   onSelectActionsComponent: PropTypes.func.isRequired,

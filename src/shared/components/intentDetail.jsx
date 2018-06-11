@@ -118,6 +118,7 @@ IntentDetail.propTypes = {
     input: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   }).isRequired,
+  displayCondition: PropTypes.bool,
 };
 
 export default IntentDetail;

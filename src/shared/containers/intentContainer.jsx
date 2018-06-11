@@ -152,10 +152,9 @@ class IntentContainer extends Component {
       this.setState({ toolboxFocus: false });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
-      if (action === "condition"){
+      if (action === "condition") {
         this.toggleDisplayCondition();
-      }
-      else if (action !== "focus" && this.selectedActionsComponent) {
+      } else if (action !== "focus" && this.selectedActionsComponent) {
         this.appendAction(this.selectedActionsComponent, action);
       }
     }
@@ -165,7 +164,7 @@ class IntentContainer extends Component {
     this.setState({
       displayCondition: !this.state.displayCondition,
     });
-  }
+  };
 
   handleEditAction = (dialog, editAction) => {
     if (editAction === "Change" || editAction === "Add") {

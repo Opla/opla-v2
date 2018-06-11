@@ -65,7 +65,9 @@ class ActionsItem extends Component {
             containerName={this.props.containerName}
             content={action}
             editable={editable}
-            onAddAction={(content)=>{this.props.onAddAction(content, true);}}
+            onAddAction={(content) => {
+              this.props.onAddAction(content, true);
+            }}
             placeholder={addText}
             onChange={this.props.onActionChange}
             onActionsEditableRefchange={(e) => {
