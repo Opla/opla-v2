@@ -8,7 +8,34 @@
  @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
  @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
 
- .mdc-list {
+ html {
+  cursor: default;
+}
+
+.message_welcome {
+  cursor: pointer;
+}
+
+.mrb-subheader-menu {
+ cursor: pointer;
+}
+
+.mrb-panel-header__actions > div > i {
+ cursor: pointer;
+}
+.mrb-subheader-right {
+ cursor: pointer;
+}
+
+.mdl-button-left {
+  display: none;
+}
+
+.mdl-button-right {
+ cursor: pointer;
+}
+
+.mdc-list {
    padding: 0px;
  }
  
