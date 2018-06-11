@@ -21,6 +21,7 @@ import ActionEditor from "../components/actionEditor";
 const IntentDetail = ({
   intent,
   newActions,
+  displayCondition,
   onSelect,
   onAction,
   onSelectActionsComponent,
@@ -47,6 +48,7 @@ const IntentDetail = ({
         <ActionsList
           name="output"
           actions={output}
+          displayCondition={displayCondition}
           newAction={newActions.output}
           onSelect={onSelect}
           onAction={onAction}

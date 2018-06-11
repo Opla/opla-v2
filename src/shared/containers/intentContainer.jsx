@@ -27,6 +27,7 @@ class IntentContainer extends Component {
       editing: false,
       toolboxFocus: false,
       toolboxDisplayMode: "",
+      displayCondition: true,
     };
     this.selectedActionsComponent = null;
   }
@@ -151,11 +152,20 @@ class IntentContainer extends Component {
       this.setState({ toolboxFocus: false });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
-      if (action !== "focus" && this.selectedActionsComponent) {
+      if (action === "condition"){
+        this.toggleDisplayCondition();
+      }
+      else if (action !== "focus" && this.selectedActionsComponent) {
         this.appendAction(this.selectedActionsComponent, action);
       }
     }
   };
+
+  toggleDisplayCondition = () => {
+    this.setState({
+      displayCondition: !this.state.displayCondition,
+    });
+  }
 
   handleEditAction = (dialog, editAction) => {
     if (editAction === "Change" || editAction === "Add") {
@@ -370,6 +380,7 @@ class IntentContainer extends Component {
           <IntentDetail
             intent={intent}
             newActions={this.props.newActions}
+            displayCondition={this.state.displayCondition}
             onSelect={this.handleActions}
             onAction={this.handleDoActions}
             onSelectActionsComponent={this.handleSelectActionsComponent}

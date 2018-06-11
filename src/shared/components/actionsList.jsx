@@ -78,20 +78,21 @@ class ActionsList extends Component {
       name,
       actions,
       newAction,
+      displayCondition,
       onDrop,
       onSelectActionsComponent,
     } = this.props;
     let contentList;
-    const isCondition =
-      name === "output" &&
-      (!actions || actions.length === 0 || actions[0].type === "condition");
+    const isActionsEmpty = !actions || actions.length === 0;
+    const isActionsCondition = !isActionsEmpty && actions[0].type === "condition";
+    const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
     const addContent = (
       <ActionsItem
         containerName={name}
         action={newAction}
         editable={editable}
-        onAddAction={(content) => {
+        onAddAction={(content, isCondition = false) => {
           this.handleAddNewAction(content, isCondition);
         }}
         onActionChange={(newContent) => {
@@ -99,11 +100,11 @@ class ActionsList extends Component {
         }}
         onSelectActionsComponent={onSelectActionsComponent}
         isNew
-        isCondition={isCondition}
+        isCondition={name==="output" && (isActionsCondition || (isActionsEmpty && displayCondition))}
       />
     );
     if (actions && actions.length > 0) {
-      const actionsDisplayed = isCondition ? actions[0].children : actions;
+      const actionsDisplayed = isActionsCondition ? actions[0].children : actions;
       contentList = (
         <List style={{ overflow: "auto", maxHeight: "26vh" }}>
           {actionsDisplayed.map((action, index) => (
@@ -115,7 +116,7 @@ class ActionsList extends Component {
               key={index}
               itemKey={`cd_${index}`}
               onActionChange={(newContent) => {
-                if (isCondition) {
+                if (isActionsCondition) {
                   this.handleActionConditionChange(newContent, index);
                 } else {
                   this.handleActionChange(newContent, index);
@@ -125,7 +126,7 @@ class ActionsList extends Component {
               onDeleteActionClick={() => {
                 this.handleDeleteClick(index);
               }}
-              isCondition={isCondition}
+              isCondition={isActionsCondition}
             />
           ))}
         </List>
