@@ -34,10 +34,10 @@ class About extends Component {
       <div style={aboutStyle}>
         <div style={infoStyle}>{isLoading ? "" : null} </div>
         <p>
-          We are Opla, the mighty volcanic team ! Since 2015 we started
-          developing this deeptech chatbot solution. We are truly commited to
-          OpenSource. And we are fully involved in creating the best and
-          complete tool for conversational interface, user oriented.
+          We are Opla, the mighty volcanic team! Since 2015 we started
+          developing this deeptech chatbot solution. Nowadays we are truly
+          commited to OpenSource and fully involved in creating the most
+          complete and user oriented conversational interface tool.
         </p>
         <p>
           Version<br />0.1 : Amazing Alou (Le Puy Alou : a french volcano) June
@@ -53,10 +53,25 @@ class About extends Component {
         <p>
           Thanks to the team and contributors<br />
           Julie, Maali, Marie, Nicolle, Dorian, Loic, Manu, Mik, Thomas, Will,
-          Will
+          Will<br />
+          <a
+            href="https://github.com/Opla/joinUs"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            And we are hiring !
+          </a>
         </p>
         <p>
-          Follow us on Twitter @opla_ai<br />
+          Follow us on Twitter
+          <a
+            href="https://twitter.com/opla_ai/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            @opla_ai
+          </a>
+          <br />
           Or contact us hello@opla.ai
         </p>
       </div>
