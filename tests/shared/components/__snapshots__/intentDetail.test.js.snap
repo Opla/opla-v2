@@ -157,7 +157,7 @@ exports[`components/intentDetail can render intent with special characters corre
               >
                 <input
                   className="mdc-text-field__input"
-                  defaultValue={null}
+                  defaultValue={undefined}
                   id="conditionName"
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -187,7 +187,7 @@ exports[`components/intentDetail can render intent with special characters corre
               >
                 <input
                   className="mdc-text-field__input"
-                  defaultValue={null}
+                  defaultValue={undefined}
                   id="conditionValue"
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -498,7 +498,7 @@ exports[`components/intentDetail renders correctly 1`] = `
               >
                 <input
                   className="mdc-text-field__input"
-                  defaultValue={null}
+                  defaultValue={undefined}
                   id="conditionName"
                   onBlur={[Function]}
                   onChange={[Function]}
@@ -528,7 +528,7 @@ exports[`components/intentDetail renders correctly 1`] = `
               >
                 <input
                   className="mdc-text-field__input"
-                  defaultValue={null}
+                  defaultValue={undefined}
                   id="conditionValue"
                   onBlur={[Function]}
                   onChange={[Function]}
