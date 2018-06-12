@@ -52,6 +52,10 @@ class ActionsToolbox extends Component {
     this.props.onChange("any");
   }
 
+  onConditionSelected() {
+    this.props.onChange("condition");
+  }
+
   onVariableSelected() {
     this.variableSelect();
     this.props.onChange("output_var");
@@ -246,6 +250,20 @@ class ActionsToolbox extends Component {
               name="insert_link"
             />
           </Tooltip>
+          {this.props.condition && (
+            <Tooltip label="Insert condition">
+              <Icon
+                style={styleButton}
+                /* colored={toolbox.any} */
+                onClick={(e) => {
+                  // e.stopPropagation();
+                  this.onConditionSelected(e);
+                }}
+                id="atb_condition"
+                name="device_hub"
+              />
+            </Tooltip>
+          )}
         </span>
       );
     }
@@ -303,6 +321,7 @@ ActionsToolbox.defaultProps = {
   onChange: () => {},
   type: null,
   isInput: false,
+  condition: false,
   disable: false,
 };
 
@@ -310,6 +329,7 @@ ActionsToolbox.propTypes = {
   onChange: PropTypes.func,
   type: PropTypes.string,
   isInput: PropTypes.bool,
+  condition: PropTypes.bool,
   disable: PropTypes.bool,
 };
 

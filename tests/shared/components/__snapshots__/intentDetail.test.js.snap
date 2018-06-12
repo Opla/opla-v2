@@ -130,9 +130,9 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "color": "rgb(0, 0, 0)",
-              "height": "auto",
+              "height": "100%",
               "minHeight": "40px",
-              "padding": "16px",
+              "padding": "0px 16px",
             }
           }
         >
@@ -142,100 +142,35 @@ exports[`components/intentDetail can render intent with special characters corre
           >
             chat_bubble_outline
           </i>
-          <div>
-            <div
-              onKeyPress={[Function]}
-            >
-              <div
-                className="mdc-text-field mdc-text-field--upgraded"
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            tabIndex={0}
+          >
+            <span>
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
                 style={
                   Object {
-                    "height": "auto",
-                    "marginTop": "0px",
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                    "width": "100vw",
                   }
                 }
-              >
-                <input
-                  className="mdc-text-field__input"
-                  defaultValue={null}
-                  id="conditionName"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="text"
-                  value={undefined}
-                />
-                <label
-                  className="mdc-floating-label"
-                  focused="false"
-                  htmlFor="conditionName"
-                  style={Object {}}
-                />
-                <div
-                  className="mdc-text-field__bottom-line"
-                />
-              </div>
-              =
-              <div
-                className="mdc-text-field mdc-text-field--upgraded"
-                style={
-                  Object {
-                    "height": "auto",
-                    "marginTop": "0px",
-                  }
-                }
-              >
-                <input
-                  className="mdc-text-field__input"
-                  defaultValue={null}
-                  id="conditionValue"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="text"
-                  value={undefined}
-                />
-                <label
-                  className="mdc-floating-label"
-                  focused="false"
-                  htmlFor="conditionValue"
-                  style={Object {}}
-                />
-                <div
-                  className="mdc-text-field__bottom-line"
-                />
-              </div>
-            </div>
-            <div
-              aria-label="Add an output response"
-              className="contenteditable"
-              id="ae_content"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              onKeyPress={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              spellCheck={false}
-              tabIndex={0}
-            >
-              <span>
-                <span
-                  className={undefined}
-                  data="text"
-                  id="ae_start"
-                  onClick={[Function]}
-                  onInput={[Function]}
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "padding": "0 4px",
-                      "width": "100vw",
-                    }
-                  }
-                  tabIndex={1}
-                />
-              </span>
-            </div>
+                tabIndex={1}
+              />
+            </span>
           </div>
           <div />
         </li>
@@ -471,9 +406,9 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "color": "rgb(0, 0, 0)",
-              "height": "auto",
+              "height": "100%",
               "minHeight": "40px",
-              "padding": "16px",
+              "padding": "0px 16px",
             }
           }
         >
@@ -483,100 +418,35 @@ exports[`components/intentDetail renders correctly 1`] = `
           >
             chat_bubble_outline
           </i>
-          <div>
-            <div
-              onKeyPress={[Function]}
-            >
-              <div
-                className="mdc-text-field mdc-text-field--upgraded"
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            tabIndex={0}
+          >
+            <span>
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
                 style={
                   Object {
-                    "height": "auto",
-                    "marginTop": "0px",
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                    "width": "100vw",
                   }
                 }
-              >
-                <input
-                  className="mdc-text-field__input"
-                  defaultValue={null}
-                  id="conditionName"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="text"
-                  value={undefined}
-                />
-                <label
-                  className="mdc-floating-label"
-                  focused="false"
-                  htmlFor="conditionName"
-                  style={Object {}}
-                />
-                <div
-                  className="mdc-text-field__bottom-line"
-                />
-              </div>
-              =
-              <div
-                className="mdc-text-field mdc-text-field--upgraded"
-                style={
-                  Object {
-                    "height": "auto",
-                    "marginTop": "0px",
-                  }
-                }
-              >
-                <input
-                  className="mdc-text-field__input"
-                  defaultValue={null}
-                  id="conditionValue"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="text"
-                  value={undefined}
-                />
-                <label
-                  className="mdc-floating-label"
-                  focused="false"
-                  htmlFor="conditionValue"
-                  style={Object {}}
-                />
-                <div
-                  className="mdc-text-field__bottom-line"
-                />
-              </div>
-            </div>
-            <div
-              aria-label="Add an output response"
-              className="contenteditable"
-              id="ae_content"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              onKeyPress={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              spellCheck={false}
-              tabIndex={0}
-            >
-              <span>
-                <span
-                  className={undefined}
-                  data="text"
-                  id="ae_start"
-                  onClick={[Function]}
-                  onInput={[Function]}
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "padding": "0 4px",
-                      "width": "100vw",
-                    }
-                  }
-                  tabIndex={1}
-                />
-              </span>
-            </div>
+                tabIndex={1}
+              />
+            </span>
           </div>
           <div />
         </li>

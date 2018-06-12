@@ -185,28 +185,43 @@ describe("containers/IntentContainerBase", () => {
         jest.runAllTimers();
         wrapper.update();
 
+        // limited toolbox
         expect(wrapper.find("Tooltip")).toHaveLength(4);
-        const isInputActionIds = [
-          "#atb_text",
-          "#atb_output_var",
-          "#atb_any",
-          "#atb_trash",
-        ];
+        expect(wrapper.find("#atb_text").exists()).toEqual(true);
+        expect(wrapper.find("#atb_output_var").exists()).toEqual(true);
+        expect(wrapper.find("#atb_any").exists()).toEqual(true);
+        expect(wrapper.find("#atb_trash").exists()).toEqual(true);
+      });
 
-        isInputActionIds.forEach((actionId, index) => {
-          try {
-            expect(
-              wrapper
-                .find("Tooltip")
-                .at(index)
-                .find(`Icon${actionId}`),
-            ).toHaveLength(1);
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.error("at index", index, "cant find actionId", actionId);
-            throw e;
-          }
-        });
+      it("should conditionally display Toolbox condition button", () => {
+        const actionsComponent = {
+          props: {
+            containerName: "output",
+          },
+        };
+
+        const emptySelectedIntent = { output: [] };
+        const conditionSeletedIntent = {
+          output: [{ type: "condition", children: [] }],
+        };
+        const wrapper = mount(
+          <IntentContainerBase
+            {...defaultProps}
+            selectedIntent={emptySelectedIntent}
+          />,
+        );
+        wrapper.update();
+        wrapper.instance().handleSelectActionsComponent(actionsComponent);
+        jest.runAllTimers();
+        wrapper.update();
+
+        expect(wrapper.find("Tooltip")).toHaveLength(7);
+        expect(wrapper.find("#atb_condition").exists()).toEqual(true);
+
+        wrapper.setProps({ selectedIntent: conditionSeletedIntent });
+
+        expect(wrapper.find("Tooltip")).toHaveLength(6);
+        expect(wrapper.find("#atb_condition").exists()).toEqual(false);
       });
     });
 
@@ -534,6 +549,32 @@ describe("containers/IntentContainerBase", () => {
       expect(wrapper.state().editing).toBe(true);
       expect(appendActionSpy).toHaveBeenCalled();
       expect(appendActionSpy).toBeCalledWith({}, "foo");
+    });
+  });
+
+  describe("toggleCondition", () => {
+    it("should change newActions Type", () => {
+      const appSetNewActionsSpy = jest.fn();
+      const wrapper = shallow(
+        <IntentContainerBase
+          {...defaultProps}
+          newActions={{ output: "foo" }}
+          appSetNewActions={appSetNewActionsSpy}
+        />,
+      );
+      wrapper.instance().toggleCondition();
+      expect(appSetNewActionsSpy.mock.calls[0][0]).toEqual("output");
+      expect(appSetNewActionsSpy.mock.calls[0][1]).toEqual({
+        name: "",
+        text: "foo",
+        value: "",
+      });
+
+      wrapper.setProps({ newActions: { output: { text: "foo" } } });
+      wrapper.instance().toggleCondition();
+      expect(appSetNewActionsSpy.mock.calls[1][0]).toEqual("output");
+      expect(appSetNewActionsSpy.mock.calls[1][1]).toEqual("foo");
+      expect(appSetNewActionsSpy).toHaveBeenCalledWith("output", "foo");
     });
   });
 });

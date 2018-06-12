@@ -21,6 +21,7 @@ import ActionEditor from "../components/actionEditor";
 const IntentDetail = ({
   intent,
   newActions,
+  displayCondition,
   onSelect,
   onAction,
   onSelectActionsComponent,
@@ -47,6 +48,7 @@ const IntentDetail = ({
         <ActionsList
           name="output"
           actions={output}
+          displayCondition={displayCondition}
           newAction={newActions.output}
           onSelect={onSelect}
           onAction={onAction}
@@ -116,6 +118,7 @@ IntentDetail.propTypes = {
     input: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   }).isRequired,
+  displayCondition: PropTypes.bool,
 };
 
 export default IntentDetail;
