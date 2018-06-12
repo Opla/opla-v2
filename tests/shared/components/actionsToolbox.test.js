@@ -14,6 +14,7 @@ describe("components/actionsToolbox", () => {
     onChange: () => {},
     type: null,
     isInput: false,
+    condition: true,
     disable: false,
   };
 
@@ -30,13 +31,14 @@ describe("components/actionsToolbox", () => {
     "#atb_variable",
     "#atb_br",
     "#atb_button",
+    "#atb_condition",
     "#atb_trash",
   ];
 
   it("should render outputs actions", () => {
     const wrapper = shallow(<ActionsToolbox {...defaultProps} />);
 
-    expect(wrapper.find("Tooltip")).toHaveLength(6);
+    expect(wrapper.find("Tooltip")).toHaveLength(7);
 
     outputActionIds.forEach((actionId, index) => {
       try {

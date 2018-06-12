@@ -27,6 +27,7 @@ class IntentContainer extends Component {
       editing: false,
       toolboxFocus: false,
       toolboxDisplayMode: "",
+      displayCondition: false,
     };
     this.selectedActionsComponent = null;
   }
@@ -61,7 +62,7 @@ class IntentContainer extends Component {
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
-    this.setState({ editing: false });
+    this.setState({ editing: false, displayCondition: false });
   }
 
   handleDeleteActionClick = (containerName, index) => {
@@ -83,7 +84,7 @@ class IntentContainer extends Component {
       if (name === null && (!intent.output || intent.output.length === 0)) {
         actionValue = text;
         actionType = null;
-      } else if (name && text.length > 0) {
+      } else if (name != null && text.length > 0) {
         const type = "item";
         actionValue = {
           name,
@@ -151,10 +152,31 @@ class IntentContainer extends Component {
       this.setState({ toolboxFocus: false });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
-      if (action !== "focus" && this.selectedActionsComponent) {
+      if (action === "condition") {
+        this.toggleCondition();
+      } else if (action !== "focus" && this.selectedActionsComponent) {
         this.appendAction(this.selectedActionsComponent, action);
       }
     }
+  };
+
+  toggleCondition = () => {
+    const { newActions } = this.props;
+    // change newActions type
+    if (newActions.output && typeof newActions.output === "string") {
+      this.handleNewActionsChange("output", {
+        name: "",
+        value: "",
+        text: newActions.output,
+      });
+    } else if (newActions.output && typeof newActions.output === "object") {
+      this.handleNewActionsChange("output", newActions.output.text);
+    }
+
+    // change condition display
+    this.setState({
+      displayCondition: !this.state.displayCondition,
+    });
   };
 
   handleEditAction = (dialog, editAction) => {
@@ -331,10 +353,13 @@ class IntentContainer extends Component {
       let toolbox;
       if (editing || toolboxFocus) {
         const isInput = this.state.toolboxDisplayMode === "input";
+        const isIntentOutputEmpty =
+          !intent || !intent.output || intent.output.length === 0;
         toolbox = (
           <ActionsToolbox
             onChange={this.handleChangeToolbox}
             isInput={isInput}
+            condition={isIntentOutputEmpty}
           />
         );
       }
@@ -370,6 +395,7 @@ class IntentContainer extends Component {
           <IntentDetail
             intent={intent}
             newActions={this.props.newActions}
+            displayCondition={this.state.displayCondition}
             onSelect={this.handleActions}
             onAction={this.handleDoActions}
             onSelectActionsComponent={this.handleSelectActionsComponent}
