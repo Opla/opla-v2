@@ -43,6 +43,9 @@ const appProps = {
   },
   design: {
     minTitleName: true,
+    toolbar: {
+      theme: "white",
+    },
     drawer: {
       type: "persistent",
       themeDark: true,
