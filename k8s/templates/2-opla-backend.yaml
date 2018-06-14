@@ -34,6 +34,12 @@ spec:
         ports:
         - containerPort: 8081
         - containerPort: 9229
+        readinessProbe:
+          httpGet:
+            path: /api/v1/
+            port: 8081
+          initialDelaySeconds: 3
+          periodSeconds: 3
         env:
         - name: OPLA_BACKEND_DATABASE_HOST
           value: "db"
