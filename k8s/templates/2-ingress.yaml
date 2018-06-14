@@ -18,7 +18,9 @@ spec:
         backend:
           serviceName: front
           servicePort: 80
+  {{- if eq .Values.tls true }}
   tls:
     - secretName: {{ .Values.front.domain | replace "." "-" }}-tls
       hosts:
         - {{ .Values.front.domain }}
+  {{- end }}

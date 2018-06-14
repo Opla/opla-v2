@@ -47,6 +47,12 @@ spec:
           value: "opla"
         - name: OPLA_BACKEND_PORT
           value: "80"
+        - name: APP_INSTANCE_NAME
+          value: {{ .Values.instance.name }}
+        - name: APP_INSTANCE_COLOR
+          value: {{ .Values.instance.color }}
+        - name: APP_INSTANCE_DESCRIPTION
+          value: {{ .Values.instance.description }}
         volumeMounts:
         - mountPath: /src/config/config.json
           name: config

@@ -5,3 +5,15 @@ auth:
   clientId: xxmtlkZAre2aEj6AgVtat31wStpehwthfT0bpMRBEJ3lmb683ZBwbclxDiIWxG4u
   secret: 301oRBhGKGeo6AxBVdhi1YmZ2q2xILynWFsP1oOq4Q5zuJ1r3gqRUFwz1wFPHmp5
   userId: SaE6GLCT1CUkPyAWKQiomq7xzw4QqfXk
+
+front:
+  domain: localhost
+api:
+  domain: localhost
+
+tls: false
+
+instance:
+  color: "#7f0000"
+  name: "Dev"
+  description: "Not for production use."

@@ -3,12 +3,12 @@ set -ev
 
 echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 
-export REPO=opla/front
-
 echo $TRAVIS_COMMIT
 echo $TRAVIS_BRANCH
 
-docker build -t $REPO:$TRAVIS_COMMIT .
+export REPO=opla/front
+
+make build COMMIT=$TRAVIS_COMMIT BUILD=$TRAVIS_BUILD_ID
 docker push $REPO:$TRAVIS_COMMIT
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
