@@ -47,7 +47,7 @@ const appProps = {
       theme: "white",
     },
     drawer: {
-      type: "persistent",
+      type: "temporary",
       themeDark: true,
       renderFooter: (props) => <DrawerFooter {...props} />,
     },
