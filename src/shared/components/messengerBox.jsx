@@ -112,10 +112,10 @@ class MessengerBox extends Component {
     if (messages && Array.isArray(messages)) {
       sorted = [...messages];
       sorted = sorted.sort((msg1, msg2) => {
-        if (msg1.timestamp < msg2.timestamp) {
+        if (msg1.created_time < msg2.created_time) {
           return -1;
         }
-        if (msg1.timestamp === msg2.timestamp) {
+        if (msg1.created_time === msg2.created_time) {
           return 0;
         }
         return 1;
