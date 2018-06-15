@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: db
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     app: db
@@ -16,6 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: db
+  namespace: {{ .Values.namespace }}
   labels:
     app: db
 
@@ -45,11 +47,11 @@ spec:
         - name: MYSQL_ALLOW_EMPTY_PASSWORD
           value: 'yes'
         - name: MYSQL_DATABASE
-          value: opla_dev
+          value: {{ .Values.db.name }}
         - name: MYSQL_USER
-          value: opla
+          value: {{ .Values.db.user }}
         - name: MYSQL_PASSWORD
-          value: foo
+          value: {{ .Values.db.password }}
         volumeMounts:
         - mountPath: /docker-entrypoint-initdb.d/
           name: db-scripts

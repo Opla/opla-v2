@@ -1,9 +1,13 @@
 image:
- tag: master
+  tag: master
 
 db:
- image:
-  tag: master
+  image:
+    tag: master
+  name: opla_dev
+  user: opla
+  password: foo
+  host: db
 
 auth:
   clientId: xxmtlkZAre2aEj6AgVtat31wStpehwthfT0bpMRBEJ3lmb683ZBwbclxDiIWxG4u
@@ -11,3 +15,7 @@ auth:
   userId: SaE6GLCT1CUkPyAWKQiomq7xzw4QqfXk
   botId: yvUrUr20GwaWvPUoLpIVhwvg6u72rcOc3mv4MUbDJjeRnERI
   botUserId: QFmiA1RpYZ3DtXL57WmWOMurm3yNxn8R
+
+tls: false
+
+namespace: dev-ce
