@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: backend
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     app: backend
@@ -16,6 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
+  namespace: {{ .Values.namespace }}
   labels:
     app: backend
 spec:
@@ -42,15 +44,15 @@ spec:
           periodSeconds: 3
         env:
         - name: OPLA_BACKEND_DATABASE_HOST
-          value: "db"
+          value: {{ .Values.db.host }}
         - name: OPLA_BACKEND_DATABASE_PORT
           value: "3306"
         - name: OPLA_BACKEND_DATABASE_NAME
-          value: opla_dev
+          value: {{ .Values.db.name }}
         - name: OPLA_BACKEND_DATABASE_USER
-          value: opla
+          value: {{ .Values.db.user }}
         - name: OPLA_BACKEND_DATABASE_PASS
-          value: foo
+          value: {{ .Values.db.password }}
         - name: PORT
           value: "8081"
         - name: SKIP_MIGRATION
@@ -61,6 +63,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: backend-ingress
+  namespace: {{ .Values.namespace }}
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
@@ -78,7 +81,9 @@ spec:
         backend:
           serviceName: backend
           servicePort: 80
+  {{- if eq .Values.tls true }}
   tls:
     - secretName: {{ .Values.api.domain | replace "." "-" }}-tls
       hosts:
         - {{ .Values.api.domain }}
+  {{- end }}

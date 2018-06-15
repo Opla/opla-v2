@@ -1,0 +1,30 @@
+---
+project: backend
+desc: Backend
+
+tasks:
+  build:
+    cmd: |-
+      echo {{ .APP_VERSION }}
+      docker build \
+        -t {{ .REPO }}:{{ .COMMIT }} \
+        .
+  deploy:
+    cmd: |-
+      $myke _prepare
+      export APP_VERSION=`jq -r .version <package.json`
+      (envsubst <k8s/values.yaml; envsubst <k8s/values.{{ .K8S_ENV }}.yaml) | helm upgrade --install --wait --debug --namespace {{ .K8S_NAMESPACE }} {{ .K8S_NAMESPACE }}-{{ .APPLICATION_NAME }} ./k8s {{ .HELM_XTRA_ARGS }} -f -
+
+  preview:
+    cmd: |-
+      $myke _prepare
+      export APP_VERSION=`jq -r .version <package.json`
+      (envsubst <k8s/values.yaml; envsubst <k8s/values.{{ .K8S_ENV }}.yaml) | helm template ./k8s -f -
+      
+  notify: 
+    cmd: ./travis/slack/notify.sh
+  
+  _prepare:
+    cmd: |-
+      mkdir -p k8s/tmp/migrations/
+      cp migrations/sqls/*.sql k8s/tmp/migrations/
