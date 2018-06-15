@@ -25,3 +25,9 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get >get_h
 chmod 700 get_helm.sh
 sudo ./get_helm.sh
 helm init --service-account tiller --upgrade
+
+#myke
+curl -LO https://github.com/goeuro/myke/releases/download/v1.0.0/myke_linux_amd64
+chmod +x myke_linux_amd64
+sudo mv myke_linux_amd64 /usr/local/bin/myke
+myke --version

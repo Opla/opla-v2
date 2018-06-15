@@ -14,6 +14,8 @@ api:
 tls: false
 
 instance:
+  name: Dev
   color: "#7f0000"
-  name: "Dev"
   description: "Not for production use."
+
+namespace: dev-ce

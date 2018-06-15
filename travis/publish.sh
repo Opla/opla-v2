@@ -8,7 +8,7 @@ echo $TRAVIS_BRANCH
 
 export REPO=opla/front
 
-make build COMMIT=$TRAVIS_COMMIT BUILD=$TRAVIS_BUILD_ID
+myke build --COMMIT=$TRAVIS_COMMIT --BUILD=$TRAVIS_BUILD_ID
 docker push $REPO:$TRAVIS_COMMIT
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then

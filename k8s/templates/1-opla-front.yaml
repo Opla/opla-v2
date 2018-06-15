@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: front
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     app: front
@@ -16,6 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: front
+  namespace: {{ .Values.namespace }}
   labels:
     app: front
 spec:
@@ -65,5 +67,5 @@ spec:
           subPath: config.json
       volumes:
       - configMap:
-          name: config
+          name: front-config
         name: config

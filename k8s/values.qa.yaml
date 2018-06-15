@@ -16,3 +16,5 @@ instance:
   color: "#7f0000"
   name: "QA Instance"
   description: "Not for production use."
+
+namespace: ${K8S_NAMESPACE}
