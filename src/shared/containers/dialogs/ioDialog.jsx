@@ -228,7 +228,6 @@ class IODialog extends Component {
           <section style={{ display: p2 }}>
             <Checkbox
               label="Delete previous data"
-              ripple
               checked={this.state.deletePrevious}
               onChange={(e) => {
                 this.setState({ deletePrevious: !!e.target.value });
