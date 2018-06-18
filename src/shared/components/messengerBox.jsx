@@ -137,8 +137,8 @@ class MessengerBox extends Component {
             className="messenger-content messenger-content-test bounceOutRight bounceInRight"
           >
             {sorted.map((message, index) => {
-              if (message.error) {
-                const inputText = message.input.text;
+              if (message.error || message.body.indexOf("[Error]") !== -1) {
+                const inputText = message.input ? message.input.text : "";
                 let buttons = (
                   <div>
                     <Button
