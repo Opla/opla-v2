@@ -214,7 +214,7 @@ class BotManager extends Component {
       );
     } else {
       panel1 = (
-        <Cell style={{ margin: "0px" }} span={7}>
+        <Cell style={{ margin: "0px" }} span={8}>
           <div className="mrb-panel mrb-panel-empty" style={{ height: "80%" }}>
             <div style={{ height: "30%", ...infoStyleD }}>
               <div style={{ /* margin: "48px 0", */ textAlign: "left" }}>
