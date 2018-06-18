@@ -32,7 +32,7 @@ class MessengerBox extends Component {
             end = false;
             element = {};
           }
-        } else if (ch === "/") {
+        } else if (ch === "/" && tag) {
           end = true;
         } else if (end && ch === ">") {
           // <tag /> or </tag>

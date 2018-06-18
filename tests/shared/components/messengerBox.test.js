@@ -7,6 +7,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import MessengerBox from "shared/components/messengerBox";
+import { Button } from "zrmc";
 
 describe("components/messengerBox", () => {
   const defaultProps = {
@@ -60,5 +61,38 @@ describe("components/messengerBox", () => {
     expect(wrapper.find(".message")).toHaveLength(4);
     const content = wrapper.find(".message").map((node) => node.text());
     expect(content).toEqual(["msg1", "rep1", "msg2", "rep2"]);
+  });
+
+  it("sould render messages with slash", () => {
+    const message = {
+      body: "12/09/2018",
+      conversationId: "convId00",
+      created_time: 1528986208403,
+      from: "bot_garbot8",
+      id: "id03",
+      timestamp: 1528986208,
+    };
+    const wrapper = shallow(
+      <MessengerBox {...defaultProps} messages={[message]} />,
+    );
+    expect(wrapper.find(".message")).toHaveLength(1);
+    expect(wrapper.find(".message").text()).toEqual("12/09/2018");
+  });
+
+  it("sould render messages with slash and button", () => {
+    const message = {
+      body: "12/09/2018 <button>OK</button> ou  <button>NON OK</button>  ",
+      conversationId: "convId00",
+      created_time: 1528986208403,
+      from: "bot_garbot8",
+      id: "id03",
+      timestamp: 1528986208,
+    };
+    const wrapper = shallow(
+      <MessengerBox {...defaultProps} messages={[message]} />,
+    );
+    expect(wrapper.find(".text-wrapper")).toHaveLength(1);
+    expect(wrapper.find(".text-wrapper").text()).toMatch("12/09/2018");
+    expect(wrapper.find(Button)).toHaveLength(2);
   });
 });
