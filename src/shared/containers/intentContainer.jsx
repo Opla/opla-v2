@@ -165,8 +165,6 @@ class IntentContainer extends Component {
     // change newActions type
     if (newActions.output && typeof newActions.output === "string") {
       this.handleNewActionsChange("output", {
-        name: "",
-        value: "",
         text: newActions.output,
       });
     } else if (newActions.output && typeof newActions.output === "object") {

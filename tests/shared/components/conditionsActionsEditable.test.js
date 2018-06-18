@@ -37,4 +37,25 @@ describe("components/actionsItem", () => {
       "action text",
     );
   });
+
+  it("should handle condition action without value", () => {
+    const newAction = {
+      name: "conditionName",
+      value: undefined,
+      text: "condition text",
+    };
+
+    const onChangeSpy = jest.fn();
+    const wrapper = shallow(
+      <ConditionsActionsEditable
+        containerName={defaultContainerName}
+        content={newAction}
+        onChange={onChangeSpy}
+      />,
+    );
+
+    wrapper.instance().updateContent("value", undefined);
+    wrapper.instance().updateContent("value", "");
+    expect(onChangeSpy.mock.calls).toEqual([[newAction], [newAction]]);
+  });
 });

@@ -10,10 +10,11 @@ import { TextField } from "zrmc";
 import ActionsEditable from "./actionsEditable";
 
 class ConditionsActionsEditable extends Component {
-  updateContent = (newContent) => {
+  updateContent = (key, content) => {
+    const newContent = content === "" ? undefined : content;
     this.props.onChange({
       ...this.props.content,
-      ...newContent,
+      [key]: newContent,
     });
   };
 
@@ -42,7 +43,7 @@ class ConditionsActionsEditable extends Component {
           <TextField
             id="conditionName"
             onChange={(e) => {
-              this.updateContent({ name: e.target.value });
+              this.updateContent("name", e.target.value);
             }}
             value={this.props.content.name || ""}
             style={style}
@@ -51,7 +52,7 @@ class ConditionsActionsEditable extends Component {
           <TextField
             id="conditionValue"
             onChange={(e) => {
-              this.updateContent({ value: e.target.value });
+              this.updateContent("value", e.target.value);
             }}
             value={this.props.content.value || ""}
             style={style}
@@ -62,7 +63,7 @@ class ConditionsActionsEditable extends Component {
           content={this.props.content.text}
           onAddAction={this.handleAddAction}
           onChange={(text) => {
-            this.updateContent({ text });
+            this.updateContent("text", text);
           }}
           ref={this.props.onActionsEditableRefchange}
           style={{ minHeight: "32px" }}
@@ -73,7 +74,7 @@ class ConditionsActionsEditable extends Component {
 }
 
 ConditionsActionsEditable.defaultProps = {
-  content: { name: "", value: "", text: "" },
+  content: {},
   placeholder: null,
   onChange: () => {},
   onSelected: () => {},

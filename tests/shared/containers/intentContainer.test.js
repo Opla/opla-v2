@@ -565,9 +565,9 @@ describe("containers/IntentContainerBase", () => {
       wrapper.instance().toggleCondition();
       expect(appSetNewActionsSpy.mock.calls[0][0]).toEqual("output");
       expect(appSetNewActionsSpy.mock.calls[0][1]).toEqual({
-        name: "",
+        name: undefined,
         text: "foo",
-        value: "",
+        value: undefined,
       });
 
       wrapper.setProps({ newActions: { output: { text: "foo" } } });
