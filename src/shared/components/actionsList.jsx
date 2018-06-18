@@ -23,11 +23,7 @@ class ActionsList extends Component {
       if (content.text && (content.name || content.value)) {
         this.handleAddActionCondition(content);
         // clear new
-        this.props.onNewActionsChange(this.props.name, {
-          name: "",
-          value: "",
-          text: "",
-        });
+        this.props.onNewActionsChange(this.props.name, {});
         // add condition as string action if actions list and condition values are empty
       } else if (
         this.props.actions.length === 0 &&

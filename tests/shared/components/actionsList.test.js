@@ -108,11 +108,7 @@ describe("components/actionsList", () => {
 
   describe("handle add new action", () => {
     const defaultName = "output";
-    const defaultNewAction = {
-      name: "",
-      value: "",
-      text: "",
-    };
+    const defaultNewAction = {};
 
     it("should handle string action", () => {
       const newAction = {
@@ -166,8 +162,6 @@ describe("components/actionsList", () => {
 
     it("should add condition action with only text as string action", () => {
       const newAction = {
-        name: "",
-        value: "",
         text: "condition text",
       };
 
