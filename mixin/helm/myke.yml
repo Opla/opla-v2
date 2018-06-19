@@ -5,7 +5,7 @@ env:
   GITHUB_PAGES_BRANCH: gh-pages
 
 tasks:
-  _publish:
+  _publish_charts:
     cmd: |-
       export SOURCE_DIR=$(pwd)
       export TMP_DIR=/tmp/helm-$(uuidgen)
