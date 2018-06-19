@@ -1,0 +1,12 @@
+---
+project: docker
+
+tasks:
+  _pull:
+    cmd: docker pull {{.REPO}}:{{.TAG|required}}
+  
+  _push:
+    cmd: docker push {{.REPO}}:{{.TAG|required}}
+
+  _tag:
+    cmd: docker tag {{.REPO}}:{{.TAG_FROM|required}} {{.REPO}}:{{.TAG_TO|required}}

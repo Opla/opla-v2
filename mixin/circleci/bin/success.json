@@ -1,0 +1,53 @@
+{
+    "text": ":heavy_check_mark: ${APPLICATION_NAME} deployed",
+    "attachments": [
+        {
+            "fallback": "[${K8S_ENV}] ${APPLICATION_NAME} deploymded.",
+            "color": "#36a64f",
+            "text": "${MARKDOWN_TEXT}",
+            "fields": [
+                {
+                    "title": "K8S_ENV",
+                    "value": "${K8S_ENV}",
+                    "short": true
+                },
+                {
+                    "title": ":link: Link",
+                    "value": "<https://${DOMAIN}/|${DOMAIN}>",
+                    "short": true
+                }
+            ],
+            "mrkdwn_in": [
+                "text",
+                "title",
+                "pretext",
+                "fields"
+            ]
+        },
+        {
+            "fallback": "CI Job ${CIRCLE_BUILD_URL}",
+            "color": "#36a64f",
+            "title": "CI Job",
+            "text": "<${CIRCLE_BUILD_URL}|See logs>",
+            "mrkdwn_in": [
+                "text",
+                "title",
+                "pretext",
+                "fields"
+            ]
+        },
+        {
+            "fallback": "Github commit ${CIRCLE_COMPARE_URL}",
+            "color": "#36a64f",
+            "title": "Github Commit",
+            "text": "<${CIRCLE_COMPARE_URL}|${COMMIT_MESSAGE}>",
+            "mrkdwn_in": [
+                "text",
+                "title",
+                "pretext",
+                "fields"
+            ]
+        }
+    ],
+    "mrkdwn": true
+}
