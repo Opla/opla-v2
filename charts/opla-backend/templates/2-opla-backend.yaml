@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: node
-        image: opla/backend:{{ .Values.image.tag }}
+        image: "opla/backend:{{ .Values.image.tag }}"
         ports:
         - containerPort: 8081
         - containerPort: 9229

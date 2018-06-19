@@ -4,5 +4,6 @@ dist/
 lib/
 node_modules/
 .vscode/
-/k8s/tmp/
+/charts/opla-backend/tmp/
 values.dev.yaml
+*.env.local
