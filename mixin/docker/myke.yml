@@ -10,3 +10,9 @@ tasks:
 
   _tag:
     cmd: docker tag {{.REPO}}:{{.TAG_FROM|required}} {{.REPO}}:{{.TAG_TO|required}}
+
+  _promote:
+    cmd: |-
+      $myke _pull --TAG={{.TAG}}
+      $myke _tag --TAG={{.TAG}} --TAG_TO=latest
+      $myke _push --TAG=latest

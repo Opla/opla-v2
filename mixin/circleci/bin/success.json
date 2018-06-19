@@ -2,7 +2,7 @@
     "text": ":heavy_check_mark: ${APPLICATION_NAME} deployed",
     "attachments": [
         {
-            "fallback": "[${K8S_ENV}] ${APPLICATION_NAME} deploymded.",
+            "fallback": "[${K8S_ENV}] ${APPLICATION_NAME} deployed.",
             "color": "#36a64f",
             "text": "${MARKDOWN_TEXT}",
             "fields": [
