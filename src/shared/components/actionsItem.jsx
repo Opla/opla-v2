@@ -72,6 +72,29 @@ class ActionsItem extends Component {
         ? "Add an input sentence"
         : "Add an output response";
     const editable = true;
+
+    let meta = <div />;
+
+    if (isNew) {
+      if (action && action !== "") {
+        meta = (
+          <ListItemMeta
+            icon="add_circle_outline"
+            onClick={() => {
+              this.props.onAddAction(action, isCondition);
+            }}
+          />
+        );
+      }
+    } else {
+      meta = (
+        <ListItemMeta
+          icon="remove_circle_outline"
+          onClick={this.props.onDeleteActionClick}
+        />
+      );
+    }
+
     return (
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
@@ -117,14 +140,7 @@ class ActionsItem extends Component {
             onDrop={onDrop}
           />
         )}
-        {isNew ? (
-          <div />
-        ) : (
-          <ListItemMeta
-            icon="delete"
-            onClick={this.props.onDeleteActionClick}
-          />
-        )}
+        {meta}
       </ListItem>
     );
   }

@@ -171,7 +171,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -227,7 +227,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -283,7 +283,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -339,7 +339,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -395,7 +395,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -451,7 +451,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -507,7 +507,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
     </ul>
@@ -739,7 +739,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -795,7 +795,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -851,7 +851,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -907,7 +907,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -963,7 +963,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -1019,7 +1019,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
       <li
@@ -1075,7 +1075,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           role="button"
           tabIndex="0"
         >
-          delete
+          remove_circle_outline
         </i>
       </li>
     </ul>
