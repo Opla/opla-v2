@@ -1,0 +1,128 @@
+__steps:
+  - run: &dockerauth
+      command: echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+  - run: &gcloudauth
+      command: |
+          echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+          gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud auth configure-docker
+  - run: &deploy
+      name: deploy
+      command: |
+        gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
+        helm init --service-account tiller --upgrade
+        COMMIT_SHA=$CIRCLE_SHA1 myke deploy
+  - run: &notify0
+      when: on_success
+      command: TEST_RESULT=0 DOMAIN=$FRONT_DOMAIN myke front/_notify
+  - run: &notify1
+      when: on_fail
+      command: TEST_RESULT=1 DOMAIN=$FRONT_DOMAIN myke front/_notify
+  - run: &initsubmodules git submodule sync && git submodule update --init
+
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      - run: yarn lint
+      - run: yarn test
+  
+  build:
+    docker: 
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: qa
+      K8S_NAMESPACE: qa-ce
+      CLOUDSDK_CORE_DISABLE_PROMPTS: "1"
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - setup_remote_docker
+      - run: *dockerauth
+      - run: myke front/build --TAG=$CIRCLE_SHA1
+      - run: myke front/_push --TAG=$CIRCLE_SHA1
+
+  promote:
+    docker: 
+      - image: licarth/ci-cd:latest
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - setup_remote_docker
+      - run: *dockerauth
+      - run: myke front/_promote --TAG=$CIRCLE_SHA1
+      - run: myke front/_publish_charts --CHART_VERSION=0.1.0-$CIRCLE_SHA1 
+
+  deploy_qa:
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: qa
+      K8S_NAMESPACE: qa-ce
+      GCLOUD_CLUSTER_ID: qa
+      DOMAIN: qa.gateway.opla.ai
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - run: *gcloudauth
+      - run: *deploy
+      - run: *notify0
+      - run: *notify1
+
+  deploy_prod:
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: prod
+      K8S_NAMESPACE: prod-ce
+      GCLOUD_CLUSTER_ID: qa
+      DOMAIN: gateway.opla.ai
+
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - run: *gcloudauth
+      - run: *deploy
+      - run: *notify0
+      - run: *notify1
+
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: gh-pages
+            tags:
+              only: /.*/
+      - build
+      - promote:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: 
+                - master
+                - publish-chart
+      - deploy_qa:
+          requires:
+            - promote

@@ -1,5 +1,5 @@
 image:
-  tag: ${COMMIT_ID}
+  tag: ${COMMIT_SHA}
 
 front:
   domain: ${FRONT_DOMAIN}
@@ -7,8 +7,8 @@ api:
   domain: ${API_DOMAIN}
 
 auth:
-  clientId: ${QA_CLIENT_ID}
-  secret: ${QA_CLIENT_SECRET}
+  clientId: ${CLIENT_ID}
+  secret: ${CLIENT_SECRET}
 
 tls: true
 
