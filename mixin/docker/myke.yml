@@ -14,5 +14,5 @@ tasks:
   _promote:
     cmd: |-
       $myke _pull --TAG={{.TAG}}
-      $myke _tag --TAG={{.TAG}} --TAG_TO=latest
+      $myke _tag --TAG_FROM={{.TAG}} --TAG_TO=latest
       $myke _push --TAG=latest
