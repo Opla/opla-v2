@@ -1,8 +1,11 @@
 ---
 project: helm
 
+env:
+  GITHUB_PAGES_BRANCH: gh-pages
+
 tasks:
-  _publish_helm:
+  _publish:
     cmd: |-
       export SOURCE_DIR=$(pwd)
       export TMP_DIR=/tmp/helm-$(uuidgen)
