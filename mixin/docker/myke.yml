@@ -16,3 +16,4 @@ tasks:
       $myke _pull --TAG={{.TAG}}
       $myke _tag --TAG_FROM={{.TAG}} --TAG_TO=latest
       $myke _push --TAG=latest
+
