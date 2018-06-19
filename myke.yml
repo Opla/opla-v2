@@ -2,21 +2,38 @@
 project: front
 desc: Frontend
 
+mixin:
+  - infra/mixin/docker
+  - infra/mixin/helm
+  - infra/mixin/circleci
+
+env:
+  REPO: Opla/front
+  TAG: latest
+  CHART_DIR: charts/opla-front
+  GITHUB_PAGES_REPO: Opla/front
+
 tasks:
   build:
     cmd: |-
-      echo {{ .APP_VERSION }}
+      eval $(myke -v=0 _envs)
+      echo $APP_VERSION
       docker build \
-        -t {{ .REPO }}:{{ .COMMIT }} \
+        -t {{ .REPO }}:{{ .TAG }} \
         --build-arg APP_VERSION={{ .APP_VERSION }} \
         --build-arg APP_BUILD={{ .BUILD }} \
         .
+
   deploy:
     cmd: |-
-      export APP_VERSION=`jq -r .version <package.json`
-      (envsubst <k8s/values.yaml; envsubst <k8s/values.{{ .K8S_ENV }}.yaml) | helm upgrade --install --wait --debug --namespace {{ .K8S_NAMESPACE }} {{ .K8S_NAMESPACE }}-{{ .APPLICATION_NAME }} ./k8s -f -
+      eval $(myke -v=0 _envs)
+      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{ .K8S_ENV }}.yaml) | helm upgrade --install --wait --debug --namespace {{ .K8S_NAMESPACE }} {{ .K8S_NAMESPACE }}-{{ .APPLICATION_SHORT_NAME }} ./{{.CHART_DIR}} -f -
 
   preview:
     cmd: |-
-      export APP_VERSION=`jq -r .version <package.json`
-      (envsubst <k8s/values.yaml; envsubst <k8s/values.{{ .K8S_ENV }}.yaml) | helm template ./k8s -f -
+      eval $(myke -v=0 _envs)
+      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{ .K8S_ENV }}.yaml) | helm template ./{{.CHART_DIR}} -f -
+
+  _envs:
+    cmd: |-
+      echo "export APP_VERSION=`jq -r .version package.json`"
