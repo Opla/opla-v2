@@ -19,3 +19,6 @@ auth:
 tls: false
 
 namespace: dev-ce
+
+api:
+  domain: localhost
