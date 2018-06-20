@@ -56,9 +56,7 @@ jobs:
       - run: *initsubmodules
       - setup_remote_docker
       - run: *dockerauth
-      - run: myke backend/build --TAG=$CIRCLE_SHA1
-      - run: myke backend/_push --TAG=$CIRCLE_SHA1
-
+      - run: myke backend/ci_build --COMMIT_SHA=$CIRCLE_SHA1
   promote:
     docker: 
       - image: licarth/ci-cd:latest
@@ -67,9 +65,7 @@ jobs:
       - run: *initsubmodules
       - setup_remote_docker
       - run: *dockerauth
-      - run: myke backend/_promote --TAG=$CIRCLE_SHA1
-      - run: helm init --client-only
-      - run: myke backend/_publish_charts --CHART_VERSION=0.1.0-$CIRCLE_SHA1 
+      - run: myke backend/ci_promote --COMMIT_SHA=$CIRCLE_SHA1
 
   deploy_qa:
     docker:

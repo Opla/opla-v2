@@ -5,7 +5,7 @@ desc: Backend
 mixin:
   - infra/mixin/docker
   - infra/mixin/helm
-  - infra/mixin/circleci
+  - infra/mixin/ci
 
 env:
   REPO: Opla/backend
@@ -16,7 +16,7 @@ env:
 tasks:
   build:
     cmd: |-
-      eval $(myke -v=0 _envs)
+      eval $(myke -v=0 _app_version)
       docker build \
         -t {{ .REPO }}:{{ .TAG }} \
         .
@@ -32,7 +32,7 @@ tasks:
       
   _prepare:
     cmd: |-
-      eval $(myke -v=0 _envs)
+      eval $(myke -v=0 _app_version)
       mkdir -p {{.CHART_DIR}}/tmp/migrations/
       cp migrations/sqls/*.sql {{.CHART_DIR}}/tmp/migrations/
 
@@ -44,7 +44,3 @@ tasks:
       opla migrations up
       yarn lint
       yarn test
-    
-  _envs:
-    cmd: |-
-      echo "export APP_VERSION=`jq -r .version package.json`"
