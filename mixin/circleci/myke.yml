@@ -1,6 +1,0 @@
----
-project: circleci
-
-tasks:
-  _notify: 
-    cmd: notify.sh

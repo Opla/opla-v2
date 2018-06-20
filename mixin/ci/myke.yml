@@ -1,0 +1,27 @@
+---
+project: ci
+
+tasks:
+  _circle_notify:
+    cmd: circle_notify.sh
+
+  _app_version:
+    cmd: |-
+      echo "export APP_VERSION=`jq -r .version package.json`"
+
+  ci_build:
+    cmd: |-
+      eval $(myke -v=0 _app_version)
+      $myke build --TAG={{.COMMIT_SHA | required}}
+      $myke _push --TAG={{.COMMIT_SHA}}
+      helm init --client-only \
+        && $myke _publish_charts \
+        --CHART_VERSION={{.CHART_VERSION_SCM | required}}-{{.COMMIT_SHA}}
+
+  ci_promote:
+    cmd: |-
+      eval $(myke -v=0 _app_version)
+      $myke backend/_promote --TAG={{.COMMIT_SHA | required}}
+      helm init --client-only \
+        && $myke _publish_charts \
+        --CHART_VERSION={{.CHART_VERSION_SCM | required}}
