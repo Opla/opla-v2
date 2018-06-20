@@ -12,6 +12,7 @@ __steps:
       command: |
         gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
         helm init --service-account tiller --upgrade
+        COMMIT_SHA=$CIRCLE_SHA1 myke preview
         COMMIT_SHA=$CIRCLE_SHA1 myke deploy
   - run: &notify0
       when: on_success
