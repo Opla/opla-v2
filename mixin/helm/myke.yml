@@ -13,7 +13,9 @@ tasks:
       cd $TMP_DIR
       git clone --depth 1 -b "{{.GITHUB_PAGES_BRANCH}}" "git@github.com:{{.GITHUB_PAGES_REPO}}.git" .
       mkdir newchart
-      helm package --version {{.CHART_VERSION}} $SOURCE_DIR/$CHART_DIR --destination newchart/
+      helm package --version {{.CHART_VERSION}} \
+        {{if not (eq .APP_VERSION "") }}--app-version {{.APP_VERSION}} {{- end}}\
+        $SOURCE_DIR/$CHART_DIR --destination newchart/
       helm repo index newchart/ --merge index.yaml
       mv newchart/* .
       rm -r newchart
