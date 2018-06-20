@@ -21,7 +21,8 @@ tasks:
   ci_promote:
     cmd: |-
       eval $(myke -v=0 _app_version)
-      $myke backend/_promote --TAG={{.COMMIT_SHA | required}}
+      $myke _promote --TAG={{.COMMIT_SHA | required}}
       helm init --client-only \
+        && helm dependency update {{.CHART_DIR/APPLICATION_NAME}} \
         && $myke _publish_charts \
         --CHART_VERSION={{.CHART_VERSION_SEM | required}}
