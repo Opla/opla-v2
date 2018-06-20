@@ -56,7 +56,7 @@ jobs:
       - run: *initsubmodules
       - setup_remote_docker
       - run: *dockerauth
-      - run: myke bakend/ci_build --COMMIT_SHA=$CIRCLE_SHA1
+      - run: myke backend/ci_build --COMMIT_SHA=$CIRCLE_SHA1
   promote:
     docker: 
       - image: licarth/ci-cd:latest
@@ -65,7 +65,7 @@ jobs:
       - run: *initsubmodules
       - setup_remote_docker
       - run: *dockerauth
-      - run: myke bakend/ci_promote --COMMIT_SHA=$CIRCLE_SHA1
+      - run: myke backend/ci_promote --COMMIT_SHA=$CIRCLE_SHA1
 
   deploy_qa:
     docker:
