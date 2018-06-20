@@ -5,7 +5,7 @@ desc: Frontend
 mixin:
   - infra/mixin/docker
   - infra/mixin/helm
-  - infra/mixin/circleci
+  - infra/mixin/ci
 
 env:
   REPO: Opla/front
@@ -16,7 +16,7 @@ env:
 tasks:
   build:
     cmd: |-
-      eval $(myke -v=0 _envs)
+      eval $(myke -v=0 _app_version)
       echo $APP_VERSION
       docker build \
         -t {{ .REPO }}:{{ .TAG }} \
@@ -26,14 +26,10 @@ tasks:
 
   deploy:
     cmd: |-
-      eval $(myke -v=0 _envs)
+      eval $(myke -v=0 _app_version)
       (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{ .K8S_ENV }}.yaml) | helm upgrade --install --wait --debug --namespace {{ .K8S_NAMESPACE }} {{ .K8S_NAMESPACE }}-{{ .APPLICATION_SHORT_NAME }} ./{{.CHART_DIR}} -f -
 
   preview:
     cmd: |-
-      eval $(myke -v=0 _envs)
+      eval $(myke -v=0 _app_version)
       (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{ .K8S_ENV }}.yaml) | helm template ./{{.CHART_DIR}} -f -
-
-  _envs:
-    cmd: |-
-      echo "export APP_VERSION=`jq -r .version package.json`"
