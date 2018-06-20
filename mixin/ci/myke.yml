@@ -16,7 +16,7 @@ tasks:
       $myke _push --TAG={{.COMMIT_SHA}}
       helm init --client-only \
         && $myke _publish_charts \
-        --CHART_VERSION={{.CHART_VERSION_SCM | required}}-{{.COMMIT_SHA}}
+        --CHART_VERSION={{.CHART_VERSION_SEM | required}}-{{.COMMIT_SHA}}
 
   ci_promote:
     cmd: |-
@@ -24,4 +24,4 @@ tasks:
       $myke backend/_promote --TAG={{.COMMIT_SHA | required}}
       helm init --client-only \
         && $myke _publish_charts \
-        --CHART_VERSION={{.CHART_VERSION_SCM | required}}
+        --CHART_VERSION={{.CHART_VERSION_SEM | required}}
