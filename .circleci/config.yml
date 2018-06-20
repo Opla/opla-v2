@@ -12,6 +12,7 @@ __steps:
       command: |
         gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
         helm init --service-account tiller --upgrade
+        COMMIT_SHA=$CIRCLE_SHA1 myke preview
         COMMIT_SHA=$CIRCLE_SHA1 myke deploy
   - run: &notify0
       when: on_success
@@ -56,8 +57,7 @@ jobs:
       - run: *initsubmodules
       - setup_remote_docker
       - run: *dockerauth
-      - run: myke front/build --TAG=$CIRCLE_SHA1
-      - run: myke front/_push --TAG=$CIRCLE_SHA1
+      - run: myke front/ci_build --COMMIT_SHA=$CIRCLE_SHA1
 
   promote:
     docker: 
@@ -67,8 +67,7 @@ jobs:
       - run: *initsubmodules
       - setup_remote_docker
       - run: *dockerauth
-      - run: myke front/_promote --TAG=$CIRCLE_SHA1
-      - run: myke front/_publish_charts --CHART_VERSION=0.1.0-$CIRCLE_SHA1 
+      - run: myke front/ci_promote --COMMIT_SHA=$CIRCLE_SHA1
 
   deploy_qa:
     docker:
