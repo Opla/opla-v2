@@ -28,6 +28,7 @@ class ActionsItem extends Component {
       containerName,
       action,
       onDrop,
+      style,
     } = this.props;
     const color = "rgb(0, 0, 0)";
     // const color =
@@ -35,12 +36,12 @@ class ActionsItem extends Component {
     //     ? "rgb(213, 0, 0)"
     //     : "rgb(0, 0, 0)";
     // const style = {}; /* padding: "16px" */
-    let style = { color, height: "100%", padding: "0px 16px" };
+    let s = { ...style, color, height: "100%", padding: "0px 16px" };
     if (isNew) {
-      style = { ...style, minHeight: "40px" };
+      s = { ...style, minHeight: "40px" };
     }
     if (isCondition) {
-      style = { ...style, height: "auto", padding: "16px" };
+      s = { ...style, height: "auto", padding: "16px" };
     }
 
     const icon =
@@ -54,7 +55,7 @@ class ActionsItem extends Component {
       <ListItem
         className="selectableListItem onFocusAction mdl-list_action"
         icon={icon}
-        style={style}
+        style={s}
         key={itemKey}
         onClick={() => {
           this.handleActionsEditableSelected(this.actionsEditableRef);
@@ -123,6 +124,7 @@ ActionsItem.propTypes = {
   itemKey: PropTypes.string,
   onDrop: PropTypes.func,
   onDeleteActionClick: PropTypes.func,
+  style: PropTypes.shape({}),
 };
 
 export default ActionsItem;

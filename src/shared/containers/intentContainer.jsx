@@ -368,6 +368,8 @@ class IntentContainer extends Component {
           }}
         >
           <SubToolbar
+            className="mdc-elevation--z1"
+            style={{ margin: "8px 8px 0 8px" }}
             titleIcon="question_answer"
             titleName={
               <div>

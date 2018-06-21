@@ -8,29 +8,81 @@ exports[`components/intentDetail can render intent with special characters corre
     className="list-content"
   >
     <div
-      className="mrb-sublist"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
     >
       <div
         className="mrb-subheader"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "64px",
+            "paddingTop": "4px",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          }
+        }
       >
-        <i
-          className="mrb-subheader-right material-icons"
-          disabled={false}
-          onClick={[Function]}
-          onKeyUp={[Function]}
-          role="button"
-          tabIndex="0"
+        <div
+          style={
+            Object {
+              "float": "right",
+              "height": "48px",
+              "width": "48px",
+            }
+          }
         >
-          keyboard_arrow_up
-        </i>
-        <div>
-          input
+          <i
+            className="mrb-subheader-right material-icons"
+            disabled={false}
+            style={
+              Object {
+                "animation": null,
+                "fontSize": "24px",
+                "paddingTop": "8px",
+                "textAlign": "center",
+              }
+            }
+          >
+            keyboard_arrow_up
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "width": "33%",
+              }
+            }
+          >
+            input
+          </span>
+          <span
+            style={
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "paddingLeft": "16px",
+              }
+            }
+          />
         </div>
       </div>
       <div
         style={
           Object {
             "display": "block",
+            "height": "100%",
+            "overflow": "hidden",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           }
         }
       >
@@ -44,10 +96,8 @@ exports[`components/intentDetail can render intent with special characters corre
           role="menuitem"
           style={
             Object {
-              "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "backgroundColor": "rgba(34, 34, 34, 0.05",
               "minHeight": "40px",
-              "padding": "0px 16px",
             }
           }
         >
@@ -91,31 +141,82 @@ exports[`components/intentDetail can render intent with special characters corre
         </li>
       </div>
     </div>
-    <hr />
     <div
-      className="mrb-sublist"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
     >
       <div
         className="mrb-subheader"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "64px",
+            "paddingTop": "4px",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          }
+        }
       >
-        <i
-          className="mrb-subheader-right material-icons"
-          disabled={false}
-          onClick={[Function]}
-          onKeyUp={[Function]}
-          role="button"
-          tabIndex="0"
+        <div
+          style={
+            Object {
+              "float": "right",
+              "height": "48px",
+              "width": "48px",
+            }
+          }
         >
-          keyboard_arrow_up
-        </i>
-        <div>
-          output
+          <i
+            className="mrb-subheader-right material-icons"
+            disabled={false}
+            style={
+              Object {
+                "animation": null,
+                "fontSize": "24px",
+                "paddingTop": "8px",
+                "textAlign": "center",
+              }
+            }
+          >
+            keyboard_arrow_up
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "width": "33%",
+              }
+            }
+          >
+            output
+          </span>
+          <span
+            style={
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "paddingLeft": "16px",
+              }
+            }
+          />
         </div>
       </div>
       <div
         style={
           Object {
             "display": "block",
+            "height": "100%",
+            "overflow": "hidden",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           }
         }
       >
@@ -129,10 +230,8 @@ exports[`components/intentDetail can render intent with special characters corre
           role="menuitem"
           style={
             Object {
-              "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "backgroundColor": "rgba(34, 34, 34, 0.05",
               "minHeight": "40px",
-              "padding": "0px 16px",
             }
           }
         >
@@ -176,31 +275,80 @@ exports[`components/intentDetail can render intent with special characters corre
         </li>
       </div>
     </div>
-    <hr />
     <div
-      className="mrb-sublist"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
     >
       <div
         className="mrb-subheader"
+        onClick={[Function]}
+        style={
+          Object {
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          }
+        }
       >
-        <i
-          className="mrb-subheader-right material-icons"
-          disabled={false}
-          onClick={[Function]}
-          onKeyUp={[Function]}
-          role="button"
-          tabIndex="0"
+        <div
+          style={
+            Object {
+              "float": "right",
+              "height": "48px",
+              "width": "48px",
+            }
+          }
         >
-          keyboard_arrow_down
-        </i>
-        <div>
-          Parameters
+          <i
+            className="mrb-subheader-right material-icons"
+            disabled={false}
+            style={
+              Object {
+                "animation": null,
+                "fontSize": "24px",
+                "paddingTop": "8px",
+                "textAlign": "center",
+              }
+            }
+          >
+            keyboard_arrow_down
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "width": "33%",
+              }
+            }
+          >
+            Parameters
+          </span>
+          <span
+            style={
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "paddingLeft": "16px",
+              }
+            }
+          />
         </div>
       </div>
       <div
         style={
           Object {
-            "display": "none",
+            "display": "block",
+            "height": "0px",
+            "overflow": "hidden",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           }
         }
       >
@@ -284,29 +432,81 @@ exports[`components/intentDetail renders correctly 1`] = `
     className="list-content"
   >
     <div
-      className="mrb-sublist"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
     >
       <div
         className="mrb-subheader"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "64px",
+            "paddingTop": "4px",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          }
+        }
       >
-        <i
-          className="mrb-subheader-right material-icons"
-          disabled={false}
-          onClick={[Function]}
-          onKeyUp={[Function]}
-          role="button"
-          tabIndex="0"
+        <div
+          style={
+            Object {
+              "float": "right",
+              "height": "48px",
+              "width": "48px",
+            }
+          }
         >
-          keyboard_arrow_up
-        </i>
-        <div>
-          input
+          <i
+            className="mrb-subheader-right material-icons"
+            disabled={false}
+            style={
+              Object {
+                "animation": null,
+                "fontSize": "24px",
+                "paddingTop": "8px",
+                "textAlign": "center",
+              }
+            }
+          >
+            keyboard_arrow_up
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "width": "33%",
+              }
+            }
+          >
+            input
+          </span>
+          <span
+            style={
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "paddingLeft": "16px",
+              }
+            }
+          />
         </div>
       </div>
       <div
         style={
           Object {
             "display": "block",
+            "height": "100%",
+            "overflow": "hidden",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           }
         }
       >
@@ -320,10 +520,8 @@ exports[`components/intentDetail renders correctly 1`] = `
           role="menuitem"
           style={
             Object {
-              "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "backgroundColor": "rgba(34, 34, 34, 0.05",
               "minHeight": "40px",
-              "padding": "0px 16px",
             }
           }
         >
@@ -367,31 +565,82 @@ exports[`components/intentDetail renders correctly 1`] = `
         </li>
       </div>
     </div>
-    <hr />
     <div
-      className="mrb-sublist"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
     >
       <div
         className="mrb-subheader"
+        onClick={[Function]}
+        style={
+          Object {
+            "height": "64px",
+            "paddingTop": "4px",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          }
+        }
       >
-        <i
-          className="mrb-subheader-right material-icons"
-          disabled={false}
-          onClick={[Function]}
-          onKeyUp={[Function]}
-          role="button"
-          tabIndex="0"
+        <div
+          style={
+            Object {
+              "float": "right",
+              "height": "48px",
+              "width": "48px",
+            }
+          }
         >
-          keyboard_arrow_up
-        </i>
-        <div>
-          output
+          <i
+            className="mrb-subheader-right material-icons"
+            disabled={false}
+            style={
+              Object {
+                "animation": null,
+                "fontSize": "24px",
+                "paddingTop": "8px",
+                "textAlign": "center",
+              }
+            }
+          >
+            keyboard_arrow_up
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "width": "33%",
+              }
+            }
+          >
+            output
+          </span>
+          <span
+            style={
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "paddingLeft": "16px",
+              }
+            }
+          />
         </div>
       </div>
       <div
         style={
           Object {
             "display": "block",
+            "height": "100%",
+            "overflow": "hidden",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           }
         }
       >
@@ -405,10 +654,8 @@ exports[`components/intentDetail renders correctly 1`] = `
           role="menuitem"
           style={
             Object {
-              "color": "rgb(0, 0, 0)",
-              "height": "100%",
+              "backgroundColor": "rgba(34, 34, 34, 0.05",
               "minHeight": "40px",
-              "padding": "0px 16px",
             }
           }
         >
@@ -452,31 +699,80 @@ exports[`components/intentDetail renders correctly 1`] = `
         </li>
       </div>
     </div>
-    <hr />
     <div
-      className="mrb-sublist"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
     >
       <div
         className="mrb-subheader"
+        onClick={[Function]}
+        style={
+          Object {
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          }
+        }
       >
-        <i
-          className="mrb-subheader-right material-icons"
-          disabled={false}
-          onClick={[Function]}
-          onKeyUp={[Function]}
-          role="button"
-          tabIndex="0"
+        <div
+          style={
+            Object {
+              "float": "right",
+              "height": "48px",
+              "width": "48px",
+            }
+          }
         >
-          keyboard_arrow_down
-        </i>
-        <div>
-          Parameters
+          <i
+            className="mrb-subheader-right material-icons"
+            disabled={false}
+            style={
+              Object {
+                "animation": null,
+                "fontSize": "24px",
+                "paddingTop": "8px",
+                "textAlign": "center",
+              }
+            }
+          >
+            keyboard_arrow_down
+          </i>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "width": "33%",
+              }
+            }
+          >
+            Parameters
+          </span>
+          <span
+            style={
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "paddingLeft": "16px",
+              }
+            }
+          />
         </div>
       </div>
       <div
         style={
           Object {
-            "display": "none",
+            "display": "block",
+            "height": "0px",
+            "overflow": "hidden",
+            "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           }
         }
       >

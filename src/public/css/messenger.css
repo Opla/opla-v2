@@ -19,10 +19,10 @@
 
 .messenger-box {
 	/*overflow: scroll;*/
-	height: calc(100vh - 64px - 37px - 41px);
+	height: calc(100vh - 64px - 37px - 41px - 24px);
   /*min-height: 560px;
 	padding-top: 0px;*/
-	background: #f2f2f2;
+	background: #e8eaf6;
 	/*-ms-overflow-style: none;
 	overflow: -moz-scrollbars-none;*/
 }
@@ -78,6 +78,7 @@
 .messenger-box__actions .mdl-button-right {
   margin-top: 4px;
   margin-left: 16px;
+  color: #6200ee;
 }
 
 .messenger-box__actions .mdl-button-left {

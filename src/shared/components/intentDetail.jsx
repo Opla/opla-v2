@@ -44,7 +44,6 @@ const IntentDetail = ({
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
         />
-        <hr />
         <ActionsList
           name="output"
           actions={output}
@@ -57,8 +56,11 @@ const IntentDetail = ({
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
         />
-        <hr />
-        <ExpansionPanel label="Parameters" collapsed>
+        <ExpansionPanel
+          label="Parameters"
+          className="mdl-color--white"
+          collapsed
+        >
           <List>
             <ListItem icon="title">
               Topic

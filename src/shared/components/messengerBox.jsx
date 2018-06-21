@@ -128,7 +128,10 @@ class MessengerBox extends Component {
     }
     let chatInput = inputValue;
     return (
-      <div className="mdl-cell mdl-cell--4-col messenger-box-test">
+      <div
+        className="mdl-cell mdl-cell--4-col mdc-elevation--z1"
+        style={{ margin: "0 8px" }}
+      >
         <div className="messenger-box">
           <div
             ref={(div) => {
