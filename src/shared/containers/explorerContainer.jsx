@@ -170,6 +170,8 @@ class ExplorerContainer extends Component {
     return (
       <div>
         <SubToolbar
+          className="mdc-elevation--z1"
+          style={{ margin: "8px 8px 0" }}
           titleName={name}
           menu={{
             items: [
@@ -186,7 +188,10 @@ class ExplorerContainer extends Component {
             ],
           }}
         />
-        <div className="list-box">
+        <div
+          className="list-box mdc-elevation--z1"
+          style={{ margin: "0 8px", backgroundColor: "white" }}
+        >
           <ListDragComponent
             className="list-content"
             items={items}

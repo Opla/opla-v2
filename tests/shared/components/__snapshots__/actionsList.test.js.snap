@@ -2,29 +2,81 @@
 
 exports[`components/actionsList can be rendered with array of actions typed as shapes 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foo
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foo
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -32,7 +84,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       className="mdc-list"
       style={
         Object {
-          "maxHeight": "26vh",
+          "maxHeight": "18.07vh",
           "overflow": "auto",
         }
       }
@@ -465,10 +517,8 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >
@@ -516,29 +566,81 @@ exports[`components/actionsList can be rendered with array of actions typed as s
 
 exports[`components/actionsList can be rendered with array of actions typed as strings 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foo
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foo
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -546,7 +648,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       className="mdc-list"
       style={
         Object {
-          "maxHeight": "26vh",
+          "maxHeight": "18.07vh",
           "overflow": "auto",
         }
       }
@@ -986,10 +1088,8 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >
@@ -1037,29 +1137,81 @@ exports[`components/actionsList can be rendered with array of actions typed as s
 
 exports[`components/actionsList can have an unique id 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foobar
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foobar
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -1073,10 +1225,8 @@ exports[`components/actionsList can have an unique id 1`] = `
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >
@@ -1124,29 +1274,81 @@ exports[`components/actionsList can have an unique id 1`] = `
 
 exports[`components/actionsList can have different behavior on action 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foobar
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foobar
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -1160,10 +1362,8 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >
@@ -1211,29 +1411,81 @@ exports[`components/actionsList can have different behavior on action 1`] = `
 
 exports[`components/actionsList can have different behavior on drop 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foobar
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foobar
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -1247,10 +1499,8 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >
@@ -1298,29 +1548,81 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
 
 exports[`components/actionsList can have different behavior on edit 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foobar
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foobar
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -1334,10 +1636,8 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >
@@ -1385,29 +1685,81 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
 
 exports[`components/actionsList can have different behavior on select 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foobar
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foobar
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -1421,10 +1773,8 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >
@@ -1472,29 +1822,81 @@ exports[`components/actionsList can have different behavior on select 1`] = `
 
 exports[`components/actionsList renders correctly 1`] = `
 <div
-  className="mrb-sublist"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "8px",
+    }
+  }
 >
   <div
     className="mrb-subheader"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
   >
-    <i
-      className="mrb-subheader-right material-icons"
-      disabled={false}
-      onClick={[Function]}
-      onKeyUp={[Function]}
-      role="button"
-      tabIndex="0"
+    <div
+      style={
+        Object {
+          "float": "right",
+          "height": "48px",
+          "width": "48px",
+        }
+      }
     >
-      keyboard_arrow_up
-    </i>
-    <div>
-      foobar
+      <i
+        className="mrb-subheader-right material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <span
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      >
+        foobar
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.54)",
+            "paddingLeft": "16px",
+          }
+        }
+      />
     </div>
   </div>
   <div
     style={
       Object {
         "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
       }
     }
   >
@@ -1508,10 +1910,8 @@ exports[`components/actionsList renders correctly 1`] = `
       role="menuitem"
       style={
         Object {
-          "color": "rgb(0, 0, 0)",
-          "height": "100%",
+          "backgroundColor": "rgba(34, 34, 34, 0.05",
           "minHeight": "40px",
-          "padding": "0px 16px",
         }
       }
     >

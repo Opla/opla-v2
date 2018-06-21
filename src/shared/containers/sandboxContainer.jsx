@@ -168,6 +168,8 @@ class SandboxContainer extends Component {
             ],
             align: "right",
           }}
+          className="mdc-elevation--z1"
+          style={{ margin: "8px 8px 0" }}
         />
         {this.renderMessenger(messages, users)}
       </div>

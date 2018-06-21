@@ -7,27 +7,27 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid, Inner, Cell } from "zrmc";
+import { Grid, Inner, Cell, Icon } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 
 import { appSetTitle } from "zoapp-front/actions/app";
 import { apiGetMetricsRequest } from "../actions/api";
 
 const metricStyle = {
-  textAlign: "center",
-  margin: "1em",
+  textAlign: "right",
+  padding: "24px",
+  display: "flex",
+  color: "white",
 };
 
 const valueStyle = {
   fontSize: "34px",
   fontWeight: "500",
-  color: "#888",
-  padding: "16px 0",
+  color: "white",
   lineHeight: "1.1",
 };
 
 const errorStyle = {
-  fontSize: "34px",
   fontWeight: "500",
   color: "#F44336",
   padding: "16px 0",
@@ -35,10 +35,9 @@ const errorStyle = {
 };
 
 const legendStyle = {
-  textAlign: "center",
   fontSize: "16px",
   fontWeight: "400",
-  color: "#666",
+  color: "white",
   padding: "60px 0",
   lineHeight: "1.1",
 };
@@ -94,7 +93,7 @@ export class DashboardBase extends Component {
       <div className="mdl-layout__content mdl-color--grey-100">
         <Grid>
           <Inner>
-            <Cell className="mdl-color--white" span={12}>
+            <Cell className="mdl-color--white mdc-elevation--z1" span={12}>
               <Grid>
                 <Inner>
                   <Cell span={12}>
@@ -103,28 +102,69 @@ export class DashboardBase extends Component {
                 </Inner>
                 <Inner>
                   <Cell span={4}>
-                    <div style={metricStyle}>
-                      {this.renderingValue(metrics.users.count)}
-                      <br />
-                      <span style={legendStyle}>users</span>
+                    <div
+                      style={{
+                        ...metricStyle,
+                        background: "#1a237e",
+                      }}
+                    >
+                      <Icon
+                        style={{
+                          textAlign: "left",
+                          width: "30%",
+                          fontSize: "48px",
+                        }}
+                        name="perm_identity"
+                      />
+                      <span style={{ textAlign: "right", width: "70%" }}>
+                        {this.renderingValue(metrics.users.count)}
+                        <br />
+                        <span style={legendStyle}>users</span>
+                      </span>
                     </div>
                   </Cell>
 
                   <Cell span={4}>
-                    <div style={metricStyle}>
-                      {this.renderingValue(metrics.conversations.count)}
-                      <br />
-                      <span style={legendStyle}>conversations</span>
+                    <div style={{ ...metricStyle, background: "#f57f17" }}>
+                      <Icon
+                        style={{
+                          textAlign: "left",
+                          width: "30%",
+                          fontSize: "48px",
+                        }}
+                        name="chat"
+                      />
+                      <span style={{ textAlign: "right", width: "70%" }}>
+                        {this.renderingValue(metrics.conversations.count)}
+                        <br />
+                        <span style={legendStyle}>conversations</span>
+                      </span>
                     </div>
                   </Cell>
 
                   <Cell span={4}>
-                    <div style={metricStyle}>
-                      {this.renderingValue(
-                        metrics.conversations.messages_per_conversation,
-                      )}
-                      <br />
-                      <span style={legendStyle}>messages/conversations</span>
+                    <div style={{ ...metricStyle, background: "#827717" }}>
+                      <Icon
+                        style={{
+                          textAlign: "left",
+                          width: "30%",
+                          fontSize: "48px",
+                        }}
+                        name="forum"
+                      />
+                      <span
+                        style={{
+                          textAlign: "right",
+                          width: "70%",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {this.renderingValue(
+                          metrics.conversations.messages_per_conversation,
+                        )}
+                        <br />
+                        <span style={legendStyle}>messages/conversations</span>
+                      </span>
                     </div>
                   </Cell>
                 </Inner>
@@ -132,7 +172,11 @@ export class DashboardBase extends Component {
             </Cell>
           </Inner>
           <Inner>
-            <Cell className="mdl-color--white" span={12}>
+            <Cell
+              className="mdl-color--white mdc-elevation--z1"
+              style={{ marginTop: "24px" }}
+              span={12}
+            >
               <Grid>
                 <Inner>
                   <Cell span={12}>
@@ -142,32 +186,62 @@ export class DashboardBase extends Component {
 
                 <Inner>
                   <Cell span={4}>
-                    <div style={metricStyle}>
-                      {this.renderingValue(metrics.sessions.duration, "ms")}
-                      <br />
-                      <span style={legendStyle}>session duration</span>
+                    <div style={{ ...metricStyle, background: "#4a148c" }}>
+                      <Icon
+                        style={{
+                          textAlign: "left",
+                          width: "30%",
+                          fontSize: "48px",
+                        }}
+                        name="hourglass_empty"
+                      />
+                      <span style={{ textAlign: "right", width: "70%" }}>
+                        {this.renderingValue(metrics.sessions.duration, "ms")}
+                        <br />
+                        <span style={legendStyle}>session duration</span>
+                      </span>
                     </div>
                   </Cell>
 
                   <Cell span={4}>
-                    <div style={metricStyle}>
-                      {this.renderingValue(
-                        (metrics.errors.rate * 100).toFixed(2),
-                        "%",
-                      )}
-                      <br />
-                      <span style={legendStyle}>errors rate</span>
+                    <div style={{ ...metricStyle, background: "#004d40" }}>
+                      <Icon
+                        style={{
+                          textAlign: "left",
+                          width: "30%",
+                          fontSize: "48px",
+                        }}
+                        name="error"
+                      />
+                      <span style={{ textAlign: "right", width: "70%" }}>
+                        {this.renderingValue(
+                          (metrics.errors.rate * 100).toFixed(2),
+                          "%",
+                        )}
+                        <br />
+                        <span style={legendStyle}>errors rate</span>
+                      </span>
                     </div>
                   </Cell>
 
                   <Cell span={4}>
-                    <div style={metricStyle}>
-                      {this.renderingValue(
-                        metrics.responses.speed.toFixed(2),
-                        "ms",
-                      )}
-                      <br />
-                      <span style={legendStyle}>response time</span>
+                    <div style={{ ...metricStyle, background: "#bf360c" }}>
+                      <Icon
+                        style={{
+                          textAlign: "left",
+                          width: "30%",
+                          fontSize: "48px",
+                        }}
+                        name="grade"
+                      />
+                      <span style={{ textAlign: "right", width: "70%" }}>
+                        {this.renderingValue(
+                          metrics.responses.speed.toFixed(2),
+                          "ms",
+                        )}
+                        <br />
+                        <span style={legendStyle}>response time</span>
+                      </span>
                     </div>
                   </Cell>
                 </Inner>

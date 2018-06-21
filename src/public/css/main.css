@@ -45,7 +45,7 @@
   padding-bottom: 4px;
   font-size: .812rem;
  }
- 
+
  .gray_dot {
    height: 12px;
    width: 12px;
@@ -116,16 +116,16 @@
  }
 
  .mdl-chip {
-   height: 32px;
+   height: 24px;
    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-   line-height: 32px;
-   padding: 0 12px;
+   line-height: 24px;
+   padding: 0 6px;
    border: 0;
-   border-radius: 16px;
+   border-radius: 4px;
    background-color: #dedede;
    display: inline-block;
    color: rgba(0,0,0, 0.87);
-   margin: 2px 0;
+   margin: 2px 1px;
    font-size: 0;
    white-space: nowrap;
  }
@@ -171,8 +171,9 @@
  }
  
  .selectedListItem {
-   background: rgba(34, 190, 196, 0.10);
+   background: rgba(34, 34, 34, 0.1);
    font-weight: bold;
+   color: rgb(85, 38, 130);
  }
  
  .selectedListItem span {
@@ -222,6 +223,7 @@
    /* font-size: 14px; */
    height: 40px;
    padding: 0px 16px;
+   border-bottom: 1px solid rgba(34,34,34,0.05);
  }
  
  .mrb-sublist {
@@ -279,7 +281,7 @@
  }
  
  .list-box {
-   height:83vh;
+   height:100%;
  }
  
  .list-content {
@@ -287,7 +289,7 @@
    overflow-x: hidden;
    overflow-y: auto;
    width: 100%;
-   height: calc(100vh - 64px - 42px);
+   height: calc(100vh - 64px - 41px - 24px);
  }
  
  .service_start i {

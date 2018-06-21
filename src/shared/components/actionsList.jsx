@@ -86,6 +86,7 @@ class ActionsList extends Component {
     const editable = true;
     const addContent = (
       <ActionsItem
+        style={{ backgroundColor: "rgba(34, 34, 34, 0.05" }}
         containerName={name}
         action={newAction}
         editable={editable}
@@ -108,7 +109,7 @@ class ActionsList extends Component {
         ? actions[0].children
         : actions;
       contentList = (
-        <List style={{ overflow: "auto", maxHeight: "26vh" }}>
+        <List style={{ overflow: "auto", maxHeight: "18.07vh" }}>
           {actionsDisplayed.map((action, index) => (
             <ActionsItem
               containerName={name}
@@ -137,7 +138,11 @@ class ActionsList extends Component {
       contentList = <List />;
     }
     return (
-      <ExpansionPanel label={name}>
+      <ExpansionPanel
+        label={name}
+        className="mdl-color--white"
+        style={{ margin: "8px" }}
+      >
         {contentList}
         {addContent}
       </ExpansionPanel>

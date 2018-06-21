@@ -81,7 +81,7 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
       className="mdc-layout-grid__inner"
     >
       <div
-        className="mdl-color--white mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+        className="mdl-color--white mdc-elevation--z1 mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
       >
         <div
           className="mdc-layout-grid"
@@ -106,38 +106,60 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
               <div
                 style={
                   Object {
-                    "margin": "1em",
-                    "textAlign": "center",
+                    "background": "#1a237e",
+                    "color": "white",
+                    "display": "flex",
+                    "padding": "24px",
+                    "textAlign": "right",
                   }
                 }
               >
-                <span
+                <i
+                  className="material-icons"
                   style={
                     Object {
-                      "color": "#888",
-                      "fontSize": "34px",
-                      "fontWeight": "500",
-                      "lineHeight": "1.1",
-                      "padding": "16px 0",
+                      "fontSize": "48px",
+                      "textAlign": "left",
+                      "width": "30%",
                     }
                   }
                 >
-                  123
-                </span>
-                <br />
+                  perm_identity
+                </i>
                 <span
                   style={
                     Object {
-                      "color": "#666",
-                      "fontSize": "16px",
-                      "fontWeight": "400",
-                      "lineHeight": "1.1",
-                      "padding": "60px 0",
-                      "textAlign": "center",
+                      "textAlign": "right",
+                      "width": "70%",
                     }
                   }
                 >
-                  users
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "34px",
+                        "fontWeight": "500",
+                        "lineHeight": "1.1",
+                      }
+                    }
+                  >
+                    123
+                  </span>
+                  <br />
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "16px",
+                        "fontWeight": "400",
+                        "lineHeight": "1.1",
+                        "padding": "60px 0",
+                      }
+                    }
+                  >
+                    users
+                  </span>
                 </span>
               </div>
             </div>
@@ -147,38 +169,60 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
               <div
                 style={
                   Object {
-                    "margin": "1em",
-                    "textAlign": "center",
+                    "background": "#f57f17",
+                    "color": "white",
+                    "display": "flex",
+                    "padding": "24px",
+                    "textAlign": "right",
                   }
                 }
               >
-                <span
+                <i
+                  className="material-icons"
                   style={
                     Object {
-                      "color": "#888",
-                      "fontSize": "34px",
-                      "fontWeight": "500",
-                      "lineHeight": "1.1",
-                      "padding": "16px 0",
+                      "fontSize": "48px",
+                      "textAlign": "left",
+                      "width": "30%",
                     }
                   }
                 >
-                  1200
-                </span>
-                <br />
+                  chat
+                </i>
                 <span
                   style={
                     Object {
-                      "color": "#666",
-                      "fontSize": "16px",
-                      "fontWeight": "400",
-                      "lineHeight": "1.1",
-                      "padding": "60px 0",
-                      "textAlign": "center",
+                      "textAlign": "right",
+                      "width": "70%",
                     }
                   }
                 >
-                  conversations
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "34px",
+                        "fontWeight": "500",
+                        "lineHeight": "1.1",
+                      }
+                    }
+                  >
+                    1200
+                  </span>
+                  <br />
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "16px",
+                        "fontWeight": "400",
+                        "lineHeight": "1.1",
+                        "padding": "60px 0",
+                      }
+                    }
+                  >
+                    conversations
+                  </span>
                 </span>
               </div>
             </div>
@@ -188,38 +232,61 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
               <div
                 style={
                   Object {
-                    "margin": "1em",
-                    "textAlign": "center",
+                    "background": "#827717",
+                    "color": "white",
+                    "display": "flex",
+                    "padding": "24px",
+                    "textAlign": "right",
                   }
                 }
               >
-                <span
+                <i
+                  className="material-icons"
                   style={
                     Object {
-                      "color": "#888",
-                      "fontSize": "34px",
-                      "fontWeight": "500",
-                      "lineHeight": "1.1",
-                      "padding": "16px 0",
+                      "fontSize": "48px",
+                      "textAlign": "left",
+                      "width": "30%",
                     }
                   }
                 >
-                  4
-                </span>
-                <br />
+                  forum
+                </i>
                 <span
                   style={
                     Object {
-                      "color": "#666",
-                      "fontSize": "16px",
-                      "fontWeight": "400",
-                      "lineHeight": "1.1",
-                      "padding": "60px 0",
-                      "textAlign": "center",
+                      "overflow": "hidden",
+                      "textAlign": "right",
+                      "width": "70%",
                     }
                   }
                 >
-                  messages/conversations
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "34px",
+                        "fontWeight": "500",
+                        "lineHeight": "1.1",
+                      }
+                    }
+                  >
+                    4
+                  </span>
+                  <br />
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "16px",
+                        "fontWeight": "400",
+                        "lineHeight": "1.1",
+                        "padding": "60px 0",
+                      }
+                    }
+                  >
+                    messages/conversations
+                  </span>
                 </span>
               </div>
             </div>
@@ -231,7 +298,12 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
       className="mdc-layout-grid__inner"
     >
       <div
-        className="mdl-color--white mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+        className="mdl-color--white mdc-elevation--z1 mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+        style={
+          Object {
+            "marginTop": "24px",
+          }
+        }
       >
         <div
           className="mdc-layout-grid"
@@ -256,39 +328,61 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
               <div
                 style={
                   Object {
-                    "margin": "1em",
-                    "textAlign": "center",
+                    "background": "#4a148c",
+                    "color": "white",
+                    "display": "flex",
+                    "padding": "24px",
+                    "textAlign": "right",
                   }
                 }
               >
-                <span
+                <i
+                  className="material-icons"
                   style={
                     Object {
-                      "color": "#888",
-                      "fontSize": "34px",
-                      "fontWeight": "500",
-                      "lineHeight": "1.1",
-                      "padding": "16px 0",
+                      "fontSize": "48px",
+                      "textAlign": "left",
+                      "width": "30%",
                     }
                   }
                 >
-                  5000
-                  ms
-                </span>
-                <br />
+                  hourglass_empty
+                </i>
                 <span
                   style={
                     Object {
-                      "color": "#666",
-                      "fontSize": "16px",
-                      "fontWeight": "400",
-                      "lineHeight": "1.1",
-                      "padding": "60px 0",
-                      "textAlign": "center",
+                      "textAlign": "right",
+                      "width": "70%",
                     }
                   }
                 >
-                  session duration
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "34px",
+                        "fontWeight": "500",
+                        "lineHeight": "1.1",
+                      }
+                    }
+                  >
+                    5000
+                    ms
+                  </span>
+                  <br />
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "16px",
+                        "fontWeight": "400",
+                        "lineHeight": "1.1",
+                        "padding": "60px 0",
+                      }
+                    }
+                  >
+                    session duration
+                  </span>
                 </span>
               </div>
             </div>
@@ -298,39 +392,61 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
               <div
                 style={
                   Object {
-                    "margin": "1em",
-                    "textAlign": "center",
+                    "background": "#004d40",
+                    "color": "white",
+                    "display": "flex",
+                    "padding": "24px",
+                    "textAlign": "right",
                   }
                 }
               >
-                <span
+                <i
+                  className="material-icons"
                   style={
                     Object {
-                      "color": "#888",
-                      "fontSize": "34px",
-                      "fontWeight": "500",
-                      "lineHeight": "1.1",
-                      "padding": "16px 0",
+                      "fontSize": "48px",
+                      "textAlign": "left",
+                      "width": "30%",
                     }
                   }
                 >
-                  23.01
-                  %
-                </span>
-                <br />
+                  error
+                </i>
                 <span
                   style={
                     Object {
-                      "color": "#666",
-                      "fontSize": "16px",
-                      "fontWeight": "400",
-                      "lineHeight": "1.1",
-                      "padding": "60px 0",
-                      "textAlign": "center",
+                      "textAlign": "right",
+                      "width": "70%",
                     }
                   }
                 >
-                  errors rate
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "34px",
+                        "fontWeight": "500",
+                        "lineHeight": "1.1",
+                      }
+                    }
+                  >
+                    23.01
+                    %
+                  </span>
+                  <br />
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "16px",
+                        "fontWeight": "400",
+                        "lineHeight": "1.1",
+                        "padding": "60px 0",
+                      }
+                    }
+                  >
+                    errors rate
+                  </span>
                 </span>
               </div>
             </div>
@@ -340,39 +456,61 @@ exports[`containers/Dashboard renders and update correctly 1`] = `
               <div
                 style={
                   Object {
-                    "margin": "1em",
-                    "textAlign": "center",
+                    "background": "#bf360c",
+                    "color": "white",
+                    "display": "flex",
+                    "padding": "24px",
+                    "textAlign": "right",
                   }
                 }
               >
-                <span
+                <i
+                  className="material-icons"
                   style={
                     Object {
-                      "color": "#888",
-                      "fontSize": "34px",
-                      "fontWeight": "500",
-                      "lineHeight": "1.1",
-                      "padding": "16px 0",
+                      "fontSize": "48px",
+                      "textAlign": "left",
+                      "width": "30%",
                     }
                   }
                 >
-                  40.22
-                  ms
-                </span>
-                <br />
+                  grade
+                </i>
                 <span
                   style={
                     Object {
-                      "color": "#666",
-                      "fontSize": "16px",
-                      "fontWeight": "400",
-                      "lineHeight": "1.1",
-                      "padding": "60px 0",
-                      "textAlign": "center",
+                      "textAlign": "right",
+                      "width": "70%",
                     }
                   }
                 >
-                  response time
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "34px",
+                        "fontWeight": "500",
+                        "lineHeight": "1.1",
+                      }
+                    }
+                  >
+                    40.22
+                    ms
+                  </span>
+                  <br />
+                  <span
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontSize": "16px",
+                        "fontWeight": "400",
+                        "lineHeight": "1.1",
+                        "padding": "60px 0",
+                      }
+                    }
+                  >
+                    response time
+                  </span>
                 </span>
               </div>
             </div>
