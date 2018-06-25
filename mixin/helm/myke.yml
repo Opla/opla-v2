@@ -7,13 +7,13 @@ env:
 tasks:
   _publish_charts:
     cmd: |-
+      helm dependency update {{.CHART_DIR}}
       export SOURCE_DIR=$(pwd)
       export TMP_DIR=/tmp/helm-$(uuidgen)
       mkdir -p $TMP_DIR
       cd $TMP_DIR
       git clone --depth 1 -b "{{.GITHUB_PAGES_BRANCH}}" "git@github.com:{{.GITHUB_PAGES_REPO}}.git" .
       mkdir newchart
-      helm dependency update {{.CHART_DIR}}
       helm package --version {{.CHART_VERSION}} \
         {{if not (eq .APP_VERSION "") }}--app-version {{.APP_VERSION}} {{- end}}\
         $SOURCE_DIR/$CHART_DIR --destination newchart/
