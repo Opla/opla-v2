@@ -29,6 +29,7 @@ tasks:
   deploy:
     cmd: |-
       $myke _prepare || true
+      helm dependency update {{.CHART_DIR}}
       (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
       | helm upgrade --install --wait --debug \
       --namespace {{ .K8S_NAMESPACE }} \
@@ -38,12 +39,14 @@ tasks:
   preview:
     cmd: |-
       $myke _prepare || true
+      helm dependency update {{.CHART_DIR}}
       (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
       | helm template ./{{.CHART_DIR}} -f -
       
   dry_run:
     cmd: |-
       $myke _prepare || true
+      helm dependency update {{.CHART_DIR}}
       (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
       | helm upgrade --install --wait --dry-run --debug \
       --namespace {{ .K8S_NAMESPACE }} \
