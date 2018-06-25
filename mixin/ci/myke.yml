@@ -37,13 +37,13 @@ tasks:
 
   preview:
     cmd: |-
-      $myke _prepare
+      $myke _prepare || true
       (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
       | helm template ./{{.CHART_DIR}} -f -
       
   dry_run:
     cmd: |-
-      $myke _prepare
+      $myke _prepare || true
       (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
       | helm upgrade --install --wait --dry-run --debug \
       --namespace {{ .K8S_NAMESPACE }} \
