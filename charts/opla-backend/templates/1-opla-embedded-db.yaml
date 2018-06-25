@@ -1,3 +1,4 @@
+{{- if eq .Values.db_mode "embedded"}}
 ---
 kind: Service
 apiVersion: v1
@@ -59,3 +60,4 @@ spec:
       - configMap:
           name: db-scripts
         name: db-scripts
+{{- end}}

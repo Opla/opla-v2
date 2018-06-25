@@ -1,20 +1,18 @@
 image:
-  tag: master
+ tag: latest
 
 db:
-  image:
-    tag: master
   name: opla_dev
   user: opla
   password: foo
-  host: db
-
-auth:
-  clientId: xxmtlkZAre2aEj6AgVtat31wStpehwthfT0bpMRBEJ3lmb683ZBwbclxDiIWxG4u
-  secret: 301oRBhGKGeo6AxBVdhi1YmZ2q2xILynWFsP1oOq4Q5zuJ1r3gqRUFwz1wFPHmp5
-  userId: SaE6GLCT1CUkPyAWKQiomq7xzw4QqfXk
-  botId: yvUrUr20GwaWvPUoLpIVhwvg6u72rcOc3mv4MUbDJjeRnERI
-  botUserId: QFmiA1RpYZ3DtXL57WmWOMurm3yNxn8R
+  port: 3306
+  createApplication: true #Runs SQL scripts to create application on startup
+  auth:
+    clientId: xxmtlkZAre2aEj6AgVtat31wStpehwthfT0bpMRBEJ3lmb683ZBwbclxDiIWxG4u
+    secret: 301oRBhGKGeo6AxBVdhi1YmZ2q2xILynWFsP1oOq4Q5zuJ1r3gqRUFwz1wFPHmp5
+    userId: SaE6GLCT1CUkPyAWKQiomq7xzw4QqfXk
+    botId: yvUrUr20GwaWvPUoLpIVhwvg6u72rcOc3mv4MUbDJjeRnERI
+    botUserId: QFmiA1RpYZ3DtXL57WmWOMurm3yNxn8R
 
 tls: false
 
@@ -22,3 +20,20 @@ namespace: dev-ce
 
 api:
   domain: localhost
+
+db_mode: embedded
+# db_mode: persistent # This is the persistent mariadb StatefulSet.
+# db_mode: none 
+
+# Values for mariadb persistent dependency
+
+embedded_db:
+  host: db
+
+mariadb:
+  enabled: false
+  db:
+    name: opla_dev
+    user: opla
+    password: foo
+  nameOverride: mariadb

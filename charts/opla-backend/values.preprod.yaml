@@ -1,8 +1,8 @@
 image:
- tag: ${COMMIT_SHA}
+  tag: ${COMMIT_SHA}
 
 api:
- domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
+  domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
 
 db: 
   auth:
@@ -12,3 +12,8 @@ db:
 tls: true
 
 namespace: ${K8S_NAMESPACE}
+
+db_mode: persistent
+
+mariadb:
+  enabled: true

@@ -4,7 +4,7 @@ INSERT INTO `users`
     (`id`,`idx`,`username`,`password`,`email`,`valid_email`,`creation_date`) 
 VALUES 
     (unhex(replace(uuid(),'-','')),
-    '{{ .Values.auth.userId }}',
+    '{{ .Values.db.auth.userId }}',
     'admin',
     @password_md1sum,
     'qa@opla.ai',
@@ -15,16 +15,16 @@ INSERT INTO `authentications`
     (`id`,`idx`,`user_id`,`client_id`,`scope`,`redirect_uri`) 
 VALUES 
     (unhex(replace(uuid(),'-','')),
-    '{{ .Values.auth.clientId }}-{{ .Values.auth.userId }}',
-    '{{ .Values.auth.userId }}',
-    '{{ .Values.auth.clientId }}',
+    '{{ .Values.db.auth.clientId }}-{{ .Values.db.auth.userId }}',
+    '{{ .Values.db.auth.userId }}',
+    '{{ .Values.db.auth.clientId }}',
     'admin',
     'localhost');
 
  INSERT INTO `bots` (`id`,`idx`,`name`,`email`,`author`,`creation_date`) 
  VALUES
     (unhex(replace(uuid(),'-','')),
-    '{{ .Values.auth.botId }}',
+    '{{ .Values.db.auth.botId }}',
     'My QA Assistant',
     'qa@opla.ai',
     'admin',
@@ -35,9 +35,9 @@ VALUES
  VALUES 
     (
      unhex(replace(uuid(),'-','')),
-     '{{ .Values.auth.botUserId }}',
-     '{{ .Values.auth.botId }}',
-     '{{ .Values.auth.userId }}',
+     '{{ .Values.db.auth.botUserId }}',
+     '{{ .Values.db.auth.botId }}',
+     '{{ .Values.db.auth.userId }}',
      'qa@opla.ai',
      'admin',
      'owner'

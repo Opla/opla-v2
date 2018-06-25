@@ -5,8 +5,11 @@ metadata:
   name: db-scripts
   namespace: {{ .Values.namespace }}
 data:
-{{ (.Files.Glob "tmp/migrations/*.sql").AsConfig | indent 2 }}
-  90-create-application.sql: |-
-{{ include ( print $.Template.BasePath "/_90-create-application.sql") . | indent 4 }}
-  91-insert-admin.sql: |-
-{{ include ( print $.Template.BasePath "/_91-insert-admin.sql") . | indent 4 }}
+{{- if eq .Values.db.createApplication true }}
+{{ $root := . -}}
+{{- range $path, $bytes := .Files.Glob "sql/**.sql" }}
+{{- $path | base | indent 2 }}: |-
+{{ tpl ($root.Files.Get $path) $root | indent 4 }}
+
+{{ end -}}
+{{ end -}}

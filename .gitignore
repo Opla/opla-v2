@@ -4,6 +4,8 @@ dist/
 lib/
 node_modules/
 .vscode/
-/charts/opla-backend/tmp/
 values.dev.yaml
 *.env.local
+
+# Chart dependencies
+**/charts/*.tgz

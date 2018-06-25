@@ -16,25 +16,14 @@ env:
 tasks:
   build:
     cmd: |-
-      eval $(myke -v=0 _app_version)
+      $myke _prepare
       docker build \
         -t {{ .REPO }}:{{ .TAG }} \
         .
-  deploy:
-    cmd: |-
-      $myke _prepare
-      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) | helm upgrade --install --wait --debug --namespace {{ .K8S_NAMESPACE }} {{ .K8S_NAMESPACE }}-{{ .APPLICATION_SHORT_NAME }} ./{{.CHART_DIR}} {{ .HELM_XTRA_ARGS }} -f -
 
-  preview:
-    cmd: |-
-      $myke _prepare
-      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) | helm template ./{{.CHART_DIR}} -f -
-      
   _prepare:
     cmd: |-
       eval $(myke -v=0 _app_version)
-      mkdir -p {{.CHART_DIR}}/tmp/migrations/
-      cp migrations/sqls/*.sql {{.CHART_DIR}}/tmp/migrations/
 
   test:
     cmd: |-
@@ -44,3 +33,7 @@ tasks:
       opla migrations up
       yarn lint
       yarn test
+
+  clean_pv:
+    cmd: |-
+      kubectl -n {{.K8S_NAMESPACE}} delete pvc data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-master-0 data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-slave-0 || true
