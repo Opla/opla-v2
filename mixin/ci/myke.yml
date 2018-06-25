@@ -25,3 +25,27 @@ tasks:
       helm init --client-only \
         && $myke _publish_charts \
         --CHART_VERSION={{.CHART_VERSION_SEM | required}}
+
+  deploy:
+    cmd: |-
+      $myke _prepare || true
+      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
+      | helm upgrade --install --wait --debug \
+      --namespace {{ .K8S_NAMESPACE }} \
+      {{ .K8S_NAMESPACE }}-{{ .APPLICATION_SHORT_NAME }} ./{{.CHART_DIR}} \
+      {{ .HELM_XTRA_ARGS }} -f -
+
+  preview:
+    cmd: |-
+      $myke _prepare
+      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
+      | helm template ./{{.CHART_DIR}} -f -
+      
+  dry_run:
+    cmd: |-
+      $myke _prepare
+      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{.K8S_ENV}}.yaml) \
+      | helm upgrade --install --wait --dry-run --debug \
+      --namespace {{ .K8S_NAMESPACE }} \
+      {{ .K8S_NAMESPACE }}-{{ .APPLICATION_SHORT_NAME }} ./{{.CHART_DIR}} \
+      {{ .HELM_XTRA_ARGS }} -f -
