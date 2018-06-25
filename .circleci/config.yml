@@ -16,10 +16,10 @@ __steps:
         COMMIT_SHA=$CIRCLE_SHA1 myke deploy
   - run: &notify0
       when: on_success
-      command: TEST_RESULT=0 DOMAIN=$FRONT_DOMAIN myke front/_notify
+      command: TEST_RESULT=0 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke front/_circle_notify
   - run: &notify1
       when: on_fail
-      command: TEST_RESULT=1 DOMAIN=$FRONT_DOMAIN myke front/_notify
+      command: TEST_RESULT=1 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke front/_circle_notify
   - run: &initsubmodules git submodule sync && git submodule update --init
 
 version: 2
@@ -76,7 +76,21 @@ jobs:
       K8S_ENV: qa
       K8S_NAMESPACE: qa-ce
       GCLOUD_CLUSTER_ID: qa
-      DOMAIN: qa.gateway.opla.ai
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - run: *gcloudauth
+      - run: *deploy
+      - run: *notify0
+      - run: *notify1
+
+  deploy_preprod:
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: preprod
+      K8S_NAMESPACE: preprod-ce
+      GCLOUD_CLUSTER_ID: qa
     steps:
       - checkout
       - run: *initsubmodules
@@ -92,7 +106,6 @@ jobs:
       K8S_ENV: prod
       K8S_NAMESPACE: prod-ce
       GCLOUD_CLUSTER_ID: qa
-      DOMAIN: gateway.opla.ai
 
     steps:
       - checkout
@@ -121,7 +134,10 @@ workflows:
             branches:
               only: 
                 - master
-                - publish-chart
+                - infra-update
       - deploy_qa:
+          requires:
+            - promote
+      - deploy_preprod:
           requires:
             - promote

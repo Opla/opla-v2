@@ -23,13 +23,3 @@ tasks:
         --build-arg APP_VERSION={{ .APP_VERSION }} \
         --build-arg APP_BUILD={{ .BUILD }} \
         .
-
-  deploy:
-    cmd: |-
-      eval $(myke -v=0 _app_version)
-      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{ .K8S_ENV }}.yaml) | helm upgrade --install --wait --debug --namespace {{ .K8S_NAMESPACE }} {{ .K8S_NAMESPACE }}-{{ .APPLICATION_SHORT_NAME }} ./{{.CHART_DIR}} -f -
-
-  preview:
-    cmd: |-
-      eval $(myke -v=0 _app_version)
-      (envsubst <{{.CHART_DIR}}/values.yaml; envsubst <{{.CHART_DIR}}/values.{{ .K8S_ENV }}.yaml) | helm template ./{{.CHART_DIR}} -f -
