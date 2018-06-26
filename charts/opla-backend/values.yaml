@@ -37,3 +37,6 @@ mariadb:
     user: opla
     password: foo
   nameOverride: mariadb
+  slave.replicas: 0
+  rootUser: 
+    password: changeit #Needed, otherwise redeployments fail.
