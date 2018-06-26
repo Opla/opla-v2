@@ -4,6 +4,7 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import fetch from "node-fetch";
 import openNLX from "opennlx";
 
 class OpenNLXMiddleware {
@@ -68,7 +69,7 @@ class OpenNLXMiddleware {
             id: message.id,
             created_time: message.created_time,
           };
-          const response = this.openNLX.parse(bot.id, v, msg);
+          const response = await this.openNLX.parse(bot.id, v, msg);
           // logger.info("response=", JSON.stringify(response));
           const { conversationId } = message;
           const params = {
@@ -175,6 +176,63 @@ class OpenNLXMiddleware {
     }
   }
 
+  static async doCall(middlewares, botId, func, parameters) {
+    const wss = await middlewares.list(botId, "WebService");
+    if (wss && wss.length > 0) {
+      const ws = wss[0];
+      if (ws) {
+        // WIP
+        let className = "";
+        let action = "";
+        const i = func.indexOf(".");
+        if (i > 0) {
+          className = func.substring(0, i);
+          action = func.substring(i + 1);
+          logger.info(" action=", action, " className", className);
+        } else {
+          logger.info("OpenNLX.doCall Malformed func : ", func);
+          return null;
+        }
+        const post = { action, parameters };
+        const url = `${ws.url}${ws.path}?class=${className}&secret=${
+          ws.secret
+        }`;
+        // console.log("url=", url);
+        const response = await fetch(url, {
+          method: "post",
+          body: JSON.stringify(post),
+        });
+        if (response.ok) {
+          const json = await response.json();
+          if (json && json.result) {
+            // logger.info("result=", json.result);
+            return json.result;
+          }
+        } else {
+          logger.info("OpenNLX.doCall fetch error : ", response);
+        }
+      }
+    }
+    return null;
+  }
+
+  async callables(botId, action, params, target = "default") {
+    logger.info(
+      "callables botId=",
+      botId,
+      "action=",
+      action,
+      "params=",
+      params,
+      target,
+    );
+    if (this.mainControllers) {
+      const mdw = this.mainControllers.zoapp.controllers.getMiddlewares();
+      return OpenNLXMiddleware.doCall(mdw, botId, action, params);
+    }
+    return null;
+  }
+
   async init(m) {
     this.id = m.id;
     this.openNLX = openNLX;
@@ -189,6 +247,7 @@ class OpenNLXMiddleware {
       openNLX.createAgent(bot);
       // Add intents to openNLX
       let intents = await botsController.getIntents(bot.id);
+      openNLX.setCallablesObserver(bot.id, this.callables.bind(this));
       openNLX.setIntents(bot.id, "default", intents);
       if (bot.publishedVersionId) {
         intents = await botsController.getIntents(
