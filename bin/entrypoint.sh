@@ -23,17 +23,8 @@ else
 
 fi
 
-#TODO Take host and port from config.
-
-until nc -z -v -w30 $OPLA_BACKEND_DATABASE_HOST $OPLA_BACKEND_DATABASE_PORT; do
-	echo "Waiting for database connection..."
-	# wait for 2 seconds before check again
-	sleep 1
-done
-
 if [ -n "$SKIP_MIGRATION" -a "$SKIP_MIGRATION" = 'true' ]; then
 	echo "Skipping migrations."
-
 else
 	waitForDbConnection
 	./bin/opla migrations up --non-interactive

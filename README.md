@@ -94,6 +94,19 @@ To apply all migrations at once, run:
    $ bin/opla migrations up
    ```
 
+## Docker image
+The CI/CD pipeline produces a Docker image that you can use to run the Backend.
+
+### Environment variables
+
+| env                        | default  | description                                                                                                                         |
+|----------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------|
+| SKIP_MIGRATIONS            | false    | Skips the database migration step. Useful for production use, where database schema is most likely already set.                     |
+| MIGRATIONS_ONLY            | true     | Only does the migration step. Useful for production use, to use the backend container to initialise the db for the very first time. |
+| OPLA_BACKEND_DATABASE_HOST | db       | Database host                                                                                                                       |
+| OPLA_BACKEND_DATABASE_NAME | opla_dev | Database name                                                                                                                       |
+| OPLA_BACKEND_DATABASE_USER | opla     | Database user                                                                                                                       |
+| OPLA_BACKEND_DATABASE_PASS | foo      | Database password                                                                                                                   |
 
 ## Contributing
 

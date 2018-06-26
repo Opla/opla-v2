@@ -9,7 +9,8 @@ ENV OPLA_BACKEND_DATABASE_HOST=db \
     OPLA_BACKEND_DATABASE_NAME=opla \
     OPLA_BACKEND_DATABASE_USER=opla \
     OPLA_BACKEND_DATABASE_PASS=foo \
-    SKIP_MIGRATION=false
+    SKIP_MIGRATION=false \
+    MIGRATIONS_ONLY=false
 
 RUN apt-get update && \
     apt-get install -y netcat \
