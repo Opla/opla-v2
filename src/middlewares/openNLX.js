@@ -42,7 +42,7 @@ class OpenNLXMiddleware {
       );
       // store in db parameters
       await parameters.setValue(data.conversationId, contextParams);
-      logger.info("contextParams=", contextParams);
+      // logger.info("contextParams=", contextParams);
     } else if (data.action === "resetConversation") {
       // reset Conversation / Context
       openNLX.deleteContext(bot.id, v, data.conversationId);
@@ -78,7 +78,7 @@ class OpenNLXMiddleware {
           };
           // get params from Db parameters
           let contextParams = await parameters.getValue(data.conversationId);
-          logger.info("contextParams=", contextParams);
+          // logger.info("contextParams=", contextParams);
           // set context in OpenNLX
           openNLX.setContextParameters(
             bot.id,
@@ -102,7 +102,7 @@ class OpenNLXMiddleware {
             v,
             data.conversationId,
           );
-          logger.info("contextParams=", contextParams);
+          // logger.info("contextParams=", contextParams);
           // store in Db parameters
           await parameters.setValue(data.conversationId, contextParams);
         }
