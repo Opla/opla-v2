@@ -33,7 +33,7 @@
     "fs-extra": "^5.0.0",
     "inquirer": "^5.1.0",
     "node-fetch": "^2.1.2",
-    "opennlx": "0.4.1",
+    "opennlx": "0.4.2",
     "zoapp-backend": "0.23.2",
     "zoapp-core": "0.12.1",
     "zoauth-server": "0.9.0"
