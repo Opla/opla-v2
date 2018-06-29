@@ -35,8 +35,8 @@
     "node-fetch": "^2.1.2",
     "opennlx": "0.3.8",
     "zoapp-backend": "0.23.2",
-    "zoapp-core": "0.12.1",
-    "zoauth-server": "0.9.0"
+    "zoapp-core": "0.12.2",
+    "zoauth-server": "0.9.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
