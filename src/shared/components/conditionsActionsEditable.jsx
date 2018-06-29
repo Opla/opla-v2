@@ -36,6 +36,11 @@ class ConditionsActionsEditable extends Component {
   };
 
   render() {
+    const style = {
+      marginTop: "0px",
+      marginBottom: "0px",
+      height: "24px",
+    };
     return (
       <div>
         <div onKeyPress={this.handleKeyPress} className="opla-conditional">
@@ -45,6 +50,7 @@ class ConditionsActionsEditable extends Component {
               this.updateContent("name", e.target.value);
             }}
             value={this.props.content.name || ""}
+            style={style}
             className="opla-conditional-field opla-conditional-name"
           />
           <span className="opla-conditional-op">=</span>
@@ -54,6 +60,7 @@ class ConditionsActionsEditable extends Component {
               this.updateContent("value", e.target.value);
             }}
             value={this.props.content.value || ""}
+            style={style}
             className="opla-conditional-field opla-conditional-value"
           />
         </div>

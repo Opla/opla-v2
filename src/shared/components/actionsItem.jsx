@@ -54,7 +54,7 @@ class ActionsItem extends Component {
       s = {
         ...style,
         height: "auto",
-        padding: "16px",
+        padding: "4px 16px",
         borderTop: "rgba(0,0,0,0.04) 1px solid",
       };
     }
