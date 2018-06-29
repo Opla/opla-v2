@@ -36,16 +36,32 @@ class ActionsItem extends Component {
     //     ? "rgb(213, 0, 0)"
     //     : "rgb(0, 0, 0)";
     // const style = {}; /* padding: "16px" */
-    let s = { ...style, color, height: "100%", padding: "0px 16px" };
+    let s = {
+      ...style,
+      color,
+      height: "100%",
+      padding: "4px 16px",
+      borderTop: "rgba(0,0,0,0.04) 1px solid",
+    };
     if (isNew) {
-      s = { ...style, minHeight: "40px" };
+      s = {
+        ...style,
+        minHeight: "40px",
+        borderTop: "rgba(0,0,0,0.04) 1px solid",
+      };
     }
     if (isCondition) {
-      s = { ...style, height: "auto", padding: "16px" };
+      s = {
+        ...style,
+        height: "auto",
+        padding: "4px 16px",
+        borderTop: "rgba(0,0,0,0.04) 1px solid",
+      };
     }
-
-    const icon =
-      containerName === "input" ? "format_quote" : "chat_bubble_outline";
+    let icon = null;
+    if (isNew) {
+      icon = containerName === "input" ? "format_quote" : "chat_bubble_outline";
+    }
     const addText =
       containerName === "input"
         ? "Add an input sentence"

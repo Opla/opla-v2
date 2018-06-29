@@ -385,3 +385,36 @@
   transform: translate(-50%, -50%);
   margin: 0;
 }
+
+.opla-conditional {
+  background: transparent;
+  width: 345px;
+  padding: 0px;
+  margin-bottom: 8px;
+  border: #56002759 1px solid;
+  border-radius: 4px;
+}
+
+.opla-conditional-name {
+  margin-right: 8px;
+}
+
+.opla-conditional-value {
+  margin-left: 8px;
+}
+
+.opla-conditional-field {
+  background: transparent;
+  padding: 4px 8px;
+  width: 160px;
+}
+
+.opla-conditional-field > input {
+  border-bottom: none;
+  padding: 0px;
+}
+
+.opla-conditional-op {
+  color: #ba2d65;
+  font-weight: 900;
+}
