@@ -5436,9 +5436,9 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zoapp-backend@0.23.2:
-  version "0.23.2"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.23.2.tgz#c68a361a068c57da5ed5d834376b431058182039"
+zoapp-backend@0.23.3:
+  version "0.23.3"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.23.3.tgz#e7e4651d3fb34aaa23bf4c2248e1247434627929"
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"
@@ -5447,20 +5447,20 @@ zoapp-backend@0.23.2:
     nodemailer "^4.6.5"
     validate.js "^0.12.0"
     ws "^3.3.3"
-    zoapp-core "^0.12.1"
-    zoauth-server "0.9.0"
+    zoapp-core "^0.12.2"
+    zoauth-server "0.9.1"
 
-zoapp-core@0.12.1, zoapp-core@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/zoapp-core/-/zoapp-core-0.12.1.tgz#c571d4c9825e3f323d5e1468e8adb66dda57cd4f"
+zoapp-core@0.12.2, zoapp-core@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/zoapp-core/-/zoapp-core-0.12.2.tgz#04d942cf1b31f17e1f8f62dcc92f1934b3275f79"
   dependencies:
     mysql2 "^1.5.1"
     winston "2.4.0"
 
-zoauth-server@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/zoauth-server/-/zoauth-server-0.9.0.tgz#c6376cf14cb24d24fa0bcd0c376f837077f294b5"
+zoauth-server@0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/zoauth-server/-/zoauth-server-0.9.1.tgz#2e5109731b5c386be0c763b804cff16eab667d36"
   dependencies:
     body-parser "^1.17.2"
     express "^4.15.3"
-    zoapp-core "^0.12.1"
+    zoapp-core "^0.12.2"
