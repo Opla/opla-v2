@@ -97,6 +97,7 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "backgroundColor": "rgba(34, 34, 34, 0.05",
+              "borderTop": "rgba(0,0,0,0.04) 1px solid",
               "minHeight": "40px",
             }
           }
@@ -231,6 +232,7 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "backgroundColor": "rgba(34, 34, 34, 0.05",
+              "borderTop": "rgba(0,0,0,0.04) 1px solid",
               "minHeight": "40px",
             }
           }
@@ -521,6 +523,7 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "backgroundColor": "rgba(34, 34, 34, 0.05",
+              "borderTop": "rgba(0,0,0,0.04) 1px solid",
               "minHeight": "40px",
             }
           }
@@ -655,6 +658,7 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "backgroundColor": "rgba(34, 34, 34, 0.05",
+              "borderTop": "rgba(0,0,0,0.04) 1px solid",
               "minHeight": "40px",
             }
           }

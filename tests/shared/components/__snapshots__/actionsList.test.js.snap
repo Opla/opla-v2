@@ -96,18 +96,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -156,18 +151,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -216,18 +206,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -276,18 +261,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -336,18 +316,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -396,18 +371,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -456,18 +426,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -518,6 +483,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
@@ -660,18 +626,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -721,18 +682,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -782,18 +738,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -843,18 +794,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -904,18 +850,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -965,18 +906,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -1026,18 +962,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         role="menuitem"
         style={
           Object {
+            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
             "height": "100%",
-            "padding": "0px 16px",
+            "padding": "4px 16px",
           }
         }
       >
-        <i
-          aria-hidden="true"
-          className="mdc-list-item__graphic material-icons"
-        >
-          chat_bubble_outline
-        </i>
         <div
           aria-label="Add an output response"
           className="contenteditable"
@@ -1089,6 +1020,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
@@ -1226,6 +1158,7 @@ exports[`components/actionsList can have an unique id 1`] = `
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
@@ -1363,6 +1296,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
@@ -1500,6 +1434,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
@@ -1637,6 +1572,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
@@ -1774,6 +1710,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
@@ -1911,6 +1848,7 @@ exports[`components/actionsList renders correctly 1`] = `
       style={
         Object {
           "backgroundColor": "rgba(34, 34, 34, 0.05",
+          "borderTop": "rgba(0,0,0,0.04) 1px solid",
           "minHeight": "40px",
         }
       }
