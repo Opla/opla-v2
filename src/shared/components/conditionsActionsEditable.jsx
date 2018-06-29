@@ -36,26 +36,25 @@ class ConditionsActionsEditable extends Component {
   };
 
   render() {
-    const style = { marginTop: "0px", height: "auto" };
     return (
       <div>
-        <div onKeyPress={this.handleKeyPress}>
+        <div onKeyPress={this.handleKeyPress} className="opla-conditional">
           <TextField
             id="conditionName"
             onChange={(e) => {
               this.updateContent("name", e.target.value);
             }}
             value={this.props.content.name || ""}
-            style={style}
+            className="opla-conditional-field opla-conditional-name"
           />
-          =
+          <span className="opla-conditional-op">=</span>
           <TextField
             id="conditionValue"
             onChange={(e) => {
               this.updateContent("value", e.target.value);
             }}
             value={this.props.content.value || ""}
-            style={style}
+            className="opla-conditional-field opla-conditional-value"
           />
         </div>
         <ActionsEditable
