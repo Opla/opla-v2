@@ -58,9 +58,10 @@ class ActionsItem extends Component {
         borderTop: "rgba(0,0,0,0.04) 1px solid",
       };
     }
-
-    const icon =
-      containerName === "input" ? "format_quote" : "chat_bubble_outline";
+    let icon = null;
+    if (isNew) {
+      icon = containerName === "input" ? "format_quote" : "chat_bubble_outline";
+    }
     const addText =
       containerName === "input"
         ? "Add an input sentence"
