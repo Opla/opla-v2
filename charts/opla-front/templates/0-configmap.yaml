@@ -11,15 +11,15 @@ data:
               "api": {
                   "host": "{{ .Values.api.domain }}",
                   "path": "api/v1/",
-                  "port": "443"
+                  "port": "{{ if eq .Values.tls true }}443{{else}}80{{end}}"
               },
               "auth": {
                   "clientId": "{{ .Values.auth.clientId }}",
                   "clientSecret": "{{ .Values.auth.secret }}",
                   "host": "{{ .Values.api.domain }}",
                   "path": "auth/",
-                  "port": "443"
+                  "port": "{{ if eq .Values.tls true }}443{{else}}80{{end}}"
               },
-              "secure": true
+              "secure": {{ if eq .Values.tls true }}true{{else}}false{{end}}
           }
       }
