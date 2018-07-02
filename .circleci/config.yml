@@ -43,7 +43,11 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-  
+      - run: bin/opla init --non-interactive --database-name opla_test
+      - run: bin/opla migrations up
+      - run: yarn lint
+      - run: yarn test
+      
   build:
     docker: 
       - image: licarth/ci-cd:latest
