@@ -141,7 +141,7 @@ class MessengerBox extends Component {
           >
             {sorted.map((message, index) => {
               if (message.error || message.body.indexOf("[Error]") !== -1) {
-                const inputText = message.input ? message.input.text : "";
+                /* const inputText = message.input ? message.input.text : "";
                 let buttons = (
                   <div>
                     <Button
@@ -182,14 +182,28 @@ class MessengerBox extends Component {
                       </Button>
                     </div>
                   );
+                } */
+                const from = message.from.toLowerCase();
+                const user = users[from];
+                let dest = "you";
+                let icon = "default";
+                if (user) {
+                  ({ dest, icon } = user);
                 }
                 return (
-                  <div key={message.id} className="message_error">
-                    <div className="message_error_header">
-                      <strong>Oh snap ! </strong>
-                      I can&quot;t associate an intent with previous input.
+                  <div key={message.id} className={`message ${dest} ${icon}`}>
+                    <div className="circle-wrapper animated bounceIn" />
+                    <div className="text-wrapper animated fadeIn">
+                      <div className="message-body-error">
+                        I don&apos;t understand. You need to write a response
+                        here, and I will create an intent with previous message.
+                      </div>
+                      <div className="message-error-container">
+                        <a href="#" className="message-intent-link-error">
+                          #Unknown.output
+                        </a>
+                      </div>
                     </div>
-                    {buttons}
                   </div>
                 );
               } else if (message.welcome) {
@@ -216,11 +230,33 @@ class MessengerBox extends Component {
               if (user) {
                 ({ dest, icon } = user);
               }
+              const intentLinkButton =
+                dest === "you" ? (
+                  <span>
+                    <Icon name="link" className="message-intent-icon-link" />
+                    <span className="message-intent-hint">
+                      &lt;- Link to an intent
+                    </span>
+                  </span>
+                ) : (
+                  ""
+                );
+              // TODO
+              const intentLink =
+                dest === "you" ? "#Intent.input.0" : "#Intent.output.0";
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
                   <div className="text-wrapper animated fadeIn">
-                    {this.createMessage(message)}
+                    <div className="message-body">
+                      {this.createMessage(message)}
+                    </div>
+                    <div className="message-debug-container">
+                      <a href="#" className="message-intent-link">
+                        {intentLink}
+                      </a>
+                      {intentLinkButton}
+                    </div>
                   </div>
                 </div>
               );
