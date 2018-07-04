@@ -198,9 +198,12 @@ class MessengerBox extends Component {
                         I don&apos;t understand. You need to write a response
                         here, and I will create an intent with previous message.
                       </div>
+                      <span>
+                        <Icon name="edit" className="message-edit-icon-right" />
+                      </span>
                       <div className="message-error-container">
                         <a href="#" className="message-intent-link-error">
-                          #Unknown.output
+                          #UnknownIntent.output
                         </a>
                       </div>
                     </div>
@@ -230,20 +233,53 @@ class MessengerBox extends Component {
               if (user) {
                 ({ dest, icon } = user);
               }
+              const { debug } = message;
+              const notError = debug && debug.intent && debug.intent.name;
+              let intentLinkClassName = "message-intent-link-error";
+              let intentIconClassName = "message-intent-icon-link";
+              let intentLink = "#NotFoundIntent.";
+              let intentHint = "";
+              let messageActions = "";
+              if (notError) {
+                intentLink = `#${debug.intent.name}.`;
+                intentLinkClassName = "message-intent-link";
+              } else {
+                intentHint = (
+                  <span className="message-intent-hint">
+                    &lt;- Link to an intent
+                  </span>
+                );
+                intentIconClassName = "message-intent-icon-link-error";
+              }
+              intentLink += dest === "you" ? "input" : ".output";
+              if (notError) {
+                intentLink += ".";
+                intentLink +=
+                  dest === "you" ? debug.input.index : debug.output.index;
+              }
+              if (dest === "you") {
+                messageActions = (
+                  <span>
+                    <Icon name="clear" className="message-delete-icon" />
+                    <Icon name="edit" className="message-edit-icon" />
+                  </span>
+                );
+              } else {
+                messageActions = (
+                  <span>
+                    <Icon name="edit" className="message-edit-icon-right" />
+                  </span>
+                );
+              }
               const intentLinkButton =
                 dest === "you" ? (
                   <span>
-                    <Icon name="link" className="message-intent-icon-link" />
-                    <span className="message-intent-hint">
-                      &lt;- Link to an intent
-                    </span>
+                    <Icon name="link" className={intentIconClassName} />
+                    {intentHint}
                   </span>
                 ) : (
                   ""
                 );
-              // TODO
-              const intentLink =
-                dest === "you" ? "#Intent.input.0" : "#Intent.output.0";
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
@@ -251,8 +287,9 @@ class MessengerBox extends Component {
                     <div className="message-body">
                       {this.createMessage(message)}
                     </div>
+                    {messageActions}
                     <div className="message-debug-container">
-                      <a href="#" className="message-intent-link">
+                      <a href="#" className={intentLinkClassName}>
                         {intentLink}
                       </a>
                       {intentLinkButton}
