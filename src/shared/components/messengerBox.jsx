@@ -140,49 +140,37 @@ class MessengerBox extends Component {
             className="messenger-content messenger-content-test bounceOutRight bounceInRight"
           >
             {sorted.map((message, index) => {
+              const inputText =
+                message.debug &&
+                message.debug.input &&
+                message.debug.input.sentence
+                  ? message.debug.input.sentence.text
+                  : "";
+              const intentCreateAction = (e) => {
+                e.preventDefault();
+                this.props.onAction("createIntent", inputText, message);
+              };
+              const intentAddInputAction = (e) => {
+                e.preventDefault();
+                this.props.onAction("addInput", inputText, message);
+              };
+              let intentActionGoto = (e) => {
+                e.preventDefault();
+                // TODO Goto intent
+              };
+              let intentActionLink = (e) => {
+                e.preventDefault();
+                // TODO display link
+              };
+              const messageEditAction = (e) => {
+                e.preventDefault();
+                // TODO edit message
+              };
+              const messageDeleteAction = (e) => {
+                e.preventDefault();
+                // TODO delete message
+              };
               if (message.error || message.body.indexOf("[Error]") !== -1) {
-                /* const inputText = message.input ? message.input.text : "";
-                let buttons = (
-                  <div>
-                    <Button
-                      raised
-                      onClick={(e) => {
-                        e.preventDefault();
-                        this.props.onAction("createIntent", inputText, message);
-                      }}
-                    >
-                      create intent
-                    </Button>
-                  </div>
-                );
-                if (this.props.isSelectedIntent) {
-                  buttons = (
-                    <div>
-                      <Button
-                        raised
-                        onClick={(e) => {
-                          e.preventDefault();
-                          this.props.onAction(
-                            "createIntent",
-                            inputText,
-                            message,
-                          );
-                        }}
-                      >
-                        create intent
-                      </Button>
-                      <Button
-                        raised
-                        onClick={(e) => {
-                          e.preventDefault();
-                          this.props.onAction("addInput", inputText);
-                        }}
-                      >
-                        add input
-                      </Button>
-                    </div>
-                  );
-                } */
                 const from = message.from.toLowerCase();
                 const user = users[from];
                 let dest = "you";
@@ -202,8 +190,12 @@ class MessengerBox extends Component {
                         <Icon name="edit" className="message-edit-icon-right" />
                       </span>
                       <div className="message-error-container">
-                        <a href="#" className="message-intent-link-error">
-                          #UnknownIntent.output
+                        <a
+                          href="#"
+                          className="message-intent-link-error"
+                          onClick={intentCreateAction}
+                        >
+                          #NotFoundIntent.output
                         </a>
                       </div>
                     </div>
@@ -246,10 +238,12 @@ class MessengerBox extends Component {
               } else {
                 intentHint = (
                   <span className="message-intent-hint">
-                    &lt;- Link to an intent
+                    &lt;- Add to current intent input
                   </span>
                 );
                 intentIconClassName = "message-intent-icon-link-error";
+                intentActionLink = intentAddInputAction;
+                intentActionGoto = intentCreateAction;
               }
               intentLink += dest === "you" ? "input" : ".output";
               if (notError) {
@@ -260,21 +254,38 @@ class MessengerBox extends Component {
               if (dest === "you") {
                 messageActions = (
                   <span>
-                    <Icon name="clear" className="message-delete-icon" />
-                    <Icon name="edit" className="message-edit-icon" />
+                    <Icon
+                      onClick={messageDeleteAction}
+                      name="clear"
+                      className="message-delete-icon"
+                    />
+                    <Icon
+                      onClick={messageEditAction}
+                      name="edit"
+                      className="message-edit-icon"
+                    />
                   </span>
                 );
               } else {
                 messageActions = (
                   <span>
-                    <Icon name="edit" className="message-edit-icon-right" />
+                    <Icon
+                      onClick={messageEditAction}
+                      name="edit"
+                      className="message-edit-icon-right"
+                    />
                   </span>
                 );
               }
+
               const intentLinkButton =
                 dest === "you" ? (
                   <span>
-                    <Icon name="link" className={intentIconClassName} />
+                    <Icon
+                      onClick={intentActionLink}
+                      name={notError ? "link" : "add_circle_outline"}
+                      className={intentIconClassName}
+                    />
                     {intentHint}
                   </span>
                 ) : (
@@ -289,7 +300,11 @@ class MessengerBox extends Component {
                     </div>
                     {messageActions}
                     <div className="message-debug-container">
-                      <a href="#" className={intentLinkClassName}>
+                      <a
+                        href="#"
+                        onClick={intentActionGoto}
+                        className={intentLinkClassName}
+                      >
                         {intentLink}
                       </a>
                       {intentLinkButton}
