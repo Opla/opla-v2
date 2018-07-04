@@ -239,10 +239,10 @@ class MessengerModel extends Model {
     return message;
   }
 
-  async storeMessage(conversation, message) {
+  async storeMessage(message, messageId = null) {
     const collection = this.database.getTable("messages");
     try {
-      await collection.setItem(null, message);
+      await collection.setItem(messageId, message);
       // logger.info("store message=", message);
     } catch (error) {
       logger.info(error);

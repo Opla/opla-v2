@@ -60,7 +60,7 @@ class OpenNLXMiddleware {
       /* eslint-disable no-restricted-syntax */
       /* eslint-disable no-await-in-loop */
       for (const message of data.messages) {
-        if (message.from !== fromBot) {
+        if (message.from !== fromBot && !message.debug) {
           // logger.info("message=", message);
           const msg = {
             text: message.body,
@@ -69,12 +69,13 @@ class OpenNLXMiddleware {
             id: message.id,
             created_time: message.created_time,
           };
-          const response = await this.openNLX.parse(bot.id, v, msg);
-          // logger.info("response=", JSON.stringify(response));
+          const debug = version === "sandbox";
+          const response = await this.openNLX.parse(bot.id, v, msg, debug);
+          logger.info("response=", JSON.stringify(response));
           const { conversationId } = message;
           const params = {
             from: fromBot,
-            input: msg,
+            speaker: "chatbot",
           };
           // get params from Db parameters
           let contextParams = await parameters.getValue(data.conversationId);
@@ -88,14 +89,23 @@ class OpenNLXMiddleware {
           );
           if (response && response.message) {
             params.message = response.message.text;
-            messenger.createMessage(null, conversationId, params);
-          } else if (version === "sandbox") {
+          } else if (debug) {
             params.message = "[Error] No intent found";
             params.error = "No intent found";
-            messenger.createMessage(null, conversationId, params);
           } else {
             logger.info("error in response", response);
           }
+          if (debug) {
+            params.debug = response.debug;
+            await messenger.updateMessage({
+              ...message,
+              debug: response.debug,
+            });
+          }
+          if (params.message) {
+            await messenger.createMessage(null, conversationId, params);
+          }
+
           // get context from OpenNLX
           contextParams = openNLX.getContextParameters(
             bot.id,

@@ -39,6 +39,14 @@ export default class extends Controller {
     return this.model.getConversationMessages(conversationId, since);
   }
 
+  async updateMessage(message) {
+    let msg = null;
+    if (message.id && message.conversationId) {
+      msg = await this.model.storeMessage(message, message.id);
+    }
+    return msg;
+  }
+
   async createMessage(user, conversationId, params) {
     let fromUser = params.from;
     if (!fromUser && user) {
@@ -52,7 +60,7 @@ export default class extends Controller {
         conversationId,
       );
       if (conversation) {
-        message = await this.model.storeMessage(conversationId, {
+        message = await this.model.storeMessage({
           conversationId: conversation.id,
           ...message,
         });
