@@ -278,8 +278,9 @@ class MessengerBox extends Component {
                 );
               }
 
-              const intentLinkButton =
-                dest === "you" ? (
+              let intentLinkButton = "";
+              if (dest === "you" && this.props.isSelectedIntent) {
+                intentLinkButton = (
                   <span>
                     <Icon
                       onClick={intentActionLink}
@@ -288,9 +289,14 @@ class MessengerBox extends Component {
                     />
                     {intentHint}
                   </span>
-                ) : (
-                  ""
                 );
+              } else if (dest === "you") {
+                intentLinkButton = (
+                  <span className="message-intent-hint">
+                    &lt;- Click to create an intent
+                  </span>
+                );
+              }
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
