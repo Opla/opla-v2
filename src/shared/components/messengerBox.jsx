@@ -140,56 +140,65 @@ class MessengerBox extends Component {
             className="messenger-content messenger-content-test bounceOutRight bounceInRight"
           >
             {sorted.map((message, index) => {
+              const inputText =
+                message.debug &&
+                message.debug.input &&
+                message.debug.input.sentence
+                  ? message.debug.input.sentence.text
+                  : "";
+              const intentCreateAction = (e) => {
+                e.preventDefault();
+                this.props.onAction("createIntent", inputText, message);
+              };
+              const intentAddInputAction = (e) => {
+                e.preventDefault();
+                this.props.onAction("addInput", inputText, message);
+              };
+              let intentActionGoto = (e) => {
+                e.preventDefault();
+                // TODO Goto intent
+              };
+              let intentActionLink = (e) => {
+                e.preventDefault();
+                // TODO display link
+              };
+              const messageEditAction = (e) => {
+                e.preventDefault();
+                // TODO edit message
+              };
+              const messageDeleteAction = (e) => {
+                e.preventDefault();
+                // TODO delete message
+              };
               if (message.error || message.body.indexOf("[Error]") !== -1) {
-                const inputText = message.input ? message.input.text : "";
-                let buttons = (
-                  <div>
-                    <Button
-                      raised
-                      onClick={(e) => {
-                        e.preventDefault();
-                        this.props.onAction("createIntent", inputText, message);
-                      }}
-                    >
-                      create intent
-                    </Button>
-                  </div>
-                );
-                if (this.props.isSelectedIntent) {
-                  buttons = (
-                    <div>
-                      <Button
-                        raised
-                        onClick={(e) => {
-                          e.preventDefault();
-                          this.props.onAction(
-                            "createIntent",
-                            inputText,
-                            message,
-                          );
-                        }}
-                      >
-                        create intent
-                      </Button>
-                      <Button
-                        raised
-                        onClick={(e) => {
-                          e.preventDefault();
-                          this.props.onAction("addInput", inputText);
-                        }}
-                      >
-                        add input
-                      </Button>
-                    </div>
-                  );
+                const from = message.from.toLowerCase();
+                const user = users[from];
+                let dest = "you";
+                let icon = "default";
+                if (user) {
+                  ({ dest, icon } = user);
                 }
                 return (
-                  <div key={message.id} className="message_error">
-                    <div className="message_error_header">
-                      <strong>Oh snap ! </strong>
-                      I can&quot;t associate an intent with previous input.
+                  <div key={message.id} className={`message ${dest} ${icon}`}>
+                    <div className="circle-wrapper animated bounceIn" />
+                    <div className="text-wrapper animated fadeIn">
+                      <div className="message-body-error">
+                        I don&apos;t understand. You need to write a response
+                        here, and I will create an intent with previous message.
+                      </div>
+                      <span>
+                        <Icon name="edit" className="message-edit-icon-right" />
+                      </span>
+                      <div className="message-error-container">
+                        <a
+                          href="#"
+                          className="message-intent-link-error"
+                          onClick={intentCreateAction}
+                        >
+                          #NotFoundIntent.output
+                        </a>
+                      </div>
                     </div>
-                    {buttons}
                   </div>
                 );
               } else if (message.welcome) {
@@ -216,11 +225,90 @@ class MessengerBox extends Component {
               if (user) {
                 ({ dest, icon } = user);
               }
+              const { debug } = message;
+              const notError = debug && debug.intent && debug.intent.name;
+              let intentLinkClassName = "message-intent-link-error";
+              let intentIconClassName = "message-intent-icon-link";
+              let intentLink = "#NotFoundIntent.";
+              let intentHint = "";
+              let messageActions = "";
+              if (notError) {
+                intentLink = `#${debug.intent.name}.`;
+                intentLinkClassName = "message-intent-link";
+              } else {
+                intentHint = (
+                  <span className="message-intent-hint">
+                    &lt;- Add to current intent input
+                  </span>
+                );
+                intentIconClassName = "message-intent-icon-link-error";
+                intentActionLink = intentAddInputAction;
+                intentActionGoto = intentCreateAction;
+              }
+              intentLink += dest === "you" ? "input" : ".output";
+              if (notError) {
+                intentLink += ".";
+                intentLink +=
+                  dest === "you" ? debug.input.index : debug.output.index;
+              }
+              if (dest === "you") {
+                messageActions = (
+                  <span>
+                    <Icon
+                      onClick={messageDeleteAction}
+                      name="clear"
+                      className="message-delete-icon"
+                    />
+                    <Icon
+                      onClick={messageEditAction}
+                      name="edit"
+                      className="message-edit-icon"
+                    />
+                  </span>
+                );
+              } else {
+                messageActions = (
+                  <span>
+                    <Icon
+                      onClick={messageEditAction}
+                      name="edit"
+                      className="message-edit-icon-right"
+                    />
+                  </span>
+                );
+              }
+
+              const intentLinkButton =
+                dest === "you" ? (
+                  <span>
+                    <Icon
+                      onClick={intentActionLink}
+                      name={notError ? "link" : "add_circle_outline"}
+                      className={intentIconClassName}
+                    />
+                    {intentHint}
+                  </span>
+                ) : (
+                  ""
+                );
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
                   <div className="text-wrapper animated fadeIn">
-                    {this.createMessage(message)}
+                    <div className="message-body">
+                      {this.createMessage(message)}
+                    </div>
+                    {messageActions}
+                    <div className="message-debug-container">
+                      <a
+                        href="#"
+                        onClick={intentActionGoto}
+                        className={intentLinkClassName}
+                      >
+                        {intentLink}
+                      </a>
+                      {intentLinkButton}
+                    </div>
                   </div>
                 </div>
               );

@@ -258,6 +258,171 @@
     margin: 8px 16px 8px 16px;
 }
 
+.message-body-error {
+  color: #b71c1c;
+  font-style: italic;
+  margin-bottom: 16px;
+  cursor: text;
+}
+
+.message-body {
+  margin-bottom: 16px;
+}
+
+.from > .text-wrapper > .message-debug-container {
+  right: 8px;
+  position: absolute;
+}
+
+.from > .text-wrapper > .message-error-container {
+  right: 8px;
+  position: absolute;  
+}
+
+.you > .text-wrapper > .message-debug-container {
+  left: 8px;
+  position: absolute;
+}
+
+.you > .text-wrapper > .message-error-container {
+  left: 8px;
+  position: absolute;  
+}
+
+.message:hover .message-delete-icon {
+  opacity: 1;
+}
+
+.message-delete-icon {
+  opacity: 0;
+  left: -28px;
+  top: 28px;
+  padding: 0px;
+  position: absolute;
+  cursor: pointer;
+  color: rgba(85, 38, 130, 0.05);
+}
+
+.message-delete-icon:hover {
+  color: rgba(85, 38, 130, 0.8);
+}
+
+.message:hover .message-edit-icon {
+  opacity: 1;
+}
+
+.message-edit-icon {
+  opacity: 0;
+  left: -28px;
+  top: 0px;
+  padding: 0px;
+  position: absolute;
+  cursor: pointer;
+  color: rgba(85, 38, 130, 0.05);
+}
+
+.message-edit-icon:hover {
+  color: rgba(85, 38, 130, 0.8);
+}
+
+.message:hover .message-edit-icon-right {
+  opacity: 1;
+}
+
+.message-edit-icon-right {
+  opacity: 0;
+  right: -28px;
+  top: 0px;
+  padding: 0px;
+  position: absolute;
+  cursor: pointer;
+  color: rgba(85, 38, 130, 0.05);
+}
+
+.message-edit-icon-right:hover {
+  color: rgba(85, 38, 130, 0.8);
+}
+
+.error-color {
+  color: #b71c1c;
+}
+
+.error-color:hover {
+  color: #7f0000;
+}
+
+.message-error-container {
+  bottom: 8px;
+  position: absolute;
+  color: #b71c1c;
+}
+
+.message-debug-container {
+  bottom: 8px;
+  position: absolute;
+  color: rgba(85, 38, 130, 0.2);
+  margin-top: 8px;
+}
+
+.message-debug-container-to {
+  bottom: 8px;
+  left: 8px;
+  position: absolute;
+  color: #b71c1c;
+  margin-top: 8px;
+}
+
+.message-intent-link {
+  text-align: left;
+  font-size: 12px;
+  margin-right: 8px;
+  color: rgba(85, 38, 130, 0.2);
+}
+
+.message-intent-link-error {
+  text-align: left;
+  font-size: 12px;
+  margin-right: 8px;
+  color: #b71c1c;
+}
+
+.message-intent-link-error:hover {
+  color: #7f0000;
+}
+
+.message-intent-link:hover {
+  color: rgba(85, 38, 130, 0.8);
+}
+
+.message-intent-icon-link {
+  padding: 0px;
+  position: absolute;
+  cursor: pointer;
+  bottom: -4px;
+}
+
+.message-intent-icon-link:hover {
+  color: rgba(85, 38, 130, 0.8);
+}
+
+.message-intent-icon-link-error {
+  padding: 0px;
+  position: absolute;
+  cursor: pointer;
+  bottom: -4px;
+  color: #b71c1c;
+}
+
+.message-intent-icon-link-error:hover {
+  color: #7f0000;
+}
+
+.message-intent-hint {
+  font-size: 10px;
+  padding-left: 30px;
+  color: rgba(85, 38, 130, 0.8);
+}
+
 @media screen and (max-width: 1024px) {
   .mdl-dialog-container .mdl-dialog .mdl-dialog__content {
       padding: 0px;

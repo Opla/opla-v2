@@ -60,7 +60,12 @@ describe("components/messengerBox", () => {
 
     expect(wrapper.find(".message")).toHaveLength(4);
     const content = wrapper.find(".message").map((node) => node.text());
-    expect(content).toEqual(["msg1", "rep1", "msg2", "rep2"]);
+    expect(content).toEqual([
+      "msg1<Icon />#NotFoundIntent..output",
+      "rep1<Icon />#NotFoundIntent..output",
+      "msg2<Icon />#NotFoundIntent..output",
+      "rep2<Icon />#NotFoundIntent..output",
+    ]);
   });
 
   it("sould render messages with slash", () => {
@@ -76,7 +81,9 @@ describe("components/messengerBox", () => {
       <MessengerBox {...defaultProps} messages={[message]} />,
     );
     expect(wrapper.find(".message")).toHaveLength(1);
-    expect(wrapper.find(".message").text()).toEqual("12/09/2018");
+    expect(wrapper.find(".message").text()).toEqual(
+      "12/09/2018<Icon />#NotFoundIntent..output",
+    );
   });
 
   it("sould render messages with slash and button", () => {
@@ -92,7 +99,9 @@ describe("components/messengerBox", () => {
       <MessengerBox {...defaultProps} messages={[message]} />,
     );
     expect(wrapper.find(".text-wrapper")).toHaveLength(1);
-    expect(wrapper.find(".text-wrapper").text()).toMatch("12/09/2018");
+    expect(wrapper.find(".text-wrapper").text()).toMatch(
+      "12/09/2018 <Button /> ou  <Button />  <Icon />#NotFoundIntent..output",
+    );
     expect(wrapper.find(Button)).toHaveLength(2);
   });
 });
