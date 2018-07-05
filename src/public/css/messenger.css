@@ -289,6 +289,24 @@
   position: absolute;  
 }
 
+.message_welcome:hover .message-welcome-icon {
+  opacity: 1;
+}
+
+.message-welcome-icon {
+  opacity: 0;
+  right: 8px;
+  top: 20px;
+  padding: 0px;
+  position: absolute;
+  cursor: pointer;
+  color: rgba(85, 38, 130, 0.2);
+}
+
+.message-welcome-icon:hover {
+  color: rgba(85, 38, 130, 0.8);
+}
+
 .message:hover .message-delete-icon {
   opacity: 1;
 }

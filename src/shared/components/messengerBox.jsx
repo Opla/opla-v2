@@ -203,18 +203,24 @@ class MessengerBox extends Component {
                 );
               } else if (message.welcome) {
                 const key = `wl_${index}`;
+                const editWelcomeAction = (e) => {
+                  e.preventDefault();
+                  this.props.onAction("welcomeMessage", message.body);
+                };
                 return (
                   <div
                     key={key}
                     role="presentation"
                     className="message_welcome"
                     onKeyUp={() => {}}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      this.props.onAction("welcomeMessage", message.body);
-                    }}
+                    onClick={editWelcomeAction}
                   >
                     {message.body}
+                    <Icon
+                      onClick={editWelcomeAction}
+                      name="edit"
+                      className="message-welcome-icon"
+                    />
                   </div>
                 );
               }
