@@ -71,6 +71,38 @@ export default class extends MessengerController {
     return this.appendConversationsMessages(conversations);
   }
 
+  async updateMessages(user, botId, messages, isAdmin = false) {
+    const conversations = await this.getConversations(user, 0, botId, isAdmin);
+    if (conversations && conversations.length > 0) {
+      const conversation = conversations[0];
+      const conversationId = conversation.id;
+      if (Array.isArray(messages)) {
+        await Promise.all(
+          messages.map((message) => {
+            if (
+              message.id &&
+              message.conversationId === conversationId &&
+              message.from
+            ) {
+              return this.model.storeMessage(message, message.id);
+            }
+            return null;
+          }),
+        );
+      }
+      if (this.className) {
+        await this.dispatch(this.className, {
+          origin: conversation.origin,
+          author: conversation.author,
+          conversationId,
+          action: "updateConversation",
+        });
+      }
+      return { result: "ok" };
+    }
+    return { result: "error" };
+  }
+
   async resetConversations(user, botId, isAdmin = false) {
     await this.deleteConversations(user, botId, isAdmin);
     const conversations = await this.getFullBotConversations(

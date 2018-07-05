@@ -103,6 +103,20 @@ export default class extends Controller {
     return message;
   }
 
+  async deleteMessage(message, origin, author) {
+    let id = null;
+    if (message.id && message.conversationId) {
+      id = await this.model.deleteMessage(message);
+      await this.dispatch(this.className, {
+        origin,
+        author,
+        conversationId: message.conversationId,
+        action: "deleteMessage",
+      });
+    }
+    return id;
+  }
+
   async deleteConversations(user, origin, isAdmin = false) {
     return this.model.deleteConversations(user, origin, isAdmin);
     // TODO dispatch message

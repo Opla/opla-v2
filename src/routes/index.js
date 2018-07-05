@@ -146,6 +146,20 @@ export default (zoapp) => {
     ["owner", "admin", "master", "default"],
     bots.sandboxNewMessage,
   );
+  // bot sandbox update messages
+  route.add(
+    "PUT",
+    "/:botId/sandbox/messages/:conversationId",
+    ["owner", "admin", "master", "default"],
+    bots.sandboxUpdateMessages,
+  );
+  // bot sandbox delete message
+  route.add(
+    "DELETE",
+    "/:botId/sandbox/messages/:conversationId",
+    ["owner", "admin", "master", "default"],
+    bots.sandboxDeleteMessage,
+  );
   // bot sandbox get context
   route.add(
     "GET",

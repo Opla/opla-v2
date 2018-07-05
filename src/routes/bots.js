@@ -326,6 +326,37 @@ export default class extends CommonRoutes {
     return messenger.createMessage(user, conversationId, params);
   }
 
+  async sandboxDeleteMessage(context) {
+    // const me = await this.access(context);
+    const { botId, message } = context.getParams();
+    // const scope = context.getScope();
+    // const isAdmin = scope === "master" || scope === "admin";
+    // TODO check if me has access to botId
+    const messenger = this.extensions.getSandboxMessenger();
+    const payload = await messenger.deleteMessage(message, botId);
+    return {
+      result: payload,
+    };
+  }
+
+  async sandboxUpdateMessages(context) {
+    const me = await this.access(context);
+    const { botId, messages } = context.getParams();
+    const scope = context.getScope();
+    const isAdmin = scope === "master" || scope === "admin";
+    // TODO check if me has access to botId
+    const messenger = this.extensions.getSandboxMessenger();
+    const payload = await messenger.updateMessages(
+      me,
+      botId,
+      messages,
+      isAdmin,
+    );
+    return {
+      result: payload.result,
+    };
+  }
+
   async sandboxGetContext(context) {
     this.todo = {};
     return {
