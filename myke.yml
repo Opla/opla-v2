@@ -8,18 +8,24 @@ mixin:
   - infra/mixin/ci
 
 env:
-  REPO: Opla/front
+  K8S_ENV: dev
+  K8S_NAMESPACE: dev-ce
+  APPLICATION_NAME: opla-front
+  APPLICATION_SHORT_NAME: front
+  CHART_VERSION_SEM: 0.1.0
+  REPO: opla/front
   TAG: latest
   CHART_DIR: charts/opla-front
   GITHUB_PAGES_REPO: Opla/front
+  APP_BUILD: dev
 
 tasks:
   build:
     cmd: |-
-      eval $(myke -v=0 _app_version)
+      eval $(myke -v=0 _app_version) #APP_VERSION comes from there
       echo $APP_VERSION
       docker build \
         -t {{ .REPO }}:{{ .TAG }} \
         --build-arg APP_VERSION={{ .APP_VERSION }} \
-        --build-arg APP_BUILD={{ .BUILD }} \
+        --build-arg APP_BUILD={{ .APP_BUILD }} \
         .

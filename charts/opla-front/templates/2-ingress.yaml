@@ -12,6 +12,16 @@ metadata:
 
 spec:
   rules:
+   # Allows access via
+   # http://<namespace>.<nginx_svc_load_balancer_ip>.xip.io.
+   # See https://github.com/kubernetes/kubernetes/issues/41881
+  - host: {{ .Values.namespace }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: front
+          servicePort: 80
   - host: {{ .Values.front.domain }}
     http:
       paths:
