@@ -107,7 +107,6 @@ The CI/CD pipeline produces a Docker image that you can use to run the Backend.
 | OPLA_BACKEND_DATABASE_NAME | opla_dev | Database name                                                                                                                       |
 | OPLA_BACKEND_DATABASE_USER | opla     | Database user                                                                                                                       |
 | OPLA_BACKEND_DATABASE_PASS | foo      | Database password                                                                                                                   |
-
 ## Contributing
 
 Please, see the [CONTRIBUTING](CONTRIBUTING.md) file.

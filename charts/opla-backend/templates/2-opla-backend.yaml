@@ -97,6 +97,20 @@ metadata:
     certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
+  # Allows access via
+  # http://<namespace>.<nginx_svc_load_balancer_ip>.xip.io.
+  # See https://github.com/kubernetes/kubernetes/issues/41881
+  - host: {{ .Values.namespace }} 
+    http:
+      paths:
+      - path: /api
+        backend:
+          serviceName: backend
+          servicePort: 80
+      - path: /auth
+        backend:
+          serviceName: backend
+          servicePort: 80
   - host: {{ .Values.api.domain }}
     http:
       paths:
