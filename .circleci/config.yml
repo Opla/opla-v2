@@ -13,7 +13,7 @@ __steps:
         gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
         helm init --service-account tiller --upgrade
         COMMIT_SHA=$CIRCLE_SHA1 myke preview
-        COMMIT_SHA=$CIRCLE_SHA1 myke deploy
+        COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS=$HELM_XTRA_ARGS myke deploy
   - run: &notify0
       when: on_success
       command: TEST_RESULT=0 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke backend/_circle_notify
@@ -48,7 +48,7 @@ jobs:
       - run: bin/opla migrations up
       - run: yarn lint
       - run: yarn test
-      
+  
   build:
     docker: 
       - image: licarth/ci-cd:latest
@@ -62,6 +62,33 @@ jobs:
       - setup_remote_docker
       - run: *dockerauth
       - run: myke backend/ci_build --COMMIT_SHA=$CIRCLE_SHA1
+
+  e2e_test:
+    docker:
+      - image: licarth/ci-cd:latest
+    environment: 
+      K8S_ENV: qa
+      GCLOUD_CLUSTER_ID: qa
+
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - run: *gcloudauth
+      - run: |
+          export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
+          gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
+          helm init --service-account tiller --upgrade
+          COMMIT_SHA=$CIRCLE_SHA1 myke preview
+          COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS="--set tls=false" myke deploy
+      - run: |
+          export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
+          retry -s 1 -t 60 myke e2e_test
+      - run:
+          command: |
+            export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
+            echo $HELM_XTRA_ARGS && kubectl delete ns circleci-$CIRCLE_BUILD_NUM
+          when: always
+
   promote:
     docker: 
       - image: licarth/ci-cd:latest
@@ -128,10 +155,12 @@ workflows:
             tags:
               only: /.*/
       - build
-      - promote:
+      - e2e_test:
           requires:
             - build
-            - test
+      - promote:
+          requires:
+            - e2e_test
           filters:
             branches:
               only: 
