@@ -42,3 +42,20 @@ tasks:
   clean_pv:
     cmd: |-
       kubectl -n {{.K8S_NAMESPACE}} delete pvc data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-master-0 data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-slave-0 || true
+
+  e2e_test:
+    cmd: |-
+      IP=$(kubectl get svc nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress.*.ip}')
+      STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" "http://{{.K8S_NAMESPACE}}.$IP.xip.io/auth/access_token" \
+      -H "origin: http://{{.K8S_NAMESPACE}}.$IP.xip.io" \
+      -H 'accept-encoding: gzip, deflate, br' \
+      -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,en-GB;q=0.6,de;q=0.5' \
+      -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36' \
+      -H 'content-type: application/json' \
+      -H 'accept: */*' \
+      -H "referer: http://{{.K8S_NAMESPACE}}.$IP.xip.io" \
+      --data-binary '{"username":"admin","password":"password","client_id":"{{.CLIENT_ID}}","redirect_uri":"localhost","grant_type":"password"}' \
+      --compressed)
+      if [ "$STATUS_CODE" != 200 ]; then
+        exit 1
+      fi;
