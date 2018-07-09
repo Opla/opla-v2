@@ -42,7 +42,9 @@ class IntentContainer extends Component {
   }
 
   handleDocumentClick = (e) => {
-    if (!this.node.contains(e.target)) {
+    // Mik : Test this.node to fix
+    // https://github.com/Opla/front/issues/249
+    if (this.node && !this.node.contains(e.target)) {
       this.handleClickOutside();
     }
   };
