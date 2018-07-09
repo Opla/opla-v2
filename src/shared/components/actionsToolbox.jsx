@@ -189,7 +189,7 @@ class ActionsToolbox extends Component {
     };
     const styleToolbar = {
       borderRight: "1px solid #ddd",
-      /* display: "table-cell", */
+      display: "flex",
       padding: "8px",
       float: "left",
       height: "22px",
@@ -199,10 +199,10 @@ class ActionsToolbox extends Component {
       cursor: "pointer",
     };
     const { toolbox } = this.state;
-    let extra = "";
+    const extras = [];
     if (this.props.isInput) {
-      extra = (
-        <Tooltip label="Insert block any">
+      extras.push(
+        <Tooltip key="action_iba" label="Insert block any">
           <Icon
             style={styleButton}
             /* colored={toolbox.any} */ onClick={(e) => {
@@ -212,60 +212,64 @@ class ActionsToolbox extends Component {
             id="atb_any"
             name="all_out"
           />
-        </Tooltip>
+        </Tooltip>,
       );
     } else {
-      extra = (
-        <span>
-          <Tooltip label="Insert code">
-            <Icon
-              style={styleButton}
-              /* colored={toolbox.code} */ onClick={(e) => {
-                // e.stopPropagation();
-                this.onCodeSelected(e);
-              }}
-              id="atb_variable"
-              name="code"
-            />
-          </Tooltip>
-          <Tooltip label="Insert Linebreak">
-            <Icon
-              style={styleButton}
-              /* colored={toolbox.linebreak} */ onClick={(e) => {
-                // e.stopPropagation();
-                this.onLineBreakSelected(e);
-              }}
-              id="atb_br"
-              name="keyboard_return"
-            />
-          </Tooltip>
-          <Tooltip label="Insert Button">
-            <Icon
-              style={styleButton}
-              /* colored={toolbox.button} */ onClick={(e) => {
-                // e.stopPropagation();
-                this.onButtonSelected(e);
-              }}
-              id="atb_button"
-              name="insert_link"
-            />
-          </Tooltip>
-          {this.props.condition && (
-            <Tooltip label="Insert condition">
-              <Icon
-                style={styleButton}
-                /* colored={toolbox.any} */
-                onClick={(e) => {
-                  // e.stopPropagation();
-                  this.onConditionSelected(e);
-                }}
-                id="atb_condition"
-                name="device_hub"
-              />
-            </Tooltip>
-          )}
-        </span>
+      extras.push(
+        <Tooltip key="action_ico" label="Insert code">
+          <Icon
+            style={styleButton}
+            /* colored={toolbox.code} */ onClick={(e) => {
+              // e.stopPropagation();
+              this.onCodeSelected(e);
+            }}
+            id="atb_variable"
+            name="code"
+          />
+        </Tooltip>,
       );
+      extras.push(
+        <Tooltip key="action_ilb" label="Insert Linebreak">
+          <Icon
+            style={styleButton}
+            /* colored={toolbox.linebreak} */ onClick={(e) => {
+              // e.stopPropagation();
+              this.onLineBreakSelected(e);
+            }}
+            id="atb_br"
+            name="keyboard_return"
+          />
+        </Tooltip>,
+      );
+      extras.push(
+        <Tooltip key="action_ib" label="Insert Button">
+          <Icon
+            style={styleButton}
+            /* colored={toolbox.button} */ onClick={(e) => {
+              // e.stopPropagation();
+              this.onButtonSelected(e);
+            }}
+            id="atb_button"
+            name="insert_link"
+          />
+        </Tooltip>,
+      );
+      if (this.props.condition) {
+        extras.push(
+          <Tooltip key="action_ic" label="Insert condition">
+            <Icon
+              style={styleButton}
+              /* colored={toolbox.any} */
+              onClick={(e) => {
+                // e.stopPropagation();
+                this.onConditionSelected(e);
+              }}
+              id="atb_condition"
+              name="device_hub"
+            />
+          </Tooltip>,
+        );
+      }
     }
     return (
       <div
@@ -296,10 +300,10 @@ class ActionsToolbox extends Component {
               name="assignment"
             />
           </Tooltip>
-          {extra}
+          {extras.map((e) => e)}
         </div>
         <div style={styleToolbar}>
-          <Tooltip label="Delete selected item">
+          <Tooltip label="Delete selected block">
             <Icon
               style={styleButton}
               disabled={toolbox.trash}
