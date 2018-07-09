@@ -45,6 +45,7 @@ class OpenNLXMiddleware {
         debug: response.debug,
       });
     }
+    // logger.info("p=", p, debug);
     return p;
   }
 
@@ -75,7 +76,7 @@ class OpenNLXMiddleware {
           const debug = version === "sandbox";
           const response = await this.openNLX.parse(bot.id, v, msg, debug);
           logger.info("refreshConversation response", response);
-          const params = OpenNLXMiddleware.updateInputMessage(
+          const params = await OpenNLXMiddleware.updateInputMessage(
             messenger,
             message,
             response,
@@ -174,7 +175,7 @@ class OpenNLXMiddleware {
           const response = await this.openNLX.parse(bot.id, v, msg, debug);
           // logger.info("response=", JSON.stringify(response));
           const { conversationId } = message;
-          const params = OpenNLXMiddleware.updateInputMessage(
+          const params = await OpenNLXMiddleware.updateInputMessage(
             messenger,
             message,
             response,
@@ -184,6 +185,7 @@ class OpenNLXMiddleware {
             },
             debug,
           );
+          // logger.info("params=", JSON.stringify(params));
           if (params.message) {
             await messenger.createMessage(null, conversationId, params);
           }
