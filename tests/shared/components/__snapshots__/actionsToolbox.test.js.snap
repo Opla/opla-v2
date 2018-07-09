@@ -16,6 +16,7 @@ exports[`components/actionsToolbox can be an input 1`] = `
     style={
       Object {
         "borderRight": "1px solid #ddd",
+        "display": "flex",
         "float": "left",
         "height": "22px",
         "padding": "8px",
@@ -23,11 +24,7 @@ exports[`components/actionsToolbox can be an input 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "display": "inline-block",
-        }
-      }
+      className="mdc-tooltype"
     >
       <i
         className="material-icons"
@@ -45,13 +42,12 @@ exports[`components/actionsToolbox can be an input 1`] = `
       >
         text_fields
       </i>
+      <span>
+        Insert text
+      </span>
     </div>
     <div
-      style={
-        Object {
-          "display": "inline-block",
-        }
-      }
+      className="mdc-tooltype"
     >
       <i
         className="material-icons"
@@ -69,13 +65,12 @@ exports[`components/actionsToolbox can be an input 1`] = `
       >
         assignment
       </i>
+      <span>
+        Insert variable assignment
+      </span>
     </div>
     <div
-      style={
-        Object {
-          "display": "inline-block",
-        }
-      }
+      className="mdc-tooltype"
     >
       <i
         className="material-icons"
@@ -93,12 +88,16 @@ exports[`components/actionsToolbox can be an input 1`] = `
       >
         all_out
       </i>
+      <span>
+        Insert block any
+      </span>
     </div>
   </div>
   <div
     style={
       Object {
         "borderRight": "1px solid #ddd",
+        "display": "flex",
         "float": "left",
         "height": "22px",
         "padding": "8px",
@@ -106,11 +105,7 @@ exports[`components/actionsToolbox can be an input 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "display": "inline-block",
-        }
-      }
+      className="mdc-tooltype"
     >
       <i
         className="material-icons"
@@ -129,6 +124,9 @@ exports[`components/actionsToolbox can be an input 1`] = `
       >
         delete
       </i>
+      <span>
+        Delete selected block
+      </span>
     </div>
   </div>
 </div>

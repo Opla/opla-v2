@@ -27,11 +27,7 @@ exports[`components/actionEditor renders correctly 1`] = `
       }
     >
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="mdc-tooltype"
       >
         <i
           className="material-icons"
@@ -42,13 +38,12 @@ exports[`components/actionEditor renders correctly 1`] = `
         >
           text_fields
         </i>
+        <span>
+          Insert text
+        </span>
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="mdc-tooltype"
       >
         <i
           className="material-icons"
@@ -59,13 +54,12 @@ exports[`components/actionEditor renders correctly 1`] = `
         >
           all_out
         </i>
+        <span>
+          Insert block any
+        </span>
       </div>
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="mdc-tooltype"
       >
         <i
           className="material-icons"
@@ -76,14 +70,13 @@ exports[`components/actionEditor renders correctly 1`] = `
         >
           assignment
         </i>
+        <span>
+          Insert entity assignment
+        </span>
       </div>
       <span>
         <div
-          style={
-            Object {
-              "display": "inline-block",
-            }
-          }
+          className="mdc-tooltype"
         >
           <i
             className="material-icons"
@@ -94,13 +87,12 @@ exports[`components/actionEditor renders correctly 1`] = `
           >
             code
           </i>
+          <span>
+            Insert code
+          </span>
         </div>
         <div
-          style={
-            Object {
-              "display": "inline-block",
-            }
-          }
+          className="mdc-tooltype"
         >
           <i
             className="material-icons"
@@ -111,13 +103,12 @@ exports[`components/actionEditor renders correctly 1`] = `
           >
             keyboard_return
           </i>
+          <span>
+            Insert Linebreak
+          </span>
         </div>
         <div
-          style={
-            Object {
-              "display": "inline-block",
-            }
-          }
+          className="mdc-tooltype"
         >
           <i
             className="material-icons"
@@ -128,6 +119,9 @@ exports[`components/actionEditor renders correctly 1`] = `
           >
             insert_link
           </i>
+          <span>
+            Insert Button
+          </span>
         </div>
       </span>
     </div>
@@ -140,11 +134,7 @@ exports[`components/actionEditor renders correctly 1`] = `
       }
     >
       <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
+        className="mdc-tooltype"
       >
         <i
           className="material-icons"
@@ -156,6 +146,9 @@ exports[`components/actionEditor renders correctly 1`] = `
         >
           delete
         </i>
+        <span>
+          Delete selected item
+        </span>
       </div>
     </div>
   </div>
