@@ -7865,9 +7865,9 @@ zoapp-common@0.3.0:
     whatwg-fetch "^2.0.4"
     winston "2.4.0"
 
-zoapp-front@0.23.3:
-  version "0.23.3"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.23.3.tgz#afe17132a6f9c75e7338628c587270422fe718b3"
+zoapp-front@0.23.4:
+  version "0.23.4"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.23.4.tgz#de251b2de00c312eda7873f2114763d349e51c1b"
   dependencies:
     babel-runtime "^6.26.0"
     prop-types "15.6.0"
@@ -7880,12 +7880,12 @@ zoapp-front@0.23.3:
     redux "3.7.2"
     redux-saga "0.16.0"
     zoapp-common "0.3.0"
-    zoapp-ui "0.6.4"
+    zoapp-ui "0.6.5"
     zrmc "0.10.6"
 
-zoapp-ui@0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.6.4.tgz#1f1e5ac9ed1179d50d4222d642ab4897ce783a1b"
+zoapp-ui@0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.6.5.tgz#86f696df9ef999e532da1bb60abaa75a2cf95bc1"
   dependencies:
     prop-types "15.6.0"
     react "16.2.0"
