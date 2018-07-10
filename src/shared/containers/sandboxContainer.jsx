@@ -13,6 +13,7 @@ import { SubToolbar, Tooltip } from "zoapp-ui";
 import MessengerBox from "../components/messengerBox";
 import {
   apiGetSandboxMessagesRequest,
+  apiUpdateSandboxMessagesRequest,
   apiSubscribeSandboxMessages,
   apiUnsubscribeSandboxMessages,
   apiSendSandboxMessageRequest,
@@ -78,6 +79,16 @@ class SandboxContainer extends Component {
     }
     // console.log("Error", "SandboxContainer.handleSend", this.props.conversation, body.length);
     return false;
+  };
+
+  handleRefresh = (e) => {
+    e.preventDefault();
+    if (this.props.conversation) {
+      this.props.apiUpdateSandboxMessagesRequest(
+        this.props.selectedBotId,
+        this.props.conversation.id,
+      );
+    }
   };
 
   handleDemo = () => {};
@@ -170,7 +181,7 @@ class SandboxContainer extends Component {
                 }}
               >
                 <Tooltip label="refresh">
-                  <Icon name="refresh" />
+                  <Icon name="refresh" onClick={this.handleRefresh} />
                 </Tooltip>
               </div>
             </div>
@@ -220,6 +231,7 @@ SandboxContainer.propTypes = {
   apiSubscribeSandboxMessages: PropTypes.func.isRequired,
   apiUnsubscribeSandboxMessages: PropTypes.func.isRequired,
   apiSendSandboxMessageRequest: PropTypes.func.isRequired,
+  apiUpdateSandboxMessagesRequest: PropTypes.func.isRequired,
   apiSandboxResetRequest: PropTypes.func.isRequired,
 };
 
@@ -257,6 +269,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   apiGetSandboxMessagesRequest: (botId) => {
     dispatch(apiGetSandboxMessagesRequest(botId));
+  },
+  apiUpdateSandboxMessagesRequest: (botId) => {
+    dispatch(apiUpdateSandboxMessagesRequest(botId));
   },
   apiSubscribeSandboxMessages: (botId) => {
     dispatch(apiSubscribeSandboxMessages(botId));

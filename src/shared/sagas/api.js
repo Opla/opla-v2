@@ -28,6 +28,7 @@ import {
   API_SAVEBOT,
   API_SB_GETCONTEXT,
   API_SB_GETMESSAGES,
+  API_SB_UPDATEMESSAGES,
   API_SB_RESET,
   API_SB_SENDMESSAGE,
   API_SENDINTENT,
@@ -358,6 +359,27 @@ const api = [
         });
       } catch (error) {
         yield put({ type: `${API_SB_SENDMESSAGE}${FETCH_FAILURE}`, error });
+      }
+    },
+  ],
+
+  [
+    API_SB_UPDATEMESSAGES + FETCH_REQUEST,
+    function* f(action) {
+      const { botId, conversationId } = action;
+      try {
+        const response = yield getWebService().put(
+          `bots/${botId}/sandbox/messages/${conversationId}`,
+          [],
+        );
+        yield put({
+          type: `${API_SB_UPDATEMESSAGES}${FETCH_SUCCESS}`,
+          loading: false,
+          conversationId,
+          message: response,
+        });
+      } catch (error) {
+        yield put({ type: `${API_SB_UPDATEMESSAGES}${FETCH_FAILURE}`, error });
       }
     },
   ],

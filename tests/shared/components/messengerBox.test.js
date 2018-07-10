@@ -61,10 +61,10 @@ describe("components/messengerBox", () => {
     expect(wrapper.find(".message")).toHaveLength(4);
     const content = wrapper.find(".message").map((node) => node.text());
     expect(content).toEqual([
-      "msg1<Icon />#NotFoundIntent..output",
-      "rep1<Icon />#NotFoundIntent..output",
-      "msg2<Icon />#NotFoundIntent..output",
-      "rep2<Icon />#NotFoundIntent..output",
+      "msg1<Tooltip /><Tooltip />",
+      "rep1<Tooltip /><Tooltip />",
+      "msg2<Tooltip /><Tooltip />",
+      "rep2<Tooltip /><Tooltip />",
     ]);
   });
 
@@ -82,7 +82,7 @@ describe("components/messengerBox", () => {
     );
     expect(wrapper.find(".message")).toHaveLength(1);
     expect(wrapper.find(".message").text()).toEqual(
-      "12/09/2018<Icon />#NotFoundIntent..output",
+      "12/09/2018<Tooltip /><Tooltip />",
     );
   });
 
@@ -100,7 +100,7 @@ describe("components/messengerBox", () => {
     );
     expect(wrapper.find(".text-wrapper")).toHaveLength(1);
     expect(wrapper.find(".text-wrapper").text()).toMatch(
-      "12/09/2018 <Button /> ou  <Button />  <Icon />#NotFoundIntent..output",
+      "12/09/2018 <Button /> ou  <Button />  <Tooltip /><Tooltip />",
     );
     expect(wrapper.find(Button)).toHaveLength(2);
   });

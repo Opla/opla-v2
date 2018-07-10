@@ -25,6 +25,7 @@ import {
   API_SAVEBOT,
   API_SB_GETCONTEXT,
   API_SB_GETMESSAGES,
+  API_SB_UPDATEMESSAGES,
   API_SB_RESET,
   API_SB_SENDMESSAGE,
   API_SENDINTENT,
@@ -133,6 +134,14 @@ export function apiSendSandboxMessageRequest(botId, conversationId, message) {
     botId,
     conversationId,
     message,
+  };
+}
+
+export function apiUpdateSandboxMessagesRequest(botId, conversationId) {
+  return {
+    type: API_SB_UPDATEMESSAGES + FETCH_REQUEST,
+    botId,
+    conversationId,
   };
 }
 
