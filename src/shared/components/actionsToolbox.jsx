@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Tooltip } from "zoapp-ui";
-import { Icon } from "zrmc";
+import { Icon, Menu, MenuItem } from "zrmc";
 
 class ActionsToolbox extends Component {
   constructor(props) {
@@ -214,6 +214,34 @@ class ActionsToolbox extends Component {
           />
         </Tooltip>,
       );
+      extras.push(
+        <Tooltip key="action_emo" label="TODO Insert emoticon">
+          <Icon
+            style={styleButton}
+            /* colored={toolbox.button} */ onClick={(e) => {
+              e.stopPropagation();
+              // this.onButtonSelected(e);
+              // TODO insert emoji
+            }}
+            id="ati_emoticon"
+            name="insert_emoticon"
+          />
+        </Tooltip>,
+      );
+      extras.push(
+        <Tooltip key="action_att" label="TODO Insert Attachment">
+          <Icon
+            style={styleButton}
+            /* colored={toolbox.button} */ onClick={(e) => {
+              e.stopPropagation();
+              // this.onButtonSelected(e);
+              // TODO insert attachment
+            }}
+            id="ati_attachment"
+            name="attachment"
+          />
+        </Tooltip>,
+      );
     } else {
       extras.push(
         <Tooltip key="action_ico" label="Insert code">
@@ -242,17 +270,56 @@ class ActionsToolbox extends Component {
         </Tooltip>,
       );
       extras.push(
-        <Tooltip key="action_ib" label="Insert Button">
+        <Tooltip key="action_il" label="TODO Insert link">
           <Icon
             style={styleButton}
             /* colored={toolbox.button} */ onClick={(e) => {
-              // e.stopPropagation();
-              this.onButtonSelected(e);
+              e.stopPropagation();
+              // this.onButtonSelected(e);
+              // TODO insert link
             }}
-            id="atb_button"
+            id="atb_link"
             name="insert_link"
           />
         </Tooltip>,
+      );
+      extras.push(
+        <Tooltip key="action_emo" label="TODO Insert emoticon">
+          <Icon
+            style={styleButton}
+            /* colored={toolbox.button} */ onClick={(e) => {
+              e.stopPropagation();
+              // this.onButtonSelected(e);
+              // TODO insert emoji
+            }}
+            id="atb_emo"
+            name="insert_emoticon"
+          />
+        </Tooltip>,
+      );
+      const menu = (
+        <Menu target="" align="left">
+          <MenuItem
+            onSelected={() => {
+              this.onButtonSelected();
+            }}
+          >
+            Button
+          </MenuItem>
+          <MenuItem disabled>Image</MenuItem>
+          <MenuItem disabled>Poll</MenuItem>
+          <MenuItem disabled>Map</MenuItem>
+          <MenuItem disabled>Menu</MenuItem>
+        </Menu>
+      );
+      extras.push(
+        <Icon
+          key="action_gu"
+          style={styleButton}
+          id="atb_gui"
+          name="category"
+          menu={menu}
+        />,
       );
       if (this.props.condition) {
         extras.push(

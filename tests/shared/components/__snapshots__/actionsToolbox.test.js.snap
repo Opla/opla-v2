@@ -92,6 +92,52 @@ exports[`components/actionsToolbox can be an input 1`] = `
         Insert block any
       </span>
     </div>
+    <div
+      className="mdc-tooltype"
+    >
+      <i
+        className="material-icons"
+        id="ati_emoticon"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "cursor": "pointer",
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        insert_emoticon
+      </i>
+      <span>
+        TODO Insert emoticon
+      </span>
+    </div>
+    <div
+      className="mdc-tooltype"
+    >
+      <i
+        className="material-icons"
+        id="ati_attachment"
+        onClick={[Function]}
+        onKeyUp={[Function]}
+        role="button"
+        style={
+          Object {
+            "cursor": "pointer",
+            "margin": "0 4px",
+          }
+        }
+        tabIndex="0"
+      >
+        attachment
+      </i>
+      <span>
+        TODO Insert Attachment
+      </span>
+    </div>
   </div>
   <div
     style={
