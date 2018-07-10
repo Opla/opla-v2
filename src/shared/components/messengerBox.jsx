@@ -6,6 +6,7 @@
  */
 import React, { Component } from "react";
 import { TextField, Icon, Button } from "zrmc";
+import { Tooltip } from "zoapp-ui";
 import PropTypes from "prop-types";
 
 class MessengerBox extends Component {
@@ -186,17 +187,19 @@ class MessengerBox extends Component {
                         I don&apos;t understand. You need to write a response
                         here, and I will create an intent with previous message.
                       </div>
-                      <span>
+                      <Tooltip label="Create output response">
                         <Icon name="edit" className="message-edit-icon-right" />
-                      </span>
+                      </Tooltip>
                       <div className="message-error-container">
-                        <a
-                          href="#"
-                          className="message-intent-link-error"
-                          onClick={intentCreateAction}
-                        >
-                          #NotFoundIntent.output
-                        </a>
+                        <Tooltip label="create an intent">
+                          <a
+                            href="#"
+                            className="message-intent-link-error"
+                            onClick={intentCreateAction}
+                          >
+                            #NotFoundIntent.output
+                          </a>
+                        </Tooltip>
                       </div>
                     </div>
                   </div>
@@ -216,11 +219,13 @@ class MessengerBox extends Component {
                     onClick={editWelcomeAction}
                   >
                     {message.body}
-                    <Icon
-                      onClick={editWelcomeAction}
-                      name="edit"
-                      className="message-welcome-icon"
-                    />
+                    <Tooltip label="Edit welcome message">
+                      <Icon
+                        onClick={editWelcomeAction}
+                        name="edit"
+                        className="message-welcome-icon"
+                      />
+                    </Tooltip>
                   </div>
                 );
               }
@@ -232,24 +237,20 @@ class MessengerBox extends Component {
                 ({ dest, icon } = user);
               }
               const { debug } = message;
+              let intentTooltip = "Goto intent's item";
               const notError = debug && debug.intent && debug.intent.name;
               let intentLinkClassName = "message-intent-link-error";
               let intentIconClassName = "message-intent-icon-link";
               let intentLink = "#NotFoundIntent.";
-              let intentHint = "";
               let messageActions = "";
               if (notError) {
                 intentLink = `#${debug.intent.name}.`;
                 intentLinkClassName = "message-intent-link";
               } else {
-                intentHint = (
-                  <span className="message-intent-hint">
-                    &lt;- Add to current intent input
-                  </span>
-                );
                 intentIconClassName = "message-intent-icon-link-error";
                 intentActionLink = intentAddInputAction;
                 intentActionGoto = intentCreateAction;
+                intentTooltip = "Create an intent";
               }
               intentLink += dest === "you" ? "input" : ".output";
               if (notError) {
@@ -260,47 +261,50 @@ class MessengerBox extends Component {
               if (dest === "you") {
                 messageActions = (
                   <span>
-                    <Icon
-                      onClick={messageDeleteAction}
-                      name="clear"
-                      className="message-delete-icon"
-                    />
-                    <Icon
-                      onClick={messageEditAction}
-                      name="edit"
-                      className="message-edit-icon"
-                    />
+                    <Tooltip label="Delete message">
+                      <Icon
+                        onClick={messageDeleteAction}
+                        name="clear"
+                        className="message-delete-icon"
+                      />
+                    </Tooltip>
+                    <Tooltip label="Edit message">
+                      <Icon
+                        onClick={messageEditAction}
+                        name="edit"
+                        className="message-edit-icon"
+                      />
+                    </Tooltip>
                   </span>
                 );
               } else {
                 messageActions = (
-                  <span>
+                  <Tooltip label="Edit message">
                     <Icon
                       onClick={messageEditAction}
                       name="edit"
                       className="message-edit-icon-right"
                     />
-                  </span>
+                  </Tooltip>
                 );
               }
 
               let intentLinkButton = "";
+              let intentLinkTooltip = "";
               if (dest === "you" && this.props.isSelectedIntent) {
+                if (notError) {
+                  intentLinkTooltip = "link to another intent";
+                } else {
+                  intentLinkTooltip = "Add to current intent's inputs";
+                }
                 intentLinkButton = (
-                  <span>
+                  <Tooltip label={intentLinkTooltip}>
                     <Icon
                       onClick={intentActionLink}
                       name={notError ? "link" : "add_circle_outline"}
                       className={intentIconClassName}
                     />
-                    {intentHint}
-                  </span>
-                );
-              } else if (dest === "you") {
-                intentLinkButton = (
-                  <span className="message-intent-hint">
-                    &lt;- Click to create an intent
-                  </span>
+                  </Tooltip>
                 );
               }
               return (
@@ -312,13 +316,15 @@ class MessengerBox extends Component {
                     </div>
                     {messageActions}
                     <div className="message-debug-container">
-                      <a
-                        href="#"
-                        onClick={intentActionGoto}
-                        className={intentLinkClassName}
-                      >
-                        {intentLink}
-                      </a>
+                      <Tooltip label={intentTooltip}>
+                        <a
+                          href="#"
+                          onClick={intentActionGoto}
+                          className={intentLinkClassName}
+                        >
+                          {intentLink}
+                        </a>
+                      </Tooltip>
                       {intentLinkButton}
                     </div>
                   </div>
