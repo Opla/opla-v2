@@ -146,6 +146,20 @@ export default (zoapp) => {
     ["owner", "admin", "master", "default"],
     bots.sandboxNewMessage,
   );
+  // bot sandbox update messages
+  route.add(
+    "PUT",
+    "/:botId/sandbox/messages/:conversationId",
+    ["owner", "admin", "master", "default"],
+    bots.sandboxUpdateMessages,
+  );
+  // bot sandbox delete message
+  route.add(
+    "DELETE",
+    "/:botId/sandbox/messages/:conversationId",
+    ["owner", "admin", "master", "default"],
+    bots.sandboxDeleteMessage,
+  );
   // bot sandbox get context
   route.add(
     "GET",
@@ -171,7 +185,11 @@ export default (zoapp) => {
     async (event, channelId, data, ws) => {
       let response = null;
       // logger.info("sandbox WS", event, channelId);
-      if (event === "newMessages" || event === "subscribe") {
+      if (
+        event === "newMessages" ||
+        event === "updateConversation" ||
+        event === "subscribe"
+      ) {
         // logger.info("get me", ws.access);
         const me = await zoapp.controllers.getMe(ws.access.user_id);
         // logger.info("me=", me);

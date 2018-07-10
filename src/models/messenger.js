@@ -250,6 +250,17 @@ class MessengerModel extends Model {
     }
     return message;
   }
+
+  async deleteMessage(message) {
+    const collection = this.database.getTable("messages");
+    try {
+      await collection.deleteItem(message.id);
+    } catch (error) {
+      logger.info(error);
+      return null;
+    }
+    return message.id;
+  }
 }
 
 export default MessengerModel;

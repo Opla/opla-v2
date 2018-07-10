@@ -26,6 +26,7 @@ export default class extends CommonRoutes {
     this.moveIntent = this.moveIntent.bind(this);
     this.removeIntent = this.removeIntent.bind(this);
     this.sandboxMessages = this.sandboxMessages.bind(this);
+    this.sandboxUpdateMessages = this.sandboxUpdateMessages.bind(this);
     this.sandboxNewMessage = this.sandboxNewMessage.bind(this);
     this.sandboxGetContext = this.sandboxGetContext.bind(this);
     this.sandboxReset = this.sandboxReset.bind(this);
@@ -178,7 +179,7 @@ export default class extends CommonRoutes {
   }
 
   async import(context) {
-    // const me = await this.access(context);
+    const me = await this.access(context);
     // const scope = context.getScope();
     // const isMaster = scope === "master";
     const { botId } = context.getParams();
@@ -193,6 +194,8 @@ export default class extends CommonRoutes {
     );
     if (payload) {
       // logger.info("import payload=", payload);
+      const messenger = this.extensions.getSandboxMessenger();
+      await messenger.updateBotConversation(me, botId);
       return payload;
     }
     return { error: "doesn't import anything" };
@@ -236,7 +239,7 @@ export default class extends CommonRoutes {
   }
 
   async updateIntents(context) {
-    // const me = await this.access(context);
+    const me = await this.access(context);
     const { botId } = context.getParams();
     // TODO check if me has access to botId
     const versionId = context.getParams().version;
@@ -245,13 +248,15 @@ export default class extends CommonRoutes {
       .getBots()
       .setIntents(botId, params, versionId);
     if (intents) {
+      const messenger = this.extensions.getSandboxMessenger();
+      await messenger.updateBotConversation(me, botId);
       return { intents };
     }
     return { error: "can't set bot's intents" };
   }
 
   async updateIntent(context) {
-    // const me = await this.access(context);
+    const me = await this.access(context);
     const { botId, version } = context.getParams();
     // TODO check if me has access to botId
     // const intentId = context.getParams().intentId;
@@ -260,13 +265,15 @@ export default class extends CommonRoutes {
       .getBots()
       .setIntent(botId, params, version);
     if (intent) {
+      const messenger = this.extensions.getSandboxMessenger();
+      await messenger.updateBotConversation(me, botId);
       return intent;
     }
     return { error: "can't set bot's intent" };
   }
 
   async moveIntent(context) {
-    // const me = await this.access(context);
+    const me = await this.access(context);
     const { botId, intentId } = context.getParams();
     // TODO check if me has access to botId
     const { from, to } = context.getBody();
@@ -276,6 +283,8 @@ export default class extends CommonRoutes {
       .moveIntent(botId, intentId, from, to);
 
     if (payload) {
+      const messenger = this.extensions.getSandboxMessenger();
+      await messenger.updateBotConversation(me, botId);
       return payload;
     }
 
@@ -283,7 +292,7 @@ export default class extends CommonRoutes {
   }
 
   async removeIntent(context) {
-    // const me = await this.access(context);
+    const me = await this.access(context);
     const { botId, intentId } = context.getParams();
     // TODO check if me has access to botId
     // logger.info(`delete intentId=${intentId} botid=${botId}`);
@@ -291,6 +300,8 @@ export default class extends CommonRoutes {
       .getBots()
       .removeIntent(botId, intentId);
     if (payload) {
+      const messenger = this.extensions.getSandboxMessenger();
+      await messenger.updateBotConversation(me, botId);
       return { ok: "intent removed", id: intentId };
     }
     return { error: "can't remove bot's intent" };
@@ -324,6 +335,39 @@ export default class extends CommonRoutes {
     }
     const params = context.getBody();
     return messenger.createMessage(user, conversationId, params);
+  }
+
+  async sandboxDeleteMessage(context) {
+    // const me = await this.access(context);
+    const { botId, message } = context.getParams();
+    // const scope = context.getScope();
+    // const isAdmin = scope === "master" || scope === "admin";
+    // TODO check if me has access to botId
+    const messenger = this.extensions.getSandboxMessenger();
+    const payload = await messenger.deleteMessage(message, botId);
+    return {
+      result: payload,
+    };
+  }
+
+  async sandboxUpdateMessages(context) {
+    const me = await this.access(context);
+    const { botId, conversationId } = context.getParams();
+    const messages = context.getBody();
+    const scope = context.getScope();
+    const isAdmin = scope === "master" || scope === "admin";
+    // TODO check if me has access to botId
+    const messenger = this.extensions.getSandboxMessenger();
+    const payload = await messenger.updateMessages(
+      me,
+      botId,
+      conversationId,
+      messages,
+      isAdmin,
+    );
+    return {
+      result: payload.result,
+    };
   }
 
   async sandboxGetContext(context) {

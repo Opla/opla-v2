@@ -16,10 +16,103 @@ class OpenNLXMiddleware {
     logger.info("OpenNLXMiddleware");
   }
 
+  async resetContext(parameters, bot, conversationId, v) {
+    this.openNLX.deleteContext(bot.id, v, conversationId);
+    // delete in db parameters
+    try {
+      await parameters.deleteValue(conversationId);
+    } catch (error) {
+      // Silent error :
+      // the context could be not stored in Parameters as not previously
+      // initialized/used by adding a message
+    }
+  }
+
+  static async updateInputMessage(messenger, message, response, params, debug) {
+    const p = { ...params };
+    if (response && response.message) {
+      p.message = response.message.text;
+    } else if (debug) {
+      p.message = "[Error] No intent found";
+      p.error = "No intent found";
+    } else {
+      logger.info("error in response", response);
+    }
+    if (debug) {
+      p.debug = response.debug;
+      await messenger.updateMessage({
+        ...message,
+        debug: response.debug,
+      });
+    }
+    // logger.info("p=", p, debug);
+    return p;
+  }
+
+  async refreshConversation(messenger, conversationId, bot, version, v) {
+    const messages = await messenger.getConversationMessages(conversationId);
+    // logger.info("refreshConversation", messages.length);
+    const parameters = this.mainControllers.zoapp.controllers.getParameters();
+    if (Array.isArray(messages)) {
+      await this.resetContext(parameters, bot, conversationId, v);
+      const contextParams = {};
+      this.openNLX.setContextParameters(
+        bot.id,
+        v,
+        conversationId,
+        contextParams,
+      );
+      const fromBot = `bot_${bot.name}_${bot.id}`;
+      /* eslint-disable no-restricted-syntax */
+      /* eslint-disable no-await-in-loop */
+      for (const message of messages) {
+        if (message.from !== fromBot && message.debug) {
+          const msg = {
+            text: message.body,
+            from: message.from,
+            conversationId: message.conversationId,
+            id: message.id,
+            created_time: message.created_time,
+          };
+          const debug = version === "sandbox";
+          const response = await this.openNLX.parse(bot.id, v, msg, debug);
+          // logger.info("refreshConversation response", response);
+          const params = await OpenNLXMiddleware.updateInputMessage(
+            messenger,
+            message,
+            response,
+            {
+              from: fromBot,
+              speaker: "chatbot",
+            },
+            debug,
+          );
+          const outputMessage = messages.find((m) => message.id === m.previous);
+          // logger.info("outputMessage=", outputMessage);
+          if (params.message && outputMessage) {
+            // WIP
+            await messenger.updateMessage({
+              ...outputMessage,
+              body: params.message,
+              debug: response.debug,
+            });
+            // logger.info("refreshConversation output", outputMessage);
+          } else {
+            logger.error("No previous output message to refresh");
+          }
+        }
+      }
+      /* eslint-disable no-restricted-syntax */
+      /* eslint-disable no-await-in-loop */
+      // store in Db parameters
+      await parameters.setValue(conversationId, contextParams);
+    }
+  }
+
   async handleMessengerActions(data, version = null) {
     const bot = await this.mainControllers
       .getBots()
-      .getBot(data.conversationOrigin);
+      .getBot(data.conversationOrigin || data.origin);
     if (!bot) return;
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     let v = version;
@@ -34,7 +127,7 @@ class OpenNLXMiddleware {
     if (data.action === "newConversation") {
       // create Conversation / Context
       const contextParams = {};
-      openNLX.setContextParameters(
+      this.openNLX.setContextParameters(
         bot.id,
         v,
         data.conversationId,
@@ -45,7 +138,7 @@ class OpenNLXMiddleware {
       // logger.info("contextParams=", contextParams);
     } else if (data.action === "resetConversation") {
       // reset Conversation / Context
-      openNLX.deleteContext(bot.id, v, data.conversationId);
+      this.openNLX.deleteContext(bot.id, v, data.conversationId);
       // delete in db parameters
       try {
         await parameters.deleteValue(data.conversationId);
@@ -59,8 +152,18 @@ class OpenNLXMiddleware {
       const fromBot = `bot_${bot.name}_${bot.id}`;
       /* eslint-disable no-restricted-syntax */
       /* eslint-disable no-await-in-loop */
+      // get params from Db parameters
       for (const message of data.messages) {
         if (message.from !== fromBot && !message.debug) {
+          let contextParams = await parameters.getValue(data.conversationId);
+          // logger.info("contextParams=", contextParams);
+          // set context in OpenNLX
+          this.openNLX.setContextParameters(
+            bot.id,
+            v,
+            data.conversationId,
+            contextParams,
+          );
           // logger.info("message=", message);
           const msg = {
             text: message.body,
@@ -71,43 +174,26 @@ class OpenNLXMiddleware {
           };
           const debug = version === "sandbox";
           const response = await this.openNLX.parse(bot.id, v, msg, debug);
-          logger.info("response=", JSON.stringify(response));
+          // logger.info("response=", JSON.stringify(response));
           const { conversationId } = message;
-          const params = {
-            from: fromBot,
-            speaker: "chatbot",
-          };
-          // get params from Db parameters
-          let contextParams = await parameters.getValue(data.conversationId);
-          // logger.info("contextParams=", contextParams);
-          // set context in OpenNLX
-          openNLX.setContextParameters(
-            bot.id,
-            v,
-            data.conversationId,
-            contextParams,
+          const params = await OpenNLXMiddleware.updateInputMessage(
+            messenger,
+            message,
+            response,
+            {
+              from: fromBot,
+              speaker: "chatbot",
+              previous: message.id,
+            },
+            debug,
           );
-          if (response && response.message) {
-            params.message = response.message.text;
-          } else if (debug) {
-            params.message = "[Error] No intent found";
-            params.error = "No intent found";
-          } else {
-            logger.info("error in response", response);
-          }
-          if (debug) {
-            params.debug = response.debug;
-            await messenger.updateMessage({
-              ...message,
-              debug: response.debug,
-            });
-          }
+          // logger.info("params=", JSON.stringify(params));
           if (params.message) {
             await messenger.createMessage(null, conversationId, params);
           }
 
           // get context from OpenNLX
-          contextParams = openNLX.getContextParameters(
+          contextParams = this.openNLX.getContextParameters(
             bot.id,
             v,
             data.conversationId,
@@ -119,8 +205,25 @@ class OpenNLXMiddleware {
       }
       /* eslint-disable no-restricted-syntax */
       /* eslint-disable no-await-in-loop */
+    } else if (data.action === "updateConversation") {
+      await this.refreshConversation(
+        messenger,
+        data.conversationId,
+        bot,
+        version,
+        v,
+      );
+    } else if (data.action === "deleteMessage") {
+      await this.refreshConversation(
+        messenger,
+        data.conversationId,
+        bot,
+        version,
+        v,
+      );
     }
   }
+
   async onDispatch(className, data) {
     logger.info("OpenNLX onDispatch: ", className, data.action);
     if (className === "sandbox") {
@@ -130,19 +233,19 @@ class OpenNLXMiddleware {
       if (data.action === "createBot") {
         // WIP create bot
         const { bot } = data;
-        openNLX.createAgent(bot);
+        this.openNLX.createAgent(bot);
       } else if (data.action === "updateBot") {
         // WIP update bot
         const { bot } = data;
-        openNLX.updateAgent(bot);
+        this.openNLX.updateAgent(bot);
       } else if (data.action === "removeBot") {
         // WIP remove bot
         const { bot } = data;
-        openNLX.deleteAgent(bot.id);
+        this.openNLX.deleteAgent(bot.id);
       } else if (data.action === "publishBot") {
         // WIP publish bot
         const { botId, version } = data;
-        openNLX.publishIntents(botId, "default", version);
+        this.openNLX.publishIntents(botId, "default", version);
       } else if (data.action === "setIntents") {
         // WIP set Intents
         // logger.info("setIntents data.intents=", data.intents);
@@ -254,17 +357,17 @@ class OpenNLXMiddleware {
     /* eslint-disable no-await-in-loop */
     for (const bot of bots) {
       // logger.info("bot=", bot);
-      openNLX.createAgent(bot);
+      this.openNLX.createAgent(bot);
       // Add intents to openNLX
       let intents = await botsController.getIntents(bot.id);
-      openNLX.setCallablesObserver(bot.id, this.callables.bind(this));
-      openNLX.setIntents(bot.id, "default", intents);
+      this.openNLX.setCallablesObserver(bot.id, this.callables.bind(this));
+      this.openNLX.setIntents(bot.id, "default", intents);
       if (bot.publishedVersionId) {
         intents = await botsController.getIntents(
           bot.id,
           bot.publishedVersionId,
         );
-        openNLX.setIntents(bot.id, bot.publishedVersionId, intents);
+        this.openNLX.setIntents(bot.id, bot.publishedVersionId, intents);
       }
     }
     /* eslint-disable no-restricted-syntax */

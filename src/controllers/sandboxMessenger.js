@@ -71,6 +71,57 @@ export default class extends MessengerController {
     return this.appendConversationsMessages(conversations);
   }
 
+  async updateMessages(user, botId, conversationId, messages, isAdmin = false) {
+    const conversations = await this.getConversations(user, 0, botId, isAdmin);
+    if (conversations && conversations.length > 0) {
+      const conversation = conversations[0];
+      const cId = conversation.id;
+      if (cId === conversationId && Array.isArray(messages)) {
+        await Promise.all(
+          messages.map((message) => {
+            if (
+              message.id &&
+              message.conversationId === conversationId &&
+              message.from
+            ) {
+              return this.model.storeMessage(message, message.id);
+            }
+            return null;
+          }),
+        );
+      }
+      this.updateConversation(
+        conversationId,
+        conversation.origin,
+        conversation.author,
+      );
+      return { result: "ok" };
+    }
+    return { result: "error" };
+  }
+
+  async updateBotConversation(user, botId, isAdmin = false) {
+    const conversations = await this.getConversations(user, 0, botId, isAdmin);
+    if (conversations && conversations.length > 0) {
+      const conversation = conversations[0];
+      await this.updateConversation(
+        conversation.id,
+        botId,
+        conversation.author,
+      );
+    }
+  }
+
+  async updateConversation(conversationId, origin, author) {
+    if (this.className) {
+      await this.dispatch(this.className, {
+        origin,
+        author,
+        conversationId,
+        action: "updateConversation",
+      });
+    }
+  }
   async resetConversations(user, botId, isAdmin = false) {
     await this.deleteConversations(user, botId, isAdmin);
     const conversations = await this.getFullBotConversations(
