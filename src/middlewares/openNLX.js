@@ -51,6 +51,7 @@ class OpenNLXMiddleware {
 
   async refreshConversation(messenger, conversationId, bot, version, v) {
     const messages = await messenger.getConversationMessages(conversationId);
+    // logger.info("refreshConversation", messages.length);
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     if (Array.isArray(messages)) {
       await this.resetContext(parameters, bot, conversationId, v);
@@ -75,7 +76,7 @@ class OpenNLXMiddleware {
           };
           const debug = version === "sandbox";
           const response = await this.openNLX.parse(bot.id, v, msg, debug);
-          logger.info("refreshConversation response", response);
+          // logger.info("refreshConversation response", response);
           const params = await OpenNLXMiddleware.updateInputMessage(
             messenger,
             message,
@@ -86,16 +87,16 @@ class OpenNLXMiddleware {
             },
             debug,
           );
-          const outputMessage = messages.find(
-            (m) => m.id === message.debug.next,
-          );
+          const outputMessage = messages.find((m) => message.id === m.previous);
+          // logger.info("outputMessage=", outputMessage);
           if (params.message && outputMessage) {
             // WIP
             await messenger.updateMessage({
               ...outputMessage,
+              body: params.message,
               debug: response.debug,
             });
-            logger.info("refreshConversation output", outputMessage);
+            // logger.info("refreshConversation output", outputMessage);
           } else {
             logger.error("No previous output message to refresh");
           }
@@ -111,7 +112,7 @@ class OpenNLXMiddleware {
   async handleMessengerActions(data, version = null) {
     const bot = await this.mainControllers
       .getBots()
-      .getBot(data.conversationOrigin);
+      .getBot(data.conversationOrigin || data.origin);
     if (!bot) return;
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     let v = version;
@@ -182,6 +183,7 @@ class OpenNLXMiddleware {
             {
               from: fromBot,
               speaker: "chatbot",
+              previous: message.id,
             },
             debug,
           );

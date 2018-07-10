@@ -185,7 +185,11 @@ export default (zoapp) => {
     async (event, channelId, data, ws) => {
       let response = null;
       // logger.info("sandbox WS", event, channelId);
-      if (event === "newMessages" || event === "subscribe") {
+      if (
+        event === "newMessages" ||
+        event === "updateConversation" ||
+        event === "subscribe"
+      ) {
         // logger.info("get me", ws.access);
         const me = await zoapp.controllers.getMe(ws.access.user_id);
         // logger.info("me=", me);
