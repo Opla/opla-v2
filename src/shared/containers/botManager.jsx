@@ -52,7 +52,7 @@ class BotManager extends Component {
     this.updateIntents();
   }
 
-  onAddIntent = (dialog, action) => {
+  onAddIntent = (dialog, action, data) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
 
@@ -61,10 +61,23 @@ class BotManager extends Component {
         return false;
       }
 
-      const data = {};
-
+      let { input } = data;
+      if (!input) {
+        input = [intentName];
+      }
+      let { output } = data;
+      if (!output) {
+        // TODO create a better output
+        let i = input[0];
+        const il = i.toLowerCase();
+        if (!(il === "hello" || il === "hi")) {
+          i = "I don't understand.";
+        }
+        output = [i];
+      }
       const intent = {
-        ...data,
+        input,
+        output,
         name: intentName,
       };
 
@@ -161,9 +174,13 @@ class BotManager extends Component {
       if (!intent.input) {
         intent.input = [];
       }
-      // TODO check if sentence already exists in input
-      intent.input.push(defaultValue);
-      this.props.appUpdateIntent(this.props.selectedBotId, intent);
+      // Check if sentence already exists in input
+      if (!intent.input.find((i) => i === defaultValue)) {
+        intent.input.push(defaultValue);
+        // this.props.appUpdateIntent(this.props.selectedBotId, intent);
+        delete intent.notSaved;
+        this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+      }
     }
     // console.log("botManager.handlePlaygroundAction", action);
   };
