@@ -88,9 +88,7 @@
 }
 
 .message {
-  position: relative;
-  overflow: hidden;
-  /*width: 100%;*/
+  display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 8px;
@@ -115,7 +113,6 @@
 .message .text-wrapper {
   padding: 14px;
   min-height: 48px;
-  width: 70%;
   margin: 0 10px;
   box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
   border-radius: 2px;
@@ -135,7 +132,6 @@
 .message.from .circle-wrapper, .message.from .text-wrapper {
   background: #fcea20;
   font-weight: 300;
-  float: left;
   text-align: left;
   color: #000;
 }
@@ -156,10 +152,13 @@
 	visibility: hidden;
 }
 
+.message.you {
+  flex-direction: row-reverse;
+}
+
 .message.you .circle-wrapper, .message.you .text-wrapper {
   background: transparent;
   font-weight: 300;
-  float: right;
   text-align: right;
   color: #333333;
 }
@@ -371,15 +370,18 @@
 
 .message-error-container {
   bottom: 8px;
-  position: absolute;
+  display: flex;
+  margin-top: 8px;
+  margin-left: 12px;
   color: #b71c1c;
 }
 
 .message-debug-container {
   bottom: 8px;
-  position: absolute;
+  display: flex;
   color: rgba(85, 38, 130, 0.2);
   margin-top: 8px;
+  margin-left: 12px;
 }
 
 .message-debug-container-to {
@@ -414,9 +416,7 @@
 
 .message-intent-icon-link {
   padding: 0px;
-  position: absolute;
   cursor: pointer;
-  bottom: -4px;
 }
 
 .message-intent-icon-link:hover {
@@ -425,9 +425,7 @@
 
 .message-intent-icon-link-error {
   padding: 0px;
-  position: absolute;
   cursor: pointer;
-  bottom: -4px;
   color: #b71c1c;
 }
 
@@ -463,6 +461,5 @@
   }
   .message .text-wrapper {
       padding: 8px;
-      width: 90%;
   }
 }

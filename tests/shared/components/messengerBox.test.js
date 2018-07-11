@@ -100,7 +100,7 @@ describe("components/messengerBox", () => {
     );
     expect(wrapper.find(".text-wrapper")).toHaveLength(1);
     expect(wrapper.find(".text-wrapper").text()).toMatch(
-      "12/09/2018 <Button /> ou  <Button />  <Tooltip /><Tooltip />",
+      "12/09/2018 <Button /> ou  <Button />  <Tooltip />",
     );
     expect(wrapper.find(Button)).toHaveLength(2);
   });

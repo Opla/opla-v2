@@ -298,7 +298,7 @@ class ActionsToolbox extends Component {
         </Tooltip>,
       );
       const menu = (
-        <Menu target="" align="left">
+        <Menu target="atb_gui" align="left">
           <MenuItem
             onSelected={() => {
               this.onButtonSelected();

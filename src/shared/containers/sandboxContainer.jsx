@@ -101,13 +101,14 @@ class SandboxContainer extends Component {
     this.props.onAction(action, defaultValue, data);
   };
 
-  renderMessenger(messages, users) {
+  renderMessenger(messages, users, intents) {
     const welcome =
       this.props.selectedBot.welcome ||
       "Welcome fellow user! Here you could test your assistant, before you publish it.";
     return (
       <MessengerBox
         messages={messages}
+        intents={intents}
         users={users}
         onSendMessage={this.handleSend}
         onAction={this.handleAction}
@@ -201,7 +202,7 @@ class SandboxContainer extends Component {
           className="mdc-elevation--z1"
           style={{ margin: "8px 8px 0" }}
         />
-        {this.renderMessenger(messages, users)}
+        {this.renderMessenger(messages, users, this.props.intents)}
       </div>
     );
   }
@@ -217,6 +218,7 @@ SandboxContainer.defaultProps = {
 
 SandboxContainer.propTypes = {
   conversation: PropTypes.shape({ id: PropTypes.string }),
+  intents: PropTypes.arrayOf(PropTypes.shape({})),
   selectedBotId: PropTypes.string,
   selectedBot: PropTypes.shape({
     id: PropTypes.string,
