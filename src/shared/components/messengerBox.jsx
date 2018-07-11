@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { Component } from "react";
-import { TextField, Icon, Button } from "zrmc";
+import { TextField, Icon, Button, Menu, MenuItem } from "zrmc";
 import { Tooltip } from "zoapp-ui";
 import PropTypes from "prop-types";
 
@@ -182,14 +182,26 @@ class MessengerBox extends Component {
                 return (
                   <div key={message.id} className={`message ${dest} ${icon}`}>
                     <div className="circle-wrapper animated bounceIn" />
-                    <div className="text-wrapper animated fadeIn">
-                      <div className="message-body-error">
-                        I don&apos;t understand. You need to write a response
-                        here, and I will create an intent with previous message.
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "90%",
+                      }}
+                    >
+                      <div className="text-wrapper animated fadeIn">
+                        <div className="message-body-error">
+                          I don&apos;t understand. You need to write a response
+                          here, and I will create an intent with previous
+                          message.
+                        </div>
+                        <Tooltip label="Create output response">
+                          <Icon
+                            name="edit"
+                            className="message-edit-icon-right"
+                          />
+                        </Tooltip>
                       </div>
-                      <Tooltip label="Create output response">
-                        <Icon name="edit" className="message-edit-icon-right" />
-                      </Tooltip>
                       <div className="message-error-container">
                         <Tooltip label="create an intent">
                           <a
@@ -290,31 +302,79 @@ class MessengerBox extends Component {
               }
 
               let intentLinkButton = "";
-              let intentLinkTooltip = "";
+              let intentLinkMenu;
+              const intentLinkId = `intent_link_${message.id}`;
+
+              const list = this.props.intents.map((intent) => {
+                const intentName = `#${intent.name}`;
+                return (
+                  <MenuItem
+                    disabled={notError && intent.id === debug.intent.id}
+                    key={`i_${message.id}_${intent.id}`}
+                  >
+                    {intentName}
+                  </MenuItem>
+                );
+              });
+              list.unshift(
+                <MenuItem
+                  key={`i_${message.id}_new`}
+                  onSelected={() => {
+                    this.onButtonSelected();
+                  }}
+                >
+                  Resolve as new intent
+                </MenuItem>,
+              );
               if (dest === "you" && this.props.isSelectedIntent) {
                 if (notError) {
-                  intentLinkTooltip = "link to another intent";
-                } else {
-                  intentLinkTooltip = "Add to current intent's inputs";
-                }
-                intentLinkButton = (
-                  <Tooltip label={intentLinkTooltip}>
+                  intentLinkMenu = (
+                    <Menu target={intentLinkId} align="left">
+                      {list}
+                    </Menu>
+                  );
+                  intentLinkButton = (
                     <Icon
                       onClick={intentActionLink}
-                      name={notError ? "link" : "add_circle_outline"}
+                      id={intentLinkId}
+                      name={notError ? "question_answer" : "add_circle_outline"}
                       className={intentIconClassName}
+                      menu={intentLinkMenu}
                     />
-                  </Tooltip>
-                );
+                  );
+                } else {
+                  const intentLinkTooltip = "Add to current intent's inputs";
+                  intentLinkButton = (
+                    <Tooltip label={intentLinkTooltip}>
+                      <Icon
+                        onClick={intentActionLink}
+                        id={intentLinkId}
+                        name={
+                          notError ? "question_answer" : "add_circle_outline"
+                        }
+                        className={intentIconClassName}
+                        menu={intentLinkMenu}
+                      />
+                    </Tooltip>
+                  );
+                }
               }
               return (
                 <div key={message.id} className={`message ${dest} ${icon}`}>
                   <div className="circle-wrapper animated bounceIn" />
-                  <div className="text-wrapper animated fadeIn">
-                    <div className="message-body">
-                      {this.createMessage(message)}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "90%",
+                    }}
+                  >
+                    <div className="text-wrapper animated fadeIn">
+                      <div className="message-body">
+                        {this.createMessage(message)}
+                      </div>
+                      {messageActions}
                     </div>
-                    {messageActions}
                     <div className="message-debug-container">
                       <Tooltip label={intentTooltip}>
                         <a
@@ -381,10 +441,12 @@ MessengerBox.defaultProps = {
   inputValue: null,
   welcome: "",
   isSelectedIntent: false,
+  intents: [],
 };
 
 MessengerBox.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  intents: PropTypes.arrayOf(PropTypes.shape({})),
   onSendMessage: PropTypes.func.isRequired,
   onAction: PropTypes.func,
   users: PropTypes.shape({}).isRequired,

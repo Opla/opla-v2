@@ -305,6 +305,19 @@ class BotManager extends Component {
       );
       panel2 = "";
     }
+    const intentsEx = [];
+    if (Array.isArray(this.props.intents)) {
+      this.props.intents.forEach((intent) => {
+        const selected =
+          this.props.selectedIntent &&
+          intent.id === this.props.selectedIntent.id;
+        intentsEx.push({
+          id: intent.id,
+          selected,
+          name: intent.name,
+        });
+      });
+    }
     return (
       <div className="mdl-color--grey-100">
         <Grid
@@ -319,7 +332,10 @@ class BotManager extends Component {
               className="mdl-color--white mdl-shadow--2dp"
               span={4}
             >
-              <SandboxContainer onAction={this.handlePlaygroundAction} />
+              <SandboxContainer
+                onAction={this.handlePlaygroundAction}
+                intents={intentsEx}
+              />
             </Cell>
           </Inner>
         </Grid>
@@ -345,8 +361,8 @@ BotManager.propTypes = {
     description: PropTypes.string,
     language: PropTypes.string,
   }),
-  intents: PropTypes.arrayOf(PropTypes.shape({})),
-  selectedIntent: PropTypes.shape({}),
+  intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+  selectedIntent: PropTypes.shape({ id: PropTypes.string }),
   store: PropTypes.shape({}),
   titleName: PropTypes.string.isRequired,
   appSetTitle: PropTypes.func.isRequired,
