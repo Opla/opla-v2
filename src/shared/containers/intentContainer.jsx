@@ -345,7 +345,8 @@ class IntentContainer extends Component {
       const style = intent.notSaved ? {} : { display: "none" };
       name = (
         <span>
-          <span className="gray_dot" style={style} />
+          <span className="red_dot" style={style} />
+          <span style={{ color: "#bbb" }}>#</span>
           {intent.name}
         </span>
       );
@@ -370,9 +371,8 @@ class IntentContainer extends Component {
           }}
         >
           <SubToolbar
-            className="mdc-elevation--z1"
-            style={{ margin: "8px 8px 0 8px" }}
-            titleIcon="question_answer"
+            className=""
+            style={{ margin: "0px 0px 0 0px" }}
             titleName={
               <div>
                 <div

@@ -6,8 +6,8 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List } from "zrmc";
-import { ExpansionPanel } from "zoapp-ui";
+import { List, Icon } from "zrmc";
+import { ExpansionPanel, Tooltip } from "zoapp-ui";
 import ActionsItem from "./actionsItem";
 
 class ActionsList extends Component {
@@ -86,7 +86,10 @@ class ActionsList extends Component {
     const editable = true;
     const addContent = (
       <ActionsItem
-        style={{ backgroundColor: "rgba(34, 34, 34, 0.05" }}
+        style={{
+          border: "1px solid rgba(0, 0, 0, 0.2)",
+          color: "black",
+        }}
         containerName={name}
         action={newAction}
         editable={editable}
@@ -109,7 +112,14 @@ class ActionsList extends Component {
         ? actions[0].children
         : actions;
       contentList = (
-        <List style={{ overflow: "auto", maxHeight: "18.07vh" }}>
+        <List
+          style={{
+            overflow: "auto",
+            maxHeight: "18.07vh",
+            border: "1px solid #eee",
+            margin: "0 8px",
+          }}
+        >
           {actionsDisplayed.map((action, index) => (
             <ActionsItem
               containerName={name}
@@ -137,11 +147,31 @@ class ActionsList extends Component {
     } else {
       contentList = <List />;
     }
+    const tooltip =
+      name === "input"
+        ? "List of sentences, events or attachments that will trigger this intent."
+        : "One of below items is send to the user if this intent is activated.";
+    const title = (
+      <div style={{ display: "flex" }}>
+        {name}
+        <Tooltip label={tooltip}>
+          <Icon
+            name="help_outline"
+            style={{
+              color: "#ddd",
+              paddingTop: "12px",
+              paddingLeft: "16px",
+            }}
+          />
+        </Tooltip>
+      </div>
+    );
     return (
       <ExpansionPanel
-        label={name}
+        label={title}
         className="mdl-color--white"
         style={{ margin: "8px" }}
+        elevation={0}
       >
         {contentList}
         {addContent}

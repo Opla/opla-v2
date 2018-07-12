@@ -194,18 +194,15 @@ class ActionsToolbox extends Component {
       float: "left",
       height: "22px",
     };
-    const styleButton = {
-      margin: "0 4px",
-      cursor: "pointer",
-    };
+
     const { toolbox } = this.state;
     const extras = [];
     if (this.props.isInput) {
       extras.push(
         <Tooltip key="action_iba" label="Insert block any">
           <Icon
-            style={styleButton}
-            /* colored={toolbox.any} */ onClick={(e) => {
+            className="actionstoolbox-icon"
+            onClick={(e) => {
               // e.stopPropagation();
               this.onAnySelected(e);
             }}
@@ -217,8 +214,8 @@ class ActionsToolbox extends Component {
       extras.push(
         <Tooltip key="action_emo" label="TODO Insert emoticon">
           <Icon
-            style={styleButton}
-            /* colored={toolbox.button} */ onClick={(e) => {
+            className="actionstoolbox-icon"
+            onClick={(e) => {
               e.stopPropagation();
               // this.onButtonSelected(e);
               // TODO insert emoji
@@ -231,8 +228,8 @@ class ActionsToolbox extends Component {
       extras.push(
         <Tooltip key="action_att" label="TODO Insert Attachment">
           <Icon
-            style={styleButton}
-            /* colored={toolbox.button} */ onClick={(e) => {
+            className="actionstoolbox-icon"
+            onClick={(e) => {
               e.stopPropagation();
               // this.onButtonSelected(e);
               // TODO insert attachment
@@ -246,8 +243,8 @@ class ActionsToolbox extends Component {
       extras.push(
         <Tooltip key="action_ico" label="Insert code">
           <Icon
-            style={styleButton}
-            /* colored={toolbox.code} */ onClick={(e) => {
+            className="actionstoolbox-icon"
+            onClick={(e) => {
               // e.stopPropagation();
               this.onCodeSelected(e);
             }}
@@ -259,8 +256,8 @@ class ActionsToolbox extends Component {
       extras.push(
         <Tooltip key="action_ilb" label="Insert Linebreak">
           <Icon
-            style={styleButton}
-            /* colored={toolbox.linebreak} */ onClick={(e) => {
+            className="actionstoolbox-icon"
+            onClick={(e) => {
               // e.stopPropagation();
               this.onLineBreakSelected(e);
             }}
@@ -272,8 +269,8 @@ class ActionsToolbox extends Component {
       extras.push(
         <Tooltip key="action_il" label="TODO Insert link">
           <Icon
-            style={styleButton}
-            /* colored={toolbox.button} */ onClick={(e) => {
+            className="actionstoolbox-icon"
+            onClick={(e) => {
               e.stopPropagation();
               // this.onButtonSelected(e);
               // TODO insert link
@@ -286,8 +283,8 @@ class ActionsToolbox extends Component {
       extras.push(
         <Tooltip key="action_emo" label="TODO Insert emoticon">
           <Icon
-            style={styleButton}
-            /* colored={toolbox.button} */ onClick={(e) => {
+            className="actionstoolbox-icon"
+            onClick={(e) => {
               e.stopPropagation();
               // this.onButtonSelected(e);
               // TODO insert emoji
@@ -315,7 +312,7 @@ class ActionsToolbox extends Component {
       extras.push(
         <Icon
           key="action_gu"
-          style={styleButton}
+          className="actionstoolbox-icon"
           id="atb_gui"
           name="category"
           menu={menu}
@@ -325,8 +322,7 @@ class ActionsToolbox extends Component {
         extras.push(
           <Tooltip key="action_ic" label="Insert condition">
             <Icon
-              style={styleButton}
-              /* colored={toolbox.any} */
+              className="actionstoolbox-icon"
               onClick={(e) => {
                 // e.stopPropagation();
                 this.onConditionSelected(e);
@@ -347,8 +343,8 @@ class ActionsToolbox extends Component {
         <div style={styleToolbar}>
           <Tooltip label="Insert text">
             <Icon
-              style={styleButton}
-              /* colored={toolbox.text} */ onClick={(e) => {
+              className="actionstoolbox-icon"
+              onClick={(e) => {
                 // e.stopPropagation();
                 this.onTextSelected(e);
               }}
@@ -358,8 +354,8 @@ class ActionsToolbox extends Component {
           </Tooltip>
           <Tooltip label="Insert variable assignment">
             <Icon
-              style={styleButton}
-              /* colored={toolbox.variable} */ onClick={(e) => {
+              className="actionstoolbox-icon"
+              onClick={(e) => {
                 // e.stopPropagation();
                 this.onVariableSelected(e);
               }}
@@ -372,7 +368,7 @@ class ActionsToolbox extends Component {
         <div style={styleToolbar}>
           <Tooltip label="Delete selected block">
             <Icon
-              style={styleButton}
+              className="actionstoolbox-icon"
               disabled={toolbox.trash}
               onClick={(e) => {
                 // e.stopPropagation();

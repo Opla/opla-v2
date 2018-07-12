@@ -21,7 +21,7 @@ import {
 import { appUpdateIntent } from "../actions/app";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";
-import SandboxContainer from "./sandboxContainer";
+import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
 
@@ -332,7 +332,7 @@ class BotManager extends Component {
               className="mdl-color--white mdl-shadow--2dp"
               span={4}
             >
-              <SandboxContainer
+              <PlaygroundContainer
                 onAction={this.handlePlaygroundAction}
                 intents={intentsEx}
               />
