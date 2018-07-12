@@ -393,6 +393,25 @@ class MessengerBox extends Component {
             })}
           </div>
         </div>
+        <div
+          style={{
+            height: "18px",
+            textAlign: "right",
+            paddingTop: "6px",
+            paddingRight: "16px",
+            fontSize: "10px",
+            background: "white",
+          }}
+        >
+          <a
+            href="https://opla.ai"
+            style={{ color: "#aaa" }}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Powered by Opla.ai
+          </a>
+        </div>
         <div className="messenger-box__actions">
           <Icon
             className="mdl-button-left"

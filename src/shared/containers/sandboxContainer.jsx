@@ -7,8 +7,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Zrmc, { Icon } from "zrmc";
-import { SubToolbar, Tooltip } from "zoapp-ui";
+import Zrmc from "zrmc";
+import { SubToolbar } from "zoapp-ui";
 
 import MessengerBox from "../components/messengerBox";
 import {
@@ -169,22 +169,7 @@ class SandboxContainer extends Component {
           titleIcon="chat"
           titleName={
             <div style={{ display: "flex" }}>
-              <div
-                style={{ borderRight: "1px solid #ddd", paddingRight: "24px" }}
-              >
-                {name}
-              </div>
-              <div
-                style={{
-                  padding: "6px 16px",
-                  height: "24px",
-                  cursor: "pointer",
-                }}
-              >
-                <Tooltip label="refresh">
-                  <Icon name="refresh" onClick={this.handleRefresh} />
-                </Tooltip>
-              </div>
+              <div>{name}</div>
             </div>
           }
           menu={{
@@ -193,6 +178,7 @@ class SandboxContainer extends Component {
               { name: "Load", disabled: true },
               { name: "Save", disabled: true },
               { name: "Reset", onSelect: this.handleReset },
+              { name: "Refresh", onSelect: this.handleRefresh },
               { name: "Demo", onSelect: this.handleDemo },
               { name: "Share", onSelect: this.handleShare },
               { name: "Settings", onSelect: this.handleSettings },
