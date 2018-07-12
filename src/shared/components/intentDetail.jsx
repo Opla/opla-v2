@@ -59,6 +59,8 @@ const IntentDetail = ({
         <ExpansionPanel
           label="Parameters"
           className="mdl-color--white"
+          style={{ margin: "8px" }}
+          elevation={0}
           collapsed
         >
           <List>

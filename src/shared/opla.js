@@ -11,7 +11,7 @@ import About from "OplaContainers/about";
 import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
 import AdminManager from "zoapp-front/containers/adminManager";
-import BotManager from "OplaContainers/botManager";
+import AgentManager from "OplaContainers/agentManager";
 import PublishContainer from "OplaContainers/publishContainer";
 import configureStore from "OplaLibs/store";
 import DrawerFooter from "zoapp-front/containers/drawerFooter";
@@ -71,8 +71,15 @@ const appProps = {
       name: "Builder",
       path: "/builder",
       access: "auth",
-      toolbox: [{ title: "Publish", onAction: handleOpenPublishDialog }],
-      render: (props) => <BotManager {...props} />,
+      toolbox: [
+        {
+          title: "Publish",
+          onAction: handleOpenPublishDialog,
+          color: "var(--mdc-theme-text-primary-on-primary,#fff)",
+          backgroundColor: "var(--mdc-theme-primary,#6200ee)",
+        },
+      ],
+      render: (props) => <AgentManager {...props} />,
     },
     {
       id: "3",

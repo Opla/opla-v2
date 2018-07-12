@@ -186,7 +186,7 @@ describe("containers/IntentContainerBase", () => {
         wrapper.update();
 
         // limited toolbox
-        expect(wrapper.find("Tooltip")).toHaveLength(6);
+        expect(wrapper.find("Tooltip")).toHaveLength(8);
         expect(wrapper.find("#atb_text").exists()).toEqual(true);
         expect(wrapper.find("#atb_output_var").exists()).toEqual(true);
         expect(wrapper.find("#atb_any").exists()).toEqual(true);
@@ -215,12 +215,12 @@ describe("containers/IntentContainerBase", () => {
         jest.runAllTimers();
         wrapper.update();
 
-        expect(wrapper.find("Tooltip")).toHaveLength(8);
+        expect(wrapper.find("Tooltip")).toHaveLength(10);
         expect(wrapper.find("#atb_condition").exists()).toEqual(true);
 
         wrapper.setProps({ selectedIntent: conditionSeletedIntent });
 
-        expect(wrapper.find("Tooltip")).toHaveLength(7);
+        expect(wrapper.find("Tooltip")).toHaveLength(9);
         expect(wrapper.find("#atb_condition").exists()).toEqual(false);
       });
     });

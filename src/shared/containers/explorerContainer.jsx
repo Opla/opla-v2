@@ -160,7 +160,8 @@ class ExplorerContainer extends Component {
               textOverflow: "ellipsis",
             }}
           >
-            <span className="gray_dot" style={style} />
+            <span className="red_dot" style={style} />
+            <span style={{ color: "#bbb" }}>#</span>
             {intent.name}
           </span>
         );
@@ -168,10 +169,16 @@ class ExplorerContainer extends Component {
       });
     }
     return (
-      <div>
+      <div
+        style={{
+          backgroundColor: "rgb(252, 252, 252)",
+          borderRight: "1px solid rgba(0, 0, 0, 0.12)",
+        }}
+      >
         <SubToolbar
-          className="mdc-elevation--z1"
-          style={{ margin: "8px 8px 0" }}
+          className=""
+          style={{ backgroundColor: "rgb(252, 252, 252)", margin: "0" }}
+          titleIcon="question_answer"
           titleName={name}
           menu={{
             items: [
@@ -188,11 +195,9 @@ class ExplorerContainer extends Component {
             ],
           }}
         />
-        <div
-          className="list-box mdc-elevation--z1"
-          style={{ margin: "0 8px", backgroundColor: "white" }}
-        >
+        <div className="list-box" style={{ margin: "0" }}>
           <ListDragComponent
+            style={{ backgroundColor: "rgb(252, 252, 252)" }}
             className="list-content"
             items={items}
             selectedItem={selected}

@@ -12,8 +12,9 @@
   cursor: default;
 }
 
-.message_welcome {
-  cursor: pointer;
+.mdc-toolbar--fixed {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mrb-subheader-menu {
@@ -22,7 +23,28 @@
 
 .mrb-panel-header__actions > div > i {
  cursor: pointer;
+ color: #888;
 }
+
+.mrb-panel-header-title {
+  font-weight: 900;
+}
+
+.actionstoolbox-icon {
+  cursor: pointer;
+  color: #888;
+  margin: 0 4px;
+  font-size: 18px;
+}
+
+.actionstoolbox-icon:hover {
+  color: #222;
+ }
+
+.mrb-panel-header__actions > div > i:hover {
+  color: #222;
+ }
+
 .mrb-subheader-right {
  cursor: pointer;
 }
@@ -55,6 +77,15 @@
    display: inline-block;
  }
  
+ .red_dot {
+  height: 12px;
+  width: 12px;
+  background-color: #d50000;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
  .fileInput {
    overflow: hidden;
    position: relative;
@@ -171,9 +202,9 @@
  }
  
  .selectedListItem {
-   background: rgba(34, 34, 34, 0.1);
+   background: rgb(85, 38, 130);
    font-weight: bold;
-   color: rgb(85, 38, 130);
+   color: white;
  }
  
  .selectedListItem span {
@@ -289,7 +320,8 @@
    overflow-x: hidden;
    overflow-y: auto;
    width: 100%;
-   height: calc(100vh - 64px - 41px - 24px);
+   height: calc(100vh - 64px - 41px);
+   background: white;
  }
  
  .service_start i {

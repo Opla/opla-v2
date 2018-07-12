@@ -8,7 +8,7 @@ exports[`components/intentDetail can render intent with special characters corre
     className="list-content"
   >
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="mrb-sublist mdl-color--white"
       style={
         Object {
           "margin": "8px",
@@ -64,7 +64,34 @@ exports[`components/intentDetail can render intent with special characters corre
               }
             }
           >
-            input
+            <div
+              style={
+                Object {
+                  "display": "flex",
+                }
+              }
+            >
+              input
+              <div
+                className="mdc-tooltype"
+              >
+                <i
+                  className="material-icons"
+                  style={
+                    Object {
+                      "color": "#ddd",
+                      "paddingLeft": "16px",
+                      "paddingTop": "12px",
+                    }
+                  }
+                >
+                  help_outline
+                </i>
+                <span>
+                  List of sentences, events or attachments that will trigger this intent.
+                </span>
+              </div>
+            </div>
           </span>
           <span
             style={
@@ -96,8 +123,9 @@ exports[`components/intentDetail can render intent with special characters corre
           role="menuitem"
           style={
             Object {
-              "backgroundColor": "rgba(34, 34, 34, 0.05",
-              "borderTop": "rgba(0,0,0,0.04) 1px solid",
+              "border": "1px solid rgba(0, 0, 0, 0.2)",
+              "color": "black",
+              "margin": "0 8px",
               "minHeight": "40px",
             }
           }
@@ -143,7 +171,7 @@ exports[`components/intentDetail can render intent with special characters corre
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="mrb-sublist mdl-color--white"
       style={
         Object {
           "margin": "8px",
@@ -199,7 +227,34 @@ exports[`components/intentDetail can render intent with special characters corre
               }
             }
           >
-            output
+            <div
+              style={
+                Object {
+                  "display": "flex",
+                }
+              }
+            >
+              output
+              <div
+                className="mdc-tooltype"
+              >
+                <i
+                  className="material-icons"
+                  style={
+                    Object {
+                      "color": "#ddd",
+                      "paddingLeft": "16px",
+                      "paddingTop": "12px",
+                    }
+                  }
+                >
+                  help_outline
+                </i>
+                <span>
+                  One of below items is send to the user if this intent is activated.
+                </span>
+              </div>
+            </div>
           </span>
           <span
             style={
@@ -231,8 +286,9 @@ exports[`components/intentDetail can render intent with special characters corre
           role="menuitem"
           style={
             Object {
-              "backgroundColor": "rgba(34, 34, 34, 0.05",
-              "borderTop": "rgba(0,0,0,0.04) 1px solid",
+              "border": "1px solid rgba(0, 0, 0, 0.2)",
+              "color": "black",
+              "margin": "0 8px",
               "minHeight": "40px",
             }
           }
@@ -278,7 +334,7 @@ exports[`components/intentDetail can render intent with special characters corre
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="mrb-sublist mdl-color--white"
       style={
         Object {
           "margin": "8px",
@@ -434,7 +490,7 @@ exports[`components/intentDetail renders correctly 1`] = `
     className="list-content"
   >
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="mrb-sublist mdl-color--white"
       style={
         Object {
           "margin": "8px",
@@ -490,7 +546,34 @@ exports[`components/intentDetail renders correctly 1`] = `
               }
             }
           >
-            input
+            <div
+              style={
+                Object {
+                  "display": "flex",
+                }
+              }
+            >
+              input
+              <div
+                className="mdc-tooltype"
+              >
+                <i
+                  className="material-icons"
+                  style={
+                    Object {
+                      "color": "#ddd",
+                      "paddingLeft": "16px",
+                      "paddingTop": "12px",
+                    }
+                  }
+                >
+                  help_outline
+                </i>
+                <span>
+                  List of sentences, events or attachments that will trigger this intent.
+                </span>
+              </div>
+            </div>
           </span>
           <span
             style={
@@ -522,8 +605,9 @@ exports[`components/intentDetail renders correctly 1`] = `
           role="menuitem"
           style={
             Object {
-              "backgroundColor": "rgba(34, 34, 34, 0.05",
-              "borderTop": "rgba(0,0,0,0.04) 1px solid",
+              "border": "1px solid rgba(0, 0, 0, 0.2)",
+              "color": "black",
+              "margin": "0 8px",
               "minHeight": "40px",
             }
           }
@@ -569,7 +653,7 @@ exports[`components/intentDetail renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="mrb-sublist mdl-color--white"
       style={
         Object {
           "margin": "8px",
@@ -625,7 +709,34 @@ exports[`components/intentDetail renders correctly 1`] = `
               }
             }
           >
-            output
+            <div
+              style={
+                Object {
+                  "display": "flex",
+                }
+              }
+            >
+              output
+              <div
+                className="mdc-tooltype"
+              >
+                <i
+                  className="material-icons"
+                  style={
+                    Object {
+                      "color": "#ddd",
+                      "paddingLeft": "16px",
+                      "paddingTop": "12px",
+                    }
+                  }
+                >
+                  help_outline
+                </i>
+                <span>
+                  One of below items is send to the user if this intent is activated.
+                </span>
+              </div>
+            </div>
           </span>
           <span
             style={
@@ -657,8 +768,9 @@ exports[`components/intentDetail renders correctly 1`] = `
           role="menuitem"
           style={
             Object {
-              "backgroundColor": "rgba(34, 34, 34, 0.05",
-              "borderTop": "rgba(0,0,0,0.04) 1px solid",
+              "border": "1px solid rgba(0, 0, 0, 0.2)",
+              "color": "black",
+              "margin": "0 8px",
               "minHeight": "40px",
             }
           }
@@ -704,7 +816,7 @@ exports[`components/intentDetail renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="mrb-sublist mdl-color--white"
       style={
         Object {
           "margin": "8px",

@@ -41,22 +41,27 @@ class ActionsItem extends Component {
       color,
       height: "100%",
       padding: "4px 16px",
-      borderTop: "rgba(0,0,0,0.04) 1px solid",
     };
     if (isNew) {
       s = {
         ...style,
         minHeight: "40px",
-        borderTop: "rgba(0,0,0,0.04) 1px solid",
+        margin: "0 8px",
       };
+    } else {
+      s.borderTop = "rgba(0,0,0,0.04) 1px solid";
     }
     if (isCondition) {
       s = {
         ...style,
         height: "auto",
         padding: "4px 16px",
-        borderTop: "rgba(0,0,0,0.04) 1px solid",
       };
+      if (!isNew) {
+        s.borderTop = "rgba(0,0,0,0.04) 1px solid";
+      } else {
+        s.margin = "0 8px";
+      }
     }
     let icon = null;
     if (isNew) {
