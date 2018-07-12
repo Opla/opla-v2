@@ -26,6 +26,10 @@
  color: #888;
 }
 
+.mrb-panel-header-title {
+  font-weight: 900;
+}
+
 .actionstoolbox-icon {
   cursor: pointer;
   color: #888;

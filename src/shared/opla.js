@@ -71,7 +71,14 @@ const appProps = {
       name: "Builder",
       path: "/builder",
       access: "auth",
-      toolbox: [{ title: "Publish", onAction: handleOpenPublishDialog }],
+      toolbox: [
+        {
+          title: "Publish",
+          onAction: handleOpenPublishDialog,
+          color: "var(--mdc-theme-text-primary-on-primary,#fff)",
+          backgroundColor: "var(--mdc-theme-primary,#6200ee)",
+        },
+      ],
       render: (props) => <AgentManager {...props} />,
     },
     {

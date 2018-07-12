@@ -27,17 +27,11 @@ exports[`components/actionsToolbox can be an input 1`] = `
       className="mdc-tooltype"
     >
       <i
-        className="material-icons"
+        className="actionstoolbox-icon material-icons"
         id="atb_text"
         onClick={[Function]}
         onKeyUp={[Function]}
         role="button"
-        style={
-          Object {
-            "cursor": "pointer",
-            "margin": "0 4px",
-          }
-        }
         tabIndex="0"
       >
         text_fields
@@ -50,17 +44,11 @@ exports[`components/actionsToolbox can be an input 1`] = `
       className="mdc-tooltype"
     >
       <i
-        className="material-icons"
+        className="actionstoolbox-icon material-icons"
         id="atb_output_var"
         onClick={[Function]}
         onKeyUp={[Function]}
         role="button"
-        style={
-          Object {
-            "cursor": "pointer",
-            "margin": "0 4px",
-          }
-        }
         tabIndex="0"
       >
         assignment
@@ -73,17 +61,11 @@ exports[`components/actionsToolbox can be an input 1`] = `
       className="mdc-tooltype"
     >
       <i
-        className="material-icons"
+        className="actionstoolbox-icon material-icons"
         id="atb_any"
         onClick={[Function]}
         onKeyUp={[Function]}
         role="button"
-        style={
-          Object {
-            "cursor": "pointer",
-            "margin": "0 4px",
-          }
-        }
         tabIndex="0"
       >
         all_out
@@ -96,17 +78,11 @@ exports[`components/actionsToolbox can be an input 1`] = `
       className="mdc-tooltype"
     >
       <i
-        className="material-icons"
+        className="actionstoolbox-icon material-icons"
         id="ati_emoticon"
         onClick={[Function]}
         onKeyUp={[Function]}
         role="button"
-        style={
-          Object {
-            "cursor": "pointer",
-            "margin": "0 4px",
-          }
-        }
         tabIndex="0"
       >
         insert_emoticon
@@ -119,17 +95,11 @@ exports[`components/actionsToolbox can be an input 1`] = `
       className="mdc-tooltype"
     >
       <i
-        className="material-icons"
+        className="actionstoolbox-icon material-icons"
         id="ati_attachment"
         onClick={[Function]}
         onKeyUp={[Function]}
         role="button"
-        style={
-          Object {
-            "cursor": "pointer",
-            "margin": "0 4px",
-          }
-        }
         tabIndex="0"
       >
         attachment
@@ -154,18 +124,12 @@ exports[`components/actionsToolbox can be an input 1`] = `
       className="mdc-tooltype"
     >
       <i
-        className="material-icons"
+        className="actionstoolbox-icon material-icons"
         disabled={true}
         id="atb_trash"
         onClick={[Function]}
         onKeyUp={[Function]}
         role="button"
-        style={
-          Object {
-            "cursor": "pointer",
-            "margin": "0 4px",
-          }
-        }
         tabIndex="0"
       >
         delete
