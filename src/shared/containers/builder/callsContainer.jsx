@@ -19,11 +19,14 @@ class CallsContainer extends Component {
   };
 
   render() {
-    const items = this.props.calls || [];
-    items.unshift({
+    const items = [];
+    items.push({
       id: "system",
       name: "System",
     });
+    if (this.props.calls) {
+      items.push(...this.props.calls);
+    }
     return (
       <Explorer
         items={items}

@@ -19,15 +19,18 @@ class EntitiesContainer extends Component {
   };
 
   render() {
-    const items = this.props.entities || [];
-    items.unshift({
-      id: "context",
-      name: "Context",
-    });
-    items.unshift({
+    const items = [];
+    items.push({
       id: "system",
       name: "System",
     });
+    items.push({
+      id: "context",
+      name: "Context",
+    });
+    if (this.props.entities) {
+      items.push(...this.props.entities);
+    }
     return (
       <Explorer
         items={items}
