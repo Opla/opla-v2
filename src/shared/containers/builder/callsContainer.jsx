@@ -14,8 +14,16 @@ class CallsContainer extends Component {
     // TODO
   };
 
+  handleMove = () => {
+    // TODO
+  };
+
   render() {
-    const items = this.props.calls;
+    const items = this.props.calls || [];
+    items.unshift({
+      id: "system",
+      name: "System",
+    });
     return (
       <Explorer
         items={items}
@@ -23,7 +31,8 @@ class CallsContainer extends Component {
         icon="/"
         selectedBotId={this.props.selectedBotId}
         selectedItemIndex={this.props.selectedCallIndex}
-        onSelect={this.handleSelect}
+        onSelectItem={this.handleSelect}
+        onMoveItem={this.handleMove}
       />
     );
   }

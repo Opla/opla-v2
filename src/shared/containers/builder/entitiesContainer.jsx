@@ -14,8 +14,20 @@ class EntitiesContainer extends Component {
     // TODO
   };
 
+  handleMove = () => {
+    // TODO
+  };
+
   render() {
-    const items = this.props.entities;
+    const items = this.props.entities || [];
+    items.unshift({
+      id: "context",
+      name: "Context",
+    });
+    items.unshift({
+      id: "system",
+      name: "System",
+    });
     return (
       <Explorer
         items={items}
@@ -23,7 +35,8 @@ class EntitiesContainer extends Component {
         icon="@"
         selectedBotId={this.props.selectedBotId}
         selectedItemIndex={this.props.selectedEntityIndex}
-        onSelect={this.handleSelect}
+        onSelectItem={this.handleSelect}
+        onMoveItem={this.handleMove}
       />
     );
   }

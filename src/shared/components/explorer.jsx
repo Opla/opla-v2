@@ -13,11 +13,16 @@ class Explorer extends Component {
     const item = this.props.items[dragIndex];
     const itemId = item.id;
 
-    this.props.moveItem(this.props.selectedBotId, itemId, dragIndex, dropIndex);
+    this.props.onMoveItem(
+      this.props.selectedBotId,
+      itemId,
+      dragIndex,
+      dropIndex,
+    );
   };
 
   onSelectItem = (selected) => {
-    this.props.selectItem(this.props.selectedBotId, selected);
+    this.props.onSelectItem(this.props.selectedBotId, selected);
   };
 
   render() {
@@ -103,8 +108,8 @@ Explorer.propTypes = {
   menu: PropTypes.arrayOf(PropTypes.shape({})),
   items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedItemIndex: PropTypes.number,
-  moveItem: PropTypes.func.isRequired,
-  selectItem: PropTypes.func.isRequired,
+  onMoveItem: PropTypes.func.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
 };
 
 export default Explorer;
