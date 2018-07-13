@@ -334,7 +334,7 @@ class MessengerBox extends Component {
                     <Icon
                       onClick={intentActionLink}
                       id={intentLinkId}
-                      name={notError ? "question_answer" : "add_circle_outline"}
+                      name={notError ? "reorder" : "add_circle_outline"}
                       className={intentIconClassName}
                       menu={intentLinkMenu}
                     />
@@ -346,9 +346,7 @@ class MessengerBox extends Component {
                       <Icon
                         onClick={intentActionLink}
                         id={intentLinkId}
-                        name={
-                          notError ? "question_answer" : "add_circle_outline"
-                        }
+                        name={notError ? "reorder" : "add_circle_outline"}
                         className={intentIconClassName}
                         menu={intentLinkMenu}
                       />

@@ -255,6 +255,7 @@
    height: 40px;
    padding: 0px 16px;
    border-bottom: 1px solid rgba(34,34,34,0.05);
+   margin: 0 8px;
  }
  
  .mrb-sublist {

@@ -71,6 +71,7 @@ const appProps = {
       name: "Builder",
       path: "/builder",
       access: "auth",
+      panels: ["#Intents", "@Entities", "/Calls"],
       toolbox: [
         {
           title: "Publish",

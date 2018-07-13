@@ -21,6 +21,8 @@ import {
 import { appUpdateIntent } from "../actions/app";
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./intentContainer";
+import EntitiesContainer from "./builder/entitiesContainer";
+import CallsContainer from "./builder/callsContainer";
 import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
@@ -34,7 +36,7 @@ const infoStyleD = {
   textAlign: "left",
 };
 
-class BotManager extends Component {
+class AgentManager extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
@@ -87,13 +89,13 @@ class BotManager extends Component {
   };
 
   onImportData = (data, options) => {
-    // console.log("BotManager.onUpload=", options.filetype);
+    // console.log("AgentManager.onUpload=", options.filetype);
     if (
       options.filetype === "application/json" ||
       options.filetype === "text/csv"
     ) {
       // WIP detect format
-      // console.log("BotManager.onUpload=", data);
+      // console.log("AgentManager.onUpload=", data);
       this.props.apiImportRequest(this.props.selectedBotId, data, options);
     }
   };
@@ -198,6 +200,82 @@ class BotManager extends Component {
     }
   }
 
+  renderOnboarding() {
+    return (
+      <Cell style={{ margin: "0px" }} span={8}>
+        <div className="mrb-panel mrb-panel-empty" style={{ height: "80%" }}>
+          <div style={{ height: "30%", ...infoStyleD }}>
+            <div style={{ /* margin: "48px 0", */ textAlign: "left" }}>
+              <h2>Get Started</h2>
+              <p>
+                This assistant has no data. You need to fill it with intents to
+                reply to inputs from end-users.<br />
+                To do so you could create an intent. Or you could use the
+                playground to help you to create them.<br />
+              </p>
+              <div
+                style={{
+                  margin: "0",
+                  padding: "4px",
+                  backgroundColor: "#FFFF8D",
+                }}
+              >
+                For example:
+                <code>
+                  send &quot;Hello&quot; using Playground&apos;s textfield at
+                  the bottom
+                </code>
+              </div>
+            </div>
+          </div>
+          <div style={infoStyleD}>
+            <div>
+              <Button
+                raised
+                style={{ marginRight: "32px" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.handleAddIntent();
+                }}
+              >
+                Create intent
+              </Button>
+              <Button
+                raised
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.handleExportImport(true);
+                }}
+              >
+                Import intents
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div
+          className="mrb-panel"
+          style={{ height: "18.05%", backgroundColor: "#FFFF8D" }}
+        >
+          <div
+            style={{
+              margin: "16px",
+              padding: "8px",
+              textAlign: "left",
+              backgroundColor: "#FFFF8D",
+            }}
+          >
+            An <b>assistant</b> has a list of intents.<br />An <b>intent</b>
+            is an expected behaviour from the end-user.<br />
+            Assistant&apos;s <b>NLP</b> (Natural Language Processing) engine
+            will use that list to match intent&apos;s <b>input</b>
+            with end-user&apos;s input. If a match is found assistant responds
+            using selected intent&apos;s <b>output</b>.
+          </div>
+        </div>
+      </Cell>
+    );
+  }
+
   render() {
     let { isLoading } = this.props;
     if (!isLoading && !this.props.intents && this.props.isSignedIn) {
@@ -210,14 +288,38 @@ class BotManager extends Component {
     }
     let panel1 = null;
     let panel2 = null;
-    if (this.props.intents.length > 0) {
+    if (this.props.activeTab === 0) {
+      if (this.props.intents.length > 0) {
+        panel1 = (
+          <Cell
+            style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+            className="mdl-color--white mrb-panel"
+            span={2}
+          >
+            <ExplorerContainer handleExportImport={this.handleExportImport} />
+          </Cell>
+        );
+        panel2 = (
+          <Cell
+            style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+            className="mdl-color--white mrb-panel"
+            span={6}
+          >
+            <IntentContainer />
+          </Cell>
+        );
+      } else {
+        panel1 = this.renderOnboarding();
+        panel2 = "";
+      }
+    } else if (this.props.activeTab === 1) {
       panel1 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
           className="mdl-color--white mrb-panel"
           span={2}
         >
-          <ExplorerContainer handleExportImport={this.handleExportImport} />
+          <EntitiesContainer handleExportImport={this.handleExportImport} />
         </Cell>
       );
       panel2 = (
@@ -226,85 +328,30 @@ class BotManager extends Component {
           className="mdl-color--white mrb-panel"
           span={6}
         >
-          <IntentContainer />
+          TODO
         </Cell>
       );
     } else {
       panel1 = (
-        <Cell style={{ margin: "0px" }} span={8}>
-          <div className="mrb-panel mrb-panel-empty" style={{ height: "80%" }}>
-            <div style={{ height: "30%", ...infoStyleD }}>
-              <div style={{ /* margin: "48px 0", */ textAlign: "left" }}>
-                <h2>Get Started</h2>
-                <p>
-                  This assistant has no data. You need to fill it with intents
-                  to reply to inputs from end-users.<br />
-                  To do so you could create an intent. Or you could use the
-                  playground to help you to create them.<br />
-                </p>
-                <div
-                  style={{
-                    margin: "0",
-                    padding: "4px",
-                    backgroundColor: "#FFFF8D",
-                  }}
-                >
-                  For example:
-                  <code>
-                    send &quot;Hello&quot; using Playground&apos;s textfield at
-                    the bottom
-                  </code>
-                </div>
-              </div>
-            </div>
-            <div style={infoStyleD}>
-              <div>
-                <Button
-                  raised
-                  style={{ marginRight: "32px" }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.handleAddIntent();
-                  }}
-                >
-                  Create intent
-                </Button>
-                <Button
-                  raised
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.handleExportImport(true);
-                  }}
-                >
-                  Import intents
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div
-            className="mrb-panel"
-            style={{ height: "18.05%", backgroundColor: "#FFFF8D" }}
-          >
-            <div
-              style={{
-                margin: "16px",
-                padding: "8px",
-                textAlign: "left",
-                backgroundColor: "#FFFF8D",
-              }}
-            >
-              An <b>assistant</b> has a list of intents.<br />An <b>intent</b>
-              is an expected behaviour from the end-user.<br />
-              Assistant&apos;s <b>NLP</b> (Natural Language Processing) engine
-              will use that list to match intent&apos;s <b>input</b>
-              with end-user&apos;s input. If a match is found assistant responds
-              using selected intent&apos;s <b>output</b>.
-            </div>
-          </div>
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={2}
+        >
+          <CallsContainer handleExportImport={this.handleExportImport} />
         </Cell>
       );
-      panel2 = "";
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={6}
+        >
+          TODO
+        </Cell>
+      );
     }
+
     const intentsEx = [];
     if (Array.isArray(this.props.intents)) {
       this.props.intents.forEach((intent) => {
@@ -344,15 +391,17 @@ class BotManager extends Component {
   }
 }
 
-BotManager.defaultProps = {
+AgentManager.defaultProps = {
   bot: null,
   intents: null,
   selectedIntent: null,
   selectedBotId: null,
   store: null,
+  activeTab: 0,
 };
 
-BotManager.propTypes = {
+AgentManager.propTypes = {
+  activeTab: PropTypes.number,
   isLoading: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
   selectedBotId: PropTypes.string,
@@ -421,4 +470,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BotManager);
+export default connect(mapStateToProps, mapDispatchToProps)(AgentManager);

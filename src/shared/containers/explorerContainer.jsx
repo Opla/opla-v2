@@ -178,8 +178,12 @@ class ExplorerContainer extends Component {
         <SubToolbar
           className=""
           style={{ backgroundColor: "rgb(252, 252, 252)", margin: "0" }}
-          titleIcon="question_answer"
-          titleName={name}
+          titleName={
+            <div style={{ display: "flex", marginLeft: "-8px" }}>
+              <div style={{ marginRight: "16px", fontSize: "24px" }}>#</div>
+              {name}
+            </div>
+          }
           menu={{
             items: [
               { name: "Add intent", onSelect: this.handleAddIntent },

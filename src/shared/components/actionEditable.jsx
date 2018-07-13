@@ -142,7 +142,7 @@ class ActionEditable extends Component {
         // onClick={(e)=>{this.props.onSelect();}}
         onClick={this.props.onSelect}
       >
-        {type === "any" && <span className="mdl-chip__text_ex">any</span>}
+        {type === "any" && <span className="mdl-chip__text_ex">@any</span>}
         {(type === "output_var" || type === "variable") && (
           <span className="mdl-chip__text_ex">{decodeURIComponent(text)}</span>
         )}
