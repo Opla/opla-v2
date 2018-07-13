@@ -1,2 +1,0 @@
-ALTER TABLE `users` ADD COLUMN `salt` VARCHAR(128);
-ALTER TABLE `users` MODIFY `password` VARCHAR(128) COLLATE utf8_unicode_ci DEFAULT NULL;
