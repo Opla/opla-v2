@@ -276,7 +276,7 @@ class ActionsEditable extends Component {
     // create a start action if empty or first item is not a text
     if (isEditable && (len < 1 || (actions[0] && actions[0].type !== "text"))) {
       // if intent empty start action take all the space
-      const style = len < 1 ? { width: "100vw" } : {};
+      const style = len < 1 ? { width: "100vw", minHeight: "15px" } : {};
       start = (
         <ActionEditable
           actionId={"ae_start"}
