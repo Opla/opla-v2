@@ -158,6 +158,7 @@ exports[`components/intentDetail can render intent with special characters corre
                 style={
                   Object {
                     "display": "inline-block",
+                    "minHeight": "15px",
                     "padding": "0 4px",
                     "width": "100vw",
                   }
@@ -321,6 +322,7 @@ exports[`components/intentDetail can render intent with special characters corre
                 style={
                   Object {
                     "display": "inline-block",
+                    "minHeight": "15px",
                     "padding": "0 4px",
                     "width": "100vw",
                   }
@@ -640,6 +642,7 @@ exports[`components/intentDetail renders correctly 1`] = `
                 style={
                   Object {
                     "display": "inline-block",
+                    "minHeight": "15px",
                     "padding": "0 4px",
                     "width": "100vw",
                   }
@@ -803,6 +806,7 @@ exports[`components/intentDetail renders correctly 1`] = `
                 style={
                   Object {
                     "display": "inline-block",
+                    "minHeight": "15px",
                     "padding": "0 4px",
                     "width": "100vw",
                   }

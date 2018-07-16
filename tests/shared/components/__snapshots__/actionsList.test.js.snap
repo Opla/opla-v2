@@ -154,6 +154,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "minHeight": "15px",
                   "padding": "0 4px",
                   "width": "100vw",
                 }
@@ -209,6 +210,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "minHeight": "15px",
                   "padding": "0 4px",
                   "width": "100vw",
                 }
@@ -264,6 +266,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "minHeight": "15px",
                   "padding": "0 4px",
                   "width": "100vw",
                 }
@@ -319,6 +322,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "minHeight": "15px",
                   "padding": "0 4px",
                   "width": "100vw",
                 }
@@ -374,6 +378,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "minHeight": "15px",
                   "padding": "0 4px",
                   "width": "100vw",
                 }
@@ -429,6 +434,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "minHeight": "15px",
                   "padding": "0 4px",
                   "width": "100vw",
                 }
@@ -484,6 +490,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "minHeight": "15px",
                   "padding": "0 4px",
                   "width": "100vw",
                 }
@@ -546,6 +553,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
@@ -1113,6 +1121,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
@@ -1279,6 +1288,7 @@ exports[`components/actionsList can have an unique id 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
@@ -1445,6 +1455,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
@@ -1611,6 +1622,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
@@ -1777,6 +1789,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
@@ -1943,6 +1956,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
@@ -2109,6 +2123,7 @@ exports[`components/actionsList renders correctly 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "minHeight": "15px",
                 "padding": "0 4px",
                 "width": "100vw",
               }
