@@ -146,9 +146,25 @@ exports[`components/intentDetail can render intent with special characters corre
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
             spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+                "minHeight": "40px",
+              }
+            }
             tabIndex={0}
           >
-            <span>
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
               <span
                 className={undefined}
                 data="text"
@@ -158,9 +174,9 @@ exports[`components/intentDetail can render intent with special characters corre
                 style={
                   Object {
                     "display": "inline-block",
+                    "flex": "1",
                     "minHeight": "15px",
                     "padding": "0 4px",
-                    "width": "100vw",
                   }
                 }
                 tabIndex={1}
@@ -310,9 +326,25 @@ exports[`components/intentDetail can render intent with special characters corre
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
             spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+                "minHeight": "40px",
+              }
+            }
             tabIndex={0}
           >
-            <span>
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
               <span
                 className={undefined}
                 data="text"
@@ -322,9 +354,9 @@ exports[`components/intentDetail can render intent with special characters corre
                 style={
                   Object {
                     "display": "inline-block",
+                    "flex": "1",
                     "minHeight": "15px",
                     "padding": "0 4px",
-                    "width": "100vw",
                   }
                 }
                 tabIndex={1}
@@ -630,9 +662,25 @@ exports[`components/intentDetail renders correctly 1`] = `
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
             spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+                "minHeight": "40px",
+              }
+            }
             tabIndex={0}
           >
-            <span>
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
               <span
                 className={undefined}
                 data="text"
@@ -642,9 +690,9 @@ exports[`components/intentDetail renders correctly 1`] = `
                 style={
                   Object {
                     "display": "inline-block",
+                    "flex": "1",
                     "minHeight": "15px",
                     "padding": "0 4px",
-                    "width": "100vw",
                   }
                 }
                 tabIndex={1}
@@ -794,9 +842,25 @@ exports[`components/intentDetail renders correctly 1`] = `
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
             spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+                "minHeight": "40px",
+              }
+            }
             tabIndex={0}
           >
-            <span>
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
               <span
                 className={undefined}
                 data="text"
@@ -806,9 +870,9 @@ exports[`components/intentDetail renders correctly 1`] = `
                 style={
                   Object {
                     "display": "inline-block",
+                    "flex": "1",
                     "minHeight": "15px",
                     "padding": "0 4px",
-                    "width": "100vw",
                   }
                 }
                 tabIndex={1}

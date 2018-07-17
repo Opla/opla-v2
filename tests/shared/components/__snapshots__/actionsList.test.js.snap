@@ -142,9 +142,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -154,9 +169,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "flex": "1",
                   "minHeight": "15px",
                   "padding": "0 4px",
-                  "width": "100vw",
                 }
               }
               tabIndex={1}
@@ -198,9 +213,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -210,9 +240,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "flex": "1",
                   "minHeight": "15px",
                   "padding": "0 4px",
-                  "width": "100vw",
                 }
               }
               tabIndex={1}
@@ -254,9 +284,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -266,9 +311,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "flex": "1",
                   "minHeight": "15px",
                   "padding": "0 4px",
-                  "width": "100vw",
                 }
               }
               tabIndex={1}
@@ -310,9 +355,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -322,9 +382,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "flex": "1",
                   "minHeight": "15px",
                   "padding": "0 4px",
-                  "width": "100vw",
                 }
               }
               tabIndex={1}
@@ -366,9 +426,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -378,9 +453,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "flex": "1",
                   "minHeight": "15px",
                   "padding": "0 4px",
-                  "width": "100vw",
                 }
               }
               tabIndex={1}
@@ -422,9 +497,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -434,9 +524,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "flex": "1",
                   "minHeight": "15px",
                   "padding": "0 4px",
-                  "width": "100vw",
                 }
               }
               tabIndex={1}
@@ -478,9 +568,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -490,9 +595,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               style={
                 Object {
                   "display": "inline-block",
+                  "flex": "1",
                   "minHeight": "15px",
                   "padding": "0 4px",
-                  "width": "100vw",
                 }
               }
               tabIndex={1}
@@ -541,9 +646,25 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -553,9 +674,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
@@ -710,9 +831,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -766,9 +902,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -822,9 +973,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -878,9 +1044,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -934,9 +1115,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -990,9 +1186,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -1046,9 +1257,24 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           onMouseUp={[Function]}
           onTouchEnd={[Function]}
           spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+            }
+          }
           tabIndex={0}
         >
-          <span>
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
             <span
               className={undefined}
               data="text"
@@ -1109,9 +1335,25 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -1121,9 +1363,9 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
@@ -1276,9 +1518,25 @@ exports[`components/actionsList can have an unique id 1`] = `
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -1288,9 +1546,9 @@ exports[`components/actionsList can have an unique id 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
@@ -1443,9 +1701,25 @@ exports[`components/actionsList can have different behavior on action 1`] = `
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -1455,9 +1729,9 @@ exports[`components/actionsList can have different behavior on action 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
@@ -1610,9 +1884,25 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -1622,9 +1912,9 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
@@ -1777,9 +2067,25 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -1789,9 +2095,9 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
@@ -1944,9 +2250,25 @@ exports[`components/actionsList can have different behavior on select 1`] = `
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -1956,9 +2278,9 @@ exports[`components/actionsList can have different behavior on select 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
@@ -2111,9 +2433,25 @@ exports[`components/actionsList renders correctly 1`] = `
         onMouseUp={[Function]}
         onTouchEnd={[Function]}
         spellCheck={false}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flex": 1,
+            "minHeight": "40px",
+          }
+        }
         tabIndex={0}
       >
-        <span>
+        <span
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flexWrap": "wrap",
+            }
+          }
+        >
           <span
             className={undefined}
             data="text"
@@ -2123,9 +2461,9 @@ exports[`components/actionsList renders correctly 1`] = `
             style={
               Object {
                 "display": "inline-block",
+                "flex": "1",
                 "minHeight": "15px",
                 "padding": "0 4px",
-                "width": "100vw",
               }
             }
             tabIndex={1}
