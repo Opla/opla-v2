@@ -75,7 +75,7 @@ describe("containers/IntentContainerBase", () => {
   });
 
   describe("handleChangeAction", () => {
-    it("should not call appSetIntentAction when new intent action doesnt have a value", () => {
+    it("should call appSetIntentAction when new intent action text is empty", () => {
       const appSetIntentActionSpy = jest.fn();
       const wrapper = shallow(
         <IntentContainerBase
@@ -88,12 +88,17 @@ describe("containers/IntentContainerBase", () => {
       wrapper.instance().actionContainer = "input";
       wrapper.instance().selectedAction = undefined;
 
-      const text = undefined;
+      const text = "";
       const name = undefined;
       const value = undefined;
       wrapper.instance().handleChangeAction(text, name, value);
 
-      expect(appSetIntentActionSpy).not.toHaveBeenCalled();
+      expect(appSetIntentActionSpy).toHaveBeenCalledWith(
+        "input",
+        undefined,
+        "",
+        undefined,
+      );
     });
 
     it("sould call appSetIntentAction when intent action is edited", () => {
