@@ -45,6 +45,10 @@
   color: #222;
  }
 
+.mrb-panel-header-icon {
+  line-height: 1;
+}
+
 .mrb-subheader-right {
  cursor: pointer;
 }
