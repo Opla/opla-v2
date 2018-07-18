@@ -276,7 +276,7 @@ class ActionsEditable extends Component {
     // create a start action if empty or first item is not a text
     if (isEditable && (len < 1 || (actions[0] && actions[0].type !== "text"))) {
       // if intent empty start action take all the space
-      const style = len < 1 ? { width: "100vw", minHeight: "15px" } : {};
+      const style = len < 1 ? { flex: "1", minHeight: "15px" } : {};
       start = (
         <ActionEditable
           actionId={"ae_start"}
@@ -344,9 +344,18 @@ class ActionsEditable extends Component {
         );
       }
     }
+    const contentStyle = {
+      flex: 1,
+      display: "flex",
+      alignItems: "center",
+    };
+    if (this.props.isNew) {
+      contentStyle.minHeight = "40px";
+    }
     return (
       <div
         id="ae_content"
+        style={contentStyle}
         tabIndex={0}
         key="0"
         className="contenteditable"
@@ -361,7 +370,13 @@ class ActionsEditable extends Component {
           this.node = node;
         }}
       >
-        <span>
+        <span
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           {start}
           {list}
           {end}

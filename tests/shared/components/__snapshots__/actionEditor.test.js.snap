@@ -162,9 +162,24 @@ exports[`components/actionEditor renders correctly 1`] = `
     onMouseUp={[Function]}
     onTouchEnd={[Function]}
     spellCheck={false}
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flex": 1,
+      }
+    }
     tabIndex={0}
   >
-    <span>
+    <span
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexWrap": "wrap",
+        }
+      }
+    >
       <span
         className={undefined}
         data="text"
