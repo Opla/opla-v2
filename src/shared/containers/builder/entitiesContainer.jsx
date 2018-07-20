@@ -71,7 +71,6 @@ const mapStateToProps = (state) => {
     bot,
   };
 };
-
 const mapDispatchToProps = null;
 
 // prettier-ignore
