@@ -284,4 +284,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SandboxContainer);
+// prettier-ignore
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SandboxContainer);

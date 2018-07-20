@@ -206,4 +206,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GeneralAdmin);
+// prettier-ignore
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GeneralAdmin);

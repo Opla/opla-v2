@@ -413,4 +413,8 @@ const mapDispatchToProps = (dispatch) => ({
   }, */
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublishDialog);
+// prettier-ignore
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PublishDialog);

@@ -289,4 +289,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchMetrics: (botId) => dispatch(apiGetMetricsRequest(botId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardBase);
+// prettier-ignore
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DashboardBase);

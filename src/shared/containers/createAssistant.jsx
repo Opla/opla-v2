@@ -346,6 +346,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+// prettier-ignore
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CreateAssistantBase),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(CreateAssistantBase),
 );

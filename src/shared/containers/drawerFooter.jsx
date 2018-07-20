@@ -42,4 +42,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(DrawerFooter);
+// prettier-ignore
+export default connect(
+  mapStateToProps,
+  null,
+)(DrawerFooter);

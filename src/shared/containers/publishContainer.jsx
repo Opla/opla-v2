@@ -92,4 +92,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(apiGetBotParametersRequest(name)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublishContainer);
+// prettier-ignore
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PublishContainer);
