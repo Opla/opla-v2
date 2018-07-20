@@ -74,4 +74,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = null;
 
-export default connect(mapStateToProps, mapDispatchToProps)(EntitiesContainer);
+// prettier-ignore
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(EntitiesContainer);
