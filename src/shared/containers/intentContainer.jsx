@@ -481,6 +481,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export { IntentContainer as IntentContainerBase };
+
+// prettier-ignore
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

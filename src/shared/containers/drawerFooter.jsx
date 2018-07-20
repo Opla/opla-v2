@@ -42,6 +42,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+// prettier-ignore
 export default connect(
   mapStateToProps,
   null,

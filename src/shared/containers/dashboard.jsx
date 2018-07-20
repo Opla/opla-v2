@@ -289,6 +289,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchMetrics: (botId) => dispatch(apiGetMetricsRequest(botId)),
 });
 
+// prettier-ignore
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

@@ -89,6 +89,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+// prettier-ignore
 export default connect(
   null,
   mapDispatchToProps,
