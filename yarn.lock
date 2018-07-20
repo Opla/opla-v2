@@ -6168,15 +6168,6 @@ react@16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react@^16.2.0:
-  version "16.3.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.3.1.tgz#4a2da433d471251c69b6033ada30e2ed1202cfd8"
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
-
 read-pkg-up@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-1.0.1.tgz#9d63c13276c065918d57f002a57f40a1b643fb02"
@@ -7865,13 +7856,13 @@ zoapp-common@0.3.0:
     whatwg-fetch "^2.0.4"
     winston "2.4.0"
 
-zoapp-front@0.23.5:
-  version "0.23.5"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.23.5.tgz#d499c05c282f5b811d4ab1d9ffc63f141d79ef66"
+zoapp-front@0.23.6:
+  version "0.23.6"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.23.6.tgz#ec0626fea94ffb89d2964afb733252bdaa9d282f"
   dependencies:
     babel-runtime "^6.26.0"
     prop-types "15.6.0"
-    react "^16.2.0"
+    react "16.2.0"
     react-dom "16.2.0"
     react-hot-loader "^4.0.0"
     react-redux "5.0.6"
