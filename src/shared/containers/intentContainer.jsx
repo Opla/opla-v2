@@ -481,4 +481,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export { IntentContainer as IntentContainerBase };
-export default connect(mapStateToProps, mapDispatchToProps)(IntentContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(IntentContainer);

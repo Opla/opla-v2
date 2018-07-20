@@ -472,4 +472,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServicesContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ServicesContainer);

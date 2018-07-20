@@ -284,4 +284,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SandboxContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SandboxContainer);

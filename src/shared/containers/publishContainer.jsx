@@ -92,4 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(apiGetBotParametersRequest(name)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublishContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PublishContainer);

@@ -262,4 +262,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExplorerContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ExplorerContainer);

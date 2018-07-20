@@ -289,4 +289,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchMetrics: (botId) => dispatch(apiGetMetricsRequest(botId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardBase);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DashboardBase);

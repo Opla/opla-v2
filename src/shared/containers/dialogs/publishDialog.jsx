@@ -413,4 +413,7 @@ const mapDispatchToProps = (dispatch) => ({
   }, */
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublishDialog);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PublishDialog);

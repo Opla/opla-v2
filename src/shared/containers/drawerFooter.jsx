@@ -42,4 +42,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(DrawerFooter);
+export default connect(
+  mapStateToProps,
+  null,
+)(DrawerFooter);

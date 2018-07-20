@@ -206,4 +206,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GeneralAdmin);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GeneralAdmin);

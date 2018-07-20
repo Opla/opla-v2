@@ -51,6 +51,9 @@
                 "config": "webpack.common.js"
             }
         },
+        "react": {
+            "version": "16.2"
+          },
         "import/core-modules": ["zrmc"]
     }
 }
