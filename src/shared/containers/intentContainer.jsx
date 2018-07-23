@@ -28,6 +28,8 @@ class IntentContainer extends Component {
       toolboxFocus: false,
       toolboxDisplayMode: "",
       displayCondition: false,
+      selectedInput: -1,
+      selectedOutput: -1,
     };
     this.selectedActionsComponent = null;
   }
@@ -328,6 +330,14 @@ class IntentContainer extends Component {
       this.selectedActionsComponent && this.selectedActionsComponent.props
         ? this.selectedActionsComponent.props.containerName
         : "";
+    console.log("selectedActionsComponent", selectedActionsComponent);
+    if (containerName === "input") {
+      const selected = selectedActionsComponent.props.isNew ? 0 : -1;
+      this.setState({ selectedOutput: -1, selectedInput: selected });
+    } else if (containerName === "output") {
+      const selected = selectedActionsComponent.props.isNew ? 0 : -1;
+      this.setState({ selectedInput: -1, selectedOutput: selected });
+    }
     this.updateToolboxDisplay(true, containerName);
   };
 
@@ -400,6 +410,8 @@ class IntentContainer extends Component {
             onSelectActionsComponent={this.handleSelectActionsComponent}
             onNewActionsChange={this.handleNewActionsChange}
             onDeleteActionClick={this.handleDeleteActionClick}
+            selectedInput={this.state.selectedInput}
+            selectedOutput={this.state.selectedOutput}
           />
         </div>
       );

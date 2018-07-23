@@ -102,14 +102,17 @@
   margin-top: 2px;
   padding: 0px  10px;
 }
+
 .message .circle-wrapper {
   height: 42px;
   width: 42px;
   border-radius: 50%;
 }
+
 .next .circle-wrapper {
   visibility: hidden;
 }
+
 .message .text-wrapper {
   padding: 14px;
   min-height: 48px;
@@ -129,6 +132,39 @@
   height: 0;
   border-style: solid;
 }
+
+.message.error .circle-wrapper, .message.from .text-wrapper {
+  background: #fee;
+  font-weight: 300;
+  text-align: left;
+  color: #999;
+}
+
+.message.error .circle-wrapper {
+  background: #b71c1c;
+  color: white;
+  text-align: center;
+  font-size: 38px;
+  font-weight: 1000;
+}
+
+.message.error .text-wrapper {
+  box-shadow: none;
+  border-radius: 0px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  min-height: 24px;
+  height: 44px;
+}
+
+.message.error .text-wrapper:before {
+  content: none;
+}
+
+.message.error .text-wrapper .message-edit-icon-right {
+  color: #b71c1c;
+}
+
 .message.from .circle-wrapper, .message.from .text-wrapper {
   background: #fcea20;
   font-weight: 300;
@@ -258,7 +294,7 @@
 }
 
 .message-body-error {
-  color: #b71c1c;
+  color: #999;
   font-style: italic;
   margin-bottom: 16px;
   cursor: text;

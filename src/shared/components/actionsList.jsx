@@ -84,12 +84,14 @@ class ActionsList extends Component {
       !isActionsEmpty && actions[0].type === "condition";
     // const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
+    let addContentClassname = "";
+    if (this.props.selected === 0) {
+      addContentClassname = "selectedActionItem";
+    }
+    addContentClassname = `addActionItem ${addContentClassname}`;
     const addContent = (
       <ActionsItem
-        style={{
-          border: "1px solid rgba(0, 0, 0, 0.2)",
-          color: "black",
-        }}
+        className={addContentClassname}
         containerName={name}
         action={newAction}
         editable={editable}
@@ -117,7 +119,7 @@ class ActionsList extends Component {
             overflow: "auto",
             maxHeight: "18.07vh",
             border: "1px solid #eee",
-            margin: "0 8px",
+            margin: "0 8px 16px 8px",
           }}
         >
           {actionsDisplayed.map((action, index) => (
@@ -171,10 +173,9 @@ class ActionsList extends Component {
         label={title}
         className="mdl-color--white"
         style={{ margin: "8px" }}
-        elevation={0}
       >
-        {contentList}
         {addContent}
+        {contentList}
       </ExpansionPanel>
     );
   }
@@ -205,6 +206,7 @@ ActionsList.propTypes = {
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,
+  selected: PropTypes.number.isRequired,
 };
 
 export default ActionsList;

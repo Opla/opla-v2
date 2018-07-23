@@ -27,6 +27,8 @@ const IntentDetail = ({
   onSelectActionsComponent,
   onNewActionsChange,
   onDeleteActionClick,
+  selectedInput,
+  selectedOutput,
 }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
@@ -43,6 +45,7 @@ const IntentDetail = ({
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
+          selected={selectedInput}
         />
         <ActionsList
           name="output"
@@ -55,12 +58,12 @@ const IntentDetail = ({
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
+          selected={selectedOutput}
         />
         <ExpansionPanel
-          label="Parameters"
+          label="Advanced"
           className="mdl-color--white"
           style={{ margin: "8px" }}
-          elevation={0}
           collapsed
         >
           <List>
@@ -123,6 +126,8 @@ IntentDetail.propTypes = {
     output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   }).isRequired,
   displayCondition: PropTypes.bool,
+  selectedInput: PropTypes.number,
+  selectedOutput: PropTypes.number,
 };
 
 export default IntentDetail;
