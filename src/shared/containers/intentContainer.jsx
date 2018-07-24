@@ -66,7 +66,12 @@ class IntentContainer extends Component {
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
-    this.setState({ editing: false, displayCondition: false });
+    this.setState({
+      editing: false,
+      displayCondition: false,
+      selectedInput: -1,
+      selectedOutput: -1,
+    });
   }
 
   handleDeleteActionClick = (containerName, index) => {
@@ -150,7 +155,11 @@ class IntentContainer extends Component {
 
   handleChangeToolbox = (action) => {
     if (action === "unfocus") {
-      this.setState({ toolboxFocus: false });
+      this.setState({
+        toolboxFocus: false,
+        selectedInput: -1,
+        selectedOutput: -1,
+      });
     } else {
       this.setState({ editing: true, toolboxFocus: true });
       if (action === "condition") {
@@ -324,18 +333,17 @@ class IntentContainer extends Component {
     }
   }
 
-  handleSelectActionsComponent = (selectedActionsComponent) => {
+  handleSelectActionsComponent = (selectedActionsComponent, index) => {
     this.selectedActionsComponent = selectedActionsComponent;
     const containerName =
       this.selectedActionsComponent && this.selectedActionsComponent.props
         ? this.selectedActionsComponent.props.containerName
         : "";
-    console.log("selectedActionsComponent", selectedActionsComponent);
     if (containerName === "input") {
-      const selected = selectedActionsComponent.props.isNew ? 0 : -1;
+      const selected = selectedActionsComponent.props.isNew ? 0 : index + 1;
       this.setState({ selectedOutput: -1, selectedInput: selected });
     } else if (containerName === "output") {
-      const selected = selectedActionsComponent.props.isNew ? 0 : -1;
+      const selected = selectedActionsComponent.props.isNew ? 0 : index + 1;
       this.setState({ selectedInput: -1, selectedOutput: selected });
     }
     this.updateToolboxDisplay(true, containerName);
@@ -399,7 +407,10 @@ class IntentContainer extends Component {
                 {toolbox}
               </div>
             }
-            icons={[{ name: "file_upload", onClick: this.handleSaveIntent }]}
+            actions={[
+              { name: "help", onClick: () => {} },
+              { name: "save", onClick: this.handleSaveIntent },
+            ]}
           />
           <IntentDetail
             intent={intent}

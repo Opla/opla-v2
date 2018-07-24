@@ -85,9 +85,12 @@ class ActionsList extends Component {
     // const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
     let addContentClassname = "";
+    let isSelected = false;
     if (this.props.selected === 0) {
       addContentClassname = "selectedActionItem";
+      isSelected = true;
     }
+    const selected = this.props.selected - 1;
     addContentClassname = `addActionItem ${addContentClassname}`;
     const addContent = (
       <ActionsItem
@@ -95,6 +98,7 @@ class ActionsList extends Component {
         containerName={name}
         action={newAction}
         editable={editable}
+        isSelected={isSelected}
         onAddAction={(content, isCondition = false) => {
           this.handleAddNewAction(content, isCondition);
         }}
@@ -109,27 +113,25 @@ class ActionsList extends Component {
         }
       />
     );
+    const s = {
+      overflow: "auto",
+      maxHeight: "18.07vh",
+      border: "1px solid #eee",
+      margin: "0 8px 16px 8px",
+    };
     if (actions && actions.length > 0) {
       const actionsDisplayed = isActionsCondition
         ? actions[0].children
         : actions;
       contentList = (
-        <List
-          style={{
-            overflow: "auto",
-            maxHeight: "18.07vh",
-            border: "1px solid #eee",
-            margin: "0 8px 16px 8px",
-          }}
-        >
+        <List style={s}>
           {actionsDisplayed.map((action, index) => (
             <ActionsItem
               containerName={name}
               action={action}
-              index={index}
               onDrop={onDrop}
-              key={index}
-              itemKey={`cd_${index}`}
+              key={`asi_${index}`}
+              index={index}
               onActionChange={(newContent) => {
                 if (isActionsCondition) {
                   this.handleActionConditionChange(newContent, index);
@@ -142,31 +144,40 @@ class ActionsList extends Component {
                 this.handleDeleteClick(index);
               }}
               isCondition={isActionsCondition}
+              isSelected={index === selected}
+              className={index === selected ? "selectedActionItem" : null}
             />
           ))}
         </List>
       );
     } else {
-      contentList = <List />;
+      contentList = <List style={s} />;
     }
     const tooltip =
       name === "input"
         ? "List of sentences, events or attachments that will trigger this intent."
         : "One of below items is send to the user if this intent is activated.";
+    const st = {
+      color: "#999",
+      paddingTop: "12px",
+      paddingRight: "4px",
+      marginLeft: "-8px",
+    };
+    if (name === "output") {
+      st.color = "transparent";
+      st.backgroundImage = "url(../images/opla-avatar.png)";
+      st.backgroundSize = "20px";
+      st.backgroundRepeat = "no-repeat";
+      st.backgroundPositionY = "14px";
+      st.backgroundPositionX = "2px";
+    }
     const title = (
-      <div style={{ display: "flex" }}>
-        {name}
-        <Tooltip label={tooltip}>
-          <Icon
-            name="help_outline"
-            style={{
-              color: "#ddd",
-              paddingTop: "12px",
-              paddingLeft: "16px",
-            }}
-          />
-        </Tooltip>
-      </div>
+      <Tooltip label={tooltip}>
+        <div style={{ display: "flex", fontWeight: "900" }}>
+          <Icon name="account_circle" style={st} />
+          {name}
+        </div>
+      </Tooltip>
     );
     return (
       <ExpansionPanel

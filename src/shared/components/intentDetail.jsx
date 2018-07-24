@@ -13,6 +13,7 @@ import Zrmc, {
   ListItemMeta,
   TextField,
   Button,
+  Icon,
 } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
@@ -61,7 +62,19 @@ const IntentDetail = ({
           selected={selectedOutput}
         />
         <ExpansionPanel
-          label="Advanced"
+          label={
+            <div style={{ display: "flex", fontWeight: "900" }}>
+              <Icon
+                name="question_answer"
+                style={{
+                  color: "#999",
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+              />Advanced
+            </div>
+          }
           className="mdl-color--white"
           style={{ margin: "8px" }}
           collapsed

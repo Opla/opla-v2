@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Zrmc from "zrmc";
+import Zrmc, { ListItemMeta, Icon } from "zrmc";
 import { ListDragComponent, SubToolbar } from "zoapp-ui";
 import {
   apiGetIntentsRequest,
@@ -51,7 +51,7 @@ class ExplorerContainer extends Component {
     return true;
   };
 
-  onRenameIntent = (dialog, action) => {
+  onRenameIntent = (dialog, action, data) => {
     if (action === "Rename") {
       const intentName = dialog.getFieldValue();
       // console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
@@ -59,7 +59,7 @@ class ExplorerContainer extends Component {
         dialog.invalidateField();
         return false;
       }
-      const selected = this.props.selectedIntentIndex;
+      const { selected } = data;
       const it = this.props.intents[selected];
       const intent = { ...it, name: intentName };
       this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
@@ -67,9 +67,9 @@ class ExplorerContainer extends Component {
     return true;
   };
 
-  onDeleteIntent = (dialog, action) => {
+  onDeleteIntent = (dialog, action, data) => {
     if (action === "Delete") {
-      const selected = this.props.selectedIntentIndex;
+      const { selected } = data;
       const intent = this.props.intents[selected];
       // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
       this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
@@ -93,9 +93,7 @@ class ExplorerContainer extends Component {
     });
   };
 
-  handleRename = () => {
-    // console.log("TODO", "ExplorerContainer.handleRename");
-    const selected = this.props.selectedIntentIndex;
+  handleRename = (selected = this.props.selectedIntentIndex) => {
     const intent = this.props.intents[selected];
     const field = {
       defaultValue: intent.name,
@@ -108,23 +106,23 @@ class ExplorerContainer extends Component {
       field,
       actions: [{ name: "Cancel" }, { name: "Rename" }],
       onAction: this.onRenameIntent,
+      data: { selected },
     });
   };
 
   handleSynchronize = () => {
-    // console.log("WIP", "ExplorerContainer.handleSynchronize");
     this.props.apiGetIntentsRequest(this.props.selectedBotId);
   };
 
-  handleDelete = () => {
-    // console.log("WIP", "ExplorerContainer.handleDelete");
-    const selected = this.props.selectedIntentIndex;
+  handleDelete = (selected = this.props.selectedIntentIndex) => {
+    // const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
     Zrmc.showDialog({
       header: "Intent",
       body: `${intent.name} Do you want to delete it ?`,
       actions: [{ name: "Cancel" }, { name: "Delete" }],
       onAction: this.onDeleteIntent,
+      data: { selected },
     });
   };
 
@@ -140,7 +138,7 @@ class ExplorerContainer extends Component {
     const name = "Intents";
     const items = [];
     if (this.props.intents) {
-      this.props.intents.forEach((intent) => {
+      this.props.intents.forEach((intent, index) => {
         const { id } = intent;
         const style = intent.notSaved
           ? {
@@ -151,23 +149,62 @@ class ExplorerContainer extends Component {
             }
           : { display: "none", marginRight: "2px" };
         const marginLeft = intent.notSaved ? "-14px" : "0px";
-        const n = (
+        const n = [];
+        n.push(
           <span
+            key="i_text"
             style={{
               marginLeft,
               overflow: "hidden",
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
+              maxWidth: "160px",
             }}
           >
             <span className="red_dot" style={style} />
-            <span style={{ color: "#bbb" }}>#</span>
+            <span style={{ color: "#00000044" }}>#</span>
             {intent.name}
-          </span>
+          </span>,
+        );
+        n.push(
+          <ListItemMeta
+            key="i_meta"
+            style={{ marginRight: "-8px", marginTop: "7px" }}
+          >
+            <Icon
+              name="edit"
+              onClick={(e) => {
+                e.stopPropagation();
+                this.handleRename(index);
+              }}
+            />
+            <Icon
+              name="remove_circle_outline"
+              onClick={(e) => {
+                e.stopPropagation();
+                this.handleRename(index);
+              }}
+            />
+          </ListItemMeta>,
         );
         items.push({ id, name: n });
       });
     }
+    /*
+          menu={{
+            items: [
+              { name: "Add intent", onSelect: this.handleAddIntent },
+              { name: "Rename", onSelect: this.handleRename },
+              { name: "Delete", onSelect: this.handleDelete },
+              {
+                name: "Export / Import",
+                onSelect: () => {
+                  this.props.handleExportImport();
+                },
+              },
+            ],
+          }}
+    */
     return (
       <div
         style={{
@@ -178,22 +215,19 @@ class ExplorerContainer extends Component {
         <SubToolbar
           className=""
           style={{ backgroundColor: "rgb(252, 252, 252)", margin: "0" }}
-          titleIcon="question_answer"
           titleName={name}
-          menu={{
-            items: [
-              { name: "Add intent", onSelect: this.handleAddIntent },
-              { name: "Rename", onSelect: this.handleRename },
-              { name: "Delete", onSelect: this.handleDelete },
-              /* { name: "Synchronize", onSelect: this.handleSynchronize }, */
-              {
-                name: "Export / Import",
-                onSelect: () => {
-                  this.props.handleExportImport();
-                },
-              },
-            ],
-          }}
+          icons={[
+            {
+              name: "add_circle_outline",
+              tooltip: "Add an intent",
+              onClick: this.handleAddIntent,
+            },
+            {
+              name: "cloud_circle",
+              tooltip: "Import / Export",
+              onClick: this.props.handleExportImport,
+            },
+          ]}
         />
         <div className="list-box" style={{ margin: "0" }}>
           <ListDragComponent

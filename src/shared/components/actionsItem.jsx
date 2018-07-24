@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { ListItem, ListItemMeta } from "zrmc";
 import ActionsEditable from "./actionsEditable";
 import ConditionsActionsEditable from "./conditionsActionsEditable";
+import ActionsToolbox from "./actionsToolbox";
 
 class ActionsItem extends Component {
   constructor(props) {
@@ -16,15 +17,18 @@ class ActionsItem extends Component {
     this.actionsEditableRef = null;
   }
 
-  handleActionsEditableSelected = (ref) => {
-    this.props.onSelectActionsComponent(ref);
+  handleActionsEditableSelected = (ref, index) => {
+    this.props.onSelectActionsComponent(ref, index);
   };
 
   render() {
     const {
       isNew,
       isCondition,
-      itemKey,
+      isSelected,
+      isIntentOutputEmpty,
+      isInput,
+      index,
       containerName,
       action,
       onDrop,
@@ -32,38 +36,15 @@ class ActionsItem extends Component {
       className,
     } = this.props;
     const color = "rgb(0, 0, 0)";
-    // const color =
-    //   (!actions || actions.length === 0) && !newAction
-    //     ? "rgb(213, 0, 0)"
-    //     : "rgb(0, 0, 0)";
-    // const style = {}; /* padding: "16px" */
-    let s = {
+    const itemKey = index > -1 ? `cd_${index}` : null;
+    const s = {
       ...style,
       color,
-      height: "100%",
-      padding: "4px 16px",
     };
-    if (isNew) {
-      s = {
-        ...style,
-      };
-    } else {
-      s.borderTop = "rgba(0,0,0,0.04) 1px solid";
-    }
-    if (isCondition) {
-      s = {
-        ...style,
-        height: "auto",
-        padding: "4px 16px",
-      };
-      if (!isNew) {
-        s.borderTop = "rgba(0,0,0,0.04) 1px solid";
-      }
-    }
-    let icon = null;
+    /* let icon = null;
     if (isNew) {
       icon = containerName === "input" ? "format_quote" : "chat_bubble_outline";
-    }
+    } */
     const addText =
       containerName === "input"
         ? "Add an input sentence"
@@ -91,55 +72,79 @@ class ActionsItem extends Component {
         />
       );
     }
-    let cl = " selectableListItem onFocusAction mdl-list_action";
+    let cl = " onFocusAction actionItem";
+    if (isCondition) {
+      cl = ` actionConditional ${cl}`;
+    }
     if (className) {
       cl = className + cl;
+    }
+    let toolbox = "";
+    if (isSelected) {
+      toolbox = (
+        <div
+          style={{
+            background: "white",
+            position: "absolute",
+            top: "100%",
+            right: "0px",
+          }}
+        >
+          <ActionsToolbox
+            onChange={this.handleChangeToolbox}
+            isInput={isInput}
+            condition={isIntentOutputEmpty}
+          />
+        </div>
+      );
     }
     return (
       <ListItem
         className={cl}
-        icon={icon}
         style={s}
         key={itemKey}
         onClick={() => {
-          this.handleActionsEditableSelected(this.actionsEditableRef);
+          this.handleActionsEditableSelected(this.actionsEditableRef, index);
         }}
       >
-        {isCondition ? (
-          <ConditionsActionsEditable
-            containerName={this.props.containerName}
-            content={action}
-            editable={editable}
-            onAddAction={(content) => {
-              this.props.onAddAction(content, true);
-            }}
-            placeholder={addText}
-            onChange={this.props.onActionChange}
-            onActionsEditableRefchange={(e) => {
-              if (e) {
-                this.actionsEditableRef = e;
-              }
-            }}
-            isNew={isNew}
-            onDrop={onDrop}
-          />
-        ) : (
-          <ActionsEditable
-            containerName={this.props.containerName}
-            content={action}
-            editable={editable}
-            onAddAction={this.props.onAddAction}
-            placeholder={addText}
-            onChange={this.props.onActionChange}
-            ref={(e) => {
-              if (e) {
-                this.actionsEditableRef = e;
-              }
-            }}
-            isNew={isNew}
-            onDrop={onDrop}
-          />
-        )}
+        <div style={{ width: "100%", overflow: "hidden" }}>
+          {isCondition ? (
+            <ConditionsActionsEditable
+              containerName={this.props.containerName}
+              content={action}
+              editable={editable}
+              onAddAction={(content) => {
+                this.props.onAddAction(content, true);
+              }}
+              placeholder={addText}
+              onChange={this.props.onActionChange}
+              onActionsEditableRefchange={(e) => {
+                if (e) {
+                  this.actionsEditableRef = e;
+                }
+              }}
+              isNew={isNew}
+              onDrop={onDrop}
+            />
+          ) : (
+            <ActionsEditable
+              containerName={this.props.containerName}
+              content={action}
+              editable={editable}
+              onAddAction={this.props.onAddAction}
+              placeholder={addText}
+              onChange={this.props.onActionChange}
+              ref={(e) => {
+                if (e) {
+                  this.actionsEditableRef = e;
+                }
+              }}
+              isNew={isNew}
+              onDrop={onDrop}
+            />
+          )}
+          {toolbox}
+        </div>
         {meta}
       </ListItem>
     );
@@ -148,6 +153,7 @@ class ActionsItem extends Component {
 
 ActionsItem.defaultProps = {
   onAddAction: () => {},
+  index: -1,
 };
 
 ActionsItem.propTypes = {
@@ -158,11 +164,14 @@ ActionsItem.propTypes = {
   isNew: PropTypes.bool,
   isCondition: PropTypes.bool,
   action: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
-  itemKey: PropTypes.string,
+  index: PropTypes.number,
   onDrop: PropTypes.func,
   onDeleteActionClick: PropTypes.func,
   style: PropTypes.shape({}),
   className: PropTypes.string,
+  isSelected: PropTypes.bool,
+  isIntentOutputEmpty: PropTypes.bool,
+  isInput: PropTypes.bool,
 };
 
 export default ActionsItem;
