@@ -143,6 +143,42 @@ jobs:
       - run: *deploy
       - run: *notify0
       - run: *notify1
+  
+  backup_prod:
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: prod
+      K8S_NAMESPACE: prod-ce
+      GCLOUD_CLUSTER_ID: qa
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - run: *gcloudauth
+      - run: 
+          name: backup mariadb
+          command: |
+            gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
+            helm init --service-account tiller --upgrade
+            COMMIT_SHA=$CIRCLE_SHA1 myke backup_db
+  
+  backup_preprod:
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: preprod
+      K8S_NAMESPACE: preprod-ce
+      GCLOUD_CLUSTER_ID: qa
+    steps:
+      - checkout
+      - run: *initsubmodules
+      - run: *gcloudauth
+      - run: 
+          name: backup mariadb
+          command: |
+            gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
+            helm init --service-account tiller --upgrade
+            COMMIT_SHA=$CIRCLE_SHA1 myke backup_db
 
 workflows:
   version: 2
@@ -171,3 +207,21 @@ workflows:
       - deploy_preprod:
           requires:
             - promote
+      - manual_check:
+         type: approval
+         requires:
+           - deploy_preprod
+      - deploy_prod:
+          requires:
+            - manual_check
+  backup_daily:
+    triggers:
+      - schedule:
+          cron: "0,15,30,45 7-20 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - backup_prod
+      - backup_preprod

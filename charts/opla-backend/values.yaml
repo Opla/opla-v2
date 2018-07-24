@@ -14,6 +14,16 @@ db:
     botId: yvUrUr20GwaWvPUoLpIVhwvg6u72rcOc3mv4MUbDJjeRnERI
     botUserId: QFmiA1RpYZ3DtXL57WmWOMurm3yNxn8R
 
+  backup:
+    on: false
+    cron: "0 0 2 1/1 * ? *" #Everyday at 2AM
+    from: "gcs://"
+
+  restore:
+    on: false
+    cron: "0 0 2 1/1 * ? *" # Everyday at 2AM
+    from: "gcs://"
+
 tls: false
 
 namespace: dev-ce
@@ -46,6 +56,8 @@ mariadb:
     user: opla
     password: foo
   nameOverride: mariadb
+  master:
+    antiAffinity: hard
   slave:
     replicas: 0
   rootUser: 

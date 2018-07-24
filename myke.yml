@@ -47,6 +47,7 @@ tasks:
     cmd: |-
       kubectl -n {{.K8S_NAMESPACE}} delete pvc data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-master-0 data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-slave-0 || true
 
+      
   e2e_test:
     cmd: |-
       IP=$(kubectl get svc nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress.*.ip}')
@@ -63,3 +64,27 @@ tasks:
       if [ "$STATUS_CODE" != 200 ]; then
         exit 1
       fi;
+
+  backup_db:
+    cmd: |-
+      helm template \
+        --set namespace={{.K8S_NAMESPACE}} \
+        --set persistentVolumeClaimName=data-{{.K8S_NAMESPACE}}-backend-mariadb-master-0 \
+        charts/snapshots/ \
+        | kubectl apply -f -
+  
+  restore_db:
+    cmd: |-
+        # helm delete {{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}} || true
+        # $myke clean_pv
+        helm template \
+          --set backupDate={{.BACKUP_DATE}} \
+          --set namespace={{.K8S_NAMESPACE}} \
+          charts/snapshot-restore/ \
+        | kubectl apply -f -
+        $myke deploy
+      # $myke deploy --HELM_XTRA_ARGS="\
+      #   --set mariadb.master.persistence.storageClass=\"snapshot-promoter\" \
+      #   --set mariadb.master.persistence.annotations={\"snapshot.alpha.kubernetes.io/snapshot=snapshot-mariadb\"} \
+      #   "
+
