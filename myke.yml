@@ -17,7 +17,10 @@ env:
   TAG: latest
   CHART_DIR: charts/opla-front
   GITHUB_PAGES_REPO: Opla/front
+  COMMIT_SHA: latest
   APP_BUILD: dev
+  CLIENT_ID: A_CLIENT_ID
+  CLIENT_SECRET: A_CLIENT_SECRET
 
 tasks:
   build:
