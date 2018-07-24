@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const chalk = require("chalk");
-const dbMigrate = require("db-migrate");
 const figlet = require("figlet");
 const fs = require("fs-extra");
 const path = require("path");
@@ -10,7 +9,7 @@ const { prompt } = require("inquirer");
 const pkg = require("../package.json");
 
 const CONFIG_FILE = path.resolve(__dirname, "../config/default.json");
-const DB_MIGRATE_CONFIG_FILE = path.resolve(__dirname, "../config/db-migrate.json");
+const FLYWAY_CONFIG_FILE = path.resolve(__dirname, "../config/flyway.conf");
 const DESCRIPTION = `Management tool for ${pkg.description}`;
 
 program
@@ -104,7 +103,7 @@ program
             type: "confirm",
             name: "overwrite",
             message:
-            "The configuration files already exist. Do you want to overwrite them?",
+              "The configuration files already exist. Do you want to overwrite them?",
             default: !!options.overwrite,
           },
         );
@@ -199,25 +198,15 @@ program
         },
       };
 
-      // create configuration for "db-migrate" tool
-      // see: http://db-migrate.readthedocs.io/en/latest/Getting%20Started/configuration/
-      const dbMigrateConfig = {
-        defaultEnv: "local",
-        "sql-file": true,
-        local: {
-          driver: answers.databaseType,
-          host: answers.databaseHost,
-          database: answers.databaseName,
-          user: answers.databaseUser,
-          password: answers.databasePass,
-          multipleStatements: true,
-        },
-      };
+      let conf = `flyway.url=jdbc:mariadb://${answers.databaseHost}:3306/${answers.databaseName}\n` +
+        `flyway.user=${answers.databaseUser}\n` +
+        `flyway.password=${answers.databasePass}\n` +
+        `flyway.locations=filesystem:migrations/sqls\n`
+        ;
+
+      fs.writeFile(FLYWAY_CONFIG_FILE, conf)
 
       await fs.writeJson(CONFIG_FILE, config, { spaces: 2 });
-      await fs.writeJson(DB_MIGRATE_CONFIG_FILE, dbMigrateConfig, {
-        spaces: 2,
-      });
 
       console.log(chalk.green("Project successfully configured!"));
     } catch (err) {
@@ -231,23 +220,14 @@ program
   .alias("m")
   .description("Meta-command to manage the database migrations")
   .action(async () => {
-    if (process.argv.length > 3) {
-      // We drop the "database" from the list of arguments to let db-migrate
-      // find the correct action. If we do not do that, it thinks "database" is
-      // the command to run... We do it only if an argument is provided after
-      // "database", so that it displays the default help if one only runs
-      // `bin/opla database`.
-      process.argv.splice(2, 1);
-    }
-
-    const db = dbMigrate.getInstance(true, {
-      config: DB_MIGRATE_CONFIG_FILE,
-    });
 
     try {
-      await db.registerAPIHook();
+      const shell = require('shelljs');
+      if (shell.exec('npm run migrate').code !== 0) {
+        shell.echo('Error: Database migration failed');
+        shell.exit(1);
+      }
 
-      db.run();
     } catch (err) {
       console.error(chalk.red(`An error has occured: ${err.message || err}`));
       process.exit(1);

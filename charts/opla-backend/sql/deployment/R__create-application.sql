@@ -1,4 +1,4 @@
-INSERT INTO `applications` 
+INSERT IGNORE INTO `applications` 
     (`id`,`idx`,`name`,`email`,`redirect_uri`,`grant_type`,`creation_date`,`secret`)
 VALUES (
         unhex(replace(uuid(),'-','')),

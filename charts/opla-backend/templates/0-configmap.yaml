@@ -7,9 +7,28 @@ metadata:
 data:
 {{- if eq .Values.db.createApplication true }}
 {{ $root := . -}}
-{{- range $path, $bytes := .Files.Glob "sql/**.sql" }}
+{{- range $path, $bytes := .Files.Glob "sql/src/**.sql" }}
 {{- $path | base | indent 2 }}: |-
 {{ tpl ($root.Files.Get $path) $root | indent 4 }}
 
 {{ end -}}
+{{- range $path, $bytes := .Files.Glob "sql/deployment/**.sql" }}
+{{- $path | base | indent 2 }}: |-
+{{ tpl ($root.Files.Get $path) $root | indent 4 }}
+
+{{ end -}}
+{{ end -}}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scripts
+  namespace: {{ .Values.namespace }}
+data:
+{{ $root := . -}}
+{{- range $path, $bytes := .Files.Glob "scripts/**.sh" }}
+{{- $path | base | indent 2 }}: |-
+{{ tpl ($root.Files.Get $path) $root | indent 4 }}
+
 {{ end -}}

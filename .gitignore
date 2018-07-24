@@ -6,6 +6,7 @@ node_modules/
 .vscode/
 values.dev.yaml
 *.env.local
+charts/opla-backend/sql/src/
 
 # Chart dependencies
 **/charts/*.tgz

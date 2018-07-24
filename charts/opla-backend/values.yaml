@@ -30,6 +30,15 @@ db_mode: embedded
 embedded_db:
   host: db
 
+# Creates a default user and bot.
+default_user:
+  bot_name: My QA Assistant
+  username: admin
+  password: password
+  email: qa@opla.ai
+  template: |-
+    {"name":"Hello World","intents":[{"name":"Hello","id":"eqF56dq8TGSI6gpPsDvOXXRXkGJ7pJBTsfOjTPI5542vlhKV","botId":"WYHVSJw1JZ2pyrTHByzkvmKxKl7omcjD1jJqW0J9C0fsKT6w","order":1,"input":["Hello"],"output":["Hello World !"]}]}
+
 mariadb:
   enabled: false
   db:
@@ -37,6 +46,7 @@ mariadb:
     user: opla
     password: foo
   nameOverride: mariadb
-  slave.replicas: 0
+  slave:
+    replicas: 0
   rootUser: 
     password: changeit #Needed, otherwise redeployments fail.

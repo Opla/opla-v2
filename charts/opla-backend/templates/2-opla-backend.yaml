@@ -29,8 +29,10 @@ spec:
     metadata:
       labels:
         app: backend
+      annotations:
+        checksum/configMap: {{ include (print $.Template.BasePath "/0-configmap.yaml") . | sha256sum }}
+
     spec:
-      {{- if eq .Values.db_mode "persistent"}}
       initContainers:
         - name: migrations
           image: boxfuse/flyway
@@ -38,7 +40,11 @@ spec:
             - name: FLYWAY_USER
               value: "{{ .Values.db.user }}"
             - name: FLYWAY_URL
+          {{- if eq .Values.db_mode "embedded"}}
+              value: "jdbc:mariadb://db:{{.Values.db.port}}/{{.Values.db.name}}"
+          {{- else if eq .Values.db_mode "persistent"}}
               value: "jdbc:mariadb://{{.Release.Name}}-mariadb:{{.Values.db.port}}/{{.Values.db.name}}"
+          {{- end}}
             - name: FLYWAY_PASSWORD
               value: "{{ .Values.db.password }}"
             - name: FLYWAY_BASELINE_ON_MIGRATE
@@ -52,7 +58,6 @@ spec:
         - name: db-scripts
           configMap:
             name: db-scripts
-      {{- end}}
       containers:
         - name: node
           image: "opla/backend:{{ .Values.image.tag }}"

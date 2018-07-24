@@ -17,6 +17,9 @@ env:
   TAG: latest
   CHART_DIR: charts/opla-backend
   GITHUB_PAGES_REPO: Opla/backend
+  COMMIT_SHA: latest
+  CLIENT_ID: A_CLIENT_ID
+  CLIENT_SECRET: A_CLIENT_SECRET
 
 tasks:
   build:
@@ -29,6 +32,7 @@ tasks:
   _prepare:
     cmd: |-
       eval $(myke -v=0 _app_version)
+      mkdir -p {{.CHART_DIR}}/sql/src/ && cp -r migrations/sqls/*.sql {{.CHART_DIR}}/sql/src/
 
   test:
     cmd: |-

@@ -53,11 +53,4 @@ spec:
           value: {{ .Values.db.user }}
         - name: MYSQL_PASSWORD
           value: {{ .Values.db.password }}
-        volumeMounts:
-        - mountPath: /docker-entrypoint-initdb.d/
-          name: db-scripts
-      volumes:
-      - configMap:
-          name: db-scripts
-        name: db-scripts
 {{- end}}
