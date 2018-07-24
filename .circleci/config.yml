@@ -141,3 +141,11 @@ workflows:
       - deploy_preprod:
           requires:
             - promote
+      - manual_check:
+          type: approval
+          requires:
+            - deploy_preprod
+            - deploy_qa
+      - deploy_prod:
+          requires:
+            - manual_check
