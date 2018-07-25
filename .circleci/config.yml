@@ -211,6 +211,7 @@ workflows:
          type: approval
          requires:
            - deploy_preprod
+           - deploy_qa
       - deploy_prod:
           requires:
             - manual_check
