@@ -28,11 +28,37 @@
 .mrb-panel-header__actions > div > i {
  cursor: pointer;
  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
- margin-right: px;
 }
 
 .mrb-panel-header-title {
   font-weight: 900;
+}
+
+.intent_title {
+  padding-right: 16px;
+  max-width: 28vw;
+  height: 36px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  cursor: pointer;
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+}
+
+.intent_title:hover .intent_title_edit {
+  opacity: 1;
+}
+
+.intent_title_edit {
+  margin-top: 6px;
+  margin-left: 8px;
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+  opacity: 0;
+}
+
+.intent_title:hover  .intent_title_edit {
+  color: rgba(85,38,130);
 }
 
 .actionstoolbox {

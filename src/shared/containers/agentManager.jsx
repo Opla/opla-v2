@@ -15,6 +15,7 @@ import { appSetTitle } from "zoapp-front/actions/app";
 import {
   apiGetIntentsRequest,
   apiSendIntentRequest,
+  apiDeleteIntentRequest,
   apiSaveBotRequest,
   apiImportRequest,
 } from "../actions/api";
@@ -52,6 +53,22 @@ class BotManager extends Component {
     this.updateIntents();
   }
 
+  onRenameIntent = (dialog, action, data) => {
+    if (action === "Rename") {
+      const intentName = dialog.getFieldValue();
+      // console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
+      if (intentName === "") {
+        dialog.invalidateField();
+        return false;
+      }
+      const { selected } = data;
+      const it = this.props.intents[selected];
+      const intent = { ...it, name: intentName };
+      this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+    }
+    return true;
+  };
+
   onAddIntent = (dialog, action, data) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
@@ -82,6 +99,16 @@ class BotManager extends Component {
       };
 
       this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+    }
+    return true;
+  };
+
+  onDeleteIntent = (dialog, action, data) => {
+    if (action === "Delete") {
+      const { selected } = data;
+      const intent = this.props.intents[selected];
+      // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
+      this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
   };
@@ -120,6 +147,18 @@ class BotManager extends Component {
     return true;
   };
 
+  handleDeleteIntent = (selected = this.props.selectedIntentIndex) => {
+    // const selected = this.props.selectedIntentIndex;
+    const intent = this.props.intents[selected];
+    Zrmc.showDialog({
+      header: "Intent",
+      body: `${intent.name} Do you want to delete it ?`,
+      actions: [{ name: "Cancel" }, { name: "Delete" }],
+      onAction: this.onDeleteIntent,
+      data: { selected },
+    });
+  };
+
   handleAddIntent = (defaultValue = "", data = {}) => {
     const field = {
       defaultValue,
@@ -133,6 +172,23 @@ class BotManager extends Component {
       actions: [{ name: "Cancel" }, { name: "Create" }],
       onAction: this.onAddIntent,
       data,
+    });
+  };
+
+  handleRenameIntent = (selected = this.props.selectedIntentIndex) => {
+    const intent = this.props.intents[selected];
+    const field = {
+      defaultValue: intent.name,
+      pattern: ".+",
+      name: "Intent name",
+      error: "Wrong name",
+    };
+    Zrmc.showDialog({
+      header: "Rename intent",
+      field,
+      actions: [{ name: "Cancel" }, { name: "Rename" }],
+      onAction: this.onRenameIntent,
+      data: { selected },
     });
   };
 
@@ -217,7 +273,12 @@ class BotManager extends Component {
           className="mdl-color--white mrb-panel"
           span={2}
         >
-          <ExplorerContainer handleExportImport={this.handleExportImport} />
+          <ExplorerContainer
+            handleExportImport={this.handleExportImport}
+            handleRename={this.handleRenameIntent}
+            handleAdd={this.handleAddIntent}
+            handleDelete={this.handleDeleteIntent}
+          />
         </Cell>
       );
       panel2 = (
@@ -226,7 +287,7 @@ class BotManager extends Component {
           className="mdl-color--white mrb-panel"
           span={6}
         >
-          <IntentContainer />
+          <IntentContainer handleRename={this.handleRenameIntent} />
         </Cell>
       );
     } else {
@@ -362,12 +423,14 @@ BotManager.propTypes = {
     language: PropTypes.string,
   }),
   intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+  selectedIntentIndex: PropTypes.number.isRequired,
   selectedIntent: PropTypes.shape({ id: PropTypes.string }),
   store: PropTypes.shape({}),
   titleName: PropTypes.string.isRequired,
   appSetTitle: PropTypes.func.isRequired,
   apiGetIntentsRequest: PropTypes.func.isRequired,
   apiSendIntentRequest: PropTypes.func.isRequired,
+  apiDeleteIntentRequest: PropTypes.func.isRequired,
   apiSaveBotRequest: PropTypes.func.isRequired,
   apiImportRequest: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
@@ -396,6 +459,7 @@ const mapStateToProps = (state) => {
     isLoading,
     isSignedIn,
     selectedIntent,
+    selectedIntentIndex,
     titleName,
   };
 };
@@ -409,6 +473,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiSendIntentRequest: (botId, intent) => {
     dispatch(apiSendIntentRequest(botId, intent));
+  },
+  apiDeleteIntentRequest: (botId, intentId) => {
+    dispatch(apiDeleteIntentRequest(botId, intentId));
   },
   apiSaveBotRequest: (bot) => {
     dispatch(apiSaveBotRequest(bot));

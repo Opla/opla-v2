@@ -7,12 +7,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Zrmc, { ListItemMeta, Icon } from "zrmc";
+import { ListItemMeta, Icon } from "zrmc";
 import { ListDragComponent, SubToolbar } from "zoapp-ui";
 import {
-  apiGetIntentsRequest,
+  /* apiGetIntentsRequest,
   apiSendIntentRequest,
-  apiDeleteIntentRequest,
+  apiDeleteIntentRequest, */
   apiMoveIntentRequest,
 } from "../actions/api";
 import { appSelectIntent, appDeleteNewActions } from "../actions/app";
@@ -34,7 +34,7 @@ class ExplorerContainer extends Component {
     this.props.appSelectIntent(this.props.selectedBotId, selected);
   };
 
-  onAddIntent = (dialog, action) => {
+  /* onAddIntent = (dialog, action) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
 
@@ -49,25 +49,9 @@ class ExplorerContainer extends Component {
     }
 
     return true;
-  };
+  }; */
 
-  onRenameIntent = (dialog, action, data) => {
-    if (action === "Rename") {
-      const intentName = dialog.getFieldValue();
-      // console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
-      if (intentName === "") {
-        dialog.invalidateField();
-        return false;
-      }
-      const { selected } = data;
-      const it = this.props.intents[selected];
-      const intent = { ...it, name: intentName };
-      this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
-    }
-    return true;
-  };
-
-  onDeleteIntent = (dialog, action, data) => {
+  /* onDeleteIntent = (dialog, action, data) => {
     if (action === "Delete") {
       const { selected } = data;
       const intent = this.props.intents[selected];
@@ -75,9 +59,9 @@ class ExplorerContainer extends Component {
       this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
-  };
+  }; */
 
-  handleAddIntent = () => {
+  /* handleAddIntent = () => {
     // console.log("WIP", "ExplorerContainer.handleAddIntent");
     const field = {
       defaultValue: "",
@@ -91,30 +75,13 @@ class ExplorerContainer extends Component {
       actions: [{ name: "Cancel" }, { name: "Create" }],
       onAction: this.onAddIntent,
     });
-  };
+  }; */
 
-  handleRename = (selected = this.props.selectedIntentIndex) => {
-    const intent = this.props.intents[selected];
-    const field = {
-      defaultValue: intent.name,
-      pattern: ".+",
-      name: "Intent name",
-      error: "Wrong name",
-    };
-    Zrmc.showDialog({
-      header: "Rename intent",
-      field,
-      actions: [{ name: "Cancel" }, { name: "Rename" }],
-      onAction: this.onRenameIntent,
-      data: { selected },
-    });
-  };
-
-  handleSynchronize = () => {
+  /* handleSynchronize = () => {
     this.props.apiGetIntentsRequest(this.props.selectedBotId);
-  };
+  }; */
 
-  handleDelete = (selected = this.props.selectedIntentIndex) => {
+  /* handleDelete = (selected = this.props.selectedIntentIndex) => {
     // const selected = this.props.selectedIntentIndex;
     const intent = this.props.intents[selected];
     Zrmc.showDialog({
@@ -124,7 +91,7 @@ class ExplorerContainer extends Component {
       onAction: this.onDeleteIntent,
       data: { selected },
     });
-  };
+  }; */
 
   /* handleExportImport = () => {
     const dialog = <IODialog open store={this.props.store}
@@ -175,14 +142,14 @@ class ExplorerContainer extends Component {
               name="edit"
               onClick={(e) => {
                 e.stopPropagation();
-                this.handleRename(index);
+                this.props.handleRename(index);
               }}
             />
             <Icon
               name="remove_circle_outline"
               onClick={(e) => {
                 e.stopPropagation();
-                this.handleRename(index);
+                this.props.handleDelete(index);
               }}
             />
           </ListItemMeta>,
@@ -220,7 +187,7 @@ class ExplorerContainer extends Component {
             {
               name: "add_circle_outline",
               tooltip: "Add an intent",
-              onClick: this.handleAddIntent,
+              onClick: this.props.handleAdd,
             },
             {
               name: "cloud_circle",
@@ -260,6 +227,9 @@ ExplorerContainer.propTypes = {
   apiMoveIntentRequest: PropTypes.func.isRequired,
   appSelectIntent: PropTypes.func.isRequired,
   handleExportImport: PropTypes.func.isRequired,
+  handleAdd: PropTypes.func.isRequired,
+  handleRename: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -278,7 +248,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  apiGetIntentsRequest: (botId) => {
+  /* apiGetIntentsRequest: (botId) => {
     dispatch(apiGetIntentsRequest(botId));
   },
   apiSendIntentRequest: (botId, intent) => {
@@ -286,7 +256,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiDeleteIntentRequest: (botId, intentId) => {
     dispatch(apiDeleteIntentRequest(botId, intentId));
-  },
+  }, */
   apiMoveIntentRequest: (botId, intentId, from, to) => {
     dispatch(apiMoveIntentRequest(botId, intentId, from, to));
   },

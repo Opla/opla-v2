@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Zrmc from "zrmc";
+import Zrmc, { Icon } from "zrmc";
 import { SubToolbar } from "zoapp-ui";
 
 import IntentDetail, { displayActionEditor } from "../components/intentDetail";
@@ -388,22 +388,17 @@ class IntentContainer extends Component {
             className=""
             style={{ margin: "0px 0px 0 0px" }}
             titleName={
-              <div>
-                <div
-                  style={{
-                    float: "left",
-                    borderRight: "1px solid #ddd",
-                    paddingRight: "16px",
-                    maxWidth: "10vw",
-                    height: "36px",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  <span>{name}</span>
+              <div
+                className="intent_title"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.props.handleRename();
+                }}
+              >
+                <div>{name}</div>
+                <div className="intent_title_edit">
+                  <Icon name="edit" />
                 </div>
-                {/* toolbox */}
               </div>
             }
             actions={[
@@ -451,6 +446,7 @@ IntentContainer.propTypes = {
     id: PropTypes.string,
   }),
   newActions: PropTypes.shape({}).isRequired,
+  handleRename: PropTypes.func.isRequired,
   apiSendIntentRequest: PropTypes.func.isRequired,
   appDeleteIntentAction: PropTypes.func.isRequired,
   appSetIntentAction: PropTypes.func.isRequired,
