@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import { ListItem, ListItemMeta } from "zrmc";
 import ActionsEditable from "./actionsEditable";
 import ConditionsActionsEditable from "./conditionsActionsEditable";
-import ActionsToolbox from "./actionsToolbox";
 
 class ActionsItem extends Component {
   constructor(props) {
@@ -25,9 +24,6 @@ class ActionsItem extends Component {
     const {
       isNew,
       isCondition,
-      isSelected,
-      isIntentOutputEmpty,
-      isInput,
       index,
       containerName,
       action,
@@ -79,25 +75,6 @@ class ActionsItem extends Component {
     if (className) {
       cl = className + cl;
     }
-    let toolbox = "";
-    if (isSelected) {
-      toolbox = (
-        <div
-          style={{
-            background: "white",
-            position: "absolute",
-            top: "100%",
-            right: "0px",
-          }}
-        >
-          <ActionsToolbox
-            onChange={this.handleChangeToolbox}
-            isInput={isInput}
-            condition={isIntentOutputEmpty}
-          />
-        </div>
-      );
-    }
     return (
       <ListItem
         className={cl}
@@ -107,7 +84,12 @@ class ActionsItem extends Component {
           this.handleActionsEditableSelected(this.actionsEditableRef, index);
         }}
       >
-        <div style={{ width: "100%", overflow: "hidden" }}>
+        <div
+          style={{ width: "100%" }}
+          ref={(r) => {
+            this.ref = r;
+          }}
+        >
           {isCondition ? (
             <ConditionsActionsEditable
               containerName={this.props.containerName}
@@ -143,7 +125,6 @@ class ActionsItem extends Component {
               onDrop={onDrop}
             />
           )}
-          {toolbox}
         </div>
         {meta}
       </ListItem>
@@ -169,9 +150,6 @@ ActionsItem.propTypes = {
   onDeleteActionClick: PropTypes.func,
   style: PropTypes.shape({}),
   className: PropTypes.string,
-  isSelected: PropTypes.bool,
-  isIntentOutputEmpty: PropTypes.bool,
-  isInput: PropTypes.bool,
 };
 
 export default ActionsItem;

@@ -30,6 +30,7 @@ const IntentDetail = ({
   onDeleteActionClick,
   selectedInput,
   selectedOutput,
+  onChangeToolbox,
 }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
@@ -46,6 +47,7 @@ const IntentDetail = ({
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
+          onChangeToolbox={onChangeToolbox}
           selected={selectedInput}
         />
         <ActionsList
@@ -59,6 +61,7 @@ const IntentDetail = ({
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
+          onChangeToolbox={onChangeToolbox}
           selected={selectedOutput}
         />
         <ExpansionPanel
@@ -134,6 +137,7 @@ IntentDetail.propTypes = {
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,
+  onChangeToolbox: PropTypes.func.isRequired,
   newActions: PropTypes.shape({
     input: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),

@@ -35,6 +35,18 @@
   font-weight: 900;
 }
 
+.actionstoolbox {
+  background: #ffffffdd;
+  position: fixed;
+  top: 140px;
+  left: 244px;
+  z-index: 100;
+  height: 38px;
+  border-top: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+  border-right: 1px solid rgb(221, 221, 221);
+}
+
 .actionstoolbox-icon {
   cursor: pointer;
   color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
@@ -232,7 +244,6 @@
   /* background: rgba(85,38,130, 0.10);*/
   opacity: 1;
   cursor: pointer;
-  position: relative;
 }
 
 .addActionItem {

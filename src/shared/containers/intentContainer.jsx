@@ -18,7 +18,6 @@ import {
   appUpdateIntent,
   appSetNewActions,
 } from "../actions/app";
-import ActionsToolbox from "../components/actionsToolbox";
 
 class IntentContainer extends Component {
   constructor(props) {
@@ -365,7 +364,7 @@ class IntentContainer extends Component {
           {intent.name}
         </span>
       );
-      const { editing, toolboxFocus } = this.state;
+      /* const { editing, toolboxFocus } = this.state;
       let toolbox;
       if (editing || toolboxFocus) {
         const isInput = this.state.toolboxDisplayMode === "input";
@@ -378,7 +377,7 @@ class IntentContainer extends Component {
             condition={isIntentOutputEmpty}
           />
         );
-      }
+      } */
       return (
         <div
           ref={(node) => {
@@ -404,7 +403,7 @@ class IntentContainer extends Component {
                 >
                   <span>{name}</span>
                 </div>
-                {toolbox}
+                {/* toolbox */}
               </div>
             }
             actions={[
@@ -419,6 +418,7 @@ class IntentContainer extends Component {
             onSelect={this.handleActions}
             onAction={this.handleDoActions}
             onSelectActionsComponent={this.handleSelectActionsComponent}
+            onChangeToolbox={this.handleChangeToolbox}
             onNewActionsChange={this.handleNewActionsChange}
             onDeleteActionClick={this.handleDeleteActionClick}
             selectedInput={this.state.selectedInput}
