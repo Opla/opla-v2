@@ -25,6 +25,11 @@
   padding-right: 8px;
 }
 
+.mrb-panel-header__actions > div > button {
+  margin-top: -12px;
+  margin-left: 12px;
+}
+
 .mrb-panel-header__actions > div > i {
  cursor: pointer;
  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
