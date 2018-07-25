@@ -32,6 +32,7 @@
 
 .mrb-panel-header-title {
   font-weight: 900;
+  font-size: 16px;
 }
 
 .intent_title {
@@ -43,7 +44,6 @@
   text-overflow: ellipsis;
   display: flex;
   cursor: pointer;
-  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
 }
 
 .intent_title:hover .intent_title_edit {
