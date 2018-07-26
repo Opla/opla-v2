@@ -70,7 +70,7 @@ const IntentDetail = ({
               <Icon
                 name="question_answer"
                 style={{
-                  color: "#999",
+                  color: "rgba(0,0,0,.87)",
                   paddingTop: "12px",
                   paddingRight: "4px",
                   marginLeft: "-8px",

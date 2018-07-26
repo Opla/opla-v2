@@ -172,6 +172,7 @@ class SandboxContainer extends Component {
               <div>{name}</div>
             </div>
           }
+          icons={[{ name: "highlight_off", onClick: this.handleReset }]}
           menu={{
             items: [
               { name: "Context", onSelect: this.handleMenu },
@@ -185,14 +186,7 @@ class SandboxContainer extends Component {
             ],
             align: "right",
           }}
-          className="m"
-          style={{
-            margin: "0px",
-            borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
-            borderBottom: "none",
-            background: "#383838",
-            color: "white",
-          }}
+          className="mrb-panel-header-dark"
         />
         {this.renderMessenger(messages, users, this.props.intents)}
       </div>

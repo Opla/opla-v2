@@ -193,7 +193,7 @@ class ActionsList extends Component {
         ? "List of sentences, events or attachments that will trigger this intent."
         : "One of below items is send to the user if this intent is activated.";
     const st = {
-      color: "#999",
+      color: "rgba(0,0,0,.87)",
       paddingTop: "12px",
       paddingRight: "4px",
       marginLeft: "-8px",
