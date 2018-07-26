@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Zrmc, { Icon } from "zrmc";
 import { SubToolbar } from "zoapp-ui";
-
 import IntentDetail, { displayActionEditor } from "../components/intentDetail";
 import { apiSendIntentRequest } from "../actions/api";
 import {
@@ -18,10 +17,15 @@ import {
   appUpdateIntent,
   appSetNewActions,
 } from "../actions/app";
+import IntentTools from "../utils/intentsTools";
 
 class IntentContainer extends Component {
   constructor(props) {
     super(props);
+    let { selectedIntent } = this.props;
+    if (!selectedIntent || !selectedIntent.id) {
+      selectedIntent = IntentTools.generateFirstIntent();
+    }
     this.state = {
       editing: false,
       toolboxFocus: false,
@@ -29,6 +33,7 @@ class IntentContainer extends Component {
       displayCondition: false,
       selectedInput: -1,
       selectedOutput: -1,
+      selectedIntent,
     };
     this.selectedActionsComponent = null;
   }
@@ -56,12 +61,22 @@ class IntentContainer extends Component {
 
   componentDidUpdate(prevProps) {
     // reset when a new intent is selected
-    if (prevProps.selectedIntent.id !== this.props.selectedIntent.id) {
-      this.reset();
+    let { selectedIntent } = this.props;
+    if (!selectedIntent || !selectedIntent.id) {
+      selectedIntent = IntentTools.generateFirstIntent();
+    }
+    if (
+      prevProps.selectedIntent &&
+      this.props.selectedIntent &&
+      prevProps.selectedIntent.id !== this.props.selectedIntent.id
+    ) {
+      this.reset({ selectedIntent });
+    } else if (prevProps.selectedIntent !== this.props.selectedIntent) {
+      this.reset({ selectedIntent });
     }
   }
 
-  reset() {
+  reset(moreState = {}) {
     this.selectedAction = undefined;
     this.actionContainer = undefined;
     this.actionType = undefined;
@@ -70,6 +85,7 @@ class IntentContainer extends Component {
       displayCondition: false,
       selectedInput: -1,
       selectedOutput: -1,
+      ...moreState,
     });
   }
 
@@ -86,7 +102,7 @@ class IntentContainer extends Component {
 
   handleChangeAction = (text, name, value) => {
     let actionValue = null;
-    const intent = this.props.selectedIntent;
+    const intent = this.state.selectedIntent;
     let { actionType } = this;
     if (actionType === "condition") {
       if (name === null && (!intent.output || intent.output.length === 0)) {
@@ -223,8 +239,8 @@ class IntentContainer extends Component {
   };
 
   handleSaveIntent = () => {
-    if (this.props.selectedIntent) {
-      const intent = { ...this.props.selectedIntent };
+    if (this.state.selectedIntent) {
+      const intent = { ...this.state.selectedIntent };
       if (intent.notSaved) {
         delete intent.notSaved;
         this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
@@ -250,7 +266,7 @@ class IntentContainer extends Component {
     this.actionContainer = name;
     this.actionType = type;
     this.selectedAction = index;
-    const intent = this.props.selectedIntent;
+    const intent = this.state.selectedIntent;
     let title = name;
     let parameters;
     let action;
@@ -353,83 +369,75 @@ class IntentContainer extends Component {
   };
 
   render() {
-    const intent = this.props.selectedIntent;
+    const intent = this.state.selectedIntent;
     let name = "";
-    if (intent) {
-      const style = intent.notSaved ? {} : { display: "none" };
-      name = (
-        <span>
-          <span className="red_dot" style={style} />
-          <span style={{ color: "#bbb" }}>#</span>
-          {intent.name}
-        </span>
-      );
-      /* const { editing, toolboxFocus } = this.state;
-      let toolbox;
-      if (editing || toolboxFocus) {
-        const isInput = this.state.toolboxDisplayMode === "input";
-        const isIntentOutputEmpty =
-          !intent || !intent.output || intent.output.length === 0;
-        toolbox = (
-          <ActionsToolbox
-            onChange={this.handleChangeToolbox}
-            isInput={isInput}
-            condition={isIntentOutputEmpty}
-          />
-        );
-      } */
-      return (
-        <div
-          ref={(node) => {
-            this.node = node;
-          }}
-        >
-          <SubToolbar
-            className=""
-            style={{ margin: "0px 0px 0 0px" }}
-            titleName={
-              <div
-                className="intent_title"
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.props.handleRename();
-                }}
-              >
-                <div>{name}</div>
-                <div className="intent_title_edit">
-                  <Icon name="edit" />
-                </div>
-              </div>
-            }
-            actions={[
-              { name: "help", onClick: () => {} },
-              { name: "save", onClick: this.handleSaveIntent },
-            ]}
-          />
-          <IntentDetail
-            intent={intent}
-            newActions={this.props.newActions}
-            displayCondition={this.state.displayCondition}
-            onSelect={this.handleActions}
-            onAction={this.handleDoActions}
-            onSelectActionsComponent={this.handleSelectActionsComponent}
-            onChangeToolbox={this.handleChangeToolbox}
-            onNewActionsChange={this.handleNewActionsChange}
-            onDeleteActionClick={this.handleDeleteActionClick}
-            selectedInput={this.state.selectedInput}
-            selectedOutput={this.state.selectedOutput}
-          />
-        </div>
-      );
+    const style = intent.notSaved ? {} : { display: "none" };
+    let buttonName = "Save";
+    if (!intent.id) {
+      buttonName = "Create";
     }
-    return (
-      <div>
-        <SubToolbar
-          titleIcon="question_answer"
-          titleName={name}
-          icons={[{ name: "file_upload", onClick: this.handleSaveIntent }]}
+    name = (
+      <span>
+        <span className="red_dot" style={style} />
+        <span style={{ color: "#bbb" }}>#</span>
+        {intent.name}
+      </span>
+    );
+    /* const { editing, toolboxFocus } = this.state;
+    let toolbox;
+    if (editing || toolboxFocus) {
+      const isInput = this.state.toolboxDisplayMode === "input";
+      const isIntentOutputEmpty =
+        !intent || !intent.output || intent.output.length === 0;
+      toolbox = (
+        <ActionsToolbox
+          onChange={this.handleChangeToolbox}
+          isInput={isInput}
+          condition={isIntentOutputEmpty}
         />
-        <div>You need to create an Intent </div>
+      );
+    } */
+    return (
+      <div
+        ref={(node) => {
+          this.node = node;
+        }}
+      >
+        <SubToolbar
+          className=""
+          style={{ margin: "0px 0px 0 0px" }}
+          titleName={
+            <div
+              className="intent_title"
+              onClick={(e) => {
+                e.preventDefault();
+                this.props.handleRename();
+              }}
+            >
+              <div>{name}</div>
+              <div className="intent_title_edit">
+                <Icon name="edit" />
+              </div>
+            </div>
+          }
+          actions={[
+            { name: "help", onClick: () => {} },
+            { name: buttonName, onClick: this.handleSaveIntent },
+          ]}
+        />
+        <IntentDetail
+          intent={intent}
+          newActions={this.props.newActions}
+          displayCondition={this.state.displayCondition}
+          onSelect={this.handleActions}
+          onAction={this.handleDoActions}
+          onSelectActionsComponent={this.handleSelectActionsComponent}
+          onChangeToolbox={this.handleChangeToolbox}
+          onNewActionsChange={this.handleNewActionsChange}
+          onDeleteActionClick={this.handleDeleteActionClick}
+          selectedInput={this.state.selectedInput}
+          selectedOutput={this.state.selectedOutput}
+        />
       </div>
     );
   }

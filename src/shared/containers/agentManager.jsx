@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Zrmc, { Grid, Inner, Cell, Button } from "zrmc";
+import Zrmc, { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
 import { appSetTitle } from "zoapp-front/actions/app";
@@ -26,6 +26,7 @@ import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
 
+/*
 const infoStyleD = {
   fontSize: "16px",
   fontWeight: "400",
@@ -34,6 +35,7 @@ const infoStyleD = {
   lineHeight: "1.1",
   textAlign: "left",
 };
+*/
 
 class BotManager extends Component {
   constructor(props) {
@@ -288,106 +290,29 @@ class BotManager extends Component {
     }
     let panel1 = null;
     let panel2 = null;
-    if (this.props.intents.length > 0) {
-      panel1 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
-          span={2}
-        >
-          <ExplorerContainer
-            handleExportImport={this.handleExportImport}
-            handleRename={this.handleRenameIntent}
-            handleAdd={this.handleAddIntent}
-            handleDelete={this.handleDeleteIntent}
-          />
-        </Cell>
-      );
-      panel2 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
-          span={6}
-        >
-          <IntentContainer handleRename={this.handleRenameIntent} />
-        </Cell>
-      );
-    } else {
-      panel1 = (
-        <Cell style={{ margin: "0px" }} span={8}>
-          <div className="mrb-panel mrb-panel-empty" style={{ height: "80%" }}>
-            <div style={{ height: "30%", ...infoStyleD }}>
-              <div style={{ /* margin: "48px 0", */ textAlign: "left" }}>
-                <h2>Get Started</h2>
-                <p>
-                  This assistant has no data. You need to fill it with intents
-                  to reply to inputs from end-users.<br />
-                  To do so you could create an intent. Or you could use the
-                  playground to help you to create them.<br />
-                </p>
-                <div
-                  style={{
-                    margin: "0",
-                    padding: "4px",
-                    backgroundColor: "#FFFF8D",
-                  }}
-                >
-                  For example:
-                  <code>
-                    send &quot;Hello&quot; using Playground&apos;s textfield at
-                    the bottom
-                  </code>
-                </div>
-              </div>
-            </div>
-            <div style={infoStyleD}>
-              <div>
-                <Button
-                  raised
-                  style={{ marginRight: "32px" }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.handleAddIntent();
-                  }}
-                >
-                  Create intent
-                </Button>
-                <Button
-                  raised
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.handleExportImport(true);
-                  }}
-                >
-                  Import intents
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div
-            className="mrb-panel"
-            style={{ height: "18.05%", backgroundColor: "#FFFF8D" }}
-          >
-            <div
-              style={{
-                margin: "16px",
-                padding: "8px",
-                textAlign: "left",
-                backgroundColor: "#FFFF8D",
-              }}
-            >
-              An <b>assistant</b> has a list of intents.<br />An <b>intent</b>
-              is an expected behaviour from the end-user.<br />
-              Assistant&apos;s <b>NLP</b> (Natural Language Processing) engine
-              will use that list to match intent&apos;s <b>input</b>
-              with end-user&apos;s input. If a match is found assistant responds
-              using selected intent&apos;s <b>output</b>.
-            </div>
-          </div>
-        </Cell>
-      );
-      panel2 = "";
-    }
+    panel1 = (
+      <Cell
+        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+        className="mdl-color--white mrb-panel"
+        span={2}
+      >
+        <ExplorerContainer
+          handleExportImport={this.handleExportImport}
+          handleRename={this.handleRenameIntent}
+          handleAdd={this.handleAddIntent}
+          handleDelete={this.handleDeleteIntent}
+        />
+      </Cell>
+    );
+    panel2 = (
+      <Cell
+        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+        className="mdl-color--white mrb-panel"
+        span={6}
+      >
+        <IntentContainer handleRename={this.handleRenameIntent} />
+      </Cell>
+    );
     const intentsEx = [];
     if (Array.isArray(this.props.intents)) {
       this.props.intents.forEach((intent) => {

@@ -34,77 +34,12 @@ class ExplorerContainer extends Component {
     this.props.appSelectIntent(this.props.selectedBotId, selected);
   };
 
-  /* onAddIntent = (dialog, action) => {
-    if (action === "Create") {
-      const intentName = dialog.getFieldValue();
-
-      if (intentName === "") {
-        dialog.invalidateField();
-        return false;
-      }
-
-      const intent = { name: intentName };
-
-      this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
-    }
-
-    return true;
-  }; */
-
-  /* onDeleteIntent = (dialog, action, data) => {
-    if (action === "Delete") {
-      const { selected } = data;
-      const intent = this.props.intents[selected];
-      // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
-      this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
-    }
-    return true;
-  }; */
-
-  /* handleAddIntent = () => {
-    // console.log("WIP", "ExplorerContainer.handleAddIntent");
-    const field = {
-      defaultValue: "",
-      pattern: ".+",
-      name: "Intent name",
-      error: "Wrong name",
-    };
-    Zrmc.showDialog({
-      header: "Add new intent",
-      field,
-      actions: [{ name: "Cancel" }, { name: "Create" }],
-      onAction: this.onAddIntent,
-    });
-  }; */
-
-  /* handleSynchronize = () => {
-    this.props.apiGetIntentsRequest(this.props.selectedBotId);
-  }; */
-
-  /* handleDelete = (selected = this.props.selectedIntentIndex) => {
-    // const selected = this.props.selectedIntentIndex;
-    const intent = this.props.intents[selected];
-    Zrmc.showDialog({
-      header: "Intent",
-      body: `${intent.name} Do you want to delete it ?`,
-      actions: [{ name: "Cancel" }, { name: "Delete" }],
-      onAction: this.onDeleteIntent,
-      data: { selected },
-    });
-  }; */
-
-  /* handleExportImport = () => {
-    const dialog = <IODialog open store={this.props.store}
-      onClosed={this.handleCloseDialog} accept={"application/json"}
-      onDownload={this.props.onDownloadData} onImport={this.props.onImportData} />;
-    Zrmc.showDialog(dialog);
-  } */
-
   render() {
     const selected = this.props.selectedIntentIndex;
     const name = "Intents";
     const items = [];
-    if (this.props.intents) {
+    let list = "";
+    if (this.props.intents && this.props.intents.length > 0) {
       this.props.intents.forEach((intent, index) => {
         const { id } = intent;
         const style = intent.notSaved
@@ -156,22 +91,19 @@ class ExplorerContainer extends Component {
         );
         items.push({ id, name: n });
       });
+    } else {
+      items.push({ id: "noIntent", name: "Create an intent" });
     }
-    /*
-          menu={{
-            items: [
-              { name: "Add intent", onSelect: this.handleAddIntent },
-              { name: "Rename", onSelect: this.handleRename },
-              { name: "Delete", onSelect: this.handleDelete },
-              {
-                name: "Export / Import",
-                onSelect: () => {
-                  this.props.handleExportImport();
-                },
-              },
-            ],
-          }}
-    */
+    list = (
+      <ListDragComponent
+        style={{ backgroundColor: "rgb(252, 252, 252)" }}
+        className="list-content"
+        items={items}
+        selectedItem={selected}
+        onSelect={this.onSelectIntent}
+        onDrop={this.onDropIntent}
+      />
+    );
     return (
       <div
         style={{
@@ -197,14 +129,7 @@ class ExplorerContainer extends Component {
           ]}
         />
         <div className="list-box" style={{ margin: "0" }}>
-          <ListDragComponent
-            style={{ backgroundColor: "rgb(252, 252, 252)" }}
-            className="list-content"
-            items={items}
-            selectedItem={selected}
-            onSelect={this.onSelectIntent}
-            onDrop={this.onDropIntent}
-          />
+          {list}
         </div>
       </div>
     );
@@ -212,14 +137,13 @@ class ExplorerContainer extends Component {
 }
 
 ExplorerContainer.defaultProps = {
-  intents: [],
   selectedIntentIndex: 0,
   selectedBotId: null,
 };
 
 ExplorerContainer.propTypes = {
   selectedBotId: PropTypes.string,
-  intents: PropTypes.arrayOf(PropTypes.shape({})),
+  intents: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedIntentIndex: PropTypes.number,
   apiMoveIntentRequest: PropTypes.func.isRequired,
   appSelectIntent: PropTypes.func.isRequired,
@@ -232,7 +156,7 @@ ExplorerContainer.propTypes = {
 const mapStateToProps = (state) => {
   const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  const intents = state.app.intents ? state.app.intents : null;
+  const intents = state.app.intents ? [...state.app.intents] : null;
   const { admin } = state.app;
   const bot = admin ? admin.bots[0] : null;
 
