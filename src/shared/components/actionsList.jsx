@@ -238,7 +238,7 @@ class ActionsList extends Component {
       <ExpansionPanel
         label={title}
         className="mdl-color--white"
-        style={{ margin: "8px" }}
+        style={{ margin: "12px" }}
       >
         {toolbox}
         {addContent}

@@ -26,17 +26,6 @@ import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
 
-/*
-const infoStyleD = {
-  fontSize: "16px",
-  fontWeight: "400",
-  color: "#666",
-  padding: "16px",
-  lineHeight: "1.1",
-  textAlign: "left",
-};
-*/
-
 class BotManager extends Component {
   constructor(props) {
     super(props);
@@ -336,8 +325,12 @@ class BotManager extends Component {
             {panel1}
             {panel2}
             <Cell
-              style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-              className="mdl-color--white mdl-shadow--2dp"
+              style={{
+                margin: "0px",
+                backgroundColor: "#f2f2f2",
+                zIndex: "10",
+              }}
+              className="mdc-elevation--z4"
               span={4}
             >
               <PlaygroundContainer

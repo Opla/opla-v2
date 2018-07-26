@@ -18,6 +18,7 @@ import Zrmc, {
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
+import HelpPanel from "../components/helpPanel";
 
 const IntentDetail = ({
   intent,
@@ -37,6 +38,7 @@ const IntentDetail = ({
   return (
     <div className="mrb-action-panel list-box">
       <div className="list-content">
+        <HelpPanel index={0} />
         <ActionsList
           name="input"
           actions={input}
@@ -79,7 +81,7 @@ const IntentDetail = ({
             </div>
           }
           className="mdl-color--white"
-          style={{ margin: "8px" }}
+          style={{ margin: "12px" }}
           collapsed
         >
           <List>

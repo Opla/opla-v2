@@ -179,10 +179,46 @@
   display: inline-block;
 }
 
- .fileInput {
-   overflow: hidden;
-   position: relative;
- }
+.help_panel {
+  height: 260px;
+  background: #e0f7fa;
+  margin: 12px;
+}
+
+.help_panel_header {
+  display: flex;
+  padding: 8px;
+  flex-direction: row-reverse;
+}
+
+.help_panel_title {
+  display: flex;
+  margin-right: auto;
+  margin-left: 8px;
+  line-height: 24px;
+  font-size: 15px;
+  font-weight: 900;
+  color: rgba(0,0,0,.87);
+}
+
+.help_panel_title > i {
+  padding-right: 4px;
+  margin-left: -8px;
+}
+
+.help_panel_header > div {
+  height: 24px;
+}
+
+.help_panel_header > div > i {
+  height: 24px;
+  color: rgba(0,0,0,.54);
+}
+
+.fileInput {
+  overflow: hidden;
+  position: relative;
+}
  
  .fileInput [type=file] {
    cursor: inherit;
