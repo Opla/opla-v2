@@ -69,36 +69,33 @@ class BotManager extends Component {
     return true;
   };
 
+  addIntent(intentName, data) {
+    let { input } = data;
+    if (!input) {
+      input = [intentName];
+    }
+    let { output } = data;
+    if (!output) {
+      // TODO create a better output
+      let i = input[0];
+      const il = i.toLowerCase();
+      if (!(il === "hello" || il === "hi")) {
+        i = "I don't understand.";
+      }
+      output = [i];
+    }
+    const intent = {
+      input,
+      output,
+      name: intentName,
+    };
+    this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+  }
+
   onAddIntent = (dialog, action, data) => {
     if (action === "Create") {
       const intentName = dialog.getFieldValue();
-
-      if (intentName === "") {
-        dialog.invalidateField();
-        return false;
-      }
-
-      let { input } = data;
-      if (!input) {
-        input = [intentName];
-      }
-      let { output } = data;
-      if (!output) {
-        // TODO create a better output
-        let i = input[0];
-        const il = i.toLowerCase();
-        if (!(il === "hello" || il === "hi")) {
-          i = "I don't understand.";
-        }
-        output = [i];
-      }
-      const intent = {
-        input,
-        output,
-        name: intentName,
-      };
-
-      this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+      this.addIntent(intentName, data);
     }
     return true;
   };
@@ -159,8 +156,32 @@ class BotManager extends Component {
     });
   };
 
-  handleAddIntent = (defaultValue = "", data = {}) => {
-    const field = {
+  findIntentName(name) {
+    const { intents } = this.props;
+
+    let result = false;
+    if (intents && intents.length > 0) {
+      intents.forEach((intent) => {
+        if (intent.name.toLowerCase() === name) {
+          result = true;
+        }
+      });
+    }
+    return result;
+  }
+
+  generateIntentName() {
+    let name = "Intent";
+    let index = 1;
+    while (this.findIntentName(name.toLowerCase())) {
+      name = `Intent ${index}`;
+      index += 1;
+    }
+    return name;
+  }
+
+  handleAddIntent = (defaultValue = this.generateIntentName(), data = {}) => {
+    /* const field = {
       defaultValue,
       pattern: ".+",
       name: "Intent name",
@@ -172,7 +193,8 @@ class BotManager extends Component {
       actions: [{ name: "Cancel" }, { name: "Create" }],
       onAction: this.onAddIntent,
       data,
-    });
+    }); */
+    this.addIntent(defaultValue, data);
   };
 
   handleRenameIntent = (selected = this.props.selectedIntentIndex) => {

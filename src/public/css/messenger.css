@@ -154,7 +154,6 @@
   padding: 4px;
   border: 1px solid #ccc;
   min-height: 24px;
-  height: 44px;
 }
 
 .message.error .text-wrapper:before {
@@ -296,7 +295,6 @@
 .message-body-error {
   color: #999;
   font-style: italic;
-  margin-bottom: 16px;
   cursor: text;
 }
 
