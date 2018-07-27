@@ -17,6 +17,10 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+.mdc-toolbar__menu-icon {
+  color: var(--mdc-theme-primary,#6200ee);
+}
+
 .mrb-subheader-menu {
  cursor: pointer;
 }
@@ -328,6 +332,10 @@
  
  .mdc-list-item--two-line .mdl-list__item-primary-content {
    height: initial;
+ }
+
+ .explorer .mdc-list-item__meta {
+   min-width: 48px;
  }
 
  .actionConditional {

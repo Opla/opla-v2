@@ -128,7 +128,7 @@ class ExplorerContainer extends Component {
             },
           ]}
         />
-        <div className="list-box" style={{ margin: "0" }}>
+        <div className="list-box explorer" style={{ margin: "0" }}>
           {list}
         </div>
       </div>
