@@ -23,8 +23,10 @@ class IntentContainer extends Component {
   constructor(props) {
     super(props);
     let { selectedIntent } = this.props;
+    let displayHelp = -1;
     if (!selectedIntent || !selectedIntent.id) {
       selectedIntent = IntentTools.generateFirstIntent();
+      displayHelp = 0;
     }
     this.state = {
       editing: false,
@@ -34,6 +36,7 @@ class IntentContainer extends Component {
       selectedInput: -1,
       selectedOutput: -1,
       selectedIntent,
+      displayHelp,
     };
     this.selectedActionsComponent = null;
   }
@@ -62,17 +65,19 @@ class IntentContainer extends Component {
   componentDidUpdate(prevProps) {
     // reset when a new intent is selected
     let { selectedIntent } = this.props;
+    let { displayHelp } = this.state;
     if (!selectedIntent || !selectedIntent.id) {
       selectedIntent = IntentTools.generateFirstIntent();
+      displayHelp = 0;
     }
     if (
       prevProps.selectedIntent &&
       this.props.selectedIntent &&
       prevProps.selectedIntent.id !== this.props.selectedIntent.id
     ) {
-      this.reset({ selectedIntent });
+      this.reset({ selectedIntent, displayHelp });
     } else if (prevProps.selectedIntent !== this.props.selectedIntent) {
-      this.reset({ selectedIntent });
+      this.reset({ selectedIntent, displayHelp });
     }
   }
 
@@ -341,6 +346,24 @@ class IntentContainer extends Component {
     }
   };
 
+  handleHelp = (help) => {
+    let { displayHelp } = this.state;
+    if (help === "input") {
+      displayHelp = 1;
+    } else if (help === "output") {
+      displayHelp = 2;
+    } else if (help === "advanced") {
+      displayHelp = 3;
+    } else if (help === "input_actions") {
+      displayHelp = 4;
+    } else if (help === "output_actions") {
+      displayHelp = 5;
+    } else {
+      displayHelp = -1;
+    }
+    this.setState({ displayHelp });
+  };
+
   // mode: "", "input" or "output"
   updateToolboxDisplay(editing, mode = "") {
     if (this.state.editing !== editing || this.state.mode !== mode) {
@@ -383,6 +406,10 @@ class IntentContainer extends Component {
         {intent.name}
       </span>
     );
+    let action = null;
+    if (intent.notSaved) {
+      action = [{ name: buttonName, onClick: this.handleSaveIntent }];
+    }
     /* const { editing, toolboxFocus } = this.state;
     let toolbox;
     if (editing || toolboxFocus) {
@@ -420,17 +447,16 @@ class IntentContainer extends Component {
               </div>
             </div>
           }
-          actions={[
-            { name: "help", onClick: () => {} },
-            { name: buttonName, onClick: this.handleSaveIntent },
-          ]}
+          actions={action}
         />
         <IntentDetail
           intent={intent}
           newActions={this.props.newActions}
+          displayHelp={this.state.displayHelp}
           displayCondition={this.state.displayCondition}
           onSelect={this.handleActions}
           onAction={this.handleDoActions}
+          onHelp={this.handleHelp}
           onSelectActionsComponent={this.handleSelectActionsComponent}
           onChangeToolbox={this.handleChangeToolbox}
           onNewActionsChange={this.handleNewActionsChange}

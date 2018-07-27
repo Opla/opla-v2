@@ -24,8 +24,10 @@ const IntentDetail = ({
   intent,
   newActions,
   displayCondition,
+  displayHelp,
   onSelect,
   onAction,
+  onHelp,
   onSelectActionsComponent,
   onNewActionsChange,
   onDeleteActionClick,
@@ -35,16 +37,21 @@ const IntentDetail = ({
 }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
+  let help = "";
+  if (displayHelp > -1) {
+    help = <HelpPanel index={displayHelp} onHelp={onHelp} />;
+  }
   return (
     <div className="mrb-action-panel list-box">
       <div className="list-content">
-        <HelpPanel index={0} />
+        {help}
         <ActionsList
           name="input"
           actions={input}
           newAction={newActions.input}
           onSelect={onSelect}
           onAction={onAction}
+          onHelp={onHelp}
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
@@ -59,6 +66,7 @@ const IntentDetail = ({
           newAction={newActions.output}
           onSelect={onSelect}
           onAction={onAction}
+          onHelp={onHelp}
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
@@ -78,6 +86,14 @@ const IntentDetail = ({
                   marginLeft: "-8px",
                 }}
               />Advanced
+              <Icon
+                name="help"
+                className="help_icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onHelp("advanced");
+                }}
+              />
             </div>
           }
           className="mdl-color--white"
@@ -136,6 +152,7 @@ IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
   onSelect: PropTypes.func.isRequired,
   onAction: PropTypes.func.isRequired,
+  onHelp: PropTypes.func.isRequired,
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,
@@ -145,6 +162,7 @@ IntentDetail.propTypes = {
     output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   }).isRequired,
   displayCondition: PropTypes.bool,
+  displayHelp: PropTypes.number.isRequired,
   selectedInput: PropTypes.number,
   selectedOutput: PropTypes.number,
 };

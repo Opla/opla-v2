@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { List, Icon } from "zrmc";
-import { ExpansionPanel, Tooltip } from "zoapp-ui";
+import { ExpansionPanel } from "zoapp-ui";
 import ActionsItem from "./actionsItem";
 import ActionsToolbox from "./actionsToolbox";
 
@@ -92,6 +92,7 @@ class ActionsList extends Component {
       onDrop,
       onSelectActionsComponent,
       onChangeToolbox,
+      onHelp,
     } = this.props;
     let contentList;
     const isActionsEmpty = !actions || actions.length === 0;
@@ -188,10 +189,6 @@ class ActionsList extends Component {
     } else {
       contentList = <List style={s} />;
     }
-    const tooltip =
-      name === "input"
-        ? "List of sentences, events or attachments that will trigger this intent."
-        : "One of below items is send to the user if this intent is activated.";
     const st = {
       color: "rgba(0,0,0,.87)",
       paddingTop: "12px",
@@ -207,12 +204,18 @@ class ActionsList extends Component {
       st.backgroundPositionX = "2px";
     }
     const title = (
-      <Tooltip label={tooltip}>
-        <div style={{ display: "flex", fontWeight: "900" }}>
-          <Icon name="account_circle" style={st} />
-          {name}
-        </div>
-      </Tooltip>
+      <div style={{ display: "flex", fontWeight: "900" }}>
+        <Icon name="account_circle" style={st} />
+        {name}
+        <Icon
+          name="help"
+          className="help_icon"
+          onClick={(e) => {
+            onHelp(name);
+            e.stopPropagation();
+          }}
+        />
+      </div>
     );
     let toolbox = "";
     if (isSelected) {
@@ -253,6 +256,7 @@ ActionsList.defaultProps = {
   onSelect: null,
   onDrop: null,
   onAction: () => {},
+  onHelp: () => {},
   intentId: null,
   onSelectActionsComponent: () => {},
   onNewActionsChange: () => {},
@@ -267,6 +271,7 @@ ActionsList.propTypes = {
   onSelect: PropTypes.func,
   onDrop: PropTypes.func,
   onAction: PropTypes.func,
+  onHelp: PropTypes.func,
   displayCondition: PropTypes.bool,
   intentId: PropTypes.string,
   newAction: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),

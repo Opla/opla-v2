@@ -183,6 +183,23 @@
   display: inline-block;
 }
 
+.help_icon {
+  margin-top: 12px;
+  margin-left: 8px;
+  height: 24px;
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+  cursor: pointer;
+  opacity: 0;
+}
+
+.mrb-subheader:hover .help_icon {
+  opacity: 1;
+}
+
+.help_icon:hover {
+  color: rgba(85,38,130);
+}
+
 .help_panel {
   height: 260px;
   background: #e0f7fa;
@@ -193,6 +210,17 @@
   display: flex;
   padding: 8px;
   flex-direction: row-reverse;
+}
+
+.help_panel_bubble {
+  width: 22px;
+  height: 22px;
+  background-color: rgba(0,0,0,.87);
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  margin-left: -6px;
+  margin-right: 4px;
 }
 
 .help_panel_title {
