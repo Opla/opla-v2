@@ -39,6 +39,9 @@ module.exports = merge(commonConfig, {
     lazy: false,
     port: 8080,
     publicPath: "/",
+    allowedHosts: [
+      '.localtunnel.me'
+    ]
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
