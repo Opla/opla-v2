@@ -13,36 +13,51 @@ import Zrmc, {
   ListItemMeta,
   TextField,
   Button,
+  Icon,
 } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
 import ActionEditor from "../components/actionEditor";
+import HelpPanel from "../components/helpPanel";
 
 const IntentDetail = ({
   intent,
   newActions,
   displayCondition,
+  displayHelp,
   onSelect,
   onAction,
+  onHelp,
   onSelectActionsComponent,
   onNewActionsChange,
   onDeleteActionClick,
+  selectedInput,
+  selectedOutput,
+  onChangeToolbox,
 }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
+  let help = "";
+  if (displayHelp > -1) {
+    help = <HelpPanel index={displayHelp} onHelp={onHelp} />;
+  }
   return (
     <div className="mrb-action-panel list-box">
       <div className="list-content">
+        {help}
         <ActionsList
           name="input"
           actions={input}
           newAction={newActions.input}
           onSelect={onSelect}
           onAction={onAction}
+          onHelp={onHelp}
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
+          onChangeToolbox={onChangeToolbox}
+          selected={selectedInput}
         />
         <ActionsList
           name="output"
@@ -51,16 +66,38 @@ const IntentDetail = ({
           newAction={newActions.output}
           onSelect={onSelect}
           onAction={onAction}
+          onHelp={onHelp}
           intentId={intent.id}
           onSelectActionsComponent={onSelectActionsComponent}
           onNewActionsChange={onNewActionsChange}
           onDeleteActionClick={onDeleteActionClick}
+          onChangeToolbox={onChangeToolbox}
+          selected={selectedOutput}
         />
         <ExpansionPanel
-          label="Parameters"
+          label={
+            <div style={{ display: "flex", fontWeight: "900" }}>
+              <Icon
+                name="question_answer"
+                style={{
+                  color: "rgba(0,0,0,.87)",
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+              />Advanced
+              <Icon
+                name="help"
+                className="help_icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onHelp("advanced");
+                }}
+              />
+            </div>
+          }
           className="mdl-color--white"
-          style={{ margin: "8px" }}
-          elevation={0}
+          style={{ margin: "12px" }}
           collapsed
         >
           <List>
@@ -115,14 +152,19 @@ IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
   onSelect: PropTypes.func.isRequired,
   onAction: PropTypes.func.isRequired,
+  onHelp: PropTypes.func,
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,
+  onChangeToolbox: PropTypes.func,
   newActions: PropTypes.shape({
     input: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
     output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   }).isRequired,
   displayCondition: PropTypes.bool,
+  displayHelp: PropTypes.number,
+  selectedInput: PropTypes.number,
+  selectedOutput: PropTypes.number,
 };
 
 export default IntentDetail;

@@ -7,11 +7,12 @@ exports[`components/intentDetail can render intent with special characters corre
   <div
     className="list-content"
   >
+    
     <div
-      className="mrb-sublist mdl-color--white"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
       style={
         Object {
-          "margin": "8px",
+          "margin": "12px",
         }
       }
     >
@@ -68,29 +69,33 @@ exports[`components/intentDetail can render intent with special characters corre
               style={
                 Object {
                   "display": "flex",
+                  "fontWeight": "900",
                 }
               }
             >
+              <i
+                className="material-icons"
+                style={
+                  Object {
+                    "color": "rgba(0,0,0,.87)",
+                    "marginLeft": "-8px",
+                    "paddingRight": "4px",
+                    "paddingTop": "12px",
+                  }
+                }
+              >
+                account_circle
+              </i>
               input
-              <div
-                className="mdc-tooltype"
+              <i
+                className="help_icon material-icons"
+                onClick={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex="0"
               >
-                <i
-                  className="material-icons"
-                  style={
-                    Object {
-                      "color": "#ddd",
-                      "paddingLeft": "16px",
-                      "paddingTop": "12px",
-                    }
-                  }
-                >
-                  help_outline
-                </i>
-                <span>
-                  List of sentences, events or attachments that will trigger this intent.
-                </span>
-              </div>
+                help
+              </i>
             </div>
           </span>
           <span
@@ -113,85 +118,94 @@ exports[`components/intentDetail can render intent with special characters corre
           }
         }
       >
-        <ul
-          className="mdc-list"
-        />
+        
         <li
-          className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+          className="addActionItem  onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
           style={
             Object {
-              "border": "1px solid rgba(0, 0, 0, 0.2)",
-              "color": "black",
-              "margin": "0 8px",
-              "minHeight": "40px",
+              "color": "rgb(0, 0, 0)",
             }
           }
         >
-          <i
-            aria-hidden="true"
-            className="mdc-list-item__graphic material-icons"
-          >
-            format_quote
-          </i>
           <div
-            aria-label="Add an input sentence"
-            className="contenteditable"
-            id="ae_content"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            onKeyPress={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            spellCheck={false}
             style={
               Object {
-                "alignItems": "center",
-                "display": "flex",
-                "flex": 1,
-                "minHeight": "40px",
+                "width": "100%",
               }
             }
-            tabIndex={0}
           >
-            <span
+            <div
+              aria-label="Add an input sentence"
+              className="contenteditable"
+              id="ae_content"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyPress={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              spellCheck={false}
               style={
                 Object {
                   "alignItems": "center",
                   "display": "flex",
-                  "flexWrap": "wrap",
+                  "flex": 1,
+                  "minHeight": "40px",
                 }
               }
+              tabIndex={0}
             >
               <span
-                className={undefined}
-                data="text"
-                id="ae_start"
-                onClick={[Function]}
-                onInput={[Function]}
                 style={
                   Object {
-                    "display": "inline-block",
-                    "flex": "1",
-                    "minHeight": "15px",
-                    "padding": "0 4px",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexWrap": "wrap",
                   }
                 }
-                tabIndex={1}
-              />
-            </span>
+              >
+                <span
+                  className={undefined}
+                  data="text"
+                  id="ae_start"
+                  onClick={[Function]}
+                  onInput={[Function]}
+                  style={
+                    Object {
+                      "display": "inline-block",
+                      "flex": "1",
+                      "minHeight": "15px",
+                      "padding": "0 4px",
+                    }
+                  }
+                  tabIndex={1}
+                />
+              </span>
+            </div>
           </div>
           <div />
         </li>
+        <ul
+          className="mdc-list"
+          style={
+            Object {
+              "border": "1px solid #eee",
+              "margin": "0 8px 16px 8px",
+              "maxHeight": "18.07vh",
+              "overflowX": "hidden",
+              "overflowY": "scroll",
+            }
+          }
+        />
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
       style={
         Object {
-          "margin": "8px",
+          "margin": "12px",
         }
       }
     >
@@ -248,29 +262,38 @@ exports[`components/intentDetail can render intent with special characters corre
               style={
                 Object {
                   "display": "flex",
+                  "fontWeight": "900",
                 }
               }
             >
-              output
-              <div
-                className="mdc-tooltype"
-              >
-                <i
-                  className="material-icons"
-                  style={
-                    Object {
-                      "color": "#ddd",
-                      "paddingLeft": "16px",
-                      "paddingTop": "12px",
-                    }
+              <i
+                className="material-icons"
+                style={
+                  Object {
+                    "backgroundImage": "url(../images/opla-avatar.png)",
+                    "backgroundPositionX": "2px",
+                    "backgroundPositionY": "14px",
+                    "backgroundRepeat": "no-repeat",
+                    "backgroundSize": "20px",
+                    "color": "transparent",
+                    "marginLeft": "-8px",
+                    "paddingRight": "4px",
+                    "paddingTop": "12px",
                   }
-                >
-                  help_outline
-                </i>
-                <span>
-                  One of below items is send to the user if this intent is activated.
-                </span>
-              </div>
+                }
+              >
+                account_circle
+              </i>
+              output
+              <i
+                className="help_icon material-icons"
+                onClick={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                help
+              </i>
             </div>
           </span>
           <span
@@ -293,85 +316,94 @@ exports[`components/intentDetail can render intent with special characters corre
           }
         }
       >
-        <ul
-          className="mdc-list"
-        />
+        
         <li
-          className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+          className="addActionItem  onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
           style={
             Object {
-              "border": "1px solid rgba(0, 0, 0, 0.2)",
-              "color": "black",
-              "margin": "0 8px",
-              "minHeight": "40px",
+              "color": "rgb(0, 0, 0)",
             }
           }
         >
-          <i
-            aria-hidden="true"
-            className="mdc-list-item__graphic material-icons"
-          >
-            chat_bubble_outline
-          </i>
           <div
-            aria-label="Add an output response"
-            className="contenteditable"
-            id="ae_content"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            onKeyPress={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            spellCheck={false}
             style={
               Object {
-                "alignItems": "center",
-                "display": "flex",
-                "flex": 1,
-                "minHeight": "40px",
+                "width": "100%",
               }
             }
-            tabIndex={0}
           >
-            <span
+            <div
+              aria-label="Add an output response"
+              className="contenteditable"
+              id="ae_content"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyPress={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              spellCheck={false}
               style={
                 Object {
                   "alignItems": "center",
                   "display": "flex",
-                  "flexWrap": "wrap",
+                  "flex": 1,
+                  "minHeight": "40px",
                 }
               }
+              tabIndex={0}
             >
               <span
-                className={undefined}
-                data="text"
-                id="ae_start"
-                onClick={[Function]}
-                onInput={[Function]}
                 style={
                   Object {
-                    "display": "inline-block",
-                    "flex": "1",
-                    "minHeight": "15px",
-                    "padding": "0 4px",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexWrap": "wrap",
                   }
                 }
-                tabIndex={1}
-              />
-            </span>
+              >
+                <span
+                  className={undefined}
+                  data="text"
+                  id="ae_start"
+                  onClick={[Function]}
+                  onInput={[Function]}
+                  style={
+                    Object {
+                      "display": "inline-block",
+                      "flex": "1",
+                      "minHeight": "15px",
+                      "padding": "0 4px",
+                    }
+                  }
+                  tabIndex={1}
+                />
+              </span>
+            </div>
           </div>
           <div />
         </li>
+        <ul
+          className="mdc-list"
+          style={
+            Object {
+              "border": "1px solid #eee",
+              "margin": "0 8px 16px 8px",
+              "maxHeight": "18.07vh",
+              "overflowX": "hidden",
+              "overflowY": "scroll",
+            }
+          }
+        />
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
       style={
         Object {
-          "margin": "8px",
+          "margin": "12px",
         }
       }
     >
@@ -422,7 +454,38 @@ exports[`components/intentDetail can render intent with special characters corre
               }
             }
           >
-            Parameters
+            <div
+              style={
+                Object {
+                  "display": "flex",
+                  "fontWeight": "900",
+                }
+              }
+            >
+              <i
+                className="material-icons"
+                style={
+                  Object {
+                    "color": "rgba(0,0,0,.87)",
+                    "marginLeft": "-8px",
+                    "paddingRight": "4px",
+                    "paddingTop": "12px",
+                  }
+                }
+              >
+                question_answer
+              </i>
+              Advanced
+              <i
+                className="help_icon material-icons"
+                onClick={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                help
+              </i>
+            </div>
           </span>
           <span
             style={
@@ -523,11 +586,12 @@ exports[`components/intentDetail renders correctly 1`] = `
   <div
     className="list-content"
   >
+    
     <div
-      className="mrb-sublist mdl-color--white"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
       style={
         Object {
-          "margin": "8px",
+          "margin": "12px",
         }
       }
     >
@@ -584,29 +648,33 @@ exports[`components/intentDetail renders correctly 1`] = `
               style={
                 Object {
                   "display": "flex",
+                  "fontWeight": "900",
                 }
               }
             >
+              <i
+                className="material-icons"
+                style={
+                  Object {
+                    "color": "rgba(0,0,0,.87)",
+                    "marginLeft": "-8px",
+                    "paddingRight": "4px",
+                    "paddingTop": "12px",
+                  }
+                }
+              >
+                account_circle
+              </i>
               input
-              <div
-                className="mdc-tooltype"
+              <i
+                className="help_icon material-icons"
+                onClick={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex="0"
               >
-                <i
-                  className="material-icons"
-                  style={
-                    Object {
-                      "color": "#ddd",
-                      "paddingLeft": "16px",
-                      "paddingTop": "12px",
-                    }
-                  }
-                >
-                  help_outline
-                </i>
-                <span>
-                  List of sentences, events or attachments that will trigger this intent.
-                </span>
-              </div>
+                help
+              </i>
             </div>
           </span>
           <span
@@ -629,85 +697,94 @@ exports[`components/intentDetail renders correctly 1`] = `
           }
         }
       >
-        <ul
-          className="mdc-list"
-        />
+        
         <li
-          className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+          className="addActionItem  onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
           style={
             Object {
-              "border": "1px solid rgba(0, 0, 0, 0.2)",
-              "color": "black",
-              "margin": "0 8px",
-              "minHeight": "40px",
+              "color": "rgb(0, 0, 0)",
             }
           }
         >
-          <i
-            aria-hidden="true"
-            className="mdc-list-item__graphic material-icons"
-          >
-            format_quote
-          </i>
           <div
-            aria-label="Add an input sentence"
-            className="contenteditable"
-            id="ae_content"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            onKeyPress={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            spellCheck={false}
             style={
               Object {
-                "alignItems": "center",
-                "display": "flex",
-                "flex": 1,
-                "minHeight": "40px",
+                "width": "100%",
               }
             }
-            tabIndex={0}
           >
-            <span
+            <div
+              aria-label="Add an input sentence"
+              className="contenteditable"
+              id="ae_content"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyPress={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              spellCheck={false}
               style={
                 Object {
                   "alignItems": "center",
                   "display": "flex",
-                  "flexWrap": "wrap",
+                  "flex": 1,
+                  "minHeight": "40px",
                 }
               }
+              tabIndex={0}
             >
               <span
-                className={undefined}
-                data="text"
-                id="ae_start"
-                onClick={[Function]}
-                onInput={[Function]}
                 style={
                   Object {
-                    "display": "inline-block",
-                    "flex": "1",
-                    "minHeight": "15px",
-                    "padding": "0 4px",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexWrap": "wrap",
                   }
                 }
-                tabIndex={1}
-              />
-            </span>
+              >
+                <span
+                  className={undefined}
+                  data="text"
+                  id="ae_start"
+                  onClick={[Function]}
+                  onInput={[Function]}
+                  style={
+                    Object {
+                      "display": "inline-block",
+                      "flex": "1",
+                      "minHeight": "15px",
+                      "padding": "0 4px",
+                    }
+                  }
+                  tabIndex={1}
+                />
+              </span>
+            </div>
           </div>
           <div />
         </li>
+        <ul
+          className="mdc-list"
+          style={
+            Object {
+              "border": "1px solid #eee",
+              "margin": "0 8px 16px 8px",
+              "maxHeight": "18.07vh",
+              "overflowX": "hidden",
+              "overflowY": "scroll",
+            }
+          }
+        />
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
       style={
         Object {
-          "margin": "8px",
+          "margin": "12px",
         }
       }
     >
@@ -764,29 +841,38 @@ exports[`components/intentDetail renders correctly 1`] = `
               style={
                 Object {
                   "display": "flex",
+                  "fontWeight": "900",
                 }
               }
             >
-              output
-              <div
-                className="mdc-tooltype"
-              >
-                <i
-                  className="material-icons"
-                  style={
-                    Object {
-                      "color": "#ddd",
-                      "paddingLeft": "16px",
-                      "paddingTop": "12px",
-                    }
+              <i
+                className="material-icons"
+                style={
+                  Object {
+                    "backgroundImage": "url(../images/opla-avatar.png)",
+                    "backgroundPositionX": "2px",
+                    "backgroundPositionY": "14px",
+                    "backgroundRepeat": "no-repeat",
+                    "backgroundSize": "20px",
+                    "color": "transparent",
+                    "marginLeft": "-8px",
+                    "paddingRight": "4px",
+                    "paddingTop": "12px",
                   }
-                >
-                  help_outline
-                </i>
-                <span>
-                  One of below items is send to the user if this intent is activated.
-                </span>
-              </div>
+                }
+              >
+                account_circle
+              </i>
+              output
+              <i
+                className="help_icon material-icons"
+                onClick={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                help
+              </i>
             </div>
           </span>
           <span
@@ -809,85 +895,94 @@ exports[`components/intentDetail renders correctly 1`] = `
           }
         }
       >
-        <ul
-          className="mdc-list"
-        />
+        
         <li
-          className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+          className="addActionItem  onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
           style={
             Object {
-              "border": "1px solid rgba(0, 0, 0, 0.2)",
-              "color": "black",
-              "margin": "0 8px",
-              "minHeight": "40px",
+              "color": "rgb(0, 0, 0)",
             }
           }
         >
-          <i
-            aria-hidden="true"
-            className="mdc-list-item__graphic material-icons"
-          >
-            chat_bubble_outline
-          </i>
           <div
-            aria-label="Add an output response"
-            className="contenteditable"
-            id="ae_content"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            onKeyPress={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            spellCheck={false}
             style={
               Object {
-                "alignItems": "center",
-                "display": "flex",
-                "flex": 1,
-                "minHeight": "40px",
+                "width": "100%",
               }
             }
-            tabIndex={0}
           >
-            <span
+            <div
+              aria-label="Add an output response"
+              className="contenteditable"
+              id="ae_content"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyPress={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              spellCheck={false}
               style={
                 Object {
                   "alignItems": "center",
                   "display": "flex",
-                  "flexWrap": "wrap",
+                  "flex": 1,
+                  "minHeight": "40px",
                 }
               }
+              tabIndex={0}
             >
               <span
-                className={undefined}
-                data="text"
-                id="ae_start"
-                onClick={[Function]}
-                onInput={[Function]}
                 style={
                   Object {
-                    "display": "inline-block",
-                    "flex": "1",
-                    "minHeight": "15px",
-                    "padding": "0 4px",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexWrap": "wrap",
                   }
                 }
-                tabIndex={1}
-              />
-            </span>
+              >
+                <span
+                  className={undefined}
+                  data="text"
+                  id="ae_start"
+                  onClick={[Function]}
+                  onInput={[Function]}
+                  style={
+                    Object {
+                      "display": "inline-block",
+                      "flex": "1",
+                      "minHeight": "15px",
+                      "padding": "0 4px",
+                    }
+                  }
+                  tabIndex={1}
+                />
+              </span>
+            </div>
           </div>
           <div />
         </li>
+        <ul
+          className="mdc-list"
+          style={
+            Object {
+              "border": "1px solid #eee",
+              "margin": "0 8px 16px 8px",
+              "maxHeight": "18.07vh",
+              "overflowX": "hidden",
+              "overflowY": "scroll",
+            }
+          }
+        />
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white"
+      className="mrb-sublist mdl-color--white mdc-elevation--z1"
       style={
         Object {
-          "margin": "8px",
+          "margin": "12px",
         }
       }
     >
@@ -938,7 +1033,38 @@ exports[`components/intentDetail renders correctly 1`] = `
               }
             }
           >
-            Parameters
+            <div
+              style={
+                Object {
+                  "display": "flex",
+                  "fontWeight": "900",
+                }
+              }
+            >
+              <i
+                className="material-icons"
+                style={
+                  Object {
+                    "color": "rgba(0,0,0,.87)",
+                    "marginLeft": "-8px",
+                    "paddingRight": "4px",
+                    "paddingTop": "12px",
+                  }
+                }
+              >
+                question_answer
+              </i>
+              Advanced
+              <i
+                className="help_icon material-icons"
+                onClick={[Function]}
+                onKeyUp={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                help
+              </i>
+            </div>
           </span>
           <span
             style={
