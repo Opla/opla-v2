@@ -269,82 +269,6 @@ class AgentManager extends Component {
     }
   }
 
-  renderOnboarding() {
-    return (
-      <Cell style={{ margin: "0px" }} span={8}>
-        <div className="mrb-panel mrb-panel-empty" style={{ height: "80%" }}>
-          <div style={{ height: "30%", ...infoStyleD }}>
-            <div style={{ /* margin: "48px 0", */ textAlign: "left" }}>
-              <h2>Get Started</h2>
-              <p>
-                This assistant has no data. You need to fill it with intents to
-                reply to inputs from end-users.<br />
-                To do so you could create an intent. Or you could use the
-                playground to help you to create them.<br />
-              </p>
-              <div
-                style={{
-                  margin: "0",
-                  padding: "4px",
-                  backgroundColor: "#FFFF8D",
-                }}
-              >
-                For example:
-                <code>
-                  send &quot;Hello&quot; using Playground&apos;s textfield at
-                  the bottom
-                </code>
-              </div>
-            </div>
-          </div>
-          <div style={infoStyleD}>
-            <div>
-              <Button
-                raised
-                style={{ marginRight: "32px" }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.handleAddIntent();
-                }}
-              >
-                Create intent
-              </Button>
-              <Button
-                raised
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.handleExportImport(true);
-                }}
-              >
-                Import intents
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div
-          className="mrb-panel"
-          style={{ height: "18.05%", backgroundColor: "#FFFF8D" }}
-        >
-          <div
-            style={{
-              margin: "16px",
-              padding: "8px",
-              textAlign: "left",
-              backgroundColor: "#FFFF8D",
-            }}
-          >
-            An <b>assistant</b> has a list of intents.<br />An <b>intent</b>
-            is an expected behaviour from the end-user.<br />
-            Assistant&apos;s <b>NLP</b> (Natural Language Processing) engine
-            will use that list to match intent&apos;s <b>input</b>
-            with end-user&apos;s input. If a match is found assistant responds
-            using selected intent&apos;s <b>output</b>.
-          </div>
-        </div>
-      </Cell>
-    );
-  }
-
   render() {
     let { isLoading } = this.props;
     if (!isLoading && !this.props.intents && this.props.isSignedIn) {
@@ -357,29 +281,70 @@ class AgentManager extends Component {
     }
     let panel1 = null;
     let panel2 = null;
-    panel1 = (
-      <Cell
-        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-        className="mdl-color--white mrb-panel"
-        span={2}
-      >
-        <ExplorerContainer
-          handleExportImport={this.handleExportImport}
-          handleRename={this.handleRenameIntent}
-          handleAdd={this.handleAddIntent}
-          handleDelete={this.handleDeleteIntent}
-        />
-      </Cell>
-    );
-    panel2 = (
-      <Cell
-        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-        className="mdl-color--white mrb-panel"
-        span={6}
-      >
-        <IntentContainer handleRename={this.handleRenameIntent} />
-      </Cell>
-    );
+
+    if (this.props.activeTab === 0) {
+      panel1 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={2}
+        >
+          <ExplorerContainer
+            handleExportImport={this.handleExportImport}
+            handleRename={this.handleRenameIntent}
+            handleAdd={this.handleAddIntent}
+            handleDelete={this.handleDeleteIntent}
+          />
+        </Cell>
+      );
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={6}
+        >
+          <IntentContainer handleRename={this.handleRenameIntent} />
+        </Cell>
+      );
+    } else if (this.props.activeTab === 1) {
+      panel1 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={2}
+        >
+          <EntitiesContainer handleExportImport={this.handleExportImport} />
+        </Cell>
+      );
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={6}
+        >
+          TODO
+        </Cell>
+      );
+    } else {
+      panel1 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={2}
+        >
+          <CallsContainer handleExportImport={this.handleExportImport} />
+        </Cell>
+      );
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="mdl-color--white mrb-panel"
+          span={6}
+        >
+          TODO
+        </Cell>
+      );
+    }
     const intentsEx = [];
     if (Array.isArray(this.props.intents)) {
       this.props.intents.forEach((intent) => {
