@@ -7,8 +7,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { List, Icon } from "zrmc";
-import { ExpansionPanel, Tooltip } from "zoapp-ui";
+import { ExpansionPanel } from "zoapp-ui";
 import ActionsItem from "./actionsItem";
+import ActionsToolbox from "./actionsToolbox";
 
 class ActionsList extends Component {
   constructor(props) {
@@ -69,6 +70,19 @@ class ActionsList extends Component {
     this.props.onDeleteActionClick(this.props.name, index);
   };
 
+  updateToolboxDisplay = () => {
+    if (this.selectedItemRef && this.selectedItemRef.ref && this.toolboxRef) {
+      const { left, top } = this.selectedItemRef.ref.getBoundingClientRect();
+      let adjustedLeft = left - 10;
+      if (adjustedLeft < 0) {
+        adjustedLeft = 0;
+      }
+      const adjustedTop = top - 43;
+      const style = `left: ${adjustedLeft}px; top: ${adjustedTop}px;`;
+      this.toolboxRef.style = style;
+    }
+  };
+
   render() {
     const {
       name,
@@ -77,6 +91,8 @@ class ActionsList extends Component {
       displayCondition,
       onDrop,
       onSelectActionsComponent,
+      onChangeToolbox,
+      onHelp,
     } = this.props;
     let contentList;
     const isActionsEmpty = !actions || actions.length === 0;
@@ -84,15 +100,21 @@ class ActionsList extends Component {
       !isActionsEmpty && actions[0].type === "condition";
     // const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
+    let addContentClassname = "";
+    let isSelected = false;
+    if (this.props.selected === 0) {
+      addContentClassname = "selectedActionItem  mdc-elevation--z2";
+      isSelected = true;
+    }
+    const selected = this.props.selected - 1;
+    addContentClassname = `addActionItem ${addContentClassname}`;
     const addContent = (
       <ActionsItem
-        style={{
-          border: "1px solid rgba(0, 0, 0, 0.2)",
-          color: "black",
-        }}
+        className={addContentClassname}
         containerName={name}
         action={newAction}
         editable={editable}
+        isSelected={isSelected}
         onAddAction={(content, isCondition = false) => {
           this.handleAddNewAction(content, isCondition);
         }}
@@ -105,76 +127,125 @@ class ActionsList extends Component {
           name === "output" &&
           (isActionsCondition || (isActionsEmpty && displayCondition))
         }
+        ref={(r) => {
+          if (this.props.selected === 0) {
+            this.selectedItemRef = r;
+            this.updateToolboxDisplay();
+          }
+        }}
       />
     );
+    const s = {
+      overflowX: "hidden",
+      overflowY: "scroll",
+      maxHeight: "18.07vh",
+      border: "1px solid #eee",
+      margin: "0 8px 16px 8px",
+    };
     if (actions && actions.length > 0) {
       const actionsDisplayed = isActionsCondition
         ? actions[0].children
         : actions;
       contentList = (
-        <List
-          style={{
-            overflow: "auto",
-            maxHeight: "18.07vh",
-            border: "1px solid #eee",
-            margin: "0 8px",
-          }}
-        >
-          {actionsDisplayed.map((action, index) => (
-            <ActionsItem
-              containerName={name}
-              action={action}
-              index={index}
-              onDrop={onDrop}
-              key={index}
-              itemKey={`cd_${index}`}
-              onActionChange={(newContent) => {
-                if (isActionsCondition) {
-                  this.handleActionConditionChange(newContent, index);
-                } else {
-                  this.handleActionChange(newContent, index);
+        <List style={s}>
+          {actionsDisplayed.map((action, index) => {
+            isSelected = isSelected || index === selected;
+            return (
+              <ActionsItem
+                containerName={name}
+                action={action}
+                onDrop={onDrop}
+                key={`asi_${index}`}
+                index={index}
+                onActionChange={(newContent) => {
+                  if (isActionsCondition) {
+                    this.handleActionConditionChange(newContent, index);
+                  } else {
+                    this.handleActionChange(newContent, index);
+                  }
+                }}
+                onSelectActionsComponent={onSelectActionsComponent}
+                onDeleteActionClick={() => {
+                  this.handleDeleteClick(index);
+                }}
+                isCondition={isActionsCondition}
+                isSelected={index === selected}
+                className={
+                  index === selected
+                    ? "selectedActionItem  mdc-elevation--z2"
+                    : null
                 }
-              }}
-              onSelectActionsComponent={onSelectActionsComponent}
-              onDeleteActionClick={() => {
-                this.handleDeleteClick(index);
-              }}
-              isCondition={isActionsCondition}
-            />
-          ))}
+                ref={(r) => {
+                  if (index === selected) {
+                    this.selectedItemRef = r;
+                    this.updateToolboxDisplay();
+                  }
+                }}
+              />
+            );
+          })}
         </List>
       );
     } else {
-      contentList = <List />;
+      contentList = <List style={s} />;
     }
-    const tooltip =
-      name === "input"
-        ? "List of sentences, events or attachments that will trigger this intent."
-        : "One of below items is send to the user if this intent is activated.";
+    const st = {
+      color: "rgba(0,0,0,.87)",
+      paddingTop: "12px",
+      paddingRight: "4px",
+      marginLeft: "-8px",
+    };
+    if (name === "output") {
+      st.color = "transparent";
+      st.backgroundImage = "url(../images/opla-avatar.png)";
+      st.backgroundSize = "20px";
+      st.backgroundRepeat = "no-repeat";
+      st.backgroundPositionY = "14px";
+      st.backgroundPositionX = "2px";
+    }
     const title = (
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", fontWeight: "900" }}>
+        <Icon name="account_circle" style={st} />
         {name}
-        <Tooltip label={tooltip}>
-          <Icon
-            name="help_outline"
-            style={{
-              color: "#ddd",
-              paddingTop: "12px",
-              paddingLeft: "16px",
-            }}
-          />
-        </Tooltip>
+        <Icon
+          name="help"
+          className="help_icon"
+          onClick={(e) => {
+            onHelp(name);
+            e.stopPropagation();
+          }}
+        />
       </div>
     );
+    let toolbox = "";
+    if (isSelected) {
+      const isInput = name === "input";
+      const isIntentOutputEmpty = !isInput && !(actions && actions.length > 0);
+      toolbox = (
+        <div
+          className="actionstoolbox  mdc-elevation--z3"
+          ref={(r) => {
+            this.toolboxRef = r;
+            this.updateToolboxDisplay();
+          }}
+        >
+          <ActionsToolbox
+            onChange={onChangeToolbox}
+            isInput={isInput}
+            condition={isIntentOutputEmpty}
+          />
+        </div>
+      );
+    }
     return (
       <ExpansionPanel
         label={title}
         className="mdl-color--white"
-        style={{ margin: "8px" }}
-        elevation={0}
+        style={{ margin: "12px" }}
       >
-        {contentList}
+        {toolbox}
         {addContent}
+        {contentList}
       </ExpansionPanel>
     );
   }
@@ -185,6 +256,7 @@ ActionsList.defaultProps = {
   onSelect: null,
   onDrop: null,
   onAction: () => {},
+  onHelp: () => {},
   intentId: null,
   onSelectActionsComponent: () => {},
   onNewActionsChange: () => {},
@@ -199,12 +271,15 @@ ActionsList.propTypes = {
   onSelect: PropTypes.func,
   onDrop: PropTypes.func,
   onAction: PropTypes.func,
+  onHelp: PropTypes.func,
   displayCondition: PropTypes.bool,
   intentId: PropTypes.string,
   newAction: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,
+  onChangeToolbox: PropTypes.func,
+  selected: PropTypes.number,
 };
 
 export default ActionsList;

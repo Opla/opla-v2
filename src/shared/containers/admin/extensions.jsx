@@ -22,7 +22,9 @@ export default class Extension extends Component {
   render() {
     return (
       <Grid>
-        <ServicesContainer pluginsManager={this.state.pluginsManager} />
+        <div className="zap-panel mdl-color--white">
+          <ServicesContainer pluginsManager={this.state.pluginsManager} />
+        </div>
       </Grid>
     );
   }

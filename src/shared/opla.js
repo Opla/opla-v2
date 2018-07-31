@@ -22,7 +22,6 @@ import Extension from "OplaContainers/admin/extensions";
 import GeneralAdmin from "OplaContainers/admin/generalAdmin";
 import Users from "zoapp-front/containers/admin/users";
 import Advanced from "zoapp-front/containers/admin/advanced";
-import { infoStyleD } from "OplaContainers/admin/styles";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
 
@@ -99,20 +98,20 @@ const appProps = {
             <Advanced key="advanced">
               <Inner>
                 <Cell className="mdl-color--white" span={12}>
-                  <div style={infoStyleD}>
-                    <span style={{ color: "#d50000" }}>
-                      Delete this assistant
-                    </span>
-                    <Button
-                      raised
-                      style={{
-                        float: "right",
-                        marginBottom: "24px",
-                        backgroundColor: "#d50000",
-                      }}
-                    >
-                      DELETE
-                    </Button>
+                  <div className="zap-panel">
+                    <div className="zap-panel_title">
+                      <span style={{ color: "#b71c1c" }}>
+                        Delete this assistant
+                      </span>
+                      <Button
+                        raised
+                        style={{
+                          backgroundColor: "#b71c1c",
+                        }}
+                      >
+                        DELETE
+                      </Button>
+                    </div>
                   </div>
                   <div />
                 </Cell>

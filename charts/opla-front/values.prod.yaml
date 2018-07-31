@@ -1,0 +1,20 @@
+image:
+  tag: ${COMMIT_SHA}
+
+front:
+  domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
+api:
+  domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
+
+auth:
+  clientId: ${CLIENT_ID}
+  secret: ${CLIENT_SECRET}
+
+tls: true
+
+instance:
+  color: "#7f0000"
+  name: "Prod"
+  description: "Production Build."
+
+namespace: ${K8S_NAMESPACE}

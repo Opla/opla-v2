@@ -168,6 +168,8 @@ class MessengerBox extends Component {
                 e.preventDefault();
                 // TODO delete message
               };
+              const errorResponse =
+                "No matching intent. Edit this text or create one using previous message as input.";
               if (message.error || message.body.indexOf("[Error]") !== -1) {
                 const from = message.from.toLowerCase();
                 const user = users[from];
@@ -176,9 +178,12 @@ class MessengerBox extends Component {
                 if (user) {
                   ({ dest, icon } = user);
                 }
+                if (dest === "from") {
+                  dest = "error";
+                }
                 return (
                   <div key={message.id} className={`message ${dest} ${icon}`}>
-                    <div className="circle-wrapper animated bounceIn" />
+                    <div className="circle-wrapper animated bounceIn">?</div>
                     <div
                       style={{
                         display: "flex",
@@ -188,9 +193,7 @@ class MessengerBox extends Component {
                     >
                       <div className="text-wrapper animated fadeIn">
                         <div className="message-body-error">
-                          I don&apos;t understand. You need to write a response
-                          here, and I will create an intent with previous
-                          message.
+                          {errorResponse}
                         </div>
                         <Tooltip label="Create output response">
                           <Icon
@@ -206,7 +209,7 @@ class MessengerBox extends Component {
                             className="message-intent-link-error"
                             onClick={intentCreateAction}
                           >
-                            #NotFoundIntent.output
+                            Create an intent
                           </a>
                         </Tooltip>
                       </div>

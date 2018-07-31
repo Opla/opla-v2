@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Zrmc, { Grid, Inner, Cell, Button } from "zrmc";
+import Zrmc, { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
 import { appSetTitle } from "zoapp-front/actions/app";
@@ -15,6 +15,7 @@ import { appSetTitle } from "zoapp-front/actions/app";
 import {
   apiGetIntentsRequest,
   apiSendIntentRequest,
+  apiDeleteIntentRequest,
   apiSaveBotRequest,
   apiImportRequest,
 } from "../actions/api";
@@ -27,16 +28,7 @@ import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
 
-const infoStyleD = {
-  fontSize: "16px",
-  fontWeight: "400",
-  color: "#666",
-  padding: "16px",
-  lineHeight: "1.1",
-  textAlign: "left",
-};
-
-class AgentManager extends Component {
+class BotManager extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
@@ -54,36 +46,59 @@ class AgentManager extends Component {
     this.updateIntents();
   }
 
-  onAddIntent = (dialog, action, data) => {
-    if (action === "Create") {
+  onRenameIntent = (dialog, action, data) => {
+    if (action === "Rename") {
       const intentName = dialog.getFieldValue();
-
+      // console.log("WIP", `ExplorerContainer.onRenameIntent :${intentName}`);
       if (intentName === "") {
         dialog.invalidateField();
         return false;
       }
-
-      let { input } = data;
-      if (!input) {
-        input = [intentName];
-      }
-      let { output } = data;
-      if (!output) {
-        // TODO create a better output
-        let i = input[0];
-        const il = i.toLowerCase();
-        if (!(il === "hello" || il === "hi")) {
-          i = "I don't understand.";
-        }
-        output = [i];
-      }
-      const intent = {
-        input,
-        output,
-        name: intentName,
-      };
-
+      const { selected } = data;
+      const it = this.props.intents[selected];
+      const intent = { ...it, name: intentName };
       this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+    }
+    return true;
+  };
+
+  addIntent(intentName, data) {
+    let { input } = data;
+    if (!input) {
+      input = [intentName];
+    }
+    let { output } = data;
+    if (!output) {
+      // TODO create a better output
+      let i = input[0];
+      const il = i.toLowerCase();
+      if (!(il === "hello" || il === "hi")) {
+        i = "I don't understand.";
+      }
+      output = [i];
+    }
+    const intent = {
+      input,
+      output,
+      name: intentName,
+    };
+    this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+  }
+
+  onAddIntent = (dialog, action, data) => {
+    if (action === "Create") {
+      const intentName = dialog.getFieldValue();
+      this.addIntent(intentName, data);
+    }
+    return true;
+  };
+
+  onDeleteIntent = (dialog, action, data) => {
+    if (action === "Delete") {
+      const { selected } = data;
+      const intent = this.props.intents[selected];
+      // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
+      this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
   };
@@ -122,8 +137,44 @@ class AgentManager extends Component {
     return true;
   };
 
-  handleAddIntent = (defaultValue = "", data = {}) => {
-    const field = {
+  handleDeleteIntent = (selected = this.props.selectedIntentIndex) => {
+    // const selected = this.props.selectedIntentIndex;
+    const intent = this.props.intents[selected];
+    Zrmc.showDialog({
+      header: "Intent",
+      body: `${intent.name} Do you want to delete it ?`,
+      actions: [{ name: "Cancel" }, { name: "Delete" }],
+      onAction: this.onDeleteIntent,
+      data: { selected },
+    });
+  };
+
+  findIntentName(name) {
+    const { intents } = this.props;
+
+    let result = false;
+    if (intents && intents.length > 0) {
+      intents.forEach((intent) => {
+        if (intent.name.toLowerCase() === name) {
+          result = true;
+        }
+      });
+    }
+    return result;
+  }
+
+  generateIntentName() {
+    let name = "Intent";
+    let index = 1;
+    while (this.findIntentName(name.toLowerCase())) {
+      name = `Intent ${index}`;
+      index += 1;
+    }
+    return name;
+  }
+
+  handleAddIntent = (defaultValue = this.generateIntentName(), data = {}) => {
+    /* const field = {
       defaultValue,
       pattern: ".+",
       name: "Intent name",
@@ -135,6 +186,24 @@ class AgentManager extends Component {
       actions: [{ name: "Cancel" }, { name: "Create" }],
       onAction: this.onAddIntent,
       data,
+    }); */
+    this.addIntent(defaultValue, data);
+  };
+
+  handleRenameIntent = (selected = this.props.selectedIntentIndex) => {
+    const intent = this.props.intents[selected];
+    const field = {
+      defaultValue: intent.name,
+      pattern: ".+",
+      name: "Intent name",
+      error: "Wrong name",
+    };
+    Zrmc.showDialog({
+      header: "Rename intent",
+      field,
+      actions: [{ name: "Cancel" }, { name: "Rename" }],
+      onAction: this.onRenameIntent,
+      data: { selected },
     });
   };
 
@@ -288,70 +357,29 @@ class AgentManager extends Component {
     }
     let panel1 = null;
     let panel2 = null;
-    if (this.props.activeTab === 0) {
-      if (this.props.intents.length > 0) {
-        panel1 = (
-          <Cell
-            style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-            className="mdl-color--white mrb-panel"
-            span={2}
-          >
-            <ExplorerContainer handleExportImport={this.handleExportImport} />
-          </Cell>
-        );
-        panel2 = (
-          <Cell
-            style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-            className="mdl-color--white mrb-panel"
-            span={6}
-          >
-            <IntentContainer />
-          </Cell>
-        );
-      } else {
-        panel1 = this.renderOnboarding();
-        panel2 = "";
-      }
-    } else if (this.props.activeTab === 1) {
-      panel1 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
-          span={2}
-        >
-          <EntitiesContainer handleExportImport={this.handleExportImport} />
-        </Cell>
-      );
-      panel2 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
-          span={6}
-        >
-          TODO
-        </Cell>
-      );
-    } else {
-      panel1 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
-          span={2}
-        >
-          <CallsContainer handleExportImport={this.handleExportImport} />
-        </Cell>
-      );
-      panel2 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
-          span={6}
-        >
-          TODO
-        </Cell>
-      );
-    }
-
+    panel1 = (
+      <Cell
+        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+        className="mdl-color--white mrb-panel"
+        span={2}
+      >
+        <ExplorerContainer
+          handleExportImport={this.handleExportImport}
+          handleRename={this.handleRenameIntent}
+          handleAdd={this.handleAddIntent}
+          handleDelete={this.handleDeleteIntent}
+        />
+      </Cell>
+    );
+    panel2 = (
+      <Cell
+        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+        className="mdl-color--white mrb-panel"
+        span={6}
+      >
+        <IntentContainer handleRename={this.handleRenameIntent} />
+      </Cell>
+    );
     const intentsEx = [];
     if (Array.isArray(this.props.intents)) {
       this.props.intents.forEach((intent) => {
@@ -375,8 +403,12 @@ class AgentManager extends Component {
             {panel1}
             {panel2}
             <Cell
-              style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-              className="mdl-color--white mdl-shadow--2dp"
+              style={{
+                margin: "0px",
+                backgroundColor: "#f2f2f2",
+                zIndex: "3",
+              }}
+              className="mdc-elevation--z4"
               span={4}
             >
               <PlaygroundContainer
@@ -411,12 +443,14 @@ AgentManager.propTypes = {
     language: PropTypes.string,
   }),
   intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+  selectedIntentIndex: PropTypes.number.isRequired,
   selectedIntent: PropTypes.shape({ id: PropTypes.string }),
   store: PropTypes.shape({}),
   titleName: PropTypes.string.isRequired,
   appSetTitle: PropTypes.func.isRequired,
   apiGetIntentsRequest: PropTypes.func.isRequired,
   apiSendIntentRequest: PropTypes.func.isRequired,
+  apiDeleteIntentRequest: PropTypes.func.isRequired,
   apiSaveBotRequest: PropTypes.func.isRequired,
   apiImportRequest: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
@@ -445,6 +479,7 @@ const mapStateToProps = (state) => {
     isLoading,
     isSignedIn,
     selectedIntent,
+    selectedIntentIndex,
     titleName,
   };
 };
@@ -458,6 +493,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiSendIntentRequest: (botId, intent) => {
     dispatch(apiSendIntentRequest(botId, intent));
+  },
+  apiDeleteIntentRequest: (botId, intentId) => {
+    dispatch(apiDeleteIntentRequest(botId, intentId));
   },
   apiSaveBotRequest: (bot) => {
     dispatch(apiSaveBotRequest(bot));

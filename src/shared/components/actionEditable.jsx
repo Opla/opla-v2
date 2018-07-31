@@ -19,7 +19,7 @@ const types = {
   any: {
     style: {
       color: "black",
-      backgroundColor: "#fcea20",
+      backgroundColor: "#ffb300",
     },
     className: "mdl-chip",
     editable: false,
@@ -27,7 +27,7 @@ const types = {
   output_var: {
     style: {
       color: "white",
-      backgroundColor: "#23b4bb",
+      backgroundColor: "#4b830d",
     },
     className: "mdl-chip",
     editable: true,
@@ -35,7 +35,7 @@ const types = {
   variable: {
     style: {
       color: "white",
-      backgroundColor: "#552682",
+      backgroundColor: "#007c91",
     },
     className: "mdl-chip",
     editable: true,
@@ -43,7 +43,7 @@ const types = {
   br: {
     style: {
       color: "white",
-      backgroundColor: "#aaa",
+      backgroundColor: "#00227b",
     },
     className: "mdl-chip",
     editable: false,
@@ -51,7 +51,7 @@ const types = {
   button: {
     style: {
       color: "white",
-      backgroundColor: "#aaa",
+      backgroundColor: "#ab000d",
     },
     className: "mdl-chip",
     editable: true,

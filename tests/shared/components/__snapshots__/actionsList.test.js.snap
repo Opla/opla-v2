@@ -2,10 +2,10 @@
 
 exports[`components/actionsList can be rendered with array of actions typed as shapes 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -62,29 +62,33 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foo
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foo
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -107,76 +111,151 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       }
     }
   >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
     <ul
       className="mdc-list"
       style={
         Object {
           "border": "1px solid #eee",
-          "margin": "0 8px",
+          "margin": "0 8px 16px 8px",
           "maxHeight": "18.07vh",
-          "overflow": "auto",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
         }
       }
     >
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_start"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "flex": "1",
-                  "minHeight": "15px",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
-            />
-          </span>
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -190,64 +269,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_start"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "flex": "1",
-                  "minHeight": "15px",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
-            />
-          </span>
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -261,64 +345,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_start"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "flex": "1",
-                  "minHeight": "15px",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
-            />
-          </span>
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -332,64 +421,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_start"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "flex": "1",
-                  "minHeight": "15px",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
-            />
-          </span>
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -403,64 +497,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_start"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "flex": "1",
-                  "minHeight": "15px",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
-            />
-          </span>
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -474,64 +573,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_start"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "flex": "1",
-                  "minHeight": "15px",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
-            />
-          </span>
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -545,64 +649,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_start"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "flex": "1",
-                  "minHeight": "15px",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
-            />
-          </span>
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -616,85 +725,16 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
     </ul>
-    <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="menuitem"
-      style={
-        Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
-        }
-      }
-    >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
-      <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
-        style={
-          Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
-          }
-        }
-        tabIndex={0}
-      >
-        <span
-          style={
-            Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flexWrap": "wrap",
-            }
-          }
-        >
-          <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
-            style={
-              Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
-              }
-            }
-            tabIndex={1}
-          />
-        </span>
-      </div>
-      <div />
-    </li>
   </div>
 </div>
 `;
 
 exports[`components/actionsList can be rendered with array of actions typed as strings 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -751,29 +791,33 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foo
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foo
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -796,76 +840,151 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       }
     }
   >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
     <ul
       className="mdc-list"
       style={
         Object {
           "border": "1px solid #eee",
-          "margin": "0 8px",
+          "margin": "0 8px 16px 8px",
           "maxHeight": "18.07vh",
-          "overflow": "auto",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
         }
       }
     >
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_0"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
             >
-              any
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                any
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -879,64 +998,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_0"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
             >
-              output_var
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                output_var
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -950,64 +1074,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_0"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
             >
-              variable
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                variable
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -1021,64 +1150,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_0"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
             >
-              br
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                br
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -1092,64 +1226,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_0"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
             >
-              button
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                button
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -1163,64 +1302,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_0"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
             >
-              trash
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                trash
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -1234,64 +1378,69 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
       <li
-        className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+        className=" onFocusAction actionItem mdc-list-item"
         onClick={[Function]}
         onKeyPress={[Function]}
         role="menuitem"
         style={
           Object {
-            "borderTop": "rgba(0,0,0,0.04) 1px solid",
             "color": "rgb(0, 0, 0)",
-            "height": "100%",
-            "padding": "4px 16px",
           }
         }
       >
         <div
-          aria-label="Add an output response"
-          className="contenteditable"
-          id="ae_content"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onMouseUp={[Function]}
-          onTouchEnd={[Function]}
-          spellCheck={false}
           style={
             Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flex": 1,
+              "width": "100%",
             }
           }
-          tabIndex={0}
         >
-          <span
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
             style={
               Object {
                 "alignItems": "center",
                 "display": "flex",
-                "flexWrap": "wrap",
+                "flex": 1,
               }
             }
+            tabIndex={0}
           >
             <span
-              className={undefined}
-              data="text"
-              id="ae_0"
-              onClick={[Function]}
-              onInput={[Function]}
               style={
                 Object {
-                  "display": "inline-block",
-                  "padding": "0 4px",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
                 }
               }
-              tabIndex={1}
             >
-              bar
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                bar
+              </span>
             </span>
-          </span>
+          </div>
         </div>
         <i
           className="mdc-list-item__meta material-icons"
@@ -1305,85 +1454,16 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         </i>
       </li>
     </ul>
-    <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="menuitem"
-      style={
-        Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
-        }
-      }
-    >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
-      <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
-        style={
-          Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
-          }
-        }
-        tabIndex={0}
-      >
-        <span
-          style={
-            Object {
-              "alignItems": "center",
-              "display": "flex",
-              "flexWrap": "wrap",
-            }
-          }
-        >
-          <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
-            style={
-              Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
-              }
-            }
-            tabIndex={1}
-          />
-        </span>
-      </div>
-      <div />
-    </li>
   </div>
 </div>
 `;
 
 exports[`components/actionsList can have an unique id 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -1440,29 +1520,33 @@ exports[`components/actionsList can have an unique id 1`] = `
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foobar
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -1485,88 +1569,97 @@ exports[`components/actionsList can have an unique id 1`] = `
       }
     }
   >
-    <ul
-      className="mdc-list"
-    />
+    
     <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
       style={
         Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
+          "color": "rgb(0, 0, 0)",
         }
       }
     >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
       <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
         style={
           Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
+            "width": "100%",
           }
         }
-        tabIndex={0}
       >
-        <span
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
           style={
             Object {
               "alignItems": "center",
               "display": "flex",
-              "flexWrap": "wrap",
+              "flex": 1,
+              "minHeight": "40px",
             }
           }
+          tabIndex={0}
         >
           <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
             style={
               Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
               }
             }
-            tabIndex={1}
-          />
-        </span>
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
       </div>
       <div />
     </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
   </div>
 </div>
 `;
 
 exports[`components/actionsList can have different behavior on action 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -1623,29 +1716,33 @@ exports[`components/actionsList can have different behavior on action 1`] = `
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foobar
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -1668,88 +1765,97 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       }
     }
   >
-    <ul
-      className="mdc-list"
-    />
+    
     <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
       style={
         Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
+          "color": "rgb(0, 0, 0)",
         }
       }
     >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
       <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
         style={
           Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
+            "width": "100%",
           }
         }
-        tabIndex={0}
       >
-        <span
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
           style={
             Object {
               "alignItems": "center",
               "display": "flex",
-              "flexWrap": "wrap",
+              "flex": 1,
+              "minHeight": "40px",
             }
           }
+          tabIndex={0}
         >
           <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
             style={
               Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
               }
             }
-            tabIndex={1}
-          />
-        </span>
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
       </div>
       <div />
     </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
   </div>
 </div>
 `;
 
 exports[`components/actionsList can have different behavior on drop 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -1806,29 +1912,33 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foobar
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -1851,88 +1961,97 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       }
     }
   >
-    <ul
-      className="mdc-list"
-    />
+    
     <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
       style={
         Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
+          "color": "rgb(0, 0, 0)",
         }
       }
     >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
       <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
         style={
           Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
+            "width": "100%",
           }
         }
-        tabIndex={0}
       >
-        <span
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
           style={
             Object {
               "alignItems": "center",
               "display": "flex",
-              "flexWrap": "wrap",
+              "flex": 1,
+              "minHeight": "40px",
             }
           }
+          tabIndex={0}
         >
           <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
             style={
               Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
               }
             }
-            tabIndex={1}
-          />
-        </span>
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
       </div>
       <div />
     </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
   </div>
 </div>
 `;
 
 exports[`components/actionsList can have different behavior on edit 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -1989,29 +2108,33 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foobar
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -2034,88 +2157,97 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       }
     }
   >
-    <ul
-      className="mdc-list"
-    />
+    
     <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
       style={
         Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
+          "color": "rgb(0, 0, 0)",
         }
       }
     >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
       <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
         style={
           Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
+            "width": "100%",
           }
         }
-        tabIndex={0}
       >
-        <span
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
           style={
             Object {
               "alignItems": "center",
               "display": "flex",
-              "flexWrap": "wrap",
+              "flex": 1,
+              "minHeight": "40px",
             }
           }
+          tabIndex={0}
         >
           <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
             style={
               Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
               }
             }
-            tabIndex={1}
-          />
-        </span>
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
       </div>
       <div />
     </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
   </div>
 </div>
 `;
 
 exports[`components/actionsList can have different behavior on select 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -2172,29 +2304,33 @@ exports[`components/actionsList can have different behavior on select 1`] = `
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foobar
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -2217,88 +2353,97 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       }
     }
   >
-    <ul
-      className="mdc-list"
-    />
+    
     <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
       style={
         Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
+          "color": "rgb(0, 0, 0)",
         }
       }
     >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
       <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
         style={
           Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
+            "width": "100%",
           }
         }
-        tabIndex={0}
       >
-        <span
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
           style={
             Object {
               "alignItems": "center",
               "display": "flex",
-              "flexWrap": "wrap",
+              "flex": 1,
+              "minHeight": "40px",
             }
           }
+          tabIndex={0}
         >
           <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
             style={
               Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
               }
             }
-            tabIndex={1}
-          />
-        </span>
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
       </div>
       <div />
     </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
   </div>
 </div>
 `;
 
 exports[`components/actionsList renders correctly 1`] = `
 <div
-  className="mrb-sublist mdl-color--white"
+  className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -2355,29 +2500,33 @@ exports[`components/actionsList renders correctly 1`] = `
           style={
             Object {
               "display": "flex",
+              "fontWeight": "900",
             }
           }
         >
-          foobar
-          <div
-            className="mdc-tooltype"
-          >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#ddd",
-                  "paddingLeft": "16px",
-                  "paddingTop": "12px",
-                }
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
-            >
-              help_outline
-            </i>
-            <span>
-              One of below items is send to the user if this intent is activated.
-            </span>
-          </div>
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -2400,78 +2549,87 @@ exports[`components/actionsList renders correctly 1`] = `
       }
     }
   >
-    <ul
-      className="mdc-list"
-    />
+    
     <li
-      className="selectableListItem onFocusAction mdl-list_action mdc-list-item"
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
       style={
         Object {
-          "border": "1px solid rgba(0, 0, 0, 0.2)",
-          "color": "black",
-          "margin": "0 8px",
-          "minHeight": "40px",
+          "color": "rgb(0, 0, 0)",
         }
       }
     >
-      <i
-        aria-hidden="true"
-        className="mdc-list-item__graphic material-icons"
-      >
-        chat_bubble_outline
-      </i>
       <div
-        aria-label="Add an output response"
-        className="contenteditable"
-        id="ae_content"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        spellCheck={false}
         style={
           Object {
-            "alignItems": "center",
-            "display": "flex",
-            "flex": 1,
-            "minHeight": "40px",
+            "width": "100%",
           }
         }
-        tabIndex={0}
       >
-        <span
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
           style={
             Object {
               "alignItems": "center",
               "display": "flex",
-              "flexWrap": "wrap",
+              "flex": 1,
+              "minHeight": "40px",
             }
           }
+          tabIndex={0}
         >
           <span
-            className={undefined}
-            data="text"
-            id="ae_start"
-            onClick={[Function]}
-            onInput={[Function]}
             style={
               Object {
-                "display": "inline-block",
-                "flex": "1",
-                "minHeight": "15px",
-                "padding": "0 4px",
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
               }
             }
-            tabIndex={1}
-          />
-        </span>
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
       </div>
       <div />
     </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
   </div>
 </div>
 `;
