@@ -278,8 +278,8 @@ ActionsList.propTypes = {
   onSelectActionsComponent: PropTypes.func.isRequired,
   onNewActionsChange: PropTypes.func.isRequired,
   onDeleteActionClick: PropTypes.func.isRequired,
-  onChangeToolbox: PropTypes.func.isRequired,
-  selected: PropTypes.number.isRequired,
+  onChangeToolbox: PropTypes.func,
+  selected: PropTypes.number,
 };
 
 export default ActionsList;

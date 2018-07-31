@@ -480,7 +480,7 @@ IntentContainer.propTypes = {
     id: PropTypes.string,
   }),
   newActions: PropTypes.shape({}).isRequired,
-  handleRename: PropTypes.func.isRequired,
+  handleRename: PropTypes.func,
   apiSendIntentRequest: PropTypes.func.isRequired,
   appDeleteIntentAction: PropTypes.func.isRequired,
   appSetIntentAction: PropTypes.func.isRequired,

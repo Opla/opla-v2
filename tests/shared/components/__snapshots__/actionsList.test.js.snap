@@ -5,7 +5,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -59,34 +59,36 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foo
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foo
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -732,7 +734,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -786,34 +788,36 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foo
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foo
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -1459,7 +1463,7 @@ exports[`components/actionsList can have an unique id 1`] = `
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -1513,34 +1517,36 @@ exports[`components/actionsList can have an unique id 1`] = `
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foobar
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -1653,7 +1659,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -1707,34 +1713,36 @@ exports[`components/actionsList can have different behavior on action 1`] = `
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foobar
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -1847,7 +1855,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -1901,34 +1909,36 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foobar
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -2041,7 +2051,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -2095,34 +2105,36 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foobar
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -2235,7 +2247,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -2289,34 +2301,36 @@ exports[`components/actionsList can have different behavior on select 1`] = `
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foobar
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
@@ -2429,7 +2443,7 @@ exports[`components/actionsList renders correctly 1`] = `
   className="mrb-sublist mdl-color--white mdc-elevation--z1"
   style={
     Object {
-      "margin": "8px",
+      "margin": "12px",
     }
   }
 >
@@ -2483,34 +2497,36 @@ exports[`components/actionsList renders correctly 1`] = `
         }
       >
         <div
-          className="mdc-tooltype"
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
         >
-          <div
+          <i
+            className="material-icons"
             style={
               Object {
-                "display": "flex",
-                "fontWeight": "900",
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
               }
             }
           >
-            <i
-              className="material-icons"
-              style={
-                Object {
-                  "color": "#999",
-                  "marginLeft": "-8px",
-                  "paddingRight": "4px",
-                  "paddingTop": "12px",
-                }
-              }
-            >
-              account_circle
-            </i>
-            foobar
-          </div>
-          <span>
-            One of below items is send to the user if this intent is activated.
-          </span>
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
         </div>
       </span>
       <span
