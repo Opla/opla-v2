@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 
 import { apiSaveBotRequest } from "../../actions/api";
 import timezones from "../../utils/timezones";
-import { infoStyleD, FORM_WIDTH } from "./styles";
 
 class GeneralAdmin extends Component {
   constructor(props) {
@@ -78,89 +77,87 @@ class GeneralAdmin extends Component {
     if (this.props.bot === null) {
       return null;
     }
-
+    const title = (
+      <div className="zap-panel_title">
+        Configure your assistant
+        <Button
+          disabled={
+            !this.state.bot ||
+            (this.state.bot && this.state.bot.name.length < 1)
+          }
+          onClick={this.onSaveBotDetails}
+        >
+          SAVE
+        </Button>
+      </div>
+    );
     return (
       <Grid>
         <Inner>
-          <Cell
-            className="mdl-color--white"
-            span={12}
-            style={{ display: "table" }}
-          >
-            <div style={{ width: "200px", display: "table-cell" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  width: "180px",
-                  height: "180px",
-                  margin: "24px",
-                  backgroundColor: "#ddd",
-                }}
-              />
-            </div>
-            <div style={{ display: "table-cell" }}>
-              <form style={infoStyleD}>
-                <div>
-                  <TextField
-                    defaultValue={this.props.bot.name}
-                    label="Assistant name"
-                    onChange={this.handleBotNameChange}
-                    style={{ width: FORM_WIDTH }}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    defaultValue={this.props.bot.description}
-                    isTextarea
-                    label="Description"
-                    onChange={this.handleBotDescriptionChange}
-                    style={{ width: FORM_WIDTH }}
-                  />
-                </div>
-                <div>
-                  <Select
-                    label="Language"
-                    onSelected={this.handleLanguageChange}
-                    style={{ width: FORM_WIDTH }}
-                    selectedIndex={["en", "fr"].findIndex(
-                      (language) =>
-                        language === (this.props.bot.language || null),
-                    )}
-                  >
-                    <MenuItem value="en">English</MenuItem>
-                    <MenuItem value="fr">French</MenuItem>
-                  </Select>
-                </div>
-                <div>
-                  <Select
-                    label="Timezone"
-                    onSelected={this.handleTimezoneChange}
-                    style={{ width: FORM_WIDTH }}
-                    selectedIndex={this.props.timezones.findIndex(
-                      (tz) => tz === (this.props.bot.timezone || null),
-                    )}
-                  >
-                    {this.props.timezones.map((timezone) => (
-                      <MenuItem key={timezone} value={timezone}>
-                        {timezone}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </div>
-              </form>
-            </div>
-            <div>
-              <Button
-                disabled={
-                  !this.state.bot ||
-                  (this.state.bot && this.state.bot.name.length < 1)
-                }
-                raised
-                style={{ float: "right", margin: "24px" }}
-                onClick={this.onSaveBotDetails}
-              >
-                SAVE
-              </Button>
+          <Cell className="zap-panel mdl-color--white" span={12}>
+            {title}
+            <div style={{ display: "flex" }}>
+              <div style={{ width: "200px", marginLeft: "24px" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "180px",
+                    height: "180px",
+                    margin: "24px",
+                    backgroundColor: "#ddd",
+                  }}
+                />
+              </div>
+              <div style={{ width: "65%", marginLeft: "24px" }}>
+                <form className="zap-panel_form">
+                  <div>
+                    <TextField
+                      defaultValue={this.props.bot.name}
+                      label="Assistant name"
+                      onChange={this.handleBotNameChange}
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      defaultValue={this.props.bot.description}
+                      isTextarea
+                      label="Description"
+                      onChange={this.handleBotDescriptionChange}
+                    />
+                  </div>
+                  <div>
+                    <Select
+                      label="Language"
+                      style={{ width: "100%" }}
+                      onSelected={this.handleLanguageChange}
+                      selectedIndex={["en", "fr"].findIndex(
+                        (language) =>
+                          language === (this.props.bot.language || null),
+                      )}
+                    >
+                      <MenuItem value="en">English</MenuItem>
+                      <MenuItem value="fr">French</MenuItem>
+                    </Select>
+                  </div>
+                  <div>
+                    <Select
+                      label="Timezone"
+                      style={{ width: "100%" }}
+                      onSelected={this.handleTimezoneChange}
+                      selectedIndex={this.props.timezones.findIndex(
+                        (tz) => tz === (this.props.bot.timezone || null),
+                      )}
+                    >
+                      {this.props.timezones.map((timezone) => (
+                        <MenuItem key={timezone} value={timezone}>
+                          {timezone}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </div>
+                </form>
+              </div>
+              <div />
             </div>
           </Cell>
         </Inner>

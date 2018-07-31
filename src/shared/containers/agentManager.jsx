@@ -328,7 +328,7 @@ class BotManager extends Component {
               style={{
                 margin: "0px",
                 backgroundColor: "#f2f2f2",
-                zIndex: "4",
+                zIndex: "3",
               }}
               className="mdc-elevation--z4"
               span={4}
