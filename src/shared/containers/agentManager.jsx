@@ -28,7 +28,7 @@ import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
 
-class BotManager extends Component {
+class AgentManager extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
