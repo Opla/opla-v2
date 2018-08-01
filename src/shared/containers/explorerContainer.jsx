@@ -8,13 +8,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { ListItemMeta, Icon } from "zrmc";
-import { ListDragComponent, SubToolbar } from "zoapp-ui";
 import {
-  /* apiGetIntentsRequest,
-  apiSendIntentRequest,
-  apiDeleteIntentRequest, */
-  apiMoveIntentRequest,
-} from "../actions/api";
+  ListComponent,
+  ListDragComponent,
+  ExpansionPanel,
+  SubToolbar,
+} from "zoapp-ui";
+import { apiMoveIntentRequest } from "../actions/api";
 import { appSelectIntent, appDeleteNewActions } from "../actions/app";
 
 class ExplorerContainer extends Component {
@@ -36,9 +36,7 @@ class ExplorerContainer extends Component {
 
   render() {
     const selected = this.props.selectedIntentIndex;
-    const name = "Intents";
-    const items = [];
-    let list = "";
+    let items = [];
     if (this.props.intents && this.props.intents.length > 0) {
       this.props.intents.forEach((intent, index) => {
         const { id } = intent;
@@ -94,15 +92,110 @@ class ExplorerContainer extends Component {
     } else {
       items.push({ id: "noIntent", name: "Create an intent" });
     }
-    list = (
-      <ListDragComponent
-        style={{ backgroundColor: "rgb(252, 252, 252)" }}
-        className="list-content"
-        items={items}
-        selectedItem={selected}
-        onSelect={this.onSelectIntent}
-        onDrop={this.onDropIntent}
-      />
+    const intentList = (
+      <ExpansionPanel
+        elevation={0}
+        label={
+          <div
+            style={{
+              display: "flex",
+              fontWeight: "900",
+              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
+            }}
+          >
+            <Icon
+              style={{
+                paddingTop: "12px",
+                paddingRight: "4px",
+                marginLeft: "-8px",
+              }}
+              name="add_circle_outline"
+              onClick={this.props.handleAdd}
+            />
+            Intents
+          </div>
+        }
+      >
+        <ListDragComponent
+          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
+          items={items}
+          selectedItem={selected}
+          onSelect={this.onSelectIntent}
+          onDrop={this.onDropIntent}
+        />
+      </ExpansionPanel>
+    );
+    items = [];
+    items.push({ id: "noIntent", name: "@System" });
+    const entityList = (
+      <ExpansionPanel
+        elevation={0}
+        collapsed
+        label={
+          <div
+            style={{
+              display: "flex",
+              fontWeight: "900",
+              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
+            }}
+          >
+            <Icon
+              style={{
+                paddingTop: "12px",
+                paddingRight: "4px",
+                marginLeft: "-8px",
+              }}
+              name="add_circle_outline"
+              onClick={this.props.handleAdd}
+            />
+            Entities
+          </div>
+        }
+      >
+        <ListComponent
+          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
+          items={items}
+          selectedItem={-1}
+          onSelect={this.onSelectIntent}
+          onDrop={this.onDropIntent}
+        />
+      </ExpansionPanel>
+    );
+    items = [];
+    items.push({ id: "system", name: "@System" });
+    const callableList = (
+      <ExpansionPanel
+        elevation={0}
+        collapsed
+        label={
+          <div
+            style={{
+              display: "flex",
+              fontWeight: "900",
+              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
+            }}
+          >
+            <Icon
+              style={{
+                paddingTop: "12px",
+                paddingRight: "4px",
+                marginLeft: "-8px",
+              }}
+              name="add_circle_outline"
+              onClick={this.props.handleAdd}
+            />
+            Functions
+          </div>
+        }
+      >
+        <ListComponent
+          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
+          items={items}
+          selectedItem={-1}
+          onSelect={this.onSelectIntent}
+          onDrop={this.onDropIntent}
+        />
+      </ExpansionPanel>
     );
     return (
       <div
@@ -114,13 +207,8 @@ class ExplorerContainer extends Component {
         <SubToolbar
           className=""
           style={{ backgroundColor: "rgb(252, 252, 252)", margin: "0" }}
-          titleName={name}
+          titleName="Explorer"
           icons={[
-            {
-              name: "add_circle_outline",
-              tooltip: "Add an intent",
-              onClick: this.props.handleAdd,
-            },
             {
               name: "cloud_circle",
               tooltip: "Import / Export",
@@ -129,7 +217,11 @@ class ExplorerContainer extends Component {
           ]}
         />
         <div className="list-box explorer" style={{ margin: "0" }}>
-          {list}
+          <div className="list-content">
+            {intentList}
+            {entityList}
+            {callableList}
+          </div>
         </div>
       </div>
     );

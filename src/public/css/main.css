@@ -410,7 +410,7 @@
    margin: 0px;
    padding: 0px;
  }
- 
+
  .list-content > .mdc-list-item {
    /* font-size: 14px; */
    height: 40px;
@@ -419,6 +419,11 @@
    margin: 0 8px;
  }
  
+ .explorer .mrb-subheader {
+   background: #f2f2f2;
+   border-top: 1px solid #e1e1e1;
+ }
+
  /* TODO put this in Zoapp-front */
 i.mrb-subheader-right:hover {
   color: rgba(85,38,130);
