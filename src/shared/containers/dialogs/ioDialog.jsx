@@ -118,7 +118,7 @@ class IODialog extends Component {
           <DialogBody>
             <section>
               <Button
-                className="mdl-button--file"
+                className="zui-button--file"
                 raised
                 style={{ width: "100%", marginTop: "30px" }}
               >
@@ -234,7 +234,7 @@ class IODialog extends Component {
               }}
             />
             <Button
-              className="mdl-button--file"
+              className="zui-button--file"
               raised
               style={{ width: "100%", marginTop: "30px" }}
             >

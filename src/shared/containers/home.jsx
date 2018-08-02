@@ -30,7 +30,7 @@ const Home = ({ isSignedIn }) => {
   }
 
   return (
-    <div className="mdl-layout__content mdl-color--grey-100">
+    <div className="zui-layout__content zui-color--grey-100">
       <section className="text-section" style={{ margin: "40px" }}>
         <Card shadow={0} style={{ width: "512px", margin: "auto" }}>
           <CardTitle style={titleStyle}>

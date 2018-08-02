@@ -181,8 +181,8 @@ export class CreateAssistantBase extends Component {
     // TODO json only for instance
     const acceptImport = "application/json";
     return (
-      <div className="mdl-layout__content mdl-color--grey-100">
-        <section className="mdl-color--white mdl-shadow--2dp" style={boxStyle}>
+      <div className="zui-layout__content zui-color--grey-100">
+        <section className="zui-color--white zui-shadow--2dp" style={boxStyle}>
           <div style={headerStyle}>
             <h4 style={h4}>Welcome</h4>
             <div style={secText}>
@@ -191,7 +191,7 @@ export class CreateAssistantBase extends Component {
             </div>
           </div>
         </section>
-        <section className="mdl-color--white mdl-shadow--2dp" style={boxStyle}>
+        <section className="zui-color--white zui-shadow--2dp" style={boxStyle}>
           <div style={headerStyle}>
             <h4 style={h4}>Templates</h4>
             <div style={secText}>
@@ -215,7 +215,7 @@ export class CreateAssistantBase extends Component {
           onSubmit={this.handleCreate}
         >
           <section
-            className="mdl-color--white mdl-shadow--2dp"
+            className="zui-color--white zui-shadow--2dp"
             style={boxStyle}
           >
             <div style={headerStyle}>

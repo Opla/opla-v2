@@ -186,7 +186,7 @@ class SandboxContainer extends Component {
             ],
             align: "right",
           }}
-          className="mrb-panel-header-dark"
+          className="zui-panel-header-dark"
         />
         {this.renderMessenger(messages, users, this.props.intents)}
       </div>

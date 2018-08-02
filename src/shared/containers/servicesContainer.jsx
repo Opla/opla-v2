@@ -109,7 +109,7 @@ class ServicesContainer extends Component {
       // console.log("ws");
       if (state === "select" || state === "create") {
         if (item.provider) {
-          className = "mdl-dialog-extended";
+          className = "zui-dialog-extended";
           title = item.name;
           content = item.provider.renderSettings();
           action = "next";
@@ -122,7 +122,7 @@ class ServicesContainer extends Component {
           }
         }
       } else if (state === "add") {
-        className = "mdl-dialog-list";
+        className = "zui-dialog-list";
         title = "Add a WebService";
         const items = this.getWebServices(true);
         items.push({
@@ -163,12 +163,12 @@ class ServicesContainer extends Component {
       editor = displayProviderEditor;
       couldDelete = false;
       if ((state === "select" || state === "create") && item.provider) {
-        className = "mdl-dialog-extended";
+        className = "zui-dialog-extended";
         title = item.name;
         content = item.provider.renderSettings();
         action = "next";
       } else if (state === "add") {
-        className = "mdl-dialog-list";
+        className = "zui-dialog-list";
         title = "Add an AI/NLU provider";
         const items = this.getAIProviders(true);
         items.push({
@@ -211,12 +211,12 @@ class ServicesContainer extends Component {
       editor = displayProviderEditor;
       couldDelete = false;
       if ((state === "select" || state === "create") && item.provider) {
-        className = "mdl-dialog-extended";
+        className = "zui-dialog-extended";
         title = item.name;
         content = item.provider.renderSettings();
         action = "next";
       } else if (state === "add") {
-        className = "mdl-dialog-list";
+        className = "zui-dialog-list";
         title = "Add a messaging platform";
         const items = this.getMessagingProviders(true);
         items.push({
@@ -411,21 +411,21 @@ class ServicesContainer extends Component {
 
     return (
       <div style={divCellStyle}>
-        <Cell className="mdl-color--white" span={12}>
+        <Cell className="zui-color--white" span={12}>
           <ServicesList
             name="Messaging platforms"
             items={messagings}
             onSelect={this.onSelect}
           />
         </Cell>
-        <Cell className="mdl-color--white" span={12}>
+        <Cell className="zui-color--white" span={12}>
           <ServicesList
             name="AI/NLU providers"
             items={ais}
             onSelect={this.onSelect}
           />
         </Cell>
-        <Cell className="mdl-color--white" span={12}>
+        <Cell className="zui-color--white" span={12}>
           <ServicesList
             name="Web services"
             items={webservices}

@@ -17,7 +17,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.mrb-panel-header-dark .mrb-panel-header-icon {
+.zui-panel-header-dark .zui-panel-header-icon {
   color: #fcea22;
 }
 
@@ -108,7 +108,7 @@
   opacity: 0;
 }
 
-.mrb-subheader:hover .help_icon {
+.zui-subheader:hover .help_icon {
   opacity: 1;
 }
 
@@ -183,7 +183,7 @@
    top: 0;
  }
  
- mdl-button--file input {
+ zui-button--file input {
    cursor: pointer;
    height: 100%;
    right: 0;
@@ -220,11 +220,11 @@
    outline: 0px solid transparent;
  }
 
- .mdl-chip:focus {
+ .zui-chip:focus {
   border: 1px solid;
  }
 
- .mdl-chip {
+ .zui-chip {
    height: 24px;
    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
    line-height: 24px;
@@ -239,13 +239,13 @@
    white-space: nowrap;
  }
  
- .mdl-chip__text_ex {
+ .zui-chip__text_ex {
    font-size: 13px;
    vertical-align: inherit;
    display: inline-block;
  }
  
- .mdl-chip__text {
+ .zui-chip__text {
    font-size: 13px;
    vertical-align: initial;
  }
@@ -255,17 +255,17 @@
    margin: 0px;
  }
  
- .mrb-action-button {
+ .zui-action-button {
    min-width: 320px;
    background-color: #F2F2F2;
  }
  
- .mrb-action-button-mid {
+ .zui-action-button-mid {
    min-width: 200px;
    background-color: #F2F2F2;
  }
  
- .mdc-list-item .mdc-list-item__secondary-text .mdl-list__item-icon {
+ .mdc-list-item .mdc-list-item__secondary-text .zui-list__item-icon {
   color: rgb(221,221,221);
  }
 
@@ -275,7 +275,7 @@
    text-overflow: ellipsis;
  }
  
- .mdc-list-item--two-line .mdl-list__item-primary-content {
+ .mdc-list-item--two-line .zui-list__item-primary-content {
    height: initial;
  }
 
@@ -406,7 +406,7 @@
    color: #757575 !important;
  }
  
- .mrb-sublist .mdl-list {
+ .zui-sublist .zui-list {
    margin: 0px;
    padding: 0px;
  }
@@ -419,21 +419,25 @@
    margin: 0 8px;
  }
  
- .explorer .mrb-subheader {
+ .zui-expansion-title {
+   overflow: visible;
+ }
+ 
+ .explorer .zui-subheader {
    background: #f2f2f2;
    border-top: 1px solid #e1e1e1;
  }
 
  /* TODO put this in Zoapp-front */
-i.mrb-subheader-right:hover {
+i.zui-subheader-right:hover {
   color: rgba(85,38,130);
 }
 
- .mrb-subheader-right {
+ .zui-subheader-right {
   font-size: .875rem;
  }
  
- .mrb-sublist h4 {
+ .zui-sublist h4 {
   font-size: 15px;
   font-weight: 900;
   color: rgba(0,0,0,.87);
@@ -441,11 +445,11 @@ i.mrb-subheader-right:hover {
   height: 36px;
  }
  
- .mdl-dialog-extended {
+ .zui-dialog-extended {
    width: 550px;
  }
  
- .mdl-dialog-list {
+ .zui-dialog-list {
    width: 320px;
  }
  
@@ -460,7 +464,7 @@ i.mrb-subheader-right:hover {
    -webkit-margin-after: 0;
  }
  
- .mdc-list-item--two-line .mdc-list-item__secondary-text .mdl-list__item-icon {
+ .mdc-list-item--two-line .mdc-list-item__secondary-text .zui-list__item-icon {
    height: 100%;
  }
 

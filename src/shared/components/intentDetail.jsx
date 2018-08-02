@@ -42,7 +42,7 @@ const IntentDetail = ({
     help = <HelpPanel index={displayHelp} onHelp={onHelp} />;
   }
   return (
-    <div className="mrb-action-panel list-box">
+    <div className="zui-action-panel list-box">
       <div className="list-content">
         {help}
         <ActionsList
@@ -96,7 +96,7 @@ const IntentDetail = ({
               />
             </div>
           }
-          className="mdl-color--white"
+          className="zui-color--white"
           style={{ margin: "12px" }}
           collapsed
         >
@@ -106,7 +106,7 @@ const IntentDetail = ({
               <ListItemMeta>
                 <Button
                   ripple
-                  className="mrb-action-button"
+                  className="zui-action-button"
                   onClick={(e) => {
                     e.preventDefault();
                     if (onSelect) {
@@ -123,7 +123,7 @@ const IntentDetail = ({
               <ListItemMeta>
                 <Button
                   ripple
-                  className="mrb-action-button"
+                  className="zui-action-button"
                   onClick={(e) => {
                     e.preventDefault();
                     if (onSelect) {

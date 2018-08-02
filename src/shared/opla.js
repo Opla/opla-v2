@@ -96,7 +96,7 @@ const appProps = {
             <Users key="users" />,
             <Advanced key="advanced">
               <Inner>
-                <Cell className="mdl-color--white" span={12}>
+                <Cell className="zui-color--white" span={12}>
                   <div className="zap-panel">
                     <div className="zap-panel_title">
                       <span style={{ color: "#b71c1c" }}>

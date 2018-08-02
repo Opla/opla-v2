@@ -111,7 +111,7 @@ export default class AppSettings extends Component {
     } */
     return (
       <div>
-        <div className="mdl-color--grey-100" style={style}>
+        <div className="zui-color--grey-100" style={style}>
           {container}
         </div>
       </div>

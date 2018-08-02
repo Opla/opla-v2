@@ -286,7 +286,7 @@ class AgentManager extends Component {
       panel1 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
+          className="zui-color--white zui-panel"
           span={2}
         >
           <ExplorerContainer
@@ -300,7 +300,7 @@ class AgentManager extends Component {
       panel2 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
+          className="zui-color--white zui-panel"
           span={6}
         >
           <IntentContainer handleRename={this.handleRenameIntent} />
@@ -310,7 +310,7 @@ class AgentManager extends Component {
       panel1 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
+          className="zui-color--white zui-panel"
           span={2}
         >
           <EntitiesContainer handleExportImport={this.handleExportImport} />
@@ -319,7 +319,7 @@ class AgentManager extends Component {
       panel2 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
+          className="zui-color--white zui-panel"
           span={6}
         >
           TODO
@@ -329,7 +329,7 @@ class AgentManager extends Component {
       panel1 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
+          className="zui-color--white zui-panel"
           span={2}
         >
           <CallsContainer handleExportImport={this.handleExportImport} />
@@ -338,7 +338,7 @@ class AgentManager extends Component {
       panel2 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="mdl-color--white mrb-panel"
+          className="zui-color--white zui-panel"
           span={6}
         >
           TODO
@@ -359,7 +359,7 @@ class AgentManager extends Component {
       });
     }
     return (
-      <div className="mdl-color--grey-100">
+      <div className="zui-color--grey-100">
         <Grid
           gutter={{ desktop: "0px", tablet: "0px", phone: "0px" }}
           style={{ margin: "0px", padding: "0px" }}

@@ -240,7 +240,7 @@ class ActionsList extends Component {
     return (
       <ExpansionPanel
         label={title}
-        className="mdl-color--white"
+        className="zui-color--white"
         style={{ margin: "12px" }}
       >
         {toolbox}

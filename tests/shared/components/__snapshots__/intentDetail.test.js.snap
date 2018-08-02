@@ -2,14 +2,14 @@
 
 exports[`components/intentDetail can render intent with special characters correctly 1`] = `
 <div
-  className="mrb-action-panel list-box"
+  className="zui-action-panel list-box"
 >
   <div
     className="list-content"
   >
     
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="zui-expansion zui-color--white mdc-elevation--z1"
       style={
         Object {
           "margin": "12px",
@@ -17,7 +17,7 @@ exports[`components/intentDetail can render intent with special characters corre
       }
     >
       <div
-        className="mrb-subheader"
+        className="zui-expansion-header"
         onClick={[Function]}
         style={
           Object {
@@ -28,16 +28,10 @@ exports[`components/intentDetail can render intent with special characters corre
         }
       >
         <div
-          style={
-            Object {
-              "float": "right",
-              "height": "48px",
-              "width": "48px",
-            }
-          }
+          className="zui-expansion-arrow"
         >
           <i
-            className="mrb-subheader-right material-icons"
+            className="zui-expansion-arrow-icon material-icons"
             disabled={false}
             style={
               Object {
@@ -55,15 +49,13 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "display": "flex",
+              "width": "100%",
             }
           }
         >
-          <span
-            style={
-              Object {
-                "width": "33%",
-              }
-            }
+          <div
+            className="zui-expansion-title"
+            style={null}
           >
             <div
               style={
@@ -97,15 +89,8 @@ exports[`components/intentDetail can render intent with special characters corre
                 help
               </i>
             </div>
-          </span>
-          <span
-            style={
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "paddingLeft": "16px",
-              }
-            }
-          />
+          </div>
+          
         </div>
       </div>
       <div
@@ -202,7 +187,7 @@ exports[`components/intentDetail can render intent with special characters corre
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="zui-expansion zui-color--white mdc-elevation--z1"
       style={
         Object {
           "margin": "12px",
@@ -210,7 +195,7 @@ exports[`components/intentDetail can render intent with special characters corre
       }
     >
       <div
-        className="mrb-subheader"
+        className="zui-expansion-header"
         onClick={[Function]}
         style={
           Object {
@@ -221,16 +206,10 @@ exports[`components/intentDetail can render intent with special characters corre
         }
       >
         <div
-          style={
-            Object {
-              "float": "right",
-              "height": "48px",
-              "width": "48px",
-            }
-          }
+          className="zui-expansion-arrow"
         >
           <i
-            className="mrb-subheader-right material-icons"
+            className="zui-expansion-arrow-icon material-icons"
             disabled={false}
             style={
               Object {
@@ -248,15 +227,13 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "display": "flex",
+              "width": "100%",
             }
           }
         >
-          <span
-            style={
-              Object {
-                "width": "33%",
-              }
-            }
+          <div
+            className="zui-expansion-title"
+            style={null}
           >
             <div
               style={
@@ -295,15 +272,8 @@ exports[`components/intentDetail can render intent with special characters corre
                 help
               </i>
             </div>
-          </span>
-          <span
-            style={
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "paddingLeft": "16px",
-              }
-            }
-          />
+          </div>
+          
         </div>
       </div>
       <div
@@ -400,7 +370,7 @@ exports[`components/intentDetail can render intent with special characters corre
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="zui-expansion zui-color--white mdc-elevation--z1"
       style={
         Object {
           "margin": "12px",
@@ -408,7 +378,7 @@ exports[`components/intentDetail can render intent with special characters corre
       }
     >
       <div
-        className="mrb-subheader"
+        className="zui-expansion-header"
         onClick={[Function]}
         style={
           Object {
@@ -417,16 +387,10 @@ exports[`components/intentDetail can render intent with special characters corre
         }
       >
         <div
-          style={
-            Object {
-              "float": "right",
-              "height": "48px",
-              "width": "48px",
-            }
-          }
+          className="zui-expansion-arrow"
         >
           <i
-            className="mrb-subheader-right material-icons"
+            className="zui-expansion-arrow-icon material-icons"
             disabled={false}
             style={
               Object {
@@ -444,15 +408,13 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "display": "flex",
+              "width": "100%",
             }
           }
         >
-          <span
-            style={
-              Object {
-                "width": "33%",
-              }
-            }
+          <div
+            className="zui-expansion-title"
+            style={null}
           >
             <div
               style={
@@ -486,15 +448,8 @@ exports[`components/intentDetail can render intent with special characters corre
                 help
               </i>
             </div>
-          </span>
-          <span
-            style={
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "paddingLeft": "16px",
-              }
-            }
-          />
+          </div>
+          
         </div>
       </div>
       <div
@@ -530,7 +485,7 @@ exports[`components/intentDetail can render intent with special characters corre
               tabIndex="0"
             >
               <button
-                className="mrb-action-button mdc-button"
+                className="zui-action-button mdc-button"
                 disabled={false}
                 id={null}
                 onClick={[Function]}
@@ -561,7 +516,7 @@ exports[`components/intentDetail can render intent with special characters corre
               tabIndex="0"
             >
               <button
-                className="mrb-action-button mdc-button"
+                className="zui-action-button mdc-button"
                 disabled={false}
                 id={null}
                 onClick={[Function]}
@@ -581,14 +536,14 @@ exports[`components/intentDetail can render intent with special characters corre
 
 exports[`components/intentDetail renders correctly 1`] = `
 <div
-  className="mrb-action-panel list-box"
+  className="zui-action-panel list-box"
 >
   <div
     className="list-content"
   >
     
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="zui-expansion zui-color--white mdc-elevation--z1"
       style={
         Object {
           "margin": "12px",
@@ -596,7 +551,7 @@ exports[`components/intentDetail renders correctly 1`] = `
       }
     >
       <div
-        className="mrb-subheader"
+        className="zui-expansion-header"
         onClick={[Function]}
         style={
           Object {
@@ -607,16 +562,10 @@ exports[`components/intentDetail renders correctly 1`] = `
         }
       >
         <div
-          style={
-            Object {
-              "float": "right",
-              "height": "48px",
-              "width": "48px",
-            }
-          }
+          className="zui-expansion-arrow"
         >
           <i
-            className="mrb-subheader-right material-icons"
+            className="zui-expansion-arrow-icon material-icons"
             disabled={false}
             style={
               Object {
@@ -634,15 +583,13 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "display": "flex",
+              "width": "100%",
             }
           }
         >
-          <span
-            style={
-              Object {
-                "width": "33%",
-              }
-            }
+          <div
+            className="zui-expansion-title"
+            style={null}
           >
             <div
               style={
@@ -676,15 +623,8 @@ exports[`components/intentDetail renders correctly 1`] = `
                 help
               </i>
             </div>
-          </span>
-          <span
-            style={
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "paddingLeft": "16px",
-              }
-            }
-          />
+          </div>
+          
         </div>
       </div>
       <div
@@ -781,7 +721,7 @@ exports[`components/intentDetail renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="zui-expansion zui-color--white mdc-elevation--z1"
       style={
         Object {
           "margin": "12px",
@@ -789,7 +729,7 @@ exports[`components/intentDetail renders correctly 1`] = `
       }
     >
       <div
-        className="mrb-subheader"
+        className="zui-expansion-header"
         onClick={[Function]}
         style={
           Object {
@@ -800,16 +740,10 @@ exports[`components/intentDetail renders correctly 1`] = `
         }
       >
         <div
-          style={
-            Object {
-              "float": "right",
-              "height": "48px",
-              "width": "48px",
-            }
-          }
+          className="zui-expansion-arrow"
         >
           <i
-            className="mrb-subheader-right material-icons"
+            className="zui-expansion-arrow-icon material-icons"
             disabled={false}
             style={
               Object {
@@ -827,15 +761,13 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "display": "flex",
+              "width": "100%",
             }
           }
         >
-          <span
-            style={
-              Object {
-                "width": "33%",
-              }
-            }
+          <div
+            className="zui-expansion-title"
+            style={null}
           >
             <div
               style={
@@ -874,15 +806,8 @@ exports[`components/intentDetail renders correctly 1`] = `
                 help
               </i>
             </div>
-          </span>
-          <span
-            style={
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "paddingLeft": "16px",
-              }
-            }
-          />
+          </div>
+          
         </div>
       </div>
       <div
@@ -979,7 +904,7 @@ exports[`components/intentDetail renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="mrb-sublist mdl-color--white mdc-elevation--z1"
+      className="zui-expansion zui-color--white mdc-elevation--z1"
       style={
         Object {
           "margin": "12px",
@@ -987,7 +912,7 @@ exports[`components/intentDetail renders correctly 1`] = `
       }
     >
       <div
-        className="mrb-subheader"
+        className="zui-expansion-header"
         onClick={[Function]}
         style={
           Object {
@@ -996,16 +921,10 @@ exports[`components/intentDetail renders correctly 1`] = `
         }
       >
         <div
-          style={
-            Object {
-              "float": "right",
-              "height": "48px",
-              "width": "48px",
-            }
-          }
+          className="zui-expansion-arrow"
         >
           <i
-            className="mrb-subheader-right material-icons"
+            className="zui-expansion-arrow-icon material-icons"
             disabled={false}
             style={
               Object {
@@ -1023,15 +942,13 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "display": "flex",
+              "width": "100%",
             }
           }
         >
-          <span
-            style={
-              Object {
-                "width": "33%",
-              }
-            }
+          <div
+            className="zui-expansion-title"
+            style={null}
           >
             <div
               style={
@@ -1065,15 +982,8 @@ exports[`components/intentDetail renders correctly 1`] = `
                 help
               </i>
             </div>
-          </span>
-          <span
-            style={
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "paddingLeft": "16px",
-              }
-            }
-          />
+          </div>
+          
         </div>
       </div>
       <div
@@ -1109,7 +1019,7 @@ exports[`components/intentDetail renders correctly 1`] = `
               tabIndex="0"
             >
               <button
-                className="mrb-action-button mdc-button"
+                className="zui-action-button mdc-button"
                 disabled={false}
                 id={null}
                 onClick={[Function]}
@@ -1140,7 +1050,7 @@ exports[`components/intentDetail renders correctly 1`] = `
               tabIndex="0"
             >
               <button
-                className="mrb-action-button mdc-button"
+                className="zui-action-button mdc-button"
                 disabled={false}
                 id={null}
                 onClick={[Function]}

@@ -34,8 +34,8 @@ const MessagingsList = ({ name, items, onSelect }) => {
   };
 
   return (
-    <div className="mrb-sublist">
-      <div className="mrb-subheader">
+    <div className="zui-sublist">
+      <div className="zui-subheader">
         <h4>{name}</h4>
       </div>
 

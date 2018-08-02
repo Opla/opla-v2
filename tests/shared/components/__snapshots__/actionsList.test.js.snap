@@ -2,7 +2,7 @@
 
 exports[`components/actionsList can be rendered with array of actions typed as shapes 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -10,7 +10,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -21,16 +21,10 @@ exports[`components/actionsList can be rendered with array of actions typed as s
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -48,15 +42,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -90,15 +82,8 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
@@ -731,7 +716,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
 
 exports[`components/actionsList can be rendered with array of actions typed as strings 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -739,7 +724,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -750,16 +735,10 @@ exports[`components/actionsList can be rendered with array of actions typed as s
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -777,15 +756,13 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -819,15 +796,8 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
@@ -1460,7 +1430,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
 
 exports[`components/actionsList can have an unique id 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -1468,7 +1438,7 @@ exports[`components/actionsList can have an unique id 1`] = `
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -1479,16 +1449,10 @@ exports[`components/actionsList can have an unique id 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -1506,15 +1470,13 @@ exports[`components/actionsList can have an unique id 1`] = `
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -1548,15 +1510,8 @@ exports[`components/actionsList can have an unique id 1`] = `
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
@@ -1656,7 +1611,7 @@ exports[`components/actionsList can have an unique id 1`] = `
 
 exports[`components/actionsList can have different behavior on action 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -1664,7 +1619,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -1675,16 +1630,10 @@ exports[`components/actionsList can have different behavior on action 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -1702,15 +1651,13 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -1744,15 +1691,8 @@ exports[`components/actionsList can have different behavior on action 1`] = `
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
@@ -1852,7 +1792,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
 
 exports[`components/actionsList can have different behavior on drop 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -1860,7 +1800,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -1871,16 +1811,10 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -1898,15 +1832,13 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -1940,15 +1872,8 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
@@ -2048,7 +1973,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
 
 exports[`components/actionsList can have different behavior on edit 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -2056,7 +1981,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -2067,16 +1992,10 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -2094,15 +2013,13 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -2136,15 +2053,8 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
@@ -2244,7 +2154,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
 
 exports[`components/actionsList can have different behavior on select 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -2252,7 +2162,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -2263,16 +2173,10 @@ exports[`components/actionsList can have different behavior on select 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -2290,15 +2194,13 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -2332,15 +2234,8 @@ exports[`components/actionsList can have different behavior on select 1`] = `
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
@@ -2440,7 +2335,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
 
 exports[`components/actionsList renders correctly 1`] = `
 <div
-  className="mrb-sublist mdl-color--white mdc-elevation--z1"
+  className="zui-expansion zui-color--white mdc-elevation--z1"
   style={
     Object {
       "margin": "12px",
@@ -2448,7 +2343,7 @@ exports[`components/actionsList renders correctly 1`] = `
   }
 >
   <div
-    className="mrb-subheader"
+    className="zui-expansion-header"
     onClick={[Function]}
     style={
       Object {
@@ -2459,16 +2354,10 @@ exports[`components/actionsList renders correctly 1`] = `
     }
   >
     <div
-      style={
-        Object {
-          "float": "right",
-          "height": "48px",
-          "width": "48px",
-        }
-      }
+      className="zui-expansion-arrow"
     >
       <i
-        className="mrb-subheader-right material-icons"
+        className="zui-expansion-arrow-icon material-icons"
         disabled={false}
         style={
           Object {
@@ -2486,15 +2375,13 @@ exports[`components/actionsList renders correctly 1`] = `
       style={
         Object {
           "display": "flex",
+          "width": "100%",
         }
       }
     >
-      <span
-        style={
-          Object {
-            "width": "33%",
-          }
-        }
+      <div
+        className="zui-expansion-title"
+        style={null}
       >
         <div
           style={
@@ -2528,15 +2415,8 @@ exports[`components/actionsList renders correctly 1`] = `
             help
           </i>
         </div>
-      </span>
-      <span
-        style={
-          Object {
-            "color": "rgba(0, 0, 0, 0.54)",
-            "paddingLeft": "16px",
-          }
-        }
-      />
+      </div>
+      
     </div>
   </div>
   <div
