@@ -7,7 +7,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 
-import { IntentContainerBase } from "shared/containers/intentContainer";
+import { IntentContainerBase } from "shared/containers/builder/intentContainer";
 import ActionsEditable from "shared/components/actionsEditable";
 import * as intentDetail from "shared/components/intentDetail";
 import Zrmc from "zrmc";

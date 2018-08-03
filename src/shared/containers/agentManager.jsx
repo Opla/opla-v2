@@ -21,9 +21,9 @@ import {
 } from "../actions/api";
 import { appUpdateIntent } from "../actions/app";
 import ExplorerContainer from "./explorerContainer";
-import IntentContainer from "./intentContainer";
-import EntitiesContainer from "./builder/entitiesContainer";
-import CallsContainer from "./builder/callsContainer";
+import IntentContainer from "./builder/intentContainer";
+import EntityContainer from "./builder/entityContainer";
+import FunctionContainer from "./builder/functionContainer";
 import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
@@ -282,21 +282,41 @@ class AgentManager extends Component {
     let panel1 = null;
     let panel2 = null;
 
-    if (this.props.activeTab === 0) {
-      panel1 = (
+    panel1 = (
+      <Cell
+        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+        className="zui-color--white zui-panel"
+        span={2}
+      >
+        <ExplorerContainer
+          handleExportImport={this.handleExportImport}
+          handleRename={this.handleRenameIntent}
+          handleAdd={this.handleAddIntent}
+          handleDelete={this.handleDeleteIntent}
+        />
+      </Cell>
+    );
+    if (this.props.selectedType === "function") {
+      panel2 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
           className="zui-color--white zui-panel"
-          span={2}
+          span={6}
         >
-          <ExplorerContainer
-            handleExportImport={this.handleExportImport}
-            handleRename={this.handleRenameIntent}
-            handleAdd={this.handleAddIntent}
-            handleDelete={this.handleDeleteIntent}
-          />
+          <FunctionContainer />
         </Cell>
       );
+    } else if (this.props.selectedType === "entity") {
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="zui-color--white zui-panel"
+          span={6}
+        >
+          <EntityContainer />
+        </Cell>
+      );
+    } else {
       panel2 = (
         <Cell
           style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
@@ -304,44 +324,6 @@ class AgentManager extends Component {
           span={6}
         >
           <IntentContainer handleRename={this.handleRenameIntent} />
-        </Cell>
-      );
-    } else if (this.props.activeTab === 1) {
-      panel1 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="zui-color--white zui-panel"
-          span={2}
-        >
-          <EntitiesContainer handleExportImport={this.handleExportImport} />
-        </Cell>
-      );
-      panel2 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="zui-color--white zui-panel"
-          span={6}
-        >
-          TODO
-        </Cell>
-      );
-    } else {
-      panel1 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="zui-color--white zui-panel"
-          span={2}
-        >
-          <CallsContainer handleExportImport={this.handleExportImport} />
-        </Cell>
-      );
-      panel2 = (
-        <Cell
-          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-          className="zui-color--white zui-panel"
-          span={6}
-        >
-          TODO
         </Cell>
       );
     }
@@ -402,6 +384,7 @@ AgentManager.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
   selectedBotId: PropTypes.string,
+  selectedType: PropTypes.string.isRequired,
   bot: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -431,6 +414,7 @@ const mapStateToProps = (state) => {
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading || false;
   const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
+  const selectedType = state.app ? state.app.selectedType : "intent";
   if (!selectedIntent) {
     selectedIntent = state.app.intents
       ? state.app.intents[selectedIntentIndex]
@@ -445,6 +429,7 @@ const mapStateToProps = (state) => {
     isSignedIn,
     selectedIntent,
     selectedIntentIndex,
+    selectedType,
     titleName,
   };
 };

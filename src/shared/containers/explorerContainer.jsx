@@ -16,7 +16,12 @@ import {
   Tooltip,
 } from "zoapp-ui";
 import { apiMoveIntentRequest } from "../actions/api";
-import { appSelectIntent, appDeleteNewActions } from "../actions/app";
+import {
+  appSelectIntent,
+  appSelectEntity,
+  appSelectFunction,
+  appDeleteNewActions,
+} from "../actions/app";
 
 class ExplorerContainer extends Component {
   onDropIntent = (dragIndex, dropIndex) => {
@@ -33,6 +38,14 @@ class ExplorerContainer extends Component {
 
   onSelectIntent = (selected) => {
     this.props.appSelectIntent(this.props.selectedBotId, selected);
+  };
+
+  onSelectEntity = (selected) => {
+    this.props.appSelectEntity(this.props.selectedBotId, selected);
+  };
+
+  onSelectFunction = (selected) => {
+    this.props.appSelectFunction(this.props.selectedBotId, selected);
   };
 
   render() {
@@ -96,7 +109,10 @@ class ExplorerContainer extends Component {
                   marginLeft: "-8px",
                 }}
                 name="add_circle_outline"
-                onClick={this.props.handleAdd}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  this.props.handleAdd();
+                }}
               />
             </Tooltip>
             Intents
@@ -113,7 +129,14 @@ class ExplorerContainer extends Component {
       </ExpansionPanel>
     );
     items = [];
-    items.push({ id: "noIntent", name: "@System" });
+    items.push({
+      id: "entitySystem",
+      name: (
+        <span>
+          <span style={{ color: "#00000044" }}>@</span>System
+        </span>
+      ),
+    });
     const entityList = (
       <ExpansionPanel
         elevation={0}
@@ -136,7 +159,10 @@ class ExplorerContainer extends Component {
                   marginLeft: "-8px",
                 }}
                 name="add_circle_outline"
-                onClick={this.props.handleAdd}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // this.props.handleAdd();
+                }}
               />
             </Tooltip>
             Entities
@@ -146,14 +172,20 @@ class ExplorerContainer extends Component {
         <ListComponent
           style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
           items={items}
-          selectedItem={-1}
-          onSelect={this.onSelectIntent}
-          onDrop={this.onDropIntent}
+          selectedItem={this.props.selectedEntityIndex}
+          onSelect={this.onSelectEntity}
         />
       </ExpansionPanel>
     );
     items = [];
-    items.push({ id: "system", name: "/System" });
+    items.push({
+      id: "funcSystem",
+      name: (
+        <span>
+          <span style={{ color: "#00000044" }}>/</span>System
+        </span>
+      ),
+    });
     const callableList = (
       <ExpansionPanel
         elevation={0}
@@ -176,7 +208,10 @@ class ExplorerContainer extends Component {
                   marginLeft: "-8px",
                 }}
                 name="add_circle_outline"
-                onClick={() => {}}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // this.props.handleAdd();
+                }}
               />
             </Tooltip>
             Functions
@@ -186,9 +221,8 @@ class ExplorerContainer extends Component {
         <ListComponent
           style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
           items={items}
-          selectedItem={-1}
+          selectedItem={this.props.selectedFunctionIndex}
           onSelect={this.onSelectFunction}
-          onDrop={this.onDropIntent}
         />
       </ExpansionPanel>
     );
@@ -241,8 +275,12 @@ ExplorerContainer.propTypes = {
   selectedBotId: PropTypes.string,
   intents: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedIntentIndex: PropTypes.number,
+  selectedEntityIndex: PropTypes.number,
+  selectedFunctionIndex: PropTypes.number,
   apiMoveIntentRequest: PropTypes.func.isRequired,
   appSelectIntent: PropTypes.func.isRequired,
+  appSelectEntity: PropTypes.func.isRequired,
+  appSelectFunction: PropTypes.func.isRequired,
   handleExportImport: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
   handleRename: PropTypes.func.isRequired,
@@ -251,6 +289,10 @@ ExplorerContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
+  const selectedEntityIndex = state.app ? state.app.selectedEntityIndex : -1;
+  const selectedFunctionIndex = state.app
+    ? state.app.selectedFunctionIndex
+    : -1;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const intents = state.app.intents ? [...state.app.intents] : null;
   const { admin } = state.app;
@@ -259,6 +301,8 @@ const mapStateToProps = (state) => {
   return {
     intents,
     selectedIntentIndex,
+    selectedEntityIndex,
+    selectedFunctionIndex,
     selectedBotId,
     bot,
   };
@@ -271,6 +315,14 @@ const mapDispatchToProps = (dispatch) => ({
   appSelectIntent: (botId, intentIndex) => {
     dispatch(appDeleteNewActions());
     dispatch(appSelectIntent(botId, intentIndex));
+  },
+  appSelectEntity: (botId, index) => {
+    dispatch(appDeleteNewActions());
+    dispatch(appSelectEntity(botId, index));
+  },
+  appSelectFunction: (botId, index) => {
+    dispatch(appDeleteNewActions());
+    dispatch(appSelectFunction(botId, index));
   },
 });
 

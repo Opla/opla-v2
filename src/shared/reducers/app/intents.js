@@ -224,11 +224,17 @@ export const handlers = {
     if (state.intents && selectedIntentIndex < state.intents.length) {
       selectedIntent = { ...state.intents[selectedIntentIndex] };
     }
+    const selectedType = "intent";
+    const selectedEntityIndex = -1;
+    const selectedFunctionIndex = -1;
     return {
       ...state,
       selectedBotId,
       selectedIntentIndex,
       selectedIntent,
+      selectedEntityIndex,
+      selectedFunctionIndex,
+      selectedType,
     };
   },
 
