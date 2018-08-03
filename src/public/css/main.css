@@ -117,7 +117,7 @@
   opacity: 0;
 }
 
-.zui-subheader:hover .help_icon {
+.zui-expansion-header:hover .help_icon {
   opacity: 1;
 }
 
@@ -171,6 +171,11 @@
 .help_panel_header > div > i {
   height: 24px;
   color: rgba(0,0,0,.54);
+  cursor: pointer;
+}
+
+.help_panel_header > div > i:hover {
+  color: rgba(85,38,130);
 }
 
 .fileInput {
@@ -288,7 +293,32 @@
    height: initial;
  }
 
- .explorer .zui-expansion-header {
+.explorer_header {
+  display: flex;
+  display: flex;
+  margin-top: 6px;
+  line-height: 24px;
+}
+
+.explorer_header > div {
+  margin-right: 8px;
+  cursor: pointer;
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+}
+
+.explorer_header > div:hover {
+  margin-right: 8px;
+  cursor: pointer;
+  color: rgba(2, 206, 204, 0.54);
+}
+
+.explorer_view_selected {
+  color: var(--mdc-theme-secondary, #018786);
+  border-bottom: 2px solid;
+  padding-bottom: 6px;
+}
+ 
+.explorer .zui-expansion-header {
   background: rgb(242, 242, 242);
   border-top: 1px solid rgba(34,34,34,0.05);
  }
@@ -307,11 +337,11 @@
   justify-content: space-between;
 }
 
-.explorer .zui-expansion-title > div > i {
+.explorer .zui-expansion-title > div i {
   margin-right: -20px;
 }
 
-.explorer .zui-expansion-title > div > i:hover {
+.explorer .zui-expansion-title > div i:hover {
   color: rgba(85,38,130);
 }
 
@@ -326,10 +356,20 @@
    min-width: 48px;
  }
 
+.zui-panel-header__actions i {
+  cursor: pointer;
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+}
+
+.zui-panel-header__actions i:hover {
+  color: rgba(85,38,130);
+}
+
  .actionConditional {
    height: auto;
  }
  
+
 .actionItem {
   color: rgb(0, 0, 0);
   height: 100%;

@@ -13,6 +13,7 @@ import {
   ListDragComponent,
   ExpansionPanel,
   SubToolbar,
+  Tooltip,
 } from "zoapp-ui";
 import { apiMoveIntentRequest } from "../actions/api";
 import { appSelectIntent, appDeleteNewActions } from "../actions/app";
@@ -87,15 +88,17 @@ class ExplorerContainer extends Component {
               color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
             }}
           >
-            <Icon
-              style={{
-                paddingTop: "12px",
-                paddingRight: "4px",
-                marginLeft: "-8px",
-              }}
-              name="add_circle_outline"
-              onClick={this.props.handleAdd}
-            />
+            <Tooltip label="add an intent">
+              <Icon
+                style={{
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+                name="add_circle_outline"
+                onClick={this.props.handleAdd}
+              />
+            </Tooltip>
             Intents
           </div>
         }
@@ -125,15 +128,17 @@ class ExplorerContainer extends Component {
               color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
             }}
           >
-            <Icon
-              style={{
-                paddingTop: "12px",
-                paddingRight: "4px",
-                marginLeft: "-8px",
-              }}
-              name="add_circle_outline"
-              onClick={this.props.handleAdd}
-            />
+            <Tooltip label="TODO add an entity">
+              <Icon
+                style={{
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+                name="add_circle_outline"
+                onClick={this.props.handleAdd}
+              />
+            </Tooltip>
             Entities
           </div>
         }
@@ -163,15 +168,17 @@ class ExplorerContainer extends Component {
               color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
             }}
           >
-            <Icon
-              style={{
-                paddingTop: "12px",
-                paddingRight: "4px",
-                marginLeft: "-8px",
-              }}
-              name="add_circle_outline"
-              onClick={this.props.handleAdd}
-            />
+            <Tooltip label="TODO add a function">
+              <Icon
+                style={{
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+                name="add_circle_outline"
+                onClick={() => {}}
+              />
+            </Tooltip>
             Functions
           </div>
         }
@@ -180,7 +187,7 @@ class ExplorerContainer extends Component {
           style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
           items={items}
           selectedItem={-1}
-          onSelect={this.onSelectIntent}
+          onSelect={this.onSelectFunction}
           onDrop={this.onDropIntent}
         />
       </ExpansionPanel>
@@ -188,14 +195,23 @@ class ExplorerContainer extends Component {
     return (
       <div
         style={{
-          backgroundColor: "rgb(252, 252, 252)",
+          backgroundColor: "rgb(232, 232, 232)",
           borderRight: "1px solid rgba(0, 0, 0, 0.12)",
         }}
       >
         <SubToolbar
           className=""
           style={{ backgroundColor: "rgb(252, 252, 252)", margin: "0" }}
-          titleName="Explorer"
+          titleName={
+            <div className="explorer_header">
+              <Tooltip label="view as list">
+                <Icon name="view_list" className="explorer_view_selected" />
+              </Tooltip>
+              <Tooltip label="TODO view as graph">
+                <Icon name="device_hub" />
+              </Tooltip>
+            </div>
+          }
           icons={[
             {
               name: "cloud_circle",
