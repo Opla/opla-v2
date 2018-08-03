@@ -40,31 +40,13 @@ class ExplorerContainer extends Component {
     if (this.props.intents && this.props.intents.length > 0) {
       this.props.intents.forEach((intent, index) => {
         const { id } = intent;
-        const style = intent.notSaved
-          ? {
-              marginRight: "4px",
-              width: "8px",
-              height: "8px",
-              marginBottom: "2px",
-            }
-          : { display: "none", marginRight: "2px" };
-        const marginLeft = intent.notSaved ? "-14px" : "0px";
         const n = [];
         n.push(
-          <span
-            key="i_text"
-            style={{
-              marginLeft,
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              textOverflow: "ellipsis",
-              maxWidth: "160px",
-            }}
-          >
-            <span className="red_dot" style={style} />
+          <div key="i_text">
+            {intent.notSaved ? <div className="item_notsaved" /> : ""}
             <span style={{ color: "#00000044" }}>#</span>
             {intent.name}
-          </span>,
+          </div>,
         );
         n.push(
           <ListItemMeta
@@ -95,6 +77,8 @@ class ExplorerContainer extends Component {
     const intentList = (
       <ExpansionPanel
         elevation={0}
+        compact
+        leftArrow
         label={
           <div
             style={{
@@ -131,6 +115,8 @@ class ExplorerContainer extends Component {
       <ExpansionPanel
         elevation={0}
         collapsed
+        compact
+        leftArrow
         label={
           <div
             style={{
@@ -162,11 +148,13 @@ class ExplorerContainer extends Component {
       </ExpansionPanel>
     );
     items = [];
-    items.push({ id: "system", name: "@System" });
+    items.push({ id: "system", name: "/System" });
     const callableList = (
       <ExpansionPanel
         elevation={0}
         collapsed
+        compact
+        leftArrow
         label={
           <div
             style={{
@@ -261,15 +249,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  /* apiGetIntentsRequest: (botId) => {
-    dispatch(apiGetIntentsRequest(botId));
-  },
-  apiSendIntentRequest: (botId, intent) => {
-    dispatch(apiSendIntentRequest(botId, intent));
-  },
-  apiDeleteIntentRequest: (botId, intentId) => {
-    dispatch(apiDeleteIntentRequest(botId, intentId));
-  }, */
   apiMoveIntentRequest: (botId, intentId, from, to) => {
     dispatch(apiMoveIntentRequest(botId, intentId, from, to));
   },

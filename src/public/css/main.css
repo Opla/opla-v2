@@ -81,6 +81,15 @@
   font-size: .812rem;
  }
 
+ .item_notsaved {
+  width: 2px;
+  height: 36px;
+  position: fixed;
+  left: 0px;
+  background: #b71c1c;
+  margin-top: -4px;
+ }
+
  .gray_dot {
    height: 12px;
    width: 12px;
@@ -183,7 +192,7 @@
    top: 0;
  }
  
- zui-button--file input {
+ .zui-button--file input {
    cursor: pointer;
    height: 100%;
    right: 0;
@@ -278,6 +287,40 @@
  .mdc-list-item--two-line .zui-list__item-primary-content {
    height: initial;
  }
+
+ .explorer .zui-expansion-header {
+  background: rgb(242, 242, 242);
+  border-top: 1px solid rgba(34,34,34,0.05);
+ }
+
+ .explorer .zui-expansion-arrow {
+  margin-left: -12px;
+ }
+
+ .explorer .zui-expansion-title {
+   margin-left: -24px;
+   width: 100%;
+ }
+
+ .explorer .zui-expansion-title > div {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.explorer .zui-expansion-title > div > i {
+  margin-right: -20px;
+}
+
+.explorer .zui-expansion-title > div > i:hover {
+  color: rgba(85,38,130);
+}
+
+.explorer .mdc-list-item > div {
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
  .explorer .mdc-list-item__meta {
    min-width: 48px;
@@ -411,18 +454,19 @@
    padding: 0px;
  }
 
- .list-content > .mdc-list-item {
-   /* font-size: 14px; */
-   height: 40px;
-   padding: 0px 16px;
-   border-bottom: 1px solid rgba(34,34,34,0.05);
-   margin: 0 8px;
- }
+
+.zui-expansion-title {
+  overflow: visible;
+}
  
- .zui-expansion-title {
-   overflow: visible;
- }
- 
+ .explorer .mdc-list-item {
+  /* font-size: 14px; */
+  height: 34px;
+  padding: 0px 8px;
+  border-bottom: 1px solid rgba(34,34,34,0.05);
+  margin: 0 8px;
+}
+
  .explorer .zui-subheader {
    background: #f2f2f2;
    border-top: 1px solid #e1e1e1;

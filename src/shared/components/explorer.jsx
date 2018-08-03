@@ -50,7 +50,7 @@ class Explorer extends Component {
               textOverflow: "ellipsis",
             }}
           >
-            <span className="red_dot" style={style} />
+            <span className="red_bar" style={style} />
             <span style={{ color: "#bbb" }}>{icon}</span>
             {it.name}
           </span>
