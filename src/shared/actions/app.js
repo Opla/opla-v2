@@ -7,6 +7,8 @@
 import {
   APP_DELETEINTENTACTION,
   APP_SELECTINTENT,
+  APP_SELECTENTITY,
+  APP_SELECTFUNCTION,
   APP_SETINTENTACTION,
   APP_UPDATEINTENT,
   APP_UPDATEPUBLISHER,
@@ -57,4 +59,12 @@ export function appDeleteNewActions() {
   return {
     type: APP_DELETENEWACTIONS,
   };
+}
+
+export function appSelectEntity(selectedBotId, selectedEntityIndex) {
+  return { type: APP_SELECTENTITY, selectedBotId, selectedEntityIndex };
+}
+
+export function appSelectFunction(selectedBotId, selectedFunctionIndex) {
+  return { type: APP_SELECTFUNCTION, selectedBotId, selectedFunctionIndex };
 }

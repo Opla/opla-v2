@@ -58,30 +58,30 @@
   background: #f2f2f2;
 }
 
-.messenger-box__actions .mdl-textfield {
+.messenger-box__actions .zui-textfield {
   padding: 4px 0;
   width: 100%;
   margin-left: 8px;
 }
-.messenger-box__actions .mdl-textfield__label {
+.messenger-box__actions .zui-textfield__label {
   top: 6px;
 }
-.messenger-box__actions .mdl-textfield__label:after {
+.messenger-box__actions .zui-textfield__label:after {
   bottom: 2px;
 }
 
-.messenger-box__actions .mdl-button {
+.messenger-box__actions .zui-button {
   position: relative;
   margin: 0px;
 }
 
-.messenger-box__actions .mdl-button-right {
+.messenger-box__actions .zui-button-right {
   margin-top: 4px;
   margin-left: 16px;
   color: #6200ee;
 }
 
-.messenger-box__actions .mdl-button-left {
+.messenger-box__actions .zui-button-left {
     color: gray;
     margin-top: 4px;
     margin-right: 8px;
@@ -479,7 +479,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .mdl-dialog-container .mdl-dialog .mdl-dialog__content {
+  .zui-dialog-container .zui-dialog .zui-dialog__content {
       padding: 0px;
   }
   .wrapper {

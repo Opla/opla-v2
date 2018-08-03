@@ -94,7 +94,7 @@ class GeneralAdmin extends Component {
     return (
       <Grid>
         <Inner>
-          <Cell className="zap-panel mdl-color--white" span={12}>
+          <Cell className="zap-panel zui-color--white" span={12}>
             {title}
             <div style={{ display: "flex" }}>
               <div style={{ width: "200px", marginLeft: "24px" }}>

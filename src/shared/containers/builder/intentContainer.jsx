@@ -9,15 +9,17 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Zrmc, { Icon } from "zrmc";
 import { SubToolbar } from "zoapp-ui";
-import IntentDetail, { displayActionEditor } from "../components/intentDetail";
-import { apiSendIntentRequest } from "../actions/api";
+import IntentDetail, {
+  displayActionEditor,
+} from "../../components/intentDetail";
+import { apiSendIntentRequest } from "../../actions/api";
 import {
   appDeleteIntentAction,
   appSetIntentAction,
   appUpdateIntent,
   appSetNewActions,
-} from "../actions/app";
-import IntentTools from "../utils/intentsTools";
+} from "../../actions/app";
+import IntentTools from "../../utils/intentsTools";
 
 class IntentContainer extends Component {
   constructor(props) {

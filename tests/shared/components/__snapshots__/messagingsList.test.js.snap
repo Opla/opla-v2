@@ -2,10 +2,10 @@
 
 exports[`components/messagingsList renders correctly 1`] = `
 <div
-  className="mrb-sublist"
+  className="zui-sublist"
 >
   <div
-    className="mrb-subheader"
+    className="zui-subheader"
   >
     <h4>
       foo

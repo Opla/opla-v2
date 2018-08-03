@@ -129,7 +129,7 @@ class MessengerBox extends Component {
     }
     let chatInput = inputValue;
     return (
-      <div className="mdl-cell mdl-cell--4-col" style={{ margin: "0" }}>
+      <div className="zui-cell zui-cell--4-col" style={{ margin: "0" }}>
         <div className="messenger-box">
           <div
             ref={(div) => {
@@ -337,7 +337,7 @@ class MessengerBox extends Component {
                     <Icon
                       onClick={intentActionLink}
                       id={intentLinkId}
-                      name={notError ? "question_answer" : "add_circle_outline"}
+                      name={notError ? "reorder" : "add_circle_outline"}
                       className={intentIconClassName}
                       menu={intentLinkMenu}
                     />
@@ -349,9 +349,7 @@ class MessengerBox extends Component {
                       <Icon
                         onClick={intentActionLink}
                         id={intentLinkId}
-                        name={
-                          notError ? "question_answer" : "add_circle_outline"
-                        }
+                        name={notError ? "reorder" : "add_circle_outline"}
                         className={intentIconClassName}
                         menu={intentLinkMenu}
                       />
@@ -414,7 +412,7 @@ class MessengerBox extends Component {
         </div>
         <div className="messenger-box__actions">
           <Icon
-            className="mdl-button-left"
+            className="zui-button-left"
             onClick={(e) => {
               e.preventDefault();
             }}
@@ -439,7 +437,7 @@ class MessengerBox extends Component {
             }}
           />
           <Icon
-            className="mdl-button-right"
+            className="zui-button-right"
             /* colored */
             onClick={(e) => {
               e.preventDefault();

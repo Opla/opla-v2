@@ -196,7 +196,7 @@ export default class AppTemplate extends Component {
             this.setSelectedStep(index, true);
           }}
         />
-        <div className="mdl-color--grey-100" style={style}>
+        <div className="zui-color--grey-100" style={style}>
           {container}
         </div>
       </div>

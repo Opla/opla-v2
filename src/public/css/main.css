@@ -17,7 +17,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.mrb-panel-header-dark .mrb-panel-header-icon {
+.zui-panel-header-dark .zui-panel-header-icon {
   color: #fcea22;
 }
 
@@ -81,6 +81,15 @@
   font-size: .812rem;
  }
 
+ .item_notsaved {
+  width: 2px;
+  height: 36px;
+  position: fixed;
+  left: 0px;
+  background: #b71c1c;
+  margin-top: -4px;
+ }
+
  .gray_dot {
    height: 12px;
    width: 12px;
@@ -108,7 +117,7 @@
   opacity: 0;
 }
 
-.mrb-subheader:hover .help_icon {
+.zui-expansion-header:hover .help_icon {
   opacity: 1;
 }
 
@@ -162,6 +171,11 @@
 .help_panel_header > div > i {
   height: 24px;
   color: rgba(0,0,0,.54);
+  cursor: pointer;
+}
+
+.help_panel_header > div > i:hover {
+  color: rgba(85,38,130);
 }
 
 .fileInput {
@@ -183,7 +197,7 @@
    top: 0;
  }
  
- mdl-button--file input {
+ .zui-button--file input {
    cursor: pointer;
    height: 100%;
    right: 0;
@@ -220,11 +234,11 @@
    outline: 0px solid transparent;
  }
 
- .mdl-chip:focus {
+ .zui-chip:focus {
   border: 1px solid;
  }
 
- .mdl-chip {
+ .zui-chip {
    height: 24px;
    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
    line-height: 24px;
@@ -239,13 +253,13 @@
    white-space: nowrap;
  }
  
- .mdl-chip__text_ex {
+ .zui-chip__text_ex {
    font-size: 13px;
    vertical-align: inherit;
    display: inline-block;
  }
  
- .mdl-chip__text {
+ .zui-chip__text {
    font-size: 13px;
    vertical-align: initial;
  }
@@ -255,17 +269,17 @@
    margin: 0px;
  }
  
- .mrb-action-button {
+ .zui-action-button {
    min-width: 320px;
    background-color: #F2F2F2;
  }
  
- .mrb-action-button-mid {
+ .zui-action-button-mid {
    min-width: 200px;
    background-color: #F2F2F2;
  }
  
- .mdc-list-item .mdc-list-item__secondary-text .mdl-list__item-icon {
+ .mdc-list-item .mdc-list-item__secondary-text .zui-list__item-icon {
   color: rgb(221,221,221);
  }
 
@@ -275,18 +289,87 @@
    text-overflow: ellipsis;
  }
  
- .mdc-list-item--two-line .mdl-list__item-primary-content {
+ .mdc-list-item--two-line .zui-list__item-primary-content {
    height: initial;
  }
+
+.explorer_header {
+  display: flex;
+  display: flex;
+  margin-top: 6px;
+  line-height: 24px;
+}
+
+.explorer_header > div {
+  margin-right: 8px;
+  cursor: pointer;
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+}
+
+.explorer_header > div:hover {
+  margin-right: 8px;
+  cursor: pointer;
+  color: rgba(2, 206, 204, 0.54);
+}
+
+.explorer_view_selected {
+  color: var(--mdc-theme-secondary, #018786);
+  border-bottom: 2px solid;
+  padding-bottom: 6px;
+}
+ 
+.explorer .zui-expansion-header {
+  background: rgb(242, 242, 242);
+  border-top: 1px solid rgba(34,34,34,0.05);
+ }
+
+ .explorer .zui-expansion-arrow {
+  margin-left: -12px;
+ }
+
+ .explorer .zui-expansion-title {
+   margin-left: -24px;
+   width: 100%;
+ }
+
+ .explorer .zui-expansion-title > div {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.explorer .zui-expansion-title > div i {
+  margin-right: -20px;
+}
+
+.explorer .zui-expansion-title > div i:hover {
+  color: rgba(85,38,130);
+}
+
+.explorer .mdc-list-item > div {
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
  .explorer .mdc-list-item__meta {
    min-width: 48px;
  }
 
+.zui-panel-header__actions i {
+  cursor: pointer;
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+}
+
+.zui-panel-header__actions i:hover {
+  color: rgba(85,38,130);
+}
+
  .actionConditional {
    height: auto;
  }
  
+
 .actionItem {
   color: rgb(0, 0, 0);
   height: 100%;
@@ -406,28 +489,39 @@
    color: #757575 !important;
  }
  
- .mrb-sublist .mdl-list {
+ .zui-sublist .zui-list {
    margin: 0px;
    padding: 0px;
  }
+
+
+.zui-expansion-title {
+  overflow: visible;
+}
  
- .list-content > .mdc-list-item {
-   /* font-size: 14px; */
-   height: 40px;
-   padding: 0px 16px;
-   border-bottom: 1px solid rgba(34,34,34,0.05);
+ .explorer .mdc-list-item {
+  /* font-size: 14px; */
+  height: 34px;
+  padding: 0px 8px;
+  border-bottom: 1px solid rgba(34,34,34,0.05);
+  margin: 0 8px;
+}
+
+ .explorer .zui-subheader {
+   background: #f2f2f2;
+   border-top: 1px solid #e1e1e1;
  }
- 
+
  /* TODO put this in Zoapp-front */
-i.mrb-subheader-right:hover {
+i.zui-subheader-right:hover {
   color: rgba(85,38,130);
 }
 
- .mrb-subheader-right {
+ .zui-subheader-right {
   font-size: .875rem;
  }
  
- .mrb-sublist h4 {
+ .zui-sublist h4 {
   font-size: 15px;
   font-weight: 900;
   color: rgba(0,0,0,.87);
@@ -435,11 +529,11 @@ i.mrb-subheader-right:hover {
   height: 36px;
  }
  
- .mdl-dialog-extended {
+ .zui-dialog-extended {
    width: 550px;
  }
  
- .mdl-dialog-list {
+ .zui-dialog-list {
    width: 320px;
  }
  
@@ -454,7 +548,7 @@ i.mrb-subheader-right:hover {
    -webkit-margin-after: 0;
  }
  
- .mdc-list-item--two-line .mdc-list-item__secondary-text .mdl-list__item-icon {
+ .mdc-list-item--two-line .mdc-list-item__secondary-text .zui-list__item-icon {
    height: 100%;
  }
 

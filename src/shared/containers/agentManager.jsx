@@ -21,12 +21,14 @@ import {
 } from "../actions/api";
 import { appUpdateIntent } from "../actions/app";
 import ExplorerContainer from "./explorerContainer";
-import IntentContainer from "./intentContainer";
+import IntentContainer from "./builder/intentContainer";
+import EntityContainer from "./builder/entityContainer";
+import FunctionContainer from "./builder/functionContainer";
 import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
 
-class BotManager extends Component {
+class AgentManager extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
@@ -102,13 +104,13 @@ class BotManager extends Component {
   };
 
   onImportData = (data, options) => {
-    // console.log("BotManager.onUpload=", options.filetype);
+    // console.log("AgentManager.onUpload=", options.filetype);
     if (
       options.filetype === "application/json" ||
       options.filetype === "text/csv"
     ) {
       // WIP detect format
-      // console.log("BotManager.onUpload=", data);
+      // console.log("AgentManager.onUpload=", data);
       this.props.apiImportRequest(this.props.selectedBotId, data, options);
     }
   };
@@ -279,10 +281,11 @@ class BotManager extends Component {
     }
     let panel1 = null;
     let panel2 = null;
+
     panel1 = (
       <Cell
         style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-        className="mdl-color--white mrb-panel"
+        className="zui-color--white zui-panel"
         span={2}
       >
         <ExplorerContainer
@@ -293,15 +296,37 @@ class BotManager extends Component {
         />
       </Cell>
     );
-    panel2 = (
-      <Cell
-        style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
-        className="mdl-color--white mrb-panel"
-        span={6}
-      >
-        <IntentContainer handleRename={this.handleRenameIntent} />
-      </Cell>
-    );
+    if (this.props.selectedType === "function") {
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="zui-color--white zui-panel"
+          span={6}
+        >
+          <FunctionContainer />
+        </Cell>
+      );
+    } else if (this.props.selectedType === "entity") {
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="zui-color--white zui-panel"
+          span={6}
+        >
+          <EntityContainer />
+        </Cell>
+      );
+    } else {
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="zui-color--white zui-panel"
+          span={6}
+        >
+          <IntentContainer handleRename={this.handleRenameIntent} />
+        </Cell>
+      );
+    }
     const intentsEx = [];
     if (Array.isArray(this.props.intents)) {
       this.props.intents.forEach((intent) => {
@@ -316,7 +341,7 @@ class BotManager extends Component {
       });
     }
     return (
-      <div className="mdl-color--grey-100">
+      <div className="zui-color--grey-100">
         <Grid
           gutter={{ desktop: "0px", tablet: "0px", phone: "0px" }}
           style={{ margin: "0px", padding: "0px" }}
@@ -345,18 +370,21 @@ class BotManager extends Component {
   }
 }
 
-BotManager.defaultProps = {
+AgentManager.defaultProps = {
   bot: null,
   intents: null,
   selectedIntent: null,
   selectedBotId: null,
   store: null,
+  activeTab: 0,
 };
 
-BotManager.propTypes = {
+AgentManager.propTypes = {
+  activeTab: PropTypes.number,
   isLoading: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
   selectedBotId: PropTypes.string,
+  selectedType: PropTypes.string.isRequired,
   bot: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -386,6 +414,7 @@ const mapStateToProps = (state) => {
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading || false;
   const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
+  const selectedType = state.app ? state.app.selectedType : "intent";
   if (!selectedIntent) {
     selectedIntent = state.app.intents
       ? state.app.intents[selectedIntentIndex]
@@ -400,6 +429,7 @@ const mapStateToProps = (state) => {
     isSignedIn,
     selectedIntent,
     selectedIntentIndex,
+    selectedType,
     titleName,
   };
 };
@@ -432,4 +462,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(BotManager);
+)(AgentManager);

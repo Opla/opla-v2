@@ -90,10 +90,10 @@ export class DashboardBase extends Component {
     }
 
     return (
-      <div className="mdl-layout__content mdl-color--grey-100">
+      <div className="zui-layout__content zui-color--grey-100">
         <Grid>
           <Inner>
-            <Cell className="mdl-color--white mdc-elevation--z1" span={12}>
+            <Cell className="zui-color--white mdc-elevation--z1" span={12}>
               <Grid>
                 <Inner>
                   <Cell span={12}>
@@ -173,7 +173,7 @@ export class DashboardBase extends Component {
           </Inner>
           <Inner>
             <Cell
-              className="mdl-color--white mdc-elevation--z1"
+              className="zui-color--white mdc-elevation--z1"
               style={{ marginTop: "24px" }}
               span={12}
             >

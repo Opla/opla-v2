@@ -21,7 +21,7 @@ const types = {
       color: "black",
       backgroundColor: "#ffb300",
     },
-    className: "mdl-chip",
+    className: "zui-chip",
     editable: false,
   },
   output_var: {
@@ -29,7 +29,7 @@ const types = {
       color: "white",
       backgroundColor: "#4b830d",
     },
-    className: "mdl-chip",
+    className: "zui-chip",
     editable: true,
   },
   variable: {
@@ -37,7 +37,7 @@ const types = {
       color: "white",
       backgroundColor: "#007c91",
     },
-    className: "mdl-chip",
+    className: "zui-chip",
     editable: true,
   },
   br: {
@@ -45,7 +45,7 @@ const types = {
       color: "white",
       backgroundColor: "#00227b",
     },
-    className: "mdl-chip",
+    className: "zui-chip",
     editable: false,
   },
   button: {
@@ -53,7 +53,7 @@ const types = {
       color: "white",
       backgroundColor: "#ab000d",
     },
-    className: "mdl-chip",
+    className: "zui-chip",
     editable: true,
   },
 };
@@ -142,16 +142,16 @@ class ActionEditable extends Component {
         // onClick={(e)=>{this.props.onSelect();}}
         onClick={this.props.onSelect}
       >
-        {type === "any" && <span className="mdl-chip__text_ex">any</span>}
+        {type === "any" && <span className="zui-chip__text_ex">@any</span>}
         {(type === "output_var" || type === "variable") && (
-          <span className="mdl-chip__text_ex">{decodeURIComponent(text)}</span>
+          <span className="zui-chip__text_ex">{decodeURIComponent(text)}</span>
         )}
         {type === "br" && (
-          <span className="mdl-chip__text_ex">
+          <span className="zui-chip__text_ex">
             <Icon name="keyboard_return" style={{ fontSize: "13px" }} />
           </span>
         )}
-        {type === "button" && <span className="mdl-chip__text_ex">{text}</span>}
+        {type === "button" && <span className="zui-chip__text_ex">{text}</span>}
         {type === "text" && <React.Fragment>{text}</React.Fragment>}
       </span>
     );

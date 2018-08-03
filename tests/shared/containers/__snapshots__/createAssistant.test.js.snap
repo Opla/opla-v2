@@ -2,10 +2,10 @@
 
 exports[`containers/CreateAssistant renders correctly 1`] = `
 <div
-  className="mdl-layout__content mdl-color--grey-100"
+  className="zui-layout__content zui-color--grey-100"
 >
   <section
-    className="mdl-color--white mdl-shadow--2dp"
+    className="zui-color--white zui-shadow--2dp"
     style={
       Object {
         "margin": "16px",
@@ -43,7 +43,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
     </div>
   </section>
   <section
-    className="mdl-color--white mdl-shadow--2dp"
+    className="zui-color--white zui-shadow--2dp"
     style={
       Object {
         "margin": "16px",
@@ -186,7 +186,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
     onSubmit={[Function]}
   >
     <section
-      className="mdl-color--white mdl-shadow--2dp"
+      className="zui-color--white zui-shadow--2dp"
       style={
         Object {
           "margin": "16px",

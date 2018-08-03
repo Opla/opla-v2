@@ -42,6 +42,11 @@ import {
   handlers as intentHandlers,
 } from "./intents";
 
+import {
+  initialState as appInitialState,
+  handlers as appHandlers,
+} from "./app";
+
 export const defaultTemplates = [
   { id: "eb05e2a4-251a-4e11-a907-b1f3bcc20283", name: "Empty" },
   { id: "571a2354-ec80-4423-8edb-94d0a934fbb6", name: "Import" },
@@ -50,6 +55,7 @@ export const defaultLanguages = [{ id: "en", name: "English", default: true }];
 
 export const initialState = {
   ...zoappInitialState,
+  ...appInitialState,
   ...intentInitialState,
   selectedBotId: null,
   sandbox: null,
@@ -61,6 +67,7 @@ export const initialState = {
 
 export default createReducer(initialState, {
   ...zoappHandlers,
+  ...appHandlers,
   ...intentHandlers,
 
   [API_ADMIN + FETCH_SUCCESS]: (state, { admin }) => {

@@ -8,14 +8,20 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { ListItemMeta, Icon } from "zrmc";
-import { ListDragComponent, SubToolbar } from "zoapp-ui";
 import {
-  /* apiGetIntentsRequest,
-  apiSendIntentRequest,
-  apiDeleteIntentRequest, */
-  apiMoveIntentRequest,
-} from "../actions/api";
-import { appSelectIntent, appDeleteNewActions } from "../actions/app";
+  ListComponent,
+  ListDragComponent,
+  ExpansionPanel,
+  SubToolbar,
+  Tooltip,
+} from "zoapp-ui";
+import { apiMoveIntentRequest } from "../actions/api";
+import {
+  appSelectIntent,
+  appSelectEntity,
+  appSelectFunction,
+  appDeleteNewActions,
+} from "../actions/app";
 
 class ExplorerContainer extends Component {
   onDropIntent = (dragIndex, dropIndex) => {
@@ -34,39 +40,27 @@ class ExplorerContainer extends Component {
     this.props.appSelectIntent(this.props.selectedBotId, selected);
   };
 
+  onSelectEntity = (selected) => {
+    this.props.appSelectEntity(this.props.selectedBotId, selected);
+  };
+
+  onSelectFunction = (selected) => {
+    this.props.appSelectFunction(this.props.selectedBotId, selected);
+  };
+
   render() {
     const selected = this.props.selectedIntentIndex;
-    const name = "Intents";
-    const items = [];
-    let list = "";
+    let items = [];
     if (this.props.intents && this.props.intents.length > 0) {
       this.props.intents.forEach((intent, index) => {
         const { id } = intent;
-        const style = intent.notSaved
-          ? {
-              marginRight: "4px",
-              width: "8px",
-              height: "8px",
-              marginBottom: "2px",
-            }
-          : { display: "none", marginRight: "2px" };
-        const marginLeft = intent.notSaved ? "-14px" : "0px";
         const n = [];
         n.push(
-          <span
-            key="i_text"
-            style={{
-              marginLeft,
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              textOverflow: "ellipsis",
-              maxWidth: "160px",
-            }}
-          >
-            <span className="red_dot" style={style} />
+          <div key="i_text">
+            {intent.notSaved ? <div className="item_notsaved" /> : ""}
             <span style={{ color: "#00000044" }}>#</span>
             {intent.name}
-          </span>,
+          </div>,
         );
         n.push(
           <ListItemMeta
@@ -94,33 +88,165 @@ class ExplorerContainer extends Component {
     } else {
       items.push({ id: "noIntent", name: "Create an intent" });
     }
-    list = (
-      <ListDragComponent
-        style={{ backgroundColor: "rgb(252, 252, 252)" }}
-        className="list-content"
-        items={items}
-        selectedItem={selected}
-        onSelect={this.onSelectIntent}
-        onDrop={this.onDropIntent}
-      />
+    const intentList = (
+      <ExpansionPanel
+        elevation={0}
+        compact
+        leftArrow
+        label={
+          <div
+            style={{
+              display: "flex",
+              fontWeight: "900",
+              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
+            }}
+          >
+            <Tooltip label="add an intent">
+              <Icon
+                style={{
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+                name="add_circle_outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  this.props.handleAdd();
+                }}
+              />
+            </Tooltip>
+            Intents
+          </div>
+        }
+      >
+        <ListDragComponent
+          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
+          items={items}
+          selectedItem={selected}
+          onSelect={this.onSelectIntent}
+          onDrop={this.onDropIntent}
+        />
+      </ExpansionPanel>
+    );
+    items = [];
+    items.push({
+      id: "entitySystem",
+      name: (
+        <span>
+          <span style={{ color: "#00000044" }}>@</span>System
+        </span>
+      ),
+    });
+    const entityList = (
+      <ExpansionPanel
+        elevation={0}
+        collapsed
+        compact
+        leftArrow
+        label={
+          <div
+            style={{
+              display: "flex",
+              fontWeight: "900",
+              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
+            }}
+          >
+            <Tooltip label="TODO add an entity">
+              <Icon
+                style={{
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+                name="add_circle_outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // this.props.handleAdd();
+                }}
+              />
+            </Tooltip>
+            Entities
+          </div>
+        }
+      >
+        <ListComponent
+          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
+          items={items}
+          selectedItem={this.props.selectedEntityIndex}
+          onSelect={this.onSelectEntity}
+        />
+      </ExpansionPanel>
+    );
+    items = [];
+    items.push({
+      id: "funcSystem",
+      name: (
+        <span>
+          <span style={{ color: "#00000044" }}>/</span>System
+        </span>
+      ),
+    });
+    const callableList = (
+      <ExpansionPanel
+        elevation={0}
+        collapsed
+        compact
+        leftArrow
+        label={
+          <div
+            style={{
+              display: "flex",
+              fontWeight: "900",
+              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
+            }}
+          >
+            <Tooltip label="TODO add a function">
+              <Icon
+                style={{
+                  paddingTop: "12px",
+                  paddingRight: "4px",
+                  marginLeft: "-8px",
+                }}
+                name="add_circle_outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // this.props.handleAdd();
+                }}
+              />
+            </Tooltip>
+            Functions
+          </div>
+        }
+      >
+        <ListComponent
+          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
+          items={items}
+          selectedItem={this.props.selectedFunctionIndex}
+          onSelect={this.onSelectFunction}
+        />
+      </ExpansionPanel>
     );
     return (
       <div
         style={{
-          backgroundColor: "rgb(252, 252, 252)",
+          backgroundColor: "rgb(232, 232, 232)",
           borderRight: "1px solid rgba(0, 0, 0, 0.12)",
         }}
       >
         <SubToolbar
           className=""
           style={{ backgroundColor: "rgb(252, 252, 252)", margin: "0" }}
-          titleName={name}
+          titleName={
+            <div className="explorer_header">
+              <Tooltip label="view as list">
+                <Icon name="view_list" className="explorer_view_selected" />
+              </Tooltip>
+              <Tooltip label="TODO view as graph">
+                <Icon name="device_hub" />
+              </Tooltip>
+            </div>
+          }
           icons={[
-            {
-              name: "add_circle_outline",
-              tooltip: "Add an intent",
-              onClick: this.props.handleAdd,
-            },
             {
               name: "cloud_circle",
               tooltip: "Import / Export",
@@ -129,7 +255,11 @@ class ExplorerContainer extends Component {
           ]}
         />
         <div className="list-box explorer" style={{ margin: "0" }}>
-          {list}
+          <div className="list-content">
+            {intentList}
+            {entityList}
+            {callableList}
+          </div>
         </div>
       </div>
     );
@@ -145,8 +275,12 @@ ExplorerContainer.propTypes = {
   selectedBotId: PropTypes.string,
   intents: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedIntentIndex: PropTypes.number,
+  selectedEntityIndex: PropTypes.number,
+  selectedFunctionIndex: PropTypes.number,
   apiMoveIntentRequest: PropTypes.func.isRequired,
   appSelectIntent: PropTypes.func.isRequired,
+  appSelectEntity: PropTypes.func.isRequired,
+  appSelectFunction: PropTypes.func.isRequired,
   handleExportImport: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
   handleRename: PropTypes.func.isRequired,
@@ -155,6 +289,10 @@ ExplorerContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
+  const selectedEntityIndex = state.app ? state.app.selectedEntityIndex : -1;
+  const selectedFunctionIndex = state.app
+    ? state.app.selectedFunctionIndex
+    : -1;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const intents = state.app.intents ? [...state.app.intents] : null;
   const { admin } = state.app;
@@ -163,27 +301,28 @@ const mapStateToProps = (state) => {
   return {
     intents,
     selectedIntentIndex,
+    selectedEntityIndex,
+    selectedFunctionIndex,
     selectedBotId,
     bot,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  /* apiGetIntentsRequest: (botId) => {
-    dispatch(apiGetIntentsRequest(botId));
-  },
-  apiSendIntentRequest: (botId, intent) => {
-    dispatch(apiSendIntentRequest(botId, intent));
-  },
-  apiDeleteIntentRequest: (botId, intentId) => {
-    dispatch(apiDeleteIntentRequest(botId, intentId));
-  }, */
   apiMoveIntentRequest: (botId, intentId, from, to) => {
     dispatch(apiMoveIntentRequest(botId, intentId, from, to));
   },
   appSelectIntent: (botId, intentIndex) => {
     dispatch(appDeleteNewActions());
     dispatch(appSelectIntent(botId, intentIndex));
+  },
+  appSelectEntity: (botId, index) => {
+    dispatch(appDeleteNewActions());
+    dispatch(appSelectEntity(botId, index));
+  },
+  appSelectFunction: (botId, index) => {
+    dispatch(appDeleteNewActions());
+    dispatch(appSelectFunction(botId, index));
   },
 });
 
