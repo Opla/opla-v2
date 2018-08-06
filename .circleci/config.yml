@@ -57,7 +57,7 @@ jobs:
       - run: *initsubmodules
       - setup_remote_docker
       - run: *dockerauth
-      - run: myke front/ci_build --COMMIT_SHA=$CIRCLE_SHA1
+      - run: myke front/ci_build --COMMIT_SHA=$CIRCLE_SHA1 --BUILD_NUMBER=$CIRCLE_BUILD_NUM
 
   promote:
     docker: 
