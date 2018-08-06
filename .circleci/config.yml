@@ -218,7 +218,7 @@ workflows:
   backup_daily:
     triggers:
       - schedule:
-          cron: "0,15,30,45 7-20 * * *"
+          cron: "0 3 * * *"
           filters:
             branches:
               only:
