@@ -21,6 +21,7 @@ env:
   APP_BUILD: dev
   CLIENT_ID: A_CLIENT_ID
   CLIENT_SECRET: A_CLIENT_SECRET
+  APP_SUBNAME: CE
 
 tasks:
   build:
@@ -30,5 +31,6 @@ tasks:
       docker build \
         -t {{ .REPO }}:{{ .TAG }} \
         --build-arg APP_VERSION={{ .APP_VERSION }} \
-        --build-arg APP_BUILD={{ .APP_BUILD }} \
+        --build-arg APP_SUBNAME={{ .APP_SUBNAME }} \
+        --build-arg APP_BUILD=":{{ if not (eq "" .BUILD_NUMBER)}}{{print "ci." .BUILD_NUMBER}}{{else}}LOCAL{{end}} c:{{.COMMIT_SHA | trunc 7}} d:{{ now |  date "02.01.06 15:04" }}" \
         .

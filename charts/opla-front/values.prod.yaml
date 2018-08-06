@@ -13,8 +13,7 @@ auth:
 tls: true
 
 instance:
-  color: "#7f0000"
-  name: "Prod"
-  description: "Production Build."
+  color: "#42f44e"
+  name: PROD
 
 namespace: ${K8S_NAMESPACE}

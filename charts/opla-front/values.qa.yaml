@@ -14,7 +14,6 @@ tls: true
 
 instance:
   color: "#7f0000"
-  name: "QA Instance"
-  description: "Not for production use."
+  name: QA
 
 namespace: ${K8S_NAMESPACE}
