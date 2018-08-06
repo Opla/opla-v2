@@ -12,7 +12,7 @@ tasks:
   ci_build:
     cmd: |-
       eval $(myke -v=0 _app_version)
-      $myke build --TAG={{.COMMIT_SHA | required}}
+      $myke build --TAG={{.COMMIT_SHA | required}} --COMMIT_SHA={{.COMMIT_SHA}} --BUILD_NUMBER={{.BUILD_NUMBER}}
       $myke _push --TAG={{.COMMIT_SHA}}
       helm init --client-only \
         && $myke _publish_charts \
