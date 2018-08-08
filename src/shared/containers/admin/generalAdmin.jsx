@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { apiSaveBotRequest } from "../../actions/api";
 import timezones from "../../utils/timezones";
 
-class GeneralAdmin extends Component {
+export class GeneralAdminBase extends Component {
   constructor(props) {
     super(props);
 
@@ -166,12 +166,12 @@ class GeneralAdmin extends Component {
   }
 }
 
-GeneralAdmin.defaultProps = {
+GeneralAdminBase.defaultProps = {
   bot: null,
   timezones,
 };
 
-GeneralAdmin.propTypes = {
+GeneralAdminBase.propTypes = {
   admin: PropTypes.shape({ params: PropTypes.shape({}).isRequired }),
   apiSaveBotRequest: PropTypes.func.isRequired,
   bot: PropTypes.shape({
@@ -207,4 +207,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(GeneralAdmin);
+)(GeneralAdminBase);

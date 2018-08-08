@@ -6,39 +6,39 @@
  */
 import React from "react";
 import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 
 import { DashboardBase } from "shared/containers/dashboard";
 
 describe("containers/Dashboard", () => {
+  const defaultMetrics = {
+    users: {
+      count: 123,
+    },
+    conversations: {
+      count: 1200,
+      messages_per_conversation: 4,
+    },
+    sessions: {
+      duration: 5000,
+    },
+    errors: {
+      rate: 0.230115,
+    },
+    responses: {
+      speed: 40.219032,
+    },
+  };
   it("renders and update correctly", () => {
     const appSetTitleSpy = jest.fn();
     const fetchMetricsSpy = jest.fn();
-
-    const metrics = {
-      users: {
-        count: 123,
-      },
-      conversations: {
-        count: 1200,
-        messages_per_conversation: 4,
-      },
-      sessions: {
-        duration: 5000,
-      },
-      errors: {
-        rate: 0.230115,
-      },
-      responses: {
-        speed: 40.219032,
-      },
-    };
 
     const component = renderer.create(
       <DashboardBase
         appSetTitle={appSetTitleSpy}
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
-        metrics={metrics}
+        metrics={defaultMetrics}
       />,
     );
 
@@ -55,7 +55,7 @@ describe("containers/Dashboard", () => {
         isSignedIn
         renderingValue
         selectedBotId={"bot1"}
-        metrics={metrics}
+        metrics={defaultMetrics}
       />,
     );
     expect(fetchMetricsSpy).toHaveBeenCalledWith("bot1");
@@ -103,5 +103,21 @@ describe("containers/Dashboard", () => {
 
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it("fetch metrics when selected bot change", () => {
+    const appSetTitleSpy = jest.fn();
+    const fetchMetricsSpy = jest.fn();
+
+    const wrapper = shallow(
+      <DashboardBase
+        appSetTitle={appSetTitleSpy}
+        fetchMetrics={fetchMetricsSpy}
+        isSignedIn
+        metrics={defaultMetrics}
+      />,
+    );
+    wrapper.setProps({ selectedBotId: "abc" });
+    expect(fetchMetricsSpy).toHaveBeenCalledWith("abc");
   });
 });

@@ -48,6 +48,17 @@ describe("components/actionsEditable", () => {
     testActionIdAndContent(wrapper, "ae_3", 0);
   });
 
+  it("should update state if content props change", () => {
+    const wrapper = shallow(<ActionsEditable {...defaultProps} />);
+    expect(wrapper.state("content")).toEqual(defaultProps.content);
+    // save original build items to compare
+    const orgBuildItems = wrapper.state("items");
+
+    wrapper.setProps({ content: "foo *" });
+    expect(wrapper.state("content")).toEqual("foo *");
+    expect(wrapper.state("items")).not.toEqual(orgBuildItems);
+  });
+
   describe("build()", () => {
     it("should build an intent from html items", () => {
       const items = [

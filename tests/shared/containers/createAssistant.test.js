@@ -51,6 +51,30 @@ describe("containers/CreateAssistant", () => {
     expect(setMessage).not.toHaveBeenCalled();
   });
 
+  it("should update template selected when props change", () => {
+    const onSelectTemplateSpy = jest.fn();
+    const newPropsTemplates = [
+      { id: "abcdefgh", name: "Foo" },
+      { id: "abcdefgh-251a-4e11-a907-b1f3bcc20283", name: "Empty" },
+    ];
+    const wrapper = shallow(
+      <CreateAssistantBase
+        isLoading={false}
+        createBot={jest.fn}
+        appSetTitle={jest.fn()}
+        apiGetTemplates={jest.fn()}
+        apiGetLanguages={jest.fn()}
+        templates={defaultTemplates}
+        languages={defaultLanguages}
+        setMessage={jest.fn()}
+        history={{ length: 0, push: jest.fn() }}
+      />,
+    );
+    wrapper.instance().onSelectTemplate = onSelectTemplateSpy;
+    wrapper.setProps({ templates: newPropsTemplates });
+    expect(onSelectTemplateSpy).toHaveBeenCalledWith(1, newPropsTemplates[1]);
+  });
+
   it("sets a message if uploaded template is not a valid json", () => {
     const setMessage = jest.fn();
 

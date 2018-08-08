@@ -18,7 +18,7 @@ import { apiSetMiddlewareRequest } from "../../actions/api";
 import PluginsManager from "../../utils/pluginsManager";
 /* eslint-enable no-unused-vars */
 
-class ServiceDialog extends Component {
+export class ServiceDialogBase extends Component {
   constructor(props) {
     super(props);
     const { open, instance } = props;
@@ -121,7 +121,7 @@ class ServiceDialog extends Component {
   }
 }
 
-ServiceDialog.defaultProps = {
+ServiceDialogBase.defaultProps = {
   open: true,
   instance: null,
   service: null,
@@ -132,10 +132,13 @@ ServiceDialog.defaultProps = {
   onAction: null,
 };
 
-ServiceDialog.propTypes = {
+ServiceDialogBase.propTypes = {
   open: PropTypes.bool,
   instance: PropTypes.shape({}),
-  service: PropTypes.shape({}),
+  service: PropTypes.shape({
+    getTitle: PropTypes.func.isRequired,
+    renderSettings: PropTypes.func.isRequired,
+  }).isRequired,
   selectedBotId: PropTypes.string,
   lastMiddleware: PropTypes.shape({}),
   publicUrl: PropTypes.string,
@@ -165,4 +168,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ServiceDialog);
+)(ServiceDialogBase);
