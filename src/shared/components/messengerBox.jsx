@@ -88,15 +88,11 @@ class MessengerBox extends Component {
     return html;
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     const node = this.messengerContent;
     this.shouldScrollBottom =
       node.scrollTop + node.offsetHeight === node.scrollHeight;
-  }
-
-  componentDidUpdate() {
     if (this.shouldScrollBottom) {
-      const node = this.messengerContent;
       node.scrollTop = node.scrollHeight;
     }
   }

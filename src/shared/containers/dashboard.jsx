@@ -43,8 +43,9 @@ const legendStyle = {
 };
 
 export class DashboardBase extends Component {
-  componentWillMount() {
-    this.props.appSetTitle("Dashboard");
+  constructor(props) {
+    super();
+    props.appSetTitle("Dashboard");
   }
 
   componentDidMount() {
@@ -53,12 +54,12 @@ export class DashboardBase extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     if (
-      nextProps.selectedBotId &&
-      this.props.selectedBotId !== nextProps.selectedBotId
+      this.props.selectedBotId &&
+      this.props.selectedBotId !== prevProps.selectedBotId
     ) {
-      this.props.fetchMetrics(nextProps.selectedBotId);
+      this.props.fetchMetrics(this.props.selectedBotId);
     }
   }
 

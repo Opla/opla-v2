@@ -38,45 +38,42 @@ const secText = {
 };
 
 export class CreateAssistantBase extends Component {
-  state = {
-    name: "",
-    email: "",
-    username: "",
-    password: "",
-    language: null,
-    loading: false,
-    selectedTemplate: null,
-    template: null,
-  };
+  constructor(props) {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      language: null,
+      loading: false,
+      selectedTemplate: null,
+      template: null,
+    };
+    props.appSetTitle("Create your conversational robot");
+  }
 
   componentDidMount() {
     this.props.apiGetTemplates();
     this.props.apiGetLanguages();
   }
 
-  componentWillMount() {
-    this.props.appSetTitle("Create your conversational robot");
-  }
-
-  componentDidUpdate() {
-    if (this.state.loading && this.props.isLoading === false) {
-      this.handleCloseCreateDialog();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     if (
-      nextProps.templates !== this.props.templates &&
+      prevProps.templates !== this.props.templates &&
       this.state.selectedTemplate === null
     ) {
-      const selectedTemplate = nextProps.templates.findIndex(
+      const selectedTemplate = this.props.templates.findIndex(
         (template) => template.name === "Empty",
       );
 
       this.onSelectTemplate(
         selectedTemplate,
-        nextProps.templates[selectedTemplate],
+        this.props.templates[selectedTemplate],
       );
+    }
+    if (this.state.loading && this.props.isLoading === false) {
+      this.handleCloseCreateDialog();
     }
   }
 

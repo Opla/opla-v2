@@ -32,9 +32,6 @@ class AgentManager extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
-  }
-
-  componentWillMount() {
     this.props.appSetTitle("Builder");
     this.updateIntents();
   }

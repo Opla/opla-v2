@@ -41,13 +41,12 @@ class IntentContainer extends Component {
       displayHelp,
     };
     this.selectedActionsComponent = null;
-  }
 
-  // handle click outside intent container component
-  // inspired by https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-react-component-5604830beb7f
-  componentWillMount() {
+    // handle click outside intent container component
+    // inspired by https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-react-component-5604830beb7f
     document.addEventListener("mousedown", this.handleDocumentClick, false);
   }
+
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleDocumentClick, false);
   }
