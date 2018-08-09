@@ -55,16 +55,15 @@ class ActionsEditable extends Component {
     this.itemsElementRefs = [];
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { content, caretPosition } = nextProps;
-    if (content !== this.state.content) {
-      const items = ActionsTools.parse(content);
-      this.setState({
+  static getDerivedStateFromProps(props, state) {
+    const { content, caretPosition } = props;
+    if (content !== state.content) {
+      return {
         content,
-        items,
         caretPosition,
-      });
+      };
     }
+    return null;
   }
 
   handleKeyDown = (e) => {
@@ -403,12 +402,16 @@ class ActionsEditable extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { itemToFocus } = this.state;
     // Move focus
     if (itemToFocus !== null) {
       this.moveFocus(itemToFocus);
       this.setState({ itemToFocus: null });
+    }
+    if (this.props.content !== prevProps.content) {
+      const items = ActionsTools.parse(this.props.content);
+      this.setState({ items });
     }
   }
 }

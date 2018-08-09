@@ -29,12 +29,16 @@ export class ServiceDialogBase extends Component {
     this.updateMiddleware();
   }
 
-  componentWillReceiveProps(props) {
-    if (this.props.open !== props.open) {
-      this.setState({ openDialog: props.open });
+  static getDerivedStateFromProps(props, state) {
+    if (state.openDialog !== props.open) {
+      return { openDialog: props.open };
     }
-    if (this.props.lastMiddleware) {
-      const instance = this.props.lastMiddleware;
+    return null;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lastMiddleware) {
+      const instance = prevProps.lastMiddleware;
       this.setState({ instance });
     }
   }

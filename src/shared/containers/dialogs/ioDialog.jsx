@@ -33,10 +33,11 @@ class IODialog extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
-    if (this.props.open !== props.open) {
-      this.setState({ openDialog: props.open });
+  static getDerivedStateFromProps(props, state) {
+    if (state.openDialog !== props.open) {
+      return { openDialog: props.open };
     }
+    return null;
   }
 
   /*

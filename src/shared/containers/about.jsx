@@ -23,8 +23,9 @@ const infoStyle = {
 };
 
 class About extends Component {
-  componentWillMount() {
-    this.props.appSetTitle("About");
+  constructor(props) {
+    super();
+    props.appSetTitle("About");
   }
 
   render() {
