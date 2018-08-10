@@ -13,6 +13,7 @@ describe("components/actionsEditable", () => {
     id: "action-editor-content",
     editable: true,
     content: "* bons gestes composteur *",
+    caretPosition: 2,
     onChange: () => {},
     onSelected: () => {},
     style: {
@@ -50,13 +51,10 @@ describe("components/actionsEditable", () => {
 
   it("should update state if content props change", () => {
     const wrapper = shallow(<ActionsEditable {...defaultProps} />);
-    expect(wrapper.state("content")).toEqual(defaultProps.content);
-    // save original build items to compare
-    const orgBuildItems = wrapper.state("items");
+    expect(wrapper.state("caretPosition")).toEqual(defaultProps.caretPosition);
 
-    wrapper.setProps({ content: "foo *" });
-    expect(wrapper.state("content")).toEqual("foo *");
-    expect(wrapper.state("items")).not.toEqual(orgBuildItems);
+    wrapper.setProps({ caretPosition: 1 });
+    expect(wrapper.state("caretPosition")).toEqual(1);
   });
 
   describe("build()", () => {
