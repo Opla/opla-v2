@@ -44,7 +44,6 @@ class ActionsEditable extends Component {
     const { content, selectedItem, caretPosition } = this.props;
     const items = ActionsTools.parse(content);
     this.state = {
-      content,
       items,
       selectedItem,
       caretPosition,
@@ -56,10 +55,9 @@ class ActionsEditable extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { content, caretPosition } = props;
-    if (content !== state.content) {
+    const { caretPosition } = props;
+    if (caretPosition !== state.caretPosition) {
       return {
-        content,
         caretPosition,
       };
     }
@@ -95,7 +93,7 @@ class ActionsEditable extends Component {
     }
     if (e.which === 13) {
       // WIP handle save event
-      const text = this.state.content;
+      const text = this.props.content;
       e.preventDefault();
       if (this.props.isNew) {
         this.props.onAddAction(text);
