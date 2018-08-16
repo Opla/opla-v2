@@ -3,6 +3,9 @@ image:
 
 front:
   domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
+  extraDomains:
+    - console.${DOMAIN_SUFFIX}
+    - console.opla.ai
 api:
   domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
 

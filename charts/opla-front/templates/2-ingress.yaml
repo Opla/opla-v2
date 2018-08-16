@@ -12,26 +12,31 @@ metadata:
 
 spec:
   rules:
+    {{- define "front.paths" }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: front
+          servicePort: 80
+    {{- end }}
    # Allows access via
    # http://<namespace>.<nginx_svc_load_balancer_ip>.xip.io.
    # See https://github.com/kubernetes/kubernetes/issues/41881
-  - host: {{ .Values.namespace }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: front
-          servicePort: 80
+  - host: {{ .Values.namespace }} 
+{{- template "front.paths" }}
   - host: {{ .Values.front.domain }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: front
-          servicePort: 80
+{{- template "front.paths" }}
+  {{- range .Values.front.extraDomains }}
+  - host: {{ . }}
+{{- template "front.paths" }}
+  {{- end }}
   {{- if eq .Values.tls true }}
   tls:
     - secretName: {{ .Values.front.domain | replace "." "-" }}-tls
       hosts:
         - {{ .Values.front.domain }}
+        {{- range .Values.front.extraDomains }}
+        - {{ . }}
+        {{- end }}
   {{- end }}
