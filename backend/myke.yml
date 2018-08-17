@@ -3,9 +3,9 @@ project: backend
 desc: Backend
 
 mixin:
-  - infra/mixin/docker
-  - infra/mixin/helm
-  - infra/mixin/ci
+  - ../infra/mixin/docker
+  - ../infra/mixin/helm
+  - ../infra/mixin/ci
 
 env:
   K8S_ENV: dev

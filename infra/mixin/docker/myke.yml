@@ -1,0 +1,19 @@
+---
+project: docker
+
+tasks:
+  _pull:
+    cmd: docker pull {{.REPO}}:{{.TAG|required}}
+  
+  _push:
+    cmd: docker push {{.REPO}}:{{.TAG|required}}
+
+  _tag:
+    cmd: docker tag {{.REPO}}:{{.TAG_FROM|required}} {{.REPO}}:{{.TAG_TO|required}}
+
+  _promote:
+    cmd: |-
+      $myke _pull --TAG={{.TAG}}
+      $myke _tag --TAG_FROM={{.TAG}} --TAG_TO=latest
+      $myke _push --TAG=latest
+
