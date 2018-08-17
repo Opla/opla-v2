@@ -18,5 +18,9 @@ namespace: ${K8S_NAMESPACE}
 
 db_mode: persistent
 
+
 mariadb:
   enabled: true
+  master:
+    persistence:
+      storageClass: snapshot-promoter
