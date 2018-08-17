@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/actionEditor renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#f5f5f5",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#eee",
+        "display": "table",
+        "marginBottom": "16px",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "borderRight": "1px solid #ddd",
+          "display": "table-cell",
+        }
+      }
+    >
+      <div
+        className="mdc-tooltype"
+        onMouseEnter={[Function]}
+        onWheel={[Function]}
+      >
+        <i
+          className="material-icons"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          text_fields
+        </i>
+        <span>
+          Insert text
+        </span>
+      </div>
+      <div
+        className="mdc-tooltype"
+        onMouseEnter={[Function]}
+        onWheel={[Function]}
+      >
+        <i
+          className="material-icons"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          all_out
+        </i>
+        <span>
+          Insert block any
+        </span>
+      </div>
+      <div
+        className="mdc-tooltype"
+        onMouseEnter={[Function]}
+        onWheel={[Function]}
+      >
+        <i
+          className="material-icons"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          assignment
+        </i>
+        <span>
+          Insert entity assignment
+        </span>
+      </div>
+      <span>
+        <div
+          className="mdc-tooltype"
+          onMouseEnter={[Function]}
+          onWheel={[Function]}
+        >
+          <i
+            className="material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            code
+          </i>
+          <span>
+            Insert code
+          </span>
+        </div>
+        <div
+          className="mdc-tooltype"
+          onMouseEnter={[Function]}
+          onWheel={[Function]}
+        >
+          <i
+            className="material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            keyboard_return
+          </i>
+          <span>
+            Insert Linebreak
+          </span>
+        </div>
+        <div
+          className="mdc-tooltype"
+          onMouseEnter={[Function]}
+          onWheel={[Function]}
+        >
+          <i
+            className="material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            insert_link
+          </i>
+          <span>
+            Insert Button
+          </span>
+        </div>
+      </span>
+    </div>
+    <div
+      style={
+        Object {
+          "borderRight": "1px solid #ddd",
+          "display": "table-cell",
+        }
+      }
+    >
+      <div
+        className="mdc-tooltype"
+        onMouseEnter={[Function]}
+        onWheel={[Function]}
+      >
+        <i
+          className="material-icons"
+          disabled={true}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          delete
+        </i>
+        <span>
+          Delete selected item
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label={null}
+    className="contenteditable"
+    id="ae_content"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    spellCheck={false}
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flex": 1,
+      }
+    }
+    tabIndex={0}
+  >
+    <span
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <span
+        className={undefined}
+        data="text"
+        id="ae_0"
+        onClick={[Function]}
+        onInput={[Function]}
+        style={
+          Object {
+            "display": "inline-block",
+            "padding": "0 4px",
+          }
+        }
+        tabIndex={1}
+      >
+        some content
+      </span>
+    </span>
+  </div>
+</div>
+`;

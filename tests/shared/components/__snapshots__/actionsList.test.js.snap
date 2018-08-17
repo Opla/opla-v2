@@ -1,0 +1,2515 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/actionsList can be rendered with array of actions typed as shapes 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foo
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    >
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_start"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "flex": "1",
+                    "minHeight": "15px",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              />
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`components/actionsList can be rendered with array of actions typed as strings 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foo
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    >
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                any
+              </span>
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                output_var
+              </span>
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                variable
+              </span>
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                br
+              </span>
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                button
+              </span>
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                trash
+              </span>
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+      <li
+        className=" onFocusAction actionItem mdc-list-item"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="menuitem"
+        style={
+          Object {
+            "color": "rgb(0, 0, 0)",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            aria-label="Add an output response"
+            className="contenteditable"
+            id="ae_content"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onKeyPress={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            spellCheck={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flex": 1,
+              }
+            }
+            tabIndex={0}
+          >
+            <span
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexWrap": "wrap",
+                }
+              }
+            >
+              <span
+                className={undefined}
+                data="text"
+                id="ae_0"
+                onClick={[Function]}
+                onInput={[Function]}
+                style={
+                  Object {
+                    "display": "inline-block",
+                    "padding": "0 4px",
+                  }
+                }
+                tabIndex={1}
+              >
+                bar
+              </span>
+            </span>
+          </div>
+        </div>
+        <i
+          className="mdc-list-item__meta material-icons"
+          href={null}
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          remove_circle_outline
+        </i>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`components/actionsList can have an unique id 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`components/actionsList can have different behavior on action 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`components/actionsList can have different behavior on drop 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`components/actionsList can have different behavior on edit 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`components/actionsList can have different behavior on select 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`components/actionsList renders correctly 1`] = `
+<div
+  className="zui-expansion zui-color--white mdc-elevation--z1"
+  style={
+    Object {
+      "margin": "12px",
+    }
+  }
+>
+  <div
+    className="zui-expansion-header"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "64px",
+        "paddingTop": "4px",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    <div
+      className="zui-expansion-arrow"
+    >
+      <i
+        className="zui-expansion-arrow-icon material-icons"
+        disabled={false}
+        style={
+          Object {
+            "animation": null,
+            "fontSize": "24px",
+            "paddingTop": "8px",
+            "textAlign": "center",
+          }
+        }
+      >
+        keyboard_arrow_up
+      </i>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="zui-expansion-title"
+        style={null}
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "fontWeight": "900",
+            }
+          }
+        >
+          <i
+            className="material-icons"
+            style={
+              Object {
+                "color": "rgba(0,0,0,.87)",
+                "marginLeft": "-8px",
+                "paddingRight": "4px",
+                "paddingTop": "12px",
+              }
+            }
+          >
+            account_circle
+          </i>
+          foobar
+          <i
+            className="help_icon material-icons"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="button"
+            tabIndex="0"
+          >
+            help
+          </i>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "overflow": "hidden",
+        "transition": "height 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      }
+    }
+  >
+    
+    <li
+      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="menuitem"
+      style={
+        Object {
+          "color": "rgb(0, 0, 0)",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          aria-label="Add an output response"
+          className="contenteditable"
+          id="ae_content"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          spellCheck={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "flex": 1,
+              "minHeight": "40px",
+            }
+          }
+          tabIndex={0}
+        >
+          <span
+            style={
+              Object {
+                "alignItems": "center",
+                "display": "flex",
+                "flexWrap": "wrap",
+              }
+            }
+          >
+            <span
+              className={undefined}
+              data="text"
+              id="ae_start"
+              onClick={[Function]}
+              onInput={[Function]}
+              style={
+                Object {
+                  "display": "inline-block",
+                  "flex": "1",
+                  "minHeight": "15px",
+                  "padding": "0 4px",
+                }
+              }
+              tabIndex={1}
+            />
+          </span>
+        </div>
+      </div>
+      <div />
+    </li>
+    <ul
+      className="mdc-list"
+      style={
+        Object {
+          "border": "1px solid #eee",
+          "margin": "0 8px 16px 8px",
+          "maxHeight": "18.07vh",
+          "overflowX": "hidden",
+          "overflowY": "scroll",
+        }
+      }
+    />
+  </div>
+</div>
+`;

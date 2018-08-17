@@ -1,0 +1,71 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: front
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: front
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+      metadata:
+      annotations:
+        checksum/configMap: {{ include (print $.Template.BasePath "/0-configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: node
+        image: "opla/front:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        env:
+        - name: PORT
+          value: "80"
+        - name: OPLA_API_DOMAIN
+          value: "{{ .Values.api.domain }}"
+        - name: OPLA_BACKEND_HOST
+          value: "backend"
+        - name: OPLA_FRONT_CLIENT_NAME
+          value: "opla"
+        - name: OPLA_BACKEND_PORT
+          value: "80"
+        - name: APP_INSTANCE_NAME
+          value: {{ .Values.instance.name }}
+        - name: APP_INSTANCE_COLOR
+          value: {{ .Values.instance.color }}
+        - name: APP_INSTANCE_DESCRIPTION
+          value: {{ .Values.instance.description }}
+        volumeMounts:
+        - mountPath: /src/config/config.json
+          name: config
+          subPath: config.json
+      volumes:
+      - configMap:
+          name: front-config
+        name: config
