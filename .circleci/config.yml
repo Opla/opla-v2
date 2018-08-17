@@ -18,10 +18,10 @@ __steps:
         COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS=$HELM_XTRA_ARGS myke deploy
   - run: &notify0
       when: on_success
-      command: TEST_RESULT=0 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke _circle_notify
+      command: TEST_RESULT=0 DOMAIN="$K8S_NAMESPACE.$DOMAIN_SUFFIX" myke _circle_notify
   - run: &notify1
       when: on_fail
-      command: TEST_RESULT=1 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke _circle_notify
+      command: TEST_RESULT=1 DOMAIN="$K8S_NAMESPACE.$DOMAIN_SUFFIX" myke _circle_notify
 
 version: 2
 jobs:
