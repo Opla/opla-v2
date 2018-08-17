@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.2
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: opla_dev
+    ports:
+      - 127.0.0.1:3306:3306
+

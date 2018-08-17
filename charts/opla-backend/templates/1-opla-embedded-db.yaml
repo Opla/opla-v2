@@ -1,0 +1,56 @@
+{{- if eq .Values.db_mode "embedded"}}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: db
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: db
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: db
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+      annotations:
+        checksum/configMap: {{ include (print $.Template.BasePath "/0-configmap.yaml") . | sha256sum }}
+
+    spec:
+      containers:
+      - name: mariadb
+        image: mariadb:10.2
+        ports:
+        - containerPort: 3306
+        env:
+        - name: _SQL_CHECKSUM_1
+          value: {{ (.Files.Glob "**.sql").AsConfig | sha1sum }}
+        - name: _CONFIGMAP_CHECKSUM
+          value: {{ (.Files.Glob "**.sql").AsConfig | sha1sum }}
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: 'yes'
+        - name: MYSQL_DATABASE
+          value: {{ .Values.db.name }}
+        - name: MYSQL_USER
+          value: {{ .Values.db.user }}
+        - name: MYSQL_PASSWORD
+          value: {{ .Values.db.password }}
+{{- end}}

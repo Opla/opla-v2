@@ -1,0 +1,90 @@
+---
+project: backend
+desc: Backend
+
+mixin:
+  - infra/mixin/docker
+  - infra/mixin/helm
+  - infra/mixin/ci
+
+env:
+  K8S_ENV: dev
+  K8S_NAMESPACE: dev-ce
+  APPLICATION_NAME: opla-backend
+  APPLICATION_SHORT_NAME: backend
+  CHART_VERSION_SEM: 0.1.0
+  REPO: opla/backend
+  TAG: latest
+  CHART_DIR: charts/opla-backend
+  GITHUB_PAGES_REPO: Opla/backend
+  COMMIT_SHA: latest
+  CLIENT_ID: A_CLIENT_ID
+  CLIENT_SECRET: A_CLIENT_SECRET
+
+tasks:
+  build:
+    cmd: |-
+      $myke _prepare
+      docker build \
+        -t {{ .REPO }}:{{ .TAG }} \
+        .
+
+  _prepare:
+    cmd: |-
+      eval $(myke -v=0 _app_version)
+      mkdir -p {{.CHART_DIR}}/sql/src/ && cp -r migrations/sqls/*.sql {{.CHART_DIR}}/sql/src/
+
+  test:
+    cmd: |-
+      wait_for_mariadb.sh
+      opla migrations up
+      opla init --non-interactive --database-name opla_test
+      opla migrations up
+      yarn lint
+      yarn test
+
+  clean_pv:
+    cmd: |-
+      kubectl -n {{.K8S_NAMESPACE}} delete pvc data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-master-0 data-{{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}}-mariadb-slave-0 || true
+
+      
+  e2e_test:
+    cmd: |-
+      IP=$(kubectl get svc nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress.*.ip}')
+      STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" "http://{{.K8S_NAMESPACE}}.$IP.xip.io/auth/access_token" \
+      -H "origin: http://{{.K8S_NAMESPACE}}.$IP.xip.io" \
+      -H 'accept-encoding: gzip, deflate, br' \
+      -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,en-GB;q=0.6,de;q=0.5' \
+      -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36' \
+      -H 'content-type: application/json' \
+      -H 'accept: */*' \
+      -H "referer: http://{{.K8S_NAMESPACE}}.$IP.xip.io" \
+      --data-binary '{"username":"admin","password":"password","client_id":"{{.CLIENT_ID}}","redirect_uri":"localhost","grant_type":"password"}' \
+      --compressed)
+      if [ "$STATUS_CODE" != 200 ]; then
+        exit 1
+      fi;
+
+  backup_db:
+    cmd: |-
+      helm template \
+        --set namespace={{.K8S_NAMESPACE}} \
+        --set persistentVolumeClaimName=data-{{.K8S_NAMESPACE}}-backend-mariadb-master-0 \
+        charts/snapshots/ \
+        | kubectl apply -f -
+  
+  restore_db:
+    cmd: |-
+        # helm delete {{.K8S_NAMESPACE}}-{{.APPLICATION_SHORT_NAME}} || true
+        # $myke clean_pv
+        helm template \
+          --set backupDate={{.BACKUP_DATE}} \
+          --set namespace={{.K8S_NAMESPACE}} \
+          charts/snapshot-restore/ \
+        | kubectl apply -f -
+        $myke deploy
+      # $myke deploy --HELM_XTRA_ARGS="\
+      #   --set mariadb.master.persistence.storageClass=\"snapshot-promoter\" \
+      #   --set mariadb.master.persistence.annotations={\"snapshot.alpha.kubernetes.io/snapshot=snapshot-mariadb\"} \
+      #   "
+

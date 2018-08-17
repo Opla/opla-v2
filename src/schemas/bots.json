@@ -1,0 +1,174 @@
+{
+  "title": "bots",
+  "description": "JSON schema for Opla's Bot description tables",
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+  "definitions": {
+    "Id": {
+      "type": "string"
+    },
+    "DateTime": {
+      "type": "string"
+    },
+    "Link": {
+      "type": "string"
+    }
+  },
+    "properties": {
+        "bots": {
+            "title": "Bots",
+            "properties": {
+                "id": {
+                    "type": "#Id"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "creation_date": {
+                    "type": "#DateTime"
+                },
+                "language": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string",
+                    "size": "big"
+                },
+                "welcome": {
+                    "type": "string",
+                    "size": "big"
+                },
+                "publishedVersionId": {
+                    "type": "string"
+                },
+                "timezone": {
+                  "type": "string",
+                  "size": "40"
+                }
+            }
+        },
+        "botMiddlewares": {
+            "title": "BotMiddlewares",
+            "properties": {
+                "id": {
+                    "type": "#Id"
+                },
+                "botId": {
+                    "type": "#Link"
+                },
+                "middlewareId": {
+                    "type": "#Link"
+                },
+                "extras": {
+                    "type": "object"
+                },
+                "classes": {
+                    "type": "string"
+                },
+                "origin": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "botUsers": {
+            "title": "BotUsers",
+            "properties": {
+                "id": {
+                    "type": "#Id"
+                },
+                "botId": {
+                    "type": "#Link"
+                },
+                "userId": {
+                    "type": "#Link"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "intents": {
+            "title": "Intents",
+            "properties": {
+                "id": {
+                    "type": "#Id"
+                },
+                "botId": {
+                    "type": "#Link",
+                    "link": "bots.id"
+                },
+                "versionId": {
+                    "type": "#Link",
+                    "link": "versions.id"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "topic": {
+                    "type": "string"
+                },
+                "previousId": {
+                    "type": "#Link",
+                    "link": "intents.id"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "input": {
+                    "type": "array",
+                    "arraytype": "object",
+                    "link": "patterns.id",
+                    "nested": true
+                },
+                "entities": {
+                    "type": "array",
+                    "arraytype": "#Link",
+                    "link": "entities.id"
+                },
+                "output": {
+                    "type": "array",
+                    "arraytype": "#Link",
+                    "link": "actions.id",
+                    "nested": true
+                },
+                "description": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "arraytype": "string"
+                },
+                "order": {
+                  "type": "#Order"
+                }
+            }
+        }
+    }
+}

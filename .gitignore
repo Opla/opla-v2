@@ -1,0 +1,12 @@
+*.DS_Store
+config/
+dist/
+lib/
+node_modules/
+.vscode/
+values.dev.yaml
+*.env.local
+charts/opla-backend/sql/src/
+
+# Chart dependencies
+**/charts/*.tgz

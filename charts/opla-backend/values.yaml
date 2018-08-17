@@ -1,0 +1,64 @@
+image:
+ tag: latest
+
+db:
+  name: opla_dev
+  user: opla
+  password: foo
+  port: 3306
+  createApplication: true #Runs SQL scripts to create application on startup
+  auth:
+    clientId: xxmtlkZAre2aEj6AgVtat31wStpehwthfT0bpMRBEJ3lmb683ZBwbclxDiIWxG4u
+    secret: 301oRBhGKGeo6AxBVdhi1YmZ2q2xILynWFsP1oOq4Q5zuJ1r3gqRUFwz1wFPHmp5
+    userId: SaE6GLCT1CUkPyAWKQiomq7xzw4QqfXk
+    botId: yvUrUr20GwaWvPUoLpIVhwvg6u72rcOc3mv4MUbDJjeRnERI
+    botUserId: QFmiA1RpYZ3DtXL57WmWOMurm3yNxn8R
+
+  backup:
+    on: false
+    cron: "0 0 2 1/1 * ? *" #Everyday at 2AM
+    from: "gcs://"
+
+  restore:
+    on: false
+    cron: "0 0 2 1/1 * ? *" # Everyday at 2AM
+    from: "gcs://"
+
+tls: false
+
+namespace: dev-ce
+
+api:
+  domain: localhost
+
+db_mode: embedded
+# db_mode: persistent # This is the persistent mariadb StatefulSet.
+# db_mode: none 
+
+# Values for mariadb persistent dependency
+
+embedded_db:
+  host: db
+
+# Creates a default user and bot.
+default_user:
+  bot_name: My QA Assistant
+  username: admin
+  password: password
+  email: qa@opla.ai
+  template: |-
+    {"name":"Hello World","intents":[{"name":"Hello","id":"eqF56dq8TGSI6gpPsDvOXXRXkGJ7pJBTsfOjTPI5542vlhKV","botId":"WYHVSJw1JZ2pyrTHByzkvmKxKl7omcjD1jJqW0J9C0fsKT6w","order":1,"input":["Hello"],"output":["Hello World !"]}]}
+
+mariadb:
+  enabled: false
+  db:
+    name: opla_dev
+    user: opla
+    password: foo
+  nameOverride: mariadb
+  master:
+    antiAffinity: hard
+  slave:
+    replicas: 0
+  rootUser: 
+    password: changeit #Needed, otherwise redeployments fail.
