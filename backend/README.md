@@ -1,7 +1,5 @@
 # opla-backend
 
-[![CircleCI](https://circleci.com/gh/Opla/backend.svg?style=svg)](https://circleci.com/gh/Opla/backend)
-
 Opla.ai Backend using Node es7 react and redux.
 
 
@@ -108,14 +106,14 @@ The CI/CD pipeline produces a Docker image that you can use to run the Backend.
 | OPLA_BACKEND_DATABASE_PASS | foo      | Database password                                                                                                                   |
 ## Contributing
 
-Please, see the [CONTRIBUTING](CONTRIBUTING.md) file.
+Please, see the [CONTRIBUTING.md](../CONTRIBUTING.md) file.
 
 
 ## Contributor Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
 Conduct](http://contributor-covenant.org/). By participating in this project you
-agree to abide by its terms. See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) file.
+agree to abide by its terms. See [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) file.
 
 ## Docker Image
 
@@ -127,4 +125,4 @@ You have 2 options:
 ## License
 
 opla-front is released under the GPL v2.0+ License. See the bundled
-[LICENSE](LICENSE) file for details.
+[LICENSE](../LICENSE) file for details.

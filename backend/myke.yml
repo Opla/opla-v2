@@ -3,9 +3,9 @@ project: backend
 desc: Backend
 
 mixin:
-  - infra/mixin/docker
-  - infra/mixin/helm
-  - infra/mixin/ci
+  - ../infra/mixin/docker
+  - ../infra/mixin/helm
+  - ../infra/mixin/ci
 
 env:
   K8S_ENV: dev
@@ -16,7 +16,7 @@ env:
   REPO: opla/backend
   TAG: latest
   CHART_DIR: charts/opla-backend
-  GITHUB_PAGES_REPO: Opla/backend
+  GITHUB_PAGES_REPO: Opla/opla
   COMMIT_SHA: latest
   CLIENT_ID: A_CLIENT_ID
   CLIENT_SECRET: A_CLIENT_SECRET

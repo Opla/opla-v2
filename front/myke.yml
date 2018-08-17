@@ -3,9 +3,9 @@ project: front
 desc: Frontend
 
 mixin:
-  - infra/mixin/docker
-  - infra/mixin/helm
-  - infra/mixin/ci
+  - ../infra/mixin/docker
+  - ../infra/mixin/helm
+  - ../infra/mixin/ci
 
 env:
   K8S_ENV: dev
@@ -16,7 +16,7 @@ env:
   REPO: opla/front
   TAG: latest
   CHART_DIR: charts/opla-front
-  GITHUB_PAGES_REPO: Opla/front
+  GITHUB_PAGES_REPO: Opla/opla
   COMMIT_SHA: latest
   APP_BUILD: dev
   CLIENT_ID: A_CLIENT_ID

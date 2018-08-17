@@ -1,4 +1,6 @@
 __steps:
+  - checkout: &checkout
+      path: ~/project
   - run: &dockerauth
       command: echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
   - run: &gcloudauth
@@ -16,15 +18,15 @@ __steps:
         COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS=$HELM_XTRA_ARGS myke deploy
   - run: &notify0
       when: on_success
-      command: TEST_RESULT=0 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke backend/_circle_notify
+      command: TEST_RESULT=0 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke _circle_notify
   - run: &notify1
       when: on_fail
-      command: TEST_RESULT=1 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke backend/_circle_notify
-  - run: &initsubmodules git submodule sync && git submodule update --init
+      command: TEST_RESULT=1 DOMAIN="$K8S_NAMESPACE.$DOMAIN" myke _circle_notify
 
 version: 2
 jobs:
-  test:
+  backend_test:
+    working_directory: ~/project/backend
     docker:
       - image: circleci/node:8
       - image: circleci/mariadb
@@ -32,8 +34,7 @@ jobs:
           MYSQL_DATABASE: opla_test
 
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
@@ -49,7 +50,8 @@ jobs:
       - run: yarn lint
       - run: yarn test
   
-  build:
+  backend_build:
+    working_directory: ~/project/backend
     docker: 
       - image: licarth/ci-cd:latest
     environment:
@@ -57,13 +59,13 @@ jobs:
       K8S_NAMESPACE: qa-ce
       CLOUDSDK_CORE_DISABLE_PROMPTS: "1"
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - setup_remote_docker
       - run: *dockerauth
       - run: myke backend/ci_build --COMMIT_SHA=$CIRCLE_SHA1 --BUILD_NUMBER=$CIRCLE_BUILD_NUM
 
-  e2e_test:
+  backend_e2e_test:
+    working_directory: ~/project/backend
     docker:
       - image: licarth/ci-cd:latest
     environment: 
@@ -71,8 +73,7 @@ jobs:
       GCLOUD_CLUSTER_ID: qa
 
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - run: *gcloudauth
       - run: |
           export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
@@ -89,17 +90,18 @@ jobs:
             echo $HELM_XTRA_ARGS && kubectl delete ns circleci-$CIRCLE_BUILD_NUM
           when: always
 
-  promote:
+  backend_promote:
+    working_directory: ~/project/backend
     docker: 
       - image: licarth/ci-cd:latest
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - setup_remote_docker
       - run: *dockerauth
       - run: myke backend/ci_promote --COMMIT_SHA=$CIRCLE_SHA1
 
-  deploy_qa:
+  backend_deploy_qa:
+    working_directory: ~/project/backend
     docker:
       - image: licarth/ci-cd:latest
     environment:
@@ -107,14 +109,14 @@ jobs:
       K8S_NAMESPACE: qa-ce
       GCLOUD_CLUSTER_ID: qa
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - run: *gcloudauth
       - run: *deploy
       - run: *notify0
       - run: *notify1
 
-  deploy_preprod:
+  backend_deploy_preprod:
+    working_directory: ~/project/backend
     docker:
       - image: licarth/ci-cd:latest
     environment:
@@ -122,14 +124,14 @@ jobs:
       K8S_NAMESPACE: preprod-ce
       GCLOUD_CLUSTER_ID: qa
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - run: *gcloudauth
       - run: *deploy
       - run: *notify0
       - run: *notify1
 
-  deploy_prod:
+  backend_deploy_prod:
+    working_directory: ~/project/backend
     docker:
       - image: licarth/ci-cd:latest
     environment:
@@ -137,14 +139,14 @@ jobs:
       K8S_NAMESPACE: prod-ce
       GCLOUD_CLUSTER_ID: qa
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - run: *gcloudauth
       - run: *deploy
       - run: *notify0
       - run: *notify1
   
-  backup_prod:
+  backend_backup_prod:
+    working_directory: ~/project/backend
     docker:
       - image: licarth/ci-cd:latest
     environment:
@@ -152,8 +154,7 @@ jobs:
       K8S_NAMESPACE: prod-ce
       GCLOUD_CLUSTER_ID: qa
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - run: *gcloudauth
       - run: 
           name: backup mariadb
@@ -162,7 +163,8 @@ jobs:
             helm init --service-account tiller --upgrade
             COMMIT_SHA=$CIRCLE_SHA1 myke backup_db
   
-  backup_preprod:
+  backend_backup_preprod:
+    working_directory: ~/project/backend
     docker:
       - image: licarth/ci-cd:latest
     environment:
@@ -170,8 +172,7 @@ jobs:
       K8S_NAMESPACE: preprod-ce
       GCLOUD_CLUSTER_ID: qa
     steps:
-      - checkout
-      - run: *initsubmodules
+      - checkout: *checkout
       - run: *gcloudauth
       - run: 
           name: backup mariadb
@@ -179,42 +180,164 @@ jobs:
             gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
             helm init --service-account tiller --upgrade
             COMMIT_SHA=$CIRCLE_SHA1 myke backup_db
+
+  front_test:
+    working_directory: ~/project/front
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout: *checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      - run: yarn lint
+      - run: yarn test
+  
+  front_build:
+    working_directory: ~/project/front
+    docker: 
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: qa
+      K8S_NAMESPACE: qa-ce
+      CLOUDSDK_CORE_DISABLE_PROMPTS: "1"
+    steps:
+      - checkout: *checkout
+      - setup_remote_docker
+      - run: *dockerauth
+      - run: myke front/ci_build --COMMIT_SHA=$CIRCLE_SHA1 --BUILD_NUMBER=$CIRCLE_BUILD_NUM
+
+  front_promote:
+    working_directory: ~/project/front
+    docker: 
+      - image: licarth/ci-cd:latest
+    steps:
+      - checkout: *checkout
+      - setup_remote_docker
+      - run: *dockerauth
+      - run: myke front/ci_promote --COMMIT_SHA=$CIRCLE_SHA1
+
+  front_deploy_qa:
+    working_directory: ~/project/front
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: qa
+      K8S_NAMESPACE: qa-ce
+      GCLOUD_CLUSTER_ID: qa
+    steps:
+      - checkout: *checkout
+      - run: *gcloudauth
+      - run: *deploy
+      - run: *notify0
+      - run: *notify1
+
+  front_deploy_preprod:
+    working_directory: ~/project/front
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: preprod
+      K8S_NAMESPACE: preprod-ce
+      GCLOUD_CLUSTER_ID: qa
+    steps:
+      - checkout: *checkout
+      - run: *gcloudauth
+      - run: *deploy
+      - run: *notify0
+      - run: *notify1
+
+  front_deploy_prod:
+    working_directory: ~/project/front
+    docker:
+      - image: licarth/ci-cd:latest
+    environment:
+      K8S_ENV: prod
+      K8S_NAMESPACE: prod-ce
+      GCLOUD_CLUSTER_ID: qa
+
+    steps:
+      - checkout: *checkout
+      - run: *gcloudauth
+      - run: *deploy
+      - run: *notify0
+      - run: *notify1
 
 workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - test:
+      - backend_test:
           filters:
             branches:
               ignore: gh-pages
             tags:
               only: /.*/
-      - build
-      - e2e_test:
+      - backend_build
+      - backend_e2e_test:
           requires:
-            - build
-      - promote:
+            - backend_build
+      - backend_promote:
           requires:
-            - e2e_test
+            - backend_e2e_test
           filters:
             branches:
               only: 
                 - master
-      - deploy_qa:
+                - singlerepo
+      - backend_deploy_qa:
           requires:
-            - promote
-      - deploy_preprod:
+            - backend_promote
+      - backend_deploy_preprod:
           requires:
-            - promote
-      - manual_check:
+            - backend_promote
+      - backend_manual_check:
          type: approval
          requires:
-           - deploy_preprod
-           - deploy_qa
-      - deploy_prod:
+           - backend_deploy_preprod
+           - backend_deploy_qa
+      - backend_deploy_prod:
           requires:
-            - manual_check
+            - backend_manual_check
+      - front_test:
+          filters:
+            branches:
+              ignore: gh-pages
+            tags:
+              only: /.*/
+      - front_build
+      - front_promote:
+          requires:
+            - front_build
+            - front_test
+          filters:
+            branches:
+              only: 
+                - master
+                - singlerepo
+      - front_deploy_qa:
+          requires:
+            - front_promote
+      - front_deploy_preprod:
+          requires:
+            - front_promote
+      - front_manual_check:
+          type: approval
+          requires:
+            - front_deploy_preprod
+            - front_deploy_qa
+      - front_deploy_prod:
+          requires:
+            - front_manual_check
   backup_daily:
     triggers:
       - schedule:
@@ -224,5 +347,5 @@ workflows:
               only:
                 - master
     jobs:
-      - backup_prod
-      - backup_preprod
+      - backend_backup_prod
+      - backend_backup_preprod
