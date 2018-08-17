@@ -1,0 +1,7 @@
+node_modules/*
+dist/*
+src/public/*
+src/server/*
+config/*
+.vscode/*
+webpack*

@@ -1,0 +1,7 @@
+apiVersion: volumesnapshot.external-storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: "mariadb-{{ now | date "20060102.150405" }}"
+  namespace: {{ .Values.namespace }}
+spec:
+  persistentVolumeClaimName: {{.Values.persistentVolumeClaimName}}

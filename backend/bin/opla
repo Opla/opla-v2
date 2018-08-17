@@ -1,0 +1,246 @@
+#!/usr/bin/env node
+const chalk = require("chalk");
+const figlet = require("figlet");
+const fs = require("fs-extra");
+const path = require("path");
+const program = require("commander");
+const { prompt } = require("inquirer");
+
+const pkg = require("../package.json");
+
+const CONFIG_FILE = path.resolve(__dirname, "../config/default.json");
+const FLYWAY_CONFIG_FILE = path.resolve(__dirname, "../config/flyway.conf");
+const DESCRIPTION = `Management tool for ${pkg.description}`;
+
+program
+  .version(pkg.version)
+  .description(DESCRIPTION)
+  .option("--non-interactive", "do not prompt and use default settings or values specified as options");
+
+const configDefaults = {
+  databaseType: "mysql",
+  databaseHost: "127.0.0.1",
+  databaseName: "opla_dev",
+  databaseUser: "root",
+  databasePass: "",
+  apiEndpoint: "/api",
+  authEndpoint: "/auth",
+  gatewayUrl: "https://gateway.opla.ai",
+};
+
+program
+  .command("init")
+  .alias("i")
+  .description("Initialize the project and create the configuration file")
+  .option("--database-type [type]", "set the database driver", configDefaults.databaseType)
+  .option("--database-host [host]", "set the database host", configDefaults.databaseHost)
+  .option("--database-name [name]", "set the database name", configDefaults.databaseName)
+  .option("--database-user [user]", "set the database user", configDefaults.databaseUser)
+  .option("--database-pass [password]", "set the database password", configDefaults.databasePass)
+  .option("--api-endpoint [endpoint]", "set the main API endpoint", configDefaults.apiEndpoint)
+  .option("--auth-endpoint [endpoint]", "set the auth API endpoint", configDefaults.authEndpoint)
+  .option("--gateway-url [url]", "set the gateway url", configDefaults.gatewayUrl)
+  .option("--overwrite", "overwrite existing configuration files", false)
+  .action(async (options) => {
+    const questions = [
+      {
+        type: "list",
+        name: "databaseType",
+        message: "Database driver",
+        choices: ["mysql"],
+        default: [options.databaseType],
+      },
+      {
+        type: "input",
+        name: "databaseHost",
+        message: "Database host",
+        default: options.databaseHost,
+      },
+      {
+        type: "input",
+        name: "databaseName",
+        message: "Database name",
+        default: options.databaseName,
+      },
+      {
+        type: "input",
+        name: "databaseUser",
+        message: "Database user",
+        default: options.databaseUser,
+      },
+      {
+        type: "password",
+        name: "databasePass",
+        message: "Database password",
+        default: options.databasePass,
+      },
+      {
+        type: "input",
+        name: "apiEndpoint",
+        message: "Main API endpoint",
+        default: options.apiEndpoint,
+      },
+      {
+        type: "input",
+        name: "authEndpoint",
+        message: "Auth API endpoint",
+        default: options.authEndpoint,
+      },
+      {
+        type: "input",
+        name: "gatewayUrl",
+        message: "Gateway api url",
+        default: options.gatewayUrl,
+      },
+    ];
+
+    try {
+      const fileExists = await fs.pathExists(CONFIG_FILE);
+
+      if (fileExists) {
+        questions.push(
+          {
+            type: "confirm",
+            name: "overwrite",
+            message:
+              "The configuration files already exist. Do you want to overwrite them?",
+            default: !!options.overwrite,
+          },
+        );
+      }
+
+      let answers;
+      if (program.nonInteractive) {
+        answers = {
+          ...options,
+        };
+      } else {
+        answers = await prompt(questions);
+      }
+
+      if (fileExists && !answers.overwrite) {
+        console.log(
+          "The configuration files have been kept because you did not choose to overwrite them."
+        );
+        return;
+      }
+
+      // create the configuration
+      const config = {
+        name: "Opla.ai",
+        version: pkg.version,
+        global: {
+          database: {
+            datatype: answers.databaseType,
+            host: answers.databaseHost,
+            name: answers.databaseName,
+            user: answers.databaseUser,
+            password: answers.databasePass,
+            charset: "utf8mb4",
+            version: "2",
+          },
+          api: {
+            endpoint: answers.apiEndpoint,
+            version: "1",
+            port: 8081,
+          },
+          botSite: {
+            url: "/publish/",
+          },
+          gateway: {
+            url: answers.gatewayUrl,
+          },
+        },
+        auth: {
+          database: {
+            parent: "global",
+            name: "auth",
+          },
+          api: {
+            endpoint: answers.authEndpoint,
+          },
+        },
+        messenger: {
+          database: {
+            parent: "global",
+            name: "messenger",
+          },
+        },
+        users: {
+          database: {
+            parent: "global",
+            name: "users",
+          },
+        },
+        bots: {
+          database: {
+            parent: "global",
+            name: "bots",
+          },
+        },
+        webhooks: {
+          database: {
+            parent: "global",
+            name: "webhooks",
+          },
+        },
+        middlewares: {
+          database: {
+            parent: "global",
+            name: "middlewares",
+          },
+        },
+        parameters: {
+          database: {
+            parent: "global",
+            name: "parameters",
+          },
+        },
+      };
+
+      let conf = `flyway.url=jdbc:mariadb://${answers.databaseHost}:3306/${answers.databaseName}\n` +
+        `flyway.user=${answers.databaseUser}\n` +
+        `flyway.password=${answers.databasePass}\n` +
+        `flyway.locations=filesystem:migrations/sqls\n`
+        ;
+
+      fs.writeFile(FLYWAY_CONFIG_FILE, conf)
+
+      await fs.writeJson(CONFIG_FILE, config, { spaces: 2 });
+
+      console.log(chalk.green("Project successfully configured!"));
+    } catch (err) {
+      console.error(chalk.red(`An error has occured: ${err.message || err}`));
+      process.exit(1);
+    }
+  });
+
+program
+  .command("migrations")
+  .alias("m")
+  .description("Meta-command to manage the database migrations")
+  .action(async () => {
+
+    try {
+      const shell = require('shelljs');
+      if (shell.exec('npm run migrate').code !== 0) {
+        shell.echo('Error: Database migration failed');
+        shell.exit(1);
+      }
+
+    } catch (err) {
+      console.error(chalk.red(`An error has occured: ${err.message || err}`));
+      process.exit(1);
+    }
+  });
+
+console.log(
+  chalk.yellow(figlet.textSync("Opla CE", { horizontalLayout: "full" })),
+);
+console.log(`${DESCRIPTION}\n`);
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}

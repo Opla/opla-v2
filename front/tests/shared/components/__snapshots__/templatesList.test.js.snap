@@ -1,0 +1,335 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/TemplatesList creates a form for the 'Import' special item 1`] = `
+<div
+  className="mdc-layout-grid"
+>
+  <div
+    className="mdc-layout-grid__inner"
+  >
+    <div
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+    >
+      <div
+        onClick={[Function]}
+        role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="opla_template-infoC selectedListItem"
+        >
+          <div
+            className="opla_template-imgCell"
+          >
+            <form>
+              <div
+                className="fileInput"
+              >
+                <i
+                  className="material-icons"
+                >
+                  cloud_upload
+                </i>
+                <input
+                  accept={null}
+                  onChange={[Function]}
+                  type="file"
+                />
+              </div>
+            </form>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              Import
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/TemplatesList marks an item as selected 1`] = `
+<div
+  className="mdc-layout-grid"
+>
+  <div
+    className="mdc-layout-grid__inner"
+  >
+    <div
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+    >
+      <div
+        onClick={[Function]}
+        role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="opla_template-infoC selectableListItem"
+        >
+          <div
+            className="opla_template-imgCell"
+          >
+            <div
+              className="opla_template-backgroundCell"
+              style={
+                Object {
+                  "backgroundColor": "#4cdbc4",
+                }
+              }
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="template 1"
+                  className="opla_template-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              template 1
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+    >
+      <div
+        onClick={[Function]}
+        role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="opla_template-infoC selectedListItem"
+        >
+          <div
+            className="opla_template-imgCell"
+          >
+            <div
+              className="opla_template-backgroundCell"
+              style={
+                Object {
+                  "backgroundColor": "#54c0eb",
+                }
+              }
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="template 2"
+                  className="opla_template-img"
+                  src="./images/robots/robot-1.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              template 2
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/TemplatesList renders correctly 1`] = `
+<div
+  className="mdc-layout-grid"
+>
+  <div
+    className="mdc-layout-grid__inner"
+  />
+</div>
+`;
+
+exports[`components/TemplatesList renders some items 1`] = `
+<div
+  className="mdc-layout-grid"
+>
+  <div
+    className="mdc-layout-grid__inner"
+  >
+    <div
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+    >
+      <div
+        onClick={[Function]}
+        role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="opla_template-infoC selectedListItem"
+        >
+          <div
+            className="opla_template-imgCell"
+          >
+            <div
+              className="opla_template-backgroundCell"
+              style={
+                Object {
+                  "backgroundColor": "#4cdbc4",
+                }
+              }
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="template 1"
+                  className="opla_template-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              template 1
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`components/TemplatesList renders without selected template 1`] = `
+<div
+  className="mdc-layout-grid"
+>
+  <div
+    className="mdc-layout-grid__inner"
+  >
+    <div
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+    >
+      <div
+        onClick={[Function]}
+        role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="opla_template-infoC selectableListItem"
+        >
+          <div
+            className="opla_template-imgCell"
+          >
+            <div
+              className="opla_template-backgroundCell"
+              style={
+                Object {
+                  "backgroundColor": "#4cdbc4",
+                }
+              }
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="Template 1"
+                  className="opla_template-img"
+                  src="./images/robots/robot-0.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              Template 1
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+    >
+      <div
+        onClick={[Function]}
+        role="presentation"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          className="opla_template-infoC selectableListItem"
+        >
+          <div
+            className="opla_template-imgCell"
+          >
+            <div
+              className="opla_template-backgroundCell"
+              style={
+                Object {
+                  "backgroundColor": "#54c0eb",
+                }
+              }
+            >
+              <div
+                className="opla_template-imgMask"
+              >
+                <img
+                  alt="Template 2"
+                  className="opla_template-img"
+                  src="./images/robots/robot-1.svg"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="opla_template-textCell"
+          >
+            <b>
+              Template 2
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

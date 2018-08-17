@@ -1,0 +1,92 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8081
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+      annotations:
+        checksum/configMap: {{ include (print $.Template.BasePath "/0-configmap.yaml") . | sha256sum }}
+
+    spec:
+      initContainers:
+        - name: migrations
+          image: boxfuse/flyway
+          env:
+            - name: FLYWAY_USER
+              value: "{{ .Values.db.user }}"
+            - name: FLYWAY_URL
+          {{- if eq .Values.db_mode "embedded"}}
+              value: "jdbc:mariadb://db:{{.Values.db.port}}/{{.Values.db.name}}"
+          {{- else if eq .Values.db_mode "persistent"}}
+              value: "jdbc:mariadb://{{.Release.Name}}-mariadb:{{.Values.db.port}}/{{.Values.db.name}}"
+          {{- end}}
+            - name: FLYWAY_PASSWORD
+              value: "{{ .Values.db.password }}"
+            - name: FLYWAY_BASELINE_ON_MIGRATE
+              value: "true"
+          command: ["/bin/sh","-c"]
+          args: ["cp -L /opt/scripts/** /flyway/sql/ && flyway migrate"]
+          volumeMounts:
+          - mountPath: /opt/scripts/
+            name: db-scripts
+      volumes:
+        - name: db-scripts
+          configMap:
+            name: db-scripts
+      containers:
+        - name: node
+          image: "opla/backend:{{ .Values.image.tag }}"
+          ports:
+          - containerPort: 8081
+          - containerPort: 9229
+          readinessProbe:
+            httpGet:
+              path: /api/v1/
+              port: 8081
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          env:
+          {{- if eq .Values.db_mode "embedded"}}
+          - name: OPLA_BACKEND_DATABASE_HOST
+            value: {{ .Values.embedded_db.host }}
+          {{- else if eq .Values.db_mode "persistent"}}
+          - name: OPLA_BACKEND_DATABASE_HOST
+            value: {{ .Release.Name }}-mariadb
+          {{- end}}
+          - name: OPLA_BACKEND_DATABASE_PORT
+            value: "3306"
+          - name: OPLA_BACKEND_DATABASE_NAME
+            value: {{ .Values.db.name }}
+          - name: OPLA_BACKEND_DATABASE_USER
+            value: {{ .Values.db.user }}
+          - name: OPLA_BACKEND_DATABASE_PASS
+            value: {{ .Values.db.password }}
+          - name: PORT
+            value: "8081"
+          - name: SKIP_MIGRATION
+            value: "true"

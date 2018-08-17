@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/tunnelBox renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "margin": "auto",
+      "width": "512px",
+    }
+  }
+>
+  <div>
+    <div
+      aria-hidden={true}
+      className="mdc-select"
+      onClick={[Function]}
+      onKeyUp={[Function]}
+      role="listbox"
+      style={
+        Object {
+          "width": "400px",
+        }
+      }
+    >
+      <div
+        className="mdc-select__native-control"
+        tabIndex="0"
+      >
+        <div
+          className="mdc-floating-label zrmc-floating-label"
+        >
+          Tunnel provider
+        </div>
+        <div
+          className="mdc-select__selected-text"
+        />
+        <div
+          className="mdc-line-ripple"
+        />
+      </div>
+      <div
+        className="mdc-select__menu mdc-menu"
+        tabIndex="-1"
+      >
+        <ul
+          aria-hidden="true"
+          className="mdc-menu__items mdc-list"
+          role="menu"
+        >
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            None
+          </li>
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            foo
+          </li>
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            bar
+          </li>
+          <li
+            className="mdc-list-item"
+            onClick={[Function]}
+            onKeyUp={[Function]}
+            role="option"
+            tabIndex="0"
+          >
+            foobar
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <form
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <div>
+      <div
+        className="mdc-text-field mdc-text-field--upgraded"
+        style={
+          Object {
+            "width": "400px",
+          }
+        }
+      >
+        <input
+          className="mdc-text-field__input"
+          defaultValue={undefined}
+          id="unique-component-id"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+          value={undefined}
+        />
+        <label
+          className="mdc-floating-label"
+          focused="false"
+          htmlFor="unique-component-id"
+          style={Object {}}
+        >
+          Subdomain
+        </label>
+        <div
+          className="mdc-text-field__bottom-line"
+        />
+      </div>
+    </div>
+    <div>
+      <div
+        className="mdc-text-field mdc-text-field--upgraded"
+        style={
+          Object {
+            "width": "400px",
+          }
+        }
+      >
+        <input
+          className="mdc-text-field__input"
+          defaultValue={undefined}
+          id="unique-component-id"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+          value={undefined}
+        />
+        <label
+          className="mdc-floating-label"
+          focused="false"
+          htmlFor="unique-component-id"
+          style={Object {}}
+        >
+          Host
+        </label>
+        <div
+          className="mdc-text-field__bottom-line"
+        />
+      </div>
+    </div>
+    <div>
+      <div
+        className="mdc-text-field mdc-text-field--upgraded"
+        style={
+          Object {
+            "width": "400px",
+          }
+        }
+      >
+        <input
+          className="mdc-text-field__input"
+          defaultValue={undefined}
+          id="unique-component-id"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+          value={undefined}
+        />
+        <label
+          className="mdc-floating-label"
+          focused="false"
+          htmlFor="unique-component-id"
+          style={Object {}}
+        >
+          Localhost
+        </label>
+        <div
+          className="mdc-text-field__bottom-line"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+`;
