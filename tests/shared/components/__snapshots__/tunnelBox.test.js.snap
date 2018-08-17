@@ -23,11 +23,11 @@ exports[`components/tunnelBox renders correctly 1`] = `
       }
     >
       <div
-        className="mdc-select__surface"
+        className="mdc-select__native-control"
         tabIndex="0"
       >
         <div
-          className="mdc-select__label"
+          className="mdc-floating-label zrmc-floating-label"
         >
           Tunnel provider
         </div>
@@ -35,7 +35,7 @@ exports[`components/tunnelBox renders correctly 1`] = `
           className="mdc-select__selected-text"
         />
         <div
-          className="mdc-select__bottom-line"
+          className="mdc-line-ripple"
         />
       </div>
       <div

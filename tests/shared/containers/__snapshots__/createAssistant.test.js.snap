@@ -366,11 +366,11 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
             }
           >
             <div
-              className="mdc-select__surface"
+              className="mdc-select__native-control"
               tabIndex="0"
             >
               <div
-                className="mdc-select__label mdc-select__label--float-above"
+                className="mdc-floating-label mdc-floating-label--float-above"
               >
                 Choose language
               </div>
@@ -380,7 +380,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                 English
               </div>
               <div
-                className="mdc-select__bottom-line"
+                className="mdc-line-ripple"
               />
             </div>
             <div

@@ -25,6 +25,8 @@ exports[`components/actionsToolbox can be an input 1`] = `
   >
     <div
       className="mdc-tooltype"
+      onMouseEnter={[Function]}
+      onWheel={[Function]}
     >
       <i
         className="actionstoolbox-icon material-icons"
@@ -42,6 +44,8 @@ exports[`components/actionsToolbox can be an input 1`] = `
     </div>
     <div
       className="mdc-tooltype"
+      onMouseEnter={[Function]}
+      onWheel={[Function]}
     >
       <i
         className="actionstoolbox-icon material-icons"
@@ -59,6 +63,8 @@ exports[`components/actionsToolbox can be an input 1`] = `
     </div>
     <div
       className="mdc-tooltype"
+      onMouseEnter={[Function]}
+      onWheel={[Function]}
     >
       <i
         className="actionstoolbox-icon material-icons"
@@ -76,6 +82,8 @@ exports[`components/actionsToolbox can be an input 1`] = `
     </div>
     <div
       className="mdc-tooltype"
+      onMouseEnter={[Function]}
+      onWheel={[Function]}
     >
       <i
         className="actionstoolbox-icon material-icons"
@@ -93,6 +101,8 @@ exports[`components/actionsToolbox can be an input 1`] = `
     </div>
     <div
       className="mdc-tooltype"
+      onMouseEnter={[Function]}
+      onWheel={[Function]}
     >
       <i
         className="actionstoolbox-icon material-icons"
@@ -122,6 +132,8 @@ exports[`components/actionsToolbox can be an input 1`] = `
   >
     <div
       className="mdc-tooltype"
+      onMouseEnter={[Function]}
+      onWheel={[Function]}
     >
       <i
         className="actionstoolbox-icon material-icons"

@@ -44,21 +44,26 @@ exports[`components/messagingsList renders correctly 1`] = `
       >
         <div
           className="mdc-switch"
+          onClick={[Function]}
         >
-          <input
-            checked={false}
-            className="mdc-switch__native-control"
-            disabled={false}
-            id="unique-component-id"
-            onChange={[Function]}
-            type="checkbox"
+          <div
+            className="mdc-switch__track"
           />
           <div
-            className="mdc-switch__background"
+            className="mdc-switch__thumb-underlay"
           >
             <div
-              className="mdc-switch__knob"
-            />
+              className="mdc-switch__thumb"
+            >
+              <input
+                checked={false}
+                className="mdc-switch__native-control"
+                disabled={false}
+                id="unique-component-id"
+                role="switch"
+                type="checkbox"
+              />
+            </div>
           </div>
         </div>
       </span>
@@ -93,21 +98,26 @@ exports[`components/messagingsList renders correctly 1`] = `
       >
         <div
           className="mdc-switch"
+          onClick={[Function]}
         >
-          <input
-            checked={false}
-            className="mdc-switch__native-control"
-            disabled={false}
-            id="unique-component-id"
-            onChange={[Function]}
-            type="checkbox"
+          <div
+            className="mdc-switch__track"
           />
           <div
-            className="mdc-switch__background"
+            className="mdc-switch__thumb-underlay"
           >
             <div
-              className="mdc-switch__knob"
-            />
+              className="mdc-switch__thumb"
+            >
+              <input
+                checked={false}
+                className="mdc-switch__native-control"
+                disabled={false}
+                id="unique-component-id"
+                role="switch"
+                type="checkbox"
+              />
+            </div>
           </div>
         </div>
       </span>
@@ -142,21 +152,26 @@ exports[`components/messagingsList renders correctly 1`] = `
       >
         <div
           className="mdc-switch"
+          onClick={[Function]}
         >
-          <input
-            checked={false}
-            className="mdc-switch__native-control"
-            disabled={false}
-            id="unique-component-id"
-            onChange={[Function]}
-            type="checkbox"
+          <div
+            className="mdc-switch__track"
           />
           <div
-            className="mdc-switch__background"
+            className="mdc-switch__thumb-underlay"
           >
             <div
-              className="mdc-switch__knob"
-            />
+              className="mdc-switch__thumb"
+            >
+              <input
+                checked={false}
+                className="mdc-switch__native-control"
+                disabled={false}
+                id="unique-component-id"
+                role="switch"
+                type="checkbox"
+              />
+            </div>
           </div>
         </div>
       </span>
