@@ -1,0 +1,20 @@
+---
+project: opla
+desc: Opla community edition
+
+discover:
+  - front
+  - backend
+
+env:
+  K8S_ENV: dev
+  K8S_NAMESPACE: dev-ce
+  CLIENT_ID: A_CLIENT_ID
+  CLIENT_SECRET: A_CLIENT_SECRET
+
+tasks:
+
+  all: #This is an ugly workaround for local dev. see https://github.com/goeuro/myke/issues/108.
+    cmd: |-
+      . ./myke.env.local
+      $myke {{.CMD}}
