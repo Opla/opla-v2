@@ -6,7 +6,8 @@ Opensource chatbot builder
 ## Run Opla
 
 ### Run locally with docker-compose
-Coming soon.
+
+The quickest way to run opla locally is to follow [this guide](docker/README.md)
 
 ## Development
 

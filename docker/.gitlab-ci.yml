@@ -1,0 +1,8 @@
+docker installation on linux:
+  image: ubuntu:16.04
+  script:
+    - |
+       apt-get update && apt-get install -y unzip curl
+       ./install.sh --non-interactive --no-run --rev $CI_COMMIT_SHA
+       docker --version
+       docker-compose --version

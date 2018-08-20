@@ -272,10 +272,23 @@ jobs:
       - run: *notify0
       - run: *notify1
 
+  # TODO
+  # docker_install:
+  #   working_directory: ~/project/docker
+  #   machine: true
+  #   steps:
+  #     - checkout: *checkout
+  #     - run: |
+  #         echo 127.0.0.1 front.localhost | sudo tee -a /etc/hosts
+  #         echo 127.0.0.1 backend.localhost | sudo tee -a /etc/hosts
+  #     - run: ./install.sh --non-interactive --rev $CIRCLE_SHA1
+  #     - run: ./test.sh
+
 workflows:
   version: 2
   test_and_deploy:
     jobs:
+      - docker_install
       - backend_test:
           filters:
             branches:
