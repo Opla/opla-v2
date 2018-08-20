@@ -49,39 +49,16 @@ This application should be available at: http://127.0.0.1:8081/.
 
 ## Database migrations
 
-We use [db-migrate](http://db-migrate.readthedocs.io/en/latest/) to manage the
+We use [flyway](https://flywaydb.org/documentation/) to manage the
 database migrations with a specific configuration for this project. By using the
 `bin/opla` tool, this configuration is automatically generated and `db-migrate`
-is bound to the `bin/opla migrations` command. Do not run `db-migrate` directly
-(it should complain about not finding the configuration file anyway).
+is bound to the `bin/opla migrations` command.
 
 ### Creating a migration
 
-1. Run:
+1. Read about terminology here : https://flywaydb.org/documentation/migrations.
 
-   ```
-   $ bin/opla migrations create "short explanation of the migration"
-   ```
-
-   The `"short explanation of the migration"` will be used in the migration
-   filename (see the content of the [`migrations/`](migrations/) folder for some
-   examples). Choose something short and self-explanatory.
-
-   This command will create several files, all of them should be put into Git.
-   You should not have to care about the generated JavaScript files as writing
-   migrations in plain SQL is much easier. In addition, you should not deal with
-   the `down` migrations, since database rollbacks never work in practice, we
-   only go forward.
-
-2. Write your migration in plain SQL in the generated file:
-
-
-   ```
-   echo "<SQL STATEMENT>;" > migrations/sqls/20180307110023-short-explanation-of-the-migration-up.sql
-   ```
-
-   Then, you can apply this migration and make sure everything works as
-   intended.
+2. Add your migration file to this repo under [migrations/sqls](https://github.com/Opla/backend/tree/master/migrations/sqls)
 
 ### Applying migrations
 
@@ -104,6 +81,8 @@ The CI/CD pipeline produces a Docker image that you can use to run the Backend.
 | OPLA_BACKEND_DATABASE_NAME | opla_dev | Database name                                                                                                                       |
 | OPLA_BACKEND_DATABASE_USER | opla     | Database user                                                                                                                       |
 | OPLA_BACKEND_DATABASE_PASS | foo      | Database password                                                                                                                   |
+
+
 ## Contributing
 
 Please, see the [CONTRIBUTING.md](../CONTRIBUTING.md) file.
