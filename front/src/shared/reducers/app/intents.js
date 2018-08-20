@@ -311,14 +311,14 @@ export const handlers = {
     const actions = intent[actionContainer];
     // WIP handle Condition type
     if (actions && actions.length > 0) {
-      if (typeof actions[0] === "string") {
-        actions.splice(selectedAction, 1);
-      } else if (actions[0].type === "condition") {
+      if (actions[0] && actions[0].type === "condition") {
         const { children } = actions[0];
         children.splice(selectedAction, 1);
         if (children.length === 0) {
           actions.splice(0, 1);
         }
+      } else {
+        actions.splice(selectedAction, 1);
       }
       intent.notSaved = true;
     }
