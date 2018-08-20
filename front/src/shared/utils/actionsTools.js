@@ -128,6 +128,16 @@ const ActionsTools = {
     }
     return actions;
   },
+
+  isActionValid(action) {
+    if (action && typeof action === "string") {
+      return true;
+    }
+    if (action && typeof action === "object" && action.type) {
+      return true;
+    }
+    return false;
+  },
 };
 
 export default ActionsTools;

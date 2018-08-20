@@ -10,6 +10,7 @@ import { List, Icon } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsItem from "./actionsItem";
 import ActionsToolbox from "./actionsToolbox";
+import ActionsTools from "../utils/actionsTools";
 
 class ActionsList extends Component {
   constructor(props) {
@@ -97,7 +98,9 @@ class ActionsList extends Component {
     let contentList;
     const isActionsEmpty = !actions || actions.length === 0;
     const isActionsCondition =
-      !isActionsEmpty && actions[0].type === "condition";
+      !isActionsEmpty &&
+      ActionsTools.isActionValid(actions[0]) &&
+      actions[0].type === "condition";
     // const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
     let addContentClassname = "";
