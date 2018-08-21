@@ -6,11 +6,16 @@ discover:
   - front
   - backend
 
+mixin:
+  - infra/mixin/ci
+
+
 env:
   K8S_ENV: dev
   K8S_NAMESPACE: dev-ce
   CLIENT_ID: A_CLIENT_ID
   CLIENT_SECRET: A_CLIENT_SECRET
+  APPLICATION_NAME: opla
 
 tasks:
 
