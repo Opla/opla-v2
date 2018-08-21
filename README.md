@@ -1,7 +1,4 @@
-# Opla
-Opensource chatbot builder
-
-[![CircleCI](https://circleci.com/gh/Opla/front.svg?style=svg)](https://circleci.com/gh/Opla/opla)
+# Opla [![CircleCI](https://circleci.com/gh/Opla/front.svg?style=svg)](https://circleci.com/gh/Opla/opla)
 
 ## Run Opla
 
