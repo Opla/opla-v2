@@ -54,7 +54,7 @@ You can use `--set api.domain=$IP.xip.io` `--set front.domain=$IP.xip.io` as dom
 
 Your app is then available at http://${NAMESPACE}.${FRONT_DOMAIN}
 
-In general, if you need more details about how we deploy opla, you can have a look at our [CircleCI config.yaml](https://github.com/Opla/front/blob/master/.circleci/config.yml), where we run commands to deploy it.
+In general, if you need more details about how we deploy opla, you can have a look at our [CircleCI config.yaml](.circleci/config.yml), where we run commands to deploy it.
 
 
 ## Contributing
