@@ -1,6 +1,6 @@
 # Opla - docker quick start guide
 
-[![Build Status](https://travis-ci.org/Opla/community-edition.svg?branch=master)](https://travis-ci.org/Opla/community-edition)
+[![Build Status](https://travis-ci.org/Opla/opla.svg?branch=master)](https://travis-ci.org/Opla/opla)
 
 In 5 minutes you create your own conversational assistant using this opensource tool.
 
@@ -15,12 +15,12 @@ chmod +x install.sh
 ./install.sh
 ```
 
-You should then be able to navigate to http://front.localhost/ and create your chatbot.
+You should then be able to navigate to http://localhost/ and create your chatbot.
 
 ### From a specific revision/branch/tag :
 ```
-export REV=install-script
-curl -fsSL https://github.com/opla/opla/opla/raw/$REV/docker/install.sh -o install.sh
+export REV=<branch|tag|commit_sha>
+curl -fsSL https://github.com/opla/opla/raw/$REV/docker/install.sh -o install.sh
 chmod +x install.sh
 ./install.sh --rev $REV
 ```
