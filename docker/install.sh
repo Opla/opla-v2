@@ -236,8 +236,9 @@ _() {
 
 	test_opla_up() {
 		check_quit
-		until curl --fail http://localhost/ && echo "Connected to Opla Frontend !"; do
+		until curl --fail http://localhost/ >/dev/null 2>&1 && echo "Connected to Opla Frontend !"; do
 			check_quit
+			echo "wating for the frontend..."
 			sleep 5
 		done
 	}
@@ -291,11 +292,19 @@ _() {
 		if [ -z "$NON_INTERACTIVE" ]; then
 			open_browser "http://$(opla_domain)/"
 		fi
-		echo "Application has started. Too see logs, you can do :"
 		echo ""
+		echo "#####################  OPLA RUNNING  ########################"
+		echo "Application has started. Too see logs, you can do :"
 		echo "cd opla-ce"
 		echo "docker-compose logs -f"
 		echo ""
+		echo "To stop the application, run :"
+		echo "cd opla-ce"
+		echo "docker-compose stop"
+		echo ""
+		echo "To cleanup, run :"
+		echo "cd opla-ce"
+		echo "docker-compose rm -f"
 		echo ""
 	fi
 

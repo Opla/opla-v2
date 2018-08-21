@@ -41,6 +41,7 @@ services:
     environment:
       - PORT=80
       - OPLA_API_DOMAIN
+      - OPLA_BACKEND_HOST
       - OPLA_FRONT_CLIENT_NAME
       - OPLA_BACKEND_PORT
       - APP_INSTANCE_NAME=LOCAL

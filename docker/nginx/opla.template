@@ -2,6 +2,10 @@ server {
     listen 80;
     underscores_in_headers on;
 
+    location / {
+        proxy_pass http://front;
+    }
+
     location /api {
         proxy_pass http://backend;
         proxy_set_header Upgrade ${DOLLAR}http_upgrade;
