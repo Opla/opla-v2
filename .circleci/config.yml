@@ -25,6 +25,35 @@ __steps:
       when: on_fail
       command: TEST_RESULT=1 DOMAIN="$K8S_NAMESPACE.$DOMAIN_SUFFIX" myke opla/_circle_notify
 
+__jobs:
+  cypress: &cypress
+    working_directory: ~/project/e2e
+    docker:
+      - image: cypress/base:8
+        environment:
+          TERM: xterm ## this enables colors in the output
+    parallelism: 1
+    steps:
+      - checkout: *checkout
+      - restore_cache:
+          keys:
+            - v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v2-deps-cypress-{{ .Branch }}-
+            - v2-deps-cypress-
+      - run: npm install
+      - save_cache:
+          key: v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run:
+          name: E2E tests
+          command: $(npm bin)/cypress run
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
+
 version: 2
 jobs:
   backend_test:
@@ -91,6 +120,16 @@ jobs:
             export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
             echo $HELM_XTRA_ARGS && kubectl delete ns circleci-$CIRCLE_BUILD_NUM
           when: always
+
+  e2e_qa:
+    <<: *cypress
+    environment:
+      CYPRESS_FRONTEND_URL: https://qa-ce.k8s.opla.ai/
+  
+  e2e_preprod:
+    <<: *cypress
+    environment:
+      CYPRESS_FRONTEND_URL: https://preprod-ce.k8s.opla.ai/
 
   backup_prod:
     working_directory: ~/project/backend
@@ -247,21 +286,23 @@ workflows:
             branches:
               only: 
                 - master
-                - notifications
+                - cypress
       - deploy_qa:
           requires:
             - promote
       - deploy_preprod:
           requires:
             - promote
-      - manual_check:
-          type: approval
+      - e2e_preprod:
           requires:
             - deploy_preprod
+      - e2e_qa:
+          requires:
             - deploy_qa
       - deploy_prod:
           requires:
-            - manual_check
+            - e2e_qa
+            - e2e_preprod
   backup_daily:
     triggers:
       - schedule:
