@@ -212,8 +212,8 @@ jobs:
     steps:
       - checkout: *checkout
       - run: *gcloudauth
-      - run: *notify0
       - run: *deploy
+      - run: *notify0
       - run: *notify1
 
 workflows:
