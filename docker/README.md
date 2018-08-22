@@ -1,6 +1,4 @@
-# Opla - docker quick start guide
-
-[![Build Status](https://travis-ci.org/Opla/opla.svg?branch=master)](https://travis-ci.org/Opla/opla)
+# Opla - docker quick start guide [![Build Status](https://travis-ci.org/Opla/opla.svg?branch=master)](https://travis-ci.org/Opla/opla)
 
 In 5 minutes you create your own conversational assistant using this opensource tool.
 
