@@ -1,0 +1,68 @@
+version: "3"
+services:
+
+  db:
+    image: mariadb:10.2
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${OPLA_BACKEND_DATABASE_NAME}
+      MYSQL_USER: ${OPLA_BACKEND_DATABASE_USER}
+      MYSQL_PASSWORD: ${OPLA_BACKEND_DATABASE_PASS}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    networks: 
+      - private
+
+  backend:
+    image: "opla/backend:latest"
+    restart: always
+    networks:
+      private: 
+        aliases:  ["${OPLA_API_DOMAIN}"]
+    expose:
+      - "80"
+    depends_on:
+      - db
+    environment:
+      - PORT=80
+      - OPLA_BACKEND_DATABASE_HOST
+      - OPLA_BACKEND_DATABASE_NAME
+      - OPLA_BACKEND_DATABASE_USER
+      - OPLA_BACKEND_DATABASE_PASS
+
+  front:
+    image: "opla/front:latest"
+    restart: always
+    networks:
+      - private
+    depends_on:
+      - backend
+    expose:
+      - "80"
+    environment:
+      - PORT=80
+      - OPLA_API_DOMAIN
+      - OPLA_BACKEND_HOST
+      - OPLA_FRONT_CLIENT_NAME
+      - OPLA_BACKEND_PORT
+      - APP_INSTANCE_NAME=LOCAL
+      - APP_INSTANCE_COLOR=#42f44e
+    volumes:
+      - "/srv/app/config"
+
+  nginx:
+    build: nginx
+    restart: always
+    depends_on:
+      - front
+    ports:
+      - "80:80"
+    networks: 
+      - private
+      - public
+    environment:
+      - OPLA_FRONT_DOMAIN
+      - OPLA_API_DOMAIN
+
+networks:
+  public: 
+  private: 

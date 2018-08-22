@@ -2,5 +2,4 @@
 .vscode
 config
 values.dev.yaml
-.env
 *.env.local

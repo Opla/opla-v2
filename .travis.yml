@@ -1,0 +1,22 @@
+jobs:
+  include:
+      # Stage that tests the docker-compose part.
+    - stage: test
+      before_script: 
+        - cd docker
+        - docker-compose up &
+      script: 
+        - ./test.sh
+      # Stage that tests the install script itself.
+    - sudo: required
+      before_script:  
+        - cd docker
+        - ./install.sh --non-interactive --rev $TRAVIS_COMMIT &
+      script: 
+        - ./test.sh
+      # Stage that tests the install script on macos.
+
+addons:
+  hosts:
+    - front.localhost
+    - back.localhost
