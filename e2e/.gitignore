@@ -6,3 +6,7 @@ node_modules/
 xunit.xml
 junit-results/
 multiple-results/
+
+fixtures/
+plugins/
+support/
