@@ -13,7 +13,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-You should then be able to navigate to http://localhost/ and create your chatbot.
+You should then be able to navigate to `http://localhost/` and create your chatbot.
 
 ### From a specific revision/branch/tag :
 ```
