@@ -48,7 +48,7 @@ __jobs:
             - ~/.cache
       - run:
           name: E2E tests
-          command: $(npm bin)/cypress run
+          command: $(npm bin)/cypress run --record
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
