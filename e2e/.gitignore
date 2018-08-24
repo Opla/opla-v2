@@ -1,0 +1,12 @@
+cypress/videos/
+test-results.xml
+results/
+.DS_Store
+node_modules/
+xunit.xml
+junit-results/
+multiple-results/
+
+fixtures/
+plugins/
+support/

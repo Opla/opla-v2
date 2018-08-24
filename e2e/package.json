@@ -1,0 +1,14 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "cypress e2e tests for opla",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "author": "Mik BRY <mik@opla.co>",
+  "license": "GPL-2.0+",
+  "devDependencies": {
+    "cypress": "^3.1.0"
+  }
+}
