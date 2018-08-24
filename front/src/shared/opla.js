@@ -150,7 +150,7 @@ const appProps = {
       isDrawerItem: true,
       name: "Community chat",
       icon: "chat",
-      href: "https://gitter.im/Opla",
+      href: "https://gitter.im/Opla/Community",
       access: "all",
     },
     {
@@ -158,7 +158,7 @@ const appProps = {
       isDrawerItem: true,
       name: "Issues",
       icon: "bug_report",
-      href: "https://github.com/Opla/community-edition/issues",
+      href: "https://github.com/Opla/opla/issues",
       access: "all",
     },
     {
