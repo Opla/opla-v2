@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable */
 const chalk = require("chalk");
 const figlet = require("figlet");
 const fs = require("fs-extra");
@@ -7,6 +8,7 @@ const program = require("commander");
 const { prompt } = require("inquirer");
 
 const pkg = require("../package.json");
+const configuration = require("./configuration.js");
 
 const CONFIG_FILE = path.resolve(__dirname, "../config/default.json");
 const FLYWAY_CONFIG_FILE = path.resolve(__dirname, "../config/flyway.conf");
@@ -126,77 +128,7 @@ program
       }
 
       // create the configuration
-      const config = {
-        name: "Opla.ai",
-        version: pkg.version,
-        global: {
-          database: {
-            datatype: answers.databaseType,
-            host: answers.databaseHost,
-            name: answers.databaseName,
-            user: answers.databaseUser,
-            password: answers.databasePass,
-            charset: "utf8mb4",
-            version: "2",
-          },
-          api: {
-            endpoint: answers.apiEndpoint,
-            version: "1",
-            port: 8081,
-          },
-          botSite: {
-            url: "/publish/",
-          },
-          gateway: {
-            url: answers.gatewayUrl,
-          },
-        },
-        auth: {
-          database: {
-            parent: "global",
-            name: "auth",
-          },
-          api: {
-            endpoint: answers.authEndpoint,
-          },
-        },
-        messenger: {
-          database: {
-            parent: "global",
-            name: "messenger",
-          },
-        },
-        users: {
-          database: {
-            parent: "global",
-            name: "users",
-          },
-        },
-        bots: {
-          database: {
-            parent: "global",
-            name: "bots",
-          },
-        },
-        webhooks: {
-          database: {
-            parent: "global",
-            name: "webhooks",
-          },
-        },
-        middlewares: {
-          database: {
-            parent: "global",
-            name: "middlewares",
-          },
-        },
-        parameters: {
-          database: {
-            parent: "global",
-            name: "parameters",
-          },
-        },
-      };
+      const config = configuration.createConfiguration(pkg, answers);
 
       let conf = `flyway.url=jdbc:mariadb://${answers.databaseHost}:3306/${answers.databaseName}\n` +
         `flyway.user=${answers.databaseUser}\n` +
@@ -244,3 +176,5 @@ program.parse(process.argv);
 if (!program.args.length) {
   program.help();
 }
+
+/* eslint-enable */
