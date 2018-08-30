@@ -11,15 +11,13 @@ import buildRoutes from "./routes";
 import plugins from "./plugins";
 
 class App {
-  constructor(config = {}) {
-    // We force zoapp not to build the SQL schema by default.
-    const buildSchema =
-      config.buildSchema === undefined ? false : config.buildSchema;
+  constructor(configuration = {}) {
+    const config = {
+      buildSchema: false, // We force zoapp not to build the SQL schema by default.
+      ...configuration,
+    };
 
-    this.zoapp = createZoapp({
-      ...config,
-      buildSchema,
-    });
+    this.zoapp = createZoapp(config);
     logger.info("add Plugins");
     this.zoapp.addPlugins(plugins(this.zoapp.pluginsManager));
     logger.info("add Controller extensions");

@@ -3,3 +3,4 @@
 config
 values.dev.yaml
 *.env.local
+*yarn-error.log

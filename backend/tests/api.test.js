@@ -6,10 +6,12 @@
  */
 import request from "supertest";
 import createApp from "opla-backend/app";
+import { defaultAppConfig } from "zoapp-backend";
 
 import { dbConfig } from "./test-config";
 
 const mysqlConfig = {
+  ...defaultAppConfig,
   // Global Database
   name: "Opla.ai test",
   version: "0.8.0",
@@ -20,7 +22,7 @@ const mysqlConfig = {
     api: {
       endpoint: "/api",
       version: "1",
-      port: 8081,
+      port: 8086,
     },
   },
   messenger: {
@@ -33,6 +35,20 @@ const mysqlConfig = {
     database: {
       parent: "global",
       name: "bots",
+    },
+  },
+};
+
+const memDBConfig = {
+  ...defaultAppConfig,
+  global: {
+    database: {
+      datatype: "memDatabase",
+    },
+    api: {
+      endpoint: "/api",
+      version: "1",
+      port: 8086,
     },
   },
 };
@@ -159,6 +175,7 @@ describe("API", () => {
     {
       title: "MemDatabase",
       config: {
+        ...memDBConfig,
         // MemDatabase should always build its SQL schema as we do not have
         // migrations for this driver.
         buildSchema: true,
@@ -180,6 +197,8 @@ describe("API", () => {
       },
     },
   ];
+
+  expect(databaseDrivers[0].config.auth).toBeDefined();
 
   databaseDrivers.forEach((params) => {
     describe(`with ${params.title}`, () => {
