@@ -23,5 +23,7 @@ function loadConfig(path) {
   return config;
 }
 
-const config = loadConfig(`${__dirname}/config/default.json`);
+const configPath = `${__dirname}/config/default.json`;
+logger.info("loading configuration file: ", configPath);
+const config = loadConfig(configPath);
 createApp(config).start();

@@ -9,7 +9,7 @@
   "scripts": {
     "clean-dist": "rm -r -f dist && mkdir dist",
     "compile": "yarn compile:dev && rm -r -f ./dist/config.j*",
-    "compile:dev": "yarn clean-dist && babel src -s -D -d dist && cp -f ./package.json ./dist/package.json && cp -f ./LICENSE ./dist/LICENSE && cp -f ./README.md ./dist/README.md && cp -fr ./config ./dist/config",
+    "compile:dev": "yarn clean-dist && babel src -s -D -d dist && cp -f ./package.json ./dist/package.json && cp -f ./LICENSE ./dist/LICENSE && cp -f ./README.md ./dist/README.md",
     "dev": "yarn compile:dev && yarn start:dev",
     "lint": "eslint src tests",
     "lint:dev": "yarn lint --rule 'no-console: off' --fix",
