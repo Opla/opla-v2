@@ -95,7 +95,7 @@ jobs:
       - run: *dockerauth
       - run: myke backend/ci_build --COMMIT_SHA=$CIRCLE_SHA1 --BUILD_NUMBER=$CIRCLE_BUILD_NUM
 
-  e2e_tests:
+  backend_e2e_tests:
     working_directory: ~/project/backend
     docker:
       - image: licarth/ci-cd:latest
@@ -106,19 +106,20 @@ jobs:
     steps:
       - checkout: *checkout
       - run: *gcloudauth
-      - run: |
-          export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
-          gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
-          helm init --service-account tiller --upgrade
-          COMMIT_SHA=$CIRCLE_SHA1 myke preview
-          COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS="--set tls=false" myke deploy
-      - run: |
-          export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
-          retry -s 1 -t 60 myke e2e_test
-      - run:
+      - run: echo 'export K8S_NAMESPACE="circleci-$CIRCLE_BUILD_NUM"' >> $BASH_ENV
+      - run: 
+          name: deploy
           command: |
-            export K8S_NAMESPACE=circleci-$CIRCLE_BUILD_NUM
-            echo $HELM_XTRA_ARGS && kubectl delete ns circleci-$CIRCLE_BUILD_NUM
+            gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
+            helm init --service-account tiller --upgrade
+            COMMIT_SHA=$CIRCLE_SHA1 myke preview
+            COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS="--set tls=false" myke deploy
+      - run:
+          name: backend test
+          command: retry -s 1 -t 60 "myke e2e_test --HOST=$K8S_NAMESPACE.k8s.opla.ai"
+      - run:
+          name: cleanup
+          command: kubectl delete ns circleci-$CIRCLE_BUILD_NUM
           when: always
 
   e2e_qa:
@@ -254,7 +255,7 @@ jobs:
       - run: *deploy
       - run: *notify0
       - run: *notify1
-
+  
   # TODO make it work
   docker_install:
     working_directory: ~/project/docker
@@ -287,7 +288,7 @@ workflows:
               only: /.*/
       - backend_build
       - front_build
-      - e2e_tests:
+      - backend_e2e_tests:
           requires:
             - front_test
             - front_build
@@ -295,7 +296,7 @@ workflows:
             - backend_build
       - promote:
           requires:
-            - e2e_tests
+            - backend_e2e_tests
           filters:
             branches:
               only: 
