@@ -10,8 +10,13 @@ const { prompt } = require("inquirer");
 const pkg = require("../package.json");
 const configuration = require("./configuration.js");
 
-const CONFIG_FILE = path.resolve(__dirname, "../config/default.json");
-const FLYWAY_CONFIG_FILE = path.resolve(__dirname, "../config/flyway.conf");
+const CONFIG_PATH = path.resolve(__dirname, "../src/config/");
+if(!fs.existsSync(CONFIG_PATH)){
+  fs.mkdirSync(CONFIG_PATH);
+}
+
+const CONFIG_FILE = path.resolve(CONFIG_PATH, "default.json");
+const FLYWAY_CONFIG_FILE = path.resolve(CONFIG_PATH, "flyway.conf");
 const DESCRIPTION = `Management tool for ${pkg.description}`;
 
 program
