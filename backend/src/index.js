@@ -12,6 +12,7 @@ const fs = require("fs");
 function loadConfig(path) {
   let config = {};
   try {
+    logger.info("loading configuration file: ", path);
     config = JSON.parse(fs.readFileSync(path));
   } catch (error) {
     logger.error(
@@ -23,5 +24,12 @@ function loadConfig(path) {
   return config;
 }
 
-const config = loadConfig(`${__dirname}/config/default.json`);
+// path for dev version
+let configPath = `${__dirname}/../config/default.json`;
+if (!fs.existsSync(configPath)) {
+  // path for compiled version
+  configPath = `${__dirname}/config/default.json`;
+}
+
+const config = loadConfig(configPath);
 createApp(config).start();
