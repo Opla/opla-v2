@@ -6,22 +6,22 @@
  */
 /* eslint react/display-name: 0 */
 import React from "react";
-import Front from "zoapp-front/front";
+import Front from "zoapp-front/src/shared/front";
 import About from "OplaContainers/about";
 import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
-import AdminManager from "zoapp-front/containers/adminManager";
+import AdminManager from "zoapp-front/src/shared/containers/adminManager";
 import AgentManager from "OplaContainers/agentManager";
 import PublishContainer from "OplaContainers/publishContainer";
 import configureStore from "OplaLibs/store";
-import DrawerFooter from "zoapp-front/containers/drawerFooter";
+import DrawerFooter from "zoapp-front/src/shared/containers/drawerFooter";
 import Zrmc, { Inner, Cell, Button } from "zrmc";
 import PublishDialog from "OplaContainers/dialogs/publishDialog";
 import { defaultTemplates, defaultLanguages } from "OplaLibs/reducers/app";
 import Extension from "OplaContainers/admin/extensions";
 import GeneralAdmin from "OplaContainers/admin/generalAdmin";
-import Users from "zoapp-front/containers/admin/users";
-import Advanced from "zoapp-front/containers/admin/advanced";
+import Users from "zoapp-front/src/shared/containers/admin/users";
+import Advanced from "zoapp-front/src/shared/containers/admin/advanced";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
 

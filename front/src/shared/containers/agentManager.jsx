@@ -8,9 +8,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Zrmc, { Grid, Inner, Cell } from "zrmc";
-import Loading from "zoapp-front/components/loading";
-import SignInForm from "zoapp-front/containers/signInForm";
-import { appSetTitle } from "zoapp-front/actions/app";
+import Loading from "zoapp-front/src/shared/components/loading";
+import SignInForm from "zoapp-front/src/shared/containers/signInForm";
+import { appSetTitle } from "zoapp-front/src/shared/actions/app";
 
 import {
   apiGetIntentsRequest,

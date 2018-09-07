@@ -10,7 +10,7 @@ import {
   FETCH_SUCCESS,
   SUBSCRIBE,
   UNSUBSCRIBE,
-} from "zoapp-front/actions/constants";
+} from "zoapp-front/src/shared/actions/constants";
 
 import {
   API_CREATEBOT,
