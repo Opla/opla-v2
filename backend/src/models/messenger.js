@@ -148,6 +148,15 @@ class MessengerModel extends Model {
     return c;
   }
 
+  /**
+   * create a conversation
+   * @param {Object} user - The user
+   * @param {string} user.id
+   * @param {string} user.username
+   * @param {string[]} participants
+   * @param {*} [params=null] - Unused
+   * @param {string} [origin=null] - The bot linked to the conversation
+   */
   async createConversation(user, participants, params = null, origin = null) {
     const collection = this.database.getTable("conversations");
     const userId = user ? user.id : null;

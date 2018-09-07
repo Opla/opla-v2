@@ -21,6 +21,15 @@ export default class extends Controller {
     return this.model.getConversation(user, conversationId);
   }
 
+  /**
+   * create a conversation
+   * @param {Object} user - The user
+   * @param {string} user.id
+   * @param {string} user.username
+   * @param {object} params
+   * @param {string[]} params.participants
+   * @param {string} params.origin - The bot linked to the conversation
+   */
   async createConversation(user, params) {
     let conversation = null;
     const { participants, origin, ...p } = params;

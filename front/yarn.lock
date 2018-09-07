@@ -7857,9 +7857,9 @@ zoapp-common@0.3.0:
     whatwg-fetch "^2.0.4"
     winston "2.4.0"
 
-zoapp-front@0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.24.0.tgz#6065c6c41df61d65a65c628b3ad5802e20b5272f"
+zoapp-front@0.24.2:
+  version "0.24.2"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.24.2.tgz#9c9bc11925b0b2ee3e3fa75a77c7d1b9c949a93f"
   dependencies:
     babel-runtime "^6.26.0"
     prop-types "15.6.0"

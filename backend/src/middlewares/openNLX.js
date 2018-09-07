@@ -8,11 +8,15 @@ import fetch from "node-fetch";
 import openNLX from "opennlx";
 
 class OpenNLXMiddleware {
+  /**
+   *
+   * @param {Object} controllers - Instance of ExtensionsController
+   */
   constructor(controllers) {
     this.listener = null;
     this.name = "openNLX";
     this.classes = ["messenger", "bot", "sandbox"];
-    this.mainControllers = controllers;
+    this.mainControllers = controllers; // Instance of ExtensionsController
     logger.info("OpenNLXMiddleware");
   }
 

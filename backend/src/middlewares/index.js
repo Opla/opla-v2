@@ -8,6 +8,11 @@
 import OpenNLXMiddleware from "./openNLX";
 import PublishConnectorMiddleware from "./publishConnector";
 
+/**
+ *
+ * @param {Object} middlewaresManager - The zoapp MiddlewaresController instance
+ * @param {Object} controllers - The ExtensionsController instance
+ */
 const initMiddlewares = (middlewaresManager, controllers) => {
   // TODO dynamic loading
   logger.info("initMiddlewares");

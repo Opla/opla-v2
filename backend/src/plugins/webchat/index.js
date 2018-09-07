@@ -44,6 +44,7 @@ class WebChat {
     const { config } = this.manager;
     this.middleware = middleware;
     if (middleware.origin) {
+      // set middleware application
       if (!middleware.application || !middleware.application.id) {
         const name = `${middleware.name}_${middleware.origin}`;
         // get a previously created app with same name
