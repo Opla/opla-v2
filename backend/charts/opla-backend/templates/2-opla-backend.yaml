@@ -90,3 +90,9 @@ spec:
             value: "8081"
           - name: SKIP_MIGRATION
             value: "true"
+          - name: ZOAPP_API_URL
+            value: {{.Values.api.domain}}/api
+          - name: ZOAPP_AUTH_URL
+            value: {{.Values.api.domain}}/auth
+          - name: ZOAPP_PUBLIC_URL
+            value: {{.Values.api.domain}}/api
