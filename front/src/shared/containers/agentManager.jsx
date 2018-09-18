@@ -32,18 +32,21 @@ class AgentManager extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
-    this.props.appSetTitle("Builder");
+    this.props.appSetTitle(props.bot ? props.bot.name : "Factory");
   }
 
   componentDidMount() {
-    this.updateIntents();
+    this.update();
   }
 
   componentDidUpdate() {
-    if (this.props.titleName !== "Builder") {
-      this.props.appSetTitle("Builder");
+    this.update();
+  }
+
+  update() {
+    if (this.updateIntents()) {
+      this.props.appSetTitle(this.props.bot ? this.props.bot.name : "Factory");
     }
-    this.updateIntents();
   }
 
   onRenameIntent = (dialog, action, data) => {
@@ -261,12 +264,13 @@ class AgentManager extends Component {
       if (!this.state.needUpdate) {
         this.setState({ needUpdate: true });
       }
-      return;
     }
     if (this.props.selectedBotId && this.state.needUpdate) {
       this.setState({ needUpdate: false });
       this.props.apiGetIntentsRequest(this.props.selectedBotId);
+      return true;
     }
+    return false;
   }
 
   render() {
@@ -420,7 +424,12 @@ const mapStateToProps = (state) => {
       ? state.app.intents[selectedIntentIndex]
       : null;
   }
-  const titleName = state.app ? state.app.titleName : "";
+  let titleName;
+  if (bot) {
+    titleName = "Factory";
+  } else {
+    titleName = state.app ? state.app.titleName : "";
+  }
   return {
     selectedBotId,
     bot,

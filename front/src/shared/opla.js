@@ -58,7 +58,7 @@ const appProps = {
       id: "1",
       isDrawerItem: true,
       icon: "dashboard",
-      name: "Dashboard",
+      name: "Home",
       access: "auth",
       path: "/",
       render: (props) => <Home {...props} />,
@@ -67,9 +67,10 @@ const appProps = {
       id: "2",
       isDrawerItem: true,
       icon: "build",
-      name: "Builder",
-      path: "/builder",
+      name: "Factory",
+      path: "/factory",
       access: "auth",
+      panels: ["Dashboard", "Analytics", "Builder"],
       toolbox: [
         {
           title: "Publish",
