@@ -6,7 +6,7 @@
  */
 import * as apiActions from "shared/actions/api";
 import * as authActions from "zoapp-front/actions/auth";
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/actions/app";
 import reducer, {
   initialState,
   defaultTemplates,
@@ -21,24 +21,26 @@ describe("reducers/app", () => {
 
   it("sets the application title", () => {
     const title = "app title";
+    const activeScreen = { title, name: title };
 
     const prevState = reducer(undefined, {});
     expect(prevState).toEqual(initialState);
 
-    const state = reducer(prevState, appSetTitle(title));
+    const state = reducer(prevState, appSetTitleName(title));
     expect(state).toEqual({
       ...prevState,
-      titleName: title,
+      activeScreen,
     });
   });
 
   it("resets the state when user signs out", () => {
     const title = "some title";
+    const activeScreen = { title, name: title };
 
-    const prevState = reducer(undefined, appSetTitle(title));
+    const prevState = reducer(undefined, appSetTitleName(title));
     expect(prevState).toEqual({
       ...initialState,
-      titleName: title,
+      activeScreen,
     });
 
     const state = reducer(prevState, authActions.signOutComplete({}));

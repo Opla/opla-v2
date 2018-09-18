@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/actions/app";
 
 const aboutStyle = {
   fontSize: "18px",
@@ -25,7 +25,7 @@ const infoStyle = {
 class About extends Component {
   constructor(props) {
     super();
-    props.appSetTitle("About");
+    props.appSetTitleName("About");
   }
 
   render() {
@@ -82,11 +82,11 @@ class About extends Component {
 
 About.propTypes = {
   isLoading: PropTypes.bool,
-  appSetTitle: PropTypes.func.isRequired,
+  appSetTitleName: PropTypes.func.isRequired,
 };
 const mapDispatchToProps = (dispatch) => ({
-  appSetTitle: (titleName) => {
-    dispatch(appSetTitle(titleName));
+  appSetTitleName: (titleName) => {
+    dispatch(appSetTitleName(titleName));
   },
 });
 

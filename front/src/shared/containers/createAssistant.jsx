@@ -10,7 +10,7 @@ import Zrmc, { Select, MenuItem, Button, TextField } from "zrmc";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ProcessingDialog from "zoapp-front/containers/processingDialog";
-import { appSetTitle, setMessage } from "zoapp-front/actions/app";
+import { appSetTitleName, setMessage } from "zoapp-front/actions/app";
 
 import TemplatesList from "../components/templatesList";
 import {
@@ -50,7 +50,7 @@ export class CreateAssistantBase extends Component {
       selectedTemplate: null,
       template: null,
     };
-    props.appSetTitle("Create your conversational robot");
+    props.appSetTitleName("Create your conversational robot");
   }
 
   componentDidMount() {
@@ -301,7 +301,7 @@ CreateAssistantBase.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   createBot: PropTypes.func.isRequired,
-  appSetTitle: PropTypes.func.isRequired,
+  appSetTitleName: PropTypes.func.isRequired,
   apiGetTemplates: PropTypes.func.isRequired,
   apiGetLanguages: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
@@ -329,8 +329,8 @@ const mapDispatchToProps = (dispatch) => ({
   createBot: (botParams) => {
     dispatch(apiCreateBot(botParams));
   },
-  appSetTitle: (titleName) => {
-    dispatch(appSetTitle(titleName));
+  appSetTitleName: (titleName) => {
+    dispatch(appSetTitleName(titleName));
   },
   setMessage: (message) => {
     dispatch(setMessage(message));

@@ -19,7 +19,7 @@ beforeAll(() => {
 
 describe("containers/CreateAssistant", () => {
   it("renders correctly", () => {
-    const appSetTitleSpy = jest.fn();
+    const appSetTitleNameSpy = jest.fn();
     const setMessage = jest.fn();
     const createBotSpy = jest.fn();
     const apiGetTemplatesSpy = jest.fn();
@@ -30,7 +30,7 @@ describe("containers/CreateAssistant", () => {
       <CreateAssistantBase
         isLoading={false}
         createBot={createBotSpy}
-        appSetTitle={appSetTitleSpy}
+        appSetTitleName={appSetTitleNameSpy}
         apiGetTemplates={apiGetTemplatesSpy}
         apiGetLanguages={apiGetLanguagesSpy}
         templates={defaultTemplates}
@@ -43,7 +43,7 @@ describe("containers/CreateAssistant", () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
 
-    expect(appSetTitleSpy).toHaveBeenCalled();
+    expect(appSetTitleNameSpy).toHaveBeenCalled();
     expect(apiGetTemplatesSpy).toHaveBeenCalled();
     expect(apiGetLanguagesSpy).toHaveBeenCalled();
     expect(createBotSpy).not.toHaveBeenCalled();
@@ -61,7 +61,7 @@ describe("containers/CreateAssistant", () => {
       <CreateAssistantBase
         isLoading={false}
         createBot={jest.fn}
-        appSetTitle={jest.fn()}
+        appSetTitleName={jest.fn()}
         apiGetTemplates={jest.fn()}
         apiGetLanguages={jest.fn()}
         templates={defaultTemplates}
@@ -82,7 +82,7 @@ describe("containers/CreateAssistant", () => {
       <CreateAssistantBase
         isLoading={false}
         createBot={jest.fn}
-        appSetTitle={jest.fn()}
+        appSetTitleName={jest.fn()}
         apiGetTemplates={jest.fn()}
         apiGetLanguages={jest.fn()}
         templates={defaultTemplates}
@@ -104,7 +104,7 @@ describe("containers/CreateAssistant", () => {
       <CreateAssistantBase
         isLoading={false}
         createBot={jest.fn}
-        appSetTitle={jest.fn()}
+        appSetTitleName={jest.fn()}
         apiGetTemplates={jest.fn()}
         apiGetLanguages={jest.fn()}
         templates={defaultTemplates}
@@ -133,7 +133,7 @@ describe("containers/CreateAssistant", () => {
       <CreateAssistantBase
         isLoading={false}
         createBot={createBotSpy}
-        appSetTitle={jest.fn()}
+        appSetTitleName={jest.fn()}
         setMessage={jest.fn()}
         apiGetTemplates={jest.fn()}
         apiGetLanguages={jest.fn()}

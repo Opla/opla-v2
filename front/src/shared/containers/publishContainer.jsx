@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { apiGetBotParametersRequest } from "OplaLibs/actions/api";
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/actions/app";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../../config/default.json";
 
@@ -16,7 +16,7 @@ class PublishContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.props.appSetTitle("Webchat");
+    this.props.appSetTitleName("Webchat");
   }
 
   componentDidMount() {
@@ -75,7 +75,7 @@ PublishContainer.propTypes = {
   match: PropTypes.object.isRequired,
   apiGetBotParametersRequest: PropTypes.func.isRequired,
   botParameters: PropTypes.object,
-  appSetTitle: PropTypes.func.isRequired,
+  appSetTitleName: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -85,8 +85,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  appSetTitle: (titleName) => {
-    dispatch(appSetTitle(titleName));
+  appSetTitleName: (titleName) => {
+    dispatch(appSetTitleName(titleName));
   },
   apiGetBotParametersRequest: (name) =>
     dispatch(apiGetBotParametersRequest(name)),

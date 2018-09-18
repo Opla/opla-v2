@@ -30,12 +30,12 @@ describe("containers/Dashboard", () => {
     },
   };
   it("renders and update correctly", () => {
-    const appSetTitleSpy = jest.fn();
+    const appSetTitleNameSpy = jest.fn();
     const fetchMetricsSpy = jest.fn();
 
     const component = renderer.create(
       <DashboardBase
-        appSetTitle={appSetTitleSpy}
+        appSetTitleName={appSetTitleNameSpy}
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
         metrics={defaultMetrics}
@@ -45,12 +45,12 @@ describe("containers/Dashboard", () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
 
-    expect(appSetTitleSpy).toHaveBeenCalled();
+    expect(appSetTitleNameSpy).toHaveBeenCalled();
     expect(fetchMetricsSpy).not.toHaveBeenCalled();
 
     component.update(
       <DashboardBase
-        appSetTitle={appSetTitleSpy}
+        appSetTitleName={appSetTitleNameSpy}
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
         renderingValue
@@ -64,7 +64,7 @@ describe("containers/Dashboard", () => {
   it("renders a Loading component when user is not signed in", () => {
     const component = renderer.create(
       <DashboardBase
-        appSetTitle={jest.fn()}
+        appSetTitleName={jest.fn()}
         fetchMetrics={jest.fn()}
         isSignedIn={false}
       />,
@@ -77,7 +77,7 @@ describe("containers/Dashboard", () => {
   it("renders a Loading component when isLoading is true", () => {
     const component = renderer.create(
       <DashboardBase
-        appSetTitle={jest.fn()}
+        appSetTitleName={jest.fn()}
         fetchMetrics={jest.fn()}
         isSignedIn
         isLoading
@@ -93,7 +93,7 @@ describe("containers/Dashboard", () => {
 
     const component = renderer.create(
       <DashboardBase
-        appSetTitle={jest.fn()}
+        appSetTitleName={jest.fn()}
         fetchMetrics={jest.fn()}
         isSignedIn
         renderingValue
@@ -106,12 +106,12 @@ describe("containers/Dashboard", () => {
   });
 
   it("fetch metrics when selected bot change", () => {
-    const appSetTitleSpy = jest.fn();
+    const appSetTitleNameSpy = jest.fn();
     const fetchMetricsSpy = jest.fn();
 
     const wrapper = shallow(
       <DashboardBase
-        appSetTitle={appSetTitleSpy}
+        appSetTitleName={appSetTitleNameSpy}
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
         metrics={defaultMetrics}

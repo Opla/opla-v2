@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import Zrmc, { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 import SignInForm from "zoapp-front/containers/signInForm";
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/actions/app";
 
 import {
   apiGetIntentsRequest,
@@ -32,7 +32,7 @@ class AgentManager extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
-    this.props.appSetTitle(props.bot ? props.bot.name : "Factory");
+    this.props.appSetTitleName(props.bot ? props.bot.name : "Factory");
   }
 
   componentDidMount() {
@@ -45,7 +45,10 @@ class AgentManager extends Component {
 
   update() {
     if (this.updateIntents()) {
-      this.props.appSetTitle(this.props.bot ? this.props.bot.name : "Factory");
+      this.props.appSetTitleName(
+        this.props.bot ? this.props.bot.name : "Chatbot",
+        "Factory",
+      );
     }
   }
 
@@ -399,7 +402,7 @@ AgentManager.propTypes = {
   selectedIntent: PropTypes.shape({ id: PropTypes.string }),
   store: PropTypes.shape({}),
   titleName: PropTypes.string.isRequired,
-  appSetTitle: PropTypes.func.isRequired,
+  appSetTitleName: PropTypes.func.isRequired,
   apiGetIntentsRequest: PropTypes.func.isRequired,
   apiSendIntentRequest: PropTypes.func.isRequired,
   apiDeleteIntentRequest: PropTypes.func.isRequired,
@@ -424,12 +427,7 @@ const mapStateToProps = (state) => {
       ? state.app.intents[selectedIntentIndex]
       : null;
   }
-  let titleName;
-  if (bot) {
-    titleName = "Factory";
-  } else {
-    titleName = state.app ? state.app.titleName : "";
-  }
+  const titleName = state.app.activeScreen.name ? state.app.activeScreen.name : "";
   return {
     selectedBotId,
     bot,
@@ -447,8 +445,8 @@ const mapDispatchToProps = (dispatch) => ({
   apiGetIntentsRequest: (botId) => {
     dispatch(apiGetIntentsRequest(botId));
   },
-  appSetTitle: (titleName) => {
-    dispatch(appSetTitle(titleName));
+  appSetTitleName: (title, name) => {
+    dispatch(appSetTitleName(title, name));
   },
   apiSendIntentRequest: (botId, intent) => {
     dispatch(apiSendIntentRequest(botId, intent));

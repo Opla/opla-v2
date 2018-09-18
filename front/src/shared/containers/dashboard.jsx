@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { Grid, Inner, Cell, Icon } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/actions/app";
 import { apiGetMetricsRequest } from "../actions/api";
 
 const metricStyle = {
@@ -45,7 +45,7 @@ const legendStyle = {
 export class DashboardBase extends Component {
   constructor(props) {
     super();
-    props.appSetTitle("Dashboard");
+    props.appSetTitleName("Dashboard");
   }
 
   componentDidMount() {
@@ -266,7 +266,7 @@ DashboardBase.propTypes = {
   isSignedIn: PropTypes.bool,
   metrics: PropTypes.shape({}),
   selectedBotId: PropTypes.string,
-  appSetTitle: PropTypes.func.isRequired,
+  appSetTitleName: PropTypes.func.isRequired,
   fetchMetrics: PropTypes.func.isRequired,
 };
 
@@ -284,8 +284,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  appSetTitle: (titleName) => {
-    dispatch(appSetTitle(titleName));
+  appSetTitleName: (titleName) => {
+    dispatch(appSetTitleName(titleName));
   },
   fetchMetrics: (botId) => dispatch(apiGetMetricsRequest(botId)),
 });
