@@ -427,7 +427,9 @@ const mapStateToProps = (state) => {
       ? state.app.intents[selectedIntentIndex]
       : null;
   }
-  const titleName = state.app.activeScreen.name ? state.app.activeScreen.name : "";
+  const titleName = state.app.activeScreen.name
+    ? state.app.activeScreen.name
+    : "";
   return {
     selectedBotId,
     bot,

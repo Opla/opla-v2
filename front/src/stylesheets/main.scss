@@ -5,8 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
- @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
- @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+
+@import "palette";
+@import "theming";
+@import "messenger";
 
  html {
   cursor: default;
@@ -44,7 +48,7 @@
 }
 
 .intent_title:hover  .intent_title_edit {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
 .actionstoolbox {
@@ -67,7 +71,7 @@
 }
 
 .actionstoolbox-icon:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
  }
 
 .mdc-list {
@@ -102,7 +106,7 @@
  .red_dot {
   height: 12px;
   width: 12px;
-  background-color: #b71c1c;
+  background-color: $color_error;
   border-radius: 50%;
   margin-right: 8px;
   display: inline-block;
@@ -122,7 +126,7 @@
 }
 
 .help_icon:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
 
@@ -175,7 +179,7 @@
 }
 
 .help_panel_header > div > i:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
 .fileInput {
@@ -342,7 +346,7 @@
 }
 
 .explorer .zui-expansion-title > div i:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
 .explorer .mdc-list-item > div {
@@ -362,7 +366,7 @@
 }
 
 .zui-panel-header__actions i:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
  .actionConditional {
@@ -448,7 +452,7 @@
 
 
 .selectableListItem > .mdc-list-item__meta i:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
 .selectedListItem > .mdc-list-item__meta {
@@ -461,7 +465,7 @@
 
 
 .selectedListItem > .mdc-list-item__meta i:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
  .onFocusAction:focus {
@@ -473,7 +477,7 @@
  }
  
 .onFocusAction > .mdc-list-item__meta:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
  .onFocusAction:hover > .mdc-list-item__meta {
@@ -514,7 +518,7 @@
 
  /* TODO put this in Zoapp-front */
 i.zui-subheader-right:hover {
-  color: rgba(85,38,130);
+  color: rgb(85,38,130);
 }
 
  .zui-subheader-right {

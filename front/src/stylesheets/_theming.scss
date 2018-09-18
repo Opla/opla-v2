@@ -1,0 +1,29 @@
+/**
+ * Copyright (c) 2015-present, CWB SAS
+ *
+ * This source code is licensed under the GPL v2.0+ license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* Header */
+.mdc-toolbar--fixed {
+  border-bottom: 1px solid #EEEEEE;
+}
+.mdc-tab-bar .mdc-tab--active .mdc-tab__text-label {
+  color: $color_primary;
+}
+
+.mdc-tab-bar .mdc-tab-indicator > .mdc-tab-indicator__content--underline {
+  color: $color_primary;
+  background-color: $color_primary;
+}
+
+.mdc-toolbar__menu-icon {
+  color: #000000;
+}
+
+.mdc-toolbar__section .mdc-tab-bar button, .mdc-tab .mdc-tab__text-label {
+  color: #80878B;
+}
+
+/* ************* */

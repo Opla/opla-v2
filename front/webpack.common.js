@@ -29,6 +29,27 @@ module.exports = {
           loader: "babel-loader",
         }
       },
+      {
+        test: /\.s?css$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+              minimize: process.env.NODE_ENV === "production" ? true : false,
+            },
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              includePaths: [path.resolve(__dirname, './src')]
+            }
+          }
+        ]
+      },
     ]
   },
   plugins: [
