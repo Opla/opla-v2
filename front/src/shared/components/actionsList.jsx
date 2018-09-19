@@ -193,7 +193,6 @@ class ActionsList extends Component {
       contentList = <List style={s} />;
     }
     const st = {
-      color: "rgba(0,0,0,.87)",
       paddingTop: "12px",
       paddingRight: "4px",
       marginLeft: "-8px",
@@ -245,6 +244,7 @@ class ActionsList extends Component {
         label={title}
         className="zui-color--white"
         style={{ margin: "12px" }}
+        elevation={0}
       >
         {toolbox}
         {addContent}

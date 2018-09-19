@@ -9,17 +9,27 @@ html {
   cursor: default;
 }
  
- .intent_title {
-   padding-right: 16px;
-   max-width: 28vw;
-   height: 36px;
-   overflow: hidden;
-   white-space: nowrap;
-   text-overflow: ellipsis;
-   display: flex;
-   cursor: pointer;
- }
+.zui-panel-header-title {
+  font-weight: 200;
+}
+
+.intent_title {
+  padding-right: 16px;
+  max-width: 28vw;
+  height: 36px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 200;
+  margin-top: 30px;
+}
  
+.intent_toolbar .zui-panel-header__actions {
+  padding-top: 36px;
+}
  .intent_title:hover .intent_title_edit {
    opacity: 1;
  }
@@ -98,6 +108,11 @@ html {
    opacity: 1;
  }
  
+
+.zui-expansion-content {
+  background-color: fbfbfb;  
+}
+
  .help_panel {
    height: 260px;
    background: #e0f7fa;
@@ -331,11 +346,8 @@ html {
   
  
  .actionItem {
-   color: rgb(0, 0, 0);
    height: 100%;
    padding: 3px 16px 4px 16px;
-   border-top: 1px solid rgba(0, 0, 0, 0.04);
-   opacity: 0.7;
  }
  
  
@@ -350,30 +362,24 @@ html {
  }
  
  .addActionItem {
-   border: 1px dashed rgba(0, 0, 0, 0.2);
-   color: black;
-   margin: 0px 8px;
+   margin: 8px;
    padding: 3px 15px 3px 15px;
    min-height: 40px;
  }
  
   .selectedActionItem {
-   border : 2px solid #00bfa5;
    overflow: visible;
   }
  
  
   .addActionItem.selectedActionItem {
-   min-height: 38px;
-   /* height: 46px; */
+   min-height: 30px;
    opacity: 1;
   }
  
   
   .selectedListItem span {
     overflow: hidden;
-    /* white-space: nowrap;
-    text-overflow: ellipsis; */
   }
   
   .selectedListItem:hover {
@@ -506,10 +512,20 @@ html {
     overflow-x: hidden;
     overflow-y: auto;
     width: 100%;
-    height: calc(100vh - 64px - 41px);
-    /* background: white; */
   }
-  
+
+  .intent_detail .list-content {
+    height: calc(100vh - 122px - 41px);
+  }
+
+  .explorer .list-content {
+    height: calc(100vh - 27px - 41px);
+  }
+
+  .intent_toolbar {
+    height: 96px;
+  }
+
   .service_start i {
     color: green !important;
   }

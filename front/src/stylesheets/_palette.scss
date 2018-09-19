@@ -15,3 +15,7 @@ $color_info: #b71c1c !global;
   --mdc-theme-primary: #FF002D;
   --mdc-theme-secondary: #3F67E2;
 }
+
+.error_color {
+  color: $color_error;
+}

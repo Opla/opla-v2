@@ -14,12 +14,24 @@ i.zui-subheader-right:hover {
   color: #fcea22;
 }
  
+.zui-expansion-header > div {
+  color: #1c252c;
+}
+
 .zui-panel-header__actions i:hover {
   color: $color_secondary_a;
 }
 
 .zui-expansion-arrow-icon:hover {
   color: $color_secondary_a;
+}
+
+.zui-expansion-title > div > i {
+  color: #1c252c;
+}
+
+.zui-expansion-content {
+  background-color: #fbfbfb;  
 }
 
 .mdc-list-item__meta i {
@@ -89,7 +101,7 @@ i.zui-subheader-right:hover {
   color: #1c252c;
 }
 
-.zui-expansion-title > div i {
+.explorer .zui-expansion-title > div i {
   color: #AEB2B4;
 }
 
@@ -127,6 +139,15 @@ i.zui-subheader-right:hover {
 .explorer .mdc-list-item__meta {
   margin-right: -10px;
   margin-top: 8px;
+}
+
+.intent_toolbar {
+  background-color: #ffffff;
+  border: none;
+}
+
+.intent_detail .list-content {
+  background-color: #ffffff;
 }
 
 .intent_title {
@@ -167,5 +188,20 @@ i.zui-subheader-right:hover {
   color: $color_secondary_a;
 }
 
+.addActionItem {
+  border: 1px solid #EEEEEE;
+  color: #aeb2b4;
+  background-color: #ffffff; 
+}
+
+.selectedActionItem {
+  border : 1px solid $color_secondary_a;
+ }
+
+.actionItem {
+  color: #1c252c;
+  background-color: #ffffff;
+  border-top: 1px solid #EEEEEE;
+}
 
 /* ************* */

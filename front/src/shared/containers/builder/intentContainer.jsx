@@ -395,15 +395,14 @@ class IntentContainer extends Component {
   render() {
     const intent = this.state.selectedIntent;
     let name = "";
-    const style = intent.notSaved ? {} : { display: "none" };
+    const color = intent.notSaved ? "error_color" : "";
     let buttonName = "Save";
     if (!intent.id) {
       buttonName = "Create";
     }
     name = (
       <span>
-        <span className="red_dot" style={style} />
-        <span style={{ color: "#bbb" }}>#</span>
+        <span className={color}>#</span>
         {intent.name}
       </span>
     );
@@ -427,13 +426,13 @@ class IntentContainer extends Component {
     } */
     return (
       <div
+        className="intent_detail"
         ref={(node) => {
           this.node = node;
         }}
       >
         <SubToolbar
-          className=""
-          style={{ margin: "0px 0px 0 0px" }}
+          className="intent_toolbar"
           titleName={
             <div
               className="intent_title"
