@@ -12,7 +12,6 @@ import {
   ListComponent,
   ListDragComponent,
   ExpansionPanel,
-  SubToolbar,
   Tooltip,
 } from "zoapp-ui";
 import { apiMoveIntentRequest } from "../actions/api";
@@ -58,15 +57,12 @@ class ExplorerContainer extends Component {
         n.push(
           <div key="i_text">
             {intent.notSaved ? <div className="item_notsaved" /> : ""}
-            <span style={{ color: "#00000044" }}>#</span>
+            <span style={{ margin: "0 14px 0 0px" }}>#</span>
             {intent.name}
           </div>,
         );
         n.push(
-          <ListItemMeta
-            key="i_meta"
-            style={{ marginRight: "-8px", marginTop: "7px" }}
-          >
+          <ListItemMeta key="i_meta">
             <Icon
               name="edit"
               onClick={(e) => {
@@ -75,7 +71,7 @@ class ExplorerContainer extends Component {
               }}
             />
             <Icon
-              name="remove_circle_outline"
+              name="remove"
               onClick={(e) => {
                 e.stopPropagation();
                 this.props.handleDelete(index);
@@ -94,13 +90,7 @@ class ExplorerContainer extends Component {
         compact
         leftArrow
         label={
-          <div
-            style={{
-              display: "flex",
-              fontWeight: "900",
-              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
-            }}
-          >
+          <div>
             <Tooltip label="add an intent">
               <Icon
                 style={{
@@ -108,7 +98,7 @@ class ExplorerContainer extends Component {
                   paddingRight: "4px",
                   marginLeft: "-8px",
                 }}
-                name="add_circle_outline"
+                name="add_circle"
                 onClick={(e) => {
                   e.stopPropagation();
                   this.props.handleAdd();
@@ -120,7 +110,6 @@ class ExplorerContainer extends Component {
         }
       >
         <ListDragComponent
-          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
           items={items}
           selectedItem={selected}
           onSelect={this.onSelectIntent}
@@ -133,7 +122,7 @@ class ExplorerContainer extends Component {
       id: "entitySystem",
       name: (
         <span>
-          <span style={{ color: "#00000044" }}>@</span>System
+          <span style={{ margin: "0 14px 0 0px" }}>@</span>System
         </span>
       ),
     });
@@ -144,13 +133,7 @@ class ExplorerContainer extends Component {
         compact
         leftArrow
         label={
-          <div
-            style={{
-              display: "flex",
-              fontWeight: "900",
-              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
-            }}
-          >
+          <div>
             <Tooltip label="TODO add an entity">
               <Icon
                 style={{
@@ -158,7 +141,7 @@ class ExplorerContainer extends Component {
                   paddingRight: "4px",
                   marginLeft: "-8px",
                 }}
-                name="add_circle_outline"
+                name="add_circle"
                 onClick={(e) => {
                   e.stopPropagation();
                   // this.props.handleAdd();
@@ -170,7 +153,6 @@ class ExplorerContainer extends Component {
         }
       >
         <ListComponent
-          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
           items={items}
           selectedItem={this.props.selectedEntityIndex}
           onSelect={this.onSelectEntity}
@@ -182,7 +164,7 @@ class ExplorerContainer extends Component {
       id: "funcSystem",
       name: (
         <span>
-          <span style={{ color: "#00000044" }}>/</span>System
+          <span style={{ margin: "0 14px 0 0px" }}>/</span>System
         </span>
       ),
     });
@@ -193,13 +175,7 @@ class ExplorerContainer extends Component {
         compact
         leftArrow
         label={
-          <div
-            style={{
-              display: "flex",
-              fontWeight: "900",
-              color: "var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38))",
-            }}
-          >
+          <div>
             <Tooltip label="TODO add a function">
               <Icon
                 style={{
@@ -207,7 +183,7 @@ class ExplorerContainer extends Component {
                   paddingRight: "4px",
                   marginLeft: "-8px",
                 }}
-                name="add_circle_outline"
+                name="add_circle"
                 onClick={(e) => {
                   e.stopPropagation();
                   // this.props.handleAdd();
@@ -219,7 +195,6 @@ class ExplorerContainer extends Component {
         }
       >
         <ListComponent
-          style={{ backgroundColor: "rgb(252, 252, 252)", minHeight: "180px" }}
           items={items}
           selectedItem={this.props.selectedFunctionIndex}
           onSelect={this.onSelectFunction}
@@ -227,39 +202,11 @@ class ExplorerContainer extends Component {
       </ExpansionPanel>
     );
     return (
-      <div
-        style={{
-          backgroundColor: "rgb(232, 232, 232)",
-          borderRight: "1px solid rgba(0, 0, 0, 0.12)",
-        }}
-      >
-        <SubToolbar
-          className=""
-          style={{ backgroundColor: "rgb(252, 252, 252)", margin: "0" }}
-          titleName={
-            <div className="explorer_header">
-              <Tooltip label="view as list">
-                <Icon name="view_list" className="explorer_view_selected" />
-              </Tooltip>
-              <Tooltip label="TODO view as graph">
-                <Icon name="device_hub" />
-              </Tooltip>
-            </div>
-          }
-          icons={[
-            {
-              name: "cloud_circle",
-              tooltip: "Import / Export",
-              onClick: this.props.handleExportImport,
-            },
-          ]}
-        />
-        <div className="list-box explorer" style={{ margin: "0" }}>
-          <div className="list-content">
-            {intentList}
-            {entityList}
-            {callableList}
-          </div>
+      <div className="list-box explorer" style={{ margin: "0" }}>
+        <div className="list-content">
+          {intentList}
+          {entityList}
+          {callableList}
         </div>
       </div>
     );

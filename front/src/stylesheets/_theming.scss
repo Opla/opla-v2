@@ -5,10 +5,46 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* Header */
+/* Components */
+i.zui-subheader-right:hover {
+  color: $color_secondary_a;
+}
+
+.zui-panel-header-dark .zui-panel-header-icon {
+  color: #fcea22;
+}
+ 
+.zui-panel-header__actions i:hover {
+  color: $color_secondary_a;
+}
+
+.zui-expansion-arrow-icon:hover {
+  color: $color_secondary_a;
+}
+
+.mdc-list-item__meta i {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  margin-right: 4px;
+  font-size: 20px;
+}
+
+.mdc-list-item__meta i:hover {
+  background-color: $color_secondary_a;
+  color: #ffffff;
+}
+
+/* Header        */
 .mdc-toolbar--fixed {
+  box-shadow: none;
   border-bottom: 1px solid #EEEEEE;
 }
+
+.mdc-toolbar__section .mdc-tab-bar button {
+  padding: 0 12px;
+}
+
 .mdc-tab-bar .mdc-tab--active .mdc-tab__text-label {
   color: $color_primary;
 }
@@ -25,5 +61,111 @@
 .mdc-toolbar__section .mdc-tab-bar button, .mdc-tab .mdc-tab__text-label {
   color: #80878B;
 }
+
+/* ************* */
+
+/* Builder       */
+.explorer {
+  background-color: #FBFBFB;
+  border: 1px solid #EEEEEE;
+}
+
+.explorer .zui-expansion-header {
+  background: #ffffff;
+  border-top: none;
+  border-bottom: 1px solid #EEEEEE;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+}
+
+.explorer .mdc-list {
+  min-height: 180px;
+  margin-bottom: 12px;
+  background-color: #fBfbfb;
+}
+
+.zui-expansion-title > div {
+  display: flex;
+  font-weight: 600;
+  color: #1c252c;
+}
+
+.zui-expansion-title > div i {
+  color: #AEB2B4;
+}
+
+.explorer .mdc-list-item {
+  background-color: #ffffff;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.selectedListItem {
+  background-color: #FBFBFB;
+  color: $color_secondary_a;
+}
+
+.selectableListItem {
+  color: #4E575D;
+}
+
+.selectedListItem:hover {
+  background-color: #FBFBFB;
+}
+
+.selectableListItem {
+  color: #757575;
+}
+
+.selectableListItem:hover {
+  background-color: #FBFBFB;
+}
+
+ 
+.explorer .zui-expansion-title > div i:hover {
+  color: $color_secondary_a;
+}
+
+.explorer .mdc-list-item__meta {
+  margin-right: -10px;
+  margin-top: 8px;
+}
+
+.intent_title {
+  color: $color_secondary_a;
+} 
+
+.intent_title_edit {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.intent_title_edit > i {
+  font-size: 16px;
+  padding: 2px;
+}
+
+.intent_title:hover  .intent_title_edit {
+  background-color: $color_secondary_a;
+}
+
+.actionstoolbox-icon {
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+}
+
+.actionstoolbox-icon:hover {
+  color: $color_secondary_a;
+ }
+
+.help_icon {
+  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+}
+
+.help_icon:hover {
+  color: $color_secondary_a;
+}
+
 
 /* ************* */
