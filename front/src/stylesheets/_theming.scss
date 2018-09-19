@@ -14,6 +14,19 @@ i.zui-subheader-right:hover {
   color: #fcea22;
 }
  
+.zui-panel-header-dark {
+  color: #FFFFFF;
+  background-color: #1C252C;
+}
+
+.zui-panel-header-dark .zui-panel-header__actions > div i {
+  color: #FFFFFF;
+}
+
+.zui-panel-header-dark .zui-panel-header__actions > div i:hover {
+  color: $color_secondary_a;
+}
+
 .zui-expansion-header > div {
   color: #1c252c;
 }
@@ -204,4 +217,61 @@ i.zui-subheader-right:hover {
   border-top: 1px solid #EEEEEE;
 }
 
+/* ************* */
+/* Messenger     */
+.messenger-box {
+  background: #FBFBFB;
+}
+
+.message_welcome {
+  background-color: #FFFFFF;
+  color: #1C252C;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.message .text-wrapper {
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+.message.you .text-wrapper {
+  background-color: #FFFFFF;
+  color: #1C252C;
+}
+
+.message.to .text-wrapper::before {
+  border-color: transparent #ffffff transparent transparent;
+}
+
+.message.from .text-wrapper {
+  background-color: #FFFFFF;
+  color: #1C252C;
+}
+
+.message.from .text-wrapper::before {
+  border-color: transparent #ffffff transparent transparent;
+}
+
+.message-intent-link, .message-intent-icon-link {
+  color: #AEB2B4;
+}
+
+.message-intent-link:hover, .message-intent-icon-link:hover {
+  color: $color_secondary_a;
+}
+
+.message-body .mdc-button--raised:not(:disabled), .mdc-button--unelevated:not(:disabled) {
+  background-color: $color_secondary_a;
+}
+
+.messenger-box__actions .zui-button-right {
+  color: $color_secondary_a;
+}
+
+.messenger-box__actions > .zui-button-left {
+  display: none;
+}
+
+.messenger-box__actions .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: #AEB2B4;
+}
 /* ************* */

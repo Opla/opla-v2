@@ -59,7 +59,7 @@ class SandboxContainer extends Component {
 
   handleReset = () => {
     Zrmc.showDialog({
-      header: "Sandbox",
+      header: "Playground",
       body: "Do you want to reset conversation and context ?",
       actions: [{ name: "Cancel" }, { name: "Reset" }],
       onAction: this.onReset,
@@ -90,6 +90,8 @@ class SandboxContainer extends Component {
       );
     }
   };
+
+  handleDebug = () => {};
 
   handleDemo = () => {};
 
@@ -166,13 +168,15 @@ class SandboxContainer extends Component {
     return (
       <div>
         <SubToolbar
-          titleIcon="chat"
           titleName={
             <div style={{ display: "flex" }}>
               <div>{name}</div>
             </div>
           }
-          icons={[{ name: "highlight_off", onClick: this.handleReset }]}
+          icons={[
+            { name: "bug_report", onClick: this.handleDebug },
+            { name: "replay", onClick: this.handleReset },
+          ]}
           menu={{
             items: [
               { name: "Context", onSelect: this.handleMenu },
