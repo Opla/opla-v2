@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import * as apiActions from "shared/actions/api";
-import * as authActions from "zoapp-front/src/shared/actions/auth";
-import { appSetTitle } from "zoapp-front/src/shared/actions/app";
+import * as authActions from "zoapp-front/dist/actions/auth";
+import { appSetTitle } from "zoapp-front/dist/actions/app";
 import reducer, {
   initialState,
   defaultTemplates,

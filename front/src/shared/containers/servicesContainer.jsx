@@ -9,8 +9,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Zrmc, { Cell } from "zrmc";
 import { ListComponent } from "zoapp-ui";
-import ServicesList from "zoapp-front/src/shared/components/servicesList";
-import displayWebServiceEditor from "zoapp-front/src/shared/components/displayWebServiceEditor";
+import ServicesList from "zoapp-front/dist/components/servicesList";
+import displayWebServiceEditor from "zoapp-front/dist/components/displayWebServiceEditor";
 
 import displayProviderEditor from "../components/displayProviderEditor";
 import {

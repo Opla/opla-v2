@@ -4,15 +4,15 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import createReducer from "zoapp-front/src/shared/reducers/createReducer";
+import createReducer from "zoapp-front/dist/reducers/createReducer";
 
 import {
   initialState as zoappInitialState,
   handlers as zoappHandlers,
   addErrorToState,
-} from "zoapp-front/src/shared/reducers/message";
+} from "zoapp-front/dist/reducers/message";
 
-import { FETCH_FAILURE } from "zoapp-front/src/shared/actions/constants";
+import { FETCH_FAILURE } from "zoapp-front/dist/actions/constants";
 
 import {
   API_CREATEBOT,

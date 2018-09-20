@@ -8,7 +8,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Grid, Inner, Cell } from "zrmc";
 import makeClassName from "classnames";
-import FileInput from "zoapp-front/src/shared/components/fileInput";
+import FileInput from "zoapp-front/dist/components/fileInput";
 import { robotsColors } from "../utils/robotsColors";
 
 const TemplatesList = ({

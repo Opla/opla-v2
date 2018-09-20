@@ -12,9 +12,9 @@ import {
   FETCH_SUCCESS,
   SUBSCRIBE,
   UNSUBSCRIBE,
-} from "zoapp-front/src/shared/actions/constants";
-import zoappApi from "zoapp-front/src/shared/sagas/api";
-import { getWebService, createSocketService } from "zoapp-front/src/shared/services";
+} from "zoapp-front/dist/actions/constants";
+import zoappApi from "zoapp-front/dist/sagas/api";
+import { getWebService, createSocketService } from "zoapp-front/dist/services";
 import {
   API_CREATEBOT,
   API_DELETEINTENT,

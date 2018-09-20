@@ -1,4 +1,4 @@
-import * as actions from "zoapp-front/src/shared/actions/message";
+import * as actions from "zoapp-front/dist/actions/message";
 import reducer, { initialState } from "shared/reducers/message";
 import {
   API_CREATEBOT,
@@ -17,7 +17,7 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
 } from "shared/actions/constants";
-import { FETCH_FAILURE } from "zoapp-front/src/shared/actions/constants";
+import { FETCH_FAILURE } from "zoapp-front/dist/actions/constants";
 
 const errorTypes = [
   API_GETMIDDLEWARES + FETCH_FAILURE,

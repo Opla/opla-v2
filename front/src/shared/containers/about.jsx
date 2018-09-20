@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { appSetTitle } from "zoapp-front/src/shared/actions/app";
+import { appSetTitle } from "zoapp-front/dist/actions/app";
 
 const aboutStyle = {
   fontSize: "18px",

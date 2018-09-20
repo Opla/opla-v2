@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { takeEvery } from "redux-saga";
-import auth from "zoapp-front/src/shared/sagas/auth";
+import auth from "zoapp-front/dist/sagas/auth";
 
 import api from "./api";
 
