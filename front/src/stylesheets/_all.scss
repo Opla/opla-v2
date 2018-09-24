@@ -42,7 +42,7 @@ html {
  
  .actionstoolbox {
    position: fixed;
-   z-index: 10;
+   z-index: 2;
    height: 34px;
  }
  
@@ -52,6 +52,11 @@ html {
    font-size: 18px;
  }
  
+ .intent_detail .mdc-list {
+  border-left: 1px solid #EEEEEE;
+  border-bottom: 1px solid #EEEEEE;
+ }
+
  .mdc-list {
     padding: 0px;
   }
@@ -252,12 +257,10 @@ html {
   
   .zui-action-button {
     min-width: 320px;
-    background-color: #F2F2F2;
   }
   
   .zui-action-button-mid {
     min-width: 200px;
-    background-color: #F2F2F2;
   }
 
  
@@ -601,7 +604,9 @@ html {
    padding: 0px;
    margin-bottom: 8px;
    border: #56002759 1px solid;
-   border-radius: 4px;
+   border-radius: 2px;
+   display: flex;
+   margin-left: -12px;
  }
  
  .opla-conditional-name {
@@ -616,14 +621,22 @@ html {
    background: transparent;
    padding: 4px 8px;
    width: 160px;
+   height: 16px;
+   line-height: 16px;
  }
  
  .opla-conditional-field > input {
    border-bottom: none;
    padding: 0px;
+   height: 16px;
+   line-height: 16px;
  }
  
- .opla-conditional-op {
-   color: #ba2d65;
-   font-weight: 900;
- }
+.opla-conditional-op {
+  color: #ba2d65;
+  font-weight: 900;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+  padding: 4px;
+}

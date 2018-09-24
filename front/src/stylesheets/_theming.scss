@@ -61,6 +61,20 @@ i.zui-subheader-right:hover {
   background: #FFFFFF;
 }
 
+.mdc-dialog__footer > button:not(:disabled) {
+  color: $color_secondary_a;
+}
+
+.zui-action-button.mdc-button {
+  color: $color_secondary_a;
+}
+
+.mdc-dialog__footer__button.mdc-button::after,
+.mdc-dialog__footer__button.mdc-button::before,
+.zui-action-button.mdc-button::after, 
+.zui-action-button.mdc-button::before {
+  background-color: $color_secondary_a;
+}
 .mdc-list-item__meta i {
   background-color: #aeb2b4;
   color: white;
@@ -76,6 +90,28 @@ i.zui-subheader-right:hover {
 
 :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before {
   background-color: transparent;
+}
+
+.mdc-drawer--theme-dark .mdc-drawer__drawer, .mdc-drawer--theme-dark .mdc-drawer__drawer > :not(header):not(footer) {
+  background-color: #1c252c;
+}
+
+.mdc-drawer--theme-dark .mdc-list-item, .mdc-drawer--theme-dark .mdc-list-item * {
+  color: #80878B;
+}
+
+.mdc-drawer--theme-dark .mdc-list-item--activated, .mdc-drawer--theme-dark .mdc-list-item--activated * {
+  background-color: #E74F4F;
+  color: white;
+}
+
+.mdc-drawer--theme-dark .mdc-list-item:hover, .mdc-drawer--theme-dark .mdc-list-item:hover * {
+  background-color: #E74F4F; 
+  color: white;
+}
+
+.mdc-drawer--temporary .mdc-drawer__header-content {
+  background-color: #1c2d2c;
 }
 
 /* Header        */
@@ -103,6 +139,23 @@ i.zui-subheader-right:hover {
 
 .mdc-toolbar__section .mdc-tab-bar button, .mdc-tab .mdc-tab__text-label {
   color: #80878B;
+}
+
+.mdc-text-field--focused > .mdc-floating-label {
+  color: $color_secondary_a !important;
+}
+
+.mdc-text-field .mdc-text-field__input {
+  caret-color: $color_secondary_a;
+}
+
+.zrmc-content .mdc-button {
+  color: $color_secondary_a;
+}
+
+.zrmc-content .mdc-button--raised {
+  color: white;
+  background-color: $color_secondary_a;
 }
 
 /* ************* */
