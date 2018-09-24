@@ -192,6 +192,7 @@ class ActionsToolbox extends Component {
     };
     const styleToolbarRight = {
       ...styleToolbar,
+      borderRight: "none",
       float: "right",
       padding: "0px",
     };

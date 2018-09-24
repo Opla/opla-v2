@@ -269,6 +269,7 @@ class ActionsEditable extends Component {
     let i = 1;
     let id;
     const len = actions.length;
+    let placeholder;
 
     // create a start action if empty or first item is not a text
     if (isEditable && (len < 1 || (actions[0] && actions[0].type !== "text"))) {
@@ -340,6 +341,8 @@ class ActionsEditable extends Component {
           />
         );
       }
+    } else if (this.props.isNew) {
+      placeholder = <div>{this.props.placeholder}</div>;
     }
     const contentStyle = {
       flex: 1,
@@ -378,6 +381,7 @@ class ActionsEditable extends Component {
           {list}
           {end}
         </span>
+        {placeholder}
       </div>
     );
   }

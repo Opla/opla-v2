@@ -195,8 +195,7 @@ i.zui-subheader-right:hover {
 }
 
 .intent_title_edit > i {
-  font-size: 16px;
-  padding: 2px;
+  font-size: 20px;
 }
 
 .intent_title:hover  .intent_title_edit {
@@ -204,7 +203,7 @@ i.zui-subheader-right:hover {
 }
 
 .actionstoolbox-icon {
-  color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+  color: #AEB2B4;
 }
 
 .actionstoolbox-icon:hover {
@@ -263,6 +262,7 @@ i.zui-subheader-right:hover {
   background-color: #aeb2b4;
   color: white;
   border-radius: 2px; 
+  font-size: 20px;
  }
 
 .onFocusAction > .mdc-list-item__meta:hover {
@@ -289,6 +289,15 @@ i.zui-subheader-right:hover {
 .actionstoolbox .mdc-button::after, .mdc-button::before {
   background-color: $color_secondary_a;
 }
+
+.mdc-list-item .mdc-list-item__secondary-text .zui-list__item-icon {
+  color: rgb(221,221,221);
+ }
+
+ .contenteditable div {
+   color: #AEB2B4;
+ }
+
 /* ************* */
 /* Messenger     */
 .messenger-box {
@@ -355,4 +364,50 @@ i.zui-subheader-right:hover {
 .messenger-box__actions .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: #AEB2B4;
 }
+
+.message-edit-icon {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  font-size: 20px;
+}
+
+.message-edit-icon-right {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  font-size: 20px;
+}
+
+.message-welcome-icon {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  font-size: 20px;
+}
+
+.message-delete-icon {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  font-size: 20px;
+}
+
+
+.message-edit-icon:hover {
+  background-color: $color_secondary_a;
+}
+
+.message-edit-icon-right:hover {
+  background-color: $color_secondary_a;
+}
+
+.message-delete-icon:hover {
+  background-color: $color_secondary_a;
+}
+
+.message-welcome-icon:hover {
+  background-color: $color_secondary_a;
+}
+
 /* ************* */
