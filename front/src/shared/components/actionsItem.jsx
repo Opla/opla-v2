@@ -31,11 +31,9 @@ class ActionsItem extends Component {
       style,
       className,
     } = this.props;
-    const color = "rgb(0, 0, 0)";
     const itemKey = index > -1 ? `cd_${index}` : null;
     const s = {
       ...style,
-      color,
     };
     /* let icon = null;
     if (isNew) {
@@ -53,7 +51,7 @@ class ActionsItem extends Component {
       if (action && action !== "") {
         meta = (
           <ListItemMeta
-            icon="add_circle_outline"
+            icon="add"
             onClick={() => {
               this.props.onAddAction(action, isCondition);
             }}
@@ -62,10 +60,7 @@ class ActionsItem extends Component {
       }
     } else {
       meta = (
-        <ListItemMeta
-          icon="remove_circle_outline"
-          onClick={this.props.onDeleteActionClick}
-        />
+        <ListItemMeta icon="remove" onClick={this.props.onDeleteActionClick} />
       );
     }
     let cl = " onFocusAction actionItem";

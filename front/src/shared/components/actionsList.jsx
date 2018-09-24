@@ -58,7 +58,7 @@ class ActionsList extends Component {
     this.handleAction("change", actionCondition, "condition", index);
   };
 
-  // private methode
+  // private method
   handleAction = (state, content, type = null, index = undefined) => {
     if (state && content) {
       const { name } = this.props;
@@ -73,13 +73,18 @@ class ActionsList extends Component {
 
   updateToolboxDisplay = () => {
     if (this.selectedItemRef && this.selectedItemRef.ref && this.toolboxRef) {
-      const { left, top } = this.selectedItemRef.ref.getBoundingClientRect();
-      let adjustedLeft = left - 10;
+      const {
+        left,
+        top,
+        width,
+      } = this.selectedItemRef.ref.parentNode.getBoundingClientRect();
+      let adjustedLeft = left;
       if (adjustedLeft < 0) {
         adjustedLeft = 0;
       }
-      const adjustedTop = top - 43;
-      const style = `left: ${adjustedLeft}px; top: ${adjustedTop}px;`;
+      const adjustedTop = top - 36;
+      const adjustedWidth = width - 2;
+      const style = `left: ${adjustedLeft}px; top: ${adjustedTop}px; width: ${adjustedWidth}px;`;
       this.toolboxRef.style = style;
     }
   };
@@ -106,7 +111,7 @@ class ActionsList extends Component {
     let addContentClassname = "";
     let isSelected = false;
     if (this.props.selected === 0) {
-      addContentClassname = "selectedActionItem  mdc-elevation--z2";
+      addContentClassname = "selectedActionItem";
       isSelected = true;
     }
     const selected = this.props.selected - 1;
@@ -142,7 +147,6 @@ class ActionsList extends Component {
       overflowX: "hidden",
       overflowY: "scroll",
       maxHeight: "18.07vh",
-      border: "1px solid #eee",
       margin: "0 8px 16px 8px",
     };
     if (actions && actions.length > 0) {
@@ -173,11 +177,7 @@ class ActionsList extends Component {
                 }}
                 isCondition={isActionsCondition}
                 isSelected={index === selected}
-                className={
-                  index === selected
-                    ? "selectedActionItem  mdc-elevation--z2"
-                    : null
-                }
+                className={index === selected ? "selectedActionItem" : null}
                 ref={(r) => {
                   if (index === selected) {
                     this.selectedItemRef = r;
@@ -225,7 +225,7 @@ class ActionsList extends Component {
       const isIntentOutputEmpty = !isInput && !(actions && actions.length > 0);
       toolbox = (
         <div
-          className="actionstoolbox  mdc-elevation--z3"
+          className="actionstoolbox"
           ref={(r) => {
             this.toolboxRef = r;
             this.updateToolboxDisplay();

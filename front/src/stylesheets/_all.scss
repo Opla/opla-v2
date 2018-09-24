@@ -41,15 +41,9 @@ html {
  }
  
  .actionstoolbox {
-   background: #ffffffdd;
    position: fixed;
-   top: 140px;
-   left: 244px;
-   z-index: 100;
-   height: 38px;
-   border-top: 1px solid rgb(221, 221, 221);
-   border-left: 1px solid rgb(221, 221, 221);
-   border-right: 1px solid rgb(221, 221, 221);
+   z-index: 10;
+   height: 34px;
  }
  
  .actionstoolbox-icon {
@@ -367,9 +361,9 @@ html {
    min-height: 40px;
  }
  
-  .selectedActionItem {
+  /* .selectedActionItem {
    overflow: visible;
-  }
+  } */
  
  
   .addActionItem.selectedActionItem {
@@ -406,29 +400,13 @@ html {
    opacity: 1;
  }
  
-  .onFocusAction:focus {
-   border-color: #b71c1c;
-  }
- 
   .onFocusAction > .mdc-list-item__meta {
     opacity: 0;
   }
-  
- .onFocusAction > .mdc-list-item__meta:hover {
-   color: rgb(85,38,130);
- }
- 
+   
   .onFocusAction:hover > .mdc-list-item__meta {
     /* display: block; */
     opacity: 1;
-  }
-  
-  .onFocusAction:hover > span > span {
-    color: #757575 !important;
-  }
-  
-  .onFocusAction:hover > span > i {
-    color: #757575 !important;
   }
   
   .zui-sublist .zui-list {
@@ -455,7 +433,7 @@ html {
   .zui-sublist h4 {
    font-size: 15px;
    font-weight: 900;
-   color: rgba(0,0,0,.87);
+
    line-height: 36px;
    height: 36px;
   }

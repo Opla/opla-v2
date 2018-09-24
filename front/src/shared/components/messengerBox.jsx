@@ -63,7 +63,7 @@ class MessengerBox extends Component {
                   key={i}
                   style={{ margin: " 0 8px" }}
                   dense
-                  raised
+                  outlined
                   onClick={(e) => {
                     e.preventDefault();
                     if (el.value) {

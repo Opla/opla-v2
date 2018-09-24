@@ -39,12 +39,26 @@ i.zui-subheader-right:hover {
   color: $color_secondary_a;
 }
 
-.zui-expansion-title > div > i {
+.zui-expansion-title > div:nth-child(2) {
+  color: #AEB2B4;
+}
+
+.zui-expansion-title > di:nth-child(1) {
   color: #1c252c;
 }
 
 .zui-expansion-content {
   background-color: #fbfbfb;  
+}
+
+.zui-chip {
+  color: #1c252c;
+  background: #FBFBFB;
+}
+
+.zui-chip:focus {
+  color: $color_secondary_a;
+  background: #FFFFFF;
 }
 
 .mdc-list-item__meta i {
@@ -58,6 +72,10 @@ i.zui-subheader-right:hover {
 .mdc-list-item__meta i:hover {
   background-color: $color_secondary_a;
   color: #ffffff;
+}
+
+:not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before {
+  background-color: transparent;
 }
 
 /* Header        */
@@ -207,16 +225,70 @@ i.zui-subheader-right:hover {
   background-color: #ffffff; 
 }
 
-.selectedActionItem {
-  border : 1px solid $color_secondary_a;
- }
-
 .actionItem {
   color: #1c252c;
   background-color: #ffffff;
   border-top: 1px solid #EEEEEE;
 }
 
+.selectedActionItem {
+  border : 1px solid $color_secondary_a;
+ }
+
+.action_any {
+  border: 1px solid #ffb300;
+}
+
+.action_output {
+  border: 1px solid #4b830d;
+}
+
+.action_variable {
+  border: 1px solid #007c91;
+}
+
+.action_br {
+  border: 1px solid #00227b;
+}
+
+.action_button {
+  border: 1px solid #ab000d;
+}
+ 
+.onFocusAction:focus {
+  border-color: $color_secondary_a;
+}
+
+.onFocusAction > .mdc-list-item__meta {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px; 
+ }
+
+.onFocusAction > .mdc-list-item__meta:hover {
+  background-color: $color_secondary_a;
+}
+
+.onFocusAction:hover > span > span {
+  color: #757575 !important;
+}
+
+.onFocusAction:hover > span > i {
+  color: #757575 !important;
+}
+
+.actionstoolbox {
+  background: #FBFBFB;
+  border: 1px solid #EEEEEE;
+}
+
+.actionstoolbox .mdc-button:not(:disabled) {
+  color: $color_secondary_a;
+}
+
+.actionstoolbox .mdc-button::after, .mdc-button::before {
+  background-color: $color_secondary_a;
+}
 /* ************* */
 /* Messenger     */
 .messenger-box {
@@ -261,6 +333,15 @@ i.zui-subheader-right:hover {
 
 .message-body .mdc-button--raised:not(:disabled), .mdc-button--unelevated:not(:disabled) {
   background-color: $color_secondary_a;
+}
+.message-body .mdc-button::after, .mdc-button::before {
+  background-color: $color_secondary_a;
+}
+
+.mdc-button--outlined:not(:disabled) {
+  border-color: $color_secondary_a;
+  border-width: 1px;
+  color: $color_secondary_a;
 }
 
 .messenger-box__actions .zui-button-right {
