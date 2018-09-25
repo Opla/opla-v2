@@ -99,10 +99,12 @@ i.zui-subheader-right:hover {
 .mdc-drawer--theme-dark .mdc-list-item, .mdc-drawer--theme-dark .mdc-list-item * {
   color: #AEB2B4;
   background-color: white; 
+  fill: #AEB2B4;
 }
 
 .mdc-drawer--theme-dark .mdc-list-item--activated, .mdc-drawer--theme-dark .mdc-list-item--activated * {
   color: #E74F4F;
+  fill: #E74F4F;
 }
 
 .mdc-list-item--activated {
@@ -112,6 +114,7 @@ i.zui-subheader-right:hover {
 .mdc-drawer--theme-dark .mdc-list-item:hover, .mdc-drawer--theme-dark .mdc-list-item:hover * {
   background-color: #FBFBFB; 
   color: #E74F4F;
+  fill: #E74F4F;
 }
 
 .mdc-drawer--temporary .mdc-drawer__header-content {
@@ -156,6 +159,10 @@ i.zui-subheader-right:hover {
 
 .mdc-drawer__footer-content {
   color: #AEB2B4;
+}
+
+.mdc-drawer__content .mdc-list-item__graphic > svg {
+  margin-top: 6px;
 }
 
 /* Header        */
