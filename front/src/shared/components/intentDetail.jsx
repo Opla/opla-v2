@@ -79,7 +79,7 @@ const IntentDetail = ({
             <div style={{ display: "flex", fontWeight: "900" }}>
               <Icon
                 style={{
-                  marginTop: "-10px",
+                  marginTop: "0px",
                   marginRight: "16px",
                   marginLeft: "-20px",
                   width: "24px",
