@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { appSetTitleName } from "zoapp-front/actions/app";
 
 const aboutStyle = {
-  margin: "10% 40% 10% 10%",
+  margin: "5% 40% 10% 10%",
 };
 
 class About extends Component {

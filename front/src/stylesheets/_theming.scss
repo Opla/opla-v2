@@ -176,8 +176,8 @@ i.zui-subheader-right:hover {
   background-color: white;
 }
 
-.mdc-drawer__footer-content {
-  color: #AEB2B4;
+.mdc-drawer__footer-content, .mdc-drawer__footer-content > p  {
+  color: #80878B;
 }
 
 .mdc-drawer__content .mdc-list-item__graphic > svg {
@@ -185,12 +185,16 @@ i.zui-subheader-right:hover {
 }
 
 /* Header        */
-.mdc-toolbar--theme-white, .userbox_right > i {
-  color: #4E575D;
+.mdc-toolbar--theme-white {
+  color: #1C252C;
+}
+
+.userbox_right > i {
+  color: #AEB2B4;
 }
 
 .mdc-toolbar--theme-white .mdc-toolbar__icon {
-  color: #4E575D;  
+  color: #AEB2B4;  
 }
 
 .userbox_right:hover > i {
