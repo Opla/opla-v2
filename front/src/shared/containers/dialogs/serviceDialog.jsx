@@ -47,6 +47,9 @@ export class ServiceDialogBase extends Component {
     const { service } = this.props;
     const { instance } = this.state;
     const title = service.name;
+    if (service.onAction) {
+      service.onAction(action);
+    }
     if (action === "save" && this.props.onAction) {
       this.props.onAction(title, service, instance);
     }
@@ -89,6 +92,12 @@ export class ServiceDialogBase extends Component {
     const content = service.renderSettings(
       instance,
       this.onAction,
+      (middleware) => {
+        this.props.apiSetMiddlewareRequest(
+          this.props.selectedBotId,
+          middleware,
+        );
+      },
       this.props.publicUrl,
     );
     const style = { width: "550px" };
@@ -114,7 +123,7 @@ export class ServiceDialogBase extends Component {
             type="button"
             onClick={(e) => {
               e.preventDefault();
-              this.onAction("save");
+              this.onAction("save", service);
             }}
           >
             Save

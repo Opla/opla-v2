@@ -9,72 +9,100 @@ import PropTypes from "prop-types";
 import { TextField, Icon } from "zrmc";
 
 class FBSettings extends Component {
-  onAction = (action) => {
-    if (action === "Manual") {
-      // TODO
-    }
+  constructor(props) {
+    super(props);
+    const defaultInstance = {
+      botName: "facebooktbot",
+      accessToken: "accessToken",
+      url: "url//",
+      verifyToken: Math.random()
+        .toString(36)
+        .substring(2),
+      classes: ["messenger", "bot", "sandbox"],
+    };
+    const instance = {
+      ...defaultInstance,
+      ...this.props.instance,
+    };
 
-    if (this.props.onAction) {
-      this.props.onAction(action);
+    this.state = {
+      botName: instance.botName,
+      accessToken: instance.accessToken,
+      url: instance.url,
+      verifyToken: instance.verifyToken,
+      classes: instance.classes,
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const { target } = event;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const { name } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+  onAction = (action) => {
+    if (action === "save") {
+      const middlewareSettings = {
+        ...this.props.instance,
+        // status: "plugin2",
+        ...this.state,
+      };
+      this.props.handleSaveSettings(middlewareSettings);
     }
   };
 
   render() {
-    const instance = this.props.instance || {};
     const style = {
       width: "502px",
       position: "relative",
     };
-    // TODO set better patterns
     return (
       <div style={style}>
         <div>
           <TextField
+            name="botName"
             label="Bot name"
             pattern="[a-zA-Z0-9\.-]+"
-            value={instance.botName}
-            onChange={() => {}}
+            defaultValue={this.state.botName}
+            value={this.state.botName}
+            onChange={this.handleInputChange}
             spellCheck={false}
             style={{ width: "320px" }}
             required
-            ref={(input) => {
-              this.tfBotName = input;
-            }}
           />
           <TextField
+            name="accessToken"
             label="Page Access Token"
             pattern="[a-zA-Z0-9\.-]+"
-            value={instance.accessToken}
-            onChange={() => {}}
+            defaultValue={this.state.accessToken}
+            value={this.state.accessToken}
+            onChange={this.handleInputChange}
             spellCheck={false}
             style={{ width: "320px" }}
             required
-            ref={(input) => {
-              this.tfAccessToken = input;
-            }}
           />
           <TextField
             label="Verify Token"
             pattern="[a-zA-Z0-9\.-]+"
-            value={instance.verifyToken}
+            defaultValue={this.state.verifyToken}
+            value={this.state.verifyToken}
             onChange={() => {}}
             spellCheck={false}
             style={{ width: "320px" }}
-            required
-            ref={(input) => {
-              this.tfVerifyToken = input;
-            }}
           />
           <div style={{ width: "360px" }}>
             <TextField
               label="Callback url"
               spellCheck={false}
+              defaultValue={this.state.url}
+              value={this.state.url}
               error="You need an https public url !"
               style={{ width: "320px" }}
               disabled
-              ref={(input) => {
-                this.tfCallback = input;
-              }}
             />
             <Icon name="mode_edit" />
           </div>
@@ -115,6 +143,7 @@ FBSettings.defaultProps = {
 FBSettings.propTypes = {
   instance: PropTypes.shape({}),
   onAction: PropTypes.func,
+  handleSaveSettings: PropTypes.func.isRequired,
 };
 
 export default FBSettings;

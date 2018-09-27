@@ -8,15 +8,18 @@
 import FBMessengerRoutes from "./FBMessengerRoutes";
 import { onDispatch } from "./FBMiddleware";
 
+export const PLUGIN_NAME = "fb-messenger";
 class FBMessenger {
   constructor(pluginManager) {
     this.tunnel = null;
     this.listener = null;
-    this.name = "fb-messenger";
+    this.name = PLUGIN_NAME;
     this.type = "MessengerConnector";
     this.zoapp = pluginManager.zoapp;
     this.fbMessengerRoutes = new FBMessengerRoutes(this.zoapp);
-    FBMessenger.initRoutes(this.zoapp, this.fbMessengerRoutes);
+    // set default middleware value
+    // will be override when register
+    this.middleware = { token: "" };
   }
 
   getName() {
@@ -31,7 +34,7 @@ class FBMessenger {
     this.listener = listener;
   }
 
-  static initRoutes(zoapp, fbMessengerRoutes) {
+  static initRoutes(middleware, zoapp, fbMessengerRoutes) {
     const route = zoapp.createRoute("/webhook/fb");
     // facebook messenger callback url
     route.add(
@@ -39,10 +42,14 @@ class FBMessenger {
       "/:botId",
       ["*", "open"],
       (context) => {
-        const verifyToken = "token943";
-        logger.warn("get webhook");
+        // get token from db
+        const middlewaresController = zoapp.controllers.getMiddlewares();
+        const middlewareVerifyToken = middlewaresController.getMiddlewareById(
+          middleware.id,
+        ).verifyToken;
+        // check verify token
         const query = context.getQuery();
-        if (query && query["hub.verify_token"] === verifyToken) {
+        if (query && query["hub.verify_token"] === middlewareVerifyToken) {
           const c = query["hub.challenge"];
           return parseInt(c, 10);
           // return JSON.stringify(c);
@@ -53,7 +60,6 @@ class FBMessenger {
     );
 
     route.add("POST", "/:botId", ["*", "open"], (context) => {
-      logger.warn(context);
       fbMessengerRoutes.newMessage(context);
     });
   }
@@ -98,27 +104,22 @@ class FBMessenger {
           this.middleware.application = app;
         }
       }
+      if (!middleware.verifyToken) {
+        this.middleware.verifyToken = Math.random()
+          .toString(36)
+          .substring(2);
+      }
       if (!middleware.url) {
-        // WIP create url
-        const params = this.zoapp.controllers.getParameters();
-        const botParams = {
-          botId: middleware.origin,
-          application: {
-            id: middleware.application.id,
-            secret: middleware.application.secret,
-            policies: middleware.application.policies,
-          },
-        };
-        const name = await params.generateName(4, "botParams");
-        await params.setValue(name, botParams, "botParams");
-        this.middleware.url = `/channel/${name}`;
-        this.middleware.token = name;
+        this.middleware.url = `/webhook/fb/${middleware.origin}`;
+        this.middleware.classes = ["messenger", "bot", "sandbox"];
       }
     } else {
       logger.info("No origin for FBMessengerMiddleware ", middleware.id);
     }
     // set onDispatch function
     this.middleware.onDispatch = onDispatch.bind(this);
+    // init routes
+    FBMessenger.initRoutes(this.middleware, this.zoapp, this.fbMessengerRoutes);
     return this.middleware;
   }
 

@@ -19,6 +19,7 @@ export default class FBMessengerPlugin {
     this.color = "#0084FF";
     this.active = true;
     this.type = "MessengerConnector";
+    this.settingsRef = React.createRef();
   }
 
   getName() {
@@ -52,20 +53,24 @@ export default class FBMessengerPlugin {
 
   onAction(action) {
     this.action = action;
-    // console.log("onAction=", action, this.active);
+    if (this.settingsRef) {
+      this.settingsRef.current.onAction(action);
+    }
   }
 
   renderTemplate() {
     return <FBTemplate appId={this.config.appId} onAction={this.onAction} />;
   }
 
-  renderSettings(instance, onAction, publicUrl = null) {
+  renderSettings(instance, onAction, handleSaveSettings, publicUrl = null) {
     return (
       <FBSettings
+        ref={this.settingsRef}
         instance={instance}
         onAction={onAction}
         publicUrl={publicUrl}
         appId={this.config}
+        handleSaveSettings={handleSaveSettings}
       />
     );
   }

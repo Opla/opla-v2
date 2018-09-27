@@ -17,7 +17,6 @@ export default class AppSettings extends Component {
   };
 
   static renderCreateApp(instance) {
-    // console.log("instance=", instance);
     // const app = instance.application;
     let botUrl = "Need a first publishing";
     let token = "TOKEN";
