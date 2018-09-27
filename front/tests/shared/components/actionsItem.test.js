@@ -33,9 +33,7 @@ describe("components/actionsItem", () => {
     );
 
     expect(wrapper.find("ListItemMeta")).toHaveLength(1);
-    expect(wrapper.find("ListItemMeta").prop("icon")).toEqual(
-      "remove_circle_outline",
-    );
+    expect(wrapper.find("ListItemMeta").prop("icon")).toEqual("remove");
   });
 
   it("render add button", () => {
@@ -44,9 +42,7 @@ describe("components/actionsItem", () => {
     );
 
     expect(wrapper.find("ListItemMeta")).toHaveLength(1);
-    expect(wrapper.find("ListItemMeta").prop("icon")).toEqual(
-      "add_circle_outline",
-    );
+    expect(wrapper.find("ListItemMeta").prop("icon")).toEqual("add");
 
     // hide add icon when new action is empty
     wrapper.setProps({ action: "" });

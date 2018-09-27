@@ -504,16 +504,16 @@ html {
     height: 96px;
   }
 
-  .service_start i {
-    color: green !important;
+  .service_start .mdc-list-item__graphic {
+    color: green;
   }
   
-  .service_stop i {
-    color: rgb(117,117,117) !important;
+  .service_stop .mdc-list-item__graphic {
+    color: rgb(117,117,117);
   }
   
-  .service_error i {
-    color: #b71c1c !important;
+  .service_error .mdc-list-item__graphic {
+    color: #b71c1c;
   }
    
   /* templatesList (.opla_template) Component Style */

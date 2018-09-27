@@ -198,7 +198,7 @@ i.zui-subheader-right:hover {
 }
 
 .userbox_right:hover > i {
-  color: $color_secondary_a;
+  color: $color_primary;
 }
 
 .mdc-toolbar--fixed {
@@ -228,7 +228,7 @@ i.zui-subheader-right:hover {
 }
 
 .mdc-toolbar__menu-icon:hover {
-  color: $color_secondary_a;
+  color: $color_primary;
 }
 
 .mdc-toolbar__section .mdc-tab-bar button, .mdc-tab .mdc-tab__text-label {
@@ -250,6 +250,14 @@ i.zui-subheader-right:hover {
 .zrmc-content .mdc-button--raised {
   color: white;
   background-color: $color_secondary_a;
+}
+
+.zap-panel .mdc-button--raised {
+  background-color: $color_primary;
+}
+
+.mdc-dialog__body .mdc-list-item__graphic {
+  color: #000000;
 }
 
 /* ************* */
@@ -379,6 +387,7 @@ i.zui-subheader-right:hover {
 
 .selectedActionItem {
   border : 1px solid $color_secondary_a;
+  margin-right: 1px;
  }
 
 .action_any {

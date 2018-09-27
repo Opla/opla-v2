@@ -15,12 +15,11 @@ import AgentManager from "OplaContainers/agentManager";
 import PublishContainer from "OplaContainers/publishContainer";
 import configureStore from "OplaLibs/store";
 import DrawerFooter from "zoapp-front/containers/drawerFooter";
-import Zrmc, { Inner, Cell, Button } from "zrmc";
+import Zrmc from "zrmc";
 import PublishDialog from "OplaContainers/dialogs/publishDialog";
 import { defaultTemplates, defaultLanguages } from "OplaLibs/reducers/app";
-import Extension from "OplaContainers/admin/extensions";
-import GeneralAdmin from "OplaContainers/admin/generalAdmin";
-import Users from "zoapp-front/containers/admin/users";
+import Extensions from "OplaContainers/admin/extensions";
+import Team from "zoapp-front/containers/admin/team";
 import Advanced from "zoapp-front/containers/admin/advanced";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
@@ -92,35 +91,13 @@ const appProps = {
       name: "Admin",
       path: "/admin",
       access: "auth",
-      panels: ["General", "Extensions", "Users", "Advanced"],
+      panels: ["Team", "Extensions", "Advanced"],
       render: (props) => (
         <AdminManager
           tabs={[
-            <GeneralAdmin key="general" />,
-            <Extension key="extension" />,
-            <Users key="users" />,
-            <Advanced key="advanced">
-              <Inner>
-                <Cell className="zui-color--white" span={12}>
-                  <div className="zap-panel">
-                    <div className="zap-panel_title">
-                      <span style={{ color: "#b71c1c" }}>
-                        Delete this assistant
-                      </span>
-                      <Button
-                        raised
-                        style={{
-                          backgroundColor: "#b71c1c",
-                        }}
-                      >
-                        DELETE
-                      </Button>
-                    </div>
-                  </div>
-                  <div />
-                </Cell>
-              </Inner>
-            </Advanced>,
+            <Team key="team" />,
+            <Extensions key="extensions" />,
+            <Advanced key="advanced" />,
           ]}
           {...props}
         />
@@ -181,7 +158,8 @@ const appProps = {
     {
       id: "9",
       isDrawerItem: true,
-      name: "About Opla",
+      name: "About",
+      title: "About Opla",
       icon: "info",
       path: "/about",
       access: "all",

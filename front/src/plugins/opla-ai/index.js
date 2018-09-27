@@ -26,7 +26,7 @@ export default class OplaAIPlugin {
   }
 
   getIcon() {
-    return this.title;
+    return this.icon;
   }
 
   getColor() {

@@ -2,11 +2,7 @@
 
 exports[`components/actionEditor renders correctly 1`] = `
 <div
-  style={
-    Object {
-      "backgroundColor": "#f5f5f5",
-    }
-  }
+  className="action_editor_panel"
 >
   <div
     style={

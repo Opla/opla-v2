@@ -9,7 +9,7 @@ import { Grid } from "zrmc";
 import ServicesContainer from "../servicesContainer";
 import PluginsManager from "../../utils/pluginsManager";
 
-export default class Extension extends Component {
+export default class Extensions extends Component {
   constructor(props) {
     super(props);
     const pluginsManager = PluginsManager();

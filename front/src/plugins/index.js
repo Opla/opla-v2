@@ -30,15 +30,15 @@ export default (manager, callback) => {
   callback(new SkypePlugin(manager));
   callback(new TelegramPlugin(manager));
 
-  callback(new OplaAIPlugin(manager));
   callback(
     new DummyPlugin(manager, {
-      name: "simple-nlu",
-      title: "Simple NLU",
+      name: "opennlx",
+      title: "Open NLX",
       type: "AIProvider",
-      icon: "images/robot2.svg",
+      icon: "images/opla-bubble.svg",
     }),
   );
+  callback(new OplaAIPlugin(manager));
   callback(
     new DummyPlugin(manager, {
       name: "rasa-nlu",
@@ -63,7 +63,8 @@ export default (manager, callback) => {
   callback(
     new DummyPlugin(manager, {
       name: "api-ai",
-      title: "Api.AI",
+      title: "DialogFlow",
+      icon: "images/google.svg",
       type: "AIProvider",
     }),
   );
@@ -86,6 +87,7 @@ export default (manager, callback) => {
     new DummyPlugin(manager, {
       name: "gdoc-plugins",
       title: "Google Docs",
+      icon: "images/google.svg",
       type: "WebServices",
     }),
   );
