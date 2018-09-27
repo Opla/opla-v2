@@ -4,54 +4,51 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React, { Component } from "react";
-import { TextField, Icon, Button, Menu, MenuItem } from "zrmc";
+import { Icon, Menu, MenuItem } from "zrmc";
 import { Tooltip } from "zoapp-ui";
 import PropTypes from "prop-types";
+import MessengerBoxFooter from "./messengerBoxFooter";
+import MessengerBoxInput from "./messengerBoxInput";
+import MessengerBoxMessageContent from "./messengerBoxMessageContent";
 
 class MessengerBox extends Component {
-  createMessage(message) {
-    let html = null;
-    if (message.body && message.body.indexOf("<b") >= 0) {
-      /* eslint-disable no-restricted-syntax */
-      const elements = [];
-      let tag = false;
-      let end = false;
-      let buf = "";
-      let element = {};
-      for (const ch of message.body) {
-        if (ch === "<") {
-          if (tag) {
-            element.value = buf;
-            buf = "";
-          } else {
-            if (buf.length > 0) {
-              elements.push({ value: buf, type: "text" });
-            }
-            buf = "";
-            tag = true;
-            end = false;
-            element = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      sorted: [],
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.messages !== nextProps.messages) {
+      const { messages } = nextProps;
+      let sorted = null;
+      if (messages && Array.isArray(messages)) {
+        sorted = [...messages];
+        sorted = sorted.sort((msg1, msg2) => {
+          if (msg1.created_time < msg2.created_time) {
+            return -1;
           }
-        } else if (ch === "/" && tag) {
-          end = true;
-        } else if (end && ch === ">") {
-          // <tag /> or </tag>
-          element.type = buf.trim();
-          elements.push(element);
-          element = {};
-          tag = false;
-          buf = "";
-        } else if (tag && ch === ">") {
-          element.type = buf.trim();
-          buf = "";
-        } else {
-          buf += ch;
-        }
+          if (msg1.created_time === msg2.created_time) {
+            return 0;
+          }
+          return 1;
+        });
+      } else {
+        sorted = [];
       }
-      if (buf.length > 0) {
-        elements.push({ value: buf, type: "text" });
+
+      if (nextProps.welcome) {
+        sorted.splice(0, 0, {
+          id: "welcome",
+          body: nextProps.welcome,
+          welcome: true,
+        });
       }
+<<<<<<< HEAD:front/src/shared/components/messengerBox.jsx
       html = (
         <span>
           {elements.map((el, i) => {
@@ -84,8 +81,15 @@ class MessengerBox extends Component {
       /* eslint-enable no-restricted-syntax */
     } else {
       html = <span>{message.body}</span>;
+=======
+      return {
+        ...prevState,
+        messages: nextProps.messages,
+        sorted,
+      };
+>>>>>>> master:front/src/shared/components/messengerBox/index.js
     }
-    return html;
+    return null;
   }
 
   componentDidUpdate() {
@@ -97,33 +101,75 @@ class MessengerBox extends Component {
     }
   }
 
+  /**
+   *
+   * @param {array} array1
+   * @param {array} array2
+   * @param {function} isEqualCondition - This function should test if two items are equals
+   */
+  static areArraysEquals(array1, array2, isEqualCondition) {
+    if (!array1 && !array2) {
+      return true;
+    }
+    if (!array1) {
+      return false;
+    }
+    if (!array2) {
+      return false;
+    }
+    if (array1.length !== array2.length) {
+      return false;
+    }
+
+    // warning: doesnt go into nested array
+    for (let index = 0; index < array1.length; index += 1) {
+      const item1 = array1[index];
+      const item2 = array2[index];
+      if (!isEqualCondition(item1, item2)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  static areMessagesEquals(messages1, messages2) {
+    return MessengerBox.areArraysEquals(
+      messages1,
+      messages2,
+      (message1, message2) =>
+        message1.id === message2.id && message1.body === message2.body,
+    );
+  }
+
+  static areUsersEquals(users1, users2) {
+    return MessengerBox.areArraysEquals(
+      users1,
+      users2,
+      (user1, user2) => user1.id === user2.id,
+    );
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      nextProps.intents !== this.props.intents ||
+      !MessengerBox.areMessagesEquals(
+        nextProps.messages,
+        this.props.messages,
+      ) ||
+      !MessengerBox.areUsersEquals(nextProps.users, this.props.users) ||
+      !MessengerBox.areMessagesEquals(nextState.sorted, this.state.sorted) ||
+      !MessengerBox.areUsersEquals(nextState.users, this.state.users) ||
+      nextProps.welcome !== this.props.welcome ||
+      nextProps.isSelectedIntent !== this.props.isSelectedIntent
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const {
-      messages,
-      users,
-      onSendMessage,
-      welcome,
-      inputValue = "",
-    } = this.props;
-    let sorted = null;
-    if (messages && Array.isArray(messages)) {
-      sorted = [...messages];
-      sorted = sorted.sort((msg1, msg2) => {
-        if (msg1.created_time < msg2.created_time) {
-          return -1;
-        }
-        if (msg1.created_time === msg2.created_time) {
-          return 0;
-        }
-        return 1;
-      });
-    } else {
-      sorted = [];
-    }
-    if (welcome) {
-      sorted.splice(0, 0, { id: "welcome", body: welcome, welcome: true });
-    }
-    let chatInput = inputValue;
+    const { users } = this.props;
+    const { sorted } = this.state;
     return (
       <div className="zui-cell zui-cell--4-col" style={{ margin: "0" }}>
         <div className="messenger-box">
@@ -191,7 +237,10 @@ class MessengerBox extends Component {
                         <div className="message-body-error">
                           {errorResponse}
                         </div>
-                        <Tooltip label="Create output response">
+                        <Tooltip
+                          key={`cor${message.id}`}
+                          label="Create output response"
+                        >
                           <Icon
                             name="edit"
                             className="message-edit-icon-right"
@@ -199,7 +248,10 @@ class MessengerBox extends Component {
                         </Tooltip>
                       </div>
                       <div className="message-error-container">
-                        <Tooltip label="create an intent">
+                        <Tooltip
+                          key={`cai${message.id}`}
+                          label="create an intent"
+                        >
                           <a
                             href="#"
                             className="message-intent-link-error"
@@ -365,7 +417,10 @@ class MessengerBox extends Component {
                   >
                     <div className="text-wrapper animated fadeIn">
                       <div className="message-body">
-                        {this.createMessage(message)}
+                        <MessengerBoxMessageContent
+                          message={message}
+                          onSendMessage={this.props.onSendMessage}
+                        />
                       </div>
                       {messageActions}
                     </div>
@@ -387,63 +442,8 @@ class MessengerBox extends Component {
             })}
           </div>
         </div>
-        <div
-          style={{
-            height: "18px",
-            textAlign: "right",
-            paddingTop: "6px",
-            paddingRight: "16px",
-            fontSize: "10px",
-            background: "white",
-          }}
-        >
-          <a
-            href="https://opla.ai"
-            style={{ color: "#aaa" }}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Powered by Opla.ai
-          </a>
-        </div>
-        <div className="messenger-box__actions">
-          <Icon
-            className="zui-button-left"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-            name="add"
-          />
-          <TextField
-            type="text"
-            id="chat-input-field"
-            label="Your message"
-            style={{ width: "30vw", height: "18px", margin: "8px" }}
-            noFloatingLabel
-            ref={(input) => {
-              chatInput = input;
-            }}
-            onKeyUp={(e) => {
-              if (e.key === "Enter") {
-                if (onSendMessage && onSendMessage(chatInput.inputRef.value)) {
-                  chatInput.inputRef.value = "";
-                }
-                e.preventDefault();
-              }
-            }}
-          />
-          <Icon
-            className="zui-button-right"
-            /* colored */
-            onClick={(e) => {
-              e.preventDefault();
-              if (onSendMessage && onSendMessage(chatInput.inputRef.value)) {
-                chatInput.inputRef.value = "";
-              }
-            }}
-            name="send"
-          />
-        </div>
+        <MessengerBoxFooter />
+        <MessengerBoxInput onSendMessage={this.props.onSendMessage} />
       </div>
     );
   }
@@ -451,7 +451,6 @@ class MessengerBox extends Component {
 
 MessengerBox.defaultProps = {
   onAction: null,
-  inputValue: null,
   welcome: "",
   isSelectedIntent: false,
   intents: [],
@@ -463,7 +462,6 @@ MessengerBox.propTypes = {
   onSendMessage: PropTypes.func.isRequired,
   onAction: PropTypes.func,
   users: PropTypes.shape({}).isRequired,
-  inputValue: PropTypes.string,
   welcome: PropTypes.string,
   isSelectedIntent: PropTypes.bool,
 };
