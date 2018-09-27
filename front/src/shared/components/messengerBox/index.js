@@ -48,46 +48,11 @@ class MessengerBox extends Component {
           welcome: true,
         });
       }
-<<<<<<< HEAD:front/src/shared/components/messengerBox.jsx
-      html = (
-        <span>
-          {elements.map((el, i) => {
-            // button and br
-            // TODO link / img
-            if (el.type === "button") {
-              return (
-                <Button
-                  key={i}
-                  style={{ margin: " 0 8px" }}
-                  dense
-                  outlined
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (el.value) {
-                      this.props.onSendMessage(el.value);
-                    }
-                  }}
-                >
-                  {el.value}
-                </Button>
-              );
-            } else if (el.type === "br") {
-              return <br key={i} />;
-            }
-            return el.value;
-          })}
-        </span>
-      );
-      /* eslint-enable no-restricted-syntax */
-    } else {
-      html = <span>{message.body}</span>;
-=======
       return {
         ...prevState,
         messages: nextProps.messages,
         sorted,
       };
->>>>>>> master:front/src/shared/components/messengerBox/index.js
     }
     return null;
   }
