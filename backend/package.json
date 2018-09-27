@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Opla.ai Backend",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Mik BRY <mik@opla.co>",
   "license": "GPL-2.0+",
   "scripts": {

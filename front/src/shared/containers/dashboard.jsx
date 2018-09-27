@@ -8,9 +8,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Inner, Cell, Icon } from "zrmc";
-import Loading from "zoapp-front/components/loading";
+import Loading from "zoapp-front/dist/components/loading";
 
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitle } from "zoapp-front/dist/actions/app";
 import { apiGetMetricsRequest } from "../actions/api";
 
 const metricStyle = {
