@@ -35,7 +35,7 @@ export default (manager, callback) => {
       name: "opennlx",
       title: "Open NLX",
       type: "AIProvider",
-      icon: "images/opla-bubble.svg",
+      icon: "images/opla-logo.png",
     }),
   );
   callback(new OplaAIPlugin(manager));
@@ -44,12 +44,14 @@ export default (manager, callback) => {
       name: "rasa-nlu",
       title: "RASA NLU",
       type: "AIProvider",
+      icon: "images/rasa.png",
     }),
   );
   callback(
     new DummyPlugin(manager, {
-      name: "watson-ai",
-      title: "Watson AI",
+      name: "api-ai",
+      title: "DialogFlow",
+      icon: "images/dialogflow.png",
       type: "AIProvider",
     }),
   );
@@ -58,14 +60,7 @@ export default (manager, callback) => {
       name: "wit-ai",
       title: "Wit.AI",
       type: "AIProvider",
-    }),
-  );
-  callback(
-    new DummyPlugin(manager, {
-      name: "api-ai",
-      title: "DialogFlow",
-      icon: "images/google.svg",
-      type: "AIProvider",
+      icon: "images/wit-ai.png",
     }),
   );
   callback(
@@ -73,13 +68,15 @@ export default (manager, callback) => {
       name: "lex-ai",
       title: "Amazon Lex",
       type: "AIProvider",
+      icon: "images/amazon-alexa.svg",
     }),
   );
   callback(
     new DummyPlugin(manager, {
       name: "luis-ai",
-      title: "MS Luis",
+      title: "Microsoft Luis",
       type: "AIProvider",
+      icon: "images/ms-luis.png",
     }),
   );
 
@@ -93,16 +90,10 @@ export default (manager, callback) => {
   );
   callback(
     new DummyPlugin(manager, {
-      name: "msoffice-plugins",
-      title: "MS Office",
+      name: "zapier-plugins",
+      title: "Zapier",
       type: "WebServices",
-    }),
-  );
-  callback(
-    new DummyPlugin(manager, {
-      name: "salesforce-plugins",
-      title: "Salesforce",
-      type: "WebServices",
+      icon: "images/zapier.png",
     }),
   );
   callback(
@@ -110,6 +101,7 @@ export default (manager, callback) => {
       name: "ifttt-plugin",
       title: "IFTTT",
       type: "WebServices",
+      icon: "images/iftt.png",
     }),
   );
 };

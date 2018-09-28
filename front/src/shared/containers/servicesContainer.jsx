@@ -426,6 +426,7 @@ class ServicesContainer extends Component {
               "Connect any third party messaging solution to an assistant."
             }
             items={messagings}
+            defaultIcon="message"
             onSelect={this.onSelect}
           />
         </Cell>
@@ -444,6 +445,7 @@ class ServicesContainer extends Component {
               "Switch the brain of an assistant, to choose the best match."
             }
             items={ais}
+            defaultIcon="images/robot.svg"
             onSelect={this.onSelect}
           />
         </Cell>
@@ -459,6 +461,7 @@ class ServicesContainer extends Component {
               </svg>
             }
             items={webservices}
+            defaultIcon="images/webhook.svg"
             description={"Plug any data or api to interact with an assistant."}
             onSelect={this.onSelect}
           />

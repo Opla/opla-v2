@@ -11,7 +11,7 @@ export default class OplaAIPlugin {
     this.connector = connector;
     this.name = "opla-ai";
     this.title = "Opla NLU";
-    this.icon = "images/opla-bubble.svg";
+    this.icon = "images/opla-logo.png";
     this.color = "dark";
     this.active = true;
     this.type = "AIProvider";
