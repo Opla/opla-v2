@@ -33,7 +33,7 @@ export default (manager, callback) => {
   callback(
     new DummyPlugin(manager, {
       name: "opennlx",
-      title: "Open NLX",
+      title: "OpenNLX",
       type: "AIProvider",
       icon: "images/opla-logo.png",
     }),

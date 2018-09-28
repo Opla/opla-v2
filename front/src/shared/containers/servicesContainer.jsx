@@ -173,7 +173,7 @@ class ServicesContainer extends Component {
         const items = this.getAIProviders(true);
         items.push({
           id: items.length + 1,
-          name: "Add plugin",
+          name: "Add a plugin",
           icon: "add",
           color: "gray",
         });
@@ -408,6 +408,16 @@ class ServicesContainer extends Component {
     // WIP : need to get from backend which provider is activated/running
     const messagings = this.getMiddlewares("MessengerConnector"); // this.getMessagingProviders();
     const ais = this.getMiddlewares("AIProvider"); // this.getAIProviders();
+    if (ais.length === 0) {
+      ais.push({
+        id: 1,
+        name: "OpenNLX",
+        icon: "images/opla-logo.png",
+        status: "start",
+        provider: "AIProvider",
+        system: true,
+      });
+    }
 
     return (
       <div style={divCellStyle}>

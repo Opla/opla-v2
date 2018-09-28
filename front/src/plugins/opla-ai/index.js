@@ -10,7 +10,7 @@ export default class OplaAIPlugin {
   constructor(connector) {
     this.connector = connector;
     this.name = "opla-ai";
-    this.title = "Opla NLU";
+    this.title = "OplaNLX";
     this.icon = "images/opla-logo.png";
     this.color = "dark";
     this.active = true;
