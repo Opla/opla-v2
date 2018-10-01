@@ -1,20 +1,23 @@
 {
     "plugins": [
-        "transform-class-properties",
-        "transform-object-rest-spread",
-        "transform-decorators-legacy",
-        "react-hot-loader/babel",
+        "@babel/plugin-proposal-object-rest-spread",
         [
-            "transform-runtime",
+            "@babel/plugin-proposal-decorators",
+            { "legacy": true }
+        ],
+        "@babel/plugin-proposal-class-properties",
+        "react-hot-loader/babel",
+        "@babel/plugin-syntax-dynamic-import",
+        [
+            "@babel/plugin-transform-runtime",
             {
-                "polyfill": false,
                 "regenerator": true
             }
         ]
     ],
     "presets": [
         [
-            "env",
+            "@babel/preset-env",
             {
                 "targets": {
                     "browsers": [
@@ -25,20 +28,23 @@
                 "modules": false
             }
         ],
-        "react"
+        "@babel/preset-react"
     ],
     "env": {
         "test": {
             "presets": [
                 [
-                    "env",
+                    "@babel/preset-env",
                     {
                         "targets": {
                             "node": "current"
                         }
                     }
                 ],
-                "react"
+                "@babel/preset-react"
+            ],
+            "plugins": [
+                "dynamic-import-node"
             ]
         }
     }
