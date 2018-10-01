@@ -64,7 +64,7 @@ const MessengerBoxMessageContent = (props) => {
                 key={i}
                 style={{ margin: " 0 8px" }}
                 dense
-                raised
+                outlined
                 onClick={(e) => {
                   e.preventDefault();
                   if (el.value) {
