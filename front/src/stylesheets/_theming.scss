@@ -591,4 +591,28 @@ i.zui-subheader-right:hover {
   background-color: $color_primary;
 }
 
+.zui-table {
+  border-left: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.zui-table > table > tbody td {
+  border-top: 1px solid #EEEEEE;
+}
+
+.zui-table > table > tbody tr {
+  color: #1C252C;
+}
+
+.zui-table_icon > div > * {
+  padding-left: 12px;
+}
+
+.zui_table-menu {
+  color: #aeb2b4;
+}
+
+.zui_table-menu:hover {
+  color: $color_primary;
+}
 /* ************* */
