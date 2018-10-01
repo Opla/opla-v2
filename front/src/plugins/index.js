@@ -111,3 +111,9 @@ export default (manager, callback) => {
     }),
   );
 };
+
+/**
+ * return a promis. use it with .then((component) =>{})
+ */
+export const importSettingsComponent = (pluginName) =>
+  import(`OplaPlugins/${pluginName}/settings.jsx`);

@@ -11,11 +11,16 @@ import { ServiceDialogBase } from "shared/containers/dialogs/serviceDialog";
 
 describe("containers/serviceDialog", () => {
   it("should update state when props change", () => {
+    ServiceDialogBase.prototype.loadSettingsComponent = jest.fn();
     const wrapper = shallow(
       <ServiceDialogBase
         open={true}
         apiSetMiddlewareRequest={() => {}}
-        service={{ getTitle: () => {}, renderSettings: () => {} }}
+        service={{
+          getName: () => "service-name",
+          getTitle: () => {},
+          renderSettings: () => {},
+        }}
         instance={{}}
       />,
     );

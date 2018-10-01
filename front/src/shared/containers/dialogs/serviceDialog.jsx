@@ -14,6 +14,7 @@ import Zrmc, {
   Dialog,
 } from "zrmc";
 import { connect } from "react-redux";
+import { importSettingsComponent } from "../../../plugins";
 import { apiSetMiddlewareRequest } from "../../actions/api";
 import PluginsManager from "../../utils/pluginsManager";
 /* eslint-enable no-unused-vars */
@@ -22,11 +23,13 @@ export class ServiceDialogBase extends Component {
   constructor(props) {
     super(props);
     const { open, instance } = props;
-    this.state = { openDialog: open, instance };
+    this.state = { openDialog: open, instance, error: false };
+    this.settingsRef = React.createRef();
   }
 
   componentDidMount() {
     this.updateMiddleware();
+    this.loadSettingsComponent();
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -43,12 +46,28 @@ export class ServiceDialogBase extends Component {
     }
   }
 
+  loadSettingsComponent() {
+    const { service } = this.props;
+    const name = service.getName();
+    importSettingsComponent(name)
+      .then((component) => {
+        this.setState({ SettingsComponent: component.default });
+      })
+      .catch(() => {
+        // eslint-disable-next-line
+        console.error(
+          `cant find plugins ${name}/settings.js component`,
+        );
+        this.setState({ error: true });
+      });
+  }
+
   onAction = (action) => {
     const { service } = this.props;
     const { instance } = this.state;
     const title = service.name;
-    if (service.onAction) {
-      service.onAction(action);
+    if (this.settingsRef) {
+      this.settingsRef.current.onAction(action);
     }
     if (action === "save" && this.props.onAction) {
       this.props.onAction(title, service, instance);
@@ -85,21 +104,15 @@ export class ServiceDialogBase extends Component {
     }
   }
 
+  handleSaveSettings = (middleware) => {
+    this.props.apiSetMiddlewareRequest(this.props.selectedBotId, middleware);
+  };
+
   render() {
     const { service } = this.props;
     const { instance } = this.state;
     const title = service.getTitle();
-    const content = service.renderSettings(
-      instance,
-      this.onAction,
-      (middleware) => {
-        this.props.apiSetMiddlewareRequest(
-          this.props.selectedBotId,
-          middleware,
-        );
-      },
-      this.props.publicUrl,
-    );
+    const { SettingsComponent } = this.state;
     const style = { width: "550px" };
     return (
       <Dialog
@@ -108,7 +121,24 @@ export class ServiceDialogBase extends Component {
         onClose={this.handleCloseDialog}
       >
         <DialogHeader>{title} - settings</DialogHeader>
-        <DialogBody>{content}</DialogBody>
+        <DialogBody>
+          {SettingsComponent && (
+            <SettingsComponent
+              ref={this.settingsRef}
+              instance={instance}
+              onAction={this.onAction}
+              handleSaveSettings={this.handleSaveSettings}
+              publicUrl={this.props.publicUrl}
+              appId={service.config}
+            />
+          )}
+          {!SettingsComponent &&
+            this.state.error && (
+              <div>
+                This plugin does not have a configuration page available
+              </div>
+            )}
+        </DialogBody>
         <DialogFooter>
           <Button
             type="button"

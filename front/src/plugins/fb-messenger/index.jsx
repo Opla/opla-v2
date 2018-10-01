@@ -5,46 +5,45 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import FBSettings from "./fbSettings";
 import FBTemplate from "./fbTemplate";
+import FBSettings from "./settings";
 
 export default class FBMessengerPlugin {
   constructor(connector, config = {}) {
     this.connector = connector;
-    this.config = config;
-    this.name = "fb-messenger";
-    this.title = "Facebook Messenger";
-    // from https://simpleicons.org/
-    this.icon = "images/messenger.svg";
-    this.color = "#0084FF";
-    this.active = true;
-    this.type = "MessengerConnector";
-    this.settingsRef = React.createRef();
+    this.params = {
+      config,
+      name: "fb-messenger",
+      title: "Facebook Messenger",
+      icon: "images/messenger.svg",
+      color: "#0084FF",
+      type: "MessengerConnector",
+      active: true,
+    };
   }
 
   getName() {
-    return this.name;
+    return this.params.name;
   }
 
   getTitle() {
-    return this.title;
+    return this.params.title;
   }
 
   getIcon() {
-    return this.icon;
+    return this.params.icon;
   }
 
   getColor() {
-    return this.color;
+    return this.params.color;
   }
 
   isActive() {
-    // TODO
-    return this.active;
+    return this.params.active;
   }
 
   getType() {
-    return this.type;
+    return this.params.type;
   }
 
   isType(type) {
@@ -53,19 +52,30 @@ export default class FBMessengerPlugin {
 
   onAction(action) {
     this.action = action;
-    if (this.settingsRef) {
-      this.settingsRef.current.onAction(action);
-    }
   }
 
   renderTemplate() {
     return <FBTemplate appId={this.config.appId} onAction={this.onAction} />;
   }
 
-  renderSettings(instance, onAction, handleSaveSettings, publicUrl = null) {
+  /**
+   * Legacy static load function
+   * @param {*} settingsRef - component ref to access onAction methode
+   * @param {*} instance
+   * @param {*} onAction
+   * @param {*} handleSaveSettings
+   * @param {*} publicUrl
+   */
+  renderSettings(
+    settingsRef,
+    instance,
+    onAction,
+    handleSaveSettings = () => {},
+    publicUrl = null,
+  ) {
     return (
       <FBSettings
-        ref={this.settingsRef}
+        ref={settingsRef}
         instance={instance}
         onAction={onAction}
         publicUrl={publicUrl}

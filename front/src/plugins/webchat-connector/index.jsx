@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import AppSettings from "./appSettings";
+import AppSettings from "./settings";
 import AppTemplate from "./appTemplate";
 
 export default class ExternalAppPlugin {
@@ -46,7 +46,6 @@ export default class ExternalAppPlugin {
   }
 
   isActive() {
-    // TODO
     return this.params.isActive;
   }
 
@@ -55,6 +54,12 @@ export default class ExternalAppPlugin {
     // console.log("onAction=", action);
   };
 
+  /**
+   * Legacy static load function
+   * @param {*} instance
+   * @param {*} onAction
+   * @param {*} publicUrl
+   */
   renderSettings(instance, onAction = null, publicUrl = null) {
     let oa = onAction;
     if (!oa) {
