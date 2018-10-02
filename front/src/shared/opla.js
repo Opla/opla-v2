@@ -11,7 +11,7 @@ import About from "OplaContainers/about";
 import Home from "OplaContainers/home";
 import CreateAssistant from "OplaContainers/createAssistant";
 import AdminManager from "zoapp-front/containers/adminManager";
-import AgentManager from "OplaContainers/agentManager";
+import Factory from "OplaContainers/factory";
 import PublishContainer from "OplaContainers/publishContainer";
 import configureStore from "OplaLibs/store";
 import DrawerFooter from "zoapp-front/containers/drawerFooter";
@@ -73,7 +73,7 @@ const appProps = {
       name: "Factory",
       path: "/factory",
       access: "auth",
-      panels: ["Dashboard", "Analytics", "Builder"],
+      panels: ["Dashboard", "Builder", "Analytics"],
       toolbox: [
         {
           title: "Publish",
@@ -82,7 +82,7 @@ const appProps = {
           backgroundColor: "var(--mdc-theme-primary,#6200ee)",
         },
       ],
-      render: (props) => <AgentManager {...props} />,
+      render: (props) => <Factory {...props} />,
     },
     {
       id: "3",

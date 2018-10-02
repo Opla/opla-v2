@@ -67,14 +67,14 @@ class ExplorerContainer extends Component {
               name="edit"
               onClick={(e) => {
                 e.stopPropagation();
-                this.props.handleRename(index);
+                this.props.onRename(index);
               }}
             />
             <Icon
               name="remove"
               onClick={(e) => {
                 e.stopPropagation();
-                this.props.handleDelete(index);
+                this.props.onDelete(index);
               }}
             />
           </ListItemMeta>,
@@ -101,7 +101,7 @@ class ExplorerContainer extends Component {
                 name="add_circle"
                 onClick={(e) => {
                   e.stopPropagation();
-                  this.props.handleAdd();
+                  this.props.onAdd();
                 }}
               />
             </Tooltip>
@@ -228,10 +228,9 @@ ExplorerContainer.propTypes = {
   appSelectIntent: PropTypes.func.isRequired,
   appSelectEntity: PropTypes.func.isRequired,
   appSelectFunction: PropTypes.func.isRequired,
-  handleExportImport: PropTypes.func.isRequired,
-  handleAdd: PropTypes.func.isRequired,
-  handleRename: PropTypes.func.isRequired,
-  handleDelete: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onRename: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

@@ -6,7 +6,7 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-import { List, ListItem, ListItemMeta, Icon, Switch } from "zrmc";
+import { List, ListItem, ListItemMeta, Switch } from "zrmc";
 
 const MessagingsList = ({ name, items, onSelect }) => {
   const handleOnItemClick = (e, index, item) => {
@@ -34,71 +34,39 @@ const MessagingsList = ({ name, items, onSelect }) => {
   };
 
   return (
-    <div className="zui-sublist">
-      <div className="zui-subheader">
-        <h4>{name}</h4>
-      </div>
-
-      <List>
-        {items.map((item, index) => {
-          let icon = null;
-          if (item.icon) {
-            let { color } = item;
-
-            if (!item.enabled) {
-              color = "#ddd";
-            } else if (!color) {
-              color = "gray";
-            }
-
-            const style = {
-              backgroundColor: color,
-              color: "white",
-              padding: "8px",
-            };
-
-            if (item.icon.endsWith(".svg")) {
-              icon = (
-                <div style={style}>
-                  <img
-                    style={{ verticalAlign: "top" }}
-                    src={item.icon}
-                    alt={item.name}
-                  />
-                </div>
-              );
-            } else {
-              icon = (
-                <div style={style}>
-                  <Icon style={{ verticalAlign: "top" }} name={item.icon} />
-                </div>
-              );
-            }
+    <List className="opla-messaging_list">
+      {items.map((item, index) => {
+        let imgSrc;
+        let { icon } = item;
+        if (icon) {
+          if (icon.endsWith(".svg") || icon.endsWith(".png")) {
+            imgSrc = icon;
+            icon = null;
           }
+        }
 
-          return (
-            <ListItem
-              key={item.name}
-              className="selectableListItem switchListItem"
-              style={{ height: "40px" }}
-              avatar={icon}
-              secondaryText="click to setup"
-              onClick={(e) => handleOnItemClick(e, index, item)}
-            >
-              {item.name}
+        return (
+          <ListItem
+            key={item.name}
+            className="selectableListItem switchListItem"
+            icon={icon}
+            imgSrc={imgSrc}
+            secondaryText="click to setup"
+            onClick={(e) => handleOnItemClick(e, index, item)}
+          >
+            {item.name}
 
-              <ListItemMeta>
-                <Switch
-                  id="unique-component-id"
-                  checked={item.enabled}
-                  onChange={(e) => handleOnSwitchClick(e, index, item)}
-                />
-              </ListItemMeta>
-            </ListItem>
-          );
-        })}
-      </List>
-    </div>
+            <ListItemMeta>
+              <Switch
+                id="unique-component-id"
+                checked={item.enabled}
+                onChange={(e) => handleOnSwitchClick(e, index, item)}
+              />
+            </ListItemMeta>
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 

@@ -6,288 +6,403 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Zrmc, {
+  Grid,
+  Inner,
+  Cell,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+} from "zrmc";
+import Panel from "zoapp-front/components/panel";
 import { connect } from "react-redux";
-import { Grid, Inner, Cell, Icon } from "zrmc";
-import Loading from "zoapp-front/components/loading";
-
-import { appSetTitleName } from "zoapp-front/actions/app";
-import { apiGetMetricsRequest } from "../actions/api";
-
-const metricStyle = {
-  textAlign: "right",
-  padding: "24px",
-  display: "flex",
-  color: "white",
-};
-
-const valueStyle = {
-  fontSize: "34px",
-  fontWeight: "500",
-  color: "white",
-  lineHeight: "1.1",
-};
-
-const errorStyle = {
-  fontWeight: "500",
-  color: "#F44336",
-  padding: "16px 0",
-  lineHeight: "1.1",
-};
-
-const legendStyle = {
-  fontSize: "16px",
-  fontWeight: "400",
-  color: "white",
-  padding: "60px 0",
-  lineHeight: "1.1",
-};
+import PluginsManager from "../utils/pluginsManager";
+import MessagingsList from "../components/messagingsList";
+import ServiceDialog from "./dialogs/serviceDialog";
+import {
+  apiGetMiddlewaresRequest,
+  apiSetMiddlewareRequest,
+  /* apiDeleteMiddlewareRequest, */
+  apiPublishRequest,
+  apiSaveBotRequest,
+} from "../actions/api";
+import timezones from "../utils/timezones";
 
 export class DashboardBase extends Component {
   constructor(props) {
-    super();
-    props.appSetTitleName("Dashboard");
+    super(props);
+
+    this.state = {
+      bot: props.bot,
+    };
   }
 
-  componentDidMount() {
-    if (this.props.selectedBotId) {
-      this.props.fetchMetrics(this.props.selectedBotId);
+  static getDerivedStateFromProps(props, state) {
+    if (props.bot !== state.bot) {
+      return {
+        bot: props.bot,
+      };
     }
+    return null;
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.selectedBotId &&
-      this.props.selectedBotId !== prevProps.selectedBotId
-    ) {
-      this.props.fetchMetrics(this.props.selectedBotId);
-    }
-  }
+  handleBotNameChange = (e) => {
+    const name = e.target.value;
 
-  /* eslint-disable class-methods-use-this */
-  renderingValue(value, unit) {
-    let res;
-    if (Number.isNaN(Number(value)) || value === null) {
-      res = <span style={errorStyle}>No data</span>;
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        name,
+      },
+    });
+  };
+
+  handleBotDescriptionChange = (e) => {
+    const description = e.target.value;
+
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        description,
+      },
+    });
+  };
+
+  handleLanguageChange = (language) => {
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        language,
+      },
+    });
+  };
+
+  handleTimezoneChange = (timezone) => {
+    this.setState({
+      bot: {
+        ...this.state.bot,
+        timezone,
+      },
+    });
+  };
+
+  onSaveBotDetails = () => {
+    this.props.apiSaveBotRequest(this.state.bot);
+  };
+
+  onSelect = ({ /* name, */ state, /* index, */ item }) => {
+    const { service, instance } = item;
+    if (state === "enable") {
+      const serviceName = service.getName();
+      let publisher = this.props.publishers[serviceName];
+
+      let status;
+      if (publisher) {
+        ({ status } = publisher);
+      } else {
+        publisher = { name: serviceName };
+        ({ status } = service);
+      }
+
+      publisher.status = status === "start" ? null : "start";
+      // console.log("status ", publisher.status, status);
+      // this.setState({ servicesEnabled });
+      if (publisher.status === "start" && instance === undefined) {
+        const name = service.getName();
+        const pluginsManager = PluginsManager();
+        const newInstance = pluginsManager.instanciate(
+          name,
+          this.props.selectedBotId,
+        );
+        this.props.apiSetMiddlewareRequest(
+          this.props.selectedBotId,
+          newInstance,
+        );
+      }
+      this.props.appUpdatePublisher(this.props.selectedBotId, publisher);
     } else {
-      res = (
-        <span style={valueStyle}>
-          {value}
-          {unit}
-        </span>
+      const sdialog = (
+        <ServiceDialog
+          open
+          service={service}
+          instance={instance}
+          onClosed={this.handleCloseDialog}
+          store={this.props.store}
+        />
+      );
+      setTimeout(() => Zrmc.showDialog(sdialog), 100);
+    }
+  };
+
+  updateMiddlewares(needUpdate = false) {
+    if (needUpdate) {
+      this.setState({ isLoading: true });
+      // Call getMiddlewares
+      this.props.apiGetMiddlewaresRequest(
+        this.props.selectedBotId,
+        "MessengerConnector",
+      );
+    } else if (this.state.isLoading && !this.props.isLoading) {
+      this.setState({ isLoading: false });
+    }
+  }
+
+  getActives(pluginsManager, startedOnly = false) {
+    const servicesEnabled = this.props.publishers;
+    const actives = [];
+    if (this.props.middlewares && this.props.middlewares.length > 0) {
+      const { middlewares } = this.props;
+      middlewares.forEach((instance) => {
+        const service = pluginsManager.getPlugin(instance.name);
+        let status;
+        if (servicesEnabled[instance.name]) {
+          ({ status } = servicesEnabled[instance.name]);
+        } else {
+          ({ status } = instance);
+        }
+        const enabled = status === "start";
+        if (enabled || !startedOnly) {
+          actives.push({
+            name: service.getTitle(),
+            icon: service.getIcon(),
+            color: service.getColor(),
+            service,
+            instance,
+            enabled,
+            status: instance.status,
+          });
+        }
+      });
+    }
+    return actives;
+  }
+
+  getItemsServices(pluginsManager, actives = []) {
+    const services = pluginsManager.getPlugins({
+      type: "MessengerConnector",
+      activated: true,
+    });
+    const servicesEnabled = this.props.publishers;
+    const items = [];
+    services.forEach((service) => {
+      // TODO check if the item is already pushed
+      let active = null;
+      let i = 0;
+      for (; i < actives.length; i += 1) {
+        if (actives[i].service.getName() === service.getName()) {
+          active = actives[i];
+          break;
+        }
+      }
+      if (active) {
+        items.push(active);
+        actives.splice(i, 1);
+      } else {
+        let status;
+        if (servicesEnabled[service.getName()]) {
+          ({ status } = servicesEnabled[service.getName()]);
+        } else {
+          status = "closed";
+        }
+        const enabled = status === "start";
+        items.push({
+          name: service.getTitle(),
+          icon: service.getIcon(),
+          color: service.getColor(),
+          service,
+          enabled,
+          status,
+        });
+      }
+    });
+    return items;
+  }
+
+  renderMessagingPlatforms() {
+    let content = null;
+    if (this.state.isLoading) {
+      content = <div>Loading</div>;
+    } else {
+      const pluginsManager = PluginsManager();
+      const actives = this.getActives(pluginsManager);
+      const items = this.getItemsServices(pluginsManager, actives);
+      actives.forEach((active) => {
+        items.push(active);
+      });
+
+      content = (
+        <Panel
+          title="Publish to"
+          description="You could choose to connect this assistant on one or more of these platforms."
+        >
+          <MessagingsList items={items} onSelect={this.onSelect} />
+        </Panel>
       );
     }
-    return res;
+
+    return content;
   }
 
   render() {
-    const { isLoading, isSignedIn, metrics } = this.props;
-
-    if (!isSignedIn) {
-      return <div>You need to sign in...</div>;
+    if (this.props.bot === null) {
+      return null;
     }
-
-    if (isLoading || !metrics) {
-      return <Loading />;
-    }
-
     return (
-      <div className="zui-layout__content zui-color--grey-100">
-        <Grid>
-          <Inner>
-            <Cell className="zui-color--white mdc-elevation--z1" span={12}>
-              <Grid>
-                <Inner>
-                  <Cell span={12}>
-                    <h2>Key metrics</h2>
-                  </Cell>
-                </Inner>
-                <Inner>
-                  <Cell span={4}>
+      <Grid>
+        <Inner>
+          <Cell className="zap-panel zui-color--white" span={12}>
+            <Panel
+              title="Assistant's parameters"
+              action="Save"
+              actionDisabled={
+                !this.state.bot ||
+                (this.state.bot && this.state.bot.name.length < 1)
+              }
+              onAction={this.onSaveBotDetails}
+            >
+              <div style={{ display: "flex" }}>
+                <div style={{ width: "200px", marginLeft: "24px" }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "180px",
+                      height: "180px",
+                      margin: "24px",
+                      backgroundColor: "#ddd",
+                    }}
+                  />
+                </div>
+                <div style={{ width: "65%", marginLeft: "24px" }}>
+                  <form className="zap-panel_form">
+                    <div>
+                      <TextField
+                        defaultValue={this.props.bot.name}
+                        label="Assistant name"
+                        onChange={this.handleBotNameChange}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        defaultValue={this.props.bot.description}
+                        isTextarea
+                        label="Description"
+                        onChange={this.handleBotDescriptionChange}
+                      />
+                    </div>
                     <div
                       style={{
-                        ...metricStyle,
-                        background: "#1a237e",
+                        display: "flex",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="perm_identity"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(metrics.users.count)}
-                        <br />
-                        <span style={legendStyle}>users</span>
-                      </span>
-                    </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#f57f17" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="chat"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(metrics.conversations.count)}
-                        <br />
-                        <span style={legendStyle}>conversations</span>
-                      </span>
-                    </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#827717" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="forum"
-                      />
-                      <span
-                        style={{
-                          textAlign: "right",
-                          width: "70%",
-                          overflow: "hidden",
-                        }}
+                      <Select
+                        label="Language"
+                        style={{ width: "47%" }}
+                        onSelected={this.handleLanguageChange}
+                        selectedIndex={["en", "fr"].findIndex(
+                          (language) =>
+                            language === (this.props.bot.language || null),
+                        )}
                       >
-                        {this.renderingValue(
-                          metrics.conversations.messages_per_conversation,
+                        <MenuItem value="en">English</MenuItem>
+                        <MenuItem value="fr">French</MenuItem>
+                      </Select>
+                      <Select
+                        label="Timezone"
+                        style={{ width: "47%" }}
+                        onSelected={this.handleTimezoneChange}
+                        selectedIndex={this.props.timezones.findIndex(
+                          (tz) => tz === (this.props.bot.timezone || null),
                         )}
-                        <br />
-                        <span style={legendStyle}>messages/conversations</span>
-                      </span>
+                      >
+                        {this.props.timezones.map((timezone) => (
+                          <MenuItem key={timezone} value={timezone}>
+                            {timezone}
+                          </MenuItem>
+                        ))}
+                      </Select>
                     </div>
-                  </Cell>
-                </Inner>
-              </Grid>
-            </Cell>
-          </Inner>
-          <Inner>
-            <Cell
-              className="zui-color--white mdc-elevation--z1"
-              style={{ marginTop: "24px" }}
-              span={12}
-            >
-              <Grid>
-                <Inner>
-                  <Cell span={12}>
-                    <h2>Platform metrics</h2>
-                  </Cell>
-                </Inner>
-
-                <Inner>
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#4a148c" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="hourglass_empty"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(metrics.sessions.duration, "ms")}
-                        <br />
-                        <span style={legendStyle}>session duration</span>
-                      </span>
-                    </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#004d40" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="error"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(
-                          (metrics.errors.rate * 100).toFixed(2),
-                          "%",
-                        )}
-                        <br />
-                        <span style={legendStyle}>errors rate</span>
-                      </span>
-                    </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#bf360c" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="grade"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(
-                          metrics.responses.speed.toFixed(2),
-                          "ms",
-                        )}
-                        <br />
-                        <span style={legendStyle}>response time</span>
-                      </span>
-                    </div>
-                  </Cell>
-                </Inner>
-              </Grid>
-            </Cell>
-          </Inner>
-        </Grid>
-      </div>
+                  </form>
+                </div>
+                <div />
+              </div>
+            </Panel>
+            {this.renderMessagingPlatforms()}
+            <div className="opla_dashboard_actionbar">
+              <Button dense outlined>
+                Import/Export data
+              </Button>
+              <Button dense outlined>
+                Duplicate
+              </Button>
+              <Button dense outlined className="warning">
+                Delete
+              </Button>
+            </div>
+          </Cell>
+        </Inner>
+      </Grid>
     );
   }
 }
 
 DashboardBase.defaultProps = {
-  isLoading: false,
-  isSignedIn: false,
-  metrics: null,
+  bot: null,
+  timezones,
 };
 
 DashboardBase.propTypes = {
+  admin: PropTypes.shape({ params: PropTypes.shape({}).isRequired }),
+  apiSaveBotRequest: PropTypes.func.isRequired,
+  appUpdatePublisher: PropTypes.func.isRequired,
+  apiGetMiddlewaresRequest: PropTypes.func.isRequired,
+  apiPublishRequest: PropTypes.func.isRequired,
+  apiSetMiddlewareRequest: PropTypes.func.isRequired,
+  bot: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    language: PropTypes.string,
+    timezone: PropTypes.string,
+  }),
   isLoading: PropTypes.bool,
   isSignedIn: PropTypes.bool,
-  metrics: PropTypes.shape({}),
+  timezones: PropTypes.arrayOf(PropTypes.string).isRequired,
+  middlewares: PropTypes.arrayOf(PropTypes.shape({})),
   selectedBotId: PropTypes.string,
-  appSetTitleName: PropTypes.func.isRequired,
-  fetchMetrics: PropTypes.func.isRequired,
+  publishers: PropTypes.objectOf(PropTypes.shape({})),
+  store: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => {
-  const { metrics, user } = state;
-
-  const isSignedIn = user ? user.isSignedIn : false;
+  const { admin } = state.app;
+  const selectedBotId = state.app ? state.app.selectedBotId : null;
+  const middlewares = state.app ? state.app.middlewares : null;
+  const publishers = state.app.publishers || {};
+  // TODO get selectedBot from selectBotId
+  const bot = selectedBotId ? admin.bots[0] : null;
 
   return {
-    metrics: metrics.metrics,
-    isLoading: metrics.loading,
-    selectedBotId: state.app.selectedBotId,
-    isSignedIn,
+    bot,
+    middlewares,
+    publishers,
+    selectedBotId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  appSetTitleName: (titleName) => {
-    dispatch(appSetTitleName(titleName));
+  apiSaveBotRequest: (params) => {
+    dispatch(apiSaveBotRequest(params));
   },
-  fetchMetrics: (botId) => dispatch(apiGetMetricsRequest(botId)),
+  apiPublishRequest: (botId, publishers) => {
+    dispatch(apiPublishRequest(botId, publishers));
+  },
+  apiGetMiddlewaresRequest: (botId, type) => {
+    dispatch(apiGetMiddlewaresRequest(botId, type));
+  },
+  apiSetMiddlewareRequest: (botId, middleware) => {
+    dispatch(apiSetMiddlewareRequest(botId, middleware));
+  },
 });
 
 // prettier-ignore

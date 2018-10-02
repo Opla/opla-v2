@@ -13,6 +13,21 @@ html {
   font-weight: 200;
 }
 
+.opla_dashboard_actionbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+.opla_dashboard_actionbar button {
+  margin-left: 24px;
+}
+
+.opla_dashboard_actionbar button.warning {
+  color: $color_error;
+  border-color: $color_error;
+}
+
 .intent_title {
   padding-right: 16px;
   max-width: 28vw;

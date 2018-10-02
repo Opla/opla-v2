@@ -21,7 +21,7 @@ import {
   apiSandboxResetRequest,
 } from "../actions/api";
 
-class SandboxContainer extends Component {
+class PlaygroundContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { needToSubscribe: true };
@@ -47,14 +47,14 @@ class SandboxContainer extends Component {
   };
 
   subscribeSandboxMessages() {
-    if (this.props.selectedBot && this.state.needToSubscribe) {
+    if (this.props.selectedBot.id && this.state.needToSubscribe) {
       this.setState({ needToSubscribe: false });
       this.props.apiSubscribeSandboxMessages(this.props.selectedBotId);
     }
   }
 
   handleMenu = (/* action */) => {
-    Zrmc.showDialog({ header: "TODO", body: "SandboxContainer.handleMenu" });
+    Zrmc.showDialog({ header: "TODO", body: "PlaygroundContainer.handleMenu" });
   };
 
   handleReset = () => {
@@ -77,7 +77,7 @@ class SandboxContainer extends Component {
       );
       return true;
     }
-    // console.log("Error", "SandboxContainer.handleSend", this.props.conversation, body.length);
+    // console.log("Error", "PlaygroundContainer.handleSend", this.props.conversation, body.length);
     return false;
   };
 
@@ -129,7 +129,7 @@ class SandboxContainer extends Component {
       messages = [];
     }
     const users = {};
-    if (this.props.userProfile) {
+    if (this.props.userProfile && this.props.userProfile.username) {
       const userName = this.props.userProfile.username.toLowerCase();
       users[userName] = {
         id: this.props.selectedBot.id,
@@ -198,15 +198,7 @@ class SandboxContainer extends Component {
   }
 }
 
-SandboxContainer.defaultProps = {
-  conversation: null,
-  selectedBotId: PropTypes.string,
-  selectedBot: PropTypes.shape({}),
-  userProfile: PropTypes.shape({}),
-  isSelectedIntent: PropTypes.bool,
-};
-
-SandboxContainer.propTypes = {
+PlaygroundContainer.propTypes = {
   conversation: PropTypes.shape({ id: PropTypes.string }),
   intents: PropTypes.arrayOf(PropTypes.shape({})),
   selectedBotId: PropTypes.string,
@@ -231,8 +223,8 @@ const mapStateToProps = (state) => {
   const sandbox = state.app ? state.app.sandbox : null;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   // TODO get Bot associated with selectedBotId
-  const selectedBot = selectedBotId ? state.app.admin.bots[0] : null;
-  const userProfile = state.user ? state.user.profile : null;
+  const selectedBot = selectedBotId ? state.app.admin.bots[0] : {};
+  const userProfile = state.user ? state.user.profile : {};
   let conversation = null;
   /* const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading; */
@@ -286,4 +278,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SandboxContainer);
+)(PlaygroundContainer);

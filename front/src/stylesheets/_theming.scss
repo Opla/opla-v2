@@ -260,6 +260,38 @@ i.zui-subheader-right:hover {
   color: #000000;
 }
 
+.mdc-layout-grid {
+  padding: 0px;
+}
+
+.zui-color--grey-100 {
+  background-color: #FFFFFF;
+}
+
+/* ************* */
+
+/* Dashboard       */
+.opla-messaging_list {
+  border: 1px solid #EEEEEE;
+}
+
+.opla-messaging_list > li {
+  color: #1C252C;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.opla-messaging_list > li .mdc-list-item__graphic {
+  color: #1C252C;
+}
+
+.opla-messaging_list > li > .mdc-list-item__meta {
+  opacity: 1;
+}
+
+.opla_dashboard_actionbar {
+  border-top: 1px solid #EEEEEE;
+}
+
 /* ************* */
 
 /* Builder       */
