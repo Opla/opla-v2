@@ -13,17 +13,105 @@ html {
   font-weight: 200;
 }
 
-.opla_dashboard_actionbar {
+.opla-dashboard_title {
+  color: $color_secondary;
+  display: flex;
+}
+
+.opla-dashboard .zap-panel_title {
+  height: 64px;
+}
+
+.opla-dashboard_icon {
+  width: 62px;
+  height: 62px;
+  margin-right: 24px;
+  border-radius: 50%;
+  border: 1px solid #AEB2B4;
+}
+
+.opla-dashboard_icon .zrmc-icon {
+  width: 48px;
+  height: 48px;
+  padding: 2px 6px;
+}
+
+.opla-dashboard_icon .zrmc-icon > * {
+  width: 48px;
+  height: 48px;
+  fill: #AEB2B4;
+}
+
+.opla-dashboard_title .mdc-text-field--upgraded:not(.mdc-text-field--fullwidth):not(.mdc-text-field--box):not(.mdc-text-field--textarea):not(.mdc-text-field--outlined) {
+  margin: 0;
+  height: 64px;
+}
+
+.opla-dashboard_title .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: $color_secondary;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 200;
+}
+
+.opla-dashboard_title .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input {
+  border: none;
+}
+
+.opla-dashboard_title input {
+  padding: 0;
+  height: 64px;
+  line-height: 64px;
+}
+
+.opla-dashboard_title > .mdc-text-field__bottom-line {
+  display: none;
+}
+
+.opla-dashboard_title_edit {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.opla-dashboard_title_edit {
+  margin-top: 22px;
+  margin-right: 8px;
+  opacity: 0;
+}
+
+.opla-dashboard_title_edit .material-icons {
+  font-size: 22px;
+}
+
+.opla-dashboard_title:hover .opla-dashboard_title_edit {
+  opacity: 1;
+  background-color: $color_secondary;
+}
+
+.opla-dashboard .zap-panel_header .mdc-button--raised {
+  background-color: $color_secondary;
+  margin-top: 16px;
+}
+
+.opla-dashboard textarea {
+  resize: none;
+}
+
+.opla-dashboard_actionbar {
   display: flex;
   justify-content: flex-end;
   padding: 24px;
 }
 
-.opla_dashboard_actionbar button {
+.opla-dashboard_actionbar button {
   margin-left: 24px;
 }
 
-.opla_dashboard_actionbar button.warning {
+.opla-dashboard_actionbar button.warning {
   color: $color_error;
   border-color: $color_error;
 }

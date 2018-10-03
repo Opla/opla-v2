@@ -243,6 +243,23 @@ i.zui-subheader-right:hover {
   caret-color: $color_secondary_a;
 }
 
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: #1C252C;
+}
+
+.mdc-text-field--textarea:not(.mdc-text-field--disabled) {
+  border-color: #DCDCD0;
+}
+
+.mdc-text-field--textarea.mdc-text-field--focused:not(.mdc-text-field--disabled) {
+  border-color: $color_secondary;
+}
+
+.mdc-text-field--textarea.mdc-text-field--focused:not(.mdc-text-field--disabled)
+.mdc-text-field__input:focus {
+  border-color: $color_secondary;
+}
+
 .zrmc-content .mdc-button {
   color: $color_secondary_a;
 }

@@ -410,20 +410,7 @@ class IntentContainer extends Component {
     if (intent.notSaved) {
       action = [{ name: buttonName, onClick: this.handleSaveIntent }];
     }
-    /* const { editing, toolboxFocus } = this.state;
-    let toolbox;
-    if (editing || toolboxFocus) {
-      const isInput = this.state.toolboxDisplayMode === "input";
-      const isIntentOutputEmpty =
-        !intent || !intent.output || intent.output.length === 0;
-      toolbox = (
-        <ActionsToolbox
-          onChange={this.handleChangeToolbox}
-          isInput={isInput}
-          condition={isIntentOutputEmpty}
-        />
-      );
-    } */
+
     return (
       <div
         className="intent_detail"
