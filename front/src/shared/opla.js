@@ -34,6 +34,7 @@ const appProps = {
   name: "Opla",
   subname: "CE",
   version: "0.1.0",
+  icon: "images/opla-avatar.png",
   instance: {
     name: "Dev",
     color: "#f05545",
@@ -47,6 +48,7 @@ const appProps = {
     drawer: {
       type: "temporary",
       themeDark: true,
+      header: { href: "/" },
       renderFooter: (props) => <DrawerFooter {...props} />,
     },
   },
@@ -55,9 +57,7 @@ const appProps = {
   screens: [
     {
       id: "1",
-      isDrawerItem: true,
-      icon: "home",
-      name: "Home",
+      name: "Root",
       access: "auth",
       path: "/",
       render: (props) => <Home {...props} />,
@@ -115,7 +115,6 @@ const appProps = {
     },
     {
       id: "5",
-      isDrawerItem: true,
       icon: "home",
       name: "Home",
       path: "*",

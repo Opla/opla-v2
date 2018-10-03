@@ -150,6 +150,23 @@ i.zui-subheader-right:hover {
   font-weight: 900;
 }
 
+.mdc-drawer--temporary .mdc-drawer__header-content {
+  padding: 0px;
+}
+
+.mdc-drawer__header-content > a {
+  display: flex;
+  color: #1C252C;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+}
+
+.mdc-drawer__header-content > a:hover {
+  background-color: #FBFBFB;
+}
+
 .mdc-drawer__drawer_header_icon {
   width: 36px;
   height: 36px;
@@ -157,7 +174,7 @@ i.zui-subheader-right:hover {
   margin-right: 16px;
 }
 
-.mdc-drawer__header-content > div {
+.mdc-drawer__header-content > * > div {
   line-height: 36px;
   font-size: 20px;
   height: 36px;

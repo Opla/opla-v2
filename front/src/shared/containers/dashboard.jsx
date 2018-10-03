@@ -265,13 +265,13 @@ export class DashboardBase extends Component {
                       </Icon>
                     </div>
                     <div style={{ display: "flex" }}>
+                      <div className="opla-dashboard_title_edit">
+                        <Icon name="edit" />
+                      </div>
                       <TextField
                         defaultValue={this.props.bot.name}
                         onChange={this.handleBotNameChange}
                       />
-                      <div className="opla-dashboard_title_edit">
-                        <Icon name="edit" />
-                      </div>
                     </div>
                   </div>
                 }
