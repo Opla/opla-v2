@@ -17,43 +17,28 @@ const types = {
     className: undefined,
   },
   any: {
-    style: {
-      color: "black",
-      backgroundColor: "#ffb300",
-    },
-    className: "zui-chip",
+    style: {},
+    className: "zui-chip action_any",
     editable: false,
   },
   output_var: {
-    style: {
-      color: "white",
-      backgroundColor: "#4b830d",
-    },
-    className: "zui-chip",
+    style: {},
+    className: "zui-chip action_output",
     editable: true,
   },
   variable: {
-    style: {
-      color: "white",
-      backgroundColor: "#007c91",
-    },
-    className: "zui-chip",
+    style: {},
+    className: "zui-chip action_variable",
     editable: true,
   },
   br: {
-    style: {
-      color: "white",
-      backgroundColor: "#00227b",
-    },
-    className: "zui-chip",
+    style: {},
+    className: "zui-chip action_br",
     editable: false,
   },
   button: {
-    style: {
-      color: "white",
-      backgroundColor: "#ab000d",
-    },
-    className: "zui-chip",
+    style: {},
+    className: "zui-chip action_button",
     editable: true,
   },
 };

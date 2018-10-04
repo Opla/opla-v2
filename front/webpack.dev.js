@@ -10,25 +10,6 @@ module.exports = merge(commonConfig, {
     "webpack/hot/only-dev-server",
     "./client/index.jsx",
   ],
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                url: false,
-                minimize: false,
-              },
-            },
-          ]
-        }),
-      },
-    ]
-  },
   devtool: "inline-source-map",
   devServer: {
     contentBase: path.resolve(__dirname, "./dist/public"),

@@ -8,25 +8,6 @@ module.exports = merge(commonConfig, {
   entry: {
     app: "./client/index.jsx"
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                url: false,
-                minimize: true,
-              },
-            },
-          ]
-        }),
-      },
-    ]
-  },
   plugins: [
     new ExtractTextPlugin({
       filename: "css/[name].css",

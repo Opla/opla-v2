@@ -13,8 +13,8 @@ export default class ExternalAppPlugin {
     this.connector = connector;
     this.params = {
       name: "webchat-connector",
-      title: "WebChat",
-      icon: "devices",
+      title: "Webchat",
+      icon: "message",
       color: "gray",
       type: "MessengerConnector",
       isActive: true,

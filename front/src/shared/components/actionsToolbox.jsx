@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Tooltip } from "zoapp-ui";
-import { Icon, Menu, MenuItem } from "zrmc";
+import { Icon, Menu, MenuItem, Button } from "zrmc";
 
 class ActionsToolbox extends Component {
   constructor(props) {
@@ -179,20 +179,22 @@ class ActionsToolbox extends Component {
       return <div />;
     }
     const styleToolbox = {
-      /* width: "100%",
-      backgroundColor: "#eee",
-      marginBottom: "16px",
-      display: "table", */
       marginLeft: "0px",
-      height: "24px",
-      float: "right",
+
+      width: "100%",
     };
     const styleToolbar = {
-      borderRight: "1px solid #ddd",
+      borderRight: "1px solid #eeeeee",
       display: "flex",
-      padding: "8px",
+      padding: "8px 8px 4px 8px",
       float: "left",
       height: "22px",
+    };
+    const styleToolbarRight = {
+      ...styleToolbar,
+      borderRight: "none",
+      float: "right",
+      padding: "0px",
     };
 
     const { toolbox } = this.state;
@@ -378,6 +380,16 @@ class ActionsToolbox extends Component {
               name="delete"
             />
           </Tooltip>
+        </div>
+        <div style={styleToolbarRight}>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              this.props.onChange("unfocus");
+            }}
+          >
+            cancel
+          </Button>
         </div>
       </div>
     );

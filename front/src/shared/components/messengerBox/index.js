@@ -289,7 +289,7 @@ class MessengerBox extends Component {
                     <Tooltip label="Delete message">
                       <Icon
                         onClick={messageDeleteAction}
-                        name="clear"
+                        name="remove"
                         className="message-delete-icon"
                       />
                     </Tooltip>
@@ -350,7 +350,7 @@ class MessengerBox extends Component {
                     <Icon
                       onClick={intentActionLink}
                       id={intentLinkId}
-                      name={notError ? "reorder" : "add_circle_outline"}
+                      name={notError ? "reorder" : "add_circle"}
                       className={intentIconClassName}
                       menu={intentLinkMenu}
                     />
@@ -362,7 +362,7 @@ class MessengerBox extends Component {
                       <Icon
                         onClick={intentActionLink}
                         id={intentLinkId}
-                        name={notError ? "reorder" : "add_circle_outline"}
+                        name={notError ? "reorder" : "add_circle"}
                         className={intentIconClassName}
                         menu={intentLinkMenu}
                       />

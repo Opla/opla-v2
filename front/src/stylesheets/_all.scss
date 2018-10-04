@@ -1,0 +1,772 @@
+/**
+ * Copyright (c) 2015-present, CWB SAS
+ *
+ * This source code is licensed under the GPL v2.0+ license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+ 
+html {
+  cursor: default;
+}
+ 
+.zui-panel-header-title {
+  font-weight: 200;
+}
+
+.opla-dashboard_title {
+  color: $color_secondary;
+  display: flex;
+}
+
+.opla-dashboard .zap-panel_title {
+  height: 64px;
+}
+
+.opla-dashboard_icon {
+  width: 62px;
+  height: 62px;
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 1px solid #AEB2B4;
+}
+
+.opla-dashboard_icon .zrmc-icon {
+  width: 48px;
+  height: 48px;
+  padding: 2px 6px;
+}
+
+.opla-dashboard_icon .zrmc-icon > * {
+  width: 48px;
+  height: 48px;
+  fill: #AEB2B4;
+}
+
+.opla-dashboard_title .mdc-text-field--upgraded:not(.mdc-text-field--fullwidth):not(.mdc-text-field--box):not(.mdc-text-field--textarea):not(.mdc-text-field--outlined) {
+  margin: 0;
+  height: 64px;
+}
+
+.opla-dashboard_title .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: $color_secondary;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 200;
+}
+
+.opla-dashboard_title .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input {
+  border: none;
+}
+
+.opla-dashboard_title input {
+  padding: 0;
+  height: 64px;
+  line-height: 64px;
+}
+
+.opla-dashboard_title > .mdc-text-field__bottom-line {
+  display: none;
+}
+
+.opla-dashboard_title_edit {
+  background-color: #aeb2b4;
+  color: white;
+  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.opla-dashboard_title_edit {
+  margin-top: 22px;
+  margin-right: 8px;
+  opacity: 0;
+}
+
+.opla-dashboard_title_edit .material-icons {
+  font-size: 22px;
+}
+
+.opla-dashboard_title:hover .opla-dashboard_title_edit {
+  opacity: 1;
+  background-color: $color_secondary;
+}
+
+.opla-dashboard .zap-panel_header .mdc-button--raised {
+  background-color: $color_secondary;
+  margin-top: 16px;
+}
+
+.opla-dashboard textarea {
+  resize: none;
+}
+
+.opla-dashboard_actionbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+.opla-dashboard_actionbar button {
+  margin-left: 24px;
+}
+
+.opla-dashboard_actionbar button.warning {
+  color: $color_error;
+  border-color: $color_error;
+}
+
+.opla-analytics {
+  padding: 24px;
+}
+
+.opla-analytics_subpanel {
+  display: flex;
+}
+
+.opla-analytics_value {
+  font-size: 46px;
+  font-weight: 200;
+  color: #1C252C;
+}
+
+.opla-analytics_unit {
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.opla-analytics_metric {
+  font-size: 46px;
+  font-weight: 200;
+  color: #1C252C;
+  width: 30%;
+}
+
+.opla-analytics_legend {
+  font-size: 16px;
+  font-weight: 400;
+  color: #AEB2B4;
+  padding-top: 16px;
+}
+
+.opla-analytics_error {
+  font-weight: 500;
+  color: #F44336;
+  padding: 16px 0;
+}
+
+.intent_title {
+  padding-right: 16px;
+  max-width: 28vw;
+  height: 36px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 200;
+  margin-top: 30px;
+}
+ 
+.intent_toolbar .zui-panel-header__actions {
+  padding-top: 36px;
+}
+ .intent_title:hover .intent_title_edit {
+   opacity: 1;
+ }
+ 
+ .intent_title_edit {
+   margin-top: 6px;
+   margin-left: 8px;
+   opacity: 0;
+ }
+ 
+ .actionstoolbox {
+   position: fixed;
+   z-index: 2;
+   height: 34px;
+ }
+ 
+ .actionstoolbox-icon {
+   cursor: pointer;
+   margin: 0 4px;
+   font-size: 18px;
+ }
+ 
+ .intent_detail .mdc-list {
+  border-left: 1px solid #EEEEEE;
+  border-bottom: 1px solid #EEEEEE;
+ }
+
+ .mdc-list {
+    padding: 0px;
+  }
+  
+  .mdc-list-item {
+   /* dense */
+   padding-top: 4px;
+   padding-bottom: 4px;
+   font-size: .812rem;
+  }
+ 
+  .item_notsaved {
+   width: 2px;
+   height: 36px;
+   position: fixed;
+   left: 0px;
+   background: #b71c1c;
+   margin-top: -4px;
+  }
+ 
+  .gray_dot {
+    height: 12px;
+    width: 12px;
+    background-color: #757575;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: inline-block;
+  }
+  
+  .red_dot {
+   height: 12px;
+   width: 12px;
+   background-color: $color_error;
+   border-radius: 50%;
+   margin-right: 8px;
+   display: inline-block;
+ }
+ 
+ .help_icon {
+   margin-top: 12px;
+   margin-left: 8px;
+   height: 24px;
+   cursor: pointer;
+   opacity: 0;
+ }
+ 
+ .zui-expansion-header:hover .help_icon {
+   opacity: 1;
+ }
+ 
+
+.zui-expansion-content {
+  background-color: fbfbfb;  
+}
+
+ .help_panel {
+   height: 260px;
+   background: #e0f7fa;
+   margin: 12px;
+ }
+ 
+ .help_panel_header {
+   display: flex;
+   padding: 8px;
+   flex-direction: row-reverse;
+ }
+ 
+ .help_panel_bubble {
+   width: 22px;
+   height: 22px;
+   background-color: rgba(0,0,0,.87);
+   color: white;
+   border-radius: 50%;
+   text-align: center;
+   margin-left: -6px;
+   margin-right: 4px;
+ }
+ 
+ .help_panel_title {
+   display: flex;
+   margin-right: auto;
+   margin-left: 8px;
+   line-height: 24px;
+   font-size: 15px;
+   font-weight: 900;
+   color: rgba(0,0,0,.87);
+ }
+ 
+ .help_panel_title > i {
+   padding-right: 4px;
+   margin-left: -8px;
+ }
+ 
+ .help_panel_header > div {
+   height: 24px;
+ }
+ 
+ .help_panel_header > div > i {
+   height: 24px;
+   color: rgba(0,0,0,.54);
+   cursor: pointer;
+ }
+ 
+ .help_panel_header > div > i:hover {
+   color: rgb(85,38,130);
+ }
+ 
+ .fileInput {
+   overflow: hidden;
+   position: relative;
+ }
+  
+  .fileInput [type=file] {
+    cursor: inherit;
+    display: block;
+    font-size: 999px;
+    filter: alpha(opacity=0);
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+  }
+  
+  .zui-button--file input {
+    cursor: pointer;
+    height: 100%;
+    right: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+  }
+  
+  .fileInput {
+    background: #bbb;
+    border-radius: 40px;
+    padding: 20px;
+    margin: 30px 60px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .fileInput [type=file] {
+    cursor: pointer;
+  }
+ 
+  a {
+   color: rgba(34, 190, 196, 1);
+   font-weight: 500;
+  }
+ 
+  :focus {
+   outline: 0px solid transparent;
+  }
+ 
+  [contenteditable]:focus {
+    outline: 0px solid transparent;
+  }
+ 
+  .zui-chip:focus {
+   border: 1px solid;
+  }
+ 
+  .zui-chip {
+    height: 24px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 24px;
+    padding: 0 6px;
+    border: 0;
+    border-radius: 4px;
+    background-color: #dedede;
+    display: inline-block;
+    color: rgba(0,0,0, 0.87);
+    margin: 2px 1px;
+    font-size: 0;
+    white-space: nowrap;
+  }
+  
+  .zui-chip__text_ex {
+    font-size: 13px;
+    vertical-align: inherit;
+    display: inline-block;
+  }
+  
+  .zui-chip__text {
+    font-size: 13px;
+    vertical-align: initial;
+  }
+ 
+  .messenger-box-test {
+    width: 100%;
+    margin: 0px;
+  }
+  
+  .zui-action-button {
+    min-width: 320px;
+  }
+  
+  .zui-action-button-mid {
+    min-width: 200px;
+  }
+
+ 
+  .mdc-list-item .mdc-list-item__secondary-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .mdc-list-item--two-line .zui-list__item-primary-content {
+    height: initial;
+  }
+ 
+ .explorer_header {
+   display: flex;
+   display: flex;
+   margin-top: 6px;
+   line-height: 24px;
+ }
+ 
+ .explorer_header > div {
+   margin-right: 8px;
+   cursor: pointer;
+   color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+ }
+ 
+ .explorer_header > div:hover {
+   margin-right: 8px;
+   cursor: pointer;
+   color: rgba(2, 206, 204, 0.54);
+ }
+ 
+ .explorer_view_selected {
+   color: var(--mdc-theme-secondary, #018786);
+   border-bottom: 2px solid;
+   padding-bottom: 6px;
+ }
+
+ 
+  .explorer .zui-expansion-arrow {
+   margin-left: -12px;
+  }
+ 
+  .explorer .zui-expansion-title {
+    margin-left: -24px;
+    width: 100%;
+  }
+ 
+  .explorer .zui-expansion-title > div {
+   flex-direction: row-reverse;
+   justify-content: space-between;
+ }
+ 
+ .explorer .zui-expansion-title > div i {
+   margin-right: -20px;
+ }
+ 
+ .explorer .mdc-list-item > div {
+   max-width: 160px;
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+ }
+ 
+  .explorer .mdc-list-item__meta {
+    min-width: 48px;
+  }
+ 
+ .zui-panel-header__actions i {
+   cursor: pointer;
+   color: var(--mdc-theme-text-hint-on-background,rgba(0,0,0,.38));
+ }
+ 
+  .actionConditional {
+    height: auto;
+  }
+  
+ 
+ .actionItem {
+   height: 100%;
+   padding: 3px 16px 4px 16px;
+ }
+ 
+ 
+ .actionItem.selectedActionItem  {
+   opacity: 1;
+   padding: 2px 14px 2px 14px;
+ }
+ 
+ .actionItem:hover {
+   opacity: 1;
+   cursor: pointer;
+ }
+ 
+ .addActionItem {
+   margin: 8px;
+   padding: 3px 15px 3px 15px;
+   min-height: 40px;
+ }
+ 
+  /* .selectedActionItem {
+   overflow: visible;
+  } */
+ 
+ 
+  .addActionItem.selectedActionItem {
+   min-height: 30px;
+   opacity: 1;
+  }
+ 
+  
+  .selectedListItem span {
+    overflow: hidden;
+  }
+  
+  .selectedListItem:hover {
+    cursor: pointer;
+  }
+  
+  .selectableListItem:hover {
+    cursor: pointer;
+  }
+  
+ .selectableListItem > .mdc-list-item__meta {
+   opacity: 0;
+ }
+ 
+ .selectableListItem:hover > .mdc-list-item__meta {
+   opacity: 1;
+ }
+ 
+ .selectedListItem > .mdc-list-item__meta {
+   opacity: 0;
+ }
+ 
+ .selectedListItem:hover > .mdc-list-item__meta {
+   opacity: 1;
+ }
+ 
+  .onFocusAction > .mdc-list-item__meta {
+    opacity: 0;
+  }
+   
+  .onFocusAction:hover > .mdc-list-item__meta {
+    /* display: block; */
+    opacity: 1;
+  }
+  
+  .zui-sublist .zui-list {
+    margin: 0px;
+    padding: 0px;
+  }
+ 
+ 
+ .zui-expansion-title {
+   overflow: visible;
+ }
+  
+  .explorer .mdc-list-item {
+   height: 34px;
+   padding: 0px 16px;
+   margin: 0px;
+ }
+ 
+  /* TODO put this in Zoapp-front */
+  .zui-subheader-right {
+   font-size: .875rem;
+  }
+  
+  .zui-sublist h4 {
+   font-size: 15px;
+   font-weight: 900;
+
+   line-height: 36px;
+   height: 36px;
+  }
+  
+  .zui-dialog-extended {
+    width: 550px;
+  }
+  
+  .zui-dialog-list {
+    width: 320px;
+  }
+  
+  dialog {
+    padding: 0px;
+  }
+  
+  hr {
+    /* For white theme */
+    border-top: 1px solid #e1e1e1;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+  }
+  
+  .mdc-list-item--two-line .mdc-list-item__secondary-text .zui-list__item-icon {
+    height: 100%;
+  }
+ 
+  .mdc-list-item .mdc-list-item__text {
+    width: 80%;
+  }
+  
+  .bear-icon {
+    background-image: url(../images/bear.png);
+    background-size: 80%;
+    background-position: 3px;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+  }
+  
+  .opla-icon {
+    background-image: url(../images/opla-bubble.svg);
+    background-size: 80%;
+    background-position: 5px;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+  }
+  
+  .list-box {
+    height:100%;
+  }
+  
+  .list-content {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .intent_detail .list-content {
+    height: calc(100vh - 122px - 41px);
+  }
+
+  .explorer .list-content {
+    height: calc(100vh - 27px - 41px);
+  }
+
+  .intent_toolbar {
+    height: 96px;
+  }
+   
+  /* templatesList (.opla_template) Component Style */
+ .opla_template-templateBox {
+   position: relative;
+   height: 320px;
+   outline: 5px solid transparent;
+   text-decoration: none;
+ }
+ 
+  .opla_template-infoC {
+   color: #FFF;
+   height: 250px;
+   opacity: 0.6;
+   filter: alpha(opacity=60); /* For IE8 and earlier */
+ }
+ 
+ .opla_template-imgCell {
+   position: relative;
+   width: 100%;
+   height: 250px;
+   background-color: #f5f5f5;
+ }
+ 
+ .opla_template-backgroundCell{
+   background-size: 10000%; /* Not very beautiful but work */
+   background-position: center right; 
+   width: 100%;
+   height: 100%;
+ }
+ 
+ .opla_template-imgMask{
+   background-color: rgba(255, 255, 255, 0.2);
+   width: 100%;
+   height: 100%;
+ }
+ 
+ .opla_template-img {
+   position: absolute;  
+   width: 100px;
+   text-align: center;
+   margin: 0;
+   top: 50%;
+   left: 50%;
+   -ms-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+ }
+ 
+ .opla_template-templateBox:hover .opla_template-infoC {
+   opacity: 1;
+   filter: alpha(opacity=100); /* For IE8 and earlier */
+ }
+ 
+ .opla_template-textCell {
+   font-weight: 200;
+   font-size: 1.1em;
+   line-height: 1.1em;
+   height: 2.2em;
+   overflow: hidden;
+   padding: 1rem;
+   background-color: rgb(69, 90, 100);
+ }
+ 
+ .opla_template-templateBox .opla_template-infoC.selectedListItem {
+   opacity: 1;
+   filter: alpha(opacity=100); /* For IE8 and earlier */
+ }
+ 
+ .opla_template-templateBox .opla_template-infoC.selectedListItem .opla_template-textCell {
+   color: #FFEB3B;
+ }
+ 
+ 
+ /* Override fileInput */
+ .opla_template-templateBox .fileInput {
+   position: absolute;  
+   text-align: center;
+   top: 50%;
+   left: 50%;
+   -ms-transform: translate(-50%, -50%);
+   transform: translate(-50%, -50%);
+   margin: 0;
+ }
+ 
+ .opla-conditional {
+   background: transparent;
+   width: 345px;
+   padding: 0px;
+   margin-bottom: 8px;
+   border: #56002759 1px solid;
+   border-radius: 2px;
+   display: flex;
+   margin-left: -12px;
+ }
+ 
+ .opla-conditional-name {
+   margin-right: 8px;
+ }
+ 
+ .opla-conditional-value {
+   margin-left: 8px;
+ }
+ 
+ .opla-conditional-field {
+   background: transparent;
+   padding: 4px 8px;
+   width: 160px;
+   height: 16px;
+   line-height: 16px;
+ }
+ 
+ .opla-conditional-field > input {
+   border-bottom: none;
+   padding: 0px;
+   height: 16px;
+   line-height: 16px;
+ }
+ 
+.opla-conditional-op {
+  color: #ba2d65;
+  font-weight: 900;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+  padding: 4px;
+}

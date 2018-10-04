@@ -34,7 +34,7 @@ class EntityContainer extends Component {
         <div className="zui-action-panel list-box">
           <div className="list-content">
             <div
-              className="zui-color--white mdc-elevation--z1"
+              className="zui-color--white"
               style={{ margin: "12px", padding: "16px", height: "400px" }}
             >
               TODO {titlename} Entity

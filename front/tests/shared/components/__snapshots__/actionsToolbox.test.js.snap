@@ -6,20 +6,19 @@ exports[`components/actionsToolbox can be an input 1`] = `
   onFocus={[Function]}
   style={
     Object {
-      "float": "right",
-      "height": "24px",
       "marginLeft": "0px",
+      "width": "100%",
     }
   }
 >
   <div
     style={
       Object {
-        "borderRight": "1px solid #ddd",
+        "borderRight": "1px solid #eeeeee",
         "display": "flex",
         "float": "left",
         "height": "22px",
-        "padding": "8px",
+        "padding": "8px 8px 4px 8px",
       }
     }
   >
@@ -122,11 +121,11 @@ exports[`components/actionsToolbox can be an input 1`] = `
   <div
     style={
       Object {
-        "borderRight": "1px solid #ddd",
+        "borderRight": "1px solid #eeeeee",
         "display": "flex",
         "float": "left",
         "height": "22px",
-        "padding": "8px",
+        "padding": "8px 8px 4px 8px",
       }
     }
   >
@@ -150,6 +149,28 @@ exports[`components/actionsToolbox can be an input 1`] = `
         Delete selected block
       </span>
     </div>
+  </div>
+  <div
+    style={
+      Object {
+        "borderRight": "none",
+        "display": "flex",
+        "float": "right",
+        "height": "22px",
+        "padding": "0px",
+      }
+    }
+  >
+    <button
+      className="mdc-button"
+      disabled={false}
+      id={null}
+      onClick={[Function]}
+      type="button"
+    >
+      
+      cancel
+    </button>
   </div>
 </div>
 `;

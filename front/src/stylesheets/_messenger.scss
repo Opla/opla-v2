@@ -6,7 +6,7 @@
  */
 
 
-.opla-icon {
+ .opla-icon {
   background-image: url("../images/opla-icon.svg");
   background-size: 30px;
   background-repeat: no-repeat;
@@ -158,10 +158,6 @@
 
 .message.error .text-wrapper:before {
   content: none;
-}
-
-.message.error .text-wrapper .message-edit-icon-right {
-  color: #b71c1c;
 }
 
 .message.from .circle-wrapper, .message.from .text-wrapper {
@@ -338,11 +334,6 @@
   padding: 0px;
   position: absolute;
   cursor: pointer;
-  color: rgba(85, 38, 130, 0.2);
-}
-
-.message-welcome-icon:hover {
-  color: rgba(85, 38, 130, 0.8);
 }
 
 .message:hover .message-delete-icon {
@@ -354,13 +345,9 @@
   left: -28px;
   top: 28px;
   padding: 0px;
+  margin: 3px;
   position: absolute;
   cursor: pointer;
-  color: rgba(85, 38, 130, 0.05);
-}
-
-.message-delete-icon:hover {
-  color: rgba(85, 38, 130, 0.8);
 }
 
 .message:hover .message-edit-icon {
@@ -372,13 +359,9 @@
   left: -28px;
   top: 0px;
   padding: 0px;
+  margin: 3px;
   position: absolute;
   cursor: pointer;
-  color: rgba(85, 38, 130, 0.05);
-}
-
-.message-edit-icon:hover {
-  color: rgba(85, 38, 130, 0.8);
 }
 
 .message:hover .message-edit-icon-right {
@@ -387,16 +370,11 @@
 
 .message-edit-icon-right {
   opacity: 0;
-  right: -28px;
-  top: 0px;
+  right: -24px;
+  top: 2px;
   padding: 0px;
   position: absolute;
   cursor: pointer;
-  color: rgba(85, 38, 130, 0.05);
-}
-
-.message-edit-icon-right:hover {
-  color: rgba(85, 38, 130, 0.8);
 }
 
 .error-color {
@@ -435,7 +413,6 @@
   text-align: left;
   font-size: 12px;
   margin-right: 8px;
-  color: rgba(85, 38, 130, 0.2);
 }
 
 .message-intent-link-error {

@@ -10,8 +10,8 @@ export default class OplaAIPlugin {
   constructor(connector) {
     this.connector = connector;
     this.name = "opla-ai";
-    this.title = "Opla NLU";
-    this.icon = "images/opla-bubble.svg";
+    this.title = "OplaNLX";
+    this.icon = "images/opla-logo.png";
     this.color = "dark";
     this.active = true;
     this.type = "AIProvider";
@@ -26,7 +26,7 @@ export default class OplaAIPlugin {
   }
 
   getIcon() {
-    return this.title;
+    return this.icon;
   }
 
   getColor() {

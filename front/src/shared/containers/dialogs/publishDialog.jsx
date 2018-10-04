@@ -18,7 +18,6 @@ import Zrmc, {
 import { connect } from "react-redux";
 import PluginsManager from "../../utils/pluginsManager";
 import MessagingsList from "../../components/messagingsList";
-import ServiceDialog from "./serviceDialog";
 import {
   apiGetMiddlewaresRequest,
   apiSetMiddlewareRequest,
@@ -41,50 +40,6 @@ class PublishDialog extends Component {
   componentDidUpdate() {
     this.updateMiddlewares();
   }
-
-  onSelect = ({ /* name, */ state, /* index, */ item }) => {
-    const { service, instance } = item;
-    if (state === "enable") {
-      const serviceName = service.getName();
-      let publisher = this.props.publishers[serviceName];
-
-      let status;
-      if (publisher) {
-        ({ status } = publisher);
-      } else {
-        publisher = { name: serviceName };
-        ({ status } = service);
-      }
-
-      publisher.status = status === "start" ? null : "start";
-      // console.log("status ", publisher.status, status);
-      // this.setState({ servicesEnabled });
-      if (publisher.status === "start" && instance === undefined) {
-        const name = service.getName();
-        const pluginsManager = PluginsManager();
-        const newInstance = pluginsManager.instanciate(
-          name,
-          this.props.selectedBotId,
-        );
-        this.props.apiSetMiddlewareRequest(
-          this.props.selectedBotId,
-          newInstance,
-        );
-      }
-      this.props.appUpdatePublisher(this.props.selectedBotId, publisher);
-    } else {
-      const sdialog = (
-        <ServiceDialog
-          open
-          service={service}
-          instance={instance}
-          onClosed={this.handleCloseDialog}
-          store={this.props.store}
-        />
-      );
-      setTimeout(() => Zrmc.showDialog(sdialog), 100);
-    }
-  };
 
   getInstance(name) {
     const { middlewares } = this.props;

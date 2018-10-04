@@ -395,15 +395,14 @@ class IntentContainer extends Component {
   render() {
     const intent = this.state.selectedIntent;
     let name = "";
-    const style = intent.notSaved ? {} : { display: "none" };
+    const color = intent.notSaved ? "error_color" : "";
     let buttonName = "Save";
     if (!intent.id) {
       buttonName = "Create";
     }
     name = (
       <span>
-        <span className="red_dot" style={style} />
-        <span style={{ color: "#bbb" }}>#</span>
+        <span className={color}>#</span>
         {intent.name}
       </span>
     );
@@ -411,29 +410,16 @@ class IntentContainer extends Component {
     if (intent.notSaved) {
       action = [{ name: buttonName, onClick: this.handleSaveIntent }];
     }
-    /* const { editing, toolboxFocus } = this.state;
-    let toolbox;
-    if (editing || toolboxFocus) {
-      const isInput = this.state.toolboxDisplayMode === "input";
-      const isIntentOutputEmpty =
-        !intent || !intent.output || intent.output.length === 0;
-      toolbox = (
-        <ActionsToolbox
-          onChange={this.handleChangeToolbox}
-          isInput={isInput}
-          condition={isIntentOutputEmpty}
-        />
-      );
-    } */
+
     return (
       <div
+        className="intent_detail"
         ref={(node) => {
           this.node = node;
         }}
       >
         <SubToolbar
-          className=""
-          style={{ margin: "0px 0px 0 0px" }}
+          className="intent_toolbar"
           titleName={
             <div
               className="intent_title"

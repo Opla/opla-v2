@@ -7,25 +7,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { appSetTitle } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/actions/app";
 
 const aboutStyle = {
-  fontSize: "18px",
-  fontWeight: "300",
-  color: "#666",
-  margin: "36px",
-};
-const infoStyle = {
-  fontSize: "24px",
-  fontWeight: "300",
-  color: "#666",
-  paddingBottom: "20px",
+  margin: "5% 40% 10% 10%",
 };
 
 class About extends Component {
   constructor(props) {
     super();
-    props.appSetTitle("About");
+    props.appSetTitleName("About");
   }
 
   render() {
@@ -33,16 +24,19 @@ class About extends Component {
 
     return (
       <div style={aboutStyle}>
-        <div style={infoStyle}>{isLoading ? "" : null} </div>
+        {isLoading ? "" : null}
+        <h1>Essential</h1>
+        <h4>Your own virtual assistant</h4>
         <p>
           We are Opla, the mighty volcanic team! Since 2015 we started
           developing this deeptech chatbot solution. Nowadays we are truly
           commited to OpenSource and fully involved in creating the most
           complete and user oriented conversational interface tool.
         </p>
+        <h1>Version</h1>
+        <h4>V0.1 - Amazing Alou </h4>
         <p>
-          Version<br />0.1 : Amazing Alou (Le Puy Alou : a french volcano) June
-          2018<br />
+          (Le Puy Alou : a french volcano) July 2018<br />
           <a
             href="https://github.com/Opla/"
             target="_blank"
@@ -51,10 +45,11 @@ class About extends Component {
             See more on Github
           </a>
         </p>
+        <h1>Contributors</h1>
+        <h4>Thanks to the team and contributors</h4>
         <p>
-          Thanks to the team and contributors<br />
-          Julie, Maali, Marie, Nicolle, Dorian, Loic, Manu, Mik, Thomas, Will,
-          Will<br />
+          Elodie, Julie, Maali, Marie, Nicolle, Adil, Dorian, Florian, Loic,
+          Manu, Mik, Thomas, Will, Will<br />
           <a
             href="https://github.com/Opla/joinUs"
             target="_blank"
@@ -82,11 +77,11 @@ class About extends Component {
 
 About.propTypes = {
   isLoading: PropTypes.bool,
-  appSetTitle: PropTypes.func.isRequired,
+  appSetTitleName: PropTypes.func.isRequired,
 };
 const mapDispatchToProps = (dispatch) => ({
-  appSetTitle: (titleName) => {
-    dispatch(appSetTitle(titleName));
+  appSetTitleName: (titleName) => {
+    dispatch(appSetTitleName(titleName));
   },
 });
 

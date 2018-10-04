@@ -224,7 +224,7 @@ class ActionEditor extends Component {
       );
     }
     return (
-      <div style={{ backgroundColor: "#f5f5f5" }}>
+      <div className="action_editor_panel">
         <div style={styleToolbox}>
           <div style={styleToolbar}>
             <Tooltip label="Insert text">

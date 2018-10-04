@@ -51,9 +51,10 @@ class ConditionsActionsEditable extends Component {
             }}
             value={this.props.content.name || ""}
             style={style}
+            size="6"
             className="opla-conditional-field opla-conditional-name"
           />
-          <span className="opla-conditional-op">=</span>
+          <div className="opla-conditional-op">=</div>
           <TextField
             id="conditionValue"
             onChange={(e) => {
@@ -61,6 +62,7 @@ class ConditionsActionsEditable extends Component {
             }}
             value={this.props.content.value || ""}
             style={style}
+            size="6"
             className="opla-conditional-field opla-conditional-value"
           />
         </div>
