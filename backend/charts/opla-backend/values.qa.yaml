@@ -12,3 +12,12 @@ db:
 tls: true
 
 namespace: ${K8S_NAMESPACE}
+
+embedded_db:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: cloud.google.com/gke-preemptible
+            operator: DoesNotExist

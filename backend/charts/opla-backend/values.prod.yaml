@@ -24,3 +24,10 @@ mariadb:
   master:
     persistence:
       storageClass: snapshot-promoter
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: cloud.google.com/gke-preemptible
+              operator: DoesNotExist
