@@ -1364,12 +1364,6 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-debug@2.6.8:
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
-  dependencies:
-    ms "2.0.0"
-
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -3304,12 +3298,12 @@ load-json-file@^2.0.0:
     pify "^2.0.0"
     strip-bom "^3.0.0"
 
-localtunnel@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/localtunnel/-/localtunnel-1.9.0.tgz#8ffecdcf8c8a14f62df1056cf9d54acbb0bb9a8f"
+localtunnel@1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/localtunnel/-/localtunnel-1.9.1.tgz#1d1737eab658add5a40266d8e43f389b646ee3b1"
   dependencies:
     axios "0.17.1"
-    debug "2.6.8"
+    debug "2.6.9"
     openurl "1.1.1"
     yargs "6.6.0"
 
@@ -5392,13 +5386,13 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-zoapp-backend@0.23.5:
-  version "0.23.5"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.23.5.tgz#101bb93a74b83f786f631395c4d4540516eed760"
+zoapp-backend@0.23.10:
+  version "0.23.10"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.23.10.tgz#40b23a0edb6cab97f011887fb3140b4e58dd3fec"
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"
-    localtunnel "1.9.0"
+    localtunnel "1.9.1"
     node-fetch "^2.1.2"
     nodemailer "^4.6.5"
     validate.js "^0.12.0"
