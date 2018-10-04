@@ -48,8 +48,8 @@ class About extends Component {
         <h1>Contributors</h1>
         <h4>Thanks to the team and contributors</h4>
         <p>
-          Elodie, Julie, Maali, Marie, Nicolle, Dorian, Loic, Manu, Mik, Thomas,
-          Will, Will<br />
+          Elodie, Julie, Maali, Marie, Nicolle, Adil, Dorian, Florian, Loic,
+          Manu, Mik, Thomas, Will, Will<br />
           <a
             href="https://github.com/Opla/joinUs"
             target="_blank"

@@ -8150,9 +8150,9 @@ zoapp-common@0.3.0:
     whatwg-fetch "^2.0.4"
     winston "2.4.0"
 
-zoapp-front@0.24.2:
-  version "0.24.2"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.24.2.tgz#9c9bc11925b0b2ee3e3fa75a77c7d1b9c949a93f"
+zoapp-front@0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.25.0.tgz#f98171ed8c3f65849d43f8a8279c5503f278fab8"
   dependencies:
     babel-runtime "^6.26.0"
     prop-types "15.6.0"
@@ -8165,12 +8165,12 @@ zoapp-front@0.24.2:
     redux "3.7.2"
     redux-saga "0.16.0"
     zoapp-common "0.3.0"
-    zoapp-ui "0.7.2"
-    zrmc "0.11.0"
+    zoapp-ui "0.8.0"
+    zrmc "0.12.1"
 
-zoapp-ui@0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.7.2.tgz#643037a73823dc2b89338dc8458d76713c16c584"
+zoapp-ui@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/zoapp-ui/-/zoapp-ui-0.8.0.tgz#aec1f8d0821aac0625c8525e6962368effd4a738"
   dependencies:
     prop-types "15.6.0"
     react "16.4.2"
@@ -8179,20 +8179,11 @@ zoapp-ui@0.7.2:
     react-dom "16.4.2"
     react-redux "5.0.7"
     redux "4.0.0"
-    zrmc "0.11.0"
+    zrmc "0.12.1"
 
-zrmc@0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/zrmc/-/zrmc-0.11.0.tgz#86203a393e91d8d74a3f192083b376138f3b57d7"
-  dependencies:
-    dialog-polyfill "^0.4.9"
-    prop-types "15.6.0"
-    react "16.4.2"
-    react-dom "16.4.2"
-
-zrmc@0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/zrmc/-/zrmc-0.12.0.tgz#f532d358ed06aa86c4037ec08f4824bb33d5b7d2"
+zrmc@0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/zrmc/-/zrmc-0.12.1.tgz#7f3f45f6bcc24439990e018b53b818283a325e79"
   dependencies:
     dialog-polyfill "^0.4.9"
     prop-types "15.6.0"

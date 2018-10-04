@@ -28,6 +28,7 @@ import {
   apiPublishRequest,
   apiSaveBotRequest,
 } from "../actions/api";
+import { appUpdatePublisher } from "../actions/app";
 import timezones from "../utils/timezones";
 
 export class DashboardBase extends Component {
@@ -163,7 +164,7 @@ export class DashboardBase extends Component {
           ({ status } = instance);
         }
         const enabled = status === "start";
-        if (enabled || !startedOnly) {
+        if (service && (enabled || !startedOnly)) {
           actives.push({
             name: service.getTitle(),
             icon: service.getIcon(),
@@ -393,6 +394,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  appUpdatePublisher: (selectedBotId, publisher) => {
+    dispatch(appUpdatePublisher(selectedBotId, publisher));
+  },
   apiSaveBotRequest: (params) => {
     dispatch(apiSaveBotRequest(params));
   },

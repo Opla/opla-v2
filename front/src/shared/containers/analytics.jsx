@@ -10,39 +10,7 @@ import { connect } from "react-redux";
 import { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
 import Panel from "zoapp-front/components/panel";
-
-import { appSetTitleName } from "zoapp-front/actions/app";
 import { apiGetMetricsRequest } from "../actions/api";
-
-/*
-const metricStyle = {
-  padding: "24px",
-  display: "flex",
-  color: "#1C252C",
-};
-
-const valueStyle = {
-  fontSize: "46px",
-  fontWeight: "200",
-  color: "#1C252C",
-  lineHeight: "1.1",
-};
-
-const errorStyle = {
-  fontWeight: "500",
-  color: "#F44336",
-  padding: "16px 0",
-  lineHeight: "1.1",
-};
-
-const legendStyle = {
-  fontSize: "16px",
-  fontWeight: "400",
-  color: "#AEB2B4",
-  padding: "60px 0",
-  lineHeight: "1.1",
-};
-*/
 
 export class AnalyticsBase extends Component {
   componentDidMount() {
@@ -173,7 +141,6 @@ AnalyticsBase.propTypes = {
   isSignedIn: PropTypes.bool,
   metrics: PropTypes.shape({}),
   selectedBotId: PropTypes.string,
-  appSetTitleName: PropTypes.func.isRequired,
   fetchMetrics: PropTypes.func.isRequired,
 };
 
@@ -191,9 +158,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  appSetTitleName: (titleName) => {
-    dispatch(appSetTitleName(titleName));
-  },
   fetchMetrics: (botId) => dispatch(apiGetMetricsRequest(botId)),
 });
 

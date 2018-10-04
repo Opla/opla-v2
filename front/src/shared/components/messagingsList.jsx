@@ -71,7 +71,7 @@ const MessagingsList = ({ name, items, onSelect }) => {
 };
 
 MessagingsList.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   onSelect: PropTypes.func.isRequired,
 };

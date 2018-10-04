@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`containers/Analytics renders a Loading component when isLoading is true 1`] = `
+<div
+  className="mdc-card"
+  style={
+    Object {
+      "margin": "auto",
+      "width": "512px",
+    }
+  }
+>
+  <section
+    className="mdc-card__primary"
+  >
+    
+    <h1
+      className="mdc-card__title"
+    >
+      Processing
+    </h1>
+    
+  </section>
+  <section
+    className="mdc-card__supporting-text"
+  >
+    Please wait ...
+  </section>
+  <section
+    className="mdc-card__actions"
+  />
+</div>
+`;
+
+exports[`containers/Analytics renders a Loading component when no metrics 1`] = `
+<div
+  className="mdc-card"
+  style={
+    Object {
+      "margin": "auto",
+      "width": "512px",
+    }
+  }
+>
+  <section
+    className="mdc-card__primary"
+  >
+    
+    <h1
+      className="mdc-card__title"
+    >
+      Processing
+    </h1>
+    
+  </section>
+  <section
+    className="mdc-card__supporting-text"
+  >
+    Please wait ...
+  </section>
+  <section
+    className="mdc-card__actions"
+  />
+</div>
+`;
+
+exports[`containers/Analytics renders a Loading component when user is not signed in 1`] = `
+<div>
+  You need to sign in...
+</div>
+`;
+
+exports[`containers/Analytics renders and update correctly 1`] = `
+<div
+  className="opla-analytics zui-layout__content zui-color--grey-100"
+>
+  <div
+    className="mdc-layout-grid"
+  >
+    <div
+      className="mdc-layout-grid__inner"
+    >
+      <div
+        className="zui-color--white mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+      >
+        <div
+          className="zap-panel"
+        >
+          <div
+            className="zap-panel_header"
+          >
+            <div
+              className="zap-panel_title"
+            >
+              
+              <div>
+                Key metrics
+              </div>
+            </div>
+            
+          </div>
+          <div
+            className="zap-panel_desc"
+          />
+          <div
+            className="opla-analytics_subpanel"
+          >
+            <div
+              className="opla-analytics_metric"
+            >
+              <div>
+                <span
+                  className="opla-analytics_value"
+                >
+                  123
+                  <span
+                    className="opla-analytics_unit"
+                  />
+                </span>
+                <div
+                  className="opla-analytics_legend"
+                >
+                  Users
+                </div>
+              </div>
+            </div>
+            <div
+              className="opla-analytics_metric"
+            >
+              <div>
+                <span
+                  className="opla-analytics_value"
+                >
+                  1200
+                  <span
+                    className="opla-analytics_unit"
+                  />
+                </span>
+                <div
+                  className="opla-analytics_legend"
+                >
+                  Conversations
+                </div>
+              </div>
+            </div>
+            <div
+              className="opla-analytics_metric"
+            >
+              <div>
+                <span
+                  className="opla-analytics_value"
+                >
+                  4
+                  <span
+                    className="opla-analytics_unit"
+                  />
+                </span>
+                <div
+                  className="opla-analytics_legend"
+                >
+                  Messages
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="mdc-layout-grid__inner"
+    >
+      <div
+        className="zui-color--white mdc-layout-grid__cell mdc-layout-grid__cell--span-12"
+        style={
+          Object {
+            "paddingTop": "96px",
+          }
+        }
+      >
+        <div
+          className="zap-panel"
+        >
+          <div
+            className="zap-panel_header"
+          >
+            <div
+              className="zap-panel_title"
+            >
+              
+              <div>
+                Platform metrics
+              </div>
+            </div>
+            
+          </div>
+          <div
+            className="zap-panel_desc"
+          />
+          <div
+            className="opla-analytics_subpanel"
+          >
+            <div
+              className="opla-analytics_metric"
+            >
+              <div>
+                <span
+                  className="opla-analytics_value"
+                >
+                  5000
+                  <span
+                    className="opla-analytics_unit"
+                  >
+                    ms
+                  </span>
+                </span>
+                <div
+                  className="opla-analytics_legend"
+                >
+                  Session duration
+                </div>
+              </div>
+            </div>
+            <div
+              className="opla-analytics_metric"
+            >
+              <div>
+                <span
+                  className="opla-analytics_value"
+                >
+                  23.01
+                  <span
+                    className="opla-analytics_unit"
+                  >
+                    %
+                  </span>
+                </span>
+                <div
+                  className="opla-analytics_legend"
+                >
+                  Errors rate
+                </div>
+              </div>
+            </div>
+            <div
+              className="opla-analytics_metric"
+            >
+              <div>
+                <span
+                  className="opla-analytics_value"
+                >
+                  40.22
+                  <span
+                    className="opla-analytics_unit"
+                  >
+                    ms
+                  </span>
+                </span>
+                <div
+                  className="opla-analytics_legend"
+                >
+                  Response time
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

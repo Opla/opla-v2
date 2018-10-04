@@ -8,9 +8,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
-import { DashboardBase } from "shared/containers/dashboard";
+import { AnalyticsBase } from "shared/containers/analytics";
 
-describe("containers/Dashboard", () => {
+describe("containers/Analytics", () => {
   const defaultMetrics = {
     users: {
       count: 123,
@@ -30,12 +30,10 @@ describe("containers/Dashboard", () => {
     },
   };
   it("renders and update correctly", () => {
-    const appSetTitleNameSpy = jest.fn();
     const fetchMetricsSpy = jest.fn();
 
     const component = renderer.create(
-      <DashboardBase
-        appSetTitleName={appSetTitleNameSpy}
+      <AnalyticsBase
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
         metrics={defaultMetrics}
@@ -45,12 +43,10 @@ describe("containers/Dashboard", () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
 
-    expect(appSetTitleNameSpy).toHaveBeenCalled();
     expect(fetchMetricsSpy).not.toHaveBeenCalled();
 
     component.update(
-      <DashboardBase
-        appSetTitleName={appSetTitleNameSpy}
+      <AnalyticsBase
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
         renderingValue
@@ -63,11 +59,7 @@ describe("containers/Dashboard", () => {
 
   it("renders a Loading component when user is not signed in", () => {
     const component = renderer.create(
-      <DashboardBase
-        appSetTitleName={jest.fn()}
-        fetchMetrics={jest.fn()}
-        isSignedIn={false}
-      />,
+      <AnalyticsBase fetchMetrics={jest.fn()} isSignedIn={false} />,
     );
 
     const tree = component.toJSON();
@@ -76,12 +68,7 @@ describe("containers/Dashboard", () => {
 
   it("renders a Loading component when isLoading is true", () => {
     const component = renderer.create(
-      <DashboardBase
-        appSetTitleName={jest.fn()}
-        fetchMetrics={jest.fn()}
-        isSignedIn
-        isLoading
-      />,
+      <AnalyticsBase fetchMetrics={jest.fn()} isSignedIn isLoading />,
     );
 
     const tree = component.toJSON();
@@ -92,8 +79,7 @@ describe("containers/Dashboard", () => {
     const metrics = null;
 
     const component = renderer.create(
-      <DashboardBase
-        appSetTitleName={jest.fn()}
+      <AnalyticsBase
         fetchMetrics={jest.fn()}
         isSignedIn
         renderingValue
@@ -106,12 +92,10 @@ describe("containers/Dashboard", () => {
   });
 
   it("fetch metrics when selected bot change", () => {
-    const appSetTitleNameSpy = jest.fn();
     const fetchMetricsSpy = jest.fn();
 
     const wrapper = shallow(
-      <DashboardBase
-        appSetTitleName={appSetTitleNameSpy}
+      <AnalyticsBase
         fetchMetrics={fetchMetricsSpy}
         isSignedIn
         metrics={defaultMetrics}
