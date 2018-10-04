@@ -7,23 +7,24 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid, Inner, Cell, Icon } from "zrmc";
+import { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/components/loading";
+import Panel from "zoapp-front/components/panel";
 
 import { appSetTitleName } from "zoapp-front/actions/app";
 import { apiGetMetricsRequest } from "../actions/api";
 
+/*
 const metricStyle = {
-  textAlign: "right",
   padding: "24px",
   display: "flex",
-  color: "white",
+  color: "#1C252C",
 };
 
 const valueStyle = {
-  fontSize: "34px",
-  fontWeight: "500",
-  color: "white",
+  fontSize: "46px",
+  fontWeight: "200",
+  color: "#1C252C",
   lineHeight: "1.1",
 };
 
@@ -37,10 +38,11 @@ const errorStyle = {
 const legendStyle = {
   fontSize: "16px",
   fontWeight: "400",
-  color: "white",
+  color: "#AEB2B4",
   padding: "60px 0",
   lineHeight: "1.1",
 };
+*/
 
 export class AnalyticsBase extends Component {
   componentDidMount() {
@@ -62,12 +64,12 @@ export class AnalyticsBase extends Component {
   renderingValue(value, unit) {
     let res;
     if (Number.isNaN(Number(value)) || value === null) {
-      res = <span style={errorStyle}>No data</span>;
+      res = <span className="opla-analytics_error">No data</span>;
     } else {
       res = (
-        <span style={valueStyle}>
+        <span className="opla-analytics_value">
           {value}
-          {unit}
+          <span className="opla-analytics_unit">{unit}</span>
         </span>
       );
     }
@@ -86,162 +88,72 @@ export class AnalyticsBase extends Component {
     }
 
     return (
-      <div className="zui-layout__content zui-color--grey-100">
+      <div className="opla-analytics zui-layout__content zui-color--grey-100">
         <Grid>
           <Inner>
-            <Cell className="zui-color--white mdc-elevation--z1" span={12}>
-              <Grid>
-                <Inner>
-                  <Cell span={12}>
-                    <h2>Key metrics</h2>
-                  </Cell>
-                </Inner>
-                <Inner>
-                  <Cell span={4}>
-                    <div
-                      style={{
-                        ...metricStyle,
-                        background: "#1a237e",
-                      }}
-                    >
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="perm_identity"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(metrics.users.count)}
-                        <br />
-                        <span style={legendStyle}>users</span>
-                      </span>
+            <Cell className="zui-color--white" span={12}>
+              <Panel title="Key metrics">
+                <div className="opla-analytics_subpanel">
+                  <div className="opla-analytics_metric">
+                    <div>
+                      {this.renderingValue(metrics.users.count)}
+                      <div className="opla-analytics_legend">Users</div>
                     </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#f57f17" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="chat"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(metrics.conversations.count)}
-                        <br />
-                        <span style={legendStyle}>conversations</span>
-                      </span>
+                  </div>
+                  <div className="opla-analytics_metric">
+                    <div>
+                      {this.renderingValue(metrics.conversations.count)}
+                      <div className="opla-analytics_legend">Conversations</div>
                     </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#827717" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="forum"
-                      />
-                      <span
-                        style={{
-                          textAlign: "right",
-                          width: "70%",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {this.renderingValue(
-                          metrics.conversations.messages_per_conversation,
-                        )}
-                        <br />
-                        <span style={legendStyle}>messages/conversations</span>
-                      </span>
+                  </div>
+                  <div className="opla-analytics_metric">
+                    <div>
+                      {this.renderingValue(
+                        metrics.conversations.messages_per_conversation,
+                      )}
+                      <div className="opla-analytics_legend">Messages</div>
                     </div>
-                  </Cell>
-                </Inner>
-              </Grid>
+                  </div>
+                </div>
+              </Panel>
             </Cell>
           </Inner>
           <Inner>
             <Cell
-              className="zui-color--white mdc-elevation--z1"
-              style={{ marginTop: "24px" }}
+              className="zui-color--white"
+              style={{ paddingTop: "96px" }}
               span={12}
             >
-              <Grid>
-                <Inner>
-                  <Cell span={12}>
-                    <h2>Platform metrics</h2>
-                  </Cell>
-                </Inner>
-
-                <Inner>
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#4a148c" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="hourglass_empty"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(metrics.sessions.duration, "ms")}
-                        <br />
-                        <span style={legendStyle}>session duration</span>
-                      </span>
+              <Panel title="Platform metrics">
+                <div className="opla-analytics_subpanel">
+                  <div className="opla-analytics_metric">
+                    <div>
+                      {this.renderingValue(metrics.sessions.duration, "ms")}
+                      <div className="opla-analytics_legend">
+                        Session duration
+                      </div>
                     </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#004d40" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="error"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(
-                          (metrics.errors.rate * 100).toFixed(2),
-                          "%",
-                        )}
-                        <br />
-                        <span style={legendStyle}>errors rate</span>
-                      </span>
+                  </div>
+                  <div className="opla-analytics_metric">
+                    <div>
+                      {this.renderingValue(
+                        (metrics.errors.rate * 100).toFixed(2),
+                        "%",
+                      )}
+                      <div className="opla-analytics_legend">Errors rate</div>
                     </div>
-                  </Cell>
-
-                  <Cell span={4}>
-                    <div style={{ ...metricStyle, background: "#bf360c" }}>
-                      <Icon
-                        style={{
-                          textAlign: "left",
-                          width: "30%",
-                          fontSize: "48px",
-                        }}
-                        name="grade"
-                      />
-                      <span style={{ textAlign: "right", width: "70%" }}>
-                        {this.renderingValue(
-                          metrics.responses.speed.toFixed(2),
-                          "ms",
-                        )}
-                        <br />
-                        <span style={legendStyle}>response time</span>
-                      </span>
+                  </div>
+                  <div className="opla-analytics_metric">
+                    <div>
+                      {this.renderingValue(
+                        metrics.responses.speed.toFixed(2),
+                        "ms",
+                      )}
+                      <div className="opla-analytics_legend">Response time</div>
                     </div>
-                  </Cell>
-                </Inner>
-              </Grid>
+                  </div>
+                </div>
+              </Panel>
             </Cell>
           </Inner>
         </Grid>

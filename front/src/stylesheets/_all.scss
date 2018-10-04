@@ -116,6 +116,45 @@ html {
   border-color: $color_error;
 }
 
+.opla-analytics {
+  padding: 24px;
+}
+
+.opla-analytics_subpanel {
+  display: flex;
+}
+
+.opla-analytics_value {
+  font-size: 46px;
+  font-weight: 200;
+  color: #1C252C;
+}
+
+.opla-analytics_unit {
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.opla-analytics_metric {
+  font-size: 46px;
+  font-weight: 200;
+  color: #1C252C;
+  width: 30%;
+}
+
+.opla-analytics_legend {
+  font-size: 16px;
+  font-weight: 400;
+  color: #AEB2B4;
+  padding-top: 16px;
+}
+
+.opla-analytics_error {
+  font-weight: 500;
+  color: #F44336;
+  padding: 16px 0;
+}
+
 .intent_title {
   padding-right: 16px;
   max-width: 28vw;
