@@ -13,7 +13,7 @@ services:
       - private
 
   backend:
-    image: "opla/backend:latest"
+    image: "opla/backend:${BACKEND_TAG}"
     restart: always
     networks:
       private: 
@@ -28,9 +28,11 @@ services:
       - OPLA_BACKEND_DATABASE_NAME
       - OPLA_BACKEND_DATABASE_USER
       - OPLA_BACKEND_DATABASE_PASS
+      - ZOAPP_API_URL=${OPLA_API_DOMAIN}/api
+      - ZOAPP_API_URL=${OPLA_API_DOMAIN}/auth
 
   front:
-    image: "opla/front:latest"
+    image: "opla/front:${FRONT_TAG}"
     restart: always
     networks:
       - private
@@ -46,8 +48,6 @@ services:
       - OPLA_BACKEND_PORT
       - APP_INSTANCE_NAME=LOCAL
       - APP_INSTANCE_COLOR=#42f44e
-    volumes:
-      - "/srv/app/config"
 
   nginx:
     build: nginx

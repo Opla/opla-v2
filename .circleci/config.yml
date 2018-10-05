@@ -256,24 +256,49 @@ jobs:
       - run: *notify0
       - run: *notify1
   
-  # TODO make it work
-  docker_install:
-    working_directory: ~/project/docker
+  cypress_e2e:
+    working_directory: ~/project/e2e
     machine: true
+    environment:
+      CYPRESS_FRONTEND_URL: http://localhost/
+      TERM: xterm ## this enables colors in the output
+
     steps:
       - checkout: *checkout
-      - run: echo "Ignored for now, networking is slightly complex"
-      # - run: |
-      #     echo 127.0.0.1 front.localhost | sudo tee -a /etc/hosts
-      #     echo 127.0.0.1 backend.localhost | sudo tee -a /etc/hosts
-      # - run: ./install.sh --non-interactive --rev $CIRCLE_SHA1
-      # - run: ./test.sh
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:  cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up -d
+      - restore_cache:
+          keys:
+            - v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v2-deps-cypress-{{ .Branch }}-
+            - v2-deps-cypress-
+      - run: npm install
+      - save_cache:
+          key: v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run:
+          name: E2E tests
+          command: $(npm bin)/cypress run --record
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 
 workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - docker_install
+      - cypress_e2e:
+          requires:
+            - front_build
+            - backend_build
       - backend_test:
           filters:
             branches:
@@ -297,6 +322,7 @@ workflows:
       - promote:
           requires:
             - backend_e2e_tests
+            - cypress_e2e
           filters:
             branches:
               only: 
@@ -318,14 +344,14 @@ workflows:
           requires:
             - e2e_qa
             - e2e_preprod
-  backup_daily:
-    triggers:
-      - schedule:
-          cron: "0 3 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - backup_prod
-      - backup_preprod
+  # backup_daily:
+  #   triggers:
+  #     - schedule:
+  #         cron: "0 3 * * *"
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
+  #   jobs:
+  #     - backup_prod
+  #     - backup_preprod
