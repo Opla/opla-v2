@@ -296,7 +296,7 @@ class Factory extends Component {
       });
     }
     return (
-      <div className="zui-color--grey-100">
+      <div className="zui-color--white">
         <Grid
           gutter={{ desktop: "0px", tablet: "0px", phone: "0px" }}
           style={{ margin: "0px", padding: "0px" }}

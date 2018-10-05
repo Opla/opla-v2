@@ -13,6 +13,31 @@ html {
   font-weight: 200;
 }
 
+.opla-home {
+  margin: 15vh 15vw;
+  width: 600px;
+}
+
+.opla-home > h1 {
+  font-size: 46px;
+  font-weight: 200;
+  letter-spacing: 0.4px;
+  line-height: 60px;
+}
+
+.opla-home > div {
+  padding-top: 16px;
+}
+
+
+.opla-home > div > * {
+  margin-top: 40px;
+}
+
+.opla-home > div > .mdc-button--raised {
+  background-color: $color_primary;
+}
+
 .opla-dashboard_title {
   color: $color_secondary;
   display: flex;

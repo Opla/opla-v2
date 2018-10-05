@@ -6,36 +6,27 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Card,
-  CardTitle,
-  CardText,
-  CardMedia,
-  CardActions,
-  Button,
-} from "zrmc";
+import { Button } from "zrmc";
 import { connect } from "react-redux";
 
-const titleStyle = {
-  textAlign: "center",
-  padding: "25px 10px 10px 10px",
-  fontWeight: "300",
-  fontSize: "1.5rem",
-};
-
 const Home = () => (
-  <div className="zui-layout__content zui-color--grey-100">
-    <section className="text-section" style={{ margin: "40px" }}>
-      <Card shadow={0} style={{ width: "512px", margin: "auto" }}>
-        <CardTitle style={titleStyle}>Your open conversational robot</CardTitle>
-        <CardMedia src="images/bg.jpg" style={{ height: "240px" }} />
-        <CardText style={{ paddingTop: "20px" }}>
-          It is easy and fast. In less than 5 min, your bot will be ready!
-        </CardText>
-        <CardActions>
-          <Button link="/create">Create it</Button>
-        </CardActions>
-      </Card>
+  <div className="zui-layout__content zui-color--white">
+    <section className="text-section">
+      <div className="opla-home">
+        <h1>
+          Welcome to the future, Opla will help you automate boring tasks |
+        </h1>
+        <div>
+          Opla is an open source software you can use to create and bring up
+          virtual assistant, chatbot, conversational interface to work on
+          painfull routine.
+        </div>
+        <div>
+          <Button raised link="/create">
+            Create my first assistant
+          </Button>
+        </div>
+      </div>
     </section>
   </div>
 );

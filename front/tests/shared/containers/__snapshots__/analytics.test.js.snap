@@ -72,7 +72,7 @@ exports[`containers/Analytics renders a Loading component when user is not signe
 
 exports[`containers/Analytics renders and update correctly 1`] = `
 <div
-  className="opla-analytics zui-layout__content zui-color--grey-100"
+  className="opla-analytics zui-layout__content zui-color--white"
 >
   <div
     className="mdc-layout-grid"
