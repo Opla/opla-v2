@@ -8,7 +8,7 @@ import {
   FETCH_FAILURE,
   FETCH_REQUEST,
   FETCH_SUCCESS,
-} from "zoapp-front/actions/constants";
+} from "zoapp-front/dist/actions/constants";
 
 import {
   /* API Section */
