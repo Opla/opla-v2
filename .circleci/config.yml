@@ -344,14 +344,14 @@ workflows:
           requires:
             - e2e_qa
             - e2e_preprod
-  # backup_daily:
-  #   triggers:
-  #     - schedule:
-  #         cron: "0 3 * * *"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - master
-  #   jobs:
-  #     - backup_prod
-  #     - backup_preprod
+  backup_daily:
+    triggers:
+      - schedule:
+          cron: "0 3 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - backup_prod
+      - backup_preprod
