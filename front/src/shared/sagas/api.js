@@ -494,7 +494,7 @@ const api = [
     function* f(action) {
       const { botId } = action;
       try {
-        const response = yield getWebService().get(`/metrics/${botId}`);
+        const response = yield getWebService().get(`metrics/${botId}`);
         yield put(apiGetMetricsSuccess(response));
       } catch (error) {
         yield put(apiGetMetricsFailure(error));
