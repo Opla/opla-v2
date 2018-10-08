@@ -7675,6 +7675,13 @@ url-parse@^1.1.8, url-parse@~1.4.0:
     querystringify "^2.0.0"
     requires-port "^1.0.0"
 
+url-parse@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.3.tgz#bfaee455c889023219d757e045fa6a684ec36c15"
+  dependencies:
+    querystringify "^2.0.0"
+    requires-port "^1.0.0"
+
 url@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
@@ -8143,16 +8150,17 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zoapp-common@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/zoapp-common/-/zoapp-common-0.3.0.tgz#489e4ac727510ee0be5c7c47812a3b9b03cd33d5"
+zoapp-common@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/zoapp-common/-/zoapp-common-0.4.0.tgz#96d13fe02db779e59dce78e69c1fd309f754ff4f"
   dependencies:
+    url-parse "^1.4.3"
     whatwg-fetch "^2.0.4"
     winston "2.4.0"
 
-zoapp-front@0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.25.0.tgz#f98171ed8c3f65849d43f8a8279c5503f278fab8"
+zoapp-front@0.25.0-SNAPSHOT:
+  version "0.26.0-SNAPSHOT.1539040210"
+  resolved "https://registry.yarnpkg.com/zoapp-front/-/zoapp-front-0.26.0-SNAPSHOT.1539040210.tgz#b3ca28717770a84e41972453827b56154c13b0d7"
   dependencies:
     babel-runtime "^6.26.0"
     prop-types "15.6.0"
@@ -8164,7 +8172,7 @@ zoapp-front@0.25.0:
     react-router-dom "4.3.1"
     redux "3.7.2"
     redux-saga "0.16.0"
-    zoapp-common "0.3.0"
+    zoapp-common "0.4.0"
     zoapp-ui "0.8.0"
     zrmc "0.12.1"
 
