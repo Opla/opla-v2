@@ -37,12 +37,12 @@ __jobs:
       - checkout: *checkout
       - restore_cache:
           keys:
-            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-
-            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-
+            - c-{{ .Environment.CACHE_VERSION }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - c-{{ .Environment.CACHE_VERSION }}-npm-{{ .Branch }}-
+            - c-{{ .Environment.CACHE_VERSION }}-npm-
       - run: npm install
       - save_cache:
-          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: c-{{ .Environment.CACHE_VERSION }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache
@@ -68,14 +68,14 @@ jobs:
       - checkout: *checkout
       - restore_cache:
           keys:
-          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
-          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-
-          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-
+          - c-{{ .Environment.CACHE_VERSION }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
+          - c-{{ .Environment.CACHE_VERSION }}-yarn-{{ .Branch }}-
+          - c-{{ .Environment.CACHE_VERSION }}-yarn-
       - run: yarn install
       - save_cache:
           paths:
             - node_modules
-          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
+          key: c-{{ .Environment.CACHE_VERSION }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
       - run: timeout 60 sh -c 'until nc -z $0 $1; do sleep 1; done' 127.0.0.1 3306
       - run: bin/opla init --non-interactive --database-name opla_test
       - run: bin/opla migrations up
@@ -272,15 +272,19 @@ jobs:
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:  cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up -d
+      - run:
+          command: cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up --no-start
+      - run:
+          background: true
+          command: cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up
       - restore_cache:
           keys:
-            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-
-            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-
+            - c-{{ .Environment.CACHE_VERSION }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - c-{{ .Environment.CACHE_VERSION }}-npm-{{ .Branch }}-
+            - c-{{ .Environment.CACHE_VERSION }}-npm-
       - run: npm install
       - save_cache:
-          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: c-{{ .Environment.CACHE_VERSION }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache
@@ -328,13 +332,22 @@ workflows:
             branches:
               only: 
                 - master
-                - cypress
       - deploy_qa:
           requires:
-            - promote
+            - backend_e2e_tests
+            - cypress_e2e
+          filters:
+            branches:
+              only: 
+                - master
       - deploy_preprod:
           requires:
-            - promote
+            - backend_e2e_tests
+            - cypress_e2e
+          filters:
+            branches:
+              only: 
+                - master
       - e2e_preprod:
           requires:
             - deploy_preprod
