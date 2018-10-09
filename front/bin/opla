@@ -21,6 +21,7 @@ const configDefaults = {
   apiDomain: "127.0.0.1",
   apiPort: "8081",
   apiProtocol: "http",
+  apiResolution: "relative",
 };
 
 program
@@ -33,6 +34,7 @@ program
   .option("--api-host [host]", "set the backend api host", configDefaults.apiHost)
   .option("--api-port [port]", "set the backend api port", configDefaults.apiPort)
   .option("--api-protocol [protocol]", "set the backend api protocol", configDefaults.apiProtocol)
+  .option("--api-resolution [resolution]", "api resolution in frontend", configDefaults.apiResolution)
   .option("--overwrite", "overwrite existing configuration files", false)
   .action(async (options) => {
     const questions = [
@@ -73,6 +75,13 @@ program
         choices: ["http", "https"],
         default: [options.apiProtocol],
       },
+      {
+        type: "list",
+        name: "apiResolution",
+        message: "Absolute or relative resolution ?",
+        choices: ["absolute", "relative"],
+        default: [options.apiResolution],
+      },
     ];
 
     try {
@@ -84,7 +93,7 @@ program
             type: "confirm",
             name: "overwrite",
             message:
-            "The configuration file already exists. Do you want to overwrite it?",
+              "The configuration file already exists. Do you want to overwrite it?",
             default: !!options.overwrite,
           },
         );
@@ -123,15 +132,21 @@ program
       const config = {
         backend: {
           api: {
-            url: `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/api/v1/`
           },
           auth: {
             clientId: response.client_id,
             clientSecret: response.client_secret,
-            url: `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/auth/`
           }
         },
       };
+
+      if (answers.apiResolution === "absolute") {
+        config.backend.auth.url = `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/auth/`
+        config.backend.api.url = `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/api/v1/`
+      } else {
+        config.backend.auth.url = `/auth/`
+        config.backend.api.url = `/api/v1/`
+      }
 
       await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, 4));
 
