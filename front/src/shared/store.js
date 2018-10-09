@@ -6,7 +6,7 @@
  */
 import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
-import signoutMiddleware from "zoapp-front/middleware/signoutMiddleware";
+import signoutMiddleware from "zoapp-front/dist/middleware/signoutMiddleware";
 import reducers from "./reducers";
 import rootSaga from "./sagas";
 

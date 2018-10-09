@@ -37,12 +37,12 @@ __jobs:
       - checkout: *checkout
       - restore_cache:
           keys:
-            - v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v2-deps-cypress-{{ .Branch }}-
-            - v2-deps-cypress-
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-
       - run: npm install
       - save_cache:
-          key: v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache
@@ -68,13 +68,14 @@ jobs:
       - checkout: *checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
+          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-
+          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-
       - run: yarn install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
       - run: timeout 60 sh -c 'until nc -z $0 $1; do sleep 1; done' 127.0.0.1 3306
       - run: bin/opla init --non-interactive --database-name opla_test
       - run: bin/opla migrations up
@@ -256,24 +257,49 @@ jobs:
       - run: *notify0
       - run: *notify1
   
-  # TODO make it work
-  docker_install:
-    working_directory: ~/project/docker
+  cypress_e2e:
+    working_directory: ~/project/e2e
     machine: true
+    environment:
+      CYPRESS_FRONTEND_URL: http://localhost/
+      TERM: xterm ## this enables colors in the output
+
     steps:
       - checkout: *checkout
-      - run: echo "Ignored for now, networking is slightly complex"
-      # - run: |
-      #     echo 127.0.0.1 front.localhost | sudo tee -a /etc/hosts
-      #     echo 127.0.0.1 backend.localhost | sudo tee -a /etc/hosts
-      # - run: ./install.sh --non-interactive --rev $CIRCLE_SHA1
-      # - run: ./test.sh
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:  cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up -d
+      - restore_cache:
+          keys:
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-
+      - run: npm install
+      - save_cache:
+          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run:
+          name: E2E tests
+          command: $(npm bin)/cypress run --record
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 
 workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - docker_install
+      - cypress_e2e:
+          requires:
+            - front_build
+            - backend_build
       - backend_test:
           filters:
             branches:
@@ -297,6 +323,7 @@ workflows:
       - promote:
           requires:
             - backend_e2e_tests
+            - cypress_e2e
           filters:
             branches:
               only: 

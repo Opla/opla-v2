@@ -13,9 +13,6 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
-      OplaPlugins: path.resolve(__dirname, "./src/plugins/"),
-      OplaLibs: path.resolve(__dirname, "./src/shared/"),
-      OplaContainers: path.resolve(__dirname, "./src/shared/containers/"),
       "./config": path.resolve(__dirname, "./config/default.json")
     },
     modules: [path.join(__dirname, "src"), "node_modules"]

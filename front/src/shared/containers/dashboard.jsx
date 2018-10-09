@@ -16,7 +16,7 @@ import Zrmc, {
   Select,
   MenuItem,
 } from "zrmc";
-import Panel from "zoapp-front/components/panel";
+import Panel from "zoapp-front/dist/components/panel";
 import { connect } from "react-redux";
 import PluginsManager from "../utils/pluginsManager";
 import MessagingsList from "../components/messagingsList";

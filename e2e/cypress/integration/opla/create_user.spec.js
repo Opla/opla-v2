@@ -44,6 +44,7 @@ context('Actions', () => {
     cy.get('#signin-dialog-password').type(password)
     cy.contains('Sign in').click()
     cy.contains('menu').click()
+    cy.contains('Factory').click()
     cy.contains('Builder').click()
 
     cy.contains('button', 'Create').click()
@@ -71,9 +72,10 @@ context('Actions', () => {
     cy.contains('Opla !').click()
 
     // Login
+    cy.visit(`${root}factory`)
     cy.get('#signin-form-username').type(username)
     cy.get('#signin-form-password').type(password)
     cy.contains('Sign in').click()
-    cy.contains('How to create your first intent ?')
+    cy.contains('A wonderful bot')
   })
 })

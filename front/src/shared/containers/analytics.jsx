@@ -8,8 +8,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Inner, Cell } from "zrmc";
-import Loading from "zoapp-front/components/loading";
-import Panel from "zoapp-front/components/panel";
+import Loading from "zoapp-front/dist/components/loading";
+import Panel from "zoapp-front/dist/components/panel";
 import { apiGetMetricsRequest } from "../actions/api";
 
 export class AnalyticsBase extends Component {

@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { appSetTitleName } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/dist/actions/app";
 
 const aboutStyle = {
   margin: "5% 40% 10% 10%",

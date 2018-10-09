@@ -9,8 +9,8 @@ import PropTypes from "prop-types";
 import Zrmc, { Select, MenuItem, Button, TextField } from "zrmc";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import ProcessingDialog from "zoapp-front/containers/processingDialog";
-import { appSetTitleName, setMessage } from "zoapp-front/actions/app";
+import ProcessingDialog from "zoapp-front/dist/containers/processingDialog";
+import { appSetTitleName, setMessage } from "zoapp-front/dist/actions/app";
 
 import TemplatesList from "../components/templatesList";
 import {
