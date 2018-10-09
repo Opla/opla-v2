@@ -123,18 +123,13 @@ program
       const config = {
         backend: {
           api: {
-            host: answers.apiDomain,
-            path: "api/v1/",
-            port: answers.apiPort,
+            url: `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/api/v1/`
           },
           auth: {
             clientId: response.client_id,
             clientSecret: response.client_secret,
-            host: answers.apiDomain,
-            path: "auth/",
-            port: answers.apiPort,
-          },
-          secure: answers.apiProtocol === "https",
+            url: `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/auth/`
+          }
         },
       };
 
