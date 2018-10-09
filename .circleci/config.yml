@@ -331,10 +331,12 @@ workflows:
                 - cypress
       - deploy_qa:
           requires:
-            - promote
+            - backend_e2e_tests
+            - cypress_e2e
       - deploy_preprod:
           requires:
-            - promote
+            - backend_e2e_tests
+            - cypress_e2e
       - e2e_preprod:
           requires:
             - deploy_preprod
