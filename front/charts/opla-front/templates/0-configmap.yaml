@@ -12,7 +12,7 @@ data:
               },
               "auth": {
                   "clientId": "{{ .Values.auth.clientId }}",
-                  "clientSecret": "{{ .Values.auth.secret }}",
+                  "clientSecret": "{{ .Values.auth.secret }}"
               }
           }
       }
