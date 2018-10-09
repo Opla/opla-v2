@@ -272,7 +272,9 @@ jobs:
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:  cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up -d
+      - run:
+          background: true
+          command: cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up
       - restore_cache:
           keys:
             - c-{{ .Environment.CACHE_VERSION }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
