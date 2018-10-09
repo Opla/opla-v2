@@ -332,15 +332,22 @@ workflows:
             branches:
               only: 
                 - master
-                - cypress
       - deploy_qa:
           requires:
             - backend_e2e_tests
             - cypress_e2e
+          filters:
+            branches:
+              only: 
+                - master
       - deploy_preprod:
           requires:
             - backend_e2e_tests
             - cypress_e2e
+          filters:
+            branches:
+              only: 
+                - master
       - e2e_preprod:
           requires:
             - deploy_preprod
