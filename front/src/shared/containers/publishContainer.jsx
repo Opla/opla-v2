@@ -7,8 +7,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { apiGetBotParametersRequest } from "../actions/api";
 import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import { apiGetBotParametersRequest } from "../actions/api";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../../config/default.json";
 

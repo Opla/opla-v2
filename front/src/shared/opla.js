@@ -7,20 +7,20 @@
 /* eslint react/display-name: 0 */
 import React from "react";
 import Front from "zoapp-front/dist/front";
+import AdminManager from "zoapp-front/dist/containers/adminManager";
+import DrawerFooter from "zoapp-front/dist/containers/drawerFooter";
+import Zrmc from "zrmc";
+import Team from "zoapp-front/dist/containers/admin/team";
+import Advanced from "zoapp-front/dist/containers/admin/advanced";
+import CreateAssistant from "./containers/createAssistant";
 import About from "./containers/about";
 import Home from "./containers/home";
-import CreateAssistant from "./containers/createAssistant";
-import AdminManager from "zoapp-front/dist/containers/adminManager";
 import Factory from "./containers/factory";
 import PublishContainer from "./containers/publishContainer";
 import configureStore from "./store";
-import DrawerFooter from "zoapp-front/dist/containers/drawerFooter";
-import Zrmc from "zrmc";
 import PublishDialog from "./containers/dialogs/publishDialog";
-import { defaultTemplates, defaultLanguages } from "./reducers/app";
 import Extensions from "./containers/admin/extensions";
-import Team from "zoapp-front/dist/containers/admin/team";
-import Advanced from "zoapp-front/dist/containers/admin/advanced";
+import { defaultTemplates, defaultLanguages } from "./reducers/app";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
 
