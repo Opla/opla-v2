@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { combineReducers } from "redux";
-import auth from "zoapp-front/reducers/auth";
-import initialize from "zoapp-front/reducers/initialize";
-import user from "zoapp-front/reducers/user";
+import auth from "zoapp-front/dist/reducers/auth";
+import initialize from "zoapp-front/dist/reducers/initialize";
+import user from "zoapp-front/dist/reducers/user";
 
 import app from "./app";
 import message from "./message";

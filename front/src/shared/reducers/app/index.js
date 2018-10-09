@@ -4,12 +4,12 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import createReducer from "zoapp-front/reducers/createReducer";
+import createReducer from "zoapp-front/dist/reducers/createReducer";
 
 import {
   initialState as zoappInitialState,
   handlers as zoappHandlers,
-} from "zoapp-front/reducers/app";
+} from "zoapp-front/dist/reducers/app";
 
 import {
   API_ADMIN,
@@ -17,7 +17,7 @@ import {
   FETCH_FAILURE,
   FETCH_REQUEST,
   FETCH_SUCCESS,
-} from "zoapp-front/actions/constants";
+} from "zoapp-front/dist/actions/constants";
 
 import {
   API_CREATEBOT,

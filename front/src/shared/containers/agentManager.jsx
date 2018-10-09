@@ -8,8 +8,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Inner, Cell } from "zrmc";
-import Loading from "zoapp-front/components/loading";
-import SignInForm from "zoapp-front/containers/signInForm";
+import Loading from "zoapp-front/dist/components/loading";
+import SignInForm from "zoapp-front/dist/containers/signInForm";
 
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./builder/intentContainer";

@@ -12,9 +12,9 @@ import {
   FETCH_SUCCESS,
   SUBSCRIBE,
   UNSUBSCRIBE,
-} from "zoapp-front/actions/constants";
-import zoappApi from "zoapp-front/sagas/api";
-import { getWebService, createSocketService } from "zoapp-front/services";
+} from "zoapp-front/dist/actions/constants";
+import zoappApi from "zoapp-front/dist/sagas/api";
+import { getWebService, createSocketService } from "zoapp-front/dist/services";
 import {
   API_CREATEBOT,
   API_DELETEINTENT,
@@ -494,7 +494,7 @@ const api = [
     function* f(action) {
       const { botId } = action;
       try {
-        const response = yield getWebService().get(`/metrics/${botId}`);
+        const response = yield getWebService().get(`metrics/${botId}`);
         yield put(apiGetMetricsSuccess(response));
       } catch (error) {
         yield put(apiGetMetricsFailure(error));
