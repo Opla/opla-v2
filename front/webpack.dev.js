@@ -16,13 +16,11 @@ module.exports = merge(commonConfig, {
     filename: "js/app.js",
     historyApiFallback: true,
     host: "localhost",
+    disableHostCheck: true,
     hot: true,
     lazy: false,
     port: 8080,
     publicPath: "/",
-    allowedHosts: [
-      '.localtunnel.me'
-    ]
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
