@@ -37,12 +37,12 @@ __jobs:
       - checkout: *checkout
       - restore_cache:
           keys:
-            - v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v2-deps-cypress-{{ .Branch }}-
-            - v2-deps-cypress-
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-
       - run: npm install
       - save_cache:
-          key: v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache
@@ -68,13 +68,14 @@ jobs:
       - checkout: *checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
+          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-
+          - c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-
       - run: yarn install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-yarn-{{ .Branch }}-{{ checksum "package.json" }}
       - run: timeout 60 sh -c 'until nc -z $0 $1; do sleep 1; done' 127.0.0.1 3306
       - run: bin/opla init --non-interactive --database-name opla_test
       - run: bin/opla migrations up
@@ -274,12 +275,12 @@ jobs:
       - run:  cd ../docker && BACKEND_TAG=$CIRCLE_SHA1 FRONT_TAG=$CIRCLE_SHA1 docker-compose up -d
       - restore_cache:
           keys:
-            - v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v2-deps-cypress-{{ .Branch }}-
-            - v2-deps-cypress-
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-
+            - c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-
       - run: npm install
       - save_cache:
-          key: v2-deps-cypress-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: c-{{ .Environment.CACHE_VERSION | default "v1" }}-npm-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - ~/.cache
