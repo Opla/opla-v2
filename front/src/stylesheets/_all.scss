@@ -10,7 +10,17 @@ html {
 }
  
 .zui-panel-header-title {
-  font-weight: 200;
+  font-weight: 400;
+}
+
+.opla-title {
+  display: flex;
+}
+
+.opla-title > img {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
 }
 
 .opla-home {
@@ -20,7 +30,7 @@ html {
 
 .opla-home > h1 {
   font-size: 46px;
-  font-weight: 200;
+  font-weight: 100;
   letter-spacing: 0.4px;
   line-height: 60px;
 }
@@ -38,6 +48,35 @@ html {
   background-color: $color_primary;
 }
 
+.opla-assistants  .zap-panel_header {
+  padding-left: 24px;
+}
+
+.opla-assistants .mdc-layout-grid {
+  padding: 24px;
+}
+
+.opla-assistants  .mdc-card__horizontal-block {
+  padding: 0;
+  flex-direction: row-reverse;
+}
+
+.opla-assistants .opla-dashboard_icon {
+  margin: 6% auto 0 auto;
+  height: 13vh;
+  width: 13vh;
+}
+
+.opla-assistants .opla-dashboard_icon .zrmc-icon {
+  width: 10vh;
+  height: 10vh;
+  margin: 8%;
+}
+
+.opla-assistants .opla-dashboard_icon .zrmc-icon > * {
+  width: 10vh;
+  height: 10vh;
+}
 .opla-dashboard_title {
   color: $color_secondary;
   display: flex;
@@ -76,7 +115,7 @@ html {
   color: $color_secondary;
   cursor: pointer;
   font-size: 32px;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 .opla-dashboard_title .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input {
@@ -190,7 +229,7 @@ html {
   display: flex;
   cursor: pointer;
   font-size: 32px;
-  font-weight: 200;
+  font-weight: 300;
   margin-top: 30px;
 }
  
