@@ -20,7 +20,7 @@ import {
 import { appUpdateIntent } from "../actions/app";
 import Dashboard from "./dashboard";
 import Analytics from "./analytics";
-import AgentManager from "./agentManager";
+import Builder from "./builder";
 import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
@@ -100,20 +100,17 @@ class Factory extends Component {
     if (action === "Delete") {
       const { selected } = data;
       const intent = this.props.intents[selected];
-      // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
       this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
   };
 
   onImportData = (data, options) => {
-    // console.log("AgentManager.onUpload=", options.filetype);
     if (
       options.filetype === "application/json" ||
       options.filetype === "text/csv"
     ) {
       // WIP detect format
-      // console.log("AgentManager.onUpload=", data);
       this.props.apiImportRequest(this.props.selectedBotId, data, options);
     }
   };
@@ -272,7 +269,7 @@ class Factory extends Component {
       screen = <Dashboard store={this.props.store} />;
     } else if (active === 1) {
       screen = (
-        <AgentManager
+        <Builder
           onExportImort={this.handleExportImport}
           onRenameIntent={this.handleRenameIntent}
           onAddIntent={this.handleAddIntent}

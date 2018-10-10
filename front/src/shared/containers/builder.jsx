@@ -16,7 +16,7 @@ import IntentContainer from "./builder/intentContainer";
 import EntityContainer from "./builder/entityContainer";
 import FunctionContainer from "./builder/functionContainer";
 
-class AgentManager extends Component {
+class Builder extends Component {
   render() {
     let { isLoading } = this.props;
     if (!isLoading && !this.props.intents && this.props.isSignedIn) {
@@ -88,7 +88,7 @@ class AgentManager extends Component {
   }
 }
 
-AgentManager.defaultProps = {
+Builder.defaultProps = {
   bot: null,
   intents: null,
   selectedIntent: null,
@@ -97,7 +97,7 @@ AgentManager.defaultProps = {
   activeTab: 0,
 };
 
-AgentManager.propTypes = {
+Builder.propTypes = {
   activeTab: PropTypes.number,
   isLoading: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
@@ -157,4 +157,4 @@ const mapDispatchToProps = () => ({});
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AgentManager);
+)(Builder);
