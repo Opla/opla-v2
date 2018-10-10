@@ -8150,13 +8150,6 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zoapp-common@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/zoapp-common/-/zoapp-common-0.3.0.tgz#489e4ac727510ee0be5c7c47812a3b9b03cd33d5"
-  dependencies:
-    whatwg-fetch "^2.0.4"
-    winston "2.4.0"
-
 zoapp-common@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/zoapp-common/-/zoapp-common-0.4.0.tgz#96d13fe02db779e59dce78e69c1fd309f754ff4f"
