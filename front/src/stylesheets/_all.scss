@@ -56,6 +56,10 @@ html {
   padding: 24px;
 }
 
+.opla_assistants-selected {
+  border: 1px solid $color_primary;
+}
+
 .opla-assistants  .mdc-card__horizontal-block {
   padding: 0;
   flex-direction: row-reverse;

@@ -12,7 +12,7 @@ import { Grid, Inner, Cell, Button, Card, CardActions, Icon } from "zrmc";
 
 export class AssistantsBase extends Component {
   render() {
-    const { bots, multiBots } = this.props;
+    const { bots, multiBots, selectedBotIndex } = this.props;
 
     let create;
     if (multiBots || bots.length < 1) {
@@ -38,9 +38,16 @@ export class AssistantsBase extends Component {
         <Panel title="Assistants">
           <Grid>
             <Inner>
-              {bots.map((bot) => (
+              {bots.map((bot, index) => (
                 <Cell key={bot.id} span={2}>
-                  <Card horizontalBlock>
+                  <Card
+                    horizontalBlock
+                    className={
+                      selectedBotIndex === index
+                        ? "opla_assistants-selected"
+                        : undefined
+                    }
+                  >
                     <div className="opla-dashboard_icon">
                       <Icon>
                         <svg viewBox="0 0 24 24">
@@ -67,16 +74,19 @@ AssistantsBase.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   bots: PropTypes.arrayOf(PropTypes.shape({})),
   multiBots: PropTypes.bool,
+  selectedBotIndex: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
   const { admin } = state.app;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const isLoading = state.loading;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
+  const selectedBotIndex = selectedBotId
+    ? state.app.project.selectedIndex
+    : null;
   const bots = admin ? admin.bots : [];
   const multiBots = admin ? admin.params.multiProjects : false;
-  return { admin, isLoading, selectedBotId, isSignedIn, bots, multiBots };
+  return { isSignedIn, bots, multiBots, selectedBotIndex };
 };
 
 export default connect(mapStateToProps)(AssistantsBase);
