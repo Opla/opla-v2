@@ -74,7 +74,7 @@ AssistantsBase.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   bots: PropTypes.arrayOf(PropTypes.shape({})),
   multiBots: PropTypes.bool,
-  selectedBotIndex: PropTypes.string,
+  selectedBotIndex: PropTypes.number,
 };
 
 const mapStateToProps = (state) => {
