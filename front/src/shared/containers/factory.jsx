@@ -356,8 +356,9 @@ const mapStateToProps = (state) => {
   const { admin } = state.app;
   let { selectedIntent } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  // TODO get selectedBot from selectBotId
-  const bot = selectedBotId ? admin.bots[0] : null;
+  const bot = selectedBotId
+    ? admin.bots[state.app.project.selectedIndex]
+    : null;
   const intents = state.app.intents ? state.app.intents : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading || false;

@@ -187,12 +187,8 @@ GeneralAdminBase.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state.app;
-  const selectedBotId = state.app ? state.app.selectedBotId : null;
-
-  // TODO get selectedBot from selectBotId
-  const bot = selectedBotId ? admin.bots[0] : null;
-
+  const { admin, project } = state.app;
+  const bot = project.selectedIndex ? admin.bots[project.selectedIndex] : null;
   return {
     bot,
   };
