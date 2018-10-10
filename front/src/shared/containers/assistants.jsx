@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Panel from "zoapp-front/components/panel";
+import Panel from "zoapp-front/dist/components/panel";
 import { Grid, Inner, Cell, Button, Card, CardActions, Icon } from "zrmc";
 
 export class AssistantsBase extends Component {

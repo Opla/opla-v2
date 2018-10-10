@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "zrmc";
 import { connect } from "react-redux";
-import { appSetTitleName } from "zoapp-front/actions/app";
+import { appSetTitleName } from "zoapp-front/dist/actions/app";
 import Assistants from "./assistants";
 
 export class HomeBase extends Component {
