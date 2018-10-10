@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import UrlBuilder from "zoapp-common/utils/urlBuilder";
 import { apiGetBotParametersRequest } from "../actions/api";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../../config/default.json";
@@ -17,6 +18,7 @@ class PublishContainer extends Component {
     super(props);
 
     this.props.appSetTitleName("Webchat");
+    this.urlBuilder = new UrlBuilder(config.backend.api.url);
   }
 
   componentDidMount() {
@@ -51,13 +53,15 @@ class PublishContainer extends Component {
       );
     }
 
+    const url = this.urlBuilder.createUrl("/");
+
     const parameters = {
       botId: botParameters.botId,
       appId: botParameters.application.id,
       appSecret: botParameters.application.secret,
-      host: config.backend.api.host,
-      port: config.backend.api.port,
-      secure: config.backend.secure,
+      host: url.host,
+      port: url.port,
+      secure: url.protocol === "https:",
       anonymous_secret: botParameters.application.policies.anonymous_secret,
       path: "/",
       language: "fr",
