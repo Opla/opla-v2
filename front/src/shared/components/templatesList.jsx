@@ -6,10 +6,8 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid, Inner, Cell } from "zrmc";
-import makeClassName from "classnames";
-import FileInput from "zoapp-front/dist/components/fileInput";
-import { robotsColors } from "../utils/robotsColors";
+import { Grid, Inner } from "zrmc";
+import AssistantCard from "../components/assistantCard";
 
 const TemplatesList = ({
   items,
@@ -22,56 +20,16 @@ const TemplatesList = ({
     <Inner>
       {items.map((item, index) => {
         const key = item.id ? item.id : `${index}${item.name}`;
-        const isSelectedItem = selectedItem === index;
-        const className = makeClassName({
-          selectableListItem: !isSelectedItem,
-          selectedListItem: isSelectedItem,
-        });
-
         return (
-          <Cell
+          <AssistantCard
             key={key}
-            className="opla_template-templateBox"
-            spanDevice={{ desktop: 2, tablet: 4, phone: 6 }}
-            order={item.name === "Empty" ? 1 : 2}
-          >
-            <div
-              role="presentation"
-              style={{ width: "100%" }}
-              onClick={() => {
-                onSelect(index);
-              }}
-            >
-              <div className={`opla_template-infoC ${className}`}>
-                <div className="opla_template-imgCell">
-                  {item.name === "Import" ? (
-                    <form>
-                      <FileInput onLoad={onImport} accept={acceptImport} />
-                    </form>
-                  ) : (
-                    <div
-                      className="opla_template-backgroundCell"
-                      style={{
-                        backgroundColor:
-                          robotsColors[`robot-${index}`].mainColor,
-                      }}
-                    >
-                      <div className="opla_template-imgMask">
-                        <img
-                          src={`./images/robots/robot-${index}.svg`}
-                          className="opla_template-img"
-                          alt={item.name}
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="opla_template-textCell">
-                  <b>{item.name}</b>
-                </div>
-              </div>
-            </div>
-          </Cell>
+            item={item}
+            index={index}
+            selectedIndex={selectedItem}
+            onSelect={onSelect}
+            onImport={onImport}
+            acceptImport={acceptImport}
+          />
         );
       })}
     </Inner>

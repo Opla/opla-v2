@@ -7,30 +7,38 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import Panel from "zoapp-front/dist/components/panel";
-import { Grid, Inner, Cell, Button, Card, CardActions, Icon } from "zrmc";
+import { Grid, Inner } from "zrmc";
+import AssistantCard from "../components/assistantCard";
 
 export class AssistantsBase extends Component {
+  onSelect = (index) => {
+    if (index > -1) {
+      // TODO select new bot
+      this.props.history.push("/factory");
+    } else {
+      this.props.history.push("/create");
+    }
+  };
+
   render() {
     const { bots, multiBots, selectedBotIndex } = this.props;
 
     let create;
     if (multiBots || bots.length < 1) {
       create = (
-        <Cell span={2}>
-          <Card horizontalBlock>
-            <div className="opla-dashboard_icon">
-              <Icon>
-                <svg viewBox="0 0 24 24">
-                  <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                </svg>
-              </Icon>
-            </div>
-            <CardActions>
-              <Button>Create new assistant</Button>
-            </CardActions>
-          </Card>
-        </Cell>
+        <AssistantCard
+          item={{
+            name: "Create a new assistant",
+            icon: (
+              <svg viewBox="0 0 24 24">
+                <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+              </svg>
+            ),
+          }}
+          onSelect={this.onSelect}
+        />
       );
     }
     return (
@@ -39,27 +47,13 @@ export class AssistantsBase extends Component {
           <Grid>
             <Inner>
               {bots.map((bot, index) => (
-                <Cell key={bot.id} span={2}>
-                  <Card
-                    horizontalBlock
-                    className={
-                      selectedBotIndex === index
-                        ? "opla_assistants-selected"
-                        : undefined
-                    }
-                  >
-                    <div className="opla-dashboard_icon">
-                      <Icon>
-                        <svg viewBox="0 0 24 24">
-                          <path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z" />
-                        </svg>
-                      </Icon>
-                    </div>
-                    <CardActions>
-                      <Button>{bot.name}</Button>
-                    </CardActions>
-                  </Card>
-                </Cell>
+                <AssistantCard
+                  key={bot.id}
+                  item={bot}
+                  index={index}
+                  selectedIndex={selectedBotIndex}
+                  onSelect={this.onSelect}
+                />
               ))}
               {create}
             </Inner>
@@ -75,6 +69,8 @@ AssistantsBase.propTypes = {
   bots: PropTypes.arrayOf(PropTypes.shape({})),
   multiBots: PropTypes.bool,
   selectedBotIndex: PropTypes.number,
+  history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
+    .isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -89,4 +85,4 @@ const mapStateToProps = (state) => {
   return { isSignedIn, bots, multiBots, selectedBotIndex };
 };
 
-export default connect(mapStateToProps)(AssistantsBase);
+export default withRouter(connect(mapStateToProps)(AssistantsBase));

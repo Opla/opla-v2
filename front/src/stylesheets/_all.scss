@@ -714,102 +714,129 @@ html {
     height: 96px;
   }
    
-  /* templatesList (.opla_template) Component Style */
- .opla_template-templateBox {
-   position: relative;
-   height: 320px;
-   outline: 5px solid transparent;
-   text-decoration: none;
- }
+/* templatesList (.opla_template) Component Style */
+.opla_assistant_card-box {
+  position: relative;
+  height: 220px;
+  outline: 5px solid transparent;
+  text-decoration: none;
+  border-radius: 2px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+}
  
-  .opla_template-infoC {
-   color: #FFF;
-   height: 250px;
-   opacity: 0.6;
-   filter: alpha(opacity=60); /* For IE8 and earlier */
- }
+.opla_assistant_card-container {
+  color: #FFF;
+  height: 170px;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
  
- .opla_template-imgCell {
+ .opla_assistant_card-imgContainer {
    position: relative;
    width: 100%;
-   height: 250px;
-   background-color: #f5f5f5;
+   height: 170px;
+   background-color: #FBFBFB;
  }
  
- .opla_template-backgroundCell{
+ .opla_assistant_card-background {
    background-size: 10000%; /* Not very beautiful but work */
    background-position: center right; 
    width: 100%;
    height: 100%;
  }
  
- .opla_template-imgMask{
+ .opla_assistant_card-imgMask {
    background-color: rgba(255, 255, 255, 0.2);
    width: 100%;
    height: 100%;
  }
  
- .opla_template-img {
-   position: absolute;  
-   width: 100px;
-   text-align: center;
-   margin: 0;
-   top: 50%;
-   left: 50%;
-   -ms-transform: translate(-50%, -50%);
-   transform: translate(-50%, -50%);
- }
+.opla_assistant_card-img {
+  position: absolute;  
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+}
  
- .opla_template-templateBox:hover .opla_template-infoC {
-   opacity: 1;
-   filter: alpha(opacity=100); /* For IE8 and earlier */
- }
+.opla_assistant_card-img.zrmc-icon > * {
+  color: #AEB2B4;
+  fill: #AEB2B4;
+  width: 120px;
+  height: 120px;
+}
+
+.opla_assistant_card-box:hover .opla_assistant_card-container {
+  opacity: 1;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+.opla_assistant_card-box:hover .opla_assistant_card-img.zrmc-icon > * {
+  color: $color_secondary;
+  fill: $color_secondary;
+}
+
+.opla_assistant_card-text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.1em;
+  overflow: hidden;
+  padding: 1rem;
+  background-color: #FFFFFF;
+  color: #AEB2B4;
+}
  
- .opla_template-textCell {
-   font-weight: 200;
-   font-size: 1.1em;
-   line-height: 1.1em;
-   height: 2.2em;
-   overflow: hidden;
-   padding: 1rem;
-   background-color: rgb(69, 90, 100);
- }
+.opla_assistant_card-box .opla_assistant_card-container.selectedListItem {
+  opacity: 1;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
+}
  
- .opla_template-templateBox .opla_template-infoC.selectedListItem {
-   opacity: 1;
-   filter: alpha(opacity=100); /* For IE8 and earlier */
- }
- 
- .opla_template-templateBox .opla_template-infoC.selectedListItem .opla_template-textCell {
-   color: #FFEB3B;
- }
- 
- 
+.opla_assistant_card-box .opla_assistant_card-container.selectedListItem .opla_assistant_card-text {
+  color: $color_secondary;
+}
+
  /* Override fileInput */
- .opla_template-templateBox .fileInput {
-   position: absolute;  
-   text-align: center;
-   top: 50%;
-   left: 50%;
-   -ms-transform: translate(-50%, -50%);
-   transform: translate(-50%, -50%);
-   margin: 0;
- }
+.opla_assistant_card-box .fileInput {
+  position: absolute;  
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+}
  
- .opla-conditional {
-   background: transparent;
-   width: 345px;
-   padding: 0px;
-   margin-bottom: 8px;
-   border: #56002759 1px solid;
-   border-radius: 2px;
-   display: flex;
-   margin-left: -12px;
- }
+.opla_assistant_card-box .fileInput > i {
+  font-size: 56px;
+  margin: 32px;
+}
+
+.opla-conditional {
+  background: transparent;
+  width: 345px;
+  padding: 0px;
+  margin-bottom: 8px;
+  border: #56002759 1px solid;
+  border-radius: 2px;
+  display: flex;
+  margin-left: -12px;
+}
  
- .opla-conditional-name {
-   margin-right: 8px;
- }
+.opla-conditional-name {
+  margin-right: 8px;
+}
  
  .opla-conditional-value {
    margin-left: 8px;

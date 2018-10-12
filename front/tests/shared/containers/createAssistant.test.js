@@ -149,16 +149,6 @@ describe("containers/CreateAssistant", () => {
     expect(wrapper.state("name")).toEqual("assistant-name");
 
     wrapper
-      .find("#create-assistant-username")
-      .simulate("change", { target: { value: "assistant-username" } });
-    expect(wrapper.state("username")).toEqual("assistant-username");
-
-    wrapper
-      .find("#create-assistant-password")
-      .simulate("change", { target: { value: "assistant-password" } });
-    expect(wrapper.state("password")).toEqual("assistant-password");
-
-    wrapper
       .find("#create-assistant-email")
       .simulate("change", { target: { value: "fake-email@opla.ai" } });
     expect(wrapper.state("email")).toEqual("fake-email@opla.ai");

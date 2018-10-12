@@ -8,7 +8,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+      className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -20,10 +20,10 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
         }
       >
         <div
-          className="opla_template-infoC selectedListItem"
+          className="opla_assistant_card-container selectedListItem"
         >
           <div
-            className="opla_template-imgCell"
+            className="opla_assistant_card-imgContainer"
           >
             <form>
               <div
@@ -43,7 +43,7 @@ exports[`components/TemplatesList creates a form for the 'Import' special item 1
             </form>
           </div>
           <div
-            className="opla_template-textCell"
+            className="opla_assistant_card-text"
           >
             <b>
               Import
@@ -64,7 +64,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+      className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -76,13 +76,13 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
         }
       >
         <div
-          className="opla_template-infoC selectableListItem"
+          className="opla_assistant_card-container selectableListItem"
         >
           <div
-            className="opla_template-imgCell"
+            className="opla_assistant_card-imgContainer"
           >
             <div
-              className="opla_template-backgroundCell"
+              className="opla_assistant_card-background"
               style={
                 Object {
                   "backgroundColor": "#4cdbc4",
@@ -90,18 +90,18 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               }
             >
               <div
-                className="opla_template-imgMask"
+                className="opla_assistant_card-imgMask"
               >
                 <img
                   alt="template 1"
-                  className="opla_template-img"
+                  className="opla_assistant_card-img"
                   src="./images/robots/robot-0.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="opla_template-textCell"
+            className="opla_assistant_card-text"
           >
             <b>
               template 1
@@ -111,7 +111,7 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
       </div>
     </div>
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+      className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -123,13 +123,13 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
         }
       >
         <div
-          className="opla_template-infoC selectedListItem"
+          className="opla_assistant_card-container selectedListItem"
         >
           <div
-            className="opla_template-imgCell"
+            className="opla_assistant_card-imgContainer"
           >
             <div
-              className="opla_template-backgroundCell"
+              className="opla_assistant_card-background"
               style={
                 Object {
                   "backgroundColor": "#54c0eb",
@@ -137,18 +137,18 @@ exports[`components/TemplatesList marks an item as selected 1`] = `
               }
             >
               <div
-                className="opla_template-imgMask"
+                className="opla_assistant_card-imgMask"
               >
                 <img
                   alt="template 2"
-                  className="opla_template-img"
+                  className="opla_assistant_card-img"
                   src="./images/robots/robot-1.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="opla_template-textCell"
+            className="opla_assistant_card-text"
           >
             <b>
               template 2
@@ -179,7 +179,7 @@ exports[`components/TemplatesList renders some items 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+      className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -191,13 +191,13 @@ exports[`components/TemplatesList renders some items 1`] = `
         }
       >
         <div
-          className="opla_template-infoC selectedListItem"
+          className="opla_assistant_card-container selectedListItem"
         >
           <div
-            className="opla_template-imgCell"
+            className="opla_assistant_card-imgContainer"
           >
             <div
-              className="opla_template-backgroundCell"
+              className="opla_assistant_card-background"
               style={
                 Object {
                   "backgroundColor": "#4cdbc4",
@@ -205,18 +205,18 @@ exports[`components/TemplatesList renders some items 1`] = `
               }
             >
               <div
-                className="opla_template-imgMask"
+                className="opla_assistant_card-imgMask"
               >
                 <img
                   alt="template 1"
-                  className="opla_template-img"
+                  className="opla_assistant_card-img"
                   src="./images/robots/robot-0.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="opla_template-textCell"
+            className="opla_assistant_card-text"
           >
             <b>
               template 1
@@ -237,7 +237,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
     className="mdc-layout-grid__inner"
   >
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+      className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -249,13 +249,13 @@ exports[`components/TemplatesList renders without selected template 1`] = `
         }
       >
         <div
-          className="opla_template-infoC selectableListItem"
+          className="opla_assistant_card-container selectableListItem"
         >
           <div
-            className="opla_template-imgCell"
+            className="opla_assistant_card-imgContainer"
           >
             <div
-              className="opla_template-backgroundCell"
+              className="opla_assistant_card-background"
               style={
                 Object {
                   "backgroundColor": "#4cdbc4",
@@ -263,18 +263,18 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               }
             >
               <div
-                className="opla_template-imgMask"
+                className="opla_assistant_card-imgMask"
               >
                 <img
                   alt="Template 1"
-                  className="opla_template-img"
+                  className="opla_assistant_card-img"
                   src="./images/robots/robot-0.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="opla_template-textCell"
+            className="opla_assistant_card-text"
           >
             <b>
               Template 1
@@ -284,7 +284,7 @@ exports[`components/TemplatesList renders without selected template 1`] = `
       </div>
     </div>
     <div
-      className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+      className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
     >
       <div
         onClick={[Function]}
@@ -296,13 +296,13 @@ exports[`components/TemplatesList renders without selected template 1`] = `
         }
       >
         <div
-          className="opla_template-infoC selectableListItem"
+          className="opla_assistant_card-container selectableListItem"
         >
           <div
-            className="opla_template-imgCell"
+            className="opla_assistant_card-imgContainer"
           >
             <div
-              className="opla_template-backgroundCell"
+              className="opla_assistant_card-background"
               style={
                 Object {
                   "backgroundColor": "#54c0eb",
@@ -310,18 +310,18 @@ exports[`components/TemplatesList renders without selected template 1`] = `
               }
             >
               <div
-                className="opla_template-imgMask"
+                className="opla_assistant_card-imgMask"
               >
                 <img
                   alt="Template 2"
-                  className="opla_template-img"
+                  className="opla_assistant_card-img"
                   src="./images/robots/robot-1.svg"
                 />
               </div>
             </div>
           </div>
           <div
-            className="opla_template-textCell"
+            className="opla_assistant_card-text"
           >
             <b>
               Template 2
