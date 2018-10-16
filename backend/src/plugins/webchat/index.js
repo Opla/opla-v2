@@ -38,7 +38,7 @@ class WebChat {
     }
   }
 
-  async register(middleware) {
+  async onMiddlewareRegister(middleware) {
     logger.info("WIP register WebChat ", middleware.name, middleware.token);
     const { zoapp } = this.manager;
     const { config } = this.manager;
@@ -94,7 +94,7 @@ class WebChat {
     return middleware;
   }
 
-  async unregister(middleware) {
+  async onMiddlewareUnregister(middleware) {
     // WIP
     logger.info("WIP unregister WebChat ", middleware.token);
     const { zoapp } = this.manager;

@@ -11,6 +11,7 @@ import Zrmc, { Cell } from "zrmc";
 import { ListComponent } from "zoapp-ui";
 import ServicesList from "zoapp-front/dist/components/servicesList";
 import displayWebServiceEditor from "zoapp-front/dist/components/displayWebServiceEditor";
+import { apiGetPluginsRequest } from "zoapp-front/dist/actions/api";
 
 import displayProviderEditor from "../components/displayProviderEditor";
 import {
@@ -390,6 +391,10 @@ class ServicesContainer extends Component {
     return list;
   }
 
+  getPluginsByType(type) {
+    return this.props.plugins.filter((plugin) => plugin.type === type);
+  }
+
   updateServices() {
     if (!this.props.isSignedIn) {
       if (!this.state.needUpdate) {
@@ -400,24 +405,18 @@ class ServicesContainer extends Component {
     if (this.props.selectedBotId && this.state.needUpdate) {
       this.setState({ needUpdate: false });
       this.props.apiGetMiddlewaresRequest(this.props.selectedBotId);
+      this.props.apiGetPluginsRequest(this.props.selectedBotId);
     }
   }
 
   render() {
     const webservices = this.getMiddlewares("WebService");
     // WIP : need to get from backend which provider is activated/running
-    const messagings = this.getMiddlewares("MessengerConnector"); // this.getMessagingProviders();
-    const ais = this.getMiddlewares("AIProvider"); // this.getAIProviders();
-    if (ais.length === 0) {
-      ais.push({
-        id: 1,
-        name: "OpenNLX",
-        icon: "images/opla-logo.png",
-        status: "start",
-        provider: "AIProvider",
-        system: true,
-      });
-    }
+    const messagings = this.props.plugins.filter(
+      (plugin) =>
+        plugin.type === "MessengerConnector" && plugin.isAvailable === true,
+    );
+    const ais = this.getPluginsByType("AIConnector");
 
     return (
       <div style={divCellStyle}>
@@ -485,15 +484,18 @@ ServicesContainer.defaultProps = {
   isSignedIn: true,
   selectedBotId: null,
   middlewares: null,
+  plugins: [],
 };
 
 ServicesContainer.propTypes = {
   isSignedIn: PropTypes.bool,
   selectedBotId: PropTypes.string,
   middlewares: PropTypes.arrayOf(PropTypes.shape({})),
+  plugins: PropTypes.arrayOf(PropTypes.shape({})),
   apiGetMiddlewaresRequest: PropTypes.func.isRequired,
   apiSetMiddlewareRequest: PropTypes.func.isRequired,
   apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
+  apiGetPluginsRequest: PropTypes.func.isRequired,
   pluginsManager: PropTypes.shape({ getPlugins: PropTypes.func }).isRequired,
 };
 
@@ -501,10 +503,14 @@ const mapStateToProps = (state) => {
   const middlewares = state.app ? state.app.middlewares : null;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
-  return { middlewares, selectedBotId, isSignedIn };
+  const plugins = state.app ? state.app.plugins : null;
+  return { middlewares, plugins, selectedBotId, isSignedIn };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  apiGetPluginsRequest: (botId) => {
+    dispatch(apiGetPluginsRequest(botId));
+  },
   apiGetMiddlewaresRequest: (botId) => {
     dispatch(apiGetMiddlewaresRequest(botId));
   },

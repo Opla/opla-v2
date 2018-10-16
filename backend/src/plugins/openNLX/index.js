@@ -13,6 +13,8 @@ class OpenNLXConnector {
     this.name = "openNLX";
     this.type = "AIConnector";
     this.classes = ["messenger", "bot", "sandbox"];
+    this.icon = "images/opla-logo.png";
+    this.system = true;
   }
 
   getName() {
@@ -35,13 +37,13 @@ class OpenNLXConnector {
     }
   }
 
-  async register(middleware) {
+  async onMiddlewareRegister(middleware) {
     logger.info("OpenNLX register", middleware.id);
     this.middleware = middleware;
     return middleware;
   }
 
-  async unregister(middleware) {
+  async onMiddlewareUnregister(middleware) {
     logger.info("OpenNLX unregister", middleware.id);
     this.middleware = null;
     return middleware;

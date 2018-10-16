@@ -20,9 +20,12 @@ import {
 } from "zoapp-front/dist/actions/constants";
 
 import {
+  API_BOTS_PARAMETERS,
   API_CREATEBOT,
   API_DELETEMIDDLEWARE,
+  API_GETLANGUAGES,
   API_GETMIDDLEWARES,
+  API_GETTEMPLATES,
   API_IMPORT,
   API_PUBLISH,
   API_SAVEBOT,
@@ -32,9 +35,6 @@ import {
   API_SB_SENDMESSAGE,
   API_SETMIDDLEWARE,
   APP_UPDATEPUBLISHER,
-  API_GETTEMPLATES,
-  API_GETLANGUAGES,
-  API_BOTS_PARAMETERS,
 } from "../../actions/constants";
 
 import {

@@ -7,6 +7,7 @@
 // TODO remove import and use dynamic loading
 import createWebChatPlugin from "./webchat";
 import createOpenNLXConnector from "./openNLX";
+import FBMessengerPlugin from "./fb-messenger";
 
 const plugins = (pluginsManager) => {
   const list = [];
@@ -15,6 +16,7 @@ const plugins = (pluginsManager) => {
   list.push(plugin);
   plugin = createOpenNLXConnector(pluginsManager);
   list.push(plugin);
+  list.push(FBMessengerPlugin());
   return list;
 };
 export default plugins;

@@ -32,13 +32,13 @@ class FBMessenger {
     }
   }
 
-  async register(middleware) {
+  async onMiddlewareRegister(middleware) {
     // TODO
     this.middleware = middleware;
     return middleware;
   }
 
-  async unregister(middleware) {
+  async onMiddlewareUnregister(middleware) {
     // TODO
     this.middleware = null;
     return middleware;
