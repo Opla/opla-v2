@@ -139,9 +139,6 @@ export class CreateAssistantBase extends Component {
   };
 
   render() {
-    if (!this.props.isSignedIn) {
-      return <div>SignUp</div>;
-    }
     const { name, email, selectedTemplate: selected } = this.state;
 
     let selectedLanguageIndex = 0;

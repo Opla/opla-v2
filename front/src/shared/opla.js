@@ -108,9 +108,10 @@ const appProps = {
     },
     {
       id: "4",
-      name: "Create Assistant",
+      name: "Create an assistant",
       path: "/create",
-      access: "public",
+      access: "auth",
+      signUp: true,
       render: (props) => <CreateAssistant {...props} />,
     },
     {

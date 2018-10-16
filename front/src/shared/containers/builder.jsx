@@ -9,8 +9,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/dist/components/loading";
-import SignInForm from "zoapp-front/dist/containers/signInForm";
-
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./builder/intentContainer";
 import EntityContainer from "./builder/entityContainer";
@@ -18,13 +16,7 @@ import FunctionContainer from "./builder/functionContainer";
 
 class Builder extends Component {
   render() {
-    let { isLoading } = this.props;
-    if (!isLoading && !this.props.intents && this.props.isSignedIn) {
-      isLoading = true;
-    }
-    if (!this.props.isSignedIn) {
-      return <SignInForm />;
-    } else if (this.props.intents == null) {
+    if (this.props.intents == null) {
       return <Loading />;
     }
     let panel1 = null;

@@ -6,6 +6,7 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router";
 import { Button } from "zrmc";
 import { connect } from "react-redux";
 import { appSetTitleName } from "zoapp-front/dist/actions/app";
@@ -54,7 +55,12 @@ export class HomeBase extends Component {
               painfull routine.
             </div>
             <div>
-              <Button raised link="/create">
+              <Button
+                raised
+                onClick={() => {
+                  this.props.history.push("/create");
+                }}
+              >
                 Create my first assistant
               </Button>
             </div>
@@ -68,6 +74,8 @@ export class HomeBase extends Component {
 HomeBase.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   appSetTitleName: PropTypes.func.isRequired,
+  history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
+    .isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -83,7 +91,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomeBase);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(HomeBase),
+);
