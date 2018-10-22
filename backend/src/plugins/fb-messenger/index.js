@@ -5,18 +5,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-class FBMessenger {
+import AbstractPlugin from "zoapp-backend/plugins/abstractPlugin";
+
+class FBMessenger extends AbstractPlugin {
   constructor() {
+    // AbstractPlugin constructor(name, title, type, classes, icon)
+    super(
+      "fb-messenger",
+      "Facebook Messenger",
+      "MessengerConnector",
+      [],
+      "images/messenger.svg",
+    );
     this.tunnel = null;
     this.listener = null;
-    this.name = "fb-messenger";
-    this.type = "MessengerConnector";
   }
 
+  // legacy
   getName() {
     return this.name;
   }
 
+  // legacy
   getType() {
     return this.type;
   }
@@ -42,6 +52,15 @@ class FBMessenger {
     // TODO
     this.middleware = null;
     return middleware;
+  }
+
+  getMiddlewareDefaultProperties() {
+    const mdp = super.getMiddlewareDefaultProperties();
+    logger.debug("MDP:", mdp);
+    return {
+      ...mdp,
+      status: "disabled",
+    };
   }
 }
 

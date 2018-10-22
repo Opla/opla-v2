@@ -11,7 +11,13 @@ import Zrmc, { Cell } from "zrmc";
 import { ListComponent } from "zoapp-ui";
 import ServicesList from "zoapp-front/dist/components/servicesList";
 import displayWebServiceEditor from "zoapp-front/dist/components/displayWebServiceEditor";
-import { apiGetPluginsRequest } from "zoapp-front/dist/actions/api";
+import {
+  apiGetPluginsRequest,
+  apiSetPluginRequest,
+  apiDeletePluginRequest,
+} from "zoapp-front/dist/actions/api";
+
+import ServiceDialog from "./dialogs/serviceDialog";
 
 import displayProviderEditor from "../components/displayProviderEditor";
 import {
@@ -28,6 +34,10 @@ class ServicesContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
+    this.handlePluginSelect = this.displayPluginSettings.bind(this);
+    this.displayPluginSettings = this.displayPluginSettings.bind(this);
+    this.displayPluginsList = this.displayPluginsList.bind(this);
+    this.handlePluginDelete = this.handlePluginDelete.bind(this);
   }
 
   componentDidMount() {
@@ -88,6 +98,109 @@ class ServicesContainer extends Component {
     this.currentSelected = null;
     this.paramFields = null;
     return true;
+  };
+
+  handlePluginDelete(plugin) {
+    Zrmc.showDialog({
+      header: plugin.title,
+      body: "Do you want to delete it ?",
+      actions: [{ name: "Cancel" }, { name: "Delete" }],
+      onAction: (dialog, action) => {
+        switch (action) {
+          case "Delete":
+            this.props.apiDeletePluginRequest(plugin, this.props.selectedBotId);
+            Zrmc.closeDialog();
+            break;
+
+          default:
+            // cancel
+            Zrmc.closeDialog();
+            break;
+        }
+      },
+      className: plugin.className,
+    });
+  }
+
+  displayPluginSettings(plugin) {
+    const sdialog = (
+      <ServiceDialog
+        open
+        plugin={plugin}
+        botId={this.props.selectedBotId}
+        onClosed={this.handleCloseDialog}
+        apiSetPluginRequest={(newPlugin) => {
+          this.props.apiSetPluginRequest(newPlugin, this.props.selectedBotId);
+        }}
+      />
+    );
+    setTimeout(() => Zrmc.showDialog(sdialog), 100);
+  }
+
+  displayPluginsList(plugins) {
+    const className = "zui-dialog-list";
+    const title = "Add a messaging platform";
+    let disabledPlugins = plugins.filter((plugin) => !plugin.middleware);
+    // ids will by used as ListItem keys
+    disabledPlugins = disabledPlugins.map((plugin, index) => ({
+      ...plugin,
+      id: index,
+    }));
+    disabledPlugins.push({
+      id: disabledPlugins.length + 1,
+      name: "Add plugin",
+      icon: "add",
+      color: "gray",
+    });
+    const content = (
+      <div style={{ height: "280px" }}>
+        <ListComponent
+          className="list-content"
+          style={{ padding: "0px", height: "100%" }}
+          items={disabledPlugins}
+          selectedItem={-1}
+          onSelect={(i) => {
+            Zrmc.closeDialog();
+            this.displayPluginSettings(disabledPlugins[i]);
+          }}
+        />
+      </div>
+    );
+    Zrmc.showDialog({
+      header: title,
+      body: content,
+      actions: [{ name: "Cancel" }],
+      onAction: this.onEditAction,
+      className,
+    });
+  }
+
+  handleSelect = (selected) => {
+    this.currentSelected = { ...selected }; // legacy
+    const { name, state, item } = selected;
+    const plugin = item;
+    // add buttton selected.
+    if (state === "add") {
+      // display list available;
+      let items;
+      switch (name) {
+        case "Messaging platforms":
+          items = this.getPluginsByType("MessengerConnector");
+          this.displayPluginsList(items);
+          break;
+
+        default:
+          break;
+      }
+    }
+    if (state === "select" || state === "create") {
+      if (name === "Messaging platforms") {
+        this.displayPluginSettings(plugin);
+      }
+    }
+    if (state === "delete") {
+      this.handlePluginDelete(plugin);
+    }
   };
 
   onSelect = (selected) => {
@@ -206,54 +319,20 @@ class ServicesContainer extends Component {
       } else {
         this.currentSelected = null;
       }
+      // Legacy case to remove
     } else if (name === "Messaging platforms") {
       // WIP
       title = null;
       editor = displayProviderEditor;
       couldDelete = false;
-      if ((state === "select" || state === "create") && item.provider) {
-        className = "zui-dialog-extended";
-        title = item.name;
-        content = item.provider.renderSettings();
-        action = "next";
+      if ((state === "select" || state === "create") && item) {
+        this.displayPluginSettings(item);
+        return;
       } else if (state === "add") {
-        className = "zui-dialog-list";
-        title = "Add a messaging platform";
-        const items = this.getMessagingProviders(true);
-        items.push({
-          id: items.length + 1,
-          name: "Add plugin",
-          icon: "add",
-          color: "gray",
-        });
-        const that = this;
-        content = (
-          <div style={{ height: "280px" }}>
-            <ListComponent
-              className="list-content"
-              style={{ padding: "0px", height: "100%" }}
-              items={items}
-              selectedItem={-1}
-              onSelect={(i) => {
-                const it = items[i];
-                // const n = it.name;
-                // console.log("WIP select messaging platform =", n);
-                setTimeout(() => {
-                  Zrmc.closeDialog();
-                  that.onSelect({
-                    name: "Messaging platforms",
-                    index: i,
-                    item: it,
-                    state: "create",
-                  });
-                }, 50);
-              }}
-            />
-          </div>
-        );
-      } else {
-        this.currentSelected = null;
+        this.displayPluginsList(this.props.messagings);
+        return;
       }
+      this.currentSelected = null;
     } else {
       this.currentSelected = null;
     }
@@ -392,7 +471,9 @@ class ServicesContainer extends Component {
   }
 
   getPluginsByType(type) {
-    return this.props.plugins.filter((plugin) => plugin.type === type);
+    return this.props.plugins.filter(
+      (plugin) => plugin && plugin.type === type,
+    );
   }
 
   updateServices() {
@@ -412,10 +493,6 @@ class ServicesContainer extends Component {
   render() {
     const webservices = this.getMiddlewares("WebService");
     // WIP : need to get from backend which provider is activated/running
-    const messagings = this.props.plugins.filter(
-      (plugin) =>
-        plugin.type === "MessengerConnector" && plugin.isAvailable === true,
-    );
     const ais = this.getPluginsByType("AIConnector");
 
     return (
@@ -434,9 +511,9 @@ class ServicesContainer extends Component {
             description={
               "Connect any third party messaging solution to an assistant."
             }
-            items={messagings}
+            items={this.props.messagings}
             defaultIcon="message"
-            onSelect={this.onSelect}
+            onSelect={this.handleSelect}
           />
         </Cell>
         <Cell className="zui-color--white" span={12}>
@@ -485,6 +562,7 @@ ServicesContainer.defaultProps = {
   selectedBotId: null,
   middlewares: null,
   plugins: [],
+  messagings: [],
 };
 
 ServicesContainer.propTypes = {
@@ -492,24 +570,38 @@ ServicesContainer.propTypes = {
   selectedBotId: PropTypes.string,
   middlewares: PropTypes.arrayOf(PropTypes.shape({})),
   plugins: PropTypes.arrayOf(PropTypes.shape({})),
+  messagings: PropTypes.arrayOf(PropTypes.shape({})),
   apiGetMiddlewaresRequest: PropTypes.func.isRequired,
   apiSetMiddlewareRequest: PropTypes.func.isRequired,
   apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
   apiGetPluginsRequest: PropTypes.func.isRequired,
   pluginsManager: PropTypes.shape({ getPlugins: PropTypes.func }).isRequired,
+  apiSetPluginRequest: PropTypes.func.isRequired,
+  apiDeletePluginRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   const middlewares = state.app ? state.app.middlewares : null;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const plugins = state.app ? state.app.plugins : null;
-  return { middlewares, plugins, selectedBotId, isSignedIn };
+
+  const plugins = state.app ? state.app.plugins : [];
+  const messagings = plugins.filter(
+    (plugin) =>
+      plugin && plugin.type === "MessengerConnector" && !!plugin.middleware,
+  );
+  return { middlewares, plugins, messagings, selectedBotId, isSignedIn };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   apiGetPluginsRequest: (botId) => {
     dispatch(apiGetPluginsRequest(botId));
+  },
+  apiDeletePluginRequest: (plugin, botId) => {
+    dispatch(apiDeletePluginRequest(plugin, botId));
+  },
+  apiSetPluginRequest: (plugin, botId) => {
+    dispatch(apiSetPluginRequest(plugin, botId));
   },
   apiGetMiddlewaresRequest: (botId) => {
     dispatch(apiGetMiddlewaresRequest(botId));

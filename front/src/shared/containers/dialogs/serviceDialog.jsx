@@ -13,20 +13,18 @@ import Zrmc, {
   DialogFooter,
   Dialog,
 } from "zrmc";
-import { connect } from "react-redux";
-import { apiSetMiddlewareRequest } from "../../actions/api";
-import PluginsManager from "../../utils/pluginsManager";
-/* eslint-enable no-unused-vars */
+import { importSettingsComponent } from "../../../plugins";
 
 export class ServiceDialogBase extends Component {
   constructor(props) {
     super(props);
-    const { open, instance } = props;
-    this.state = { openDialog: open, instance };
+    const { open } = props;
+    this.state = { openDialog: open, error: false };
+    this.settingsRef = React.createRef();
   }
 
   componentDidMount() {
-    this.updateMiddleware();
+    this.loadSettingsComponent();
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -46,12 +44,25 @@ export class ServiceDialogBase extends Component {
     }
   }
 
+  loadSettingsComponent() {
+    const { plugin } = this.props;
+    const { name } = plugin;
+    importSettingsComponent(name)
+      .then((component) => {
+        this.setState({ SettingsComponent: component.default });
+      })
+      .catch(() => {
+        // eslint-disable-next-line
+        console.error(
+          `cant find plugins ${name}/settings.js component`,
+        );
+        this.setState({ error: true });
+      });
+  }
+
   onAction = (action) => {
-    const { service } = this.props;
-    const { instance } = this.state;
-    const title = service.name;
-    if (action === "save" && this.props.onAction) {
-      this.props.onAction(title, service, instance);
+    if (this.settingsRef) {
+      this.settingsRef.current.onAction(action);
     }
   };
 
@@ -74,26 +85,15 @@ export class ServiceDialogBase extends Component {
     }
   };
 
-  updateMiddleware() {
-    const origin = this.props.selectedBotId;
-    const { service } = this.props;
-    if (origin && service && this.state.instance === null) {
-      const name = service.getName();
-      const pluginsManager = PluginsManager();
-      const instance = pluginsManager.instanciate(name, origin);
-      this.props.apiSetMiddlewareRequest(origin, instance);
-    }
-  }
+  handleSavePlugin = (plugin) => {
+    this.props.apiSetPluginRequest(plugin);
+    Zrmc.closeDialog();
+  };
 
   render() {
-    const { service } = this.props;
-    const { instance } = this.state;
-    const title = service.getTitle();
-    const content = service.renderSettings(
-      instance,
-      this.onAction,
-      this.props.publicUrl,
-    );
+    const { plugin } = this.props;
+    const title = plugin.title || plugin.name;
+    const { SettingsComponent } = this.state;
     const style = { width: "550px" };
     return (
       <Dialog
@@ -102,7 +102,25 @@ export class ServiceDialogBase extends Component {
         onClose={this.handleCloseDialog}
       >
         <DialogHeader>{title} - settings</DialogHeader>
-        <DialogBody>{content}</DialogBody>
+        <DialogBody>
+          {SettingsComponent && (
+            <SettingsComponent
+              ref={this.settingsRef}
+              plugin={plugin}
+              botId={this.props.botId}
+              onAction={this.onAction}
+              handleSavePlugin={this.handleSavePlugin}
+              publicUrl={this.props.publicUrl}
+              appId={plugin.config}
+            />
+          )}
+          {!SettingsComponent &&
+            this.state.error && (
+              <div>
+                This plugin does not have a configuration page available
+              </div>
+            )}
+        </DialogBody>
         <DialogFooter>
           <Button
             type="button"
@@ -131,9 +149,7 @@ export class ServiceDialogBase extends Component {
 ServiceDialogBase.defaultProps = {
   open: true,
   instance: null,
-  service: null,
-  selectedBotId: null,
-  lastMiddleware: null,
+  plugin: null,
   publicUrl: null,
   onClosed: null,
   onAction: null,
@@ -141,38 +157,15 @@ ServiceDialogBase.defaultProps = {
 
 ServiceDialogBase.propTypes = {
   open: PropTypes.bool,
-  instance: PropTypes.shape({}),
-  service: PropTypes.shape({
-    getTitle: PropTypes.func.isRequired,
-    renderSettings: PropTypes.func.isRequired,
-  }).isRequired,
-  selectedBotId: PropTypes.string,
-  lastMiddleware: PropTypes.shape({}),
+  plugin: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+  }),
+  botId: PropTypes.string,
   publicUrl: PropTypes.string,
   onClosed: PropTypes.func,
   onAction: PropTypes.func,
-  apiSetMiddlewareRequest: PropTypes.func.isRequired,
+  apiSetPluginRequest: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  const lastMiddleware = state.app ? state.app.lastMiddleware : null;
-  const selectedBotId = state.app ? state.app.selectedBotId : null;
-  const publicUrl = state.app ? state.app.admin.publicUrl : null;
-  return {
-    lastMiddleware,
-    selectedBotId,
-    publicUrl,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  apiSetMiddlewareRequest: (botId, middleware) => {
-    dispatch(apiSetMiddlewareRequest(botId, middleware));
-  },
-});
-
-// prettier-ignore
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ServiceDialogBase);
+export default ServiceDialogBase;

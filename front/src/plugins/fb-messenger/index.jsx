@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import FBSettings from "./fbSettings";
+import FBSettings from "./components/settings";
 import FBTemplate from "./fbTemplate";
 
 export default class FBMessengerPlugin {
