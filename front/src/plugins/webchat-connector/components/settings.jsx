@@ -8,39 +8,37 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { TextField } from "zrmc";
 
-export default class AppSettings extends Component {
+export default class WebchatSettings extends Component {
   onAction = (action) => {
-    if (action === "Build") {
-      // console.log("onAction Build TODO");
+    if (action === "save") {
+      const middleware = {
+        ...this.props.plugin.middleware,
+        origin: this.props.botId,
+      };
+      const newPlugin = {
+        ...this.props.plugin,
+        middleware,
+      };
+      this.props.handleSavePlugin(newPlugin);
     }
-    this.props.onAction(action);
   };
 
-  static renderCreateApp(instance) {
-    // console.log("instance=", instance);
-    // const app = instance.application;
+  static buildPublicUrl(url) {
+    const regex = /^(http|https).*$/;
+    if (regex.test(url) === false) {
+      return `${window.location.origin}${url}`;
+    }
+    return url;
+  }
+
+  render() {
+    this.test = "";
+    const instance = this.props.plugin.middleware;
     let botUrl = "Need a first publishing";
     let token = "TOKEN";
     if (instance && instance.url) {
-      let { url } = instance;
-      const regex = /^(http|https).*$/;
-      if (regex.test(url) === false) {
-        url = `${window.location.origin}${url}`;
-      }
-
-      /* botUrl = (
-        <a
-          style={{
-            width: "100%",
-            marginBottom: "24px",
-          }}
-          href={url}
-          target="_blank"
-        >
-          {url}
-        </a>
-      ); */
-      botUrl = url;
+      const { url } = instance;
+      botUrl = WebchatSettings.buildPublicUrl(url);
     }
     if (instance && instance.token) {
       ({ token } = instance);
@@ -53,73 +51,69 @@ export default class AppSettings extends Component {
     script += "a.async=1;a.src=o;i.parentNode.insertBefore(a,i)})";
     script +=
       "('https://bots.opla.ai/js/app.js',document,'script');\r\n</script>";
-    return (
-      <div
-        style={{
-          width: "480px",
-          height: "220px",
-          margin: "auto",
-          position: "absolute",
-          left: "0px",
-          right: "0px",
-          bottom: "0px",
-          top: "0px",
-        }}
-      >
-        <div style={{ marginTop: "0px" }}>
-          Published URL <br />
-          <TextField
-            onChange={() => {
-              // TODO
-            }}
-            style={{ width: "480px", marginTop: "0px", height: "36px" }}
-            value={botUrl}
-            disabled
-            ref={(input) => {
-              this.fieldUrl = input;
-            }}
-          />
-        </div>
-
-        <div style={{ marginTop: "12px", marginBottom: "8px" }}>
-          Or add this script to an html page with TOKEN and API_URL :
-        </div>
-        <div
-          style={{
-            marginTop: "0px",
-            padding: "10px",
-            fontSize: "10px",
-            color: "black",
-            background: "#eee",
-          }}
-        >
-          <code>{script}</code>
-        </div>
-      </div>
-    );
-  }
-
-  render() {
-    const style = {
+    // const container = WebchatSettings.renderCreateApp(this.props.plugin.middleware);
+    /* if (this.props.instance && this.props.instance.application) {
+      container = this.renderCreateApp();
+    } */
+    const styleContainer = {
       height: "200px",
       width: "502px",
       position: "relative",
     };
-    const container = AppSettings.renderCreateApp(this.props.instance);
-    /* if (this.props.instance && this.props.instance.application) {
-      container = this.renderCreateApp();
-    } */
     return (
       <div>
-        <div className="zui-color--white" style={style}>
-          {container}
+        <div className="zui-color--white" style={styleContainer}>
+          <div
+            style={{
+              width: "480px",
+              height: "220px",
+              margin: "auto",
+              position: "absolute",
+              left: "0px",
+              right: "0px",
+              bottom: "0px",
+              top: "0px",
+            }}
+          >
+            <div style={{ marginTop: "0px" }}>
+              Published URL <br />
+              <TextField
+                onChange={() => {
+                  // TODO
+                }}
+                style={{ width: "480px", marginTop: "0px", height: "36px" }}
+                value={botUrl}
+                disabled
+                ref={(input) => {
+                  this.fieldUrl = input;
+                }}
+              />
+            </div>
+
+            <div style={{ marginTop: "12px", marginBottom: "8px" }}>
+              Or add this script to an html page with TOKEN and API_URL :
+            </div>
+            <div
+              style={{
+                marginTop: "0px",
+                padding: "10px",
+                fontSize: "10px",
+                color: "black",
+                background: "#eee",
+              }}
+            >
+              <code>{script}</code>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-AppSettings.propTypes = {
+WebchatSettings.propTypes = {
   onAction: PropTypes.func.isRequired,
-  instance: PropTypes.shape({ application: PropTypes.shape({}) }).isRequired,
+  plugin: PropTypes.shape({ middleware: PropTypes.shape({}) }).isRequired,
+  botId: PropTypes.string,
+  handleSavePlugin: PropTypes.func.isRequired,
 };

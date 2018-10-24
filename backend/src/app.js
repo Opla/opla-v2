@@ -19,7 +19,7 @@ class App {
 
     this.zoapp = createZoapp(config);
     logger.info("add Plugins");
-    this.zoapp.addPlugins(plugins(this.zoapp.pluginsManager));
+    this.zoapp.addPlugins(plugins(this.zoapp));
     logger.info("add Controller extensions");
     this.zoapp.addControllerExtensions(
       createExtensionsController(this.zoapp, config),

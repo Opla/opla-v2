@@ -4,25 +4,33 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import abstractPlugin from "zoapp-backend/plugins/abstractPlugin";
 
-class WebChat {
-  constructor(pluginManager) {
+class WebChat extends abstractPlugin {
+  constructor(zoapp) {
+    super({
+      name: "webchat-connector",
+      type: "MessengerConnector",
+      classes: ["messenger"],
+      title: "Webchat",
+      icon: "message",
+    });
     this.workers = {};
     this.listener = null;
-    this.manager = pluginManager;
-    this.name = "webchat-connector";
-    this.type = "MessengerConnector";
-    this.classes = ["messenger"];
+    this.zoapp = zoapp;
   }
 
+  // legacy
   getName() {
     return this.name;
   }
 
+  // legacy
   getType() {
     return this.type;
   }
 
+  // legacy
   getClasses() {
     return this.classes;
   }
@@ -40,18 +48,17 @@ class WebChat {
 
   async onMiddlewareRegister(middleware) {
     logger.info("WIP register WebChat ", middleware.name, middleware.token);
-    const { zoapp } = this.manager;
-    const { config } = this.manager;
+    const config = this.zoapp.configuration;
     this.middleware = middleware;
     if (middleware.origin) {
       if (!middleware.application || !middleware.application.id) {
         const name = `${middleware.name}_${middleware.origin}`;
         // get a previously created app with same name
-        let app = await zoapp.authServer.getApplicationByName(name);
+        let app = await this.zoapp.authServer.getApplicationByName(name);
         if (!app) {
           // TODO generate anonymous_secret
           // WIP create application
-          const bot = await zoapp.extensions
+          const bot = await this.zoapp.extensions
             .getBots()
             .getBot(middleware.origin);
           const { email } = bot; // WIP get email
@@ -62,9 +69,11 @@ class WebChat {
             redirect_uri: "localhost",
             policies: { authorizeAnonymous: true, anonymous_secret: "koko" },
           };
-          const payload = await zoapp.authServer.registerApplication(params);
+          const payload = await this.zoapp.authServer.registerApplication(
+            params,
+          );
           if (payload && payload.result) {
-            app = await zoapp.authServer.getApplicationByName(name);
+            app = await this.zoapp.authServer.getApplicationByName(name);
           }
         }
         if (app) {
@@ -73,7 +82,7 @@ class WebChat {
       }
       if (!middleware.url) {
         // WIP create url
-        const params = zoapp.controllers.getParameters();
+        const params = this.zoapp.controllers.getParameters();
         const botParams = {
           botId: middleware.origin,
           application: {
@@ -97,11 +106,19 @@ class WebChat {
   async onMiddlewareUnregister(middleware) {
     // WIP
     logger.info("WIP unregister WebChat ", middleware.token);
-    const { zoapp } = this.manager;
     this.middleware = null;
-    const params = zoapp.controllers.getParameters();
+    const params = this.zoapp.controllers.getParameters();
     await params.deleteValue(middleware.token, "botParams");
+    // TODO delete application
     return middleware;
+  }
+
+  getMiddlewareDefaultProperties() {
+    const mdp = super.getMiddlewareDefaultProperties();
+    return {
+      ...mdp,
+      status: "disabled",
+    };
   }
 }
 

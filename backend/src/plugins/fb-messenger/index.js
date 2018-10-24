@@ -10,13 +10,12 @@ import AbstractPlugin from "zoapp-backend/plugins/abstractPlugin";
 class FBMessenger extends AbstractPlugin {
   constructor() {
     // AbstractPlugin constructor(name, title, type, classes, icon)
-    super(
-      "fb-messenger",
-      "Facebook Messenger",
-      "MessengerConnector",
-      [],
-      "images/messenger.svg",
-    );
+    super({
+      name: "fb-messenger",
+      title: "Facebook Messenger",
+      type: "MessengerConnector",
+      icon: "images/messenger.svg",
+    });
     this.tunnel = null;
     this.listener = null;
   }
@@ -56,7 +55,6 @@ class FBMessenger extends AbstractPlugin {
 
   getMiddlewareDefaultProperties() {
     const mdp = super.getMiddlewareDefaultProperties();
-    logger.debug("MDP:", mdp);
     return {
       ...mdp,
       status: "disabled",

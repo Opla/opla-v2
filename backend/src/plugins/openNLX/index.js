@@ -5,22 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 import createOpenNLX from "opennlx";
+import abstractPlugin from "zoapp-backend/plugins/abstractPlugin";
 
-class OpenNLXConnector {
+class OpenNLXConnector extends abstractPlugin {
   constructor() {
+    super({
+      name: "openNLX",
+      type: "AIConnector",
+      classes: ["messenger", "bot", "sandbox"],
+      icon: "images/opla-logo.png",
+      system: true,
+    });
     this.openNLX = createOpenNLX;
     this.listener = null;
-    this.name = "openNLX";
-    this.type = "AIConnector";
-    this.classes = ["messenger", "bot", "sandbox"];
-    this.icon = "images/opla-logo.png";
-    this.system = true;
   }
 
+  // legacy
   getName() {
     return this.name;
   }
 
+  // legacy
   getType() {
     return this.type;
   }
@@ -52,9 +57,9 @@ class OpenNLXConnector {
 
 let instance = null;
 
-const createOpenNLXConnector = (pluginManager) => {
+const createOpenNLXConnector = (zoapp) => {
   if (!instance) {
-    instance = new OpenNLXConnector(pluginManager);
+    instance = new OpenNLXConnector(zoapp);
   }
   return instance;
 };
