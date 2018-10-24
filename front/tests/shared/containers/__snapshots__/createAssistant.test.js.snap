@@ -86,7 +86,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
         className="mdc-layout-grid__inner"
       >
         <div
-          className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-1"
+          className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-1"
         >
           <div
             onClick={[Function]}
@@ -98,13 +98,13 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
             }
           >
             <div
-              className="opla_template-infoC selectableListItem"
+              className="opla_assistant_card-container selectableListItem"
             >
               <div
-                className="opla_template-imgCell"
+                className="opla_assistant_card-imgContainer"
               >
                 <div
-                  className="opla_template-backgroundCell"
+                  className="opla_assistant_card-background"
                   style={
                     Object {
                       "backgroundColor": "#4cdbc4",
@@ -112,18 +112,18 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                   }
                 >
                   <div
-                    className="opla_template-imgMask"
+                    className="opla_assistant_card-imgMask"
                   >
                     <img
                       alt="Empty"
-                      className="opla_template-img"
+                      className="opla_assistant_card-img"
                       src="./images/robots/robot-0.svg"
                     />
                   </div>
                 </div>
               </div>
               <div
-                className="opla_template-textCell"
+                className="opla_assistant_card-text"
               >
                 <b>
                   Empty
@@ -133,7 +133,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="opla_template-templateBox mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
+          className="opla_assistant_card-box mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-6-phone mdc-layout-grid__cell--order-2"
         >
           <div
             onClick={[Function]}
@@ -145,10 +145,10 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
             }
           >
             <div
-              className="opla_template-infoC selectableListItem"
+              className="opla_assistant_card-container selectableListItem"
             >
               <div
-                className="opla_template-imgCell"
+                className="opla_assistant_card-imgContainer"
               >
                 <form>
                   <div
@@ -168,7 +168,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
                 </form>
               </div>
               <div
-                className="opla_template-textCell"
+                className="opla_assistant_card-text"
               >
                 <b>
                   Import
@@ -263,75 +263,8 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
             }
           >
             <input
-              autoComplete="new-password"
               className="mdc-text-field__input"
-              defaultValue=""
-              id="create-assistant-username"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              required={true}
-              type="text"
-            />
-            <label
-              className="mdc-floating-label"
-              focused="false"
-              htmlFor="create-assistant-username"
-              style={Object {}}
-            >
-              Username
-            </label>
-            <div
-              className="mdc-text-field__bottom-line"
-            />
-          </div>
-        </div>
-        <div>
-          <div
-            className="mdc-text-field mdc-text-field--upgraded"
-            style={
-              Object {
-                "width": "400px",
-              }
-            }
-          >
-            <input
-              autoComplete="new-password"
-              className="mdc-text-field__input"
-              defaultValue=""
-              id="create-assistant-password"
-              minLength="4"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              required={true}
-              type="password"
-            />
-            <label
-              className="mdc-floating-label"
-              focused="false"
-              htmlFor="create-assistant-password"
-              style={Object {}}
-            >
-              Password (min. 4 characters)
-            </label>
-            <div
-              className="mdc-text-field__bottom-line"
-            />
-          </div>
-        </div>
-        <div>
-          <div
-            className="mdc-text-field mdc-text-field--upgraded"
-            style={
-              Object {
-                "width": "400px",
-              }
-            }
-          >
-            <input
-              className="mdc-text-field__input"
-              defaultValue=""
+              defaultValue={undefined}
               id="create-assistant-email"
               onBlur={[Function]}
               onChange={[Function]}
@@ -345,7 +278,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
               htmlFor="create-assistant-email"
               style={Object {}}
             >
-              Your email
+              Contact email
             </label>
             <div
               className="mdc-text-field__bottom-line"
@@ -430,7 +363,7 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           type="submit"
         >
           
-          Opla !
+          Create
         </button>
       </div>
     </section>

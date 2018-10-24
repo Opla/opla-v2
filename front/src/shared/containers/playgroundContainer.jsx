@@ -222,12 +222,11 @@ PlaygroundContainer.propTypes = {
 const mapStateToProps = (state) => {
   const sandbox = state.app ? state.app.sandbox : null;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  // TODO get Bot associated with selectedBotId
-  const selectedBot = selectedBotId ? state.app.admin.bots[0] : {};
+  const selectedBot = selectedBotId
+    ? state.app.admin.bots[state.app.project.selectedIndex]
+    : {};
   const userProfile = state.user ? state.user.profile : {};
   let conversation = null;
-  /* const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const isLoading = state.loading; */
   const isSelectedIntent = !!(
     state.app.intents &&
     state.app.intents.length > 0 &&

@@ -67,7 +67,7 @@ class FBTemplate extends Component {
             this.setSelectedStep(index, true);
           }}
         />
-        <div className="zui-color--grey-100" style={style}>
+        <div className="zui-color--white" style={style}>
           <FBContainer
             appId={this.props.appId}
             onAction={this.onAction}

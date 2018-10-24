@@ -20,7 +20,7 @@ import {
 import { appUpdateIntent } from "../actions/app";
 import Dashboard from "./dashboard";
 import Analytics from "./analytics";
-import AgentManager from "./agentManager";
+import Builder from "./builder";
 import PlaygroundContainer from "./playgroundContainer";
 import IODialog from "./dialogs/ioDialog";
 import FileManager from "../utils/fileManager";
@@ -100,20 +100,17 @@ class Factory extends Component {
     if (action === "Delete") {
       const { selected } = data;
       const intent = this.props.intents[selected];
-      // console.log("WIP", `ExplorerContainer.onDeleteIntent :${intent.name}`);
       this.props.apiDeleteIntentRequest(this.props.selectedBotId, intent);
     }
     return true;
   };
 
   onImportData = (data, options) => {
-    // console.log("AgentManager.onUpload=", options.filetype);
     if (
       options.filetype === "application/json" ||
       options.filetype === "text/csv"
     ) {
       // WIP detect format
-      // console.log("AgentManager.onUpload=", data);
       this.props.apiImportRequest(this.props.selectedBotId, data, options);
     }
   };
@@ -272,7 +269,7 @@ class Factory extends Component {
       screen = <Dashboard store={this.props.store} />;
     } else if (active === 1) {
       screen = (
-        <AgentManager
+        <Builder
           onExportImort={this.handleExportImport}
           onRenameIntent={this.handleRenameIntent}
           onAddIntent={this.handleAddIntent}
@@ -296,7 +293,7 @@ class Factory extends Component {
       });
     }
     return (
-      <div className="zui-color--grey-100">
+      <div className="zui-color--white">
         <Grid
           gutter={{ desktop: "0px", tablet: "0px", phone: "0px" }}
           style={{ margin: "0px", padding: "0px" }}
@@ -359,8 +356,9 @@ const mapStateToProps = (state) => {
   const { admin } = state.app;
   let { selectedIntent } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  // TODO get selectedBot from selectBotId
-  const bot = selectedBotId ? admin.bots[0] : null;
+  const bot = selectedBotId
+    ? admin.bots[state.app.project.selectedIndex]
+    : null;
   const intents = state.app.intents ? state.app.intents : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading || false;

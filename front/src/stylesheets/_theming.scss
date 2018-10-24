@@ -241,7 +241,7 @@ i.zui-subheader-right:hover {
 }
 
 .mdc-toolbar__menu-icon {
-  color: #1C252C;
+  color: #AEB2B4;
 }
 
 .mdc-toolbar__menu-icon:hover {
@@ -250,6 +250,10 @@ i.zui-subheader-right:hover {
 
 .mdc-toolbar__section .mdc-tab-bar button, .mdc-tab .mdc-tab__text-label {
   color: #80878B;
+}
+
+.mdc-toolbar__section.mdc-toolbar__section--align-end > .mdc-button--raised {
+  background-color: $color_primary;
 }
 
 .mdc-text-field--focused > .mdc-floating-label {
@@ -299,7 +303,7 @@ i.zui-subheader-right:hover {
 }
 
 .zui-color--grey-100 {
-  background-color: #FFFFFF;
+  background-color: #FBFBFB;
 }
 
 /* ************* */

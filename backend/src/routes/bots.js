@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { CommonRoutes } from "zoapp-backend";
-import ApiError from "zoauth-server/Error/ApiError";
+import ApiError from "zoauth-server/errors/ApiError";
 import Importer from "../utils/importer";
 
 export default class extends CommonRoutes {

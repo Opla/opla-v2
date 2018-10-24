@@ -42,15 +42,12 @@ export class CreateAssistantBase extends Component {
     super();
     this.state = {
       name: "",
-      email: "",
-      username: "",
-      password: "",
       language: null,
       loading: false,
       selectedTemplate: null,
       template: null,
     };
-    props.appSetTitleName("Create your conversational robot");
+    props.appSetTitleName("Create an assistant", "Create");
   }
 
   componentDidMount() {
@@ -98,22 +95,15 @@ export class CreateAssistantBase extends Component {
     this.setState({ loading: false });
     Zrmc.closeDialog();
     if (!this.props.error) {
-      this.props.history.push("/builder");
+      // TODO select Bot created
+      this.props.history.push("/factory");
     }
   };
 
   handleCreate = (e) => {
     e.preventDefault();
 
-    const {
-      name,
-      email,
-      username,
-      password,
-      language,
-      template,
-      loading,
-    } = this.state;
+    const { name, email, language, template, loading } = this.state;
 
     if (template === null) {
       this.props.setMessage("please select a template");
@@ -124,8 +114,6 @@ export class CreateAssistantBase extends Component {
       const botParams = {
         name,
         email,
-        username,
-        password,
         template,
         language,
       };
@@ -151,13 +139,7 @@ export class CreateAssistantBase extends Component {
   };
 
   render() {
-    const {
-      name,
-      email,
-      username,
-      password,
-      selectedTemplate: selected,
-    } = this.state;
+    const { name, email, selectedTemplate: selected } = this.state;
 
     let selectedLanguageIndex = 0;
     const languagesItems = this.props.languages.map((language, index) => {
@@ -233,35 +215,11 @@ export class CreateAssistantBase extends Component {
               </div>
               <div>
                 <TextField
-                  id="create-assistant-username"
-                  onChange={this.createChangeHandler("username")}
-                  defaultValue={username}
-                  label="Username"
-                  autoComplete="new-password"
-                  style={{ width: "400px" }}
-                  required
-                />
-              </div>
-              <div>
-                <TextField
-                  id="create-assistant-password"
-                  onChange={this.createChangeHandler("password")}
-                  defaultValue={password}
-                  label="Password (min. 4 characters)"
-                  type="password"
-                  autoComplete="new-password"
-                  style={{ width: "400px" }}
-                  minLength="4"
-                  required
-                />
-              </div>
-              <div>
-                <TextField
                   id="create-assistant-email"
                   type="email"
                   onChange={this.createChangeHandler("email")}
                   defaultValue={email}
-                  label="Your email"
+                  label="Contact email"
                   style={{ width: "400px" }}
                   required
                 />
@@ -283,7 +241,7 @@ export class CreateAssistantBase extends Component {
           <section style={boxStyle}>
             <div style={headerStyle}>
               <Button type="submit" raised>
-                Opla !
+                Create
               </Button>
             </div>
           </section>
@@ -299,6 +257,7 @@ CreateAssistantBase.defaultProps = {
 
 CreateAssistantBase.propTypes = {
   isLoading: PropTypes.bool.isRequired,
+  isSignedIn: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
   createBot: PropTypes.func.isRequired,
   appSetTitleName: PropTypes.func.isRequired,

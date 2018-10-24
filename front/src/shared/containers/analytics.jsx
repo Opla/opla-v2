@@ -56,7 +56,7 @@ export class AnalyticsBase extends Component {
     }
 
     return (
-      <div className="opla-analytics zui-layout__content zui-color--grey-100">
+      <div className="opla-analytics zui-layout__content zui-color--white">
         <Grid>
           <Inner>
             <Cell className="zui-color--white" span={12}>

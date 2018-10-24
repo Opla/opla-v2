@@ -9,22 +9,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Inner, Cell } from "zrmc";
 import Loading from "zoapp-front/dist/components/loading";
-import SignInForm from "zoapp-front/dist/containers/signInForm";
-
 import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./builder/intentContainer";
 import EntityContainer from "./builder/entityContainer";
 import FunctionContainer from "./builder/functionContainer";
 
-class AgentManager extends Component {
+class Builder extends Component {
   render() {
-    let { isLoading } = this.props;
-    if (!isLoading && !this.props.intents && this.props.isSignedIn) {
-      isLoading = true;
-    }
-    if (!this.props.isSignedIn) {
-      return <SignInForm />;
-    } else if (this.props.intents == null) {
+    if (this.props.intents == null) {
       return <Loading />;
     }
     let panel1 = null;
@@ -88,7 +80,7 @@ class AgentManager extends Component {
   }
 }
 
-AgentManager.defaultProps = {
+Builder.defaultProps = {
   bot: null,
   intents: null,
   selectedIntent: null,
@@ -97,7 +89,7 @@ AgentManager.defaultProps = {
   activeTab: 0,
 };
 
-AgentManager.propTypes = {
+Builder.propTypes = {
   activeTab: PropTypes.number,
   isLoading: PropTypes.bool.isRequired,
   isSignedIn: PropTypes.bool.isRequired,
@@ -123,8 +115,7 @@ const mapStateToProps = (state) => {
   const { admin } = state.app;
   let { selectedIntent } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  // TODO get selectedBot from selectBotId
-  const bot = selectedBotId ? admin.bots[0] : null;
+  const bot = selectedBotId ? admin.bots[state.app.project.selectIndex] : null;
   const intents = state.app.intents ? state.app.intents : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading || false;
@@ -157,4 +148,4 @@ const mapDispatchToProps = () => ({});
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AgentManager);
+)(Builder);

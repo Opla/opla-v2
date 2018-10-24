@@ -4,44 +4,78 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  Card,
-  CardTitle,
-  CardText,
-  CardMedia,
-  CardActions,
-  Button,
-} from "zrmc";
+import { withRouter } from "react-router";
+import { Button } from "zrmc";
 import { connect } from "react-redux";
+import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import Assistants from "./assistants";
 
-const titleStyle = {
-  textAlign: "center",
-  padding: "25px 10px 10px 10px",
-  fontWeight: "300",
-  fontSize: "1.5rem",
-};
+export class HomeBase extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      language: null,
+      loading: false,
+      selectedTemplate: null,
+      template: null,
+    };
+    props.appSetTitleName(
+      <div className="opla-title">
+        <img src="images/opla-bubble.svg" />
+        <div>opla</div>
+      </div>,
+      "opla",
+    );
+  }
 
-const Home = () => (
-  <div className="zui-layout__content zui-color--grey-100">
-    <section className="text-section" style={{ margin: "40px" }}>
-      <Card shadow={0} style={{ width: "512px", margin: "auto" }}>
-        <CardTitle style={titleStyle}>Your open conversational robot</CardTitle>
-        <CardMedia src="images/bg.jpg" style={{ height: "240px" }} />
-        <CardText style={{ paddingTop: "20px" }}>
-          It is easy and fast. In less than 5 min, your bot will be ready!
-        </CardText>
-        <CardActions>
-          <Button link="/create">Create it</Button>
-        </CardActions>
-      </Card>
-    </section>
-  </div>
-);
+  render() {
+    if (this.props.isSignedIn) {
+      return (
+        <div className="zui-layout__content zui-color--white">
+          <Assistants />
+        </div>
+      );
+    }
+    return (
+      <div className="zui-layout__content zui-color--white">
+        <section className="text-section">
+          <div className="opla-home">
+            <h1>
+              Welcome to the future, Opla will help you automate boring tasks |
+            </h1>
+            <div>
+              Opla is an open source software you can use to create and bring up
+              virtual assistant, chatbot, conversational interface to work on
+              painfull routine.
+            </div>
+            <div>
+              <Button
+                raised
+                onClick={() => {
+                  this.props.history.push("/create");
+                }}
+              >
+                Create my first assistant
+              </Button>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+}
 
-Home.propTypes = {
+HomeBase.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
+  appSetTitleName: PropTypes.func.isRequired,
+  history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
+    .isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -51,4 +85,15 @@ const mapStateToProps = (state) => {
   return { admin, isLoading, isSignedIn };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+  appSetTitleName: (title, name) => {
+    dispatch(appSetTitleName(title, name));
+  },
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(HomeBase),
+);
