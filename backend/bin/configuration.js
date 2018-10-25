@@ -24,6 +24,9 @@ function createConfiguration(pkg, answers) {
         url: answers.gatewayUrl,
       },
     },
+    backend: {
+      managementEndpoint: false
+    },
     auth: {
       database: {
         parent: "global",
