@@ -174,6 +174,7 @@ describe("components/actionsEditable", () => {
   it("should request to move focus after item inserted", () => {
     const wrapper = shallow(<ActionsEditable {...defaultProps} />);
     expect(wrapper.state("items")).toHaveLength(3);
+    wrapper.instance().componentDidUpdate = jest.fn();
 
     wrapper.instance().insertItem({ text: "*", type: "any" }, 2);
     wrapper.update();

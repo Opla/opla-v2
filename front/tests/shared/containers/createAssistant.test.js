@@ -15,6 +15,8 @@ import Zrmc from "zrmc";
 
 beforeAll(() => {
   Zrmc.showDialog = jest.fn();
+  Zrmc.closeDialog = jest.fn();
+  // Zrmc.renderModal = jest.fn();
 });
 
 describe("containers/CreateAssistant", () => {
@@ -143,6 +145,7 @@ describe("containers/CreateAssistant", () => {
       />,
     );
 
+    expect(wrapper.state("loading")).toEqual(false);
     wrapper
       .find("#create-assistant-name")
       .simulate("change", { target: { value: "assistant-name" } });
@@ -157,6 +160,10 @@ describe("containers/CreateAssistant", () => {
     expect(wrapper.state("language")).toEqual("fr");
 
     wrapper.instance().onSelectTemplate(0);
+
+    wrapper.instance().handleCloseCreateDialog = jest.fn();
+    expect(createBotSpy).not.toHaveBeenCalled();
+    expect(wrapper.state("loading")).toEqual(false);
 
     wrapper
       .find("#create-assistant-form")
