@@ -3,6 +3,7 @@ image:
 
 api:
  domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
+ management_endpoint: "/management"
 
 db: 
   auth:

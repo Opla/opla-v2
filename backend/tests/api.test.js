@@ -178,7 +178,7 @@ describe("API", () => {
         ...memDBConfig,
         // MemDatabase should always build its SQL schema as we do not have
         // migrations for this driver.
-        buildSchema: true,
+        build_schema: true,
       },
     },
     {
@@ -193,7 +193,7 @@ describe("API", () => {
         //
         // The `CI` env variable is usually available on all CI platforms only,
         // see: https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables.
-        buildSchema: process.env.CI !== "true",
+        build_schema: process.env.CI !== "true",
       },
     },
   ];

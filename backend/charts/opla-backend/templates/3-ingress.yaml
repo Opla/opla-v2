@@ -13,6 +13,10 @@ spec:
     {{- define "backend.paths" }}
     http:
       paths:
+      {{- with $.Values.api.management_endpoint }}
+      - path: /api/v1{{.}}
+        backend: {}
+      {{- end }}
       - path: /api
         backend:
           serviceName: backend
@@ -26,12 +30,12 @@ spec:
   # http://<namespace>.<nginx_svc_load_balancer_ip>.xip.io.
   # See https://github.com/kubernetes/kubernetes/issues/41881
   - host: {{ .Values.namespace }}
-{{- template "backend.paths" }}
+{{- include "backend.paths" . }}
   - host: {{ .Values.api.domain }}
-{{- template "backend.paths" }}
+{{- include "backend.paths" . }}
   {{- range .Values.api.extraDomains }}
   - host: {{ . }}
-{{- template "backend.paths" }}
+{{- include "backend.paths" . }}
   {{- end }}
 
   {{- if eq .Values.tls true }}

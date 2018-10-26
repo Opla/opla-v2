@@ -10,7 +10,7 @@ const { prompt } = require("inquirer");
 const pkg = require("../package.json");
 const configuration = require("./configuration.js");
 
-const CONFIG_FILE = path.resolve(__dirname, "../config/default.json");
+const CONFIG_FILE = path.resolve(__dirname, "../config.json");
 const FLYWAY_CONFIG_FILE = path.resolve(__dirname, "../config/flyway.conf");
 const DESCRIPTION = `Management tool for ${pkg.description}`;
 

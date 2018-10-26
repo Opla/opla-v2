@@ -11,8 +11,8 @@ waitForDbConnection() {
 	done
 }
 
-if [ -f config/config.json ]; then
-	mv config/config.json config/default.json
+if [ -f config.json ]; then
+	echo "Config file already exists."
 else
 	./bin/opla init \
 		--non-interactive \
