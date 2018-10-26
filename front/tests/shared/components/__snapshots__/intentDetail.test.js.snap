@@ -148,7 +148,6 @@ exports[`components/intentDetail can render intent with special characters corre
                 }
               >
                 <span
-                  className={undefined}
                   data="text"
                   id="ae_start"
                   onClick={[Function]}
@@ -330,7 +329,6 @@ exports[`components/intentDetail can render intent with special characters corre
                 }
               >
                 <span
-                  className={undefined}
                   data="text"
                   id="ae_start"
                   onClick={[Function]}
@@ -686,7 +684,6 @@ exports[`components/intentDetail renders correctly 1`] = `
                 }
               >
                 <span
-                  className={undefined}
                   data="text"
                   id="ae_start"
                   onClick={[Function]}
@@ -868,7 +865,6 @@ exports[`components/intentDetail renders correctly 1`] = `
                 }
               >
                 <span
-                  className={undefined}
                   data="text"
                   id="ae_start"
                   onClick={[Function]}

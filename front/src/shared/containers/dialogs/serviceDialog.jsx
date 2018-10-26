@@ -37,7 +37,10 @@ export class ServiceDialogBase extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.lastMiddleware) {
+    if (
+      prevProps.lastMiddleware &&
+      prevProps.lastMiddleware !== this.props.lastMiddleware
+    ) {
       const instance = prevProps.lastMiddleware;
       this.setState({ instance });
     }

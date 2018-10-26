@@ -264,7 +264,6 @@ exports[`containers/CreateAssistant renders correctly 1`] = `
           >
             <input
               className="mdc-text-field__input"
-              defaultValue={undefined}
               id="create-assistant-email"
               onBlur={[Function]}
               onChange={[Function]}
