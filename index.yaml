@@ -2,8 +2,8 @@ apiVersion: v1
 entries:
   opla-backend:
   - appVersion: 0.1.0
-    created: 2018-10-24T15:11:44.238015876Z
-    digest: eec17b44a22c857a5445dd333c64e1b239a11a137037f7183464539345109555
+    created: 2018-10-26T11:07:52.352609223Z
+    digest: e5c724226ab2702b37c36bbf838076de0e88f62350320c1e06a7520bcf07c1dd
     name: opla-backend
     urls:
     - opla-backend-0.1.0.tgz
@@ -2046,4 +2046,4 @@ entries:
     urls:
     - opla-front-0.1.0-019ca472c4a08710eb4bd67b4571f8cdf4824d27.tgz
     version: 0.1.0-019ca472c4a08710eb4bd67b4571f8cdf4824d27
-generated: 2018-10-26T11:02:46.452560585Z
+generated: 2018-10-26T11:07:52.351615942Z
