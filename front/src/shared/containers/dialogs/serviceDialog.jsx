@@ -34,16 +34,6 @@ export class ServiceDialogBase extends Component {
     return null;
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.lastMiddleware &&
-      prevProps.lastMiddleware !== this.props.lastMiddleware
-    ) {
-      const instance = prevProps.lastMiddleware;
-      this.setState({ instance });
-    }
-  }
-
   loadSettingsComponent() {
     const { plugin } = this.props;
     const { name } = plugin;
@@ -148,7 +138,6 @@ export class ServiceDialogBase extends Component {
 
 ServiceDialogBase.defaultProps = {
   open: true,
-  instance: null,
   plugin: null,
   publicUrl: null,
   onClosed: null,

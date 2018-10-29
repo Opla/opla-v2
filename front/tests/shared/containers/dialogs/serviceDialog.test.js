@@ -14,22 +14,12 @@ describe("containers/serviceDialog", () => {
     const wrapper = shallow(
       <ServiceDialogBase
         open={true}
-        apiSetMiddlewareRequest={() => {}}
-        service={{ getTitle: () => {}, renderSettings: () => {} }}
-        instance={{}}
+        apiSetPluginRequest={() => {}}
+        plugin={{ name: "fb-messenger", title: "title" }}
       />,
     );
     expect(wrapper.state("openDialog")).toEqual(true);
     wrapper.setProps({ open: false });
     expect(wrapper.state("openDialog")).toEqual(false);
-
-    // state.instance is set to this.props.lastMiddleware
-    expect(wrapper.state("instance")).toEqual({});
-    wrapper.setProps({ lastMiddleware: { name: "foo" } });
-    expect(wrapper.state("instance")).toEqual({});
-
-    // lastMiddleware props
-    wrapper.setProps({ lastMiddleware: { name: "bar" } });
-    expect(wrapper.state("instance")).toEqual({ name: "foo" });
   });
 });
