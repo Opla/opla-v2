@@ -6,32 +6,21 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Zrmc, {
-  Grid,
-  Icon,
-  Inner,
-  Cell,
-  TextField,
-  Select,
-  MenuItem,
-} from "zrmc";
+import { Grid, Icon, Inner, Cell, TextField, Select, MenuItem } from "zrmc";
 import Panel from "zoapp-front/dist/components/panel";
 import { connect } from "react-redux";
-import PluginsManager from "../utils/pluginsManager";
-import MessagingsList from "../components/messagingsList";
-import DashboardActionBar from "../components/dashboardActionbar";
-import ServiceDialog from "./dialogs/serviceDialog";
 import {
-  apiGetMiddlewaresRequest,
-  apiSetMiddlewareRequest,
-  /* apiDeleteMiddlewareRequest, */
-  apiPublishRequest,
+  apiGetPluginsRequest,
+  apiSetPluginRequest,
+} from "zoapp-front/dist/actions/api";
+import DashboardActionBar from "../components/dashboardActionbar";
+import {
   apiSaveBotRequest,
   apiImportRequest,
   apiGetIntentsRequest,
 } from "../actions/api";
-import { appUpdatePublisher } from "../actions/app";
 import timezones from "../utils/timezones";
+import DashboardMessagings from "../components/dashboard/dashboardMessagings";
 
 export class DashboardBase extends Component {
   constructor(props) {
@@ -48,14 +37,21 @@ export class DashboardBase extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    // on bot change
     if (props.bot !== state.bot) {
       DashboardBase.loadIntents(props);
+      // load plugins used by this bot
+      DashboardBase.loadPlugins(props);
       return {
         bot: props.bot,
       };
     }
     return null;
   }
+
+  static loadPlugins = (props) => {
+    props.apiGetPluginsRequest(props.selectedBotId);
+  };
 
   handleBotNameChange = (e) => {
     const name = e.target.value;
@@ -100,159 +96,6 @@ export class DashboardBase extends Component {
   onSaveBotDetails = () => {
     this.props.apiSaveBotRequest(this.state.bot);
   };
-
-  onSelect = ({ /* name, */ state, /* index, */ item }) => {
-    const { service, instance } = item;
-    if (state === "enable") {
-      const serviceName = service.getName();
-      let publisher = this.props.publishers[serviceName];
-
-      let status;
-      if (publisher) {
-        ({ status } = publisher);
-      } else {
-        publisher = { name: serviceName };
-        ({ status } = service);
-      }
-
-      publisher.status = status === "start" ? null : "start";
-      // console.log("status ", publisher.status, status);
-      // this.setState({ servicesEnabled });
-      if (publisher.status === "start" && instance === undefined) {
-        const name = service.getName();
-        const pluginsManager = PluginsManager();
-        const newInstance = pluginsManager.instanciate(
-          name,
-          this.props.selectedBotId,
-        );
-        this.props.apiSetMiddlewareRequest(
-          this.props.selectedBotId,
-          newInstance,
-        );
-      }
-      this.props.appUpdatePublisher(this.props.selectedBotId, publisher);
-    } else {
-      const sdialog = (
-        <ServiceDialog
-          open
-          service={service}
-          instance={instance}
-          onClosed={this.handleCloseDialog}
-          store={this.props.store}
-        />
-      );
-      setTimeout(() => Zrmc.showDialog(sdialog), 100);
-    }
-  };
-
-  updateMiddlewares(needUpdate = false) {
-    if (needUpdate) {
-      this.setState({ isLoading: true });
-      // Call getMiddlewares
-      this.props.apiGetMiddlewaresRequest(
-        this.props.selectedBotId,
-        "MessengerConnector",
-      );
-    } else if (this.state.isLoading && !this.props.isLoading) {
-      this.setState({ isLoading: false });
-    }
-  }
-
-  getActives(pluginsManager, startedOnly = false) {
-    const servicesEnabled = this.props.publishers;
-    const actives = [];
-    if (this.props.middlewares && this.props.middlewares.length > 0) {
-      const { middlewares } = this.props;
-      middlewares.forEach((instance) => {
-        const service = pluginsManager.getPlugin(instance.name);
-        let status;
-        if (servicesEnabled[instance.name]) {
-          ({ status } = servicesEnabled[instance.name]);
-        } else {
-          ({ status } = instance);
-        }
-        const enabled = status === "start";
-        if (service && (enabled || !startedOnly)) {
-          actives.push({
-            name: service.getTitle(),
-            icon: service.getIcon(),
-            color: service.getColor(),
-            service,
-            instance,
-            enabled,
-            status: instance.status,
-          });
-        }
-      });
-    }
-    return actives;
-  }
-
-  getItemsServices(pluginsManager, actives = []) {
-    const services = pluginsManager.getPlugins({
-      type: "MessengerConnector",
-      activated: true,
-    });
-    const servicesEnabled = this.props.publishers;
-    const items = [];
-    services.forEach((service) => {
-      // TODO check if the item is already pushed
-      let active = null;
-      let i = 0;
-      for (; i < actives.length; i += 1) {
-        if (actives[i].service.getName() === service.getName()) {
-          active = actives[i];
-          break;
-        }
-      }
-      if (active) {
-        items.push(active);
-        actives.splice(i, 1);
-      } else {
-        let status;
-        if (servicesEnabled[service.getName()]) {
-          ({ status } = servicesEnabled[service.getName()]);
-        } else {
-          status = "closed";
-        }
-        const enabled = status === "start";
-        items.push({
-          name: service.getTitle(),
-          icon: service.getIcon(),
-          color: service.getColor(),
-          service,
-          enabled,
-          status,
-        });
-      }
-    });
-    return items;
-  }
-
-  renderMessagingPlatforms() {
-    let content = null;
-    if (this.state.isLoading) {
-      content = <div>Loading</div>;
-    } else {
-      const pluginsManager = PluginsManager();
-      const actives = this.getActives(pluginsManager);
-      const items = this.getItemsServices(pluginsManager, actives);
-      actives.forEach((active) => {
-        items.push(active);
-      });
-
-      content = (
-        <Panel
-          title="Publish to"
-          description="You could choose to connect this assistant on one or more of these platforms."
-        >
-          <MessagingsList items={items} onSelect={this.onSelect} />
-        </Panel>
-      );
-    }
-
-    return content;
-  }
 
   render() {
     if (this.props.bot === null) {
@@ -339,7 +182,11 @@ export class DashboardBase extends Component {
                 </div>
               </Panel>
             </form>
-            {this.renderMessagingPlatforms()}
+            <DashboardMessagings
+              apiSetPluginRequest={this.props.apiSetPluginRequest}
+              plugins={this.props.messagingPlugins}
+              selectedBotId={this.props.selectedBotId}
+            />
             <div className="opla-dashboard_actionbar">
               <DashboardActionBar
                 selectedBotId={this.props.selectedBotId}
@@ -363,10 +210,6 @@ DashboardBase.defaultProps = {
 DashboardBase.propTypes = {
   admin: PropTypes.shape({ params: PropTypes.shape({}).isRequired }),
   apiSaveBotRequest: PropTypes.func.isRequired,
-  appUpdatePublisher: PropTypes.func.isRequired,
-  apiGetMiddlewaresRequest: PropTypes.func.isRequired,
-  apiPublishRequest: PropTypes.func.isRequired,
-  apiSetMiddlewareRequest: PropTypes.func.isRequired,
   bot: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
@@ -376,48 +219,42 @@ DashboardBase.propTypes = {
   isLoading: PropTypes.bool,
   isSignedIn: PropTypes.bool,
   timezones: PropTypes.arrayOf(PropTypes.string).isRequired,
-  middlewares: PropTypes.arrayOf(PropTypes.shape({})),
   selectedBotId: PropTypes.string,
-  publishers: PropTypes.objectOf(PropTypes.shape({})),
-  store: PropTypes.shape({}),
   intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
   apiGetIntentsRequest: PropTypes.func.isRequired,
   apiImportRequest: PropTypes.func.isRequired,
+  apiSetPluginRequest: PropTypes.func.isRequired,
+  messagingPlugins: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
   const { admin } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  const middlewares = state.app ? state.app.middlewares : null;
-  const publishers = state.app.publishers || {};
   // TODO get selectedBot from selectBotId
   const bot = selectedBotId ? admin.bots[0] : null;
   const intents = state.app.intents ? state.app.intents : null;
+  const plugins = state.app.plugins || [];
+  const messagingPlugins = plugins.filter(
+    (plugin) => plugin.type === "MessengerConnector" && plugin.middleware,
+  );
 
   return {
     bot,
-    middlewares,
-    publishers,
     selectedBotId,
     intents,
+    messagingPlugins,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  appUpdatePublisher: (selectedBotId, publisher) => {
-    dispatch(appUpdatePublisher(selectedBotId, publisher));
-  },
   apiSaveBotRequest: (params) => {
     dispatch(apiSaveBotRequest(params));
   },
-  apiPublishRequest: (botId, publishers) => {
-    dispatch(apiPublishRequest(botId, publishers));
+  apiGetPluginsRequest: (botId) => {
+    dispatch(apiGetPluginsRequest(botId));
   },
-  apiGetMiddlewaresRequest: (botId, type) => {
-    dispatch(apiGetMiddlewaresRequest(botId, type));
-  },
-  apiSetMiddlewareRequest: (botId, middleware) => {
-    dispatch(apiSetMiddlewareRequest(botId, middleware));
+  apiSetPluginRequest: (plugin, botId) => {
+    dispatch(apiSetPluginRequest(plugin, botId));
   },
   apiImportRequest: (botId, data, options) => {
     dispatch(apiImportRequest(botId, data, options));
