@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-<code> :zap: Actual release is : v0.2 - Blooming Barboiry  :zap:</code>
+:zap:<code>Actual release is : v0.2 - Blooming Barboiry</code>:zap:
 </p>
 
 
