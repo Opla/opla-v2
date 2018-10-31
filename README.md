@@ -1,18 +1,78 @@
-# Opla [![CircleCI](https://circleci.com/gh/Opla/front.svg?style=svg)](https://circleci.com/gh/Opla/opla)
+<div align="center">
+ :jack_o_lantern:
+  <a href="https://opla.ai" target="_blank">
+    <img src="https://raw.githubusercontent.com/Opla/opla/master/front/src/public/images/opla-avatar.png" alt="Opla" width="64">
+  </a>
+  :ghost:
+</div>
+<h1 align="center">
+  Opla
+</h1>
+<h4 align="center">An amazing solution for creating chatbots :robot: or virtual assistants without coding.<br><code>FULLY opensource</code> </h4>
 
-## Run Opla
+<p align="center">
+  <a href="https://circleci.com/gh/Opla/opla" target="_blank">
+    <img src="https://circleci.com/gh/Opla/front.svg?style=svg"
+         alt="CircleCI">
+  </a>
+  <a href="https://gitter.im/Opla/community" target="_blank"><img src="https://badges.gitter.im/Opla/community.svg"></a>
+</p>
+
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#how-to-install">How To install</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
+</p>
+
+<p align="center">
+:zap:<code>Actual release is : v0.2 - Blooming Barboiry</code>:zap:
+</p>
+
+
+<div align="center">
+  <a href="https://opla.ai" target="_blank">
+    <img src="./public/images/builder.png" alt="builder" width="80%">
+  </a>
+</div>
+
+## Features
+
+We want to create the most powerful and easiest tool for chatbot and virtual assistants creation, nurturing, analyzing and management. It gives you a total control on your robot, using transparent and free technology.
+
+It combines:
+- A cool graphical interface
+- In-house NLP engine embedded :fire: ([openNLX](https://github.com/openNLX,openNLX)), transparency : no dependencies to any NLP api nor black tricks
+- Connectors to publish to Webchat and Facebook Messenger (soon available other platforms)
+- webhooks and plugins integration
+- Playground to instantly test your intents
+- Analytics
+
+
+We are working hard to add new features:
+- Entities editor
+- An interactive flow and scenarios display
+- A better playground debugger
+- other conversational UI components
+- And more candies
+- You could also [request a feature](https://github.com/Opla/opla/issues/new?template=feature_request.md)
+
+### Development
+
+Opla is framed by a frontend and a backend. For details about development in each of those, please see [front/README.md](front/README.md) and [backend/README.md](backend/README.md).
+
+We are using Javascript ES2018+, React, Node.js and other top notch tools.
+
+## How to install
 
 ### Run locally with docker-compose
 
 The quickest way to run opla locally is to follow [this guide](docker/README.md)
 
-## Development
 
-Opla is made of a frontend and a backend. For details about development in each of those, please see [front/README.md](front/README.md) and [backend/README.md](backend/README.md).
+### Deploy to your own Kubernetes cluster
 
-## Deploy to your own Kubernetes cluster
-
-### Requirements
+#### Requirements
 You will need :
 
 - (**required**) a Kubernetes cluster with LoadBalancer support. 
@@ -61,7 +121,7 @@ In general, if you need more details about how we deploy opla, you can have a lo
 ## Contributing
 Please, see the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
-## Contributor Code of Conduct
+### Contributor Code of Conduct
 Please note that this project is released with a [Contributor Code of
 Conduct](http://contributor-covenant.org/). By participating in this project you
 agree to abide by its terms. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file.
