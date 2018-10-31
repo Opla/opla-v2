@@ -85,7 +85,7 @@ jobs:
   backend_build:
     working_directory: ~/project/backend
     docker: 
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment:
       K8S_ENV: qa
       K8S_NAMESPACE: qa-ce
@@ -99,7 +99,7 @@ jobs:
   backend_e2e_tests:
     working_directory: ~/project/backend
     docker:
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment: 
       K8S_ENV: qa
       GCLOUD_CLUSTER_ID: qa
@@ -136,7 +136,7 @@ jobs:
   backup_prod:
     working_directory: ~/project/backend
     docker:
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment:
       K8S_ENV: prod
       K8S_NAMESPACE: prod-ce
@@ -154,7 +154,7 @@ jobs:
   backup_preprod:
     working_directory: ~/project/backend
     docker:
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment:
       K8S_ENV: preprod
       K8S_NAMESPACE: preprod-ce
@@ -193,7 +193,7 @@ jobs:
   front_build:
     working_directory: ~/project/front
     docker: 
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment:
       K8S_ENV: qa
       K8S_NAMESPACE: qa-ce
@@ -206,7 +206,7 @@ jobs:
 
   promote:
     docker: 
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     steps:
       - checkout: *checkout
       - setup_remote_docker
@@ -216,7 +216,7 @@ jobs:
 
   deploy_qa:
     docker:
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment:
       K8S_ENV: qa
       K8S_NAMESPACE: qa-ce
@@ -230,7 +230,7 @@ jobs:
 
   deploy_preprod:
     docker:
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment:
       K8S_ENV: preprod
       K8S_NAMESPACE: preprod-ce
@@ -244,7 +244,7 @@ jobs:
 
   deploy_prod:
     docker:
-      - image: licarth/ci-cd:latest
+      - image: opla/ci-cd:latest
     environment:
       K8S_ENV: prod
       K8S_NAMESPACE: prod-ce
