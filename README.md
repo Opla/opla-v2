@@ -1,18 +1,48 @@
-# Opla [![CircleCI](https://circleci.com/gh/Opla/front.svg?style=svg)](https://circleci.com/gh/Opla/opla)
+<h1 align="center">
+  <br>
+  <a href="https://opla.ai">
+    <img src="https://raw.githubusercontent.com/Opla/opla/master/front/src/public/images/opla-avatar.png" alt="Opla" width="64">
+  </a>
+  <br>
+  Opla
+  <br>
+</h1>
+<div align="center">
+  :robot:
+</div>
+<h4 align="center">An amazing fully opensource solution for chatbots or virtual assistants creation without coding.</h4>
 
-## Run Opla
+<p align="center">
+  <a href="https://circleci.com/gh/Opla/opla">
+    <img src="https://circleci.com/gh/Opla/front.svg?style=svg"
+         alt="CircleCI">
+  </a>
+  <a href="https://gitter.im/Opla"><img src="https://badges.gitter.im/Opla/community.svg"></a>
+</p>
+
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-install">How To install</a> •
+  <a href="#related">Contribute</a> •
+  <a href="#license">License</a>
+</p>
+
+## Key Features
+
+### Development
+
+Opla is made of a frontend and a backend. For details about development in each of those, please see [front/README.md](front/README.md) and [backend/README.md](backend/README.md).
+
+## How to install
 
 ### Run locally with docker-compose
 
 The quickest way to run opla locally is to follow [this guide](docker/README.md)
 
-## Development
 
-Opla is made of a frontend and a backend. For details about development in each of those, please see [front/README.md](front/README.md) and [backend/README.md](backend/README.md).
+### Deploy to your own Kubernetes cluster
 
-## Deploy to your own Kubernetes cluster
-
-### Requirements
+#### Requirements
 You will need :
 
 - (**required**) a Kubernetes cluster with LoadBalancer support. 
@@ -61,7 +91,7 @@ In general, if you need more details about how we deploy opla, you can have a lo
 ## Contributing
 Please, see the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
-## Contributor Code of Conduct
+### Contributor Code of Conduct
 Please note that this project is released with a [Contributor Code of
 Conduct](http://contributor-covenant.org/). By participating in this project you
 agree to abide by its terms. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file.
