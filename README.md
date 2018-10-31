@@ -53,7 +53,7 @@ We are working hard to add new features:
 - Entities editor
 - An interactive flow and scenarios display
 - A better playground debugger
-- More conversational UI components
+- other conversational UI components
 - And more candies
 - You could also [request a feature](https://github.com/Opla/opla/issues/new?template=feature_request.md)
 
