@@ -28,6 +28,13 @@
 
 ## Key Features
 
+We want to create the most powerfull and easiest tool for chatbot and virtual assistants.
+- a cool graphical interface
+- all included : no dependencies to any NLP api or black tricks
+- connectors to webchat and Facebook (soon other platforms)
+- webhooks
+- playground to test directly your intents
+
 <div align="center">
   <a href="https://opla.ai">
     <img src="./public/images/builder.png" alt="builder" width="80%">
