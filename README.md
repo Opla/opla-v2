@@ -4,10 +4,10 @@
   </a>
 </div>
 <h1 align="center">
-  :jack_o_lantern: Opla :ghost:
+  Opla
 </h1>
 <div align="center">
-  
+  :jack_o_lantern: :ghost:
 </div>
 <h4 align="center">An amazing solution for creating chatbots :robot: or virtual assistants without coding.<br><code>FULLY opensource</code> </h4>
 
@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-<code>Actual release is : v0.2 - Blooming Barboiry</code>
+<code> :zap: Actual release is : v0.2 - Blooming Barboiry  :zap:</code>
 </p>
 
 
@@ -37,13 +37,13 @@
   </a>
 </div>
 
-## Features :zap:
+## Features
 
 We want to create the most powerful and easiest tool for chatbot and virtual assistants creation, nurturing, analyzing and management. It gives you a total control on your robot, using transparent and free technology.
 
 It combines:
-- A cool graphical interface :fire:
-- In-house NLP engine embedded ([openNLX](https://github.com/openNLX,openNLX)), transparency : no dependencies to any NLP api nor black tricks
+- A cool graphical interface
+- In-house NLP engine embedded :fire: ([openNLX](https://github.com/openNLX,openNLX)), transparency : no dependencies to any NLP api nor black tricks
 - Connectors to publish to Webchat and Facebook Messenger (soon available other platforms)
 - webhooks and plugins integration
 - Playground to instantly test your intents
