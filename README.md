@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://opla.ai">
+  <a href="https://opla.ai" target="_blank">
     <img src="https://raw.githubusercontent.com/Opla/opla/master/front/src/public/images/opla-avatar.png" alt="Opla" width="64">
   </a>
 </div>
@@ -12,17 +12,17 @@
 <h4 align="center">An amazing solution for :robot: chatbots or virtual assistants creation without coding.<br>fully opensource </h4>
 
 <p align="center">
-  <a href="https://circleci.com/gh/Opla/opla">
+  <a href="https://circleci.com/gh/Opla/opla" target="_blank">
     <img src="https://circleci.com/gh/Opla/front.svg?style=svg"
          alt="CircleCI">
   </a>
-  <a href="https://gitter.im/Opla"><img src="https://badges.gitter.im/Opla/community.svg"></a>
+  <a href="https://gitter.im/Opla/community" target="_blank"><img src="https://badges.gitter.im/Opla/community.svg"></a>
 </p>
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-install">How To install</a> •
-  <a href="#related">Contribute</a> •
+  <a href="#contributing">Contributing</a> •
   <a href="#license">License</a>
 </p>
 
@@ -36,7 +36,7 @@ We want to create the most powerfull and easiest tool for chatbot and virtual as
 - playground to test directly your intents
 
 <div align="center">
-  <a href="https://opla.ai">
+  <a href="https://opla.ai" target="_blank">
     <img src="./public/images/builder.png" alt="builder" width="80%">
   </a>
 </div>
