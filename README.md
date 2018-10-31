@@ -1,16 +1,15 @@
-<h1 align="center">
-  <br>
+<div align="center">
   <a href="https://opla.ai">
     <img src="https://raw.githubusercontent.com/Opla/opla/master/front/src/public/images/opla-avatar.png" alt="Opla" width="64">
   </a>
-  <br>
+</div>
+<h1 align="center">
   Opla
-  <br>
 </h1>
 <div align="center">
-  :robot:
+  
 </div>
-<h4 align="center">An amazing fully opensource solution for chatbots or virtual assistants creation without coding.</h4>
+<h4 align="center">An amazing solution for :robot: chatbots or virtual assistants creation without coding.<br>fully opensource </h4>
 
 <p align="center">
   <a href="https://circleci.com/gh/Opla/opla">
@@ -28,6 +27,12 @@
 </p>
 
 ## Key Features
+
+<div align="center">
+  <a href="https://opla.ai">
+    <img src="./public/images/builder.png" alt="builder" width="80%">
+  </a>
+</div>
 
 ### Development
 
