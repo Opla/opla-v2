@@ -28,12 +28,25 @@
 
 ## Key Features
 
-We want to create the most powerfull and easiest tool for chatbot and virtual assistants.
-- a cool graphical interface
-- all included : no dependencies to any NLP api or black tricks
-- connectors to webchat and Facebook (soon other platforms)
-- webhooks
-- playground to test directly your intents
+We want to create the most powerfull and easiest tool for chatbot and virtual assistants creation, nurturing and management. It gives you a total control on your robot, using transparent and free technology.
+
+Actual release is : v0.2 - Blooming Barboiry
+
+It combines:
+- A cool graphical interface
+- NLP engine embedded ([openNLX](https://github.com/openNLX,openNLX)), transparency : no dependencies to any NLP api nor black tricks
+- Connectors to publish to Webchat and Facebook Messenger (soon available other platforms)
+- webhooks and plugins integration
+- Playground to instantly test your intents
+- Analytics
+
+
+We are working hard to add new features:
+- Entities editor
+- An interactive flow and scenarios display
+- A better playground debugger
+- More conversational UI components
+- And more, you could also [request a feature](https://github.com/Opla/opla/issues/new?template=feature_request.md)
 
 <div align="center">
   <a href="https://opla.ai" target="_blank">
@@ -43,7 +56,7 @@ We want to create the most powerfull and easiest tool for chatbot and virtual as
 
 ### Development
 
-Opla is made of a frontend and a backend. For details about development in each of those, please see [front/README.md](front/README.md) and [backend/README.md](backend/README.md).
+Opla is framed of a frontend and a backend. For details about development in each of those, please see [front/README.md](front/README.md) and [backend/README.md](backend/README.md).
 
 ## How to install
 
