@@ -1,9 +1,7 @@
 <div align="center">
- :jack_o_lantern:
   <a href="https://opla.ai" target="_blank">
     <img src="https://raw.githubusercontent.com/Opla/opla/master/front/src/public/images/opla-avatar.png" alt="Opla" width="64">
   </a>
-  :ghost:
 </div>
 <h1 align="center">
   Opla
