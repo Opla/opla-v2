@@ -30,6 +30,7 @@ export class DashboardBase extends Component {
       bot: props.bot,
     };
     DashboardBase.loadIntents(props);
+    DashboardBase.loadPlugins(props);
   }
 
   static loadIntents(props) {

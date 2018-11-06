@@ -69,7 +69,7 @@ export default class extends Controller {
     return r ? null : { error: "Can't create user" };
   }
 
-  async publish(botId, publisher, channels, toVersion, fromVersion) {
+  async publish(botId, publisher, toVersion, fromVersion) {
     // WIP
     const bot = await this.model.getBot(botId, publisher.id);
     let res = null;
@@ -79,6 +79,10 @@ export default class extends Controller {
       }
       const versionId = this.model.generateId(48);
       bot.publishedVersionId = versionId;
+      // get all MessengerConnector started middlewares
+      const messengerMiddlewares = await this.zoapp.controllers
+        .getMiddlewares()
+        .list({ type: "MessengerConnector", origin: botId, status: "start" });
       await this.model.setBot(bot);
       const action = "publishBot";
       // this.dispatchIntentAction(botId, action, { bot, publisher });
@@ -88,7 +92,7 @@ export default class extends Controller {
         bot,
         version: versionId,
         publisher,
-        channels,
+        channels: messengerMiddlewares,
       });
       const intents = await this.model.getIntents(botId, fromVersion);
       res = await this.duplicateIntents(botId, intents, versionId);

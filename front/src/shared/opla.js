@@ -25,7 +25,7 @@ import { defaultTemplates, defaultLanguages } from "./reducers/app";
 import config from "../../config/default.json";
 
 let store = null;
-const handleOpenPublishDialog = () => {
+const handlePublishBot = () => {
   const dialog = React.createElement(PublishDialog, { open: true, store });
   Zrmc.showDialog(dialog);
 };
@@ -77,7 +77,7 @@ const appProps = {
       toolbox: [
         {
           title: "Publish",
-          onAction: handleOpenPublishDialog,
+          onAction: handlePublishBot,
           color: "var(--mdc-theme-text-primary-on-primary,#fff)",
           backgroundColor: "var(--mdc-theme-primary,#6200ee)",
         },

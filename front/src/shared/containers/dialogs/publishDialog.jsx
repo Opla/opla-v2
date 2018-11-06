@@ -16,148 +16,41 @@ import Zrmc, {
   ListItem,
 } from "zrmc";
 import { connect } from "react-redux";
-import PluginsManager from "../../utils/pluginsManager";
-import MessagingsList from "../../components/messagingsList";
-import {
-  apiGetMiddlewaresRequest,
-  apiSetMiddlewareRequest,
-  /* apiDeleteMiddlewareRequest, */
-  apiPublishRequest,
-} from "../../actions/api";
+import { apiGetPluginsRequest } from "zoapp-front/dist/actions/api";
+import { apiPublishRequest } from "../../actions/api";
 import { appUpdatePublisher } from "../../actions/app";
 
-class PublishDialog extends Component {
+class PublishDialogBase extends Component {
   constructor(props) {
     super(props);
     const openDialog = props.open;
-    this.state = { openDialog, isLoading: true };
-  }
-
-  componentDidMount() {
-    this.updateMiddlewares(true);
-  }
-
-  componentDidUpdate() {
-    this.updateMiddlewares();
-  }
-
-  getInstance(name) {
-    const { middlewares } = this.props;
-    const pluginsManager = PluginsManager();
-    const index = middlewares.findIndex(
-      (middleware) => middleware.name === name,
-    );
-    let instance = null;
-    if (index > -1) {
-      instance = middlewares[index];
-    } else {
-      instance = pluginsManager.instanciate(name, this.props.selectedBotId);
-    }
-    return instance;
-  }
-
-  onAction = (/* action */) => {
-    // console.log("WIP onAction=", action);
-    // TODO check if services are available
-    const { publishers, middlewares } = this.props;
-    const keys = Object.keys(publishers);
-
-    if (keys.length === 0) {
-      setTimeout(() => {
-        Zrmc.showDialog({
-          header: "Error",
-          body: "You need at least one service started !",
-          onAction: this.handleCloseDialog,
-        });
-      }, 100);
-    }
-
-    /* const unpublish = {};
-    if (keys && keys.length > 0) {
-      keys.forEach((k) => {
-        const pub = publishers[k];
-        if (pub.status !== "start") {
-          unpublish[k] = pub;
-          delete publishers[k];
-          const index = middlewares.findIndex(
-            (middleware) => middleware.name === k,
-          );
-
-          if (index > -1) {
-            delete middlewares[index];
-          }
-        }
-      });
-    } */
-    // console.log("publisher", publishers);
-    // console.log("middlewares", middlewares);
-    const publishersKey = Object.keys(publishers);
-    if (publishersKey.length > 0 || (middlewares && middlewares.length > 0)) {
-      const channels = [];
-      publishersKey.forEach((key) => {
-        const instance = this.getInstance(key, middlewares);
-        instance.status = publishers[key].status;
-        channels.push(instance);
-      });
-      // console.log("channels", channels);
-      this.props.apiPublishRequest(this.props.selectedBotId, channels);
-    }
-
-    const updateMiddleware = (plugins) => {
-      const pluginsKey = Object.keys(plugins);
-      pluginsKey.forEach((key) => {
-        // console.log("plugin=", plugins[key]);
-        const instance = this.getInstance(key);
-        if (plugins[key].status) {
-          instance.status = plugins[key].status;
-        }
-        this.props.apiSetMiddlewareRequest(this.props.selectedBotId, instance);
-      });
+    this.state = {
+      selectedBotId: props.selectedBotId,
+      openDialog,
     };
+    // Publish bot
+    PublishDialogBase.publishBot(props);
+    PublishDialogBase.loadPlugins(props);
+  }
 
-    updateMiddleware(publishers);
-    // updateMiddleware(unpublish);
-    this.updateMiddlewares(true);
+  static getDerivedStateFromProps(props, state) {
+    // on bot change
+    if (props.selectedBotId !== state.selectedBotId) {
+      // load plugins used by this bot
+      PublishDialogBase.loadPlugins(props);
+      return {
+        selectedBotId: props.selectedBotId,
+      };
+    }
+    return null;
+  }
 
-    // TODO display published dialog with links to service's messenger
-    setTimeout(() => {
-      Zrmc.closeDialog();
-      const pluginsManager = PluginsManager();
-      const items = this.getActives(pluginsManager, true);
-      Zrmc.showDialog({
-        header: "Published to platforms",
-        body:
-          items.length > 0 ? (
-            <List twoLine>
-              {items.map((item) => {
-                let url = "";
-                if (item.instance) {
-                  ({ url } = item.instance);
-                  const regex = /^(http|https).*$/;
-                  if (regex.test(url) === false) {
-                    url = `${window.location.origin}${url}`;
-                  }
-                }
+  static loadPlugins = (props) => {
+    props.apiGetPluginsRequest(props.selectedBotId);
+  };
 
-                return (
-                  <ListItem
-                    key={item.name}
-                    secondaryText={url}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    {item.name}
-                  </ListItem>
-                );
-              })}
-            </List>
-          ) : (
-            <div>Nothing published</div>
-          ),
-        onAction: this.handleCloseDialog,
-      });
-    }, 100);
+  static publishBot = (props) => {
+    props.apiPublishRequest(props.selectedBotId);
   };
 
   handleCloseDialog = () => {
@@ -166,119 +59,36 @@ class PublishDialog extends Component {
     }, 100);
   };
 
-  updateMiddlewares(needUpdate = false) {
-    if (needUpdate) {
-      this.setState({ isLoading: true });
-      // Call getMiddlewares
-      this.props.apiGetMiddlewaresRequest(
-        this.props.selectedBotId,
-        "MessengerConnector",
-      );
-    } else if (this.state.isLoading && !this.props.isLoading) {
-      this.setState({ isLoading: false });
-    }
-  }
-
-  getActives(pluginsManager, startedOnly = false) {
-    const servicesEnabled = this.props.publishers;
-    const actives = [];
-    if (this.props.middlewares && this.props.middlewares.length > 0) {
-      const { middlewares } = this.props;
-      middlewares.forEach((instance) => {
-        const service = pluginsManager.getPlugin(instance.name);
-        let status;
-        if (servicesEnabled[instance.name]) {
-          ({ status } = servicesEnabled[instance.name]);
-        } else {
-          ({ status } = instance);
+  PublishDialogList = (props) => (
+    <List twoLine>
+      {props.items.map((item) => {
+        let url = "";
+        if (item.middleware) {
+          ({ url } = item.middleware);
+          const regex = /^(http|https).*$/;
+          if (regex.test(url) === false) {
+            url = `${window.location.origin}${url}`;
+          }
         }
-        const enabled = status === "start";
-        if (enabled || !startedOnly) {
-          actives.push({
-            name: service.getTitle(),
-            icon: service.getIcon(),
-            color: service.getColor(),
-            service,
-            instance,
-            enabled,
-            status: instance.status,
-          });
-        }
-      });
-    }
-    return actives;
-  }
 
-  getItemsServices(pluginsManager, actives = []) {
-    const services = pluginsManager.getPlugins({
-      type: "MessengerConnector",
-      activated: true,
-    });
-    const servicesEnabled = this.props.publishers;
-    const items = [];
-    services.forEach((service) => {
-      // TODO check if the item is already pushed
-      let active = null;
-      let i = 0;
-      for (; i < actives.length; i += 1) {
-        if (actives[i].service.getName() === service.getName()) {
-          active = actives[i];
-          break;
-        }
-      }
-      if (active) {
-        items.push(active);
-        actives.splice(i, 1);
-      } else {
-        let status;
-        if (servicesEnabled[service.getName()]) {
-          ({ status } = servicesEnabled[service.getName()]);
-        } else {
-          status = "closed";
-        }
-        const enabled = status === "start";
-        items.push({
-          name: service.getTitle(),
-          icon: service.getIcon(),
-          color: service.getColor(),
-          service,
-          enabled,
-          status,
-        });
-      }
-    });
-    return items;
-  }
-
-  renderDialog() {
-    let content = null;
-    if (this.state.isLoading) {
-      content = <div>Loading</div>;
-    } else {
-      const pluginsManager = PluginsManager();
-      const actives = this.getActives(pluginsManager);
-      const items = this.getItemsServices(pluginsManager, actives);
-      actives.forEach((active) => {
-        items.push(active);
-      });
-
-      content = (
-        <div style={{ marginBottom: "48px" }}>
-          <MessagingsList
-            items={items}
-            name="Choose messaging platform(s) to publish to"
-            onSelect={this.onSelect}
-          />
-        </div>
-      );
-    }
-
-    return content;
-  }
+        return (
+          <ListItem
+            key={item.title}
+            secondaryText={url}
+            href={url}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            {item.title}
+          </ListItem>
+        );
+      })}
+    </List>
+  );
 
   render() {
-    const title = "Publish";
     const style = { width: "550px" };
+    const items = this.props.pluginsToPublish;
 
     return (
       <Dialog
@@ -286,8 +96,14 @@ class PublishDialog extends Component {
         style={style}
         onClose={this.handleCloseDialog}
       >
-        <DialogHeader>{title}</DialogHeader>
-        <DialogBody>{this.renderDialog()}</DialogBody>
+        <DialogHeader>Published to platforms</DialogHeader>
+        <DialogBody>
+          {items.length > 0 ? (
+            <this.PublishDialogList items={items} />
+          ) : (
+            <div>Nothing published</div>
+          )}
+        </DialogBody>
         <DialogFooter>
           <Button
             type="button"
@@ -296,16 +112,7 @@ class PublishDialog extends Component {
               this.handleCloseDialog();
             }}
           >
-            Cancel
-          </Button>
-          <Button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              this.onAction("publish");
-            }}
-          >
-            Validate
+            Ok
           </Button>
         </DialogFooter>
       </Dialog>
@@ -313,40 +120,35 @@ class PublishDialog extends Component {
   }
 }
 
-PublishDialog.defaultProps = {
+PublishDialogBase.defaultProps = {
   open: true,
-  middlewares: null,
   selectedBotId: null,
-  isLoading: false,
-  publishers: null,
   store: null,
 };
 
-PublishDialog.propTypes = {
+PublishDialogBase.propTypes = {
   open: PropTypes.bool,
-  middlewares: PropTypes.arrayOf(PropTypes.shape({})),
   selectedBotId: PropTypes.string,
-  isLoading: PropTypes.bool,
   publishers: PropTypes.objectOf(PropTypes.shape({})),
+  pluginsToPublish: PropTypes.array,
   store: PropTypes.shape({}),
-  appUpdatePublisher: PropTypes.func.isRequired,
-  apiGetMiddlewaresRequest: PropTypes.func.isRequired,
+  apiGetPluginsRequest: PropTypes.func.isRequired,
   apiPublishRequest: PropTypes.func.isRequired,
-  apiSetMiddlewareRequest: PropTypes.func.isRequired,
-  // apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const middlewares = state.app ? state.app.middlewares : null;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   // const isSignedIn = state.user ? state.user.isSignedIn : false;
-  const isLoading = state.app.loading;
-  const publishers = state.app.publishers || {};
+  const plugins = state.app.plugins || [];
+  const pluginsToPublish = plugins.filter(
+    (plugin) =>
+      plugin.type === "MessengerConnector" &&
+      plugin.middleware &&
+      plugin.middleware.status === "start",
+  );
   return {
-    middlewares,
     selectedBotId,
-    isLoading,
-    publishers,
+    pluginsToPublish,
   };
 };
 
@@ -354,22 +156,16 @@ const mapDispatchToProps = (dispatch) => ({
   appUpdatePublisher: (botId, publisher) => {
     dispatch(appUpdatePublisher(botId, publisher));
   },
-  apiPublishRequest: (botId, publishers) => {
-    dispatch(apiPublishRequest(botId, publishers));
+  apiPublishRequest: (botId) => {
+    dispatch(apiPublishRequest(botId));
   },
-  apiGetMiddlewaresRequest: (botId, type) => {
-    dispatch(apiGetMiddlewaresRequest(botId, type));
+  apiGetPluginsRequest: (botId) => {
+    dispatch(apiGetPluginsRequest(botId));
   },
-  apiSetMiddlewareRequest: (botId, middleware) => {
-    dispatch(apiSetMiddlewareRequest(botId, middleware));
-  },
-  /* apiDeleteMiddlewareRequest: (botId, middleware) => {
-    dispatch(apiDeleteMiddlewareRequest(botId, middleware));
-  }, */
 });
 
 // prettier-ignore
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PublishDialog);
+)(PublishDialogBase);

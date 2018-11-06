@@ -64,11 +64,10 @@ export function apiImportRequest(botId, data, options) {
   };
 }
 
-export function apiPublishRequest(botId, channels, to = null, from = null) {
+export function apiPublishRequest(botId, to = null, from = null) {
   return {
     type: API_PUBLISH + FETCH_REQUEST,
     botId,
-    channels,
     to,
     from,
   };
