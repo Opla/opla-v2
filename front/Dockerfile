@@ -26,6 +26,7 @@ COPY ./ /src
 VOLUME "/src/config"
 
 RUN printf "{}\n" > config/default.json \
+    && yarn install \
     && yarn build:prod \
     && chmod u+x ./bin/opla ./bin/entrypoint.sh
 
