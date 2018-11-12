@@ -11,7 +11,6 @@ import Zrmc, {
   Icon,
   Inner,
   Cell,
-  Button,
   TextField,
   Select,
   MenuItem,
@@ -20,6 +19,7 @@ import Panel from "zoapp-front/dist/components/panel";
 import { connect } from "react-redux";
 import PluginsManager from "../utils/pluginsManager";
 import MessagingsList from "../components/messagingsList";
+import DashboardActionBar from "../components/dashboardActionbar";
 import ServiceDialog from "./dialogs/serviceDialog";
 import {
   apiGetMiddlewaresRequest,
@@ -27,6 +27,8 @@ import {
   /* apiDeleteMiddlewareRequest, */
   apiPublishRequest,
   apiSaveBotRequest,
+  apiImportRequest,
+  apiGetIntentsRequest,
 } from "../actions/api";
 import { appUpdatePublisher } from "../actions/app";
 import timezones from "../utils/timezones";
@@ -38,10 +40,16 @@ export class DashboardBase extends Component {
     this.state = {
       bot: props.bot,
     };
+    DashboardBase.loadIntents(props);
+  }
+
+  static loadIntents(props) {
+    props.apiGetIntentsRequest(props.selectedBotId);
   }
 
   static getDerivedStateFromProps(props, state) {
     if (props.bot !== state.bot) {
+      DashboardBase.loadIntents(props);
       return {
         bot: props.bot,
       };
@@ -333,15 +341,12 @@ export class DashboardBase extends Component {
             </form>
             {this.renderMessagingPlatforms()}
             <div className="opla-dashboard_actionbar">
-              <Button dense outlined>
-                Import/Export data
-              </Button>
-              <Button dense outlined>
-                Duplicate
-              </Button>
-              <Button dense outlined className="warning">
-                Delete
-              </Button>
+              <DashboardActionBar
+                selectedBotId={this.props.selectedBotId}
+                bot={this.props.bot}
+                intents={this.props.intents}
+                apiImportRequest={this.props.apiImportRequest}
+              />
             </div>
           </Cell>
         </Inner>
@@ -375,6 +380,9 @@ DashboardBase.propTypes = {
   selectedBotId: PropTypes.string,
   publishers: PropTypes.objectOf(PropTypes.shape({})),
   store: PropTypes.shape({}),
+  intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+  apiGetIntentsRequest: PropTypes.func.isRequired,
+  apiImportRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -384,12 +392,14 @@ const mapStateToProps = (state) => {
   const publishers = state.app.publishers || {};
   // TODO get selectedBot from selectBotId
   const bot = selectedBotId ? admin.bots[0] : null;
+  const intents = state.app.intents ? state.app.intents : null;
 
   return {
     bot,
     middlewares,
     publishers,
     selectedBotId,
+    intents,
   };
 };
 
@@ -408,6 +418,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiSetMiddlewareRequest: (botId, middleware) => {
     dispatch(apiSetMiddlewareRequest(botId, middleware));
+  },
+  apiImportRequest: (botId, data, options) => {
+    dispatch(apiImportRequest(botId, data, options));
+  },
+  apiGetIntentsRequest: (botId) => {
+    dispatch(apiGetIntentsRequest(botId));
   },
 });
 

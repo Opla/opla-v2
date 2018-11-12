@@ -220,7 +220,12 @@ class IODialog extends Component {
           <section style={{ display: p1 }}>
             <Button
               raised
-              style={{ width: "100%", marginTop: "20px" }}
+              dense
+              style={{
+                width: "100%",
+                marginTop: "20px",
+                backgroundColor: "#3F67E2",
+              }}
               onClick={() => this.props.onDownload()}
             >
               Download as json
@@ -237,7 +242,11 @@ class IODialog extends Component {
             <Button
               className="zui-button--file"
               raised
-              style={{ width: "100%", marginTop: "30px" }}
+              style={{
+                width: "100%",
+                marginTop: "30px",
+                backgroundColor: "#3F67E2",
+              }}
             >
               Upload datasets
               <input
