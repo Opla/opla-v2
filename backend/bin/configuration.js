@@ -23,9 +23,7 @@ function createConfiguration(pkg, answers) {
       gateway: {
         url: answers.gatewayUrl,
       },
-    },
-    backend: {
-      managementEndpoint: false
+      management_endpoint: false,
     },
     auth: {
       database: {
