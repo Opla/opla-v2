@@ -3406,6 +3406,11 @@ lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
+lodash@^4.17.11:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
 long@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
@@ -5496,13 +5501,15 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-zoapp-backend@0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.24.0.tgz#010db50630eb8b0740135f6cc6833c66894de1b5"
+zoapp-backend@0.24.4:
+  version "0.24.4"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.24.4.tgz#4e39244e6a3965ed58d49fd98e514a53bf646e1a"
+  integrity sha512-QoCIjtxO4yGOG3IRvf7MdY0r9n6jmlHMccSwXL9yOw+S/PSQnulucEdnylBRO6BiTX/aSTfyw2h/equt/ZY3MQ==
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"
     localtunnel "1.9.1"
+    lodash "^4.17.11"
     node-fetch "^2.1.2"
     nodemailer "^4.6.5"
     validate.js "^0.12.0"

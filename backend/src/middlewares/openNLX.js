@@ -290,7 +290,7 @@ class OpenNLXMiddleware {
   }
 
   static async doCall(middlewares, botId, func, parameters) {
-    const wss = await middlewares.list(botId, "WebService");
+    const wss = await middlewares.list({ origin: botId, type: "WebService" });
     if (wss && wss.length > 0) {
       const ws = wss[0];
       if (ws) {
