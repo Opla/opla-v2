@@ -16,7 +16,10 @@ export default class PublishConnectorMiddleware {
 
   async initChannels() {
     const controller = this.getMiddlewaresController();
-    const middlewares = await controller.list(null, "MessengerConnector");
+    const middlewares = await controller.list({
+      origin: null,
+      type: "MessengerConnector",
+    });
 
     if (Array.isArray(middlewares) && middlewares.length > 0) {
       middlewares.forEach((channel) => {
@@ -38,7 +41,10 @@ export default class PublishConnectorMiddleware {
 
   async publishBot(data) {
     const controller = this.getMiddlewaresController();
-    const middlewares = await controller.list(data.botId, "MessengerConnector");
+    const middlewares = await controller.list({
+      origin: data.botId,
+      type: "MessengerConnector",
+    });
     // logger.info("publishBot register channels=", data.channels);
     if (Array.isArray(data.channels) && data.channels.length > 0) {
       const actions = [];

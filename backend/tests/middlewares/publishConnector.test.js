@@ -40,7 +40,7 @@ describe("PublishConnectorMiddleware", () => {
         listMock.mockReturnValue([registeredMiddleware]);
         const registerMock = jest.fn();
         MiddlewaresController.mockImplementation(() => ({
-          list: (botId, type) => listMock(botId, type),
+          list: (options) => listMock(options),
           register: (middleware) => registerMock(middleware),
         }));
 
@@ -60,7 +60,10 @@ describe("PublishConnectorMiddleware", () => {
         const middleware = new PublishConnectorMiddleware(controllers);
         await middleware.onDispatch("foo", data);
 
-        expect(listMock).toHaveBeenCalledWith("foo", "MessengerConnector");
+        expect(listMock).toHaveBeenCalledWith({
+          origin: "foo",
+          type: "MessengerConnector",
+        });
         expect(registerMock).toHaveBeenCalledWith({
           ...registeredMiddleware,
         });
