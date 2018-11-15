@@ -15,15 +15,12 @@ import {
   apiSendIntentRequest,
   apiDeleteIntentRequest,
   apiSaveBotRequest,
-  apiImportRequest,
 } from "../actions/api";
 import { appUpdateIntent } from "../actions/app";
 import Dashboard from "./dashboard";
 import Analytics from "./analytics";
 import Builder from "./builder";
 import PlaygroundContainer from "./playgroundContainer";
-import IODialog from "./dialogs/ioDialog";
-import FileManager from "../utils/fileManager";
 
 class Factory extends Component {
   constructor(props) {
@@ -105,25 +102,6 @@ class Factory extends Component {
     return true;
   };
 
-  onImportData = (data, options) => {
-    if (
-      options.filetype === "application/json" ||
-      options.filetype === "text/csv"
-    ) {
-      // WIP detect format
-      this.props.apiImportRequest(this.props.selectedBotId, data, options);
-    }
-  };
-
-  onDownloadData = () => {
-    const { name } = this.props.bot;
-    const data = { name, intents: this.props.intents };
-    const json = JSON.stringify(data);
-    FileManager.download(json, `${name}.json`, "application/json,.csv", () => {
-      /* console.log("ExplorerContainer.onDownload=", name); */
-    });
-  };
-
   onEditWelcome = (dialog, action) => {
     if (action === "Save") {
       const welcome = dialog.getFieldValue();
@@ -194,21 +172,6 @@ class Factory extends Component {
     });
   };
 
-  handleExportImport = (importOnly = false) => {
-    const dialog = (
-      <IODialog
-        open
-        importOnly={importOnly}
-        store={this.props.store}
-        onClosed={this.handleCloseDialog}
-        accept="application/json"
-        onDownload={this.onDownloadData}
-        onImport={this.onImportData}
-      />
-    );
-    Zrmc.showDialog(dialog);
-  };
-
   handlePlaygroundAction = (action, defaultValue = "", data = {}) => {
     if (action === "welcomeMessage") {
       const field = {
@@ -270,7 +233,6 @@ class Factory extends Component {
     } else if (active === 1) {
       screen = (
         <Builder
-          onExportImort={this.handleExportImport}
           onRenameIntent={this.handleRenameIntent}
           onAddIntent={this.handleAddIntent}
           onDeleteIntent={this.handleDeleteIntent}
@@ -348,7 +310,6 @@ Factory.propTypes = {
   apiSendIntentRequest: PropTypes.func.isRequired,
   apiDeleteIntentRequest: PropTypes.func.isRequired,
   apiSaveBotRequest: PropTypes.func.isRequired,
-  apiImportRequest: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
 };
 
@@ -400,9 +361,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiSaveBotRequest: (bot) => {
     dispatch(apiSaveBotRequest(bot));
-  },
-  apiImportRequest: (botId, data, options) => {
-    dispatch(apiImportRequest(botId, data, options));
   },
   appUpdateIntent: (botId, intent) => {
     dispatch(appUpdateIntent(botId, intent));
