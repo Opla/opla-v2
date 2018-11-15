@@ -1241,6 +1241,13 @@ entries:
     - opla-backend-0.1.0-227fe767bed4846b0d20eca00346c70ba9376e34.tgz
     version: 0.1.0-227fe767bed4846b0d20eca00346c70ba9376e34
   - appVersion: 0.1.0
+    created: 2018-11-15T15:47:38.037243599Z
+    digest: 6d694104c6b72fbade98eecf29b65603618803384acf8f0de9ac8731a6e4b1d4
+    name: opla-backend
+    urls:
+    - opla-backend-0.1.0-2023f5ee2a2804b365b5bb66b9c2baffbe9425cc.tgz
+    version: 0.1.0-2023f5ee2a2804b365b5bb66b9c2baffbe9425cc
+  - appVersion: 0.1.0
     created: 2018-10-31T16:51:10.265465236Z
     digest: ecd0216487b3c800e080d7a5a91c065679b1cfc7298d10772863e1d9a051e9f5
     name: opla-backend
@@ -2711,4 +2718,4 @@ entries:
     urls:
     - opla-front-0.1.0-00405a7e2ca9cbc9668abd1a80e878b84e85dfd3.tgz
     version: 0.1.0-00405a7e2ca9cbc9668abd1a80e878b84e85dfd3
-generated: 2018-11-15T15:44:48.80436406Z
+generated: 2018-11-15T15:47:38.035953925Z
