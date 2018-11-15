@@ -15,7 +15,9 @@ spec:
       paths:
       {{- with $.Values.api.management_endpoint }}
       - path: /api/v1{{.}}
-        backend: {}
+        backend:
+          serviceName: none
+          servicePort: 80
       {{- end }}
       - path: /api
         backend:
