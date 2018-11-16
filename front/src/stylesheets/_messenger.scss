@@ -126,6 +126,10 @@
   opacity: 0;
 }
 
+.message img {
+  max-width: 240px;
+}
+
 .message .text-wrapper:before {
   content: '';
   width: 0;
