@@ -8,6 +8,7 @@
 import createWebChatPlugin from "./webchat";
 import createOpenNLXConnector from "./openNLX";
 import FBMessengerPlugin from "./fb-messenger";
+import JSONWebservice from "./json-webservice";
 
 const plugins = (zoapp) => {
   const list = [];
@@ -17,6 +18,7 @@ const plugins = (zoapp) => {
   plugin = createOpenNLXConnector(zoapp);
   list.push(plugin);
   list.push(FBMessengerPlugin());
+  list.push(JSONWebservice());
   return list;
 };
 export default plugins;

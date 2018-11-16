@@ -157,15 +157,9 @@ class FBSettings extends Component {
   }
 }
 
-FBSettings.defaultProps = {
-  settings: null,
-  onAction: null,
-};
-
 FBSettings.propTypes = {
   plugin: PropTypes.shape({ middleware: PropTypes.shape({}) }),
   botId: PropTypes.string,
-  onAction: PropTypes.func,
   handleSavePlugin: PropTypes.func.isRequired,
 };
 

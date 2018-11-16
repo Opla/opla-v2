@@ -188,13 +188,19 @@ class ServicesContainer extends Component {
           items = this.getPluginsByType("MessengerConnector");
           this.displayPluginsList(items);
           break;
-
+        case "Web services":
+          items = this.getPluginsByType("WebService");
+          this.displayPluginsList(items);
+          break;
         default:
           break;
       }
     }
     if (state === "select" || state === "create") {
       if (name === "Messaging platforms") {
+        this.displayPluginSettings(plugin);
+      }
+      if (name === "Web services") {
         this.displayPluginSettings(plugin);
       }
     }
@@ -491,7 +497,6 @@ class ServicesContainer extends Component {
   }
 
   render() {
-    const webservices = this.getMiddlewares("WebService");
     // WIP : need to get from backend which provider is activated/running
     const ais = this.getPluginsByType("AIConnector");
 
@@ -546,10 +551,10 @@ class ServicesContainer extends Component {
                 />
               </svg>
             }
-            items={webservices}
+            items={this.props.webservices}
             defaultIcon="images/webhook.svg"
             description={"Plug any data or api to interact with an assistant."}
-            onSelect={this.onSelect}
+            onSelect={this.handleSelect}
           />
         </Cell>
       </div>
@@ -571,6 +576,7 @@ ServicesContainer.propTypes = {
   middlewares: PropTypes.arrayOf(PropTypes.shape({})),
   plugins: PropTypes.arrayOf(PropTypes.shape({})),
   messagings: PropTypes.arrayOf(PropTypes.shape({})),
+  webservices: PropTypes.arrayOf(PropTypes.shape({})),
   apiGetMiddlewaresRequest: PropTypes.func.isRequired,
   apiSetMiddlewareRequest: PropTypes.func.isRequired,
   apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
@@ -590,7 +596,18 @@ const mapStateToProps = (state) => {
     (plugin) =>
       plugin && plugin.type === "MessengerConnector" && !!plugin.middleware,
   );
-  return { middlewares, plugins, messagings, selectedBotId, isSignedIn };
+  const webservices = plugins.filter(
+    (plugin) => plugin && plugin.type === "WebService" && !!plugin.middleware,
+  );
+
+  return {
+    middlewares,
+    plugins,
+    messagings,
+    webservices,
+    selectedBotId,
+    isSignedIn,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
