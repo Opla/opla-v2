@@ -117,6 +117,11 @@ export default class extends Controller {
     return id;
   }
 
+  async deleteConversationMessages(conversationId) {
+    return this.model.deleteConversationMessages(conversationId);
+    // TODO dispatch message
+  }
+
   async deleteConversations(user, origin, isAdmin = false) {
     return this.model.deleteConversations(user, origin, isAdmin);
     // TODO dispatch message
