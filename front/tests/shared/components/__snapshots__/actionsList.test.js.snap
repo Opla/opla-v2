@@ -141,6 +141,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}
@@ -217,6 +218,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_start"
                 onClick={[Function]}
@@ -288,6 +290,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_start"
                 onClick={[Function]}
@@ -359,6 +362,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_start"
                 onClick={[Function]}
@@ -430,6 +434,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_start"
                 onClick={[Function]}
@@ -501,6 +506,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_start"
                 onClick={[Function]}
@@ -572,6 +578,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_start"
                 onClick={[Function]}
@@ -643,6 +650,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_start"
                 onClick={[Function]}
@@ -817,6 +825,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}
@@ -893,6 +902,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_0"
                 onClick={[Function]}
@@ -964,6 +974,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_0"
                 onClick={[Function]}
@@ -1035,6 +1046,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_0"
                 onClick={[Function]}
@@ -1106,6 +1118,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_0"
                 onClick={[Function]}
@@ -1177,6 +1190,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_0"
                 onClick={[Function]}
@@ -1248,6 +1262,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_0"
                 onClick={[Function]}
@@ -1319,6 +1334,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
               }
             >
               <span
+                className={undefined}
                 data="text"
                 id="ae_0"
                 onClick={[Function]}
@@ -1493,6 +1509,7 @@ exports[`components/actionsList can have an unique id 1`] = `
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}
@@ -1671,6 +1688,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}
@@ -1849,6 +1867,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}
@@ -2027,6 +2046,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}
@@ -2205,6 +2225,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}
@@ -2383,6 +2404,7 @@ exports[`components/actionsList renders correctly 1`] = `
             }
           >
             <span
+              className={undefined}
               data="text"
               id="ae_start"
               onClick={[Function]}

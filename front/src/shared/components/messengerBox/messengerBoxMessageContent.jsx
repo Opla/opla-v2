@@ -78,13 +78,22 @@ const MessengerBoxMessageContent = (props) => {
             );
           } else if (el.type === "br") {
             return <br key={i} />;
-          } else if (el.type === "a") {
+          } else if (el.type === "a" || el.type === "img") {
             let href = el.value;
             let text = href;
             const s = href.indexOf("|");
             if (s > 0) {
               text = href.substring(s + 1);
               href = href.substring(0, s);
+            }
+            const h = href.toLowerCase();
+            if (
+              h.indexOf(".png") > 0 ||
+              h.indexOf(".gif") > 0 ||
+              h.indexOf(".jpg") > 0 ||
+              h.indexOf(".jpeg") > 0
+            ) {
+              return <img key={i} src={href} alt={text} />;
             }
             return (
               <a key={i} href={href} target="_blank" rel="noopener noreferrer">
@@ -93,14 +102,19 @@ const MessengerBoxMessageContent = (props) => {
             );
           }
           const body = StringTools.htmlLink(el.value);
-          return <span key={i} dangerouslySetInnerHTML={{ __html: body }} />;
+          if (body.indexOf("<a") >= 0 || body.indexOf("<img") >= 0) {
+            return <span dangerouslySetInnerHTML={{ __html: body }} />;
+          }
+          return body;
         })}
       </span>
     );
     /* eslint-enable no-restricted-syntax */
   } else {
-    const body = StringTools.htmlLink(message.body);
-    html = <span dangerouslySetInnerHTML={{ __html: body }} />;
+    html = StringTools.htmlLink(message.body);
+    if (html.indexOf("<a") >= 0 || html.indexOf("<img") >= 0) {
+      html = <span dangerouslySetInnerHTML={{ __html: html }} />;
+    }
   }
   return html;
 };

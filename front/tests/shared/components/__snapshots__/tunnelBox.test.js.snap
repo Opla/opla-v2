@@ -105,11 +105,13 @@ exports[`components/tunnelBox renders correctly 1`] = `
       >
         <input
           className="mdc-text-field__input"
+          defaultValue={undefined}
           id="unique-component-id"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
           type="text"
+          value={undefined}
         />
         <label
           className="mdc-floating-label"
@@ -135,11 +137,13 @@ exports[`components/tunnelBox renders correctly 1`] = `
       >
         <input
           className="mdc-text-field__input"
+          defaultValue={undefined}
           id="unique-component-id"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
           type="text"
+          value={undefined}
         />
         <label
           className="mdc-floating-label"
@@ -165,11 +169,13 @@ exports[`components/tunnelBox renders correctly 1`] = `
       >
         <input
           className="mdc-text-field__input"
+          defaultValue={undefined}
           id="unique-component-id"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
           type="text"
+          value={undefined}
         />
         <label
           className="mdc-floating-label"
