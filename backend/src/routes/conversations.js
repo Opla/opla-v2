@@ -16,6 +16,9 @@ export default class extends CommonRoutes {
     this.conversationById = this.conversationById.bind(this);
     this.conversationMessages = this.conversationMessages.bind(this);
     this.newConversation = this.newConversation.bind(this);
+    this.deleteConversationMessages = this.deleteConversationMessages.bind(
+      this,
+    );
     this.newMessage = this.newMessage.bind(this);
   }
 
@@ -60,6 +63,22 @@ export default class extends CommonRoutes {
       .getConversationMessages(me, conversationId, since);
     if (payload === null) {
       return { error: "can't find conversation's messages" };
+    }
+    return payload;
+  }
+
+  async deleteConversationMessages(context) {
+    const me = await this.access(context);
+    const { conversationId } = context.getParams();
+    const messengerCt = this.extensions.getMessenger();
+    const conversation = await messengerCt.getConversation(me);
+    let payload;
+    if (conversation) {
+      await messengerCt.deleteConversationMessages(conversationId);
+      payload = [conversationId];
+    }
+    if (!payload || payload.length < 1) {
+      return { error: "can't delete conversation" };
     }
     return payload;
   }

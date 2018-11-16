@@ -30,6 +30,26 @@ class MessengerModel extends Model {
     );
   }
 
+  /* async deleteConversationMessages(user, conversationId, origin = null) {
+    const collection = this.database.getTable("conversations");
+    const coll = this.database.getTable("messages");
+    const conversations = await this.getAuthorConversations(
+      user,
+      origin,
+      collection,
+    );
+    const c = [];
+    const self = this;
+    conversations.forEach(async (conversation) => {
+      if (conversation.id === conversationId) {
+        await collection.deleteItem(conversation.id);
+        await self.deleteConversationMessages(conversation.id, coll);
+        c.push(conversation.id);
+      }
+    });
+    return c;
+  } */
+
   async deleteConversations(user, origin = null) {
     const collection = this.database.getTable("conversations");
     const coll = this.database.getTable("messages");

@@ -40,6 +40,13 @@ export default (zoapp) => {
     ["*", "admin", "master"],
     conversations.conversationMessages,
   );
+  // Delete conversation's messages from its id
+  route.add(
+    "DELETE",
+    "/:conversationId/messages",
+    ["*", "admin", "master"],
+    conversations.deleteConversationMessages,
+  );
   // Publish a new message in a conversation
   route.add(
     "POST",
