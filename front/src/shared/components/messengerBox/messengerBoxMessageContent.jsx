@@ -9,6 +9,7 @@ import React from "react";
 // import React, { Component } from "react";
 import { Button } from "zrmc";
 import PropTypes from "prop-types";
+import StringTools from "../../utils/stringTools";
 
 const MessengerBoxMessageContent = (props) => {
   const { message } = props;
@@ -77,14 +78,29 @@ const MessengerBoxMessageContent = (props) => {
             );
           } else if (el.type === "br") {
             return <br key={i} />;
+          } else if (el.type === "a") {
+            let href = el.value;
+            let text = href;
+            const s = href.indexOf("|");
+            if (s > 0) {
+              text = href.substring(s + 1);
+              href = href.substring(0, s);
+            }
+            return (
+              <a key={i} href={href} target="_blank" rel="noopener noreferrer">
+                {text}
+              </a>
+            );
           }
-          return el.value;
+          const body = StringTools.htmlLink(el.value);
+          return <span key={i} dangerouslySetInnerHTML={{ __html: body }} />;
         })}
       </span>
     );
     /* eslint-enable no-restricted-syntax */
   } else {
-    html = <span>{message.body}</span>;
+    const body = StringTools.htmlLink(message.body);
+    html = <span dangerouslySetInnerHTML={{ __html: body }} />;
   }
   return html;
 };
