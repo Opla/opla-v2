@@ -47,20 +47,32 @@ class JSONWebservice extends abstractPlugin {
 
   async onMiddlewareRegister(middleware) {
     this.middleware = middleware;
-    if (middleware.origin) {
+    const newMiddleware = middleware;
+    if (newMiddleware.origin) {
       // add code here
       // example:
       // if (!middleware.url) {
       //   // this.middleware.url = `${config.global.botSite.url}${name}`;
       //   // this.middleware.token = name;
       // }
+
+      // generate a unique secret for middleware,
+      // allow to create multiple middlewares
+      // with same name and origin
+      if (!newMiddleware.secret) {
+        const secret = Math.random()
+          .toString(36)
+          .substring(7);
+        newMiddleware.secret = secret;
+      }
     } else {
       logger.info("No origin for jsonwebservice ", middleware.id);
     }
 
     // set middleware.onDispatch if needed
 
-    return middleware;
+    this.middleware = newMiddleware;
+    return newMiddleware;
   }
 
   // async onMiddlewareUnregister(middleware) {

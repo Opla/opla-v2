@@ -17,6 +17,7 @@ import {
   apiDeletePluginRequest,
 } from "zoapp-front/dist/actions/api";
 
+import { getInstalledPlugins } from "../selectors/pluginsSelector";
 import ServiceDialog from "./dialogs/serviceDialog";
 
 import displayProviderEditor from "../components/displayProviderEditor";
@@ -140,14 +141,13 @@ class ServicesContainer extends Component {
   displayPluginsList(plugins) {
     const className = "zui-dialog-list";
     const title = "Add a messaging platform";
-    let disabledPlugins = plugins.filter((plugin) => !plugin.middleware);
     // ids will by used as ListItem keys
-    disabledPlugins = disabledPlugins.map((plugin, index) => ({
+    const indexedPlugins = plugins.map((plugin, index) => ({
       ...plugin,
       id: index,
     }));
-    disabledPlugins.push({
-      id: disabledPlugins.length + 1,
+    indexedPlugins.push({
+      id: indexedPlugins.length + 1,
       name: "Add plugin",
       icon: "add",
       color: "gray",
@@ -157,11 +157,11 @@ class ServicesContainer extends Component {
         <ListComponent
           className="list-content"
           style={{ padding: "0px", height: "100%" }}
-          items={disabledPlugins}
+          items={indexedPlugins}
           selectedItem={-1}
           onSelect={(i) => {
             Zrmc.closeDialog();
-            this.displayPluginSettings(disabledPlugins[i]);
+            this.displayPluginSettings(indexedPlugins[i]);
           }}
         />
       </div>
@@ -499,7 +499,6 @@ class ServicesContainer extends Component {
   render() {
     // WIP : need to get from backend which provider is activated/running
     const ais = this.getPluginsByType("AIConnector");
-
     return (
       <div style={divCellStyle}>
         <Cell className="zui-color--white" span={12}>
@@ -592,19 +591,15 @@ const mapStateToProps = (state) => {
   const isSignedIn = state.user ? state.user.isSignedIn : false;
 
   const plugins = state.app ? state.app.plugins : [];
-  const messagings = plugins.filter(
-    (plugin) =>
-      plugin && plugin.type === "MessengerConnector" && !!plugin.middleware,
-  );
-  const webservices = plugins.filter(
-    (plugin) => plugin && plugin.type === "WebService" && !!plugin.middleware,
-  );
+
+  const installedPlugins = getInstalledPlugins(plugins);
 
   return {
     middlewares,
     plugins,
-    messagings,
-    webservices,
+    messagings: installedPlugins.MessengerConnector || [],
+    webservices: installedPlugins.WebService || [],
+    aiprovider: installedPlugins.AIProvider || [],
     selectedBotId,
     isSignedIn,
   };

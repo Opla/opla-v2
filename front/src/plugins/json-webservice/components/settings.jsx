@@ -17,7 +17,6 @@ class JSONWebserviceSettings extends Component {
     const defaultSettings = {
       title: "test",
       url: "",
-      secret: "",
     };
 
     this.state = {
@@ -73,16 +72,6 @@ class JSONWebserviceSettings extends Component {
           onChange={this.handleInputChange}
           pattern=".+"
           label="Url"
-          error="Wrong value"
-          style={{ width: "100%" }}
-        />
-        <TextField
-          name="secret"
-          value={this.state.secret}
-          defaultValue={this.state.secret}
-          onChange={this.handleInputChange}
-          pattern=".+"
-          label="Secret"
           error="Wrong value"
           style={{ width: "100%" }}
         />

@@ -17,6 +17,7 @@ import Zrmc, {
 } from "zrmc";
 import { connect } from "react-redux";
 import { apiGetPluginsRequest } from "zoapp-front/dist/actions/api";
+import { getInstalledPlugins } from "../../selectors/pluginsSelector";
 import { apiPublishRequest } from "../../actions/api";
 import { appUpdatePublisher } from "../../actions/app";
 
@@ -140,7 +141,11 @@ const mapStateToProps = (state) => {
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   // const isSignedIn = state.user ? state.user.isSignedIn : false;
   const plugins = state.app.plugins || [];
-  const pluginsToPublish = plugins.filter(
+
+  const installedPlugins = getInstalledPlugins(plugins);
+
+  const messengerConnector = installedPlugins.MessengerConnector;
+  const pluginsToPublish = messengerConnector.filter(
     (plugin) =>
       plugin.type === "MessengerConnector" &&
       plugin.middleware &&

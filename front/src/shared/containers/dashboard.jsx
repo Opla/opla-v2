@@ -13,6 +13,7 @@ import {
   apiGetPluginsRequest,
   apiSetPluginRequest,
 } from "zoapp-front/dist/actions/api";
+import { getInstalledPlugins } from "../selectors/pluginsSelector";
 import DashboardActionBar from "../components/dashboardActionbar";
 import {
   apiSaveBotRequest,
@@ -235,15 +236,14 @@ const mapStateToProps = (state) => {
   const bot = selectedBotId ? admin.bots[0] : null;
   const intents = state.app.intents ? state.app.intents : null;
   const plugins = state.app.plugins || [];
-  const messagingPlugins = plugins.filter(
-    (plugin) => plugin.type === "MessengerConnector" && plugin.middleware,
-  );
+
+  const installedPlugins = getInstalledPlugins(plugins);
 
   return {
     bot,
     selectedBotId,
     intents,
-    messagingPlugins,
+    messagingPlugins: installedPlugins.MessengerConnector || [],
   };
 };
 
