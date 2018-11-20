@@ -141,15 +141,15 @@ class ServicesContainer extends Component {
       }
     }
     if (state === "select" || state === "create") {
-      if (name === "Messaging platforms") {
-        this.displayPluginSettings(plugin);
-      }
-      if (name === "Web services") {
-        this.displayPluginSettings(plugin);
-      }
-      if (name === "AI/NLU providers") {
+      switch (name) {
         // // Uncomment to enable AIConnector settings
-        // this.displayPluginSettings(plugin);
+        // case "AI/NLU providers":
+        case "Messaging platforms":
+        case "Web services":
+          this.displayPluginSettings(plugin);
+          break;
+        default:
+          break;
       }
     }
     if (state === "delete") {
