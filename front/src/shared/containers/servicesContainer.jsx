@@ -146,12 +146,12 @@ class ServicesContainer extends Component {
       ...plugin,
       id: index,
     }));
-    indexedPlugins.push({
-      id: indexedPlugins.length + 1,
-      name: "Add plugin",
-      icon: "add",
-      color: "gray",
-    });
+    // indexedPlugins.push({
+    //   id: indexedPlugins.length + 1,
+    //   name: "Add plugin",
+    //   icon: "add",
+    //   color: "gray",
+    // });
     const content = (
       <div style={{ height: "280px" }}>
         <ListComponent
@@ -192,6 +192,11 @@ class ServicesContainer extends Component {
           items = this.getPluginsByType("WebService");
           this.displayPluginsList(items);
           break;
+        case "AI/NLU providers":
+          // // Uncomment to enable ADD AIConnector
+          // items = this.getPluginsByType("AIConnector");
+          // this.displayPluginsList(items);
+          break;
         default:
           break;
       }
@@ -202,6 +207,10 @@ class ServicesContainer extends Component {
       }
       if (name === "Web services") {
         this.displayPluginSettings(plugin);
+      }
+      if (name === "AI/NLU providers") {
+        // // Uncomment to enable AIConnector settings
+        // this.displayPluginSettings(plugin);
       }
     }
     if (state === "delete") {
@@ -498,7 +507,6 @@ class ServicesContainer extends Component {
 
   render() {
     // WIP : need to get from backend which provider is activated/running
-    const ais = this.getPluginsByType("AIConnector");
     return (
       <div style={divCellStyle}>
         <Cell className="zui-color--white" span={12}>
@@ -534,9 +542,9 @@ class ServicesContainer extends Component {
             description={
               "Switch the brain of an assistant, to choose the best match."
             }
-            items={ais}
+            items={this.props.AIConnector}
             defaultIcon="images/robot.svg"
-            onSelect={this.onSelect}
+            onSelect={this.handleSelect}
           />
         </Cell>
         <Cell className="zui-color--white" span={12}>
@@ -576,6 +584,7 @@ ServicesContainer.propTypes = {
   plugins: PropTypes.arrayOf(PropTypes.shape({})),
   messagings: PropTypes.arrayOf(PropTypes.shape({})),
   webservices: PropTypes.arrayOf(PropTypes.shape({})),
+  AIConnector: PropTypes.arrayOf(PropTypes.shape({})),
   apiGetMiddlewaresRequest: PropTypes.func.isRequired,
   apiSetMiddlewareRequest: PropTypes.func.isRequired,
   apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
@@ -599,7 +608,7 @@ const mapStateToProps = (state) => {
     plugins,
     messagings: installedPlugins.MessengerConnector || [],
     webservices: installedPlugins.WebService || [],
-    aiprovider: installedPlugins.AIProvider || [],
+    AIConnector: installedPlugins.AIConnector || [],
     selectedBotId,
     isSignedIn,
   };
