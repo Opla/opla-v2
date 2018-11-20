@@ -14,17 +14,19 @@ export default class PublishConnectorMiddleware {
     this.initChannels();
   }
 
+  /**
+   * Get all "messengerConnector" middlewares and register them on middlewaresController
+   */
   async initChannels() {
-    const controller = this.getMiddlewaresController();
-    const middlewares = await controller.list({
-      origin: null,
+    const middlewaresController = this.getMiddlewaresController();
+    const middlewares = await middlewaresController.list({
       type: "MessengerConnector",
     });
 
     if (Array.isArray(middlewares) && middlewares.length > 0) {
-      middlewares.forEach((channel) => {
+      middlewares.forEach((middleware) => {
         // logger.info("init register channel=", index, channel);
-        controller.register(channel);
+        middlewaresController.register(middleware);
       });
     }
   }
