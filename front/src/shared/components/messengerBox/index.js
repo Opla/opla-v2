@@ -135,8 +135,9 @@ class MessengerBox extends Component {
     this.props.onAction("addInput", inputText, message);
   };
   // let
-  intentActionGoto = (e) => {
+  intentActionGoto = (message) => (e) => {
     e.preventDefault();
+    this.props.onAction("gotoIntent", "", message.debug);
     // TODO Goto intent
   };
   // let
@@ -260,7 +261,7 @@ class MessengerBox extends Component {
               let intentLink = "#NotFoundIntent.";
               let messageActions = "";
               let actionLink = this.intentActionLink;
-              let actionGoto = this.intentActionGoto;
+              let actionGoto = this.intentActionGoto(message);
               if (notError) {
                 intentLink = `#${debug.intent.name}.`;
                 intentLinkClassName = "message-intent-link";

@@ -16,7 +16,7 @@ import {
   apiSendIntentRequest,
   apiDeleteIntentRequest,
 } from "../actions/api";
-import { appUpdateIntent } from "../actions/app";
+import { appUpdateIntent, appSelectIntent } from "../actions/app";
 import Dashboard from "./dashboard";
 import Analytics from "./analytics";
 import Builder from "./builder";
@@ -209,6 +209,12 @@ class Factory extends Component {
         delete intent.notSaved;
         this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
       }
+    } else if (action === "gotoIntent") {
+      const { intent } = data;
+      const intentIndex =
+        this.props.intents.find((i) => i.id === intent.id).order - 1;
+      this.props.appSelectIntent(this.props.selectedBotId, intentIndex);
+      // TODO manage goto specific input and rename this function
     }
     // console.log("botManager.handlePlaygroundAction", action);
   };
@@ -319,6 +325,7 @@ Factory.propTypes = {
   apiDeleteIntentRequest: PropTypes.func.isRequired,
   apiSaveBotRequest: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
+  appSelectIntent: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -370,6 +377,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   appUpdateIntent: (botId, intent) => {
     dispatch(appUpdateIntent(botId, intent));
+  },
+  appSelectIntent: (botId, intentIndex) => {
+    dispatch(appSelectIntent(botId, intentIndex));
   },
 });
 
