@@ -354,10 +354,16 @@ workflows:
       - e2e_qa:
           requires:
             - deploy_qa
+      - request_prod:
+          type: approval
+          requires:
+            - e2e_qa
+            - e2e_preprod
       - deploy_prod:
           requires:
             - e2e_qa
             - e2e_preprod
+            - request_prod
   backup_daily:
     triggers:
       - schedule:
