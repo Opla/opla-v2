@@ -5985,10 +5985,10 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-zoapp-backend@0.24.4:
-  version "0.24.4"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.24.4.tgz#4e39244e6a3965ed58d49fd98e514a53bf646e1a"
-  integrity sha512-QoCIjtxO4yGOG3IRvf7MdY0r9n6jmlHMccSwXL9yOw+S/PSQnulucEdnylBRO6BiTX/aSTfyw2h/equt/ZY3MQ==
+zoapp-backend@0.24.5:
+  version "0.24.5"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.24.5.tgz#06aba1d34582f65e1a810f1f79f234ed842dfe46"
+  integrity sha512-ADKTVM35//NbeYVwuLnH6H5OZ9l+CEQG2FXtL/Dbc01lU6jQaA8jiBIZD6EoWV8IH65JinL+7BWaODOFfMwMlw==
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"
