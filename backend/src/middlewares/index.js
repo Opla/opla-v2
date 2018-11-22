@@ -8,15 +8,17 @@
 import OpenNLXMiddleware from "./openNLX";
 import PublishConnectorMiddleware from "./publishConnector";
 
-const initMiddlewares = (middlewaresManager, controllers) => {
+const initMiddlewares = (middlewaresController, extensionsController) => {
   // TODO dynamic loading
   logger.info("initMiddlewares");
-  const middleware = new OpenNLXMiddleware(controllers);
-  middlewaresManager
+  const middleware = new OpenNLXMiddleware(extensionsController);
+  middlewaresController
     .attach(middleware.getProperties())
     .then((m) => middleware.init(m));
 
-  const connectorMiddleware = new PublishConnectorMiddleware(controllers);
-  middlewaresManager.attach(connectorMiddleware.getProperties());
+  const connectorMiddleware = new PublishConnectorMiddleware(
+    extensionsController,
+  );
+  middlewaresController.attach(connectorMiddleware.getProperties());
 };
 export default initMiddlewares;

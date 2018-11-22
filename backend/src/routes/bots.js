@@ -209,12 +209,9 @@ export default class extends CommonRoutes {
     const { botId } = context.getParams();
     /* const scope = context.getScope();
     const isAdmin = scope === "master" || scope === "admin"; */
-    const { channels } = context.getBody();
     const fromVersion = context.getBody().from;
     const toVersion = context.getBody().to || "pub";
-    return this.extensions
-      .getBots()
-      .publish(botId, me, channels, toVersion, fromVersion);
+    return this.extensions.getBots().publish(botId, me, toVersion, fromVersion);
   }
 
   async intents(context) {

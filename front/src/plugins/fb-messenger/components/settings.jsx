@@ -9,18 +9,60 @@ import PropTypes from "prop-types";
 import { TextField, Icon } from "zrmc";
 
 class FBSettings extends Component {
-  onAction = (action) => {
-    if (action === "Manual") {
-      // TODO
-    }
+  constructor(props) {
+    super(props);
+    const settings = props.plugin.middleware;
+    // const { name, title, icon, color, url, type, origin } = props.plugin;
+    const defaultSettings = {
+      botName: "facebookbot",
+      accessToken: "accessToken",
+      url: "url://",
+      verifyToken: Math.random()
+        .toString(36)
+        .substring(2),
+      classes: ["messenger", "bot", "sandbox"],
+    };
+    const mergedSettings = {
+      ...defaultSettings,
+      ...settings,
+    };
 
-    if (this.props.onAction) {
-      this.props.onAction(action);
+    this.state = {
+      botName: mergedSettings.botName,
+      accessToken: mergedSettings.accessToken,
+      url: mergedSettings.url,
+      verifyToken: mergedSettings.verifyToken,
+      classes: mergedSettings.classes,
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const { target } = event;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const { name } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+  onAction = (action) => {
+    if (action === "save") {
+      const middlewareSettings = {
+        ...this.props.plugin.middleware,
+        origin: this.props.botId,
+        // status: "plugin2",
+        ...this.state,
+      };
+      const newPlugin = {
+        ...this.props.plugin,
+        middleware: middlewareSettings,
+      };
+      this.props.handleSavePlugin(newPlugin);
     }
   };
 
   render() {
-    const instance = this.props.instance || {};
     const style = {
       width: "502px",
       position: "relative",
@@ -30,10 +72,12 @@ class FBSettings extends Component {
       <div style={style}>
         <div>
           <TextField
+            name="botName"
             label="Bot name"
             pattern="[a-zA-Z0-9\.-]+"
-            value={instance.botName}
-            onChange={() => {}}
+            value={this.state.botName}
+            defaultValue={this.state.botName}
+            onChange={this.handleInputChange}
             spellCheck={false}
             style={{ width: "320px" }}
             required
@@ -42,10 +86,12 @@ class FBSettings extends Component {
             }}
           />
           <TextField
+            name="accessToken"
             label="Page Access Token"
             pattern="[a-zA-Z0-9\.-]+"
-            value={instance.accessToken}
-            onChange={() => {}}
+            defaultValue={this.state.accessToken}
+            value={this.state.accessToken}
+            onChange={this.handleInputChange}
             spellCheck={false}
             style={{ width: "320px" }}
             required
@@ -54,10 +100,12 @@ class FBSettings extends Component {
             }}
           />
           <TextField
+            name="verifyToken"
             label="Verify Token"
             pattern="[a-zA-Z0-9\.-]+"
-            value={instance.verifyToken}
-            onChange={() => {}}
+            defaultValue={this.state.verifyToken}
+            value={this.state.verifyToken}
+            onChange={this.handleInputChange}
             spellCheck={false}
             style={{ width: "320px" }}
             required
@@ -69,6 +117,8 @@ class FBSettings extends Component {
             <TextField
               label="Callback url"
               spellCheck={false}
+              defaultValue={this.state.url}
+              value={this.state.url}
               error="You need an https public url !"
               style={{ width: "320px" }}
               disabled
@@ -107,14 +157,10 @@ class FBSettings extends Component {
   }
 }
 
-FBSettings.defaultProps = {
-  instance: null,
-  onAction: null,
-};
-
 FBSettings.propTypes = {
-  instance: PropTypes.shape({}),
-  onAction: PropTypes.func,
+  plugin: PropTypes.shape({ middleware: PropTypes.shape({}) }),
+  botId: PropTypes.string,
+  handleSavePlugin: PropTypes.func.isRequired,
 };
 
 export default FBSettings;

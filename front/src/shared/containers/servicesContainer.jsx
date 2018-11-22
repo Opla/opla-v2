@@ -10,14 +10,14 @@ import { connect } from "react-redux";
 import Zrmc, { Cell } from "zrmc";
 import { ListComponent } from "zoapp-ui";
 import ServicesList from "zoapp-front/dist/components/servicesList";
-import displayWebServiceEditor from "zoapp-front/dist/components/displayWebServiceEditor";
-
-import displayProviderEditor from "../components/displayProviderEditor";
 import {
-  apiGetMiddlewaresRequest,
-  apiSetMiddlewareRequest,
-  apiDeleteMiddlewareRequest,
-} from "../actions/api";
+  apiGetPluginsRequest,
+  apiSetPluginRequest,
+  apiDeletePluginRequest,
+} from "zoapp-front/dist/actions/api";
+
+import { getInstalledPlugins } from "../selectors/pluginsSelector";
+import ServiceDialog from "./dialogs/serviceDialog";
 
 const divCellStyle = {
   width: "100%",
@@ -27,6 +27,10 @@ class ServicesContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { needUpdate: true };
+    this.handlePluginSelect = this.displayPluginSettings.bind(this);
+    this.displayPluginSettings = this.displayPluginSettings.bind(this);
+    this.displayPluginsList = this.displayPluginsList.bind(this);
+    this.handlePluginDelete = this.handlePluginDelete.bind(this);
   }
 
   componentDidMount() {
@@ -37,357 +41,126 @@ class ServicesContainer extends Component {
     this.updateServices();
   }
 
-  onEditAction = (dialog, editAction) => {
-    const { name, index } = this.currentSelected;
+  handlePluginDelete(plugin) {
+    Zrmc.showDialog({
+      header: plugin.title,
+      body: "Do you want to delete it ?",
+      actions: [{ name: "Cancel" }, { name: "Delete" }],
+      onAction: (dialog, action) => {
+        switch (action) {
+          case "Delete":
+            this.props.apiDeletePluginRequest(plugin, this.props.selectedBotId);
+            Zrmc.closeDialog();
+            break;
 
-    if (editAction === "Change" || editAction === "Add") {
-      // WIP
-      const params = {};
-      Object.keys(this.paramFields).forEach((inputName) => {
-        const value = this.paramFields[inputName].inputRef.value.trim();
-        if (value && value.length > 0) {
-          params[inputName] = value;
+          default:
+            // cancel
+            Zrmc.closeDialog();
+            break;
         }
-      }, this);
-      if (name === "Web services") {
-        if (editAction === "Change") {
-          const webservices = this.getMiddlewares("WebService");
-          const wh = webservices[index];
-          params.id = wh.id;
-          params.status = wh.status;
-        }
-        const botId = this.props.selectedBotId;
-        params.origin = botId;
-        if (params.classes) {
-          params.classes = params.classes.split(",");
-        }
-        if (!params.path) {
-          params.path = "/";
-        }
-        if (!params.status) {
-          params.status = "start";
-        }
-        params.remote = true;
-        params.type = "WebService";
-        this.props.apiSetMiddlewareRequest(botId, params);
-        this.setState({ needUpdate: true });
-      }
-    } else if (editAction === "Delete") {
-      // WIP
-      if (name === "Web services") {
-        const webservices = this.getMiddlewares("WebService");
-        const wh = webservices[index];
-        const botId = this.props.selectedBotId;
-        this.props.apiDeleteMiddlewareRequest(botId, wh);
-        this.setState({ needUpdate: true });
+      },
+      className: plugin.className,
+    });
+  }
+
+  displayPluginSettings(plugin) {
+    const sdialog = (
+      <ServiceDialog
+        open
+        plugin={plugin}
+        botId={this.props.selectedBotId}
+        onClosed={this.handleCloseDialog}
+        apiSetPluginRequest={(newPlugin) => {
+          this.props.apiSetPluginRequest(newPlugin, this.props.selectedBotId);
+        }}
+      />
+    );
+    setTimeout(() => Zrmc.showDialog(sdialog), 100);
+  }
+
+  displayPluginsList(plugins) {
+    const className = "zui-dialog-list";
+    const title = "Add a messaging platform";
+    // ids will by used as ListItem keys
+    const indexedPlugins = plugins.map((plugin, index) => ({
+      ...plugin,
+      id: index,
+    }));
+    // indexedPlugins.push({
+    //   id: indexedPlugins.length + 1,
+    //   name: "Add plugin",
+    //   icon: "add",
+    //   color: "gray",
+    // });
+    const content = (
+      <div style={{ height: "280px" }}>
+        <ListComponent
+          className="list-content"
+          style={{ padding: "0px", height: "100%" }}
+          items={indexedPlugins}
+          selectedItem={-1}
+          onSelect={(i) => {
+            Zrmc.closeDialog();
+            this.displayPluginSettings(indexedPlugins[i]);
+          }}
+        />
+      </div>
+    );
+    Zrmc.showDialog({
+      header: title,
+      body: content,
+      actions: [{ name: "Cancel" }],
+      className,
+    });
+  }
+
+  handleSelect = (selected) => {
+    this.currentSelected = { ...selected }; // legacy
+    const { name, state, item } = selected;
+    const plugin = item;
+    // add buttton selected.
+    if (state === "add") {
+      // display list available;
+      let items;
+      switch (name) {
+        case "Messaging platforms":
+          items = this.getPluginsByType("MessengerConnector");
+          this.displayPluginsList(items);
+          break;
+        case "Web services":
+          items = this.getPluginsByType("WebService");
+          this.displayPluginsList(items);
+          break;
+        case "AI/NLU providers":
+          // // Uncomment to enable ADD AIConnector
+          // items = this.getPluginsByType("AIConnector");
+          // this.displayPluginsList(items);
+          break;
+        default:
+          break;
       }
     }
-    // console.log("TODO", `ServicesContainer.onEditAction : ${editAction}`);
-
-    this.currentSelected = null;
-    this.paramFields = null;
-    return true;
-  };
-
-  onSelect = (selected) => {
-    const { name, state, index, item } = selected;
-
-    let title = name;
-    let parameters = {};
-    let action = null;
-    let actionDef;
-    let editor = null;
-    let services = null;
-    let content = null;
-    let couldDelete = true;
-    let className = null;
-    this.currentSelected = { ...selected };
-    // console.log("test");
-    if (name === "Web services") {
-      services = this.getMiddlewares("WebService");
-      editor = displayProviderEditor;
-      // console.log("ws");
-      if (state === "select" || state === "create") {
-        if (item.provider) {
-          className = "zui-dialog-extended";
-          title = item.name;
-          content = item.provider.renderSettings();
-          action = "next";
-        } else {
-          // console.log("demo");
-          editor = displayWebServiceEditor;
-          if (state === "create") {
-            title = `Add ${title} entry`;
-            action = "Add";
-          }
-        }
-      } else if (state === "add") {
-        className = "zui-dialog-list";
-        title = "Add a WebService";
-        const items = this.getWebServices(true);
-        items.push({
-          id: `${items.length + 1}`,
-          name: "Add plugin",
-          icon: "add",
-          color: "gray",
-        });
-        const that = this;
-        content = (
-          <div style={{ height: "280px" }}>
-            <ListComponent
-              className="list-content"
-              style={{ padding: "0px", height: "100%" }}
-              items={items}
-              selectedItem={-1}
-              onSelect={(i) => {
-                const it = items[i];
-                // const n = it.name;
-                // console.log("WIP select Web services =", n);
-                setTimeout(() => {
-                  Zrmc.closeDialog();
-                  that.onSelect({
-                    name: "Web services",
-                    index: i,
-                    item: it,
-                    state: "create",
-                  });
-                }, 50);
-              }}
-            />
-          </div>
-        );
+    if (state === "select" || state === "create") {
+      switch (name) {
+        // // Uncomment to enable AIConnector settings
+        // case "AI/NLU providers":
+        case "Messaging platforms":
+        case "Web services":
+          this.displayPluginSettings(plugin);
+          break;
+        default:
+          break;
       }
-    } else if (name === "AI/NLU providers") {
-      // WIP
-      title = null;
-      editor = displayProviderEditor;
-      couldDelete = false;
-      if ((state === "select" || state === "create") && item.provider) {
-        className = "zui-dialog-extended";
-        title = item.name;
-        content = item.provider.renderSettings();
-        action = "next";
-      } else if (state === "add") {
-        className = "zui-dialog-list";
-        title = "Add an AI/NLU provider";
-        const items = this.getAIProviders(true);
-        items.push({
-          id: items.length + 1,
-          name: "Add a plugin",
-          icon: "add",
-          color: "gray",
-        });
-        const that = this;
-        content = (
-          <div style={{ height: "280px" }}>
-            <ListComponent
-              className="list-content"
-              style={{ padding: "0px", height: "100%" }}
-              items={items}
-              selectedItem={-1}
-              onSelect={(i) => {
-                const it = items[i];
-                // const n = it.name;
-                // console.log("WIP select AI/NLU providers =", n);
-                setTimeout(() => {
-                  Zrmc.closeDialog();
-                  that.onSelect({
-                    name: "AI/NLU providers",
-                    index: i,
-                    item: it,
-                    state: "create",
-                  });
-                }, 50);
-              }}
-            />
-          </div>
-        );
-      } else {
-        this.currentSelected = null;
-      }
-    } else if (name === "Messaging platforms") {
-      // WIP
-      title = null;
-      editor = displayProviderEditor;
-      couldDelete = false;
-      if ((state === "select" || state === "create") && item.provider) {
-        className = "zui-dialog-extended";
-        title = item.name;
-        content = item.provider.renderSettings();
-        action = "next";
-      } else if (state === "add") {
-        className = "zui-dialog-list";
-        title = "Add a messaging platform";
-        const items = this.getMessagingProviders(true);
-        items.push({
-          id: items.length + 1,
-          name: "Add plugin",
-          icon: "add",
-          color: "gray",
-        });
-        const that = this;
-        content = (
-          <div style={{ height: "280px" }}>
-            <ListComponent
-              className="list-content"
-              style={{ padding: "0px", height: "100%" }}
-              items={items}
-              selectedItem={-1}
-              onSelect={(i) => {
-                const it = items[i];
-                // const n = it.name;
-                // console.log("WIP select messaging platform =", n);
-                setTimeout(() => {
-                  Zrmc.closeDialog();
-                  that.onSelect({
-                    name: "Messaging platforms",
-                    index: i,
-                    item: it,
-                    state: "create",
-                  });
-                }, 50);
-              }}
-            />
-          </div>
-        );
-      } else {
-        this.currentSelected = null;
-      }
-    } else {
-      this.currentSelected = null;
     }
-
-    if (this.currentSelected) {
-      if ((state === "add" || state === "create") && !className) {
-        if (title) {
-          title = `Add ${title} entry`;
-          action = "Add";
-        }
-      } else if (state === "select" && !className) {
-        if (services) {
-          parameters = services[index];
-          title = `Edit ${title} entry`;
-        }
-        if (!action) {
-          action = "Change";
-        }
-      } else if (state === "delete") {
-        editor = null;
-        title = `Remove ${title} entry`;
-        action = "Delete";
-      }
-      if (!actionDef) {
-        actionDef = action;
-      }
-      if (editor) {
-        this.paramFields = {};
-        editor(
-          title,
-          action,
-          actionDef,
-          parameters,
-          (input, ref) => {
-            if (this.paramFields) {
-              this.paramFields[ref] = input;
-            }
-          },
-          this.onEditAction,
-          content,
-          className,
-        );
-      } else if (state === "delete" && couldDelete) {
-        Zrmc.showDialog({
-          header: title,
-          body: "Do you want to delete it ?",
-          actions: [{ name: "Cancel" }, { name: "Delete" }],
-          onAction: this.onEditAction,
-          className,
-        });
-      }
-      // console.log("WIP WebServicesContainer.onSelect", selected);
+    if (state === "delete") {
+      this.handlePluginDelete(plugin);
     }
   };
 
-  getWebServices(all = false) {
-    const providers = this.props.pluginsManager.getPlugins({
-      type: "WebServices",
-    });
-    const services = [];
-    services.push({
-      id: 1,
-      name: "JSON WebService",
-      icon: "images/webhook.svg",
-      color: "green",
-    });
-    let id = 2;
-    providers.forEach((p) => {
-      if (all || p.isActive()) {
-        services.push({
-          id,
-          name: p.getTitle(),
-          icon: p.getIcon(),
-          color: p.getColor(),
-          provider: p,
-        });
-      }
-      id += 1;
-    });
-    return services;
-  }
-
-  getMessagingProviders(all = false) {
-    const providers = this.props.pluginsManager.getPlugins({
-      type: "MessengerConnector",
-    });
-    const messagings = [];
-    let id = 1;
-    providers.forEach((p) => {
-      if (all || p.isActive()) {
-        messagings.push({
-          id,
-          name: p.getTitle(),
-          icon: p.getIcon(),
-          color: p.getColor(),
-          provider: p,
-        });
-      }
-      id += 1;
-    });
-    return messagings;
-  }
-
-  getAIProviders(all = false) {
-    const providers = this.props.pluginsManager.getPlugins({
-      type: "AIProvider",
-    });
-    const ais = [];
-    let id = 1;
-    providers.forEach((p) => {
-      if (all || p.isActive()) {
-        ais.push({
-          id,
-          name: p.getTitle(),
-          icon: p.getIcon(),
-          status: "start",
-          provider: p,
-        });
-      }
-      id += 1;
-    });
-    return ais;
-  }
-
-  getMiddlewares(type) {
-    const list = [];
-    if (this.props.middlewares) {
-      // TODO
-      this.props.middlewares.forEach((m) => {
-        if (m.type === type) {
-          list.push({ ...m });
-        }
-      });
-    }
-    return list;
+  getPluginsByType(type) {
+    return this.props.plugins.filter(
+      (plugin) => plugin && plugin.type === type,
+    );
   }
 
   updateServices() {
@@ -399,26 +172,12 @@ class ServicesContainer extends Component {
     }
     if (this.props.selectedBotId && this.state.needUpdate) {
       this.setState({ needUpdate: false });
-      this.props.apiGetMiddlewaresRequest(this.props.selectedBotId);
+      this.props.apiGetPluginsRequest(this.props.selectedBotId);
     }
   }
 
   render() {
-    const webservices = this.getMiddlewares("WebService");
     // WIP : need to get from backend which provider is activated/running
-    const messagings = this.getMiddlewares("MessengerConnector"); // this.getMessagingProviders();
-    const ais = this.getMiddlewares("AIProvider"); // this.getAIProviders();
-    if (ais.length === 0) {
-      ais.push({
-        id: 1,
-        name: "OpenNLX",
-        icon: "images/opla-logo.png",
-        status: "start",
-        provider: "AIProvider",
-        system: true,
-      });
-    }
-
     return (
       <div style={divCellStyle}>
         <Cell className="zui-color--white" span={12}>
@@ -435,9 +194,9 @@ class ServicesContainer extends Component {
             description={
               "Connect any third party messaging solution to an assistant."
             }
-            items={messagings}
+            items={this.props.messagings}
             defaultIcon="message"
-            onSelect={this.onSelect}
+            onSelect={this.handleSelect}
           />
         </Cell>
         <Cell className="zui-color--white" span={12}>
@@ -454,9 +213,9 @@ class ServicesContainer extends Component {
             description={
               "Switch the brain of an assistant, to choose the best match."
             }
-            items={ais}
+            items={this.props.AIConnector}
             defaultIcon="images/robot.svg"
-            onSelect={this.onSelect}
+            onSelect={this.handleSelect}
           />
         </Cell>
         <Cell className="zui-color--white" span={12}>
@@ -470,10 +229,10 @@ class ServicesContainer extends Component {
                 />
               </svg>
             }
-            items={webservices}
+            items={this.props.webservices}
             defaultIcon="images/webhook.svg"
             description={"Plug any data or api to interact with an assistant."}
-            onSelect={this.onSelect}
+            onSelect={this.handleSelect}
           />
         </Cell>
       </div>
@@ -484,35 +243,47 @@ class ServicesContainer extends Component {
 ServicesContainer.defaultProps = {
   isSignedIn: true,
   selectedBotId: null,
-  middlewares: null,
 };
 
 ServicesContainer.propTypes = {
   isSignedIn: PropTypes.bool,
   selectedBotId: PropTypes.string,
-  middlewares: PropTypes.arrayOf(PropTypes.shape({})),
-  apiGetMiddlewaresRequest: PropTypes.func.isRequired,
-  apiSetMiddlewareRequest: PropTypes.func.isRequired,
-  apiDeleteMiddlewareRequest: PropTypes.func.isRequired,
-  pluginsManager: PropTypes.shape({ getPlugins: PropTypes.func }).isRequired,
+  plugins: PropTypes.arrayOf(PropTypes.shape({})),
+  messagings: PropTypes.arrayOf(PropTypes.shape({})),
+  webservices: PropTypes.arrayOf(PropTypes.shape({})),
+  AIConnector: PropTypes.arrayOf(PropTypes.shape({})),
+  apiGetPluginsRequest: PropTypes.func.isRequired,
+  apiSetPluginRequest: PropTypes.func.isRequired,
+  apiDeletePluginRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const middlewares = state.app ? state.app.middlewares : null;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
-  return { middlewares, selectedBotId, isSignedIn };
+
+  const plugins = state.app ? state.app.plugins : [];
+
+  const installedPlugins = getInstalledPlugins(plugins);
+
+  return {
+    plugins,
+    messagings: installedPlugins.MessengerConnector || [],
+    webservices: installedPlugins.WebService || [],
+    AIConnector: installedPlugins.AIConnector || [],
+    selectedBotId,
+    isSignedIn,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  apiGetMiddlewaresRequest: (botId) => {
-    dispatch(apiGetMiddlewaresRequest(botId));
+  apiGetPluginsRequest: (botId) => {
+    dispatch(apiGetPluginsRequest(botId));
   },
-  apiSetMiddlewareRequest: (botId, middleware) => {
-    dispatch(apiSetMiddlewareRequest(botId, middleware));
+  apiDeletePluginRequest: (plugin, botId) => {
+    dispatch(apiDeletePluginRequest(plugin, botId));
   },
-  apiDeleteMiddlewareRequest: (botId, middleware) => {
-    dispatch(apiDeleteMiddlewareRequest(botId, middleware.id));
+  apiSetPluginRequest: (plugin, botId) => {
+    dispatch(apiSetPluginRequest(plugin, botId));
   },
 });
 

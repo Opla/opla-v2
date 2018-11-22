@@ -13,26 +13,26 @@ import {
 } from "zoapp-front/dist/actions/constants";
 
 import {
+  API_BOTS_PARAMETERS,
   API_CREATEBOT,
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
   API_GETINTENTS,
+  API_GETLANGUAGES,
   API_GETMETRICS,
   API_GETMIDDLEWARES,
+  API_GETTEMPLATES,
   API_IMPORT,
   API_MOVEINTENT,
   API_PUBLISH,
   API_SAVEBOT,
   API_SB_GETCONTEXT,
   API_SB_GETMESSAGES,
-  API_SB_UPDATEMESSAGES,
   API_SB_RESET,
   API_SB_SENDMESSAGE,
+  API_SB_UPDATEMESSAGES,
   API_SENDINTENT,
   API_SETMIDDLEWARE,
-  API_GETTEMPLATES,
-  API_GETLANGUAGES,
-  API_BOTS_PARAMETERS,
 } from "./constants";
 
 export function apiCreateBot(botParams) {
@@ -64,11 +64,10 @@ export function apiImportRequest(botId, data, options) {
   };
 }
 
-export function apiPublishRequest(botId, channels, to = null, from = null) {
+export function apiPublishRequest(botId, to = null, from = null) {
   return {
     type: API_PUBLISH + FETCH_REQUEST,
     botId,
-    channels,
     to,
     from,
   };

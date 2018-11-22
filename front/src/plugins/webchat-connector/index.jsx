@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import AppSettings from "./appSettings";
+import AppSettings from "./components/settings";
 import AppTemplate from "./appTemplate";
 
 export default class ExternalAppPlugin {

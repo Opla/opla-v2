@@ -7,14 +7,20 @@
 // TODO remove import and use dynamic loading
 import createWebChatPlugin from "./webchat";
 import createOpenNLXConnector from "./openNLX";
+import FBMessengerPlugin from "./fb-messenger";
+import JSONWebservice from "./json-webservice";
+// import createSkeletonMessengerPlugin from "./skeleton-messenger";
 
-const plugins = (pluginsManager) => {
+const plugins = (zoapp) => {
   const list = [];
   // TODO dynamic loading
-  let plugin = createWebChatPlugin(pluginsManager);
+  let plugin = createWebChatPlugin(zoapp);
   list.push(plugin);
-  plugin = createOpenNLXConnector(pluginsManager);
+  plugin = createOpenNLXConnector(zoapp);
   list.push(plugin);
+  list.push(FBMessengerPlugin());
+  list.push(JSONWebservice());
+  // list.push(createSkeletonMessengerPlugin(zoapp));
   return list;
 };
 export default plugins;
