@@ -13,47 +13,59 @@ context("Actions", () => {
   let botEmail = `bot-${email}`;
 
   let buildUrl = (path = "", rootUrl = root) => {
-    let separator = (rootUrl.slice(-1) === "/") ? "" : "/";
+    let separator = rootUrl.slice(-1) === "/" ? "" : "/";
     return `${rootUrl}${separator}${path}`;
-  }
+  };
 
   before(() => {
     cy.visit(buildUrl());
     cy.createUser(email, username, password);
     cy.createBot(botEmail, botName);
-  })
+  });
 
   beforeEach(() => {
     cy.visit(buildUrl());
     // conditional from:
     // https://docs.cypress.io/guides/core-concepts/conditional-testing.html#Element-existence
-    cy.get('body').then(($body) => {
-      if ($body.text().includes('SignIn')) {
+    cy.get("body").then($body => {
+      if ($body.text().includes("SignIn")) {
         cy.login(username, password);
+      } else {
+        cy.log("no login required");
       }
-      else {
-        cy.log("no login required")
-      }
-    })
+    });
   });
   afterEach(function() {
-    if (this.currentTest.state === 'failed') {
-      Cypress.runner.stop()
+    if (this.currentTest.state === "failed") {
+      Cypress.runner.stop();
     }
   });
 
   it("Add webchat plugin", () => {
     cy.visit(buildUrl("admin"));
     cy.contains("Extensions").click();
-    cy.contains("Add").first().click();
+    cy.wait(1000);
+    cy.contains("Add")
+      .first()
+      .click();
     cy.contains("webchat-connector").click();
     cy.contains("Save").click();
     cy.contains("Webchat");
 
     cy.visit(buildUrl("factory"));
-    cy.contains("webchat-connector").parent(".switchListItem").get(".mdc-switch__native-control").should("not.be.checked");
-    cy.contains("webchat-connector").parent(".switchListItem").find(".mdc-switch").first().click()
-    cy.contains("webchat-connector").parent(".switchListItem").get(".mdc-switch__native-control").should("be.checked");
+    cy.contains("webchat-connector")
+      .parent(".switchListItem")
+      .get(".mdc-switch__native-control")
+      .should("not.be.checked");
+    cy.contains("webchat-connector")
+      .parent(".switchListItem")
+      .find(".mdc-switch")
+      .first()
+      .click();
+    cy.contains("webchat-connector")
+      .parent(".switchListItem")
+      .get(".mdc-switch__native-control")
+      .should("be.checked");
   });
 
   let newIntentField = () =>
@@ -74,7 +86,10 @@ context("Actions", () => {
 
   it("Publish on webchat", () => {
     cy.visit(buildUrl("factory"));
-    cy.contains("webchat-connector").parent(".switchListItem").get(".mdc-switch__native-control").should("be.checked");
+    cy.contains("webchat-connector")
+      .parent(".switchListItem")
+      .get(".mdc-switch__native-control")
+      .should("be.checked");
     cy.contains("Builder").click();
 
     cy.contains("button", "Create").click();
@@ -93,9 +108,10 @@ context("Actions", () => {
     // publish
     cy.contains("Publish").click();
     cy.get(".mdc-list-item__text");
-    cy.get(".mdc-list-item__text").contains("Webchat").click();
+    cy.get(".mdc-list-item__text")
+      .contains("Webchat")
+      .click();
     // cy.get("#chat-input-field").type("foo");
     // cy.contains("bar");
   });
-  
 });
