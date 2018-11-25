@@ -1,5 +1,6 @@
 *.DS_Store
 config/
+config.json
 dist/
 lib/
 node_modules/

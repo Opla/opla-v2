@@ -13,7 +13,7 @@ import plugins from "./plugins";
 class App {
   constructor(configuration = {}) {
     const config = {
-      buildSchema: false, // We force zoapp not to build the SQL schema by default.
+      build_schema: false, // We force zoapp not to build the SQL schema by default.
       ...configuration,
     };
 

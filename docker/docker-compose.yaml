@@ -28,8 +28,8 @@ services:
       - OPLA_BACKEND_DATABASE_NAME
       - OPLA_BACKEND_DATABASE_USER
       - OPLA_BACKEND_DATABASE_PASS
-      - ZOAPP_API_URL=${OPLA_API_DOMAIN}/api
-      - ZOAPP_API_URL=${OPLA_API_DOMAIN}/auth
+      - ZOAPP__GLOBAL__API_URL=${OPLA_API_DOMAIN}/api
+      - ZOAPP__GLOBAL__API_URL=${OPLA_API_DOMAIN}/auth
 
   front:
     image: "opla/front:${FRONT_TAG}"

@@ -8,7 +8,7 @@ import createApp from "./app";
 
 const fs = require("fs");
 
-// load config/default.json configuration if present.
+// load config.json configuration if present.
 function loadConfig(path) {
   let config = {};
   try {
@@ -16,7 +16,7 @@ function loadConfig(path) {
     config = JSON.parse(fs.readFileSync(path));
   } catch (error) {
     logger.error(
-      `config/default.json file not found
+      `config.json file not found
       Please run "bin/opla init" to generate it.`,
     );
     throw error;
@@ -25,10 +25,10 @@ function loadConfig(path) {
 }
 
 // path for dev version
-let configPath = `${__dirname}/../config/default.json`;
+let configPath = `${__dirname}/../config.json`;
 if (!fs.existsSync(configPath)) {
   // path for compiled version
-  configPath = `${__dirname}/config/default.json`;
+  configPath = `${__dirname}/config.json`;
 }
 
 const config = loadConfig(configPath);
