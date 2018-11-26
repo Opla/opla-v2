@@ -26,12 +26,13 @@ chmod +x install.sh
 ## For Windows (non-unix) users / alternative to install.sh
 
 
-### How to Install Opla on Windows 10 home system
+### How to Install Opla on Windows system
 
-To run and install Opla on Windows 10 home, one must first install Docker Toolbox from the following link https://docs.docker.com/toolbox/overview/#ready-to-get-started as such : 
+To run and install Opla on Windows, one must first install Docker Toolbox from the following link https://docs.docker.com/toolbox/overview/#ready-to-get-started as such : 
 
  - Click on Docker Quickstart Terminal
  - Download Opla on your computer https://github.com/Opla/opla (clone or download button), download Zip, unzip
  - Change directories to get into unzipped docker (example C:\Users\...\opla-master\docker)
-- Run « docker-compose up »
+- Run `docker-compose up `
 - In VM Oracle, default configuration network advanced parameters, change ports with host IP 127.0.0.1, host port 80, guest port 80
+- launch browser to localhost
