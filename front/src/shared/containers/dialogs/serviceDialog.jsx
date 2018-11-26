@@ -14,6 +14,7 @@ import Zrmc, {
   Dialog,
 } from "zrmc";
 import { importSettingsComponent } from "../../../plugins";
+import DefaultPluginSettings from "../../../plugins/defaultPluginSettings";
 
 export class ServiceDialogBase extends Component {
   constructor(props) {
@@ -43,10 +44,10 @@ export class ServiceDialogBase extends Component {
       })
       .catch(() => {
         // eslint-disable-next-line
-        console.error(
+        console.warn(
           `cant find plugins ${name}/settings.js component`,
         );
-        this.setState({ error: true });
+        this.setState({ SettingsComponent: DefaultPluginSettings });
       });
   }
 
