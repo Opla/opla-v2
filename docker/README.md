@@ -35,4 +35,5 @@ To run and install Opla on Windows, one must first install Docker Toolbox from t
  - Change directories to get into unzipped docker (example C:\Users\...\opla-master\docker)
 - Run `docker-compose up `
 - In VM Oracle, default configuration network advanced parameters, change ports with host IP 127.0.0.1, host port 80, guest port 80
-- launch browser to localhost
+
+You should then be able to navigate to http://localhost/ and create your chatbot.
