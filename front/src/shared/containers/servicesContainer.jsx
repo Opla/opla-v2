@@ -136,6 +136,10 @@ class ServicesContainer extends Component {
           // items = this.getPluginsByType("AIConnector");
           // this.displayPluginsList(items);
           break;
+        case "View extensions":
+          items = this.getPluginsByType("View");
+          this.displayPluginsList(items);
+          break;
         default:
           break;
       }
@@ -146,6 +150,7 @@ class ServicesContainer extends Component {
         // case "AI/NLU providers":
         case "Messaging platforms":
         case "Web services":
+        case "View extensions":
           this.displayPluginSettings(plugin);
           break;
         default:
@@ -235,6 +240,23 @@ class ServicesContainer extends Component {
             onSelect={this.handleSelect}
           />
         </Cell>
+        <Cell className="zui-color--white" span={12}>
+          <ServicesList
+            name="View extensions"
+            icon={
+              <svg viewBox="0 0 24 24">
+                <path
+                  fill="#000000"
+                  d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L6.04,7.5L12,10.85L17.96,7.5L12,4.15Z"
+                />
+              </svg>
+            }
+            items={this.props.viewPlugins}
+            defaultIcon="images/webhook.svg"
+            description={"Plug extensions for your dashboard."}
+            onSelect={this.handleSelect}
+          />
+        </Cell>
       </div>
     );
   }
@@ -252,6 +274,7 @@ ServicesContainer.propTypes = {
   messagings: PropTypes.arrayOf(PropTypes.shape({})),
   webservices: PropTypes.arrayOf(PropTypes.shape({})),
   AIConnector: PropTypes.arrayOf(PropTypes.shape({})),
+  viewPlugins: PropTypes.arrayOf(PropTypes.shape({})),
   apiGetPluginsRequest: PropTypes.func.isRequired,
   apiSetPluginRequest: PropTypes.func.isRequired,
   apiDeletePluginRequest: PropTypes.func.isRequired,
@@ -270,6 +293,7 @@ const mapStateToProps = (state) => {
     messagings: installedPlugins.MessengerConnector || [],
     webservices: installedPlugins.WebService || [],
     AIConnector: installedPlugins.AIConnector || [],
+    viewPlugins: installedPlugins.View || [],
     selectedBotId,
     isSignedIn,
   };
