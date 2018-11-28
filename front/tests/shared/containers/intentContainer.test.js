@@ -26,6 +26,7 @@ describe("containers/IntentContainerBase", () => {
     apiSendIntentRequest: () => {},
     appSetNewActions: () => {},
     getIntentNameById: () => "title",
+    appUnSelectIO: () => {},
     intents: [{ id: "1", name: "TestIntent" }],
     selectedIntent: {
       id: "Nq421",

@@ -18,6 +18,8 @@ import {
   appSetIntentAction,
   appUpdateIntent,
   appSetNewActions,
+  appSelectIO,
+  appUnSelectIO,
 } from "../../actions/app";
 import IntentTools from "../../utils/intentsTools";
 
@@ -76,6 +78,19 @@ class IntentContainer extends Component {
     } else if (prevProps.selectedIntent !== this.props.selectedIntent) {
       this.reset({ selectedIntent, displayHelp: -1 });
     }
+
+    if (
+      prevProps.selectedInputIndex !== this.props.selectedInputIndex ||
+      prevProps.selectedOutputIndex !== this.props.selectedOutputIndex ||
+      (this.props.selectedIntent &&
+        prevProps.selectedIntent &&
+        prevProps.selectedIntent.id !== this.props.selectedIntent.id)
+    ) {
+      this.setState({
+        selectedInput: this.props.selectedInputIndex,
+        selectedOutput: this.props.selectedOutputIndex,
+      });
+    }
   }
 
   reset(moreState = {}) {
@@ -85,8 +100,6 @@ class IntentContainer extends Component {
     this.setState({
       editing: false,
       displayCondition: false,
-      selectedInput: -1,
-      selectedOutput: -1,
       ...moreState,
     });
   }
@@ -174,9 +187,8 @@ class IntentContainer extends Component {
     if (action === "unfocus") {
       this.setState({
         toolboxFocus: false,
-        selectedInput: -1,
-        selectedOutput: -1,
       });
+      this.props.appUnSelectIO();
     } else {
       this.setState({ editing: true, toolboxFocus: true });
       if (action === "condition") {
@@ -387,14 +399,11 @@ class IntentContainer extends Component {
       this.selectedActionsComponent && this.selectedActionsComponent.props
         ? this.selectedActionsComponent.props.containerName
         : "";
-    if (containerName === "input") {
-      const selected = selectedActionsComponent.props.isNew ? 0 : index + 1;
-      this.setState({ selectedOutput: -1, selectedInput: selected });
-    } else if (containerName === "output") {
-      const selected = selectedActionsComponent.props.isNew ? 0 : index + 1;
-      this.setState({ selectedInput: -1, selectedOutput: selected });
-    }
-    this.updateToolboxDisplay(true, containerName);
+    this.props.appSelectIO(
+      this.state.selectedIntent.order - 1,
+      index,
+      containerName === "output",
+    );
   };
 
   handleNewActionsChange = (container, value) => {
@@ -500,6 +509,8 @@ IntentContainer.propTypes = {
   selectedIntent: PropTypes.shape({
     id: PropTypes.string,
   }),
+  selectedInputIndex: PropTypes.number.isRequired,
+  selectedOutputIndex: PropTypes.number.isRequired,
   newActions: PropTypes.shape({}).isRequired,
   handleRename: PropTypes.func,
   apiSendIntentRequest: PropTypes.func.isRequired,
@@ -507,6 +518,8 @@ IntentContainer.propTypes = {
   appSetIntentAction: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
   appSetNewActions: PropTypes.func.isRequired,
+  appSelectIO: PropTypes.func.isRequired,
+  appUnSelectIO: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -534,8 +547,15 @@ const mapStateToProps = (state) => {
   );
 
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  const { newActions } = state.app;
-  return { selectedIntent, selectedBotId, newActions, intents };
+  const { newActions, selectedInputIndex, selectedOutputIndex } = state.app;
+  return {
+    selectedIntent,
+    selectedBotId,
+    newActions,
+    selectedOutputIndex,
+    selectedInputIndex,
+    intents,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -561,10 +581,17 @@ const mapDispatchToProps = (dispatch) => ({
     );
   },
   appDeleteIntentAction: (actionContainer, selectedAction) => {
+    dispatch(appUnSelectIO());
     dispatch(appDeleteIntentAction(actionContainer, selectedAction));
   },
   appSetNewActions: (actionContainer, actionValue) => {
     dispatch(appSetNewActions(actionContainer, actionValue));
+  },
+  appSelectIO: (intentIndex, ioIndex, isOutput) => {
+    dispatch(appSelectIO(intentIndex, ioIndex, isOutput));
+  },
+  appUnSelectIO: () => {
+    dispatch(appUnSelectIO());
   },
 });
 

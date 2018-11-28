@@ -20,6 +20,7 @@ import {
   appSelectEntity,
   appSelectFunction,
   appDeleteNewActions,
+  appUnSelectIO,
 } from "../actions/app";
 
 class ExplorerContainer extends Component {
@@ -265,6 +266,7 @@ const mapDispatchToProps = (dispatch) => ({
   appSelectIntent: (botId, intentIndex) => {
     dispatch(appDeleteNewActions());
     dispatch(appSelectIntent(botId, intentIndex));
+    dispatch(appUnSelectIO());
   },
   appSelectEntity: (botId, index) => {
     dispatch(appDeleteNewActions());
