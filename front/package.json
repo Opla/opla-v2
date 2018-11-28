@@ -1,6 +1,6 @@
 {
   "name": "opla-front",
-  "version": "0.1.0",
+  "version": "1.3.2",
   "description": "Opla.ai Frontend",
   "main": "dist/index.js",
   "homepage": "https://github.com/Opla/front",
@@ -21,8 +21,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "animate.css": "3.7.0",
     "@babel/runtime": "^7.1.0",
+    "animate.css": "3.7.0",
     "chalk": "^2.3.1",
     "chart.js": "2.7.1",
     "classnames": "^2.2.5",
