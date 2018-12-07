@@ -13,7 +13,7 @@ __steps:
       name: deploy
       command: |
         gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
-        helm init --service-account tiller --upgrade
+        helm init --service-account tiller
         COMMIT_SHA=$CIRCLE_SHA1 myke backend/preview
         COMMIT_SHA=$CIRCLE_SHA1 myke front/preview
         COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS=$HELM_XTRA_ARGS myke backend/deploy
@@ -112,7 +112,7 @@ jobs:
           name: deploy
           command: |
             gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
-            helm init --service-account tiller --upgrade
+            helm init --service-account tiller
             COMMIT_SHA=$CIRCLE_SHA1 myke preview
             COMMIT_SHA=$CIRCLE_SHA1 HELM_XTRA_ARGS="--set tls=false" myke deploy
       - run:
@@ -148,7 +148,7 @@ jobs:
           name: backup mariadb
           command: |
             gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
-            helm init --service-account tiller --upgrade
+            helm init --service-account tiller
             COMMIT_SHA=$CIRCLE_SHA1 myke backup_db
   
   backup_preprod:
@@ -166,7 +166,7 @@ jobs:
           name: backup mariadb
           command: |
             gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
-            helm init --service-account tiller --upgrade
+            helm init --service-account tiller
             COMMIT_SHA=$CIRCLE_SHA1 myke backup_db
 
   front_test:
