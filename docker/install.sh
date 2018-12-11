@@ -104,7 +104,7 @@ _() {
 		if [ -z "$NON_INTERACTIVE" ]; then
 			question=$1
 			echo ""
-			echo -n $question" (Y/n)\\n"
+			echo -n $question" (Y/n) "
 			read answer
 			if [ -z $answer ]; then
 				echo "--> Yes"
