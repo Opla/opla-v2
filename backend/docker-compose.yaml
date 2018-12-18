@@ -9,4 +9,3 @@ services:
       MYSQL_DATABASE: opla_dev
     ports:
       - 127.0.0.1:3306:3306
-
