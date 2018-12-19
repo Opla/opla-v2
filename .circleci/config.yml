@@ -316,8 +316,14 @@ workflows:
               ignore: gh-pages
             tags:
               only: /.*/
-      - backend_build
-      - front_build
+      - backend_build:
+          filters:
+            branches:
+              ignore: /^.*pull\/[\d]+$/
+      - front_build:
+          filters:
+            branches:
+              ignore: /^.*pull\/[\d]+$/
       - backend_e2e_tests:
           requires:
             - front_test
