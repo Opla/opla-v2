@@ -330,6 +330,9 @@ workflows:
             - front_build
             - backend_test
             - backend_build
+          filters:
+            branches:
+              ignore: /^.*pull\/[\d]+$/
       - promote:
           requires:
             - backend_e2e_tests
