@@ -49,11 +49,13 @@ context("Actions", () => {
     cy.get("#signin-form-username").type(username);
     cy.get("#signin-form-password").type(password);
     cy.contains("Sign in").click();
+
     cy.contains("menu").click();
-    cy.contains("Factory").click();
-    cy.contains("Builder").click();
+    cy.checkVisibilityByContent("Factory").click();
+    cy.checkVisibilityByContent("Builder").click();
 
     cy.contains("button", "Create").click();
+
     newIntentField().type("question");
     newIntentField().type("{enter}");
 

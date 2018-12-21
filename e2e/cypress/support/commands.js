@@ -51,6 +51,11 @@ Cypress.Commands.add("login", (username, password)  => {
   cy.contains("Sign in").click();
 });
 
+// Basic workaround to avoid invisible button click
+Cypress.Commands.add("checkVisibilityByContent", (content)  => {
+  cy.contains(content).invoke("width").should('be.gt', 0);
+  return cy.contains(content)
+});
 // -- This is a parent command --
 // Cypress.Commands.add("login", (email, password) => { ... })
 //
