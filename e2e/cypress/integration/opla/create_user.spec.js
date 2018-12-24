@@ -4,7 +4,7 @@ context("Actions", () => {
   let root = Cypress.env("FRONTEND_URL") || "localhost:8080";
   // https://on.cypress.io/interacting-with-elements
 
-  let ts = Math.floor(Date.now() / 1000);
+  let ts = Math.floor(Date.now() + 1 / 1000);
   let username = `cypress-${ts}`;
   // cy.visit(`${root}`)
   // let username = `cypress`;
@@ -18,11 +18,16 @@ context("Actions", () => {
     cy.contains("Create my first assistant").click();
     cy.get("#signup-form-username").type(username);
     cy.get("#signup-form-email").type(`${username}@opla.ai`);
-    cy.get("#signup-form-password").type(password, { force: true });
-    cy.contains("Register").click();
-    cy.get("#create-assistant-name").type(`A wonderful bot: ${username}`);
-    cy.get("#create-assistant-email").type(`${username}-contact@opla.ai`);
-    cy.contains("button", "Create").click();
+    cy.get("#signup-form-password").type(password);
+    cy.contains("Register").click()
+      .then(() => {
+        // This a temporary fix in order to avoid unterminated network request when Register click() is over
+        cy.url().should("include", "create");
+        cy.get("#create-assistant-name").type(`A wonderful bot: ${username}`);
+        cy.get("#create-assistant-email").type(`${username}-contact@opla.ai`);
+        cy.contains("button", "Create").click();
+        cy.url().should('include', '/factory')
+      });
   });
 
   let newIntentField = () =>
@@ -51,8 +56,9 @@ context("Actions", () => {
     cy.contains("Sign in").click();
 
     cy.contains("menu").click();
-    cy.checkVisibilityByContent("Factory").click();
-    cy.checkVisibilityByContent("Builder").click();
+    cy.contains("Factory").click();
+    // Force click should avoid error launched when scrren resolution is too small to display "builder"
+    cy.contains("Builder").click({ force: true });
 
     cy.contains("button", "Create").click();
 
