@@ -15,7 +15,6 @@
 // Sepcific timeout used for somes tests cases, which are known to be flaky
 const FLAKY_CONTAINS_TIMEOUT = 6000;
 
-
 // This command is run before every test suite (this allow to execute tests in parallel)
 // It should directly perform a backend POST request and the bot creation from the frontend
 // should be another test. But since it's a real pain to deal with application creation
@@ -32,34 +31,41 @@ Cypress.Commands.add("createUser", (email, username, password) => {
   //     password,
   //     username
   //   })
-  let root = Cypress.env("FRONTEND_URL") || "localhost:8081";
+  // const root = Cypress.env("FRONTEND_URL") || "localhost:8081";
   cy.contains("Create my first assistant").click();
   cy.get("#signup-form-username").type(username);
   cy.get("#signup-form-email").type(email);
   cy.get("#signup-form-password").type(password);
-  cy.contains("Register").click()
+  cy.contains("Register")
+    .click()
     .then(() => {
-      cy.contains(".userbox_name", username, { timeout: FLAKY_CONTAINS_TIMEOUT }).should('be.visible');
+      cy.contains(".userbox_name", username, {
+        timeout: FLAKY_CONTAINS_TIMEOUT,
+      }).should("be.visible");
     });
-})
+});
 
 Cypress.Commands.add("createBot", (botEmail, botName) => {
   cy.contains("Informations needed");
   cy.get("#create-assistant-name").type(botName);
   cy.get("#create-assistant-email").type(botEmail);
-  cy.contains("button", "Create").click()
-  .then(() => {
-    cy.url().should("include", "factory");
-  });
+  cy.contains("button", "Create")
+    .click()
+    .then(() => {
+      cy.url().should("include", "factory");
+    });
 });
 
-Cypress.Commands.add("login", (username, password)  => {
+Cypress.Commands.add("login", (username, password) => {
   cy.contains("button", "SignIn").click();
   cy.get("#signin-form-username").type(username);
   cy.get("#signin-form-password").type(password);
-  cy.contains("Sign in").click()
+  cy.contains("Sign in")
+    .click()
     .then(() => {
-      cy.contains(".userbox_name", username, { timeout: FLAKY_CONTAINS_TIMEOUT }).should('be.visible');
+      cy.contains(".userbox_name", username, {
+        timeout: FLAKY_CONTAINS_TIMEOUT,
+      }).should("be.visible");
     });
 });
 
