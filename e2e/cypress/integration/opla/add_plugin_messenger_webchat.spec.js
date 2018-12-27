@@ -1,19 +1,19 @@
-/// <reference types="Cypress" />
+// / <reference types="Cypress" />
 
 context("Actions", () => {
-  let root = Cypress.env("FRONTEND_URL") || "localhost:8080";
+  const root = Cypress.env("FRONTEND_URL") || "localhost:8080";
   // https://on.cypress.io/interacting-with-elements
 
-  let ts = Math.floor(Date.now() / 1000);
-  let username = `cypress-${ts}`;
-  let email = `${username}@opla.ai`;
-  let password = `password`;
+  const ts = Math.floor(Date.now() / 1000);
+  const username = `cypress-${ts}`;
+  const email = `${username}@opla.ai`;
+  const password = "password";
 
-  let botName = `bot-${username}`;
-  let botEmail = `bot-${email}`;
+  const botName = `bot-${username}`;
+  const botEmail = `bot-${email}`;
 
-  let buildUrl = (path = "", rootUrl = root) => {
-    let separator = rootUrl.slice(-1) === "/" ? "" : "/";
+  const buildUrl = (path = "", rootUrl = root) => {
+    const separator = rootUrl.slice(-1) === "/" ? "" : "/";
     return `${rootUrl}${separator}${path}`;
   };
 
@@ -27,7 +27,7 @@ context("Actions", () => {
     cy.visit(buildUrl());
     // conditional from:
     // https://docs.cypress.io/guides/core-concepts/conditional-testing.html#Element-existence
-    cy.get("body").then($body => {
+    cy.get("body").then(($body) => {
       if ($body.text().includes("SignIn")) {
         cy.login(username, password);
       } else {
@@ -35,6 +35,13 @@ context("Actions", () => {
       }
     });
   });
+
+  // function() is mandatory here, otherwise `this` will be undefined
+  // As it happen only here for now, I just disabled lint for this line
+  // If e2e were to grow, we might need to disabled this specific rule
+  // https://docs.cypress.io/guides/core-concepts/variables-and-aliases.html#Sharing-Context
+
+  // eslint-disable-next-line func-names
   afterEach(function() {
     if (this.currentTest.state === "failed") {
       Cypress.runner.stop();
@@ -68,7 +75,7 @@ context("Actions", () => {
       .should("be.checked");
   });
 
-  let newIntentField = () =>
+  const newIntentField = () =>
     cy
       .contains("input")
       .parents(".zui-expansion")
@@ -76,7 +83,7 @@ context("Actions", () => {
       .find("[contenteditable]")
       .first();
 
-  let responseField = () =>
+  const responseField = () =>
     cy
       .contains("output")
       .parents(".zui-expansion")

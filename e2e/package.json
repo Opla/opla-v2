@@ -4,11 +4,20 @@
   "description": "cypress e2e tests for opla",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint cypress/integration cypress/support",
+    "lint:dev": "yarn lint --rule 'no-console: off' --fix",
     "test": "cypress run"
   },
   "author": "Mik BRY <mik@opla.co>",
   "license": "GPL-2.0+",
   "devDependencies": {
-    "cypress": "^3.1.3"
+    "cypress": "^3.1.3",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-cypress": "^2.1.3",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "prettier": "^1.11.1"
   }
 }

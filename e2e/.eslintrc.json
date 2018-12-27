@@ -1,0 +1,34 @@
+{
+    "extends": [
+        "airbnb-base",
+        "prettier"
+    ],
+    "env": {
+        "cypress/globals": true
+    },
+    "globals": {
+        "cy": true,
+        "Cypress": true
+    },
+    "plugins": [
+        "prettier",
+        "cypress"
+    ],
+    "rules": {
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-console": 1,
+        "prefer-const": "error",
+        "no-var": "error",
+        "prettier/prettier": ["error", {
+            "arrowParens": "always",
+            "trailingComma": "all"
+        }]
+    }
+}

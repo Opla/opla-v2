@@ -1,14 +1,14 @@
-/// <reference types="Cypress" />
+// / <reference types="Cypress" />
 
 context("Actions", () => {
-  let root = Cypress.env("FRONTEND_URL") || "localhost:8080";
+  const root = Cypress.env("FRONTEND_URL") || "localhost:8080";
   // https://on.cypress.io/interacting-with-elements
 
-  let ts = Math.floor(Date.now() + 1 / 1000);
-  let username = `cypress-${ts}`;
+  const ts = Math.floor(Date.now() + 1 / 1000);
+  const username = `cypress-${ts}`;
   // cy.visit(`${root}`)
   // let username = `cypress`;
-  let password = `password`;
+  const password = "password";
 
   beforeEach(() => {
     cy.visit(`${root}`);
@@ -19,18 +19,19 @@ context("Actions", () => {
     cy.get("#signup-form-username").type(username);
     cy.get("#signup-form-email").type(`${username}@opla.ai`);
     cy.get("#signup-form-password").type(password);
-    cy.contains("Register").click()
+    cy.contains("Register")
+      .click()
       .then(() => {
         // This a temporary fix in order to avoid unterminated network request when Register click() is over
         cy.url().should("include", "create");
         cy.get("#create-assistant-name").type(`A wonderful bot: ${username}`);
         cy.get("#create-assistant-email").type(`${username}-contact@opla.ai`);
         cy.contains("button", "Create").click();
-        cy.url().should('include', '/factory')
+        cy.url().should("include", "/factory");
       });
   });
 
-  let newIntentField = () =>
+  const newIntentField = () =>
     cy
       .contains("input")
       .parents(".zui-expansion")
@@ -38,7 +39,7 @@ context("Actions", () => {
       .find("[contenteditable]")
       .first();
 
-  let responseField = () =>
+  const responseField = () =>
     cy
       .contains("output")
       .parents(".zui-expansion")
@@ -47,7 +48,8 @@ context("Actions", () => {
       .first();
 
   it("Login as existing user via dialog and add intent", () => {
-    let response = `something not very interesting but different from the rest of the page`;
+    const response =
+      "something not very interesting but different from the rest of the page";
 
     // Login
     cy.contains("button", "SignIn").click();

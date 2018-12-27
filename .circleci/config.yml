@@ -61,7 +61,7 @@ jobs:
     docker:
       - image: circleci/node:8
       - image: circleci/mariadb
-        environment: 
+        environment:
           MYSQL_DATABASE: opla_test
 
     steps:
@@ -81,10 +81,10 @@ jobs:
       - run: bin/opla migrations up
       - run: yarn lint
       - run: yarn test
-  
+
   backend_build:
     working_directory: ~/project/backend
-    docker: 
+    docker:
       - image: opla/ci-cd:latest
     environment:
       K8S_ENV: qa
@@ -100,7 +100,7 @@ jobs:
     working_directory: ~/project/backend
     docker:
       - image: opla/ci-cd:latest
-    environment: 
+    environment:
       K8S_ENV: qa
       GCLOUD_CLUSTER_ID: qa
 
@@ -108,7 +108,7 @@ jobs:
       - checkout: *checkout
       - run: *gcloudauth
       - run: echo 'export K8S_NAMESPACE="circleci-$CIRCLE_BUILD_NUM"' >> $BASH_ENV
-      - run: 
+      - run:
           name: deploy
           command: |
             gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
@@ -127,7 +127,7 @@ jobs:
     <<: *cypress
     environment:
       CYPRESS_FRONTEND_URL: https://qa-ce.k8s.opla.ai/
-  
+
   e2e_preprod:
     <<: *cypress
     environment:
@@ -144,13 +144,13 @@ jobs:
     steps:
       - checkout: *checkout
       - run: *gcloudauth
-      - run: 
+      - run:
           name: backup mariadb
           command: |
             gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
             helm init --service-account tiller
             COMMIT_SHA=$CIRCLE_SHA1 myke backup_db
-  
+
   backup_preprod:
     working_directory: ~/project/backend
     docker:
@@ -162,7 +162,7 @@ jobs:
     steps:
       - checkout: *checkout
       - run: *gcloudauth
-      - run: 
+      - run:
           name: backup mariadb
           command: |
             gcloud container clusters get-credentials ${GCLOUD_CLUSTER_ID} --zone=${GOOGLE_COMPUTE_ZONE}
@@ -186,13 +186,13 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+
       - run: yarn lint
       - run: yarn test
-  
+
   front_build:
     working_directory: ~/project/front
-    docker: 
+    docker:
       - image: opla/ci-cd:latest
     environment:
       K8S_ENV: qa
@@ -205,7 +205,7 @@ jobs:
       - run: myke front/ci_build --COMMIT_SHA=$CIRCLE_SHA1 --BUILD_NUMBER=$CIRCLE_BUILD_NUM
 
   promote:
-    docker: 
+    docker:
       - image: opla/ci-cd:latest
     steps:
       - checkout: *checkout
@@ -256,7 +256,7 @@ jobs:
       - run: *deploy
       - run: *notify0
       - run: *notify1
-  
+
   cypress_e2e:
     working_directory: ~/project/e2e
     machine: true
@@ -288,6 +288,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
+      - run: npm run lint
       - run:
           name: E2E tests
           command: $(npm bin)/cypress run --record
@@ -339,7 +340,7 @@ workflows:
             - cypress_e2e
           filters:
             branches:
-              only: 
+              only:
                 - master
       - deploy_qa:
           requires:
@@ -347,7 +348,7 @@ workflows:
             - cypress_e2e
           filters:
             branches:
-              only: 
+              only:
                 - master
       - deploy_preprod:
           requires:
@@ -355,7 +356,7 @@ workflows:
             - cypress_e2e
           filters:
             branches:
-              only: 
+              only:
                 - master
       - e2e_preprod:
           requires:
