@@ -250,7 +250,7 @@ export const handlers = {
     let selectedOutputIndex = -1;
     if (
       state.selectedIntent &&
-      state.selectedIntent.order - 1 === selectedIntentIndex
+      state.selectedIntentIndex === selectedIntentIndex
     ) {
       if (isOutput) {
         selectedOutputIndex = selectedIOIndex + 1;

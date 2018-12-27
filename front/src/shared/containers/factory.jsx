@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Loading from "zoapp-front/dist/components/loading";
 import Zrmc, { Grid, Inner, Cell } from "zrmc";
-import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import { appSetTitleName, appSetActiveTab } from "zoapp-front/dist/actions/app";
 import { apiSaveBotRequest } from "../actions/bot";
 import {
   apiGetIntentsRequest,
@@ -179,7 +179,7 @@ class Factory extends Component {
     });
   };
 
-  handlePlaygroundAction = (action, defaultValue = "", data = {}) => {
+  handlePlaygroundAction = async (action, defaultValue = "", data = {}) => {
     if (action === "welcomeMessage") {
       const field = {
         defaultValue,
@@ -211,8 +211,14 @@ class Factory extends Component {
       }
     } else if (action === "gotoIOIntent") {
       const { intent, input, isOutput } = data;
-      const intentIndex =
-        this.props.intents.find((i) => i.id === intent.id).order - 1;
+      const intentIndex = this.props.intents.findIndex(
+        (i) => i.id === intent.id,
+      );
+
+      if (this.props.activeTab !== 1) {
+        await this.props.appSetActiveTab(1);
+      }
+
       this.props.appSelectIO(
         this.props.selectedBotId,
         intentIndex,
@@ -330,6 +336,7 @@ Factory.propTypes = {
   apiSaveBotRequest: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
   appSelectIO: PropTypes.func.isRequired,
+  appSetActiveTab: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -385,6 +392,9 @@ const mapDispatchToProps = (dispatch) => ({
   appSelectIO: (botId, intentIndex, ioIndex, isOutput) => {
     dispatch(appSelectIntent(botId, intentIndex));
     dispatch(appSelectIO(intentIndex, ioIndex, isOutput));
+  },
+  appSetActiveTab: (tabIndex) => {
+    dispatch(appSetActiveTab(tabIndex));
   },
 });
 
