@@ -1,3 +1,7 @@
+/* eslint 
+  import/no-extraneous-dependencies: 0,
+  no-undef: 0
+*/
 const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -13,9 +17,9 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
-      "./config": path.resolve(__dirname, "./config/default.json")
+      "./config": path.resolve(__dirname, "./config/default.json"),
     },
-    modules: [path.join(__dirname, "src"), "node_modules"]
+    modules: [path.join(__dirname, "src"), "node_modules"],
   },
   module: {
     rules: [
@@ -24,58 +28,58 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-        }
+        },
       },
       {
         test: /\.s?css$/,
         use: [
           {
-            loader: "style-loader"
+            loader: "style-loader",
           },
           {
             loader: "css-loader",
             options: {
               url: false,
-              minimize: process.env.NODE_ENV === "production" ? true : false,
+              minimize: process.env.NODE_ENV === "production",
             },
           },
           {
             loader: "sass-loader",
             options: {
-              includePaths: [path.resolve(__dirname, './src')]
-            }
-          }
-        ]
+              includePaths: [path.resolve(__dirname, "./src")],
+            },
+          },
+        ],
       },
-    ]
+    ],
   },
   plugins: [
     new CopyWebpackPlugin([
       {
         from: "./public/images",
         to: path.resolve(__dirname, "./dist/public/images"),
-        force: true
+        force: true,
       },
       {
         from: "./public/favicon.ico",
         to: path.resolve(__dirname, "./dist/public/favicon.ico"),
-        force: true
+        force: true,
       },
       {
         from: "./server",
         to: path.resolve(__dirname, "./dist"),
-        force: true
+        force: true,
       },
       {
         from: path.resolve(__dirname, "./package.json"),
         to: path.resolve(__dirname, "./dist/package.json"),
-        force: true
+        force: true,
       },
       {
         from: "./public/bot.html",
         to: path.resolve(__dirname, "./dist/public/bot.html"),
-        force: true
-      }
+        force: true,
+      },
     ]),
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -96,5 +100,5 @@ module.exports = {
         },
       },
     }),
-  ]
+  ],
 };

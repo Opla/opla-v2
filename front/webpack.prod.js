@@ -1,19 +1,19 @@
+/* eslint import/no-extraneous-dependencies: 0 */
 const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack");
 
 const commonConfig = require("./webpack.common.js");
 
+// eslint-disable-next-line no-undef
 module.exports = merge(commonConfig, {
+  mode: "production",
   entry: {
-    app: "./client/index.jsx"
+    app: "./client/index.jsx",
   },
   plugins: [
     new ExtractTextPlugin({
       filename: "css/[name].css",
-    }),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production")
     }),
     new webpack.optimize.UglifyJsPlugin({
       // From: https://github.com/facebook/create-react-app/
@@ -43,5 +43,5 @@ module.exports = merge(commonConfig, {
       // Enable file caching
       cache: true,
     }),
-  ]
+  ],
 });
