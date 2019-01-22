@@ -2,7 +2,6 @@ image:
   tag: ${COMMIT_SHA}
 
 api:
-  management_endpoint: "" # replace by "/management" to activate.
   domain: ${K8S_NAMESPACE}.${DOMAIN_SUFFIX}
   extraDomains:
     - console.${DOMAIN_SUFFIX}

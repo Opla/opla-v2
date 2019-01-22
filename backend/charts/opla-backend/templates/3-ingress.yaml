@@ -13,7 +13,7 @@ spec:
     {{- define "backend.paths" }}
     http:
       paths:
-      {{- with $.Values.api.management_endpoint }}
+      {{- with .Values.api.management_endpoint }}
       - path: /api/v1{{.}}
         backend:
           serviceName: none
@@ -37,7 +37,7 @@ spec:
 {{- include "backend.paths" . }}
   {{- range .Values.api.extraDomains }}
   - host: {{ . }}
-{{- include "backend.paths" . }}
+{{- include "backend.paths" $ }}
   {{- end }}
 
   {{- if eq .Values.tls true }}
