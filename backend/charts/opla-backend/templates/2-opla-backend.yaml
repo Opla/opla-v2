@@ -96,5 +96,7 @@ spec:
             value: {{.Values.api.domain}}/auth
           - name: ZOAPP__GLOBAL__PUBLIC_URL
             value: {{.Values.api.domain}}/api
+            {{- if .Values.api.management_endpoint }}
           - name: ZOAPP__GLOBAL__MANAGEMENT_ENDPOINT
             value: {{.Values.api.management_endpoint}}
+            {{- end}}
