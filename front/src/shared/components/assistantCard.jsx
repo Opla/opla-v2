@@ -19,27 +19,27 @@ const AssistantCard = ({
   selectedIndex,
 }) => {
   const className =
-    index > -1 && selectedIndex === index
-      ? "selectedListItem"
-      : "selectableListItem";
+    selectedIndex === index ? "selectedListItem" : "selectableListItem";
+
+  const moduledIndex = index % robotsColors.length;
+
   let icon;
   if (item.icon) {
     icon = <Icon className="opla_assistant_card-img">{item.icon}</Icon>;
   } else if (index > -1) {
     icon = (
       <img
-        src={`./images/robots/robot-${index}.svg`}
+        src={`./images/robots/robot-${moduledIndex}.svg`}
         className="opla_assistant_card-img"
         alt={item.name}
       />
     );
   }
-  const color =
-    index > -1
-      ? {
-          backgroundColor: robotsColors[`robot-${index}`].mainColor,
-        }
-      : {};
+
+  let color;
+  if (index > -1) {
+    color = robotsColors[moduledIndex].mainColor;
+  }
 
   return (
     <Cell
@@ -63,7 +63,10 @@ const AssistantCard = ({
                 <FileInput onLoad={onImport} accept={acceptImport} />
               </form>
             ) : (
-              <div className="opla_assistant_card-background" style={color}>
+              <div
+                className="opla_assistant_card-background"
+                style={{ backgroundColor: color }}
+              >
                 <div className="opla_assistant_card-imgMask">{icon}</div>
               </div>
             )}
