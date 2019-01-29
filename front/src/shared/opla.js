@@ -22,6 +22,9 @@ import PublishContainer from "./containers/publishContainer";
 import configureStore from "./store";
 import PublishDialog from "./containers/dialogs/publishDialog";
 import { defaultTemplates, defaultLanguages } from "./reducers/app";
+
+import PluginManager from "./utils/pluginsManager";
+
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
 import VariableContainer from "./containers/builder/variableContainer";
@@ -31,6 +34,8 @@ const handlePublishBot = () => {
   const dialog = React.createElement(PublishDialog, { open: true, store });
   Zrmc.showDialog(dialog);
 };
+
+const plugins = new PluginManager().load().getPlugins({ type: "View" });
 
 const appProps = {
   name: "Opla",
@@ -56,6 +61,7 @@ const appProps = {
   },
   templates: defaultTemplates,
   languages: defaultLanguages,
+  frontPlugins: plugins,
   screens: [
     {
       id: "1",

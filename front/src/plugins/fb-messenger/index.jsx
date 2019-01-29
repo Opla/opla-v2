@@ -70,3 +70,5 @@ export default class FBMessengerPlugin {
     );
   }
 }
+
+export const Config = { appId: "1908982232707706" };

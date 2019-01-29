@@ -45,7 +45,7 @@ export class ServiceDialogBase extends Component {
       .catch(() => {
         // eslint-disable-next-line
         console.warn(
-          `cant find plugins ${name}/settings.js component`,
+          `cant find plugins ${name}/components/settings.jsx component`,
         );
         this.setState({ SettingsComponent: DefaultPluginSettings });
       });

@@ -29,7 +29,6 @@ export default (manager, callback) => {
   callback(new EmailPlugin(manager));
   callback(new SkypePlugin(manager));
   callback(new TelegramPlugin(manager));
-
   callback(
     new DummyPlugin(manager, {
       name: "opennlx",

@@ -48,6 +48,6 @@ class App {
   }
 }
 
-const createApp = (config = {}) => new App(config);
+const createApp = () => new App();
 
 export default createApp;

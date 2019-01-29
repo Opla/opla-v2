@@ -4,9 +4,8 @@
  * This source code is licensed under the GPL v2.0+ license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import fs from "fs";
 import createApp from "./app";
-
-const fs = require("fs");
 
 // load config.json configuration if present.
 function loadConfig(path) {
@@ -31,9 +30,13 @@ if (!fs.existsSync(configPath)) {
   configPath = `${__dirname}/config.json`;
 }
 
-const config = loadConfig(configPath);
-(async () => {
-  const app = createApp();
-  await app.init(config);
-  app.start();
-})();
+try {
+  const config = loadConfig(configPath);
+  (async () => {
+    const app = createApp();
+    await app.init(config);
+    app.start();
+  })();
+} catch (err) {
+  logger.error(`Error while starting backend : ${err.message}`);
+}

@@ -10,14 +10,16 @@ import { promisify } from "util";
 const plugins = async (zoapp) => {
   const readDir = promisify(fs.readdir);
   let pluginFolderList = await readDir(__dirname);
-  pluginFolderList = pluginFolderList.filter((p) => p !== "index.js");
+  pluginFolderList = pluginFolderList.filter(
+    (p) => p !== "index.js" && p !== "index.js.map" && p !== ".DS_Store",
+  );
   const loadedPlugins = await Promise.all(
     pluginFolderList.map(async (pluginURI) => {
       const loadedPlugin = await import(`${__dirname}/${pluginURI}`);
       return loadedPlugin.default(zoapp);
     }),
   );
-
   return loadedPlugins;
 };
+
 export default plugins;

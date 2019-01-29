@@ -20,6 +20,7 @@ class PluginsManager {
     loadPlugin(this, (plugin) => {
       that.startPlugin(plugin);
     });
+    return this;
   }
 
   startPlugin(plugin) {
