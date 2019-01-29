@@ -11,20 +11,23 @@ import buildRoutes from "./routes";
 import plugins from "./plugins";
 
 class App {
-  constructor(configuration = {}) {
+  // Can't await in constructor for obvious reason
+  // So now init is used to load dynamically all plugins from plugins folder
+  async init(configuration = {}) {
     const config = {
       build_schema: false, // We force zoapp not to build the SQL schema by default.
       ...configuration,
     };
-
     this.zoapp = createZoapp(config);
     logger.info("add Plugins");
-    this.zoapp.addPlugins(plugins(this.zoapp));
+    // Plugins is now async
+    this.zoapp.addPlugins(await plugins(this.zoapp));
     logger.info("add Controller extensions");
     this.zoapp.addControllerExtensions(
       createExtensionsController(this.zoapp, config),
     );
     buildRoutes(this.zoapp);
+    return this;
   }
 
   async start() {

@@ -64,7 +64,7 @@ const initService = async (ctx, params, commons) => {
     ({ config } = commons);
   }
 
-  const app = createApp(config);
+  const app = await createApp().init(config);
 
   await app.getDatabase().reset();
   await app.start();

@@ -32,4 +32,8 @@ if (!fs.existsSync(configPath)) {
 }
 
 const config = loadConfig(configPath);
-createApp(config).start();
+(async () => {
+  const app = createApp();
+  await app.init(config);
+  app.start();
+})();
