@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, render } from "enzyme";
 import MessengerBoxMessageContent from "shared/components/messengerBox/messengerBoxMessageContent";
 import { Button } from "zrmc";
 
@@ -41,5 +41,24 @@ describe("components/messengerBox", () => {
     // expect(wrapper.find(".text-wrapper")).toHaveLength(1);
     expect(wrapper.text()).toMatch("12/09/2018 <Button /> ou  <Button /> ");
     expect(wrapper.find(Button)).toHaveLength(2);
+  });
+  it("should render an image", () => {
+    const message = {
+      body: "https://via.placeholder.com/150.jpg",
+      conversationId: "convId00",
+      created_time: 1528986208403,
+      from: "bot_garbot8",
+      id: "id03",
+      timestamp: 1528986208,
+    };
+    // Render is used here to enforce render the full dangerouslySetInnerHTML stuff
+    const wrapper = render(
+      <MessengerBoxMessageContent message={message} onSendMessage={() => {}} />,
+    );
+    expect(wrapper.text()).toMatch("");
+    // expect to find a a href for clickable feature
+    expect(wrapper.find("a").prop("href")).toEqual(message.body);
+    // expect to find an img src, for basic inchat render
+    expect(wrapper.find("img").prop("src")).toEqual(message.body);
   });
 });
