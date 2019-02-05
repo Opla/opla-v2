@@ -26,7 +26,7 @@ const StringTools = {
           h.indexOf(".jpg") > 0 ||
           h.indexOf(".jpeg") > 0
         ) {
-          return `${space}<img src="${href}" alt="${txt}" />`;
+          return `${space}<a href="${href}" target="_blank" rel="noopener noreferrer"><img src="${href}" alt="${txt}" /></a>`;
         }
         return `${space}<a href="${href}" target="_blank" rel="noopener noreferrer">${txt}</a>`;
       },

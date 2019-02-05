@@ -93,7 +93,7 @@ const MessengerBoxMessageContent = (props) => {
               h.indexOf(".jpg") > 0 ||
               h.indexOf(".jpeg") > 0
             ) {
-              return <img key={i} src={href} alt={text} />;
+              text = <img src={href} alt={text} />;
             }
             return (
               <a key={i} href={href} target="_blank" rel="noopener noreferrer">
