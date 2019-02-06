@@ -50,17 +50,12 @@ export default class extends Model {
     let bots = [];
     if (user) {
       const collection = this.database.getTable("botUsers");
-      const self = this;
       if (collection) {
         await collection.nextItem(async (u) => {
           // logger.info("u=", u);
           // logger.info("user=", user);
-          if (
-            u.id === user.userId ||
-            u.email === user.email ||
-            u.username === user.username
-          ) {
-            const bot = await self.getBot(u.botId);
+          if (u.userId === user.id) {
+            const bot = await this.getBot(u.botId);
             if (bot) {
               bots.push({ ...bot });
             }
@@ -81,13 +76,7 @@ export default class extends Model {
     let userRet = null;
     if (collection) {
       await collection.nextItem(async (u) => {
-        if (
-          botId === u.botId &&
-          (u.id === user.id ||
-            u.id === user.userId ||
-            u.email === user.email ||
-            u.username === user.username)
-        ) {
+        if (botId === u.botId && u.userId === user.id) {
           userRet = u;
           return true;
         }

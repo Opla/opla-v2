@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 const chalk = require("chalk");
-const figlet = require('figlet');
+const figlet = require("figlet");
 const fs = require("fs-extra");
 const pkg = require("../package.json");
 const program = require("commander");
@@ -12,7 +13,7 @@ const DESCRIPTION = `Management tool for ${pkg.description}`;
 
 program
   .version(pkg.version)
-  .option("--non-interactive", "do not prompt and use default settings or values specified as options");
+  .option("--non-interactive", "do not prompt and use default settings or values specified as options"); // eslint-disable-line prettier/prettier
 
 const configDefaults = {
   clientName: "Opla Front",
@@ -22,19 +23,21 @@ const configDefaults = {
   apiPort: "8081",
   apiProtocol: "http",
   apiResolution: "relative",
+  policyValidation: "none",
 };
 
 program
   .command("init")
   .alias("i")
   .description("Initialize the project and create the configuration file")
-  .option("--client-name [name]", "set the client name", configDefaults.clientName)
-  .option("--client-email [email]", "set the client email", configDefaults.clientEmail)
-  .option("--api-domain [domain]", "set the backend api domain that is advertised to the client", configDefaults.apiDomain)
-  .option("--api-host [host]", "set the backend api host", configDefaults.apiHost)
-  .option("--api-port [port]", "set the backend api port", configDefaults.apiPort)
-  .option("--api-protocol [protocol]", "set the backend api protocol", configDefaults.apiProtocol)
-  .option("--api-resolution [resolution]", "api resolution in frontend", configDefaults.apiResolution)
+  .option("--client-name [name]", "set the client name", configDefaults.clientName) // eslint-disable-line prettier/prettier
+  .option("--client-email [email]", "set the client email", configDefaults.clientEmail) // eslint-disable-line prettier/prettier
+  .option("--api-domain [domain]", "set the backend api domain that is advertised to the client", configDefaults.apiDomain) // eslint-disable-line prettier/prettier
+  .option("--api-host [host]", "set the backend api host", configDefaults.apiHost) // eslint-disable-line prettier/prettier
+  .option("--api-port [port]", "set the backend api port", configDefaults.apiPort) // eslint-disable-line prettier/prettier
+  .option("--api-protocol [protocol]", "set the backend api protocol", configDefaults.apiProtocol) // eslint-disable-line prettier/prettier
+  .option("--api-resolution [resolution]", "api resolution in frontend", configDefaults.apiResolution) // eslint-disable-line prettier/prettier
+  .option("--policy-validation [validation]", "api validation policy", configDefaults.policyValidation) // eslint-disable-line prettier/prettier
   .option("--overwrite", "overwrite existing configuration files", false)
   .action(async (options) => {
     const questions = [
@@ -82,21 +85,26 @@ program
         choices: ["absolute", "relative"],
         default: [options.apiResolution],
       },
+      {
+        type: "list",
+        name: "policyValidation",
+        message: "Validation policy",
+        choices: ["none", "mail", "admin"],
+        default: [options.policyValidation],
+      },
     ];
 
     try {
       const fileExists = await fs.pathExists(CONFIG_FILE);
 
       if (fileExists) {
-        questions.push(
-          {
-            type: "confirm",
-            name: "overwrite",
-            message:
-              "The configuration file already exists. Do you want to overwrite it?",
-            default: !!options.overwrite,
-          },
-        );
+        questions.push({
+          type: "confirm",
+          name: "overwrite",
+          message:
+            "The configuration file already exists. Do you want to overwrite it?",
+          default: !!options.overwrite,
+        });
       }
 
       let answers;
@@ -125,27 +133,32 @@ program
           email: answers.clientEmail,
           grant_type: "password",
           redirect_uri: "http://127.0.0.1:8080",
+          policies: {
+            validation: answers.policyValidation,
+          },
         },
       });
 
       // create the configuration
       const config = {
         backend: {
-          api: {
-          },
+          api: {},
           auth: {
             clientId: response.client_id,
             clientSecret: response.client_secret,
-          }
+            signUp: {
+              validation: answers.policyValidation,
+            },
+          },
         },
       };
 
       if (answers.apiResolution === "absolute") {
-        config.backend.auth.url = `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/auth/`
-        config.backend.api.url = `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/api/v1/`
+        config.backend.auth.url = `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/auth/`; // eslint-disable-line prettier/prettier
+        config.backend.api.url = `${answers.apiProtocol}://${answers.apiDomain}:${answers.apiPort}/api/v1/`; // eslint-disable-line prettier/prettier
       } else {
-        config.backend.auth.url = `/auth/`
-        config.backend.api.url = `/api/v1/`
+        config.backend.auth.url = "/auth/";
+        config.backend.api.url = "/api/v1/";
       }
 
       await fs.writeFile(CONFIG_FILE, JSON.stringify(config, null, 4));
@@ -161,10 +174,12 @@ program
     }
   });
 
-console.log(chalk.yellow(figlet.textSync("Opla CE", { horizontalLayout: "full" })));
+console.log(
+  chalk.yellow(figlet.textSync("Opla CE", { horizontalLayout: "full" })),
+);
 console.log(`${DESCRIPTION}\n`);
 
-program.parse(process.argv);
+program.parse(process.argv); // eslint-disable-line no-undef
 
 if (!program.args.length) {
   program.help();

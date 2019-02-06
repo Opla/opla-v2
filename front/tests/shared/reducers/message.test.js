@@ -47,27 +47,33 @@ describe("reducers/message", () => {
     const prevState = reducer(undefined, {});
     expect(prevState).toEqual(initialState);
 
-    const state = reducer(prevState, actions.setMessage("An error message"));
+    const state = reducer(
+      prevState,
+      actions.addMessage("An error message", "error"),
+    );
     expect(state).toEqual({
       ...prevState,
-      message: "An error message",
+      messages: [{ message: "An error message", level: "error" }],
     });
   });
 
   it("removes message", () => {
     const prevState = reducer(
       undefined,
-      actions.setMessage("An error message"),
+      actions.addMessage("Another error message", "error"),
     );
     expect(prevState).toEqual({
       ...initialState,
-      message: "An error message",
+      messages: [
+        { message: "An error message", level: "error" },
+        { message: "Another error message", level: "error" },
+      ],
     });
 
     const state = reducer(prevState, actions.removeMessage());
     expect(state).toEqual({
       ...prevState,
-      message: null,
+      messages: [{ message: "Another error message", level: "error" }],
     });
   });
 
@@ -77,14 +83,19 @@ describe("reducers/message", () => {
     const prevState = reducer(undefined, {});
     expect(prevState).toEqual(initialState);
 
+    const messages = [{ message: "Another error message", level: "error" }];
+
     errorTypes.forEach((type) => {
       const state = reducer(prevState, {
         type,
         error: "Fake error",
       });
+
+      messages.push({ message: "Fake error", level: "error" });
+
       expect(state).toEqual({
         ...prevState,
-        message: "Fake error",
+        messages,
       });
     });
   });

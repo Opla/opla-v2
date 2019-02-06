@@ -39,6 +39,7 @@ Cypress.Commands.add("createUser", (email, username, password) => {
   cy.contains("Register")
     .click()
     .then(() => {
+      cy.contains("Create a new assistant").click();
       cy.contains(".userbox_name", username, {
         timeout: FLAKY_CONTAINS_TIMEOUT,
       }).should("be.visible");

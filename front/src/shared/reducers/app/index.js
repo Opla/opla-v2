@@ -12,7 +12,6 @@ import {
 } from "zoapp-front/dist/reducers/app";
 
 import {
-  API_ADMIN,
   AUTH_SIGNOUT,
   FETCH_FAILURE,
   FETCH_REQUEST,
@@ -20,15 +19,12 @@ import {
 } from "zoapp-front/dist/actions/constants";
 
 import {
-  API_BOTS_PARAMETERS,
-  API_CREATEBOT,
   API_DELETEMIDDLEWARE,
   API_GETLANGUAGES,
   API_GETMIDDLEWARES,
   API_GETTEMPLATES,
   API_IMPORT,
   API_PUBLISH,
-  API_SAVEBOT,
   API_SB_GETCONTEXT,
   API_SB_GETMESSAGES,
   API_SB_RESET,
@@ -47,6 +43,11 @@ import {
   handlers as appHandlers,
 } from "./app";
 
+import {
+  initialState as botInitialState,
+  handlers as botHandlers,
+} from "./bot";
+
 export const defaultTemplates = [
   { id: "eb05e2a4-251a-4e11-a907-b1f3bcc20283", name: "Empty" },
   { id: "571a2354-ec80-4423-8edb-94d0a934fbb6", name: "Import" },
@@ -57,49 +58,18 @@ export const initialState = {
   ...zoappInitialState,
   ...appInitialState,
   ...intentInitialState,
-  selectedBotId: null,
+  ...botInitialState,
   sandbox: null,
   loadingMessages: false,
   templates: defaultTemplates,
   languages: defaultLanguages,
-  botParameters: null,
 };
 
 export default createReducer(initialState, {
   ...zoappHandlers,
   ...appHandlers,
   ...intentHandlers,
-
-  [API_ADMIN + FETCH_SUCCESS]: (state, { admin }) => {
-    let { selectedBotId } = state;
-    let project = state.project ? state.project : {};
-    let { selectedIndex } = project;
-    if (admin && admin.bots) {
-      if (!selectedIndex || admin.bots.length > selectedIndex) {
-        selectedIndex = 0;
-      }
-      if (selectedBotId == null && admin.bots.length > selectedIndex) {
-        selectedBotId = admin.bots[selectedIndex].id;
-      }
-      let bot = {};
-      if (admin.bots.length > selectedIndex) {
-        bot = admin.bots[selectedIndex];
-      }
-      project = {
-        name: bot.name,
-        selectedIndex,
-        icon: bot.icon ? bot.icon : "./images/opla-avatar.png",
-      };
-    }
-    return {
-      ...state,
-      loading: false,
-      error: null,
-      admin,
-      selectedBotId,
-      project,
-    };
-  },
+  ...botHandlers,
 
   [API_GETMIDDLEWARES + FETCH_REQUEST]: (state) => ({
     ...state,
@@ -178,109 +148,6 @@ export default createReducer(initialState, {
     loading: false,
     error,
   }),
-  [API_CREATEBOT + FETCH_REQUEST]: (state) => ({
-    ...state,
-    loading: true,
-    error: null,
-  }),
-  [API_CREATEBOT + FETCH_SUCCESS]: (state, { bot }) => {
-    const { error } = bot;
-    let { selectedBotId } = state;
-    let admin = null;
-    if (state.admin != null) {
-      admin = { ...state.admin };
-    }
-    if (error) {
-      // error = bot.error;
-    } else if (admin != null) {
-      selectedBotId = bot.id;
-      const bots = [];
-      if (admin.bots) {
-        admin.bots.forEach((b) => {
-          if (b.id === selectedBotId) {
-            bots.push({ ...bot });
-          } else {
-            bots.push(b);
-          }
-        });
-      } else {
-        bots.push({ ...bot });
-      }
-      bots.push({ ...bot });
-      admin.bots = bots;
-    }
-    // TODO selectedIndex
-    const selectedIndex = 0;
-    const project = {
-      name: bot.name,
-      selectedIndex,
-      icon: bot.icon ? bot.icon : "./images/opla-avatar.png",
-    };
-    return {
-      ...state,
-      loading: false,
-      error,
-      admin,
-      selectedBotId,
-      project,
-    };
-  },
-  [API_CREATEBOT + FETCH_FAILURE]: (state, { error }) => ({
-    ...state,
-    loading: false,
-    error,
-  }),
-
-  [API_SAVEBOT + FETCH_REQUEST]: (state) => ({
-    ...state,
-    loading: true,
-    error: null,
-  }),
-  [API_SAVEBOT + FETCH_SUCCESS]: (state, { bot }) => {
-    const { error } = bot;
-    let admin = null;
-    if (state.admin != null) {
-      admin = { ...state.admin };
-    }
-    if (error) {
-      // error = bot.error;
-    } else if (admin != null) {
-      const botId = bot.id;
-      const bots = [];
-      if (admin.bots) {
-        admin.bots.forEach((b) => {
-          if (b.id === botId) {
-            bots.push({ ...bot });
-          } else {
-            bots.push({ ...b });
-          }
-        });
-      } else {
-        bots.push({ ...bot });
-      }
-      admin.bots = bots;
-    }
-    // TODO selectedIndex
-    const selectedIndex = 0;
-    const project = {
-      name: bot.name,
-      selectedIndex,
-      icon: bot.icon ? bot.icon : "./images/opla-avatar.png",
-    };
-    return {
-      ...state,
-      loading: false,
-      error,
-      admin,
-      project,
-    };
-  },
-  [API_SAVEBOT + FETCH_FAILURE]: (state, { error }) => ({
-    ...state,
-    loading: false,
-    error,
-  }),
-
   [API_IMPORT + FETCH_REQUEST]: (state) => ({
     ...state,
     loading: true,
@@ -497,22 +364,5 @@ export default createReducer(initialState, {
     loading: false,
     error: error.message,
     languages: defaultLanguages,
-  }),
-  [API_BOTS_PARAMETERS + FETCH_REQUEST]: (state) => ({
-    ...state,
-    loading: true,
-    error: null,
-  }),
-  [API_BOTS_PARAMETERS + FETCH_SUCCESS]: (state, { params }) => ({
-    ...state,
-    loading: false,
-    error: null,
-    botParameters: params,
-  }),
-  [API_BOTS_PARAMETERS + FETCH_FAILURE]: (state, error) => ({
-    ...state,
-    loading: false,
-    error,
-    botParameters: null,
   }),
 });

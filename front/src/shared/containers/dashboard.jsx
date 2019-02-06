@@ -15,11 +15,8 @@ import {
 } from "zoapp-front/dist/actions/api";
 import { getInstalledPlugins } from "../selectors/pluginsSelector";
 import DashboardActionBar from "../components/dashboardActionbar";
-import {
-  apiSaveBotRequest,
-  apiImportRequest,
-  apiGetIntentsRequest,
-} from "../actions/api";
+import { apiSaveBotRequest } from "../actions/bot";
+import { apiImportRequest, apiGetIntentsRequest } from "../actions/api";
 import timezones from "../utils/timezones";
 import DashboardMessagings from "../components/dashboard/dashboardMessagings";
 
@@ -230,10 +227,10 @@ DashboardBase.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state.app;
+  const { bots, project } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   // TODO get selectedBot from selectBotId
-  const bot = selectedBotId ? admin.bots[0] : null;
+  const bot = selectedBotId ? bots[project.selectedIndex] : null;
   const intents = state.app.intents ? state.app.intents : null;
   const plugins = state.app.plugins || [];
 

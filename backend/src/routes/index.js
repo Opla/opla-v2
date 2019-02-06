@@ -57,8 +57,8 @@ export default (zoapp) => {
 
   // /bots routes
   route = zoapp.createRoute("/bots");
-  // Bot create (No auth)
-  route.add("POST", "", ["open"], bots.createBot);
+  // Bot create
+  route.add("POST", "", ["owner, master"], bots.createBot);
   // bot params
   route.add("GET", "/params/:name", ["open"], bots.getParameters);
   // bot update

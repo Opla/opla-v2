@@ -7,9 +7,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
-import { Button } from "zrmc";
+import Zrmc, { Button } from "zrmc";
 import { connect } from "react-redux";
 import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import Authenticate from "zoapp-front/dist/containers/authenticate";
 import Assistants from "./assistants";
 
 export class HomeBase extends Component {
@@ -34,6 +35,11 @@ export class HomeBase extends Component {
     );
   }
 
+  handleOpenSignUpDialog = () => {
+    const dialog = <Authenticate store={this.props.store} display="signup" />;
+    Zrmc.showDialog(dialog);
+  };
+
   render() {
     if (this.props.isSignedIn) {
       return (
@@ -57,8 +63,9 @@ export class HomeBase extends Component {
             <div>
               <Button
                 raised
-                onClick={() => {
-                  this.props.history.push("/create");
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.handleOpenSignUpDialog();
                 }}
               >
                 Create my first assistant
@@ -72,6 +79,7 @@ export class HomeBase extends Component {
 }
 
 HomeBase.propTypes = {
+  store: PropTypes.shape({}).isRequired,
   isSignedIn: PropTypes.bool.isRequired,
   appSetTitleName: PropTypes.func.isRequired,
   history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })

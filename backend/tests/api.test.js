@@ -89,6 +89,7 @@ const initService = async (ctx, params, commons) => {
     username: "user1",
     password: "12345",
     email: "user1@test.com",
+    accept: true,
   });
   context.user1 = r.result;
 
@@ -345,8 +346,6 @@ describe("API", () => {
             context.authUser1.access_token,
             {
               name: "bot",
-              username: "user1",
-              password: "12345",
               email: "user1@test.com",
             },
           );
@@ -356,18 +355,21 @@ describe("API", () => {
           );
         });
 
+        /* Really ?
         it("should create a SINGLE bot non authentified on /bots POST", async () => {
           const res = await postAsync(context, "/bots", null, {
             name: "bot",
             username: "user3",
             password: "12345",
             email: "user3@test.com",
+            accept: true,
           });
+          console.log(res)
           // WIP
           expect(Object.keys(res).sort()).toEqual(
             ["id", "creation_date", "name", "author", "email"].sort(),
           );
-        });
+        }); */
 
         it("should get a all bot's intents on /bots/:id/intents GET", async () => {
           const res = await getAsync(
