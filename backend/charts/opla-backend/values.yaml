@@ -31,12 +31,6 @@ db_mode: embedded
 embedded_db:
   host: db
 
-# Creates a default user and bot.
-default_user:
-  username: admin
-  password: password
-  email: qa@opla.ai
-
 mariadb:
   enabled: false
   db:
