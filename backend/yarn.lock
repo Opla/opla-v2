@@ -5960,10 +5960,10 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-zoapp-backend@0.24.5:
-  version "0.24.5"
-  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.24.5.tgz#06aba1d34582f65e1a810f1f79f234ed842dfe46"
-  integrity sha512-ADKTVM35//NbeYVwuLnH6H5OZ9l+CEQG2FXtL/Dbc01lU6jQaA8jiBIZD6EoWV8IH65JinL+7BWaODOFfMwMlw==
+zoapp-backend@0.24.6:
+  version "0.24.6"
+  resolved "https://registry.yarnpkg.com/zoapp-backend/-/zoapp-backend-0.24.6.tgz#0b43b2fc25b1c6817e65209c69e71a218968d1bc"
+  integrity sha512-qtjk6rmGuY4DcrV6rGKt2Rg5E4Npd4DGSqc5aok0AGaPCNY+6hd0ExJ/WmH9/zge1iX2Ig/LdRLXZbZITd8h6g==
   dependencies:
     body-parser "^1.18.2"
     express "^4.16.2"
@@ -5973,17 +5973,8 @@ zoapp-backend@0.24.5:
     nodemailer "^4.6.5"
     validate.js "^0.12.0"
     ws "^3.3.3"
-    zoapp-core "0.13.0"
-    zoauth-server "0.10.1"
-
-zoapp-core@0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/zoapp-core/-/zoapp-core-0.13.0.tgz#482013047aec130b12ec5c40f6cb24baeb9f617c"
-  integrity sha512-ualxT9gF3RLyP3sx2W07HrTPmmIIhjpQL+/Bc3vCg3XOslOqjZL8e5Ll7OLDWPeewEmY9ifXHckS9acBfEndoA==
-  dependencies:
-    mysql2 "^1.5.1"
-    nodemailer "4.6.8"
-    winston "2.4.0"
+    zoapp-core "0.13.1"
+    zoauth-server "0.10.9"
 
 zoapp-core@0.13.1:
   version "0.13.1"
@@ -5994,19 +5985,10 @@ zoapp-core@0.13.1:
     nodemailer "4.6.8"
     winston "2.4.0"
 
-zoauth-server@0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/zoauth-server/-/zoauth-server-0.10.1.tgz#f495f9b1b8f35df5e7addcd925b9e757b12f2cab"
-  integrity sha512-CtADrxmAPpKcCbYi2O5g8VM19+qSq8il9gBESqqjzjjfEbl8bY4aQ9pS08bd1x2d2/O8PedqcTzFMKFKauW6kQ==
-  dependencies:
-    body-parser "^1.17.2"
-    express "^4.15.3"
-    zoapp-core "0.13.0"
-
-zoauth-server@0.10.8:
-  version "0.10.8"
-  resolved "https://registry.yarnpkg.com/zoauth-server/-/zoauth-server-0.10.8.tgz#c5ed23ecb9207813c33b05a29fbf2447fa318b10"
-  integrity sha512-7YG0NLQQOzDhy3nedP0GdZHKvxmyNX7J3SCeHaIcvRcb2iwxrPMQPw++x3WmNcNhbsUjBrdZHP021VCMjJD1rQ==
+zoauth-server@0.10.9:
+  version "0.10.9"
+  resolved "https://registry.yarnpkg.com/zoauth-server/-/zoauth-server-0.10.9.tgz#dc12fb145d584c27ba641d07e7b34f76001e9568"
+  integrity sha512-L08cruMBuRyUtkqf1jvGmQwESTIJlPQrM9xnqI+gkq/bHKjrbKgbVsTRS8T9jpNa17EVIvIkwpRpq0JRrFJXTA==
   dependencies:
     body-parser "^1.17.2"
     express "^4.15.3"

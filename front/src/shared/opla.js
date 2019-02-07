@@ -9,7 +9,7 @@ import React from "react";
 import Front from "zoapp-front/dist/front";
 import AdminManager from "zoapp-front/dist/containers/adminManager";
 import DrawerFooter from "zoapp-front/dist/containers/drawerFooter";
-import Settings from "zoapp-front/dist/containers/settings";
+import Settings from "zoapp-front/dist/containers/settingsManager";
 import Zrmc from "zrmc";
 import Team from "zoapp-front/dist/containers/admin/team";
 import Advanced from "zoapp-front/dist/containers/admin/advanced";
@@ -188,6 +188,7 @@ export default class Opla {
     /* eslint-enable no-undef */
     store = configureStore();
     this.front = new Front("app", appProps, config, env, { store });
+    Zrmc.init(this, { typography: true });
   }
 
   restart() {
