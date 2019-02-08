@@ -107,9 +107,10 @@ i.zui-subheader-right:hover {
   color: #ffffff;
 }
 
-:not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before {
-  background-color: transparent;
-}
+// :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::after,
+// :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item::before {
+//   background-color: transparent;
+// }
 
 .mdc-drawer--theme-dark .mdc-drawer__drawer, .mdc-drawer--theme-dark .mdc-drawer__drawer > :not(header):not(footer) {
   background-color: white;
@@ -199,6 +200,7 @@ i.zui-subheader-right:hover {
 
 .mdc-drawer__content .mdc-list-item__graphic > svg {
   margin-top: 6px;
+  height: 24px;
 }
 
 /* Header        */
@@ -281,26 +283,26 @@ i.zui-subheader-right:hover {
   border-color: $color_secondary;
 }
 
-.zrmc-content .mdc-button {
-  color: $color_secondary_a;
-}
+// .zrmc-content .mdc-button {
+//   color: $color_secondary_a;
+// }
 
-.zrmc-content .mdc-button--raised {
-  color: white;
-  background-color: $color_secondary_a;
-}
+// .zrmc-content .mdc-button--raised {
+//   color: white;
+//   background-color: $color_secondary_a;
+// }
 
-.zap-panel .mdc-button--raised {
-  background-color: $color_primary;
-}
+// .zap-panel .mdc-button--raised {
+//   background-color: $color_primary;
+// }
 
 .mdc-dialog__body .mdc-list-item__graphic {
   color: #000000;
 }
 
-.mdc-layout-grid {
-  padding: 0px;
-}
+// .mdc-layout-grid {
+//   padding: 0px;
+// }
 
 .zui-color--grey-100 {
   background-color: #FBFBFB;
@@ -680,5 +682,9 @@ i.zui-subheader-right:hover {
 
 .zui_table-menu:hover {
   color: $color_primary;
+}
+
+.mdc-dialog__footer__button.mdc-button--raised:not(:disabled), .mdc-button--unelevated:not(:disabled) {
+  color: #ffffff;
 }
 /* ************* */

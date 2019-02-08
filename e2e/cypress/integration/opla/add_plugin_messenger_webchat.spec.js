@@ -56,27 +56,29 @@ context("Actions", () => {
       });
     cy.contains("Add")
       .first()
-      .click();
-    cy.contains("webchat-connector").click();
-    cy.get(".mdc-dialog__surface")
-      .contains("Save")
-      .click();
-    cy.contains("Webchat");
+      .click()
+      .then(() => {
+        cy.contains("webchat-connector").click();
+        cy.get(".mdc-dialog__surface")
+          .contains("Save")
+          .click();
+        cy.contains("Webchat");
 
-    cy.contains("Dashboard").click();
-    cy.contains("webchat-connector")
-      .parent(".switchListItem")
-      .get(".mdc-switch__native-control")
-      .should("not.be.checked");
-    cy.contains("webchat-connector")
-      .parent(".switchListItem")
-      .find(".mdc-switch")
-      .first()
-      .click();
-    cy.contains("webchat-connector")
-      .parent(".switchListItem")
-      .get(".mdc-switch__native-control")
-      .should("be.checked");
+        cy.contains("Dashboard").click();
+        cy.contains("webchat-connector")
+          .parent(".switchListItem")
+          .get(".mdc-switch__native-control")
+          .should("not.be.checked");
+        cy.contains("webchat-connector")
+          .parent(".switchListItem")
+          .find(".mdc-switch")
+          .first()
+          .click();
+        cy.contains("webchat-connector")
+          .parent(".switchListItem")
+          .get(".mdc-switch__native-control")
+          .should("be.checked");
+      });
   });
 
   const newIntentField = () =>
