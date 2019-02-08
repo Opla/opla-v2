@@ -12,7 +12,6 @@ export default class extends CommonRoutes {
   constructor(zoapp) {
     super(zoapp.controllers);
     this.extensions = zoapp.extensions;
-    // Actually NodeJS doesn't support ES7 arrow binding so we need to bind manually
     this.createBot = this.createBot.bind(this);
     this.updateBot = this.updateBot.bind(this);
     this.getBots = this.getBots.bind(this);
@@ -60,12 +59,6 @@ export default class extends CommonRoutes {
     const { template, ...botParams } = { ...params };
     botParams.author = owner.username;
     botParams.email = owner.email;
-    if (botParams.password) {
-      delete botParams.password;
-    }
-    if (botParams.username) {
-      delete botParams.username;
-    }
     // logger.info("this.extensions");
     const bot = await this.extensions.getBots().setBot(botParams);
     // logger.info("bot=", bot);
@@ -86,6 +79,7 @@ export default class extends CommonRoutes {
     return bot;
   }
 
+  /* Really ?
   async createUserBeforeBot(params, clientId, clientSecret) {
     // logger.info("createUserBeforeBot");
     const { username, email, password } = params;
@@ -115,23 +109,18 @@ export default class extends CommonRoutes {
     );
     // TODO Authenticate user using scope
     return this.createBotNext(params, resp.result, scope);
-  }
+  } */
 
   async createBot(context) {
     // logger.info("createBot");
     const me = await this.access(context);
     // logger.info("createBot", me);
-    const clientId =
-      context.getQuery().client_id || context.req.get("client_id");
-    const clientSecret =
-      context.getQuery().client_secret || context.req.get("client_secret");
     const { ...params } = context.getBody();
     // logger.info("createBot", clientId);
-    if (me) {
-      const scope = context.getScope(context);
-      return this.createBotNext(params, me, scope);
-    }
-    return this.createUserBeforeBot(params, clientId, clientSecret);
+    const scope = context.getScope(context);
+    return this.createBotNext(params, me, scope);
+    // Really ?
+    // return this.createUserBeforeBot(params, clientId, clientSecret);
   }
 
   async updateBot(context) {
@@ -155,7 +144,7 @@ export default class extends CommonRoutes {
       user = me;
     }
     const bots = await this.extensions.getBots().getBots(user);
-    return bots === null ? [] : { result: bots };
+    return bots === null ? [] : bots;
   }
 
   async getBot(context) {

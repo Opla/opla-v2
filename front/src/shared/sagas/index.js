@@ -8,6 +8,7 @@ import { takeEvery, all } from "redux-saga/effects";
 
 import auth from "zoapp-front/dist/sagas/auth";
 import api from "./api";
+import bot from "./bot";
 
 function takeAll(subRoot) {
   const takeList = [];
@@ -22,4 +23,5 @@ function takeAll(subRoot) {
 export default function* root() {
   yield takeAll(auth);
   yield takeAll(api);
+  yield takeAll(bot);
 }

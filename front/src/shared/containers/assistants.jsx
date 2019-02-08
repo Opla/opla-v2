@@ -12,10 +12,16 @@ import Panel from "zoapp-front/dist/components/panel";
 import { Grid, Inner } from "zrmc";
 import AssistantCard from "../components/assistantCard";
 
+import { apiGetBotsRequest, apiSelectBot } from "../actions/bot";
+
 export class AssistantsBase extends Component {
+  componentDidMount() {
+    this.props.apiGetBotsRequest();
+  }
+
   onSelect = (index) => {
     if (index > -1) {
-      // TODO select new bot
+      this.props.apiSelectBot(index);
       this.props.history.push("/factory");
     } else {
       this.props.history.push("/create");
@@ -69,20 +75,36 @@ AssistantsBase.propTypes = {
   bots: PropTypes.arrayOf(PropTypes.shape({})),
   multiBots: PropTypes.bool,
   selectedBotIndex: PropTypes.number,
-  history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
-    .isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
+  apiGetBotsRequest: PropTypes.func.isRequired,
+  apiSelectBot: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state.app;
+  const { bots } = state.app;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const selectedBotIndex = selectedBotId
     ? state.app.project.selectedIndex
     : null;
-  const bots = admin ? admin.bots : [];
-  const multiBots = admin ? admin.params.multiProjects : false;
+  // Needed ?
+  // const multiBots = admin ? admin.params.multiProjects : false;
+  const multiBots = false;
   return { isSignedIn, bots, multiBots, selectedBotIndex };
 };
 
-export default withRouter(connect(mapStateToProps)(AssistantsBase));
+const mapDispatchToProps = (dispatch) => ({
+  apiGetBotsRequest: () => {
+    dispatch(apiGetBotsRequest());
+  },
+  apiSelectBot: (index) => {
+    dispatch(apiSelectBot(index));
+  },
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(AssistantsBase),
+);

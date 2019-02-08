@@ -241,8 +241,8 @@ const mapStateToProps = (state) => {
     : -1;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const intents = state.app.intents ? [...state.app.intents] : null;
-  const { admin } = state.app;
-  const bot = admin ? admin.bots[0] : null;
+  const { bots, project } = state.app;
+  const bot = selectedBotId ? bots[project.selectedIndex] : null;
 
   return {
     intents,

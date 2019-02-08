@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { Grid, Inner, Cell, Button, TextField, Select, MenuItem } from "zrmc";
 import { connect } from "react-redux";
 
-import { apiSaveBotRequest } from "../../actions/api";
+import { apiSaveBotRequest } from "../../actions/bot";
 import timezones from "../../utils/timezones";
 
 export class GeneralAdminBase extends Component {
@@ -187,8 +187,8 @@ GeneralAdminBase.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { admin, project } = state.app;
-  const bot = project.selectedIndex ? admin.bots[project.selectedIndex] : null;
+  const { bots, project } = state.app;
+  const bot = project.selectedIndex ? bots[project.selectedIndex] : null;
   return {
     bot,
   };

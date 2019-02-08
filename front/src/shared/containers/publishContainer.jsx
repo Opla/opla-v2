@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { appSetTitleName } from "zoapp-front/dist/actions/app";
 import UrlBuilder from "zoapp-common/utils/urlBuilder";
-import { apiGetBotParametersRequest } from "../actions/api";
+import { apiGetBotParametersRequest } from "../actions/bot";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../../config/default.json";
 

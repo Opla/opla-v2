@@ -49,17 +49,21 @@ context("Actions", () => {
   });
 
   it("Add webchat plugin", () => {
-    cy.visit(buildUrl("admin"));
-    cy.contains("Extensions").click();
-    cy.wait(1000);
+    cy.contains(botName)
+      .click()
+      .then(() => {
+        cy.contains("Extensions").click({ force: true });
+      });
     cy.contains("Add")
       .first()
       .click();
     cy.contains("webchat-connector").click();
-    cy.contains("Save").click();
+    cy.get(".mdc-dialog__surface")
+      .contains("Save")
+      .click();
     cy.contains("Webchat");
 
-    cy.visit(buildUrl("factory"));
+    cy.contains("Dashboard").click();
     cy.contains("webchat-connector")
       .parent(".switchListItem")
       .get(".mdc-switch__native-control")
@@ -92,7 +96,7 @@ context("Actions", () => {
       .first();
 
   it("Publish on webchat", () => {
-    cy.visit(buildUrl("factory"));
+    cy.contains(botName).click();
     cy.contains("webchat-connector")
       .parent(".switchListItem")
       .get(".mdc-switch__native-control")

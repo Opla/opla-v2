@@ -220,10 +220,11 @@ PlaygroundContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+  const { bots } = state.app;
   const sandbox = state.app ? state.app.sandbox : null;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const selectedBot = selectedBotId
-    ? state.app.admin.bots[state.app.project.selectedIndex]
+    ? bots[state.app.project.selectedIndex]
     : {};
   const userProfile = state.user ? state.user.profile : {};
   let conversation = null;

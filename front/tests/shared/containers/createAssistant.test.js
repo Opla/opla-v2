@@ -22,7 +22,7 @@ beforeAll(() => {
 describe("containers/CreateAssistant", () => {
   it("renders correctly", () => {
     const appSetTitleNameSpy = jest.fn();
-    const setMessage = jest.fn();
+    const addMessage = jest.fn();
     const createBotSpy = jest.fn();
     const apiGetTemplatesSpy = jest.fn();
     const apiGetLanguagesSpy = jest.fn();
@@ -38,7 +38,7 @@ describe("containers/CreateAssistant", () => {
         templates={defaultTemplates}
         languages={defaultLanguages}
         history={historySpy}
-        setMessage={setMessage}
+        addMessage={addMessage}
       />,
     );
 
@@ -50,7 +50,7 @@ describe("containers/CreateAssistant", () => {
     expect(apiGetLanguagesSpy).toHaveBeenCalled();
     expect(createBotSpy).not.toHaveBeenCalled();
     expect(historySpy.push).not.toHaveBeenCalled();
-    expect(setMessage).not.toHaveBeenCalled();
+    expect(addMessage).not.toHaveBeenCalled();
   });
 
   it("should update template selected when props change", () => {
@@ -68,7 +68,7 @@ describe("containers/CreateAssistant", () => {
         apiGetLanguages={jest.fn()}
         templates={defaultTemplates}
         languages={defaultLanguages}
-        setMessage={jest.fn()}
+        addMessage={jest.fn()}
         history={{ length: 0, push: jest.fn() }}
       />,
     );
@@ -78,7 +78,7 @@ describe("containers/CreateAssistant", () => {
   });
 
   it("sets a message if uploaded template is not a valid json", () => {
-    const setMessage = jest.fn();
+    const addMessage = jest.fn();
 
     const wrapper = shallow(
       <CreateAssistantBase
@@ -89,14 +89,14 @@ describe("containers/CreateAssistant", () => {
         apiGetLanguages={jest.fn()}
         templates={defaultTemplates}
         languages={defaultLanguages}
-        setMessage={setMessage}
+        addMessage={addMessage}
         history={{ length: 0, push: jest.fn() }}
       />,
     );
 
     wrapper.instance().onImportTemplate("this is not a json obviously");
 
-    expect(setMessage).toHaveBeenCalledWith(
+    expect(addMessage).toHaveBeenCalledWith(
       "imported template is not a valid JSON document",
     );
   });
@@ -111,7 +111,7 @@ describe("containers/CreateAssistant", () => {
         apiGetLanguages={jest.fn()}
         templates={defaultTemplates}
         languages={defaultLanguages}
-        setMessage={jest.fn()}
+        addMessage={jest.fn()}
         history={{ length: 0, push: jest.fn() }}
       />,
     );
@@ -136,7 +136,7 @@ describe("containers/CreateAssistant", () => {
         isLoading={false}
         createBot={createBotSpy}
         appSetTitleName={jest.fn()}
-        setMessage={jest.fn()}
+        addMessage={jest.fn()}
         apiGetTemplates={jest.fn()}
         apiGetLanguages={jest.fn()}
         templates={defaultTemplates}

@@ -16,8 +16,6 @@ import {
 import zoappApi from "zoapp-front/dist/sagas/api";
 import { getWebService, createSocketService } from "zoapp-front/dist/services";
 import {
-  API_BOTS_PARAMETERS,
-  API_CREATEBOT,
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
   API_GETINTENTS,
@@ -28,7 +26,6 @@ import {
   API_IMPORT,
   API_MOVEINTENT,
   API_PUBLISH,
-  API_SAVEBOT,
   API_SB_GETCONTEXT,
   API_SB_GETMESSAGES,
   API_SB_RESET,
@@ -48,8 +45,6 @@ import {
   apiGetTemplatesFailure,
   apiGetLanguagesSuccess,
   apiGetLanguagesFailure,
-  apiGetBotParametersSucess,
-  apiGetBotParametersFailure,
 } from "../actions/api";
 
 let sandboxSocketClient = null;
@@ -143,55 +138,6 @@ function* subscribeSandboxMessages(action) {
 
 const api = [
   ...zoappApi,
-  /* Create bot */
-  [
-    API_CREATEBOT + FETCH_REQUEST,
-    function* f(action) {
-      const { botParams } = action;
-      try {
-        const response = yield getWebService().post("bots", botParams, false);
-        yield put({
-          type: `${API_CREATEBOT}${FETCH_SUCCESS}`,
-          loading: false,
-          bot: response,
-        });
-      } catch (error) {
-        yield put({ type: `${API_CREATEBOT}${FETCH_FAILURE}`, error });
-      }
-    },
-  ],
-  [
-    API_SAVEBOT + FETCH_REQUEST,
-    function* f(action) {
-      const { botParams } = action;
-      const botId = botParams.id;
-      try {
-        const response = yield getWebService().put(
-          `bots/${botId}`,
-          botParams,
-          false,
-        );
-        yield put({
-          type: `${API_SAVEBOT}${FETCH_SUCCESS}`,
-          loading: false,
-          bot: response,
-        });
-      } catch (error) {
-        yield put({ type: `${API_SAVEBOT}${FETCH_FAILURE}`, error });
-      }
-    },
-  ],
-  [
-    API_BOTS_PARAMETERS + FETCH_REQUEST,
-    function* f({ name }) {
-      try {
-        const response = yield getWebService().get(`bots/params/${name}`);
-        yield put(apiGetBotParametersSucess(response));
-      } catch (error) {
-        yield put(apiGetBotParametersFailure(error));
-      }
-    },
-  ],
   [
     API_IMPORT + FETCH_REQUEST,
     function* f(action) {

@@ -10,14 +10,12 @@ import Zrmc, { Select, MenuItem, Button, TextField } from "zrmc";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ProcessingDialog from "zoapp-front/dist/containers/processingDialog";
-import { appSetTitleName, setMessage } from "zoapp-front/dist/actions/app";
+import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import { addMessage } from "zoapp-front/dist/actions/message";
 
 import TemplatesList from "../components/templatesList";
-import {
-  apiCreateBot,
-  apiGetTemplatesRequest,
-  apiGetLanguagesRequest,
-} from "../actions/api";
+import { apiCreateBot } from "../actions/bot";
+import { apiGetTemplatesRequest, apiGetLanguagesRequest } from "../actions/api";
 
 const boxStyle = {
   margin: "16px",
@@ -79,7 +77,7 @@ export class CreateAssistantBase extends Component {
       const json = JSON.parse(data);
       this.onSelectTemplate(3, json);
     } catch (e) {
-      this.props.setMessage("imported template is not a valid JSON document");
+      this.props.addMessage("imported template is not a valid JSON document");
     }
   };
 
@@ -106,7 +104,7 @@ export class CreateAssistantBase extends Component {
     const { name, email, language, template, loading } = this.state;
 
     if (template === null) {
-      this.props.setMessage("please select a template");
+      this.props.addMessage("please select a template");
       return;
     }
 
@@ -263,7 +261,7 @@ CreateAssistantBase.propTypes = {
   appSetTitleName: PropTypes.func.isRequired,
   apiGetTemplates: PropTypes.func.isRequired,
   apiGetLanguages: PropTypes.func.isRequired,
-  setMessage: PropTypes.func.isRequired,
+  addMessage: PropTypes.func.isRequired,
   history: PropTypes.shape({ length: PropTypes.number, push: PropTypes.func })
     .isRequired,
   templates: PropTypes.array,
@@ -291,8 +289,8 @@ const mapDispatchToProps = (dispatch) => ({
   appSetTitleName: (titleName) => {
     dispatch(appSetTitleName(titleName));
   },
-  setMessage: (message) => {
-    dispatch(setMessage(message));
+  addMessage: (message) => {
+    dispatch(addMessage(message));
   },
   apiGetTemplates: () => {
     dispatch(apiGetTemplatesRequest());

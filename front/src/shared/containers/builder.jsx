@@ -112,10 +112,10 @@ Builder.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state.app;
+  const { bots, project } = state.app;
   let { selectedIntent } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  const bot = selectedBotId ? admin.bots[state.app.project.selectIndex] : null;
+  const bot = selectedBotId ? bots[project.selectIndex] : null;
   const intents = state.app.intents ? state.app.intents : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading || false;

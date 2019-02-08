@@ -9,6 +9,7 @@ import React from "react";
 import Front from "zoapp-front/dist/front";
 import AdminManager from "zoapp-front/dist/containers/adminManager";
 import DrawerFooter from "zoapp-front/dist/containers/drawerFooter";
+import Settings from "zoapp-front/dist/containers/settingsManager";
 import Zrmc from "zrmc";
 import Team from "zoapp-front/dist/containers/admin/team";
 import Advanced from "zoapp-front/dist/containers/admin/advanced";
@@ -19,7 +20,6 @@ import Factory from "./containers/factory";
 import PublishContainer from "./containers/publishContainer";
 import configureStore from "./store";
 import PublishDialog from "./containers/dialogs/publishDialog";
-import Extensions from "./containers/admin/extensions";
 import { defaultTemplates, defaultLanguages } from "./reducers/app";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
@@ -73,7 +73,7 @@ const appProps = {
       name: "Factory",
       path: "/factory",
       access: "auth",
-      panels: ["Dashboard", "Builder", "Analytics"],
+      panels: ["Dashboard", "Builder", "Analytics", "Extensions"],
       toolbox: [
         {
           title: "Publish",
@@ -91,17 +91,10 @@ const appProps = {
       name: "Admin",
       path: "/admin",
       access: "auth",
-      panels: ["Team", "Extensions", "Advanced"],
+      panels: ["Team", "Advanced"],
       render: (props) => (
         <AdminManager
-          tabs={[
-            <Team
-              key="team"
-              menu={[{ name: "disable" }, { name: "delete" }]}
-            />,
-            <Extensions key="extensions" />,
-            <Advanced key="advanced" />,
-          ]}
+          tabs={[<Team key="team" />, <Advanced key="advanced" />]}
           {...props}
         />
       ),
@@ -177,6 +170,14 @@ const appProps = {
       isFullscreen: true,
       render: (props) => <PublishContainer {...props} />,
     },
+    {
+      id: "11",
+      icon: "settings",
+      name: "Settings",
+      access: "auth",
+      path: "/settings",
+      render: (props) => <Settings {...props} />,
+    },
   ],
 };
 
@@ -187,6 +188,7 @@ export default class Opla {
     /* eslint-enable no-undef */
     store = configureStore();
     this.front = new Front("app", appProps, config, env, { store });
+    Zrmc.init(this, { typography: true });
   }
 
   restart() {

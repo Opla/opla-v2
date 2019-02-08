@@ -13,8 +13,6 @@ import {
 } from "zoapp-front/dist/actions/constants";
 
 import {
-  API_BOTS_PARAMETERS,
-  API_CREATEBOT,
   API_DELETEINTENT,
   API_DELETEMIDDLEWARE,
   API_GETINTENTS,
@@ -25,7 +23,6 @@ import {
   API_IMPORT,
   API_MOVEINTENT,
   API_PUBLISH,
-  API_SAVEBOT,
   API_SB_GETCONTEXT,
   API_SB_GETMESSAGES,
   API_SB_RESET,
@@ -34,26 +31,6 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
 } from "./constants";
-
-export function apiCreateBot(botParams) {
-  return { type: API_CREATEBOT + FETCH_REQUEST, botParams };
-}
-
-export function apiSaveBotRequest(botParams) {
-  return { type: API_SAVEBOT + FETCH_REQUEST, botParams };
-}
-
-export function apiGetBotParametersRequest(name) {
-  return { type: API_BOTS_PARAMETERS + FETCH_REQUEST, name };
-}
-
-export function apiGetBotParametersSucess(params) {
-  return { type: API_BOTS_PARAMETERS + FETCH_SUCCESS, params };
-}
-
-export function apiGetBotParametersFailure(error) {
-  return { type: API_BOTS_PARAMETERS + FETCH_FAILURE, error };
-}
 
 export function apiImportRequest(botId, data, options) {
   return {

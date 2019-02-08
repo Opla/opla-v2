@@ -10,16 +10,17 @@ import { connect } from "react-redux";
 import Loading from "zoapp-front/dist/components/loading";
 import Zrmc, { Grid, Inner, Cell } from "zrmc";
 import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import { apiSaveBotRequest } from "../actions/bot";
 import {
   apiGetIntentsRequest,
   apiSendIntentRequest,
   apiDeleteIntentRequest,
-  apiSaveBotRequest,
 } from "../actions/api";
 import { appUpdateIntent } from "../actions/app";
 import Dashboard from "./dashboard";
 import Analytics from "./analytics";
 import Builder from "./builder";
+import Extensions from "./admin/extensions";
 import PlaygroundContainer from "./playgroundContainer";
 
 class Factory extends Component {
@@ -34,7 +35,11 @@ class Factory extends Component {
   }
 
   componentDidUpdate() {
-    this.update();
+    if (this.props.bot) {
+      this.update();
+    } else {
+      this.props.history.push("/");
+    }
   }
 
   update() {
@@ -238,8 +243,10 @@ class Factory extends Component {
           onDeleteIntent={this.handleDeleteIntent}
         />
       );
-    } else {
+    } else if (active === 2) {
       screen = <Analytics />;
+    } else {
+      screen = <Extensions />;
     }
     const intentsEx = [];
     if (Array.isArray(this.props.intents)) {
@@ -304,6 +311,7 @@ Factory.propTypes = {
   selectedIntentIndex: PropTypes.number.isRequired,
   selectedIntent: PropTypes.shape({ id: PropTypes.string }),
   store: PropTypes.shape({}),
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
   titleName: PropTypes.string.isRequired,
   appSetTitleName: PropTypes.func.isRequired,
   apiGetIntentsRequest: PropTypes.func.isRequired,
@@ -314,12 +322,10 @@ Factory.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { admin } = state.app;
+  const { bots } = state.app;
   let { selectedIntent } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
-  const bot = selectedBotId
-    ? admin.bots[state.app.project.selectedIndex]
-    : null;
+  const bot = selectedBotId ? bots[state.app.project.selectedIndex] : null;
   const intents = state.app.intents ? state.app.intents : null;
   const isSignedIn = state.user ? state.user.isSignedIn : false;
   const isLoading = state.loading || false;
