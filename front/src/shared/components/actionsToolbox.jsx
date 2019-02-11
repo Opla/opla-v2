@@ -354,7 +354,7 @@ class ActionsToolbox extends Component {
               name="text_fields"
             />
           </Tooltip>
-          <Tooltip label="Insert variable assignment">
+          <Tooltip label="Insert output code">
             <Icon
               className="actionstoolbox-icon"
               onClick={(e) => {

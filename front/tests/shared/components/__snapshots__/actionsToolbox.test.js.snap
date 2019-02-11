@@ -57,7 +57,7 @@ exports[`components/actionsToolbox can be an input 1`] = `
         assignment
       </i>
       <span>
-        Insert variable assignment
+        Insert output code
       </span>
     </div>
     <div
