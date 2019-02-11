@@ -8,10 +8,16 @@
 import OpenNLXMiddleware from "./openNLX";
 import PublishConnectorMiddleware from "./publishConnector";
 
+import SystemFunctions from "../systemFunction";
+
 const initMiddlewares = (middlewaresController, extensionsController) => {
   // TODO dynamic loading
   logger.info("initMiddlewares");
-  const middleware = new OpenNLXMiddleware(extensionsController);
+  const systemFunctions = new SystemFunctions(extensionsController);
+  const middleware = new OpenNLXMiddleware(
+    extensionsController,
+    systemFunctions,
+  );
   middlewaresController
     .attach(middleware.getProperties())
     .then((m) => middleware.init(m));

@@ -8,11 +8,12 @@ import fetch from "node-fetch";
 import openNLX from "opennlx";
 
 class OpenNLXMiddleware {
-  constructor(controllers) {
+  constructor(controllers, systemFunctions) {
     this.listener = null;
     this.name = "openNLX";
     this.classes = ["messenger", "bot", "sandbox"];
     this.mainControllers = controllers;
+    this.systemFunctions = systemFunctions;
     logger.info("OpenNLXMiddleware");
   }
 
@@ -289,23 +290,28 @@ class OpenNLXMiddleware {
     }
   }
 
-  static async doCall(middlewares, botId, func, parameters) {
+  async doCall(botId, func, parameters) {
+    const middlewares = this.mainControllers.zoapp.controllers.getMiddlewares();
+    let className = "";
+    let action = "";
+    const i = func.indexOf(".");
+    if (i > 0) {
+      className = func.substring(0, i);
+      action = func.substring(i + 1);
+      logger.info(" action=", action, " className", className);
+    } else {
+      logger.info("OpenNLX.doCall Malformed func : ", func);
+      return null;
+    }
+    if (className === "system") {
+      return this.systemFunctions.get(action).call(parameters);
+    }
+
     const wss = await middlewares.list({ origin: botId, type: "WebService" });
     if (wss && wss.length > 0) {
       const ws = wss[0];
       if (ws) {
         // WIP
-        let className = "";
-        let action = "";
-        const i = func.indexOf(".");
-        if (i > 0) {
-          className = func.substring(0, i);
-          action = func.substring(i + 1);
-          logger.info(" action=", action, " className", className);
-        } else {
-          logger.info("OpenNLX.doCall Malformed func : ", func);
-          return null;
-        }
         const post = { action, parameters };
         const url = `${ws.url}${ws.path}?class=${className}&secret=${
           ws.secret
@@ -340,8 +346,7 @@ class OpenNLXMiddleware {
       target,
     );
     if (this.mainControllers) {
-      const mdw = this.mainControllers.zoapp.controllers.getMiddlewares();
-      return OpenNLXMiddleware.doCall(mdw, botId, action, params);
+      return this.doCall(botId, action, params);
     }
     return null;
   }

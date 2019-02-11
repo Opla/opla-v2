@@ -27,8 +27,13 @@ export class DashboardBase extends Component {
     this.state = {
       bot: props.bot,
     };
-    DashboardBase.loadIntents(props);
-    DashboardBase.loadPlugins(props);
+  }
+
+  componentDidMount() {
+    if (this.state.bot) {
+      DashboardBase.loadIntents(this.props);
+      DashboardBase.loadPlugins(this.props);
+    }
   }
 
   static loadIntents(props) {
