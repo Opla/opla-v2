@@ -103,7 +103,7 @@ const MessengerBoxMessageContent = (props) => {
           }
           const body = StringTools.htmlLink(el.value);
           if (body.indexOf("<a") >= 0 || body.indexOf("<img") >= 0) {
-            return <span dangerouslySetInnerHTML={{ __html: body }} />;
+            return <span key={i} dangerouslySetInnerHTML={{ __html: body }} />;
           }
           return body;
         })}
