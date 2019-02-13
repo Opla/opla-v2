@@ -33,7 +33,7 @@
     "inquirer": "^5.1.0",
     "node-fetch": "^2.1.2",
     "opennlx": "0.7.3",
-    "zoapp-backend": "0.24.7",
+    "zoapp-backend": "0.24.8",
     "zoapp-core": "0.13.1",
     "zoauth-server": "0.10.9"
   },
