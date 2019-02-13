@@ -70,7 +70,7 @@ DashboardActionbar.propTypes = {
   store: PropTypes.shape({}),
   selectedBotId: PropTypes.string.isRequired,
   bot: PropTypes.shape({ name: PropTypes.string }),
-  intents: PropTypes.shape([]),
+  intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
   apiImportRequest: PropTypes.func.isRequired,
 };
 
