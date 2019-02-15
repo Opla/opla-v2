@@ -54,6 +54,7 @@ context("Actions", () => {
       .then(() => {
         cy.contains("Extensions").click({ force: true });
       });
+    cy.wait(1000);
     cy.contains("Add")
       .first()
       .click()

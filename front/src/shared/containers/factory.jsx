@@ -31,15 +31,15 @@ class Factory extends Component {
   }
 
   componentDidMount() {
-    this.update();
-  }
-
-  componentDidUpdate() {
     if (this.props.bot) {
       this.update();
     } else {
       this.props.history.push("/");
     }
+  }
+
+  componentDidUpdate() {
+    this.update();
   }
 
   update() {
