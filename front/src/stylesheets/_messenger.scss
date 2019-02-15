@@ -127,7 +127,9 @@
 }
 
 .message img {
-  max-width: 240px;
+  max-width: 100%;
+  display: block;
+  margin: 5px auto;
 }
 
 .message .text-wrapper:before {
@@ -309,7 +311,7 @@
 
 .from > .text-wrapper > .message-error-container {
   right: 8px;
-  position: absolute;  
+  position: absolute;
 }
 
 .you > .text-wrapper > .message-debug-container {
@@ -319,7 +321,7 @@
 
 .you > .text-wrapper > .message-error-container {
   left: 8px;
-  position: absolute;  
+  position: absolute;
 }
 
 

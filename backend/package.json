@@ -33,9 +33,9 @@
     "inquirer": "^5.1.0",
     "node-fetch": "^2.1.2",
     "opennlx": "0.7.3",
-    "zoapp-backend": "0.24.8",
+    "zoapp-backend": "0.24.9",
     "zoapp-core": "0.13.1",
-    "zoauth-server": "0.10.9"
+    "zoauth-server": "0.10.10"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -53,7 +53,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "flywaydb-cli": "^0.5.0",
     "jest": "^23.6.0",
-    "nodemon": "^1.13.3",
+    "nodemon": "^1.18.9",
     "prettier": "^1.11.1",
     "regenerator-runtime": "^0.11.1",
     "shelljs": "^0.8.2",
