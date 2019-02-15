@@ -459,7 +459,7 @@ i.zui-subheader-right:hover {
 
 .selectedActionItem {
   border : 1px solid $color_secondary_a;
-  margin-right: 1px;
+  //margin-right: 1px;
  }
 
 .action_any {
@@ -476,6 +476,7 @@ i.zui-subheader-right:hover {
 
 .action_br {
   border: 1px solid #00227b;
+  margin-right: 100%;
 }
 
 .action_button {

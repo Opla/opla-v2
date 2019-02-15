@@ -71,24 +71,6 @@ class ActionsList extends Component {
     this.props.onDeleteActionClick(this.props.name, index);
   };
 
-  updateToolboxDisplay = () => {
-    if (this.selectedItemRef && this.selectedItemRef.ref && this.toolboxRef) {
-      const {
-        left,
-        top,
-        width,
-      } = this.selectedItemRef.ref.parentNode.getBoundingClientRect();
-      let adjustedLeft = left;
-      if (adjustedLeft < 0) {
-        adjustedLeft = 0;
-      }
-      const adjustedTop = top - 36;
-      const adjustedWidth = width - 2;
-      const style = `left: ${adjustedLeft}px; top: ${adjustedTop}px; width: ${adjustedWidth}px;`;
-      this.toolboxRef.style = style;
-    }
-  };
-
   render() {
     const {
       name,
@@ -138,15 +120,13 @@ class ActionsList extends Component {
         ref={(r) => {
           if (this.props.selected === 0) {
             this.selectedItemRef = r;
-            this.updateToolboxDisplay();
           }
         }}
       />
     );
     const s = {
       overflowX: "hidden",
-      overflowY: "scroll",
-      maxHeight: "18.07vh",
+      overflowY: "auto",
       margin: "0 8px 16px 8px",
     };
     if (actions && actions.length > 0) {
@@ -181,7 +161,6 @@ class ActionsList extends Component {
                 ref={(r) => {
                   if (index === selected) {
                     this.selectedItemRef = r;
-                    this.updateToolboxDisplay();
                   }
                 }}
               />
@@ -228,7 +207,6 @@ class ActionsList extends Component {
           className="actionstoolbox"
           ref={(r) => {
             this.toolboxRef = r;
-            this.updateToolboxDisplay();
           }}
         >
           <ActionsToolbox
