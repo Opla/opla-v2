@@ -175,9 +175,8 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "maxHeight": "18.07vh",
               "overflowX": "hidden",
-              "overflowY": "scroll",
+              "overflowY": "auto",
             }
           }
         />
@@ -356,9 +355,8 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "maxHeight": "18.07vh",
               "overflowX": "hidden",
-              "overflowY": "scroll",
+              "overflowY": "auto",
             }
           }
         />
@@ -711,9 +709,8 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "maxHeight": "18.07vh",
               "overflowX": "hidden",
-              "overflowY": "scroll",
+              "overflowY": "auto",
             }
           }
         />
@@ -892,9 +889,8 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "maxHeight": "18.07vh",
               "overflowX": "hidden",
-              "overflowY": "scroll",
+              "overflowY": "auto",
             }
           }
         />

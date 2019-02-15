@@ -251,9 +251,10 @@ html {
  }
  
  .actionstoolbox {
-   position: fixed;
-   z-index: 2;
+   //position: fixed;
+   //z-index: 2;
    height: 34px;
+   margin: 0 8px;
  }
  
  .actionstoolbox-icon {
@@ -551,7 +552,7 @@ html {
  
  .actionItem {
    height: 100%;
-   padding: 3px 16px 4px 16px;
+   padding: 5px 16px;
  }
  
  
