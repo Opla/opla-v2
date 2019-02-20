@@ -75,7 +75,10 @@ const bot = [
     API_BOTS_PARAMETERS + FETCH_REQUEST,
     function* f({ name }) {
       try {
-        const response = yield getWebService().get(`bots/params/${name}`);
+        const response = yield getWebService().get(
+          `bots/params/${name}`,
+          false,
+        );
         yield put(apiGetBotParametersSucess(response));
       } catch (error) {
         yield put(apiGetBotParametersFailure(error));

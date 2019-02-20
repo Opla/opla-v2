@@ -28,9 +28,8 @@ class PublishContainer extends Component {
   render() {
     const { botParameters } = this.props;
 
-    if (botParameters === null || botParameters === undefined) {
-      return null;
-    } else if (
+    if (
+      !botParameters ||
       !botParameters.application ||
       !botParameters.application.id ||
       !botParameters.application.secret ||
@@ -54,7 +53,6 @@ class PublishContainer extends Component {
     }
 
     const url = this.urlBuilder.createUrl("/");
-
     const parameters = {
       botId: botParameters.botId,
       appId: botParameters.application.id,
@@ -68,7 +66,6 @@ class PublishContainer extends Component {
     };
 
     const params = encodeURI(JSON.stringify(parameters));
-
     return (
       <iframe frameBorder="0" src={`/bot.html?config=${params}`} width="100%" />
     );
