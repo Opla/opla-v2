@@ -400,7 +400,7 @@ class IntentContainer extends Component {
         ? this.selectedActionsComponent.props.containerName
         : "";
     this.props.appSelectIO(
-      this.state.selectedIntent.order - 1,
+      this.props.selectedIntentIndex,
       index,
       containerName === "output",
     );
@@ -509,6 +509,7 @@ IntentContainer.propTypes = {
   selectedIntent: PropTypes.shape({
     id: PropTypes.string,
   }),
+  selectedIntentIndex: PropTypes.number.isRequired,
   selectedInputIndex: PropTypes.number.isRequired,
   selectedOutputIndex: PropTypes.number.isRequired,
   newActions: PropTypes.shape({}).isRequired,
@@ -549,6 +550,7 @@ const mapStateToProps = (state) => {
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const { newActions, selectedInputIndex, selectedOutputIndex } = state.app;
   return {
+    selectedIntentIndex,
     selectedIntent,
     selectedBotId,
     newActions,

@@ -210,7 +210,7 @@ class Factory extends Component {
         this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
       }
     } else if (action === "gotoIOIntent") {
-      const { intent, input, isOutput } = data;
+      const { intent, input, output, isOutput } = data;
       const intentIndex = this.props.intents.findIndex(
         (i) => i.id === intent.id,
       );
@@ -222,7 +222,7 @@ class Factory extends Component {
       this.props.appSelectIO(
         this.props.selectedBotId,
         intentIndex,
-        input.index,
+        isOutput ? output.index : input.index,
         isOutput,
       );
     }

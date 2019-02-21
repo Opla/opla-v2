@@ -22,7 +22,15 @@ class ActionsItem extends Component {
       (this.props.isSelected !== prevProps.isSelected ||
         this.props.action !== prevProps.action)
     ) {
-      this.actionsEditableRef.changeFocus(0);
+      // Test if ActionsEditable finish by a button
+      // If yes the last item is endRef not the last ref item
+      if (this.actionsEditableRef.endRef) {
+        this.actionsEditableRef.moveFocus(-2);
+      } else {
+        this.actionsEditableRef.changeFocus(
+          this.actionsEditableRef.state.items.length - 1,
+        );
+      }
     }
   }
 

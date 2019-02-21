@@ -39,6 +39,7 @@ describe("containers/CreateAssistant", () => {
         languages={defaultLanguages}
         history={historySpy}
         addMessage={addMessage}
+        isSignedIn={true}
       />,
     );
 
@@ -70,6 +71,7 @@ describe("containers/CreateAssistant", () => {
         languages={defaultLanguages}
         addMessage={jest.fn()}
         history={{ length: 0, push: jest.fn() }}
+        isSignedIn={true}
       />,
     );
     wrapper.instance().onSelectTemplate = onSelectTemplateSpy;
@@ -91,6 +93,7 @@ describe("containers/CreateAssistant", () => {
         languages={defaultLanguages}
         addMessage={addMessage}
         history={{ length: 0, push: jest.fn() }}
+        isSignedIn={true}
       />,
     );
 
@@ -113,6 +116,7 @@ describe("containers/CreateAssistant", () => {
         languages={defaultLanguages}
         addMessage={jest.fn()}
         history={{ length: 0, push: jest.fn() }}
+        isSignedIn={true}
       />,
     );
 
@@ -142,6 +146,7 @@ describe("containers/CreateAssistant", () => {
         templates={defaultTemplates}
         languages={defaultLanguages}
         history={{ length: 0, push: jest.fn() }}
+        isSignedIn={true}
       />,
     );
 

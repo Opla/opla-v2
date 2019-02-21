@@ -42,6 +42,9 @@ describe("containers/IntentContainerBase", () => {
       output: ["La plupart des emballages de produits ménagers se placent..."],
       order: 10,
     },
+    selectedInputIndex: -1,
+    selectedOutputIndex: -1,
+    appSelectIO: () => {},
     newActions: {},
   };
 
