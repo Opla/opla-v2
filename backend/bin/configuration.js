@@ -28,6 +28,7 @@ function createConfiguration(pkg, answers) {
       database: {
         parent: "global",
         name: "auth",
+        tokenExpiration: 86400,
       },
       api: {
         endpoint: answers.authEndpoint,
