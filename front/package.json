@@ -45,8 +45,8 @@
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "timezones.json": "^1.3.3",
-    "zoapp-common": "0.6.7",
-    "zoapp-front": "0.26.6",
+    "zoapp-common": "0.6.8",
+    "zoapp-front": "0.26.7",
     "zoapp-ui": "0.8.8",
     "zrmc": "0.12.7"
   },

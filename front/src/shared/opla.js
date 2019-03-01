@@ -13,6 +13,7 @@ import Settings from "zoapp-front/dist/containers/settingsManager";
 import Zrmc from "zrmc";
 import Team from "zoapp-front/dist/containers/admin/team";
 import Advanced from "zoapp-front/dist/containers/admin/advanced";
+import LostPassword from "zoapp-front/dist/containers/lostPassword";
 import CreateAssistant from "./containers/createAssistant";
 import About from "./containers/about";
 import Home from "./containers/home";
@@ -177,6 +178,14 @@ const appProps = {
       access: "auth",
       path: "/settings",
       render: (props) => <Settings {...props} />,
+    },
+    {
+      id: "12",
+      icon: "lost-password",
+      name: "Lost password",
+      access: "public",
+      path: "/lost-password",
+      render: (props) => <LostPassword {...props} />,
     },
   ],
 };
