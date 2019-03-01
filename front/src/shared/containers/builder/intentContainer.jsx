@@ -238,7 +238,15 @@ class IntentContainer extends Component {
         this.props.appUpdateIntent(this.props.selectedBotId, intent);
       }
     } else if (editAction === "Previous") {
-      // console.log("TODO", "IntentContainer.onPrevious ");
+      const previousId = this.actionField.value;
+      const { selectedIntent } = this.props;
+      const currentPreviousId = selectedIntent.previousId
+        ? selectedIntent.previousId
+        : null;
+      if (previousId !== currentPreviousId) {
+        const intent = { ...selectedIntent, previousId };
+        this.props.appUpdateIntent(this.props.selectedBotId, intent);
+      }
     }
     this.reset();
     return true;
@@ -308,6 +316,11 @@ class IntentContainer extends Component {
       title = "Set previous intent";
       action = "Set";
       actionDef = "Previous";
+      const { previousId } = intent;
+      parameters = {
+        previousId,
+        options: this.props.intents,
+      };
     } else if (state === "addCondition") {
       title = `Add ${title} item`;
       action = "Add";
@@ -441,6 +454,12 @@ class IntentContainer extends Component {
           newActions={this.props.newActions}
           displayHelp={this.state.displayHelp}
           displayCondition={this.state.displayCondition}
+          getIntentNameById={(intentId) => {
+            const { name: intentName } = this.props.intents.find(
+              (int) => int.id === intentId,
+            ) || { name: null };
+            return intentName;
+          }}
           onSelect={this.handleActions}
           onAction={this.handleDoActions}
           onHelp={this.handleHelp}
@@ -459,9 +478,16 @@ class IntentContainer extends Component {
 IntentContainer.defaultProps = {
   selectedIntent: null,
   selectedBotId: null,
+  intents: null,
 };
 
 IntentContainer.propTypes = {
+  intents: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      id: PropTypes.string,
+    }),
+  ),
   selectedBotId: PropTypes.string,
   selectedIntent: PropTypes.shape({
     id: PropTypes.string,
@@ -485,9 +511,23 @@ const mapStateToProps = (state) => {
       ? state.app.intents[selectedIntentIndex]
       : null;
   }
+
+  // intents list as props of intentDetail can be avoided, but is mandatory in order to
+  // display full list of intent when connecting previousId
+  // Pretty ugly and laggy, since redone multiples times
+  const intents = state.app.intents.reduce(
+    (acc, cur) => {
+      if (cur.id !== selectedIntent.id) {
+        return acc.concat({ id: cur.id, name: cur.name });
+      }
+      return acc;
+    },
+    [{ id: null, name: "NONE" }],
+  );
+
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const { newActions } = state.app;
-  return { selectedIntent, selectedBotId, newActions };
+  return { selectedIntent, selectedBotId, newActions, intents };
 };
 
 const mapDispatchToProps = (dispatch) => ({

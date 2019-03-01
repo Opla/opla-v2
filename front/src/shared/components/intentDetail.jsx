@@ -7,13 +7,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Zrmc, {
+  Button,
   DialogManager,
+  Icon,
   List,
   ListItem,
   ListItemMeta,
+  MenuItem,
+  Select,
   TextField,
-  Button,
-  Icon,
 } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
 import ActionsList from "../components/actionsList";
@@ -25,6 +27,7 @@ const IntentDetail = ({
   newActions,
   displayCondition,
   displayHelp,
+  getIntentNameById,
   onSelect,
   onAction,
   onHelp,
@@ -37,6 +40,7 @@ const IntentDetail = ({
 }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
+  const { previousId } = intent;
   let help = "";
   if (displayHelp > -1) {
     help = <HelpPanel index={displayHelp} onHelp={onHelp} />;
@@ -139,7 +143,7 @@ const IntentDetail = ({
                     }
                   }}
                 >
-                  NONE
+                  {getIntentNameById(previousId) || "NONE"}
                 </Button>
               </ListItemMeta>
             </ListItem>
@@ -154,10 +158,12 @@ IntentDetail.defaultProps = {
   onNewActionsChange: () => {},
   onSelectActionsComponent: () => {},
   onDeleteActionClick: () => {},
+  getIntentNameById: () => {},
 };
 
 IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
+  getIntentNameById: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
   onAction: PropTypes.func.isRequired,
   onHelp: PropTypes.func,
@@ -191,7 +197,7 @@ export const displayActionEditor = (
   let condition = "";
   let text = parameters;
   let content = null;
-  if (actionDef === "Topic" || actionDef === "Previous") {
+  if (actionDef === "Topic") {
     content = (
       <div>
         <TextField
@@ -203,6 +209,26 @@ export const displayActionEditor = (
           ref={(input) => setInput(input)}
         />
       </div>
+    );
+  } else if (actionDef === "Previous") {
+    content = (
+      <Select
+        label="Select an intent"
+        style={{ width: "100%" }}
+        onSelected={(t) => {
+          setInput({ value: t !== "default" ? t : null });
+        }}
+      >
+        {parameters.options.map((int) => (
+          <MenuItem
+            key={int.id}
+            value={int.id || "default"}
+            selected={parameters.previousId === int.id}
+          >
+            {int.name}
+          </MenuItem>
+        ))}
+      </Select>
     );
   } else {
     if (type === "condition") {

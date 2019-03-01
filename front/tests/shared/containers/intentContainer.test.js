@@ -25,6 +25,8 @@ describe("containers/IntentContainerBase", () => {
     appDeleteIntentAction: () => {},
     apiSendIntentRequest: () => {},
     appSetNewActions: () => {},
+    getIntentNameById: () => "title",
+    intents: [{ id: "1", name: "TestIntent" }],
     selectedIntent: {
       id: "Nq421",
       botId: "HZAw",
@@ -505,7 +507,7 @@ describe("containers/IntentContainerBase", () => {
           type: undefined,
           action: "Set",
           actionDef: "Previous",
-          parameters: undefined,
+          parameters: { previousId: undefined, options: defaultProps.intents },
           function: () => {},
           handleEditAction: () => {},
           handleChangeAction: () => {},

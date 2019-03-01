@@ -254,7 +254,13 @@ class OpenNLXMiddleware {
           const { botId, versionId } = data.intents[0];
           const version = versionId || "default";
           const bots = this.mainControllers.getBots();
-          const intents = await bots.getIntents(botId, versionId);
+          let intents = await bots.getIntents(botId, versionId);
+          intents = intents.map((int) => {
+            const intentWithPrevious = int;
+            intentWithPrevious.previous = int.previousId;
+            delete intentWithPrevious.previousId;
+            return intentWithPrevious;
+          });
           this.openNLX.deleteAllIntents(botId, version);
           this.openNLX.setIntents(botId, version, intents);
         }
