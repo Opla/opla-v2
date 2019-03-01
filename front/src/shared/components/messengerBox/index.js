@@ -59,10 +59,10 @@ class MessengerBox extends Component {
 
   componentDidUpdate() {
     const node = this.messengerContent;
-    this.shouldScrollBottom =
-      node.scrollTop + node.offsetHeight === node.scrollHeight;
-    if (this.shouldScrollBottom) {
-      node.scrollTop = node.scrollHeight;
+    if (node.scrollTop + node.offsetHeight !== node.scrollHeight) {
+      const { scrollHeight, clientHeight } = node;
+      const maxScrollTop = scrollHeight - clientHeight;
+      node.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
   }
 
