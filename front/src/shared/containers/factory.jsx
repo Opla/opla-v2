@@ -73,7 +73,7 @@ class Factory extends Component {
       input = [intentName];
     }
     let { output } = data;
-    if (!output) {
+    if (!output && this.props.intents.length < 1) {
       // TODO create a better output
       let i = input[0];
       const il = i.toLowerCase();
@@ -81,6 +81,9 @@ class Factory extends Component {
         i = "I don't understand.";
       }
       output = [i];
+    } else {
+      input = [];
+      output = [];
     }
     const intent = {
       input,
