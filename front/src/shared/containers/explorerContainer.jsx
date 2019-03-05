@@ -57,8 +57,12 @@ class ExplorerContainer extends Component {
         n.push(
           <div key="i_text">
             {intent.notSaved ? <div className="item_notsaved" /> : ""}
-            <span style={{ margin: "0 14px 0 0px" }}>#</span>
-            {intent.name}
+            <span
+              style={intent.state === "deactivated" ? { opacity: "0.5" } : {}}
+            >
+              <span style={{ margin: "0 14px 0 0px" }}>#</span>
+              {intent.name}
+            </span>
           </div>,
         );
         n.push(

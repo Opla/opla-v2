@@ -456,6 +456,18 @@ class IntentContainer extends Component {
             ) || { name: null };
             return intentName;
           }}
+          onDisable={(isDisabled) => {
+            const { selectedIntent } = this.state;
+            if (isDisabled) {
+              selectedIntent.state = "deactivated";
+            } else {
+              selectedIntent.state = null;
+            }
+            this.props.appUpdateIntent(
+              this.props.selectedBotId,
+              selectedIntent,
+            );
+          }}
           onSelect={this.handleActions}
           onAction={this.handleDoActions}
           onHelp={this.handleHelp}
