@@ -15,7 +15,7 @@ export default class SendMail {
       subject,
       text,
     };
-    await this.service.sendMessage(mail);
+    return this.service.sendMessage(mail);
   }
 
   getName() {

@@ -40,19 +40,6 @@ export class DashboardBase extends Component {
     props.apiGetIntentsRequest(props.selectedBotId);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    // on bot change
-    if (props.bot !== state.bot) {
-      DashboardBase.loadIntents(props);
-      // load plugins used by this bot
-      DashboardBase.loadPlugins(props);
-      return {
-        bot: props.bot,
-      };
-    }
-    return null;
-  }
-
   static loadPlugins = (props) => {
     props.apiGetPluginsRequest(props.selectedBotId);
   };
@@ -167,6 +154,7 @@ export class DashboardBase extends Component {
                         <MenuItem value="fr">French</MenuItem>
                       </Select>
                       <Select
+                        className="selectTimeZone"
                         label="Timezone"
                         style={{ width: "47%" }}
                         onSelected={this.handleTimezoneChange}
@@ -174,8 +162,8 @@ export class DashboardBase extends Component {
                           (tz) => tz === (this.props.bot.timezone || null),
                         )}
                       >
-                        {this.props.timezones.map((timezone) => (
-                          <MenuItem key={timezone} value={timezone}>
+                        {this.props.timezones.map((timezone, i) => (
+                          <MenuItem key={i} value={timezone}>
                             {timezone}
                           </MenuItem>
                         ))}

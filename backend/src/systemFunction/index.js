@@ -1,9 +1,13 @@
 import SendMail from "./sendMail";
+import GetDate from "./getDate";
 
 export default class SystemFunctions {
   constructor(extensionsController) {
     logger.info("initSystemFunctions");
-    this.functions = [new SendMail(extensionsController.zoapp.emailService)];
+    this.functions = [
+      new SendMail(extensionsController.zoapp.emailService),
+      new GetDate(extensionsController.bots),
+    ];
   }
 
   get(name) {
