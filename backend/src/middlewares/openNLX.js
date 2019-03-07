@@ -326,6 +326,7 @@ class OpenNLXMiddleware {
         const response = await fetch(url, {
           method: "post",
           body: JSON.stringify(post),
+          headers: { "Content-Type": "application/json" },
         });
         if (response.ok) {
           const json = await response.json();
