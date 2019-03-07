@@ -78,9 +78,9 @@ class ServicesContainer extends Component {
     setTimeout(() => Zrmc.showDialog(sdialog), 100);
   }
 
-  displayPluginsList(plugins) {
+  displayPluginsList(plugins, name) {
     const className = "zui-dialog-list";
-    const title = "Add a messaging platform";
+    const title = `Add a ${name}`;
     // ids will by used as ListItem keys
     const indexedPlugins = plugins.map((plugin, index) => ({
       ...plugin,
@@ -125,13 +125,13 @@ class ServicesContainer extends Component {
       switch (name) {
         case "Messaging platforms":
           items = this.getPluginsByType("MessengerConnector");
-          this.displayPluginsList(items);
+          this.displayPluginsList(items, "messaging platform");
           break;
         case "Web services":
           items = this.getPluginsByType("WebService");
-          this.displayPluginsList(items);
+          this.displayPluginsList(items, "web service");
           break;
-        case "AI/NLU providers":
+        case "AI/NLX providers":
           // // Uncomment to enable ADD AIConnector
           // items = this.getPluginsByType("AIConnector");
           // this.displayPluginsList(items);

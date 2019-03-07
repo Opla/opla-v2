@@ -47,7 +47,7 @@ class WebChat extends abstractPlugin {
   }
 
   async onMiddlewareRegister(middleware) {
-    logger.info("WIP register WebChat ", middleware.name, middleware.token);
+    // logger.info("WIP register WebChat ", middleware.name, middleware.token);
     const config = this.zoapp.configuration;
     this.middleware = middleware;
     if (middleware.origin) {
