@@ -9,7 +9,7 @@ exports[`components/intentDetail can render intent with special characters corre
   >
     
     <div
-      className="zui-expansion zui-color--white"
+      className="zui-expansion zui-color--white editItemContainer"
       style={
         Object {
           "margin": "12px",
@@ -103,9 +103,8 @@ exports[`components/intentDetail can render intent with special characters corre
           }
         }
       >
-        
         <li
-          className="addActionItem  onFocusAction actionItem mdc-list-item"
+          className="addActionItem onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
@@ -114,7 +113,7 @@ exports[`components/intentDetail can render intent with special characters corre
           <div
             style={
               Object {
-                "width": "100%",
+                "width": "calc(100% - 28px)",
               }
             }
           >
@@ -184,15 +183,14 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "overflowX": "hidden",
-              "overflowY": "auto",
+              "overflow": "hidden",
             }
           }
         />
       </div>
     </div>
     <div
-      className="zui-expansion zui-color--white"
+      className="zui-expansion zui-color--white editItemContainer"
       style={
         Object {
           "margin": "12px",
@@ -292,9 +290,8 @@ exports[`components/intentDetail can render intent with special characters corre
           }
         }
       >
-        
         <li
-          className="addActionItem  onFocusAction actionItem mdc-list-item"
+          className="addActionItem onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
@@ -303,7 +300,7 @@ exports[`components/intentDetail can render intent with special characters corre
           <div
             style={
               Object {
-                "width": "100%",
+                "width": "calc(100% - 28px)",
               }
             }
           >
@@ -373,8 +370,7 @@ exports[`components/intentDetail can render intent with special characters corre
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "overflowX": "hidden",
-              "overflowY": "auto",
+              "overflow": "hidden",
             }
           }
         />
@@ -561,7 +557,7 @@ exports[`components/intentDetail renders correctly 1`] = `
   >
     
     <div
-      className="zui-expansion zui-color--white"
+      className="zui-expansion zui-color--white editItemContainer"
       style={
         Object {
           "margin": "12px",
@@ -655,9 +651,8 @@ exports[`components/intentDetail renders correctly 1`] = `
           }
         }
       >
-        
         <li
-          className="addActionItem  onFocusAction actionItem mdc-list-item"
+          className="addActionItem onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
@@ -666,7 +661,7 @@ exports[`components/intentDetail renders correctly 1`] = `
           <div
             style={
               Object {
-                "width": "100%",
+                "width": "calc(100% - 28px)",
               }
             }
           >
@@ -736,15 +731,14 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "overflowX": "hidden",
-              "overflowY": "auto",
+              "overflow": "hidden",
             }
           }
         />
       </div>
     </div>
     <div
-      className="zui-expansion zui-color--white"
+      className="zui-expansion zui-color--white editItemContainer"
       style={
         Object {
           "margin": "12px",
@@ -844,9 +838,8 @@ exports[`components/intentDetail renders correctly 1`] = `
           }
         }
       >
-        
         <li
-          className="addActionItem  onFocusAction actionItem mdc-list-item"
+          className="addActionItem onFocusAction actionItem mdc-list-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="menuitem"
@@ -855,7 +848,7 @@ exports[`components/intentDetail renders correctly 1`] = `
           <div
             style={
               Object {
-                "width": "100%",
+                "width": "calc(100% - 28px)",
               }
             }
           >
@@ -925,8 +918,7 @@ exports[`components/intentDetail renders correctly 1`] = `
           style={
             Object {
               "margin": "0 8px 16px 8px",
-              "overflowX": "hidden",
-              "overflowY": "auto",
+              "overflow": "hidden",
             }
           }
         />

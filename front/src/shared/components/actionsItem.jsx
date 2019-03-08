@@ -52,6 +52,7 @@ class ActionsItem extends Component {
         meta = (
           <ListItemMeta
             icon="add"
+            className="actionItemIcon"
             onClick={() => {
               this.props.onAddAction(action, isCondition);
             }}
@@ -60,7 +61,11 @@ class ActionsItem extends Component {
       }
     } else {
       meta = (
-        <ListItemMeta icon="remove" onClick={this.props.onDeleteActionClick} />
+        <ListItemMeta
+          icon="remove"
+          className="actionItemIcon"
+          onClick={this.props.onDeleteActionClick}
+        />
       );
     }
     let cl = " onFocusAction actionItem";
@@ -79,8 +84,9 @@ class ActionsItem extends Component {
           this.handleActionsEditableSelected(this.actionsEditableRef, index);
         }}
       >
+        <React.Fragment>{this.props.toolbox}</React.Fragment>
         <div
-          style={{ width: "100%" }}
+          style={{ width: "calc(100% - 28px)" }}
           ref={(r) => {
             this.ref = r;
           }}
@@ -145,6 +151,7 @@ ActionsItem.propTypes = {
   onDeleteActionClick: PropTypes.func,
   style: PropTypes.shape({}),
   className: PropTypes.string,
+  toolbox: PropTypes.node,
 };
 
 export default ActionsItem;
