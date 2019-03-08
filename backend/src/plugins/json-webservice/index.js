@@ -11,13 +11,18 @@ class JSONWebservice extends abstractPlugin {
     super({
       name: "json-webservice",
       type: "WebService",
-      classes: ["messenger", "bot", "sandbox"],
       title: "JSON WebService",
       icon: "images/webhook.svg",
     });
     this.workers = {};
     this.listener = null;
     this.zoapp = zoapp;
+  }
+
+  static generateSecret() {
+    return Math.random()
+      .toString(36)
+      .substring(7);
   }
 
   // legacy
@@ -49,24 +54,15 @@ class JSONWebservice extends abstractPlugin {
     this.middleware = middleware;
     const newMiddleware = middleware;
     if (newMiddleware.origin) {
-      // add code here
-      // example:
-      // if (!middleware.url) {
-      //   // this.middleware.url = `${config.global.botSite.url}${name}`;
-      //   // this.middleware.token = name;
-      // }
-
       // generate a unique secret for middleware,
       // allow to create multiple middlewares
       // with same name and origin
       if (!newMiddleware.secret) {
-        const secret = Math.random()
-          .toString(36)
-          .substring(7);
+        const secret = JSONWebservice.generateSecret();
         newMiddleware.secret = secret;
       }
     } else {
-      logger.info("No origin for jsonwebservice ", middleware.id);
+      logger.info("No origin for json-webservice ", middleware.id);
     }
 
     // set middleware.onDispatch if needed
@@ -83,7 +79,7 @@ class JSONWebservice extends abstractPlugin {
     const mdp = super.getMiddlewareDefaultProperties();
     return {
       ...mdp,
-      status: "disabled",
+      status: "start",
     };
   }
 }

@@ -15,13 +15,30 @@ class JSONWebserviceSettings extends Component {
     this.state = {};
     const settings = props.plugin.middleware;
     const defaultSettings = {
-      title: "test",
-      url: "",
+      title: "Webservice",
+      url: "http://localhost/",
     };
-
+    let className = "";
+    if (
+      settings &&
+      Array.isArray(settings.classes) &&
+      settings.classes.length
+    ) {
+      [className] = settings.classes;
+    } else {
+      className = "demo";
+    }
+    let secret = settings ? settings.secret : null;
+    if (!secret) {
+      secret = Math.random()
+        .toString(36)
+        .substring(7);
+    }
     this.state = {
       ...defaultSettings,
       ...settings,
+      className,
+      secret,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -38,10 +55,15 @@ class JSONWebserviceSettings extends Component {
   onAction = (action) => {
     if (action === "save") {
       // create middleware with settings
+      const { title, url, secret, className } = this.state;
+
       const middlewareSettings = {
         ...this.props.plugin.middleware,
         origin: this.props.botId,
-        ...this.state,
+        title,
+        url,
+        classes: [className],
+        secret,
       };
       // set this middleware to new plugin
       const newPlugin = {
@@ -60,9 +82,11 @@ class JSONWebserviceSettings extends Component {
           value={this.state.title}
           defaultValue={this.state.title}
           onChange={this.handleInputChange}
-          pattern=".+"
-          label="Title"
+          pattern="[a-zA-Z0-9\.-]+"
+          label="Name"
           error="Wrong value"
+          spellCheck={false}
+          required
           style={{ width: "100%" }}
         />
         <TextField
@@ -73,6 +97,32 @@ class JSONWebserviceSettings extends Component {
           pattern=".+"
           label="Url"
           error="Wrong value"
+          spellCheck={false}
+          required
+          style={{ width: "100%" }}
+        />
+        <TextField
+          name="className"
+          value={this.state.className}
+          defaultValue={this.state.className}
+          onChange={this.handleInputChange}
+          pattern=".+"
+          label="Classname"
+          error="Wrong value"
+          spellCheck={false}
+          required
+          style={{ width: "100%" }}
+        />
+        <TextField
+          name="secret"
+          value={this.state.secret}
+          defaultValue={this.state.secret}
+          onChange={this.handleInputChange}
+          pattern="[a-zA-Z0-9\.-]+"
+          label=" Secret phrase"
+          error="Wrong value"
+          spellCheck={false}
+          required
           style={{ width: "100%" }}
         />
       </div>

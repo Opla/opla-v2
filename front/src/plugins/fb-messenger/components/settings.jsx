@@ -16,7 +16,7 @@ class FBSettings extends Component {
     const defaultSettings = {
       botName: "facebookbot",
       accessToken: "accessToken",
-      url: "url://",
+      url: "https://",
       verifyToken: Math.random()
         .toString(36)
         .substring(2),
