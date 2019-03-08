@@ -319,9 +319,8 @@ class OpenNLXMiddleware {
       if (ws) {
         // WIP
         const post = { action, parameters };
-        const url = `${ws.url}${ws.path}?class=${className}&secret=${
-          ws.secret
-        }`;
+        const path = ws.path || "";
+        const url = `${ws.url}${path}?class=${className}&secret=${ws.secret}`;
         // console.log("url=", url);
         const response = await fetch(url, {
           method: "post",
