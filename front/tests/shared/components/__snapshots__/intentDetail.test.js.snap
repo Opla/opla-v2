@@ -144,6 +144,7 @@ exports[`components/intentDetail can render intent with special characters corre
                     "alignItems": "center",
                     "display": "flex",
                     "flexWrap": "wrap",
+                    "width": "100%",
                   }
                 }
               >
@@ -163,7 +164,15 @@ exports[`components/intentDetail can render intent with special characters corre
                   tabIndex={1}
                 />
               </span>
-              <div>
+              <div
+                style={
+                  Object {
+                    "left": "19px",
+                    "pointerEvents": "none",
+                    "position": "absolute",
+                  }
+                }
+              >
                 Add an input sentence
               </div>
             </div>
@@ -324,6 +333,7 @@ exports[`components/intentDetail can render intent with special characters corre
                     "alignItems": "center",
                     "display": "flex",
                     "flexWrap": "wrap",
+                    "width": "100%",
                   }
                 }
               >
@@ -343,7 +353,15 @@ exports[`components/intentDetail can render intent with special characters corre
                   tabIndex={1}
                 />
               </span>
-              <div>
+              <div
+                style={
+                  Object {
+                    "left": "19px",
+                    "pointerEvents": "none",
+                    "position": "absolute",
+                  }
+                }
+              >
                 Add an output response
               </div>
             </div>
@@ -678,6 +696,7 @@ exports[`components/intentDetail renders correctly 1`] = `
                     "alignItems": "center",
                     "display": "flex",
                     "flexWrap": "wrap",
+                    "width": "100%",
                   }
                 }
               >
@@ -697,7 +716,15 @@ exports[`components/intentDetail renders correctly 1`] = `
                   tabIndex={1}
                 />
               </span>
-              <div>
+              <div
+                style={
+                  Object {
+                    "left": "19px",
+                    "pointerEvents": "none",
+                    "position": "absolute",
+                  }
+                }
+              >
                 Add an input sentence
               </div>
             </div>
@@ -858,6 +885,7 @@ exports[`components/intentDetail renders correctly 1`] = `
                     "alignItems": "center",
                     "display": "flex",
                     "flexWrap": "wrap",
+                    "width": "100%",
                   }
                 }
               >
@@ -877,7 +905,15 @@ exports[`components/intentDetail renders correctly 1`] = `
                   tabIndex={1}
                 />
               </span>
-              <div>
+              <div
+                style={
+                  Object {
+                    "left": "19px",
+                    "pointerEvents": "none",
+                    "position": "absolute",
+                  }
+                }
+              >
                 Add an output response
               </div>
             </div>

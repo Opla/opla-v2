@@ -17,7 +17,6 @@ const infoStyle = {
 };
 
 const helpdoc = [
-  { title: "How to create your first intent ?", text: "" },
   {
     title: "Input is a list of sentences, events or attachments",
     text:

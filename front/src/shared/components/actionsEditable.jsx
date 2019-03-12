@@ -325,6 +325,7 @@ class ActionsEditable extends Component {
       if (isEditable && actions[len - 1] && actions[len - 1].type !== "text") {
         end = (
           <ActionEditable
+            style={{ flexGrow: 1 }}
             actionId={"ae_end"}
             tabIndex={i}
             type="text"
@@ -342,7 +343,13 @@ class ActionsEditable extends Component {
         );
       }
     } else if (this.props.isNew) {
-      placeholder = <div>{this.props.placeholder}</div>;
+      placeholder = (
+        <div
+          style={{ position: "absolute", left: "19px", pointerEvents: "none" }}
+        >
+          {this.props.placeholder}
+        </div>
+      );
     }
     const contentStyle = {
       flex: 1,
@@ -375,6 +382,7 @@ class ActionsEditable extends Component {
             display: "flex",
             flexWrap: "wrap",
             alignItems: "center",
+            width: "100%",
           }}
         >
           {start}

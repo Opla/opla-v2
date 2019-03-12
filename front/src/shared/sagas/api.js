@@ -231,6 +231,8 @@ const api = [
       const { botId, intentId, from, to } = action;
 
       try {
+        yield put(apiMoveIntentSuccess(from, to));
+
         yield getWebService().put(`bots/${botId}/intents/${intentId}/move`, {
           botId,
           intentId,
@@ -238,8 +240,6 @@ const api = [
           from: from + 1,
           to: to + 1,
         });
-
-        yield put(apiMoveIntentSuccess(from, to));
       } catch (error) {
         yield put(apiMoveIntentFailure(error));
       }
