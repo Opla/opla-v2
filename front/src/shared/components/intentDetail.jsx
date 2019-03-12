@@ -155,6 +155,7 @@ const IntentDetail = ({
               Deactivate
               <ListItemMeta style={{ minWidth: "320px", display: "flex" }}>
                 <Switch
+                  id="deactivate"
                   style={{ margin: "0 auto" }}
                   checked={isDeactivated}
                   onChange={(isDisabled) => {
@@ -233,7 +234,7 @@ export const displayActionEditor = (
         label="Select an intent"
         style={{ width: "100%" }}
         onSelected={(t) => {
-          setInput({ value: t !== "default" ? t : null });
+          setInput({ value: t !== "default" ? t : "" });
         }}
       >
         {parameters.options.map((int) => (

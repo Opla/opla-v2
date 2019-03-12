@@ -461,7 +461,7 @@ class IntentContainer extends Component {
             if (isDisabled) {
               selectedIntent.state = "deactivated";
             } else {
-              selectedIntent.state = null;
+              selectedIntent.state = "";
             }
             this.props.appUpdateIntent(
               this.props.selectedBotId,

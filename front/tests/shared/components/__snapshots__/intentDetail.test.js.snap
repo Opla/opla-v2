@@ -541,6 +541,62 @@ exports[`components/intentDetail can render intent with special characters corre
               </button>
             </span>
           </li>
+          <li
+            className="mdc-list-item"
+            onKeyPress={[Function]}
+            role="menuitem"
+          >
+            <i
+              aria-hidden="true"
+              className="mdc-list-item__graphic material-icons"
+            >
+              link
+            </i>
+            Deactivate
+            <span
+              className="mdc-list-item__meta"
+              onClick={null}
+              onKeyUp={[Function]}
+              role="button"
+              style={
+                Object {
+                  "display": "flex",
+                  "minWidth": "320px",
+                }
+              }
+              tabIndex="0"
+            >
+              <div
+                className="mdc-switch"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "margin": "0 auto",
+                  }
+                }
+              >
+                <div
+                  className="mdc-switch__track"
+                />
+                <div
+                  className="mdc-switch__thumb-underlay"
+                >
+                  <div
+                    className="mdc-switch__thumb"
+                  >
+                    <input
+                      checked={false}
+                      className="mdc-switch__native-control"
+                      disabled={false}
+                      id="deactivate"
+                      role="switch"
+                      type="checkbox"
+                    />
+                  </div>
+                </div>
+              </div>
+            </span>
+          </li>
         </ul>
       </div>
     </div>
@@ -1087,6 +1143,62 @@ exports[`components/intentDetail renders correctly 1`] = `
                 
                 NONE
               </button>
+            </span>
+          </li>
+          <li
+            className="mdc-list-item"
+            onKeyPress={[Function]}
+            role="menuitem"
+          >
+            <i
+              aria-hidden="true"
+              className="mdc-list-item__graphic material-icons"
+            >
+              link
+            </i>
+            Deactivate
+            <span
+              className="mdc-list-item__meta"
+              onClick={null}
+              onKeyUp={[Function]}
+              role="button"
+              style={
+                Object {
+                  "display": "flex",
+                  "minWidth": "320px",
+                }
+              }
+              tabIndex="0"
+            >
+              <div
+                className="mdc-switch"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "margin": "0 auto",
+                  }
+                }
+              >
+                <div
+                  className="mdc-switch__track"
+                />
+                <div
+                  className="mdc-switch__thumb-underlay"
+                >
+                  <div
+                    className="mdc-switch__thumb"
+                  >
+                    <input
+                      checked={false}
+                      className="mdc-switch__native-control"
+                      disabled={false}
+                      id="deactivate"
+                      role="switch"
+                      type="checkbox"
+                    />
+                  </div>
+                </div>
+              </div>
             </span>
           </li>
         </ul>
