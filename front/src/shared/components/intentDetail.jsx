@@ -15,6 +15,7 @@ import Zrmc, {
   ListItemMeta,
   MenuItem,
   Select,
+  Switch,
   TextField,
 } from "zrmc";
 import { ExpansionPanel } from "zoapp-ui";
@@ -28,6 +29,7 @@ const IntentDetail = ({
   displayCondition,
   displayHelp,
   getIntentNameById,
+  onDisable,
   onSelect,
   onAction,
   onHelp,
@@ -40,6 +42,8 @@ const IntentDetail = ({
 }) => {
   const { name, input, output } = intent;
   const topic = intent.topic && intent.topic.length > 0 ? intent.topic : "*";
+  const isDeactivated = intent.state && intent.state === "deactivated";
+
   const { previousId } = intent;
   let help = "";
   if (displayHelp > -1) {
@@ -147,6 +151,19 @@ const IntentDetail = ({
                 </Button>
               </ListItemMeta>
             </ListItem>
+            <ListItem icon="link">
+              Deactivate
+              <ListItemMeta style={{ minWidth: "320px", display: "flex" }}>
+                <Switch
+                  id="deactivate"
+                  style={{ margin: "0 auto" }}
+                  checked={isDeactivated}
+                  onChange={(isDisabled) => {
+                    onDisable(isDisabled);
+                  }}
+                />
+              </ListItemMeta>
+            </ListItem>
           </List>
         </ExpansionPanel>
       </div>
@@ -164,6 +181,7 @@ IntentDetail.defaultProps = {
 IntentDetail.propTypes = {
   intent: PropTypes.shape({}).isRequired,
   getIntentNameById: PropTypes.func.isRequired,
+  onDisable: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
   onAction: PropTypes.func.isRequired,
   onHelp: PropTypes.func,
@@ -216,7 +234,7 @@ export const displayActionEditor = (
         label="Select an intent"
         style={{ width: "100%" }}
         onSelected={(t) => {
-          setInput({ value: t !== "default" ? t : null });
+          setInput({ value: t !== "default" ? t : "" });
         }}
       >
         {parameters.options.map((int) => (
