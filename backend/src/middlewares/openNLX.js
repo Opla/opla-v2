@@ -313,8 +313,9 @@ class OpenNLXMiddleware {
       logger.info("OpenNLX.doCall Malformed func : ", func);
       return null;
     }
+
     if (className === "system") {
-      return this.systemFunctions.get(action).call(parameters);
+      return this.systemFunctions.get(action).call(parameters, botId);
     }
 
     const wss = await middlewares.list({ origin: botId, type: "WebService" });

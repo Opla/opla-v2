@@ -9,6 +9,17 @@ html {
   cursor: default;
 }
 
+.selectTimeZone {
+  .mdc-select__native-control {
+    box-sizing: border-box;
+  }
+
+  .mdc-select__selected-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+ 
 .zui-panel-header-title {
   font-weight: 400;
 }
