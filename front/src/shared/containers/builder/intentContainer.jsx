@@ -25,10 +25,8 @@ class IntentContainer extends Component {
   constructor(props) {
     super(props);
     let { selectedIntent } = this.props;
-    let displayHelp = -1;
     if (!selectedIntent || !selectedIntent.id) {
       selectedIntent = IntentTools.generateFirstIntent();
-      displayHelp = 0;
     }
     this.state = {
       editing: false,
@@ -38,7 +36,7 @@ class IntentContainer extends Component {
       selectedInput: -1,
       selectedOutput: -1,
       selectedIntent,
-      displayHelp,
+      displayHelp: -1,
     };
     this.selectedActionsComponent = null;
 
@@ -66,19 +64,17 @@ class IntentContainer extends Component {
   componentDidUpdate(prevProps) {
     // reset when a new intent is selected
     let { selectedIntent } = this.props;
-    let { displayHelp } = this.state;
     if (!selectedIntent || !selectedIntent.id) {
       selectedIntent = IntentTools.generateFirstIntent();
-      displayHelp = 0;
     }
     if (
       prevProps.selectedIntent &&
       this.props.selectedIntent &&
       prevProps.selectedIntent.id !== this.props.selectedIntent.id
     ) {
-      this.reset({ selectedIntent, displayHelp });
+      this.reset({ selectedIntent, displayHelp: -1 });
     } else if (prevProps.selectedIntent !== this.props.selectedIntent) {
-      this.reset({ selectedIntent, displayHelp });
+      this.reset({ selectedIntent, displayHelp: -1 });
     }
   }
 
@@ -363,15 +359,15 @@ class IntentContainer extends Component {
   handleHelp = (help) => {
     let { displayHelp } = this.state;
     if (help === "input") {
-      displayHelp = 1;
+      displayHelp = 0;
     } else if (help === "output") {
-      displayHelp = 2;
+      displayHelp = 1;
     } else if (help === "advanced") {
-      displayHelp = 3;
+      displayHelp = 2;
     } else if (help === "input_actions") {
-      displayHelp = 4;
+      displayHelp = 3;
     } else if (help === "output_actions") {
-      displayHelp = 5;
+      displayHelp = 4;
     } else {
       displayHelp = -1;
     }

@@ -187,6 +187,7 @@ exports[`components/actionEditor renders correctly 1`] = `
           "alignItems": "center",
           "display": "flex",
           "flexWrap": "wrap",
+          "width": "100%",
         }
       }
     >

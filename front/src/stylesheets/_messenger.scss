@@ -302,6 +302,9 @@
 
 .message-body {
   margin-bottom: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .from > .text-wrapper > .message-debug-container {
