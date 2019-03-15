@@ -2,7 +2,7 @@
 
 exports[`components/actionsList can be rendered with array of actions typed as shapes 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -96,9 +96,8 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -107,7 +106,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -177,8 +176,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     >
@@ -192,7 +190,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -244,7 +242,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -264,7 +262,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -316,7 +314,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -336,7 +334,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -388,7 +386,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -408,7 +406,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -460,7 +458,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -480,7 +478,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -532,7 +530,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -552,7 +550,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -604,7 +602,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -624,7 +622,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -676,7 +674,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -693,7 +691,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
 
 exports[`components/actionsList can be rendered with array of actions typed as strings 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -787,9 +785,8 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -798,7 +795,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -868,8 +865,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     >
@@ -883,7 +879,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -935,7 +931,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -955,7 +951,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -1007,7 +1003,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -1027,7 +1023,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -1079,7 +1075,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -1099,7 +1095,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -1151,7 +1147,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -1171,7 +1167,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -1223,7 +1219,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -1243,7 +1239,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -1295,7 +1291,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -1315,7 +1311,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
         <div
           style={
             Object {
-              "width": "100%",
+              "width": "calc(100% - 28px)",
             }
           }
         >
@@ -1367,7 +1363,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
           </div>
         </div>
         <i
-          className="mdc-list-item__meta material-icons"
+          className="actionItemIcon mdc-list-item__meta material-icons"
           href={null}
           onClick={[Function]}
           onKeyUp={[Function]}
@@ -1384,7 +1380,7 @@ exports[`components/actionsList can be rendered with array of actions typed as s
 
 exports[`components/actionsList can have an unique id 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -1478,9 +1474,8 @@ exports[`components/actionsList can have an unique id 1`] = `
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -1489,7 +1484,7 @@ exports[`components/actionsList can have an unique id 1`] = `
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -1559,8 +1554,7 @@ exports[`components/actionsList can have an unique id 1`] = `
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     />
@@ -1570,7 +1564,7 @@ exports[`components/actionsList can have an unique id 1`] = `
 
 exports[`components/actionsList can have different behavior on action 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -1664,9 +1658,8 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -1675,7 +1668,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -1745,8 +1738,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     />
@@ -1756,7 +1748,7 @@ exports[`components/actionsList can have different behavior on action 1`] = `
 
 exports[`components/actionsList can have different behavior on drop 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -1850,9 +1842,8 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -1861,7 +1852,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -1931,8 +1922,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     />
@@ -1942,7 +1932,7 @@ exports[`components/actionsList can have different behavior on drop 1`] = `
 
 exports[`components/actionsList can have different behavior on edit 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -2036,9 +2026,8 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -2047,7 +2036,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -2117,8 +2106,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     />
@@ -2128,7 +2116,7 @@ exports[`components/actionsList can have different behavior on edit 1`] = `
 
 exports[`components/actionsList can have different behavior on select 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -2222,9 +2210,8 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -2233,7 +2220,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -2303,8 +2290,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     />
@@ -2314,7 +2300,7 @@ exports[`components/actionsList can have different behavior on select 1`] = `
 
 exports[`components/actionsList renders correctly 1`] = `
 <div
-  className="zui-expansion zui-color--white"
+  className="zui-expansion zui-color--white editItemContainer"
   style={
     Object {
       "margin": "12px",
@@ -2408,9 +2394,8 @@ exports[`components/actionsList renders correctly 1`] = `
       }
     }
   >
-    
     <li
-      className="addActionItem  onFocusAction actionItem mdc-list-item"
+      className="addActionItem onFocusAction actionItem mdc-list-item"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="menuitem"
@@ -2419,7 +2404,7 @@ exports[`components/actionsList renders correctly 1`] = `
       <div
         style={
           Object {
-            "width": "100%",
+            "width": "calc(100% - 28px)",
           }
         }
       >
@@ -2489,8 +2474,7 @@ exports[`components/actionsList renders correctly 1`] = `
       style={
         Object {
           "margin": "0 8px 16px 8px",
-          "overflowX": "hidden",
-          "overflowY": "auto",
+          "overflow": "hidden",
         }
       }
     />

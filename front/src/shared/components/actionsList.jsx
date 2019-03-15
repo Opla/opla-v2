@@ -71,23 +71,23 @@ class ActionsList extends Component {
     this.props.onDeleteActionClick(this.props.name, index);
   };
 
-  updateToolboxDisplay = () => {
-    if (this.selectedItemRef && this.selectedItemRef.ref && this.toolboxRef) {
-      const {
-        left,
-        top,
-        width,
-      } = this.selectedItemRef.ref.parentNode.getBoundingClientRect();
-      let adjustedLeft = left - 8;
-      if (adjustedLeft < 0) {
-        adjustedLeft = 0;
-      }
-      const adjustedTop = top - 36;
-      const adjustedWidth = width - 2;
-      const style = `left: ${adjustedLeft}px; top: ${adjustedTop}px; width: ${adjustedWidth}px;`;
-      this.toolboxRef.style = style;
-    }
-  };
+  // updateToolboxDisplay = () => {
+  //   if (this.selectedItemRef && this.selectedItemRef.ref && this.toolboxRef) {
+  //     const {
+  //       left,
+  //       top,
+  //       width,
+  //     } = this.selectedItemRef.ref.parentNode.getBoundingClientRect();
+  //     let adjustedLeft = left - 8;
+  //     if (adjustedLeft < 0) {
+  //       adjustedLeft = 0;
+  //     }
+  //     const adjustedTop = top - 36;
+  //     const adjustedWidth = width - 2;
+  //     const style = `left: ${adjustedLeft}px; top: ${adjustedTop}px; width: ${adjustedWidth}px;`;
+  //     this.toolboxRef.style = style;
+  //   }
+  // };
 
   render() {
     const {
@@ -108,21 +108,38 @@ class ActionsList extends Component {
       actions[0].type === "condition";
     // const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
-    let addContentClassname = "";
-    let isSelected = false;
+
+    const isInput = name === "input";
+    const isIntentOutputEmpty = !isInput && !(actions && actions.length > 0);
+    const toolbox = (
+      <div
+        className="actionstoolbox"
+        // ref={(r) => {
+        //   this.toolboxRef = r;
+        //   this.updateToolboxDisplay();
+        // }}
+      >
+        <ActionsToolbox
+          onChange={onChangeToolbox}
+          isInput={isInput}
+          condition={isIntentOutputEmpty}
+        />
+      </div>
+    );
+
+    let addContentClassname = "addActionItem";
+    let isAddContentSelected = false;
     if (this.props.selected === 0) {
-      addContentClassname = "selectedActionItem";
-      isSelected = true;
+      addContentClassname += " selectedActionItem";
+      isAddContentSelected = true;
     }
-    const selected = this.props.selected - 1;
-    addContentClassname = `addActionItem ${addContentClassname}`;
     const addContent = (
       <ActionsItem
         className={addContentClassname}
         containerName={name}
         action={newAction}
         editable={editable}
-        isSelected={isSelected}
+        isSelected={isAddContentSelected}
         onAddAction={(content, isCondition = false) => {
           this.handleAddNewAction(content, isCondition);
         }}
@@ -138,14 +155,15 @@ class ActionsList extends Component {
         ref={(r) => {
           if (this.props.selected === 0) {
             this.selectedItemRef = r;
-            this.updateToolboxDisplay();
+            // this.updateToolboxDisplay();
           }
         }}
+        toolbox={isAddContentSelected && toolbox}
       />
     );
+
     const s = {
-      overflowX: "hidden",
-      overflowY: "auto",
+      overflow: "hidden",
       margin: "0 8px 16px 8px",
     };
     if (actions && actions.length > 0) {
@@ -155,7 +173,7 @@ class ActionsList extends Component {
       contentList = (
         <List style={s}>
           {actionsDisplayed.map((action, index) => {
-            isSelected = isSelected || index === selected;
+            const selected = index === this.props.selected - 1;
             return (
               <ActionsItem
                 containerName={name}
@@ -175,14 +193,15 @@ class ActionsList extends Component {
                   this.handleDeleteClick(index);
                 }}
                 isCondition={isActionsCondition}
-                isSelected={index === selected}
-                className={index === selected ? "selectedActionItem" : null}
+                isSelected={selected}
+                className={selected ? "selectedActionItem" : null}
                 ref={(r) => {
                   if (index === selected) {
                     this.selectedItemRef = r;
-                    this.updateToolboxDisplay();
+                    // this.updateToolboxDisplay();
                   }
                 }}
+                toolbox={selected && toolbox}
               />
             );
           })}
@@ -218,34 +237,13 @@ class ActionsList extends Component {
         />
       </div>
     );
-    let toolbox = "";
-    if (isSelected) {
-      const isInput = name === "input";
-      const isIntentOutputEmpty = !isInput && !(actions && actions.length > 0);
-      toolbox = (
-        <div
-          className="actionstoolbox"
-          ref={(r) => {
-            this.toolboxRef = r;
-            this.updateToolboxDisplay();
-          }}
-        >
-          <ActionsToolbox
-            onChange={onChangeToolbox}
-            isInput={isInput}
-            condition={isIntentOutputEmpty}
-          />
-        </div>
-      );
-    }
     return (
       <ExpansionPanel
         label={title}
-        className="zui-color--white"
+        className="zui-color--white editItemContainer"
         style={{ margin: "12px" }}
         elevation={0}
       >
-        {toolbox}
         {addContent}
         {contentList}
       </ExpansionPanel>

@@ -384,7 +384,7 @@ class ActionsToolbox extends Component {
         <div style={styleToolbarRight}>
           <Button
             onClick={(e) => {
-              e.preventDefault();
+              e.stopPropagation();
               this.props.onChange("unfocus");
             }}
           >
