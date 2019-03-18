@@ -21,6 +21,20 @@ export default class extends Controller {
     return this.model.getConversation(user, conversationId);
   }
 
+  async getConversationUser(conversationId, userId) {
+    const conversation = await this.model.getConversation(null, conversationId);
+    let user = null;
+    if (conversation && Array.isArray(conversation.participants)) {
+      // console.log("getConv", userId, conversation.participants);
+      conversation.participants.forEach((username) => {
+        if (username.indexOf("bot_") === -1 && !user) {
+          user = { username, id: userId };
+        }
+      });
+    }
+    return user;
+  }
+
   async createConversation(user, params) {
     let conversation = null;
     const { participants, origin, ...p } = params;

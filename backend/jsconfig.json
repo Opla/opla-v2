@@ -2,7 +2,10 @@
     "compilerOptions": {
         "target": "ES6"
     },
-    "files": [
-        "src"
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/**/*"
     ]
 }
