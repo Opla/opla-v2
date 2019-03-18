@@ -140,7 +140,7 @@ class OpenNLXMiddleware {
     } else if (data.action === "resetConversation") {
       // reset Conversation / Context
       this.openNLX.deleteContext(bot.id, v, data.conversationId);
-      // delete in db parameters
+      // TODO delete in db parameters
       try {
         await parameters.deleteValue(data.conversationId);
       } catch (error) {
@@ -232,7 +232,7 @@ class OpenNLXMiddleware {
     } else if (className === "bot") {
       // handle intents events
       if (data.action === "createBot") {
-        // WIP create bot
+        // create bot
         const { bot } = data;
         this.openNLX.createAgent(bot);
       } else if (data.action === "updateBot") {
@@ -365,6 +365,7 @@ class OpenNLXMiddleware {
   async init(m) {
     this.id = m.id;
     this.openNLX = openNLX;
+    this.openNLX.setup({ entity: { enableAll: true } });
     // logger.info("OpenNLX init", this);
     // Add bots to openNLX
     const botsController = this.mainControllers.getBots();
