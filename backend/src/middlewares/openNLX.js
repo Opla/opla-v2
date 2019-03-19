@@ -30,7 +30,7 @@ class OpenNLXMiddleware {
   }
 
   async resetContext(parameters, bot, conversationId, v) {
-    console.log("deleteContextValue", conversationId);
+    // console.log("deleteContextValue", conversationId);
     this.openNLX.deleteContext(bot.id, v, conversationId);
     // delete in db parameters
     try {
