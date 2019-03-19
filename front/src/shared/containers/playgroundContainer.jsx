@@ -19,7 +19,10 @@ import {
   apiSendSandboxMessageRequest,
   apiGetSandboxContextRequest,
   apiSandboxResetRequest,
+  appSandboxSetSandboxConversation,
 } from "../actions/api";
+
+import FileManager from "../utils/fileManager";
 
 class PlaygroundContainer extends Component {
   constructor(props) {
@@ -57,6 +60,47 @@ class PlaygroundContainer extends Component {
     Zrmc.showDialog({ header: "TODO", body: "PlaygroundContainer.handleMenu" });
   };
 
+  handleLoad = () => {
+    Zrmc.showDialog({
+      header: "Playground import conversation",
+      body: (
+        <div>
+          <input
+            type="file"
+            onChange={({ target }) => {
+              FileManager.upload(
+                target.files,
+                (fileConversationDataAsJSON, filetype) => {
+                  const fileConversationData = JSON.parse(
+                    fileConversationDataAsJSON,
+                  );
+                  this.setState({ fileConversationData, filetype });
+                },
+              );
+            }}
+            accept="application/json"
+          />
+        </div>
+      ),
+      actions: [{ name: "Cancel" }, { name: "Reset" }],
+      onAction: () => {
+        if (this.state.fileConversationData) {
+          this.props.appSandboxSetSandboxConversation({
+            conversation: this.state.fileConversationData,
+          });
+        }
+        return this.state.fileConversationData;
+      },
+    });
+  };
+
+  handleSave = () => {
+    const name = "conversation";
+    const data = this.props.conversation;
+    const json = JSON.stringify(data, null, 2);
+    FileManager.download(json, `${name}.json`, "application/json");
+  };
+
   handleReset = () => {
     Zrmc.showDialog({
       header: "Playground",
@@ -77,12 +121,10 @@ class PlaygroundContainer extends Component {
       );
       return true;
     }
-    // console.log("Error", "PlaygroundContainer.handleSend", this.props.conversation, body.length);
     return false;
   };
 
-  handleRefresh = (e) => {
-    e.preventDefault();
+  handleRefresh = () => {
     if (this.props.conversation) {
       this.props.apiUpdateSandboxMessagesRequest(
         this.props.selectedBotId,
@@ -94,10 +136,6 @@ class PlaygroundContainer extends Component {
   handleDebug = () => {};
 
   handleDemo = () => {};
-
-  handleShare = () => {};
-
-  handleSettings = () => {};
 
   handleAction = (action, defaultValue, data) => {
     this.props.onAction(action, defaultValue, data);
@@ -180,13 +218,13 @@ class PlaygroundContainer extends Component {
           menu={{
             items: [
               { name: "Context", onSelect: this.handleMenu },
-              { name: "Load", disabled: true },
-              { name: "Save", disabled: true },
+              { name: "Load", onSelect: this.handleLoad },
+              { name: "Save", onSelect: this.handleSave },
               { name: "Reset", onSelect: this.handleReset },
               { name: "Refresh", onSelect: this.handleRefresh },
               { name: "Demo", onSelect: this.handleDemo },
-              { name: "Share", onSelect: this.handleShare },
-              { name: "Settings", onSelect: this.handleSettings },
+              { name: "Share", disabled: true },
+              { name: "Settings", disabled: true },
             ],
             align: "right",
           }}
@@ -217,6 +255,7 @@ PlaygroundContainer.propTypes = {
   apiSendSandboxMessageRequest: PropTypes.func.isRequired,
   apiUpdateSandboxMessagesRequest: PropTypes.func.isRequired,
   apiSandboxResetRequest: PropTypes.func.isRequired,
+  appSandboxSetSandboxConversation: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -271,6 +310,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiSandboxResetRequest: (botId) => {
     dispatch(apiSandboxResetRequest(botId));
+  },
+  appSandboxSetSandboxConversation: ({ conversation }) => {
+    dispatch(appSandboxSetSandboxConversation(conversation));
   },
 });
 

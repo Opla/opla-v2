@@ -31,6 +31,7 @@ import {
   API_SB_SENDMESSAGE,
   API_SETMIDDLEWARE,
   APP_UPDATEPUBLISHER,
+  APP_SET_SB_CONVERSATION,
 } from "../../actions/constants";
 
 import {
@@ -364,5 +365,9 @@ export default createReducer(initialState, {
     loading: false,
     error: error.message,
     languages: defaultLanguages,
+  }),
+  [APP_SET_SB_CONVERSATION]: (state, { sandbox }) => ({
+    ...state,
+    sandbox,
   }),
 });

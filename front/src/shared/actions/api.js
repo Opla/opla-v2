@@ -30,6 +30,7 @@ import {
   API_SB_UPDATEMESSAGES,
   API_SENDINTENT,
   API_SETMIDDLEWARE,
+  APP_SET_SB_CONVERSATION,
 } from "./constants";
 
 export function apiImportRequest(botId, data, options) {
@@ -175,4 +176,11 @@ export function apiGetLanguagesSuccess(languages) {
 
 export function apiGetLanguagesFailure(error) {
   return { type: API_GETLANGUAGES + FETCH_FAILURE, error };
+}
+
+export function appSandboxSetSandboxConversation(conversation) {
+  return {
+    type: APP_SET_SB_CONVERSATION,
+    sandbox: { conversations: [conversation] },
+  };
 }
