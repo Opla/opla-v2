@@ -74,7 +74,7 @@ const appProps = {
       name: "Factory",
       path: "/factory",
       access: "auth",
-      panels: ["Dashboard", "Builder", "Analytics", "Extensions"],
+      panels: ["Dashboard", "Builder", "Settings"],
       toolbox: [
         {
           title: "Publish",

@@ -20,7 +20,6 @@ import { appUpdateIntent } from "../actions/app";
 import Dashboard from "./dashboard";
 import Analytics from "./analytics";
 import Builder from "./builder";
-import Extensions from "./admin/extensions";
 import PlaygroundContainer from "./playgroundContainer";
 
 class Factory extends Component {
@@ -237,7 +236,7 @@ class Factory extends Component {
 
     let screen;
     if (active === 0) {
-      screen = <Dashboard store={this.props.store} />;
+      screen = <Analytics />;
     } else if (active === 1) {
       screen = (
         <Builder
@@ -247,9 +246,7 @@ class Factory extends Component {
         />
       );
     } else if (active === 2) {
-      screen = <Analytics />;
-    } else {
-      screen = <Extensions />;
+      screen = <Dashboard store={this.props.store} />;
     }
     const intentsEx = [];
     if (Array.isArray(this.props.intents)) {
