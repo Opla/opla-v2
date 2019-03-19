@@ -57,10 +57,13 @@ const Importer = {
     } else {
       data = rawData;
     }
-    logger.info("data.intents", data);
+
+    result = data;
+
+    logger.info("data.intents", data.intents);
     if (data.intents) {
       const intents = await controller.duplicateIntents(botId, data.intents);
-      result = { intents };
+      data.intents = intents;
     }
     return result;
   },

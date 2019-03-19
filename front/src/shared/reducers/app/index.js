@@ -155,6 +155,7 @@ export default createReducer(initialState, {
     error: null,
   }),
   [API_IMPORT + FETCH_SUCCESS]: (state, { result }) => {
+    const res = result;
     let { intents, selectedIntentIndex, selectedIntent } = state;
     if (result.intents) {
       intents = [...result.intents];
@@ -169,6 +170,17 @@ export default createReducer(initialState, {
         // TODO handle conflicts
       }
     }
+
+    delete res.intents;
+    const bots = state.bots.slice();
+    const savedBotIndex = bots.findIndex((b) => b.id === res.id);
+    if (savedBotIndex > -1) {
+      bots[savedBotIndex] = {
+        ...bots[savedBotIndex],
+        ...res,
+      };
+    }
+
     return {
       ...state,
       loading: false,
@@ -176,6 +188,7 @@ export default createReducer(initialState, {
       intents,
       selectedIntentIndex,
       selectedIntent,
+      bots,
     };
   },
   [API_IMPORT + FETCH_FAILURE]: (state, { error }) => ({
