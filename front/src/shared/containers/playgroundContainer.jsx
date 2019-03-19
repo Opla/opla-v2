@@ -27,7 +27,7 @@ import FileManager from "../utils/fileManager";
 class PlaygroundContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { needToSubscribe: true };
+    this.state = { needToSubscribe: true, isRunningDemo: false };
   }
 
   componentDidMount() {
@@ -85,8 +85,9 @@ class PlaygroundContainer extends Component {
       actions: [{ name: "Cancel" }, { name: "Reset" }],
       onAction: () => {
         if (this.state.fileConversationData) {
+          const conversation = this.state.fileConversationData;
           this.props.appSandboxSetSandboxConversation({
-            conversation: this.state.fileConversationData,
+            conversation,
           });
         }
         return this.state.fileConversationData;
@@ -135,7 +136,36 @@ class PlaygroundContainer extends Component {
 
   handleDebug = () => {};
 
-  handleDemo = () => {};
+  handleDemo = () => {
+    const conversationToDemo = this.props.conversation;
+    let { messages } = conversationToDemo;
+
+    messages = messages.sort((msg1, msg2) => {
+      if (msg1.created_time < msg2.created_time) {
+        return -1;
+      }
+      if (msg1.created_time === msg2.created_time) {
+        return 0;
+      }
+      return 1;
+    });
+    conversationToDemo.messages = messages;
+
+    const update = (msgs, time) => {
+      setTimeout(() => {
+        conversationToDemo.messages = msgs;
+        this.props.appSandboxSetSandboxConversation({
+          conversation: conversationToDemo,
+        });
+      }, time);
+    };
+
+    messages.forEach((message, i) => {
+      const arr = messages.slice(0, i + 1);
+      const numberOfChars = arr.reduce((acc, m) => acc + m.body.length, 0);
+      update(arr, numberOfChars * 3.11 + i * 2000); // Total char * average typing speed + 2s per messages
+    });
+  };
 
   handleAction = (action, defaultValue, data) => {
     this.props.onAction(action, defaultValue, data);
