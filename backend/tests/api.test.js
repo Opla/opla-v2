@@ -502,7 +502,7 @@ describe("API", () => {
               context.authUser1.access_token,
             );
             // WIP
-            expect(Object.keys(res)).toEqual(["result"]);
+            expect(res).toMatchObject([{ messages: [] }]);
           });
         });
       });

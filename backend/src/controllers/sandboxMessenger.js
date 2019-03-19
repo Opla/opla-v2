@@ -123,12 +123,15 @@ export default class extends MessengerController {
     }
   }
   async resetConversations(user, botId, isAdmin = false) {
-    await this.deleteConversations(user, botId, isAdmin);
+    // Get old conversation
     const conversations = await this.getFullBotConversations(
       user,
       botId,
       isAdmin,
     );
+
+    // Delete old conversation & this params
+    await this.deleteConversations(user, botId, isAdmin);
     if (!conversations.error) {
       const conversation = conversations[0];
       const conversationId = conversation.id;
@@ -140,8 +143,11 @@ export default class extends MessengerController {
           action: "resetConversation",
         });
       }
-      return { result: "ok" };
+
+      // Get new conversation
+      return this.getFullBotConversations(user, botId, isAdmin);
     }
+
     return conversations;
   }
 }

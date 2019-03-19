@@ -358,7 +358,7 @@ const api = [
         yield put({
           type: `${API_SB_RESET}${FETCH_SUCCESS}`,
           loading: false,
-          result: response,
+          conversations: response,
         });
       } catch (error) {
         yield put({ type: `${API_SB_RESET}${FETCH_FAILURE}`, error });

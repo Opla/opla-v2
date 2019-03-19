@@ -297,9 +297,9 @@ export default createReducer(initialState, {
     loading: true,
     error: null,
   }),
-  [API_SB_RESET + FETCH_SUCCESS]: (state) => {
+  [API_SB_RESET + FETCH_SUCCESS]: (state, { conversations }) => {
     // TODO check if BotId is ok
-    const sandbox = { conversations: [] };
+    const sandbox = { conversations };
     return {
       ...state,
       loading: false,
