@@ -18,7 +18,6 @@ import { getInstalledPlugins } from "../selectors/pluginsSelector";
 import { apiSaveBotRequest } from "../actions/bot";
 import { apiImportRequest, apiGetIntentsRequest } from "../actions/api";
 import DashboardDescription from "../components/dashboard/dashboardDescription";
-import DashboardHeader from "../components/dashboard/dashboardHeader";
 import DashboardServiceList from "../components/dashboard/dashboardServiceList";
 
 export class DashboardBase extends Component {
@@ -36,10 +35,10 @@ export class DashboardBase extends Component {
     }
 
     return (
-      <Grid style={{ maxHeight: "calc(100vh - 68px)", overflow: "auto" }}>
+      <Grid style={{ maxHeight: "calc(100vh - 68px)", height: "100%", overflow: "auto" }}>
         <Inner>
           <Cell span={12}>
-            <DashboardHeader
+            <DashboardDescription
               bot={this.props.bot}
               intents={this.props.intents}
               selectedBotId={this.props.selectedBotId}
@@ -69,10 +68,6 @@ export class DashboardBase extends Component {
               defaultIcon="images/webhook.svg"
               apiSetPluginRequest={this.props.apiSetPluginRequest}
               apiDeletePluginRequest={this.props.apiDeletePluginRequest}
-            />
-            <DashboardDescription
-              bot={this.props.bot}
-              onSaveBotDetails={this.props.apiSaveBotRequest}
             />
           </Cell>
         </Inner>
