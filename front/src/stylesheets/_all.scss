@@ -19,7 +19,7 @@ html {
     text-overflow: ellipsis;
   }
 }
- 
+
 .zui-panel-header-title {
   font-weight: 400;
 }
@@ -91,6 +91,67 @@ html {
   width: 10vh;
   height: 10vh;
 }
+
+.opla-dashboard_expansion-panel {
+  margin: 12px 0;
+  border-radius: 4px;
+
+  .mdc-text-field--textarea .mdc-floating-label {
+    background-color: transparent;
+  }
+}
+
+.opla-dashboard_actions-menu {
+  transform-origin: right top !important;
+  right: 0;
+  left: unset !important;
+}
+
+.opla-dashboard_expansion-panel_footer {
+  display: flex;
+  padding: 16px 8px;
+  align-items: center;
+  justify-content: flex-end;
+  border-top: solid 1px rgba(0, 0, 0, 0.12);
+}
+
+.opla-dashboard_panel {
+  .zap-panel {
+    padding: 24px 0;
+  }
+
+  .zap-panel_header {
+    align-items: center;
+  }
+
+  .zap-panel_title {
+    height: auto;
+    overflow: visible;
+    width:  100%;
+
+    & > div {
+      width: 100%;
+    }
+  }
+
+  .opla-dashboard_panel-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .opla-dashboard_actionbar {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 12px 0 auto;
+    padding: 0;
+  }
+
+  .zap-panel_desc {
+    padding: 0;
+  }
+}
+
 .opla-dashboard_title {
   color: $color_secondary;
   display: flex;
@@ -316,7 +377,7 @@ html {
 
 .zui-expansion-content {
   overflow-x: visible !important;
-  overflow-y: hidden !important;  
+  overflow-y: hidden !important;
 }
 
 .help_panel {
@@ -542,7 +603,6 @@ a {
 .editItemContainer .zui-expansion-content,
 .editItemContainer .zui-expansion-content ul {
   overflow-x: visible !important;
-
 }
 
 .actionConditional {

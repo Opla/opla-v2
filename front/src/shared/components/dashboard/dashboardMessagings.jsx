@@ -6,7 +6,6 @@
  */
 
 import React, { Component } from "react";
-import Panel from "zoapp-front/dist/components/panel";
 import PropTypes from "prop-types";
 import Zrmc from "zrmc";
 import MessagingsList from "../messagingsList";
@@ -60,12 +59,13 @@ class DashboardMessagings extends Component {
         {this.props.loading ? (
           <div>Loading</div>
         ) : (
-          <Panel
-            title="Publish to"
-            description="You could choose to connect this assistant on one or more of these platforms."
-          >
+          <div>
+            <p>
+              You could choose to connect this assistant on one or more of these
+              platforms.
+            </p>
             <MessagingsList items={items} onSelect={this.onSelect} />
-          </Panel>
+          </div>
         )}
       </React.Fragment>
     );
