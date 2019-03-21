@@ -92,6 +92,18 @@ html {
   height: 10vh;
 }
 
+.services-list {
+  .zap-panel_header {
+    display: none;
+  }
+
+  i.mdc-list-item__meta {
+    &:hover {
+      background-color: #3f67e2;
+    }
+  }
+}
+
 .opla-dashboard_expansion-panel {
   margin: 12px 0;
   border-radius: 4px;
@@ -116,6 +128,17 @@ html {
 }
 
 .opla-dashboard_panel {
+  .button-secondary {
+    color: #3f67e2;
+
+    &:focus {
+      &:before,
+      &:after {
+        background-color: #3f67e2;
+      }
+    }
+  }
+
   .zap-panel {
     padding: 24px 0;
   }
@@ -127,7 +150,7 @@ html {
   .zap-panel_title {
     height: auto;
     overflow: visible;
-    width:  100%;
+    width: 100%;
 
     & > div {
       width: 100%;
@@ -145,6 +168,10 @@ html {
     justify-content: flex-end;
     margin: 10px 12px 0 auto;
     padding: 0;
+
+    .mdc-menu-anchor {
+      margin: 4px 0 0 12px;
+    }
   }
 
   .zap-panel_desc {

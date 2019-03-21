@@ -57,10 +57,12 @@ class DashboardHeader extends React.Component {
           </div>
           <div className="opla-dashboard_actionbar">
             <Button
+              dense
+              className="button-secondary"
               onClick={this.onSaveBotDetails}
               disabled={!this.state.name || this.state.name.length < 1}
             >
-              Save
+              Save Bot name
             </Button>
             <DashboardActionbar
               selectedBotId={this.props.selectedBotId}

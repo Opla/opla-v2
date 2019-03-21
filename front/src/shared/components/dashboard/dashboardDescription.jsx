@@ -38,7 +38,16 @@ class DashboardDescription extends React.Component {
       <DashboardExpansionPanel
         title="Properties"
         icon="format_list_bulleted"
-        actionsFooter={<Button onClick={this.onSaveBotDetails}>Save</Button>}
+        actionsFooter={
+          <Button
+            dense
+            raised
+            style={{ backgroundColor: "#3F67E2" }}
+            onClick={this.onSaveBotDetails}
+          >
+            Save
+          </Button>
+        }
       >
         <div
           style={{

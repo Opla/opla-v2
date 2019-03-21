@@ -116,17 +116,28 @@ class DashboardServiceList extends React.Component {
       <DashboardExpansionPanel
         title={this.props.title}
         icon={this.props.icon}
-        actionsFooter={<Button onClick={this.handleAddService}>Add</Button>}
+        actionsFooter={
+          <Button
+            dense
+            raised
+            style={{ backgroundColor: "#3F67E2" }}
+            onClick={this.handleAddService}
+          >
+            Add
+          </Button>
+        }
       >
-        <ServicesList
-          title=""
-          name=""
-          addDisabled
-          description={this.props.description}
-          items={this.props.services}
-          defaultIcon={this.props.defaultIcon}
-          onSelect={this.handleSelect}
-        />
+        <div className="services-list">
+          <ServicesList
+            title=""
+            name=""
+            addDisabled
+            description={this.props.description}
+            items={this.props.services}
+            defaultIcon={this.props.defaultIcon}
+            onSelect={this.handleSelect}
+          />
+        </div>
       </DashboardExpansionPanel>
     );
   }
