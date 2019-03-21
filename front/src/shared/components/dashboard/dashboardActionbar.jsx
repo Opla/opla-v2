@@ -6,9 +6,9 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Zrmc, { Button, Icon, Menu, MenuItem } from "zrmc";
-import IODialog from "../containers/dialogs/ioDialog";
-import FileManager from "../utils/fileManager";
+import Zrmc, { Icon, Menu, MenuItem } from "zrmc";
+import IODialog from "../../containers/dialogs/ioDialog";
+import FileManager from "../../utils/fileManager";
 
 class DashboardActionbar extends Component {
   constructor(props) {

@@ -172,10 +172,10 @@ const IntentDetail = ({
 };
 
 IntentDetail.defaultProps = {
-  onNewActionsChange: () => { },
-  onSelectActionsComponent: () => { },
-  onDeleteActionClick: () => { },
-  getIntentNameById: () => { },
+  onNewActionsChange: () => {},
+  onSelectActionsComponent: () => {},
+  onDeleteActionClick: () => {},
+  getIntentNameById: () => {},
 };
 
 IntentDetail.propTypes = {
