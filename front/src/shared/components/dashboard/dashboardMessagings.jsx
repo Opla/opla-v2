@@ -55,19 +55,19 @@ class DashboardMessagings extends Component {
   render() {
     const items = DashboardMessagings.buildItems(this.props.plugins);
     return (
-      <React.Fragment>
+      <div style={{ padding: "12px 24px 24px 24px" }}>
         {this.props.loading ? (
           <div>Loading</div>
         ) : (
           <div>
-            <p>
+            <p style={{ marginBottom: "12px" }}>
               You could choose to connect this assistant on one or more of these
               platforms.
             </p>
             <MessagingsList items={items} onSelect={this.onSelect} />
           </div>
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }
