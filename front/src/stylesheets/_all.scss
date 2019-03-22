@@ -104,6 +104,13 @@ html {
   }
 }
 
+.selectTimeZone {
+  .mdc-select__menu {
+    margin-top: 66px;
+    max-height: calc(100vh - 70px);
+  }
+}
+
 .opla-dashboard_expansion-panel {
   margin: 12px 0;
   border-radius: 4px;
