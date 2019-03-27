@@ -370,8 +370,7 @@ export default class extends CommonRoutes {
     const isAdmin = scope === "master" || scope === "admin";
     // TODO check if me has access to botId
     const messenger = this.extensions.getSandboxMessenger();
-    await messenger.resetConversations(me, botId, isAdmin);
-    return { result: "ok" };
+    return messenger.resetConversations(me, botId, isAdmin);
   }
 
   async getParameters(context) {
