@@ -189,7 +189,8 @@ class ActionsList extends Component {
                   }
                 }}
                 onSelectActionsComponent={onSelectActionsComponent}
-                onDeleteActionClick={() => {
+                onDeleteActionClick={(e) => {
+                  e.stopPropagation();
                   this.handleDeleteClick(index);
                 }}
                 isCondition={isActionsCondition}

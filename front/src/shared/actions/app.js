@@ -7,6 +7,8 @@
 import {
   APP_DELETEINTENTACTION,
   APP_SELECTINTENT,
+  APP_SELECTIO,
+  APP_UNSELECTIO,
   APP_SELECTENTITY,
   APP_SELECTFUNCTION,
   APP_SETINTENTACTION,
@@ -18,6 +20,14 @@ import {
 
 export function appSelectIntent(selectedBotId, selectedIntentIndex) {
   return { type: APP_SELECTINTENT, selectedBotId, selectedIntentIndex };
+}
+
+export function appSelectIO(selectedIntentIndex, selectedIOIndex, isOutput) {
+  return { type: APP_SELECTIO, selectedIntentIndex, selectedIOIndex, isOutput };
+}
+
+export function appUnSelectIO() {
+  return { type: APP_UNSELECTIO };
 }
 
 export function appUpdatePublisher(selectedBotId, publisher) {

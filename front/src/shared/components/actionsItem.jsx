@@ -16,6 +16,24 @@ class ActionsItem extends Component {
     this.actionsEditableRef = null;
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.isSelected &&
+      (this.props.isSelected !== prevProps.isSelected ||
+        this.props.action !== prevProps.action)
+    ) {
+      // Test if ActionsEditable finish by a button
+      // If yes the last item is endRef not the last ref item
+      if (this.actionsEditableRef.endRef) {
+        this.actionsEditableRef.moveFocus(-2);
+      } else {
+        this.actionsEditableRef.changeFocus(
+          this.actionsEditableRef.state.items.length - 1,
+        );
+      }
+    }
+  }
+
   handleActionsEditableSelected = (ref, index) => {
     this.props.onSelectActionsComponent(ref, index);
   };
@@ -152,6 +170,7 @@ ActionsItem.propTypes = {
   style: PropTypes.shape({}),
   className: PropTypes.string,
   toolbox: PropTypes.node,
+  isSelected: PropTypes.bool,
 };
 
 export default ActionsItem;

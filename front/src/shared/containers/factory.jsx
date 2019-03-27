@@ -9,14 +9,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Loading from "zoapp-front/dist/components/loading";
 import Zrmc, { Grid, Inner, Cell } from "zrmc";
-import { appSetTitleName } from "zoapp-front/dist/actions/app";
+import { appSetTitleName, appSetActiveTab } from "zoapp-front/dist/actions/app";
 import { apiSaveBotRequest } from "../actions/bot";
 import {
   apiGetIntentsRequest,
   apiSendIntentRequest,
   apiDeleteIntentRequest,
 } from "../actions/api";
-import { appUpdateIntent } from "../actions/app";
+import { appUpdateIntent, appSelectIntent, appSelectIO } from "../actions/app";
 import Dashboard from "./dashboard";
 import Analytics from "./analytics";
 import Builder from "./builder";
@@ -179,7 +179,7 @@ class Factory extends Component {
     });
   };
 
-  handlePlaygroundAction = (action, defaultValue = "", data = {}) => {
+  handlePlaygroundAction = async (action, defaultValue = "", data = {}) => {
     if (action === "welcomeMessage") {
       const field = {
         defaultValue,
@@ -209,6 +209,22 @@ class Factory extends Component {
         delete intent.notSaved;
         this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
       }
+    } else if (action === "gotoIOIntent") {
+      const { intent, input, output, isOutput } = data;
+      const intentIndex = this.props.intents.findIndex(
+        (i) => i.id === intent.id,
+      );
+
+      if (this.props.activeTab !== 1) {
+        await this.props.appSetActiveTab(1);
+      }
+
+      this.props.appSelectIO(
+        this.props.selectedBotId,
+        intentIndex,
+        isOutput ? output.index : input.index,
+        isOutput,
+      );
     }
     // console.log("botManager.handlePlaygroundAction", action);
   };
@@ -319,6 +335,8 @@ Factory.propTypes = {
   apiDeleteIntentRequest: PropTypes.func.isRequired,
   apiSaveBotRequest: PropTypes.func.isRequired,
   appUpdateIntent: PropTypes.func.isRequired,
+  appSelectIO: PropTypes.func.isRequired,
+  appSetActiveTab: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -370,6 +388,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
   appUpdateIntent: (botId, intent) => {
     dispatch(appUpdateIntent(botId, intent));
+  },
+  appSelectIO: (botId, intentIndex, ioIndex, isOutput) => {
+    dispatch(appSelectIntent(botId, intentIndex));
+    dispatch(appSelectIO(intentIndex, ioIndex, isOutput));
+  },
+  appSetActiveTab: (tabIndex) => {
+    dispatch(appSetActiveTab(tabIndex));
   },
 });
 

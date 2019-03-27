@@ -135,8 +135,13 @@ class MessengerBox extends Component {
     this.props.onAction("addInput", inputText, message);
   };
   // let
-  intentActionGoto = (e) => {
+  intentActionGoto = (message) => (e) => {
     e.preventDefault();
+    const debug = {
+      ...message.debug,
+      isOutput: !!message.from.match("^bot*"),
+    };
+    this.props.onAction("gotoIOIntent", "", debug);
     // TODO Goto intent
   };
   // let
@@ -260,7 +265,7 @@ class MessengerBox extends Component {
               let intentLink = "#NotFoundIntent.";
               let messageActions = "";
               let actionLink = this.intentActionLink;
-              let actionGoto = this.intentActionGoto;
+              let actionGoto = this.intentActionGoto(message);
               if (notError) {
                 intentLink = `#${debug.intent.name}.`;
                 intentLinkClassName = "message-intent-link";
@@ -270,7 +275,7 @@ class MessengerBox extends Component {
                 actionGoto = this.intentCreateAction(inputText, message);
                 intentTooltip = "Create an intent";
               }
-              intentLink += dest === "you" ? "input" : ".output";
+              intentLink += dest === "you" ? "input" : "output";
               if (notError) {
                 intentLink += ".";
                 intentLink +=

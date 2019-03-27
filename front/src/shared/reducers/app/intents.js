@@ -18,6 +18,8 @@ import {
   API_DELETEINTENT,
   /* APP Section */
   APP_SELECTINTENT,
+  APP_SELECTIO,
+  APP_UNSELECTIO,
   APP_UPDATEINTENT,
   APP_SETINTENTACTION,
   APP_DELETEINTENTACTION,
@@ -28,6 +30,8 @@ import {
 export const initialState = {
   intents: null,
   selectedIntentIndex: 0,
+  selectedInputIndex: -1,
+  selectedOutputIndex: -1,
   newActions: {},
 };
 
@@ -237,6 +241,35 @@ export const handlers = {
       selectedType,
     };
   },
+
+  [APP_SELECTIO]: (
+    state,
+    { selectedIntentIndex, selectedIOIndex, isOutput },
+  ) => {
+    let selectedInputIndex = -1;
+    let selectedOutputIndex = -1;
+    if (
+      state.selectedIntent &&
+      state.selectedIntentIndex === selectedIntentIndex
+    ) {
+      if (isOutput) {
+        selectedOutputIndex = selectedIOIndex + 1;
+      } else {
+        selectedInputIndex = selectedIOIndex + 1;
+      }
+    }
+    return {
+      ...state,
+      selectedInputIndex,
+      selectedOutputIndex,
+    };
+  },
+
+  [APP_UNSELECTIO]: (state) => ({
+    ...state,
+    selectedInputIndex: -1,
+    selectedOutputIndex: -1,
+  }),
 
   // UPDATE INTENT
   [APP_UPDATEINTENT]: (state, { selectedBotId, intent }) => {

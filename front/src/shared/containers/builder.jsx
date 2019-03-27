@@ -13,8 +13,13 @@ import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./builder/intentContainer";
 import EntityContainer from "./builder/entityContainer";
 import FunctionContainer from "./builder/functionContainer";
+import { appUnSelectIO } from "../actions/app";
 
 class Builder extends Component {
+  componentWillUnmount() {
+    this.props.appUnSelectIO();
+  }
+
   render() {
     if (this.props.intents == null) {
       return <Loading />;
@@ -109,6 +114,8 @@ Builder.propTypes = {
   onRenameIntent: PropTypes.func.isRequired,
   onAddIntent: PropTypes.func.isRequired,
   onDeleteIntent: PropTypes.func.isRequired,
+
+  appUnSelectIO: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -142,7 +149,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  appUnSelectIO: () => {
+    dispatch(appUnSelectIO());
+  },
+});
 
 // prettier-ignore
 export default connect(
