@@ -175,13 +175,21 @@ export default class extends CommonRoutes {
     const body = context.getBody();
     const { data, options } = body;
     // logger.info("Import data", data, options);
-    const payload = await Importer.import(
+    let payload = await Importer.import(
       data,
       options,
       botId,
       this.extensions.getBots(),
     );
+
     if (payload) {
+      const { intents } = payload;
+      delete payload.intents;
+      payload.id = botId;
+      payload = await this.extensions.getBots().setBot(payload);
+
+      payload.intents = intents;
+
       // logger.info("import payload=", payload);
       const messenger = this.extensions.getSandboxMessenger();
       await messenger.updateBotConversation(me, botId);

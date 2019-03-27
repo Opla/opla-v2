@@ -17,7 +17,6 @@ class MessengerBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [],
       sorted: [],
     };
   }
@@ -25,7 +24,7 @@ class MessengerBox extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.messages !== nextProps.messages) {
       const { messages } = nextProps;
-      let sorted = null;
+      let sorted = [];
       if (messages && Array.isArray(messages)) {
         sorted = [...messages];
         sorted = sorted.sort((msg1, msg2) => {
@@ -37,20 +36,10 @@ class MessengerBox extends Component {
           }
           return 1;
         });
-      } else {
-        sorted = [];
       }
 
-      if (nextProps.welcome) {
-        sorted.splice(0, 0, {
-          id: "welcome",
-          body: nextProps.welcome,
-          welcome: true,
-        });
-      }
       return {
         ...prevState,
-        messages: nextProps.messages,
         sorted,
       };
     }
@@ -132,8 +121,40 @@ class MessengerBox extends Component {
     return false;
   }
 
+  editWelcomeAction = (e) => {
+    e.stopPropagation();
+    this.props.onAction("welcomeMessage", this.props.welcome);
+  };
+
+  intentCreateAction = (inputText, message) => (e) => {
+    e.preventDefault();
+    this.props.onAction("createIntent", inputText, message);
+  };
+  intentAddInputAction = (inputText, message) => (e) => {
+    e.preventDefault();
+    this.props.onAction("addInput", inputText, message);
+  };
+  // let
+  intentActionGoto = (e) => {
+    e.preventDefault();
+    // TODO Goto intent
+  };
+  // let
+  intentActionLink = (e) => {
+    e.preventDefault();
+    // TODO display link
+  };
+  messageEditAction = (e) => {
+    e.preventDefault();
+    // TODO edit message
+  };
+  messageDeleteAction = (e) => {
+    e.preventDefault();
+    // TODO delete message
+  };
+
   render() {
-    const { users } = this.props;
+    const { users, welcome } = this.props;
     const { sorted } = this.state;
     return (
       <div className="zui-cell zui-cell--4-col" style={{ margin: "0" }}>
@@ -144,37 +165,27 @@ class MessengerBox extends Component {
             }}
             className="messenger-content messenger-content-test bounceOutRight bounceInRight"
           >
-            {sorted.map((message, index) => {
+            <div
+              role="presentation"
+              className="message_welcome"
+              onClick={this.editWelcomeAction}
+            >
+              {welcome}
+              <Tooltip label="Edit welcome message">
+                <Icon
+                  onClick={this.editWelcomeAction}
+                  name="edit"
+                  className="message-welcome-icon"
+                />
+              </Tooltip>
+            </div>
+            {sorted.map((message) => {
               const inputText =
                 message.debug &&
                 message.debug.input &&
                 message.debug.input.sentence
                   ? message.debug.input.sentence.text
                   : "";
-              const intentCreateAction = (e) => {
-                e.preventDefault();
-                this.props.onAction("createIntent", inputText, message);
-              };
-              const intentAddInputAction = (e) => {
-                e.preventDefault();
-                this.props.onAction("addInput", inputText, message);
-              };
-              let intentActionGoto = (e) => {
-                e.preventDefault();
-                // TODO Goto intent
-              };
-              let intentActionLink = (e) => {
-                e.preventDefault();
-                // TODO display link
-              };
-              const messageEditAction = (e) => {
-                e.preventDefault();
-                // TODO edit message
-              };
-              const messageDeleteAction = (e) => {
-                e.preventDefault();
-                // TODO delete message
-              };
               const errorResponse =
                 "No matching intent. Edit this text or create one using previous message as input.";
               if (message.error || message.body.indexOf("[Error]") !== -1) {
@@ -220,7 +231,10 @@ class MessengerBox extends Component {
                           <a
                             href="#"
                             className="message-intent-link-error"
-                            onClick={intentCreateAction}
+                            onClick={this.intentCreateAction(
+                              inputText,
+                              message,
+                            )}
                           >
                             Create an intent
                           </a>
@@ -229,31 +243,8 @@ class MessengerBox extends Component {
                     </div>
                   </div>
                 );
-              } else if (message.welcome) {
-                const key = `wl_${index}`;
-                const editWelcomeAction = (e) => {
-                  e.preventDefault();
-                  this.props.onAction("welcomeMessage", message.body);
-                };
-                return (
-                  <div
-                    key={key}
-                    role="presentation"
-                    className="message_welcome"
-                    onKeyUp={() => {}}
-                    onClick={editWelcomeAction}
-                  >
-                    {message.body}
-                    <Tooltip label="Edit welcome message">
-                      <Icon
-                        onClick={editWelcomeAction}
-                        name="edit"
-                        className="message-welcome-icon"
-                      />
-                    </Tooltip>
-                  </div>
-                );
               }
+
               const from = message.from.toLowerCase();
               const user = users[from];
               let dest = "you";
@@ -268,13 +259,15 @@ class MessengerBox extends Component {
               let intentIconClassName = "message-intent-icon-link";
               let intentLink = "#NotFoundIntent.";
               let messageActions = "";
+              let actionLink = this.intentActionLink;
+              let actionGoto = this.intentActionGoto;
               if (notError) {
                 intentLink = `#${debug.intent.name}.`;
                 intentLinkClassName = "message-intent-link";
               } else {
                 intentIconClassName = "message-intent-icon-link-error";
-                intentActionLink = intentAddInputAction;
-                intentActionGoto = intentCreateAction;
+                actionLink = this.intentAddInputAction(inputText, message);
+                actionGoto = this.intentCreateAction(inputText, message);
                 intentTooltip = "Create an intent";
               }
               intentLink += dest === "you" ? "input" : ".output";
@@ -288,14 +281,14 @@ class MessengerBox extends Component {
                   <span>
                     <Tooltip label="Delete message">
                       <Icon
-                        onClick={messageDeleteAction}
+                        onClick={this.messageDeleteAction}
                         name="remove"
                         className="message-delete-icon"
                       />
                     </Tooltip>
                     <Tooltip label="Edit message">
                       <Icon
-                        onClick={messageEditAction}
+                        onClick={this.messageEditAction}
                         name="edit"
                         className="message-edit-icon"
                       />
@@ -306,7 +299,7 @@ class MessengerBox extends Component {
                 messageActions = (
                   <Tooltip label="Edit message">
                     <Icon
-                      onClick={messageEditAction}
+                      onClick={this.messageEditAction}
                       name="edit"
                       className="message-edit-icon-right"
                     />
@@ -348,7 +341,7 @@ class MessengerBox extends Component {
                   );
                   intentLinkButton = (
                     <Icon
-                      onClick={intentActionLink}
+                      onClick={actionLink}
                       id={intentLinkId}
                       name={notError ? "reorder" : "add_circle"}
                       className={intentIconClassName}
@@ -360,7 +353,7 @@ class MessengerBox extends Component {
                   intentLinkButton = (
                     <Tooltip label={intentLinkTooltip}>
                       <Icon
-                        onClick={intentActionLink}
+                        onClick={actionLink}
                         id={intentLinkId}
                         name={notError ? "reorder" : "add_circle"}
                         className={intentIconClassName}
@@ -393,7 +386,7 @@ class MessengerBox extends Component {
                       <Tooltip label={intentTooltip}>
                         <a
                           href="#"
-                          onClick={intentActionGoto}
+                          onClick={actionGoto}
                           className={intentLinkClassName}
                         >
                           {intentLink}

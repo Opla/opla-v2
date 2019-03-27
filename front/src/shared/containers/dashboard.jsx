@@ -111,10 +111,12 @@ export class DashboardBase extends Component {
                       <div className="opla-dashboard_title_edit">
                         <Icon name="edit" />
                       </div>
-                      <TextField
-                        defaultValue={this.props.bot.name}
-                        onChange={this.handleBotNameChange}
-                      />
+                      {!this.props.isLoading && (
+                        <TextField
+                          defaultValue={this.props.bot.name}
+                          onChange={this.handleBotNameChange}
+                        />
+                      )}
                     </div>
                   </div>
                 }
@@ -128,12 +130,14 @@ export class DashboardBase extends Component {
                 <div style={{ display: "flex" }}>
                   <div>
                     <div>
-                      <TextField
-                        defaultValue={this.props.bot.description}
-                        isTextarea
-                        label="Description"
-                        onChange={this.handleBotDescriptionChange}
-                      />
+                      {!this.props.isLoading && (
+                        <TextField
+                          defaultValue={this.props.bot.description}
+                          isTextarea
+                          label="Description"
+                          onChange={this.handleBotDescriptionChange}
+                        />
+                      )}
                     </div>
                     <div
                       style={{
@@ -141,33 +145,37 @@ export class DashboardBase extends Component {
                         justifyContent: "space-between",
                       }}
                     >
-                      <Select
-                        label="Language"
-                        style={{ width: "47%" }}
-                        onSelected={this.handleLanguageChange}
-                        selectedIndex={["en", "fr"].findIndex(
-                          (language) =>
-                            language === (this.props.bot.language || null),
-                        )}
-                      >
-                        <MenuItem value="en">English</MenuItem>
-                        <MenuItem value="fr">French</MenuItem>
-                      </Select>
-                      <Select
-                        className="selectTimeZone"
-                        label="Timezone"
-                        style={{ width: "47%" }}
-                        onSelected={this.handleTimezoneChange}
-                        selectedIndex={this.props.timezones.findIndex(
-                          (tz) => tz === (this.props.bot.timezone || null),
-                        )}
-                      >
-                        {this.props.timezones.map((timezone, i) => (
-                          <MenuItem key={i} value={timezone}>
-                            {timezone}
-                          </MenuItem>
-                        ))}
-                      </Select>
+                      {!this.props.isLoading && (
+                        <Select
+                          label="Language"
+                          style={{ width: "47%" }}
+                          onSelected={this.handleLanguageChange}
+                          selectedIndex={["en", "fr"].findIndex(
+                            (language) =>
+                              language === (this.props.bot.language || null),
+                          )}
+                        >
+                          <MenuItem value="en">English</MenuItem>
+                          <MenuItem value="fr">French</MenuItem>
+                        </Select>
+                      )}
+                      {!this.props.isLoading && (
+                        <Select
+                          className="selectTimeZone"
+                          label="Timezone"
+                          style={{ width: "47%" }}
+                          onSelected={this.handleTimezoneChange}
+                          selectedIndex={this.props.timezones.findIndex(
+                            (tz) => tz === (this.props.bot.timezone || null),
+                          )}
+                        >
+                          {this.props.timezones.map((timezone, i) => (
+                            <MenuItem key={i} value={timezone}>
+                              {timezone}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      )}
                     </div>
                   </div>
                   <div />
@@ -220,7 +228,7 @@ DashboardBase.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { bots, project } = state.app;
+  const { bots, project, loading } = state.app;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   // TODO get selectedBot from selectBotId
   const bot = selectedBotId ? bots[project.selectedIndex] : null;
@@ -230,6 +238,7 @@ const mapStateToProps = (state) => {
   const installedPlugins = getInstalledPlugins(plugins);
 
   return {
+    isLoading: loading,
     bot,
     selectedBotId,
     intents,

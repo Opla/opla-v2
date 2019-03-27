@@ -19,12 +19,15 @@ import {
   apiSendSandboxMessageRequest,
   apiGetSandboxContextRequest,
   apiSandboxResetRequest,
+  appSandboxSetSandboxConversation,
 } from "../actions/api";
+
+import FileManager from "../utils/fileManager";
 
 class PlaygroundContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { needToSubscribe: true };
+    this.state = { needToSubscribe: true, isRunningDemo: false };
   }
 
   componentDidMount() {
@@ -57,6 +60,48 @@ class PlaygroundContainer extends Component {
     Zrmc.showDialog({ header: "TODO", body: "PlaygroundContainer.handleMenu" });
   };
 
+  handleLoad = () => {
+    Zrmc.showDialog({
+      header: "Playground import conversation",
+      body: (
+        <div>
+          <input
+            type="file"
+            onChange={({ target }) => {
+              FileManager.upload(
+                target.files,
+                (fileConversationDataAsJSON, filetype) => {
+                  const fileConversationData = JSON.parse(
+                    fileConversationDataAsJSON,
+                  );
+                  this.setState({ fileConversationData, filetype });
+                },
+              );
+            }}
+            accept="application/json"
+          />
+        </div>
+      ),
+      actions: [{ name: "Cancel" }, { name: "Reset" }],
+      onAction: () => {
+        if (this.state.fileConversationData) {
+          const conversation = this.state.fileConversationData;
+          this.props.appSandboxSetSandboxConversation({
+            conversation,
+          });
+        }
+        return this.state.fileConversationData;
+      },
+    });
+  };
+
+  handleSave = () => {
+    const name = "conversation";
+    const data = this.props.conversation;
+    const json = JSON.stringify(data, null, 2);
+    FileManager.download(json, `${name}.json`, "application/json");
+  };
+
   handleReset = () => {
     Zrmc.showDialog({
       header: "Playground",
@@ -77,12 +122,10 @@ class PlaygroundContainer extends Component {
       );
       return true;
     }
-    // console.log("Error", "PlaygroundContainer.handleSend", this.props.conversation, body.length);
     return false;
   };
 
-  handleRefresh = (e) => {
-    e.preventDefault();
+  handleRefresh = () => {
     if (this.props.conversation) {
       this.props.apiUpdateSandboxMessagesRequest(
         this.props.selectedBotId,
@@ -93,11 +136,36 @@ class PlaygroundContainer extends Component {
 
   handleDebug = () => {};
 
-  handleDemo = () => {};
+  handleDemo = () => {
+    const conversationToDemo = this.props.conversation;
+    let { messages } = conversationToDemo;
 
-  handleShare = () => {};
+    messages = messages.sort((msg1, msg2) => {
+      if (msg1.created_time < msg2.created_time) {
+        return -1;
+      }
+      if (msg1.created_time === msg2.created_time) {
+        return 0;
+      }
+      return 1;
+    });
+    conversationToDemo.messages = messages;
 
-  handleSettings = () => {};
+    const update = (msgs, time) => {
+      setTimeout(() => {
+        conversationToDemo.messages = msgs;
+        this.props.appSandboxSetSandboxConversation({
+          conversation: conversationToDemo,
+        });
+      }, time);
+    };
+
+    messages.forEach((message, i) => {
+      const arr = messages.slice(0, i + 1);
+      const numberOfChars = arr.reduce((acc, m) => acc + m.body.length, 0);
+      update(arr, numberOfChars * 3.11 + i * 2000); // Total char * average typing speed + 2s per messages
+    });
+  };
 
   handleAction = (action, defaultValue, data) => {
     this.props.onAction(action, defaultValue, data);
@@ -180,13 +248,13 @@ class PlaygroundContainer extends Component {
           menu={{
             items: [
               { name: "Context", onSelect: this.handleMenu },
-              { name: "Load", disabled: true },
-              { name: "Save", disabled: true },
+              { name: "Load", onSelect: this.handleLoad },
+              { name: "Save", onSelect: this.handleSave },
               { name: "Reset", onSelect: this.handleReset },
               { name: "Refresh", onSelect: this.handleRefresh },
               { name: "Demo", onSelect: this.handleDemo },
-              { name: "Share", onSelect: this.handleShare },
-              { name: "Settings", onSelect: this.handleSettings },
+              { name: "Share", disabled: true },
+              { name: "Settings", disabled: true },
             ],
             align: "right",
           }}
@@ -217,6 +285,7 @@ PlaygroundContainer.propTypes = {
   apiSendSandboxMessageRequest: PropTypes.func.isRequired,
   apiUpdateSandboxMessagesRequest: PropTypes.func.isRequired,
   apiSandboxResetRequest: PropTypes.func.isRequired,
+  appSandboxSetSandboxConversation: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -271,6 +340,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   apiSandboxResetRequest: (botId) => {
     dispatch(apiSandboxResetRequest(botId));
+  },
+  appSandboxSetSandboxConversation: ({ conversation }) => {
+    dispatch(appSandboxSetSandboxConversation(conversation));
   },
 });
 

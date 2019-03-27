@@ -31,8 +31,15 @@ class DashboardActionbar extends Component {
   };
 
   onDownloadData = () => {
-    const { name } = this.props.bot;
-    const data = { name, intents: this.props.intents };
+    const { name, description, language, timezone, welcome } = this.props.bot;
+    const data = {
+      name,
+      description,
+      language,
+      timezone,
+      welcome,
+      intents: this.props.intents,
+    };
     const json = JSON.stringify(data);
     FileManager.download(json, `${name}.json`, "application/json,.csv", () => {
       /* console.log("ExplorerContainer.onDownload=", name); */
@@ -69,7 +76,13 @@ class DashboardActionbar extends Component {
 DashboardActionbar.propTypes = {
   store: PropTypes.shape({}),
   selectedBotId: PropTypes.string.isRequired,
-  bot: PropTypes.shape({ name: PropTypes.string }),
+  bot: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    language: PropTypes.string,
+    timezone: PropTypes.string,
+    welcome: PropTypes.string,
+  }),
   intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
   apiImportRequest: PropTypes.func.isRequired,
 };
