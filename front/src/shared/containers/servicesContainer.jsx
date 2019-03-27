@@ -180,7 +180,7 @@ class ServicesContainer extends Component {
     // WIP : need to get from backend which provider is activated/running
     return (
       <div style={divCellStyle}>
-        <Cell className="zui-color--white" span={12}>
+        <Cell span={12}>
           <ServicesList
             name="Messaging platforms"
             icon={
@@ -199,7 +199,7 @@ class ServicesContainer extends Component {
             onSelect={this.handleSelect}
           />
         </Cell>
-        <Cell className="zui-color--white" span={12}>
+        <Cell span={12}>
           <ServicesList
             name="AI/NLU providers"
             icon={
@@ -218,7 +218,7 @@ class ServicesContainer extends Component {
             onSelect={this.handleSelect}
           />
         </Cell>
-        <Cell className="zui-color--white" span={12}>
+        <Cell span={12}>
           <ServicesList
             name="Web services"
             icon={

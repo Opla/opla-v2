@@ -6,9 +6,9 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Zrmc, { Button } from "zrmc";
-import IODialog from "../containers/dialogs/ioDialog";
-import FileManager from "../utils/fileManager";
+import Zrmc, { Icon, Menu, MenuItem } from "zrmc";
+import IODialog from "../../containers/dialogs/ioDialog";
+import FileManager from "../../utils/fileManager";
 
 class DashboardActionbar extends Component {
   constructor(props) {
@@ -57,18 +57,27 @@ class DashboardActionbar extends Component {
   };
 
   render() {
-    return (
-      <React.Fragment>
-        <Button dense outlined onClick={this.handleExportImport}>
+    const menu = (
+      <Menu target="dashboard_actions" className="opla-dashboard_actions-menu">
+        <MenuItem
+          onSelected={() => {
+            this.handleExportImport();
+          }}
+        >
           Import/Export data
-        </Button>
-        <Button dense outlined>
-          Duplicate
-        </Button>
-        <Button dense outlined className="warning">
-          Delete
-        </Button>
-      </React.Fragment>
+        </MenuItem>
+        <MenuItem disabled>Duplicate</MenuItem>
+        <MenuItem disabled>Delete</MenuItem>
+      </Menu>
+    );
+
+    return (
+      <Icon
+        id="dashboard_actions"
+        name="more_vert"
+        menu={menu}
+        style={{ cursor: "pointer" }}
+      />
     );
   }
 }

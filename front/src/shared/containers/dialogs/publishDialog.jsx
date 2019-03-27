@@ -144,7 +144,7 @@ const mapStateToProps = (state) => {
 
   const installedPlugins = getInstalledPlugins(plugins);
 
-  const messengerConnector = installedPlugins.MessengerConnector;
+  const messengerConnector = installedPlugins.MessengerConnector || [];
   const pluginsToPublish = messengerConnector.filter(
     (plugin) =>
       plugin.type === "MessengerConnector" &&
