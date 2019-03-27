@@ -1,4 +1,4 @@
-FROM node:8.11
+FROM node:lts-stretch
 
 ARG APP_VERSION=x.x.x
 ARG APP_BUILD=xxxxxxx
