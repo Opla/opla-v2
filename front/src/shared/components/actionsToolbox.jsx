@@ -10,170 +10,6 @@ import { Tooltip } from "zoapp-ui";
 import { Icon, Menu, MenuItem, Button } from "zrmc";
 
 class ActionsToolbox extends Component {
-  constructor(props) {
-    super(props);
-    const toolbox = {
-      text: true,
-      any: false,
-      variable: false,
-      code: false,
-      linebreak: false,
-      button: false,
-      trash: true,
-    };
-    this.state = {
-      toolbox,
-    };
-  }
-
-  handleFocusIn = (type) => {
-    if (type === "any") {
-      this.anySelect();
-    } else if (type === "variable") {
-      this.codeSelect();
-    } else if (type === "output_var") {
-      this.variableSelect();
-    } else if (type === "br") {
-      this.lineBreakSelect();
-    } else if (type === "button") {
-      this.buttonSelect();
-    } else {
-      this.textSelect();
-    }
-  };
-
-  onTextSelected() {
-    this.textSelect();
-    this.props.onChange("text");
-  }
-
-  onAnySelected() {
-    this.anySelect();
-    this.props.onChange("any");
-  }
-
-  onConditionSelected() {
-    this.props.onChange("condition");
-  }
-
-  onVariableSelected() {
-    this.variableSelect();
-    this.props.onChange("output_var");
-  }
-
-  onCodeSelected() {
-    this.codeSelect();
-    this.props.onChange("variable");
-  }
-
-  onLineBreakSelected() {
-    this.lineBreakSelect();
-    this.props.onChange("br");
-  }
-
-  onButtonSelected() {
-    this.buttonSelect();
-    this.props.onChange("button");
-  }
-
-  onTrashSelected() {
-    this.props.onChange("trash");
-  }
-
-  handleFocus = (e) => {
-    // e.stopPropagation();
-    const element = e.target;
-    const type = element.id.substring(3);
-    // console.log("focus toolbox", type, element);
-    if (type) {
-      this.handleFocusIn(type);
-    }
-    this.props.onChange("focus");
-  };
-
-  handleBlur = () => {
-    // console.log("unfocus toolbox");
-    this.props.onChange("unfocus");
-  };
-
-  textSelect() {
-    const toolbox = {
-      text: true,
-      any: false,
-      variable: false,
-      code: false,
-      linebreak: false,
-      button: false,
-      trash: true,
-    };
-    this.setState(() => ({ toolbox }));
-  }
-
-  anySelect() {
-    const toolbox = {
-      text: false,
-      any: true,
-      variable: false,
-      code: false,
-      linebreak: false,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
-
-  variableSelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      variable: true,
-      code: false,
-      linebreak: false,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
-
-  codeSelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      variable: false,
-      code: true,
-      linebreak: false,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
-
-  lineBreakSelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      variable: false,
-      code: false,
-      linebreak: true,
-      button: false,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
-
-  buttonSelect() {
-    const toolbox = {
-      text: false,
-      any: false,
-      variable: false,
-      code: false,
-      linebreak: false,
-      button: true,
-      trash: false,
-    };
-    this.setState(() => ({ toolbox }));
-  }
-
   render() {
     if (this.props.disable) {
       return <div />;
@@ -197,16 +33,14 @@ class ActionsToolbox extends Component {
       padding: "0px",
     };
 
-    const { toolbox } = this.state;
     const extras = [];
     if (this.props.isInput) {
       extras.push(
         <Tooltip key="action_iba" label="Insert block any">
           <Icon
             className="actionstoolbox-icon"
-            onClick={(e) => {
-              // e.stopPropagation();
-              this.onAnySelected(e);
+            onClick={() => {
+              this.props.onChange("any");
             }}
             id="atb_any"
             name="all_out"
@@ -246,9 +80,8 @@ class ActionsToolbox extends Component {
         <Tooltip key="action_ico" label="Insert code">
           <Icon
             className="actionstoolbox-icon"
-            onClick={(e) => {
-              // e.stopPropagation();
-              this.onCodeSelected(e);
+            onClick={() => {
+              this.props.onChange("variable");
             }}
             id="atb_variable"
             name="code"
@@ -259,9 +92,8 @@ class ActionsToolbox extends Component {
         <Tooltip key="action_ilb" label="Insert Linebreak">
           <Icon
             className="actionstoolbox-icon"
-            onClick={(e) => {
-              // e.stopPropagation();
-              this.onLineBreakSelected(e);
+            onClick={() => {
+              this.props.onChange("br");
             }}
             id="atb_br"
             name="keyboard_return"
@@ -300,7 +132,7 @@ class ActionsToolbox extends Component {
         <Menu target="atb_gui" align="left">
           <MenuItem
             onSelected={() => {
-              this.onButtonSelected();
+              this.props.onChange("button");
             }}
           >
             Button
@@ -325,9 +157,8 @@ class ActionsToolbox extends Component {
           <Tooltip key="action_ic" label="Insert condition">
             <Icon
               className="actionstoolbox-icon"
-              onClick={(e) => {
-                // e.stopPropagation();
-                this.onConditionSelected(e);
+              onClick={() => {
+                this.props.onChange("condition");
               }}
               id="atb_condition"
               name="device_hub"
@@ -337,18 +168,13 @@ class ActionsToolbox extends Component {
       }
     }
     return (
-      <div
-        style={styleToolbox}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-      >
+      <div style={styleToolbox}>
         <div style={styleToolbar}>
           <Tooltip label="Insert text">
             <Icon
               className="actionstoolbox-icon"
-              onClick={(e) => {
-                // e.stopPropagation();
-                this.onTextSelected(e);
+              onClick={() => {
+                this.props.onChange("text");
               }}
               id="atb_text"
               name="text_fields"
@@ -357,9 +183,8 @@ class ActionsToolbox extends Component {
           <Tooltip label="Insert output code">
             <Icon
               className="actionstoolbox-icon"
-              onClick={(e) => {
-                // e.stopPropagation();
-                this.onVariableSelected(e);
+              onClick={() => {
+                this.props.onChange("output_var");
               }}
               id="atb_output_var"
               name="assignment"
@@ -371,10 +196,8 @@ class ActionsToolbox extends Component {
           <Tooltip label="Delete selected block">
             <Icon
               className="actionstoolbox-icon"
-              disabled={toolbox.trash}
-              onClick={(e) => {
-                // e.stopPropagation();
-                this.onTrashSelected(e);
+              onClick={() => {
+                this.props.onChange("trash");
               }}
               id="atb_trash"
               name="delete"
