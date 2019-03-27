@@ -43,6 +43,7 @@ class MessengerBoxInput extends Component {
           style={{ width: "30vw", height: "18px", margin: "8px" }}
           noFloatingLabel
           maxLength="280"
+          autoComplete="off"
           ref={this.textFieldRef}
           onKeyUp={(e) => {
             if (e.key === "Enter") {
