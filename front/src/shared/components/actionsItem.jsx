@@ -19,8 +19,7 @@ class ActionsItem extends Component {
   componentDidUpdate(prevProps) {
     if (
       this.props.isSelected &&
-      (this.props.isSelected !== prevProps.isSelected ||
-        this.props.action !== prevProps.action)
+      this.props.isSelected !== prevProps.isSelected
     ) {
       // Test if ActionsEditable finish by a button
       // If yes the last item is endRef not the last ref item
@@ -71,7 +70,8 @@ class ActionsItem extends Component {
           <ListItemMeta
             icon="add"
             className="actionItemIcon"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               this.props.onAddAction(action, isCondition);
             }}
           />

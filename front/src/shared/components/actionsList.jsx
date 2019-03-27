@@ -71,24 +71,6 @@ class ActionsList extends Component {
     this.props.onDeleteActionClick(this.props.name, index);
   };
 
-  // updateToolboxDisplay = () => {
-  //   if (this.selectedItemRef && this.selectedItemRef.ref && this.toolboxRef) {
-  //     const {
-  //       left,
-  //       top,
-  //       width,
-  //     } = this.selectedItemRef.ref.parentNode.getBoundingClientRect();
-  //     let adjustedLeft = left - 8;
-  //     if (adjustedLeft < 0) {
-  //       adjustedLeft = 0;
-  //     }
-  //     const adjustedTop = top - 36;
-  //     const adjustedWidth = width - 2;
-  //     const style = `left: ${adjustedLeft}px; top: ${adjustedTop}px; width: ${adjustedWidth}px;`;
-  //     this.toolboxRef.style = style;
-  //   }
-  // };
-
   render() {
     const {
       name,
@@ -106,19 +88,12 @@ class ActionsList extends Component {
       !isActionsEmpty &&
       ActionsTools.isActionValid(actions[0]) &&
       actions[0].type === "condition";
-    // const isActionsString = !isActionsEmpty && !isActionsCondition;
     const editable = true;
 
     const isInput = name === "input";
     const isIntentOutputEmpty = !isInput && !(actions && actions.length > 0);
     const toolbox = (
-      <div
-        className="actionstoolbox"
-        // ref={(r) => {
-        //   this.toolboxRef = r;
-        //   this.updateToolboxDisplay();
-        // }}
-      >
+      <div className="actionstoolbox">
         <ActionsToolbox
           onChange={onChangeToolbox}
           isInput={isInput}

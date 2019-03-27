@@ -55,13 +55,9 @@ class IntentContainer extends Component {
     // Mik : Test this.node to fix
     // https://github.com/Opla/front/issues/249
     if (this.node && !this.node.contains(e.target)) {
-      this.handleClickOutside();
+      this.updateToolboxDisplay(false);
     }
   };
-
-  handleClickOutside() {
-    this.updateToolboxDisplay(false);
-  }
 
   componentDidUpdate(prevProps) {
     // reset when a new intent is selected
@@ -266,6 +262,7 @@ class IntentContainer extends Component {
       if (intent.notSaved) {
         delete intent.notSaved;
         this.props.apiSendIntentRequest(this.props.selectedBotId, intent);
+        this.props.appUnSelectIO();
       } else {
         // console.log("WIP", "IntentContainer.handleSaveIntent : intent already saved");
       }
@@ -278,6 +275,9 @@ class IntentContainer extends Component {
     this.selectedAction = index;
     if (state === "add" || state === "change") {
       this.handleChangeAction(action.text, action.name, action.value);
+      if (state === "add") {
+        this.props.appUnSelectIO();
+      }
     }
   };
 
@@ -390,6 +390,7 @@ class IntentContainer extends Component {
   updateToolboxDisplay(editing, mode = "") {
     if (this.state.editing !== editing || this.state.mode !== mode) {
       this.setState({ editing, toolboxDisplayMode: mode });
+      this.props.appUnSelectIO();
     }
   }
 
