@@ -49,13 +49,11 @@ context("Actions", () => {
   });
 
   it("Add webchat plugin", () => {
-    cy.contains(botName)
-      .click()
-      .then(() => {
-        cy.contains("Extensions").click({ force: true });
-      });
+    cy.contains(botName).click();
+    cy.contains("Settings").click({ force: true });
     cy.wait(1000);
-    cy.contains("Add")
+    cy.get(".opla-dashboard_expansion-panel_footer")
+      .contains("Add")
       .first()
       .click()
       .then(() => {
@@ -65,20 +63,7 @@ context("Actions", () => {
           .click();
         cy.contains("Webchat");
 
-        cy.contains("Dashboard").click();
-        cy.contains("webchat-connector")
-          .parent(".switchListItem")
-          .get(".mdc-switch__native-control")
-          .should("not.be.checked");
-        cy.contains("webchat-connector")
-          .parent(".switchListItem")
-          .find(".mdc-switch")
-          .first()
-          .click();
-        cy.contains("webchat-connector")
-          .parent(".switchListItem")
-          .get(".mdc-switch__native-control")
-          .should("be.checked");
+        cy.contains("Settings").click({ force: true });
       });
   });
 
@@ -100,10 +85,6 @@ context("Actions", () => {
 
   it("Publish on webchat", () => {
     cy.contains(botName).click();
-    cy.contains("webchat-connector")
-      .parent(".switchListItem")
-      .get(".mdc-switch__native-control")
-      .should("be.checked");
     cy.contains("Builder").click();
 
     cy.contains("button", "Create").click();

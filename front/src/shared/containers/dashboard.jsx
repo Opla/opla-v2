@@ -35,7 +35,13 @@ export class DashboardBase extends Component {
     }
 
     return (
-      <Grid style={{ maxHeight: "calc(100vh - 68px)", height: "100%", overflow: "auto" }}>
+      <Grid
+        style={{
+          maxHeight: "calc(100vh - 68px)",
+          height: "100%",
+          overflow: "auto",
+        }}
+      >
         <Inner>
           <Cell span={12}>
             <DashboardDescription
