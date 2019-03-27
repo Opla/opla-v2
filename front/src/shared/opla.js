@@ -35,7 +35,7 @@ const handlePublishBot = () => {
 const appProps = {
   name: "Opla",
   subname: "CE",
-  version: "0.1.0",
+  version: "0.2.0",
   icon: "images/opla-avatar.png",
   instance: {
     name: "Dev",
