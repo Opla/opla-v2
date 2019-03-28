@@ -8,7 +8,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { TextField, Select, MenuItem, Icon, Button } from "zrmc";
+import { TextField, Select, MenuItem, Icon } from "zrmc";
 
 import DashboardActionbar from "./dashboardActionbar";
 import timezones from "../../utils/timezones";
@@ -58,20 +58,13 @@ class DashboardDescription extends React.Component {
             </div>
           </div>
           <div className="opla-dashboard_actionbar">
-            <Button
-              onClick={this.onSaveBotDetails}
-              disabled={this.state.name.length < 1}
-              style={{ backgroundColor: "#3F67E2" }}
-              dense
-              raised
-            >
-              Save
-            </Button>
             <DashboardActionbar
               selectedBotId={this.props.selectedBotId}
               bot={this.props.bot}
               intents={this.props.intents}
               apiImportRequest={this.props.apiImportRequest}
+              saveBotConfigAction={this.onSaveBotDetails}
+              saveBotConfigDisabled={this.state.name.length < 1}
             />
           </div>
         </div>

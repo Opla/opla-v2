@@ -60,6 +60,12 @@ class DashboardActionbar extends Component {
     const menu = (
       <Menu target="dashboard_actions" className="opla-dashboard_actions-menu">
         <MenuItem
+          disabled={this.props.saveBotConfigDisabled}
+          onSelected={this.props.saveBotConfigAction}
+        >
+          Save
+        </MenuItem>
+        <MenuItem
           onSelected={() => {
             this.handleExportImport();
           }}
