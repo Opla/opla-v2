@@ -60,6 +60,12 @@ class DashboardActionbar extends Component {
     const menu = (
       <Menu target="dashboard_actions" className="opla-dashboard_actions-menu">
         <MenuItem
+          disabled={this.props.saveBotConfigDisabled}
+          onSelected={this.props.saveBotConfigAction}
+        >
+          Save
+        </MenuItem>
+        <MenuItem
           onSelected={() => {
             this.handleExportImport();
           }}
@@ -92,6 +98,8 @@ DashboardActionbar.propTypes = {
     timezone: PropTypes.string,
     welcome: PropTypes.string,
   }),
+  saveBotConfigDisabled: PropTypes.bool.isRequired,
+  saveBotConfigAction: PropTypes.func.isRequired,
   intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
   apiImportRequest: PropTypes.func.isRequired,
 };
