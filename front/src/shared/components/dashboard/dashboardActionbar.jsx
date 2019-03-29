@@ -98,6 +98,8 @@ DashboardActionbar.propTypes = {
     timezone: PropTypes.string,
     welcome: PropTypes.string,
   }),
+  saveBotConfigDisabled: PropTypes.bool.isRequired,
+  saveBotConfigAction: PropTypes.func.isRequired,
   intents: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
   apiImportRequest: PropTypes.func.isRequired,
 };
