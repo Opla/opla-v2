@@ -256,8 +256,9 @@ class OpenNLXMiddleware {
       // handle intents events
       if (data.action === "createBot") {
         // create bot
-        const { bot } = data;
+        const { bot, botId } = data;
         this.openNLX.createAgent(bot);
+        this.openNLX.setCallablesObserver(botId, this.callables.bind(this));
       } else if (data.action === "updateBot") {
         // WIP update bot
         const { bot } = data;
@@ -396,7 +397,7 @@ class OpenNLXMiddleware {
     /* eslint-disable no-restricted-syntax */
     /* eslint-disable no-await-in-loop */
     for (const bot of bots) {
-      // logger.info("bot=", bot);
+      logger.info("bot=", bot);
       this.openNLX.createAgent(bot);
       // Add intents to openNLX
       let intents = await botsController.getIntents(bot.id);
