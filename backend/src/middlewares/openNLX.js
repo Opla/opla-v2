@@ -344,12 +344,14 @@ class OpenNLXMiddleware {
 
     const wss = await middlewares.list({ origin: botId, type: "WebService" });
     if (wss && wss.length > 0) {
-      const ws = wss[0];
+      const ws = wss.find((m) => m.classes.includes(className));
       if (ws) {
         // WIP
         const post = { action, parameters };
         const path = ws.path || "";
-        const url = `${ws.url}${path}?class=${className}&secret=${ws.secret}`;
+        const url = `${ws.url}${path}?class=${ws.classes[0]}&secret=${
+          ws.secret
+        }`;
         // console.log("url=", url);
         const response = await fetch(url, {
           method: "post",
@@ -397,7 +399,7 @@ class OpenNLXMiddleware {
     /* eslint-disable no-restricted-syntax */
     /* eslint-disable no-await-in-loop */
     for (const bot of bots) {
-      logger.info("bot=", bot);
+      // logger.info("bot=", bot);
       this.openNLX.createAgent(bot);
       // Add intents to openNLX
       let intents = await botsController.getIntents(bot.id);
