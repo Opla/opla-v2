@@ -13,6 +13,7 @@ import ExplorerContainer from "./explorerContainer";
 import IntentContainer from "./builder/intentContainer";
 import EntityContainer from "./builder/entityContainer";
 import FunctionContainer from "./builder/functionContainer";
+import VariableContainer from "./builder/variableContainer";
 import { appUnSelectIO } from "../actions/app";
 
 class Builder extends Component {
@@ -58,6 +59,16 @@ class Builder extends Component {
           span={9}
         >
           <EntityContainer />
+        </Cell>
+      );
+    } else if (this.props.selectedType === "variable") {
+      panel2 = (
+        <Cell
+          style={{ margin: "0px", backgroundColor: "#f2f2f2" }}
+          className="zui-color--white zui-panel"
+          span={9}
+        >
+          <VariableContainer />
         </Cell>
       );
     } else {

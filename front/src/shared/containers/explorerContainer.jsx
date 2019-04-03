@@ -18,6 +18,7 @@ import { apiMoveIntentRequest } from "../actions/api";
 import {
   appSelectIntent,
   appSelectEntity,
+  appSelectVariable,
   appSelectFunction,
   appDeleteNewActions,
   appUnSelectIO,
@@ -42,6 +43,10 @@ class ExplorerContainer extends Component {
 
   onSelectEntity = (selected) => {
     this.props.appSelectEntity(this.props.selectedBotId, selected);
+  };
+
+  onSelectVariable = (selected) => {
+    this.props.appSelectVariable(this.props.selectedBotId, selected);
   };
 
   onSelectFunction = (selected) => {
@@ -165,6 +170,54 @@ class ExplorerContainer extends Component {
       </ExpansionPanel>
     );
     items = [];
+    items.push(
+      {
+        id: "variableSystem",
+        name: (
+          <span>
+            <span style={{ margin: "0 14px 0 0px" }}>$</span>System
+          </span>
+        ),
+      },
+      {
+        id: "variableGlobal",
+        name: (
+          <span>
+            <span style={{ margin: "0 14px 0 0px" }}>$</span>Global
+          </span>
+        ),
+      },
+      {
+        id: "variableLocal",
+        name: (
+          <span>
+            <span style={{ margin: "0 14px 0 0px" }}>$</span>Local
+          </span>
+        ),
+      },
+    );
+    const variableList = (
+      <ExpansionPanel
+        elevation={0}
+        collapsed
+        compact
+        leftArrow
+        label={
+          <div>
+            <Tooltip label="@TODO Remove this tooltip when styling" />
+            Variables
+          </div>
+        }
+      >
+        <ListComponent
+          items={items}
+          selectedItem={this.props.selectedVariableIndex}
+          onSelect={this.onSelectVariable}
+        />
+      </ExpansionPanel>
+    );
+
+    items = [];
     items.push({
       id: "funcSystem",
       name: (
@@ -211,6 +264,7 @@ class ExplorerContainer extends Component {
         <div className="list-content">
           {intentList}
           {entityList}
+          {variableList}
           {callableList}
         </div>
       </div>
@@ -228,10 +282,12 @@ ExplorerContainer.propTypes = {
   intents: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedIntentIndex: PropTypes.number,
   selectedEntityIndex: PropTypes.number,
+  selectedVariableIndex: PropTypes.number,
   selectedFunctionIndex: PropTypes.number,
   apiMoveIntentRequest: PropTypes.func.isRequired,
   appSelectIntent: PropTypes.func.isRequired,
   appSelectEntity: PropTypes.func.isRequired,
+  appSelectVariable: PropTypes.func.isRequired,
   appSelectFunction: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
   onRename: PropTypes.func.isRequired,
@@ -241,6 +297,9 @@ ExplorerContainer.propTypes = {
 const mapStateToProps = (state) => {
   const selectedIntentIndex = state.app ? state.app.selectedIntentIndex : 0;
   const selectedEntityIndex = state.app ? state.app.selectedEntityIndex : -1;
+  const selectedVariableIndex = state.app
+    ? state.app.selectedVariableIndex
+    : -1;
   const selectedFunctionIndex = state.app
     ? state.app.selectedFunctionIndex
     : -1;
@@ -254,6 +313,7 @@ const mapStateToProps = (state) => {
     selectedIntentIndex,
     selectedEntityIndex,
     selectedFunctionIndex,
+    selectedVariableIndex,
     selectedBotId,
     bot,
   };
@@ -271,6 +331,10 @@ const mapDispatchToProps = (dispatch) => ({
   appSelectEntity: (botId, index) => {
     dispatch(appDeleteNewActions());
     dispatch(appSelectEntity(botId, index));
+  },
+  appSelectVariable: (botId, index) => {
+    dispatch(appDeleteNewActions());
+    dispatch(appSelectVariable(botId, index));
   },
   appSelectFunction: (botId, index) => {
     dispatch(appDeleteNewActions());
