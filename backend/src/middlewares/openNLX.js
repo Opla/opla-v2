@@ -256,8 +256,9 @@ class OpenNLXMiddleware {
       // handle intents events
       if (data.action === "createBot") {
         // create bot
-        const { bot } = data;
+        const { bot, botId } = data;
         this.openNLX.createAgent(bot);
+        this.openNLX.setCallablesObserver(botId, this.callables.bind(this));
       } else if (data.action === "updateBot") {
         // WIP update bot
         const { bot } = data;
@@ -343,12 +344,14 @@ class OpenNLXMiddleware {
 
     const wss = await middlewares.list({ origin: botId, type: "WebService" });
     if (wss && wss.length > 0) {
-      const ws = wss[0];
+      const ws = wss.find((m) => m.classes.includes(className));
       if (ws) {
         // WIP
         const post = { action, parameters };
         const path = ws.path || "";
-        const url = `${ws.url}${path}?class=${className}&secret=${ws.secret}`;
+        const url = `${ws.url}${path}?class=${ws.classes[0]}&secret=${
+          ws.secret
+        }`;
         // console.log("url=", url);
         const response = await fetch(url, {
           method: "post",
