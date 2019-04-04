@@ -33,6 +33,8 @@ import {
   API_SB_UPDATEMESSAGES,
   API_SENDINTENT,
   API_SETMIDDLEWARE,
+  API_GET_VARIABLES,
+  API_SET_VARIABLES,
 } from "../actions/constants";
 import {
   apiGetIntentsFailure,
@@ -45,6 +47,10 @@ import {
   apiGetTemplatesFailure,
   apiGetLanguagesSuccess,
   apiGetLanguagesFailure,
+  apiGetVariablesSuccess,
+  apiGetVariablesFailure,
+  apiSetVariablesSuccess,
+  apiSetVariablesFailure,
 } from "../actions/api";
 
 let sandboxSocketClient = null;
@@ -467,6 +473,30 @@ const api = [
         yield put(apiGetLanguagesSuccess(response));
       } catch (error) {
         yield put(apiGetLanguagesFailure(error));
+      }
+    },
+  ],
+  [
+    API_GET_VARIABLES + FETCH_REQUEST,
+    function* f() {
+      try {
+        const response = yield getWebService().get("admin/variables");
+        yield put(apiGetVariablesSuccess(response));
+      } catch (error) {
+        yield put(apiGetVariablesFailure(error));
+      }
+    },
+  ],
+  [
+    API_SET_VARIABLES + FETCH_REQUEST,
+    function* f({ variables }) {
+      try {
+        const response = yield getWebService().post("admin/variables", {
+          variables,
+        });
+        yield put(apiSetVariablesSuccess(response));
+      } catch (error) {
+        yield put(apiSetVariablesFailure(error));
       }
     },
   ],

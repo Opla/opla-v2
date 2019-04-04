@@ -11,6 +11,8 @@ export default class extends Controller {
     super(name, main, className);
     this.gatewayClient = gatewayClient;
     this.getTemplates = this.getTemplates.bind(this);
+    this.setSystemVariables = this.setSystemVariables.bind(this);
+    this.getSystemVariables = this.getSystemVariables.bind(this);
   }
 
   async getTemplates() {
@@ -19,5 +21,18 @@ export default class extends Controller {
 
   async getLanguages() {
     return this.gatewayClient.getLanguages();
+  }
+
+  async setSystemVariables(variables) {
+    await this.getMainParameters().setValue("system", variables, "variables");
+    return this.getSystemVariables();
+  }
+
+  async getSystemVariables() {
+    const variables = await this.getMainParameters().getValue(
+      "system",
+      "variables",
+    );
+    return Object.values(variables);
   }
 }

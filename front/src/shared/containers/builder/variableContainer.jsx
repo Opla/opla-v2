@@ -10,6 +10,10 @@ import { connect } from "react-redux";
 import { SubToolbar, TableComponent } from "zoapp-ui";
 import Zrmc, { DialogManager } from "zrmc";
 import { apiGetUsersRequest } from "zoapp-front/dist/actions/api";
+import {
+  apiGetVariablesRequest,
+  apiSetVariablesRequest,
+} from "../../actions/api";
 import VariableDetail from "../../components/variableDetail";
 
 class VariableContainer extends Component {
@@ -22,6 +26,10 @@ class VariableContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.apiGetVariablesRequest();
+  }
+
   renderVariableDetail = (variableScope) => (
     <VariableDetail
       onClose={() =>
@@ -31,7 +39,20 @@ class VariableContainer extends Component {
           selectedVariableId: -1,
         })
       }
-      onSubmit={() => {
+      onSubmit={(variable) => {
+        let { variables } = this.props;
+        let setVariable = () => {}; // Override by apiSetBotVariables
+        if (variableScope === "system") {
+          variables = this.props.systemVariables;
+          setVariable = this.props.apiSetVariablesRequest;
+        }
+        if (this.state.action === "create") {
+          variables.push(variable);
+        } else {
+          variables[this.state.selectedVariableId] = variable;
+        }
+        setVariable(variables);
+
         this.setState({
           showVariableDetail: false,
           action: null,
@@ -70,12 +91,12 @@ class VariableContainer extends Component {
     });
   };
 
-  handleMenuSelect = (type, index) => {
-    switch (type) {
+  handleMenuSelect = (action, index) => {
+    switch (action) {
       case "edit":
         this.setState({
           showVariableDetail: true,
-          type: "edit",
+          action: "edit",
           selectedVariableId: index,
         });
         break;
@@ -83,7 +104,7 @@ class VariableContainer extends Component {
         this.setState(
           {
             showVariableDetail: false,
-            type: "delete",
+            action: "delete",
             selectedVariableId: index,
           },
           () => {
@@ -102,9 +123,11 @@ class VariableContainer extends Component {
 
     const { selectedVariableIndex } = this.props;
     let titlename = "";
+    let { variables } = this.props;
     switch (selectedVariableIndex) {
       case 0:
         titlename = "System";
+        variables = this.props.systemVariables;
         break;
       case 1:
         titlename = "Global";
@@ -116,7 +139,7 @@ class VariableContainer extends Component {
         break;
     }
     const headers = ["", "Name", "Value", "Type", "Access", "Description"];
-    const items = this.props.variables.map((v) => ({
+    const items = variables.map((v) => ({
       id: v.id,
       values: [v.name, v.value, v.type, v.access, v.description],
     }));
@@ -137,7 +160,7 @@ class VariableContainer extends Component {
       {
         name: "Add",
         onClick: () => {
-          this.setState({ showVariableDetail: true, type: "create" });
+          this.setState({ showVariableDetail: true, action: "create" });
         },
         disabled: scope !== "owner" || titlename === "System",
       },
@@ -184,41 +207,33 @@ VariableContainer.propTypes = {
   selectedBotId: PropTypes.string,
   selectedVariableIndex: PropTypes.number,
   variables: PropTypes.arrayOf(PropTypes.object),
+  systemVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape({}).isRequired,
   isLoading: PropTypes.bool.isRequired,
+
+  apiGetVariablesRequest: PropTypes.func.isRequired,
+  apiSetVariablesRequest: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => {
   const selectedVariableIndex = state.app ? state.app.selectedVariableIndex : 0;
   const selectedBotId = state.app ? state.app.selectedBotId : null;
   const { user } = state;
-  const variables = [
-    {
-      id: 1,
-      name: "example_mail",
-      value: "mail@example.ai",
-      type: "email",
-      access: "Read",
-      description: "Used to send mail",
-    },
-    {
-      id: 2,
-      name: "example_date",
-      value: "11/03/1992",
-      type: "date",
-      access: "Read",
-      description: "Used to save a date",
-    },
-  ];
+  const { variables: systemVariables } = state.app;
+  const variables = []; // Override by default reducers
   return {
     selectedVariableIndex,
     selectedBotId,
     variables,
+    systemVariables,
     user,
     isLoading: false,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
   apiGetUsersRequest: () => dispatch(apiGetUsersRequest()),
+  apiGetVariablesRequest: () => dispatch(apiGetVariablesRequest()),
+  apiSetVariablesRequest: (variables) =>
+    dispatch(apiSetVariablesRequest(variables)),
 });
 // prettier-ignore
 export default connect(

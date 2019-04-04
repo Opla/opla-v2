@@ -391,7 +391,7 @@ class OpenNLXMiddleware {
   async init(m) {
     this.id = m.id;
     this.openNLX = openNLX;
-    this.openNLX.setup({ entity: { enableAll: true } });
+    this.openNLX.instance.setup({ entity: { enableAll: true } });
     // logger.info("OpenNLX init", this);
     // Add bots to openNLX
     const botsController = this.mainControllers.getBots();

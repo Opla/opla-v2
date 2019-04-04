@@ -250,4 +250,6 @@ export default (zoapp) => {
   route = zoapp.createRoute("/admin");
   route.add("GET", "/templates", ["open"], admin.getTemplates);
   route.add("GET", "/languages", ["open"], admin.getLanguages);
+  route.add("POST", "/variables", ["admin"], admin.setSystemVariables);
+  route.add("GET", "/variables", ["*"], admin.getSystemVariables);
 };

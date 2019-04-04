@@ -31,6 +31,8 @@ import {
   API_SENDINTENT,
   API_SETMIDDLEWARE,
   APP_SET_SB_CONVERSATION,
+  API_GET_VARIABLES,
+  API_SET_VARIABLES,
 } from "./constants";
 
 export function apiImportRequest(botId, data, options) {
@@ -183,4 +185,30 @@ export function appSandboxSetSandboxConversation(conversation) {
     type: APP_SET_SB_CONVERSATION,
     sandbox: { conversations: [conversation] },
   };
+}
+
+export function apiGetVariablesRequest() {
+  return { type: API_GET_VARIABLES + FETCH_REQUEST };
+}
+export function apiGetVariablesSuccess(variables) {
+  return {
+    type: API_GET_VARIABLES + FETCH_SUCCESS,
+    variables,
+  };
+}
+export function apiGetVariablesFailure(error) {
+  return { type: API_GET_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiSetVariablesRequest(variables) {
+  return { type: API_SET_VARIABLES + FETCH_REQUEST, variables };
+}
+export function apiSetVariablesSuccess(variables) {
+  return {
+    type: API_SET_VARIABLES + FETCH_SUCCESS,
+    variables,
+  };
+}
+export function apiSetVariablesFailure(error) {
+  return { type: API_SET_VARIABLES + FETCH_FAILURE, error };
 }
