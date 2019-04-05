@@ -24,6 +24,7 @@ import PublishDialog from "./containers/dialogs/publishDialog";
 import { defaultTemplates, defaultLanguages } from "./reducers/app";
 // eslint-disable-next-line import/no-unresolved
 import config from "../../config/default.json";
+import VariableContainer from "./containers/builder/variableContainer";
 
 let store = null;
 const handlePublishBot = () => {
@@ -92,10 +93,14 @@ const appProps = {
       name: "Admin",
       path: "/admin",
       access: "auth",
-      panels: ["Team", "Advanced"],
+      panels: ["Team", "Advanced", "Variables"],
       render: (props) => (
         <AdminManager
-          tabs={[<Team key="team" />, <Advanced key="advanced" />]}
+          tabs={[
+            <Team key="team" />,
+            <Advanced key="advanced" />,
+            <VariableContainer key="variables" />,
+          ]}
           {...props}
         />
       ),

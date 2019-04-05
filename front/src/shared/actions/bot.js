@@ -10,6 +10,8 @@ import {
   API_CREATEBOT,
   API_SAVEBOT,
   API_SELECT_BOT,
+  API_BOT_GET_VARIABLES,
+  API_BOT_SET_VARIABLES,
 } from "./constants";
 
 export function apiGetBotsRequest() {
@@ -42,4 +44,24 @@ export function apiGetBotParametersFailure(error) {
 
 export function apiSelectBot(index) {
   return { type: API_SELECT_BOT, index };
+}
+
+export function apiGetBotVariablesRequest(botId) {
+  return { type: API_BOT_GET_VARIABLES + FETCH_REQUEST, botId };
+}
+export function apiGetBotVariablesSuccess(variables) {
+  return { type: API_BOT_GET_VARIABLES + FETCH_SUCCESS, variables };
+}
+export function apiGetBotVariablesFailure(error) {
+  return { type: API_BOT_GET_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiSetBotVariablesRequest(botId, variables) {
+  return { type: API_BOT_SET_VARIABLES + FETCH_REQUEST, botId, variables };
+}
+export function apiSetBotVariablesSuccess(variables) {
+  return { type: API_BOT_SET_VARIABLES + FETCH_SUCCESS, variables };
+}
+export function apiSetBotVariablesFailure(error) {
+  return { type: API_BOT_SET_VARIABLES + FETCH_FAILURE, error };
 }

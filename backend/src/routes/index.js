@@ -182,6 +182,9 @@ export default (zoapp) => {
     bots.sandboxReset,
   );
 
+  route.add("POST", "/variables/:botId", ["owner"], bots.setGlobalVariables);
+  route.add("GET", "/variables/:botId", ["*"], bots.getGlobalVariables);
+
   // Websocket services
   route = `${zoapp.endpoint}/bots/sandbox/messages`;
   zoapp.addWSRoute(

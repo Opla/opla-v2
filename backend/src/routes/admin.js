@@ -32,11 +32,18 @@ export default class extends CommonRoutes {
       throw new ApiError(403, "Forbiden: can't set system variables");
     }
     const { variables } = context.getBody();
-    return this.extensions.getAdmin().setSystemVariables(variables);
+    await this.controller
+      .getParameters()
+      .setValue("system", variables, "variables");
+
+    return this.getSystemVariables();
   }
 
   async getSystemVariables() {
-    const variables = await this.extensions.getAdmin().getSystemVariables();
-    return variables;
+    const variables = await this.controller
+      .getParameters()
+      .getValue("system", "variables");
+
+    return Object.values(variables || {});
   }
 }

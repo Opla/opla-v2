@@ -12,6 +12,8 @@ import {
   API_BOTS_PARAMETERS,
   API_CREATEBOT,
   API_SAVEBOT,
+  API_BOT_GET_VARIABLES,
+  API_BOT_SET_VARIABLES,
 } from "../actions/constants";
 
 import {
@@ -19,6 +21,10 @@ import {
   apiGetBotsSuccess,
   apiGetBotParametersSucess,
   apiGetBotParametersFailure,
+  apiGetBotVariablesSuccess,
+  apiGetBotVariablesFailure,
+  apiSetBotVariablesSuccess,
+  apiSetBotVariablesFailure,
 } from "../actions/bot";
 
 const bot = [
@@ -82,6 +88,30 @@ const bot = [
         yield put(apiGetBotParametersSucess(response));
       } catch (error) {
         yield put(apiGetBotParametersFailure(error));
+      }
+    },
+  ],
+  [
+    API_BOT_GET_VARIABLES + FETCH_REQUEST,
+    function* f({ botId }) {
+      try {
+        const response = yield getWebService().get(`bots/variables/${botId}`);
+        yield put(apiGetBotVariablesSuccess(response));
+      } catch (error) {
+        yield put(apiGetBotVariablesFailure(error));
+      }
+    },
+  ],
+  [
+    API_BOT_SET_VARIABLES + FETCH_REQUEST,
+    function* f({ botId, variables }) {
+      try {
+        const response = yield getWebService().post(`bots/variables/${botId}`, {
+          variables,
+        });
+        yield put(apiSetBotVariablesSuccess(response));
+      } catch (error) {
+        yield put(apiSetBotVariablesFailure(error));
       }
     },
   ],

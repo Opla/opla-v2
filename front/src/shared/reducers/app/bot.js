@@ -10,6 +10,8 @@ import {
   API_CREATEBOT,
   API_SAVEBOT,
   API_SELECT_BOT,
+  API_BOT_GET_VARIABLES,
+  API_BOT_SET_VARIABLES,
 } from "../../actions/constants";
 
 export const initialState = {
@@ -18,6 +20,7 @@ export const initialState = {
   botParameters: null,
   selectedBotId: null,
   bots: [],
+  botVariables: [],
 };
 
 export const handlers = {
@@ -118,4 +121,36 @@ export const handlers = {
       project,
     };
   },
+  [API_BOT_GET_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_GET_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botVariables: variables,
+  }),
+  [API_BOT_GET_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_SET_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_SET_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botVariables: variables,
+  }),
+  [API_BOT_SET_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 };

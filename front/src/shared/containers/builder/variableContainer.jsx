@@ -14,6 +14,10 @@ import {
   apiGetVariablesRequest,
   apiSetVariablesRequest,
 } from "../../actions/api";
+import {
+  apiGetBotVariablesRequest,
+  apiSetBotVariablesRequest,
+} from "../../actions/bot";
 import VariableDetail from "../../components/variableDetail";
 
 class VariableContainer extends Component {
@@ -23,14 +27,63 @@ class VariableContainer extends Component {
       showVariableDetail: false,
       action: null,
       selectedVariableId: -1,
+      selectedVariableIndex: -1,
+      titleName: "",
+      variables: [],
+      hasAccess: false,
+      variableScope: "",
+      setVariables: () => {},
     };
   }
 
   componentDidMount() {
     this.props.apiGetVariablesRequest();
+    if (this.props.selectedBotId) {
+      this.props.apiGetBotVariablesRequest(this.props.selectedBotId);
+    }
   }
 
-  renderVariableDetail = (variableScope) => (
+  static getDerivedStateFromProps(props, state) {
+    if (props.selectedVariableIndex !== state.selectedVariableIndex) {
+      const { user, selectedVariableIndex } = props;
+      const { scope } = user.attributes;
+      let { titlename, variables, hasAccess, setVariables } = state;
+      switch (selectedVariableIndex) {
+        case 0:
+          titlename = "System";
+          variables = props.systemVariables;
+          setVariables = props.apiSetVariablesRequest;
+          hasAccess = scope === "admin";
+          break;
+        case 1:
+          titlename = "Global";
+          variables = props.botVariables;
+          setVariables = (vs) =>
+            props.apiSetBotVariablesRequest(props.selectedBotId, vs);
+          hasAccess = scope === "owner";
+          break;
+        case 2:
+          titlename = "Local";
+          variables = props.botVariables;
+          setVariables = (vs) =>
+            props.apiSetBotVariablesRequest(props.selectedBotId, vs);
+          hasAccess = scope === "owner";
+          break;
+        default:
+          break;
+      }
+      return {
+        titlename,
+        variables,
+        setVariables,
+        hasAccess,
+        variableScope: titlename.toLowerCase(),
+      };
+    }
+    return null;
+  }
+
+  renderVariableDetail = () => (
     <VariableDetail
       onClose={() =>
         this.setState({
@@ -40,18 +93,13 @@ class VariableContainer extends Component {
         })
       }
       onSubmit={(variable) => {
-        let { variables } = this.props;
-        let setVariable = () => {}; // Override by apiSetBotVariables
-        if (variableScope === "system") {
-          variables = this.props.systemVariables;
-          setVariable = this.props.apiSetVariablesRequest;
-        }
+        const { variables } = this.state;
         if (this.state.action === "create") {
           variables.push(variable);
         } else {
           variables[this.state.selectedVariableId] = variable;
         }
-        setVariable(variables);
+        this.state.setVariables(variables);
 
         this.setState({
           showVariableDetail: false,
@@ -63,11 +111,11 @@ class VariableContainer extends Component {
         this.state.action === "create"
           ? {}
           : {
-              ...this.props.variables[this.state.selectedVariableId],
+              ...this.state.variables[this.state.selectedVariableId],
             }
       }
-      variableScope={variableScope}
-      header={<p>Variable {variableScope}</p>}
+      variableScope={this.state.variableScope}
+      header={<p>Variable {this.state.variableScope}</p>}
     />
   );
 
@@ -77,11 +125,10 @@ class VariableContainer extends Component {
       body: "This action is definitive. Are you sure ?",
       actions: [{ name: "Cancel" }, { name: "Ok" }],
       onAction: () => {
-        console.warn(
-          `Deleting specific variable with name=${
-            this.props.variables[this.state.selectedVariableId].name
-          }`,
-        );
+        const { variables } = this.state;
+        variables.splice(this.state.selectedVariableId, 1);
+        this.state.setVariables(variables);
+
         DialogManager.close();
       },
       onClose: () => {
@@ -118,28 +165,8 @@ class VariableContainer extends Component {
   };
 
   render() {
-    const { user } = this.props;
-    const { scope } = user.attributes;
-
-    const { selectedVariableIndex } = this.props;
-    let titlename = "";
-    let { variables } = this.props;
-    switch (selectedVariableIndex) {
-      case 0:
-        titlename = "System";
-        variables = this.props.systemVariables;
-        break;
-      case 1:
-        titlename = "Global";
-        break;
-      case 2:
-        titlename = "Local";
-        break;
-      default:
-        break;
-    }
     const headers = ["", "Name", "Value", "Type", "Access", "Description"];
-    const items = variables.map((v) => ({
+    const items = this.state.variables.map((v) => ({
       id: v.id,
       values: [v.name, v.value, v.type, v.access, v.description],
     }));
@@ -147,12 +174,12 @@ class VariableContainer extends Component {
       {
         name: "edit",
         onSelect: this.handleMenuSelect,
-        disabled: scope !== "owner" || titlename === "System",
+        disabled: !this.state.hasAccess,
       },
       {
         name: "delete",
         onSelect: this.handleMenuSelect,
-        disabled: scope !== "owner" || titlename === "System",
+        disabled: !this.state.hasAccess,
       },
     ];
 
@@ -162,7 +189,7 @@ class VariableContainer extends Component {
         onClick: () => {
           this.setState({ showVariableDetail: true, action: "create" });
         },
-        disabled: scope !== "owner" || titlename === "System",
+        disabled: !this.state.hasAccess,
       },
     ];
     return (
@@ -177,7 +204,7 @@ class VariableContainer extends Component {
                 e.preventDefault();
               }}
             >
-              <div>Variable ${titlename}</div>
+              <div>Variable ${this.state.titlename}</div>
             </div>
           }
           actions={action}
@@ -192,8 +219,7 @@ class VariableContainer extends Component {
             menu={menu}
           />
         </div>
-        {this.state.showVariableDetail &&
-          this.renderVariableDetail(titlename.toLowerCase())}
+        {this.state.showVariableDetail && this.renderVariableDetail()}
       </div>
     );
   }
@@ -206,24 +232,24 @@ VariableContainer.defaultProps = {
 VariableContainer.propTypes = {
   selectedBotId: PropTypes.string,
   selectedVariableIndex: PropTypes.number,
-  variables: PropTypes.arrayOf(PropTypes.object),
+  botVariables: PropTypes.arrayOf(PropTypes.object),
   systemVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape({}).isRequired,
   isLoading: PropTypes.bool.isRequired,
 
   apiGetVariablesRequest: PropTypes.func.isRequired,
   apiSetVariablesRequest: PropTypes.func.isRequired,
+  apiGetBotVariablesRequest: PropTypes.func.isRequired,
+  apiSetBotVariablesRequest: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => {
-  const selectedVariableIndex = state.app ? state.app.selectedVariableIndex : 0;
-  const selectedBotId = state.app ? state.app.selectedBotId : null;
+  const selectedVariableIndex = state.app.selectedVariableIndex || 0;
   const { user } = state;
-  const { variables: systemVariables } = state.app;
-  const variables = []; // Override by default reducers
+  const { variables: systemVariables, botVariables, selectedBotId } = state.app;
   return {
     selectedVariableIndex,
     selectedBotId,
-    variables,
+    botVariables,
     systemVariables,
     user,
     isLoading: false,
@@ -234,8 +260,12 @@ const mapDispatchToProps = (dispatch) => ({
   apiGetVariablesRequest: () => dispatch(apiGetVariablesRequest()),
   apiSetVariablesRequest: (variables) =>
     dispatch(apiSetVariablesRequest(variables)),
+  apiGetBotVariablesRequest: (botId) =>
+    dispatch(apiGetBotVariablesRequest(botId)),
+  apiSetBotVariablesRequest: (botId, variables) =>
+    dispatch(apiSetBotVariablesRequest(botId, variables)),
 });
-// prettier-ignore
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

@@ -30,6 +30,8 @@ export default class extends CommonRoutes {
     this.sandboxGetContext = this.sandboxGetContext.bind(this);
     this.sandboxReset = this.sandboxReset.bind(this);
     this.getParameters = this.getParameters.bind(this);
+    this.setGlobalVariables = this.setGlobalVariables.bind(this);
+    this.getGlobalVariables = this.getGlobalVariables.bind(this);
   }
 
   async authorizeAccess(context) {
@@ -393,5 +395,28 @@ export default class extends CommonRoutes {
     }
 
     return value;
+  }
+
+  async setGlobalVariables(context) {
+    const scope = context.getScope();
+    if (scope !== "owner") {
+      throw new ApiError(403, "Forbiden: can't set global variables");
+    }
+    const { variables } = context.getBody();
+    const { botId } = context.getParams();
+    await this.controller
+      .getParameters()
+      .setValue(botId, variables, "variables");
+
+    return this.getGlobalVariables(context);
+  }
+
+  async getGlobalVariables(context) {
+    const { botId } = context.getParams();
+    const variables = await this.controller
+      .getParameters()
+      .getValue(botId, "variables");
+
+    return Object.values(variables || {});
   }
 }
