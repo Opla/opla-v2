@@ -11,7 +11,7 @@ class OpenNLXMiddleware {
   constructor(controllers, systemFunctions) {
     this.listener = null;
     this.name = "openNLX";
-    this.classes = ["messenger", "bot", "sandbox"];
+    this.classes = ["messenger", "bot", "sandbox", "system"];
     this.mainControllers = controllers;
     this.systemFunctions = systemFunctions;
     logger.info("OpenNLXMiddleware");
@@ -27,6 +27,14 @@ class OpenNLXMiddleware {
 
   static async deleteContextValue(parameters, name) {
     return parameters.deleteValue(name, "conversationContext");
+  }
+
+  static serializeVariables(variables) {
+    return variables.reduce((a, v) => {
+      // eslint-disable-next-line no-param-reassign
+      a[`${v.scope}.${v.name}`] = v.value;
+      return a;
+    }, {});
   }
 
   async resetContext(parameters, bot, conversationId, v) {
@@ -318,9 +326,24 @@ class OpenNLXMiddleware {
         const { botId, versionId } = data.intents;
         const version = versionId || "default";
         this.openNLX.deleteAllIntents(botId, version);
+      } else if (data.action === "setVariables") {
+        const { botId, variables } = data;
+        const version = "default";
+        this.openNLX.setContext(
+          { agentId: botId, version, name: "global" },
+          OpenNLXMiddleware.serializeVariables(variables),
+        );
       }
     } else if (className === "messenger") {
       await this.handleMessengerActions(data);
+    } else if (className === "system") {
+      if (data.action === "setVariables") {
+        const { variables } = data;
+        this.openNLX.setContext(
+          { name: "system" },
+          OpenNLXMiddleware.serializeVariables(variables),
+        );
+      }
     }
   }
 
@@ -392,6 +415,13 @@ class OpenNLXMiddleware {
     this.id = m.id;
     this.openNLX = openNLX;
     this.openNLX.instance.setup({ entity: { enableAll: true } });
+    const systemVariables = await this.mainControllers
+      .getAdmin()
+      .getSystemVariables();
+    this.openNLX.setContext(
+      { name: "system" },
+      OpenNLXMiddleware.serializeVariables(systemVariables),
+    );
     // logger.info("OpenNLX init", this);
     // Add bots to openNLX
     const botsController = this.mainControllers.getBots();
@@ -412,6 +442,12 @@ class OpenNLXMiddleware {
         );
         this.openNLX.setIntents(bot.id, bot.publishedVersionId, intents);
       }
+
+      const globalVariables = await botsController.getGlobalVariables(bot.id);
+      this.openNLX.setContext(
+        { agentId: bot.id, version: "default", name: "global" },
+        OpenNLXMiddleware.serializeVariables(globalVariables),
+      );
     }
     /* eslint-disable no-restricted-syntax */
     /* eslint-disable no-await-in-loop */

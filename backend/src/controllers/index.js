@@ -84,6 +84,10 @@ class ExtensionsController {
   getAdmin() {
     return this.admin;
   }
+
+  getParameters() {
+    return this.zoapp.controllers.getParameters();
+  }
 }
 
 export default (zoapp, config) => new ExtensionsController(zoapp, config);

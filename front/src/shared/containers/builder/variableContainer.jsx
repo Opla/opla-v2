@@ -64,9 +64,8 @@ class VariableContainer extends Component {
           break;
         case 2:
           titlename = "Local";
-          variables = props.botVariables;
-          setVariables = (vs) =>
-            props.apiSetBotVariablesRequest(props.selectedBotId, vs);
+          variables = []; // Override by local variables
+          setVariables = (vs) => () => console.log(vs); // Override by apiSetLocalVariables
           hasAccess = scope === "owner";
           break;
         default:

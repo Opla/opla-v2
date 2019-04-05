@@ -404,19 +404,15 @@ export default class extends CommonRoutes {
     }
     const { variables } = context.getBody();
     const { botId } = context.getParams();
-    await this.controller
-      .getParameters()
-      .setValue(botId, variables, "variables");
+    const me = await this.access(context);
 
-    return this.getGlobalVariables(context);
+    return this.extensions
+      .getBots()
+      .setGlobalVariables(me.id, botId, variables);
   }
 
   async getGlobalVariables(context) {
     const { botId } = context.getParams();
-    const variables = await this.controller
-      .getParameters()
-      .getValue(botId, "variables");
-
-    return Object.values(variables || {});
+    return this.extensions.getBots().getGlobalVariables(botId);
   }
 }

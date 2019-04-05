@@ -20,4 +20,26 @@ export default class extends Controller {
   async getLanguages() {
     return this.gatewayClient.getLanguages();
   }
+
+  async setSystemVariables(variables) {
+    await this.main.getParameters().setValue("system", variables, "variables");
+
+    await this.dispatchGlobalVariables(variables);
+    return this.getSystemVariables();
+  }
+
+  async getSystemVariables() {
+    const variables = await this.main
+      .getParameters()
+      .getValue("system", "variables");
+
+    return Object.values(variables || {});
+  }
+
+  async dispatchGlobalVariables(variables) {
+    await this.dispatch("system", {
+      action: "setVariables",
+      variables,
+    });
+  }
 }
