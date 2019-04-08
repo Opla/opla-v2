@@ -16,6 +16,8 @@ import {
   API_BOT_SET_VARIABLES,
   API_BOT_GET_LOCAL_VARIABLES,
   API_BOT_SET_LOCAL_VARIABLES,
+  API_BOT_GET_ENTITIES,
+  API_BOT_SET_ENTITIES,
 } from "../actions/constants";
 
 import {
@@ -31,6 +33,10 @@ import {
   apiGetLocalBotVariablesFailure,
   apiSetLocalBotVariablesSuccess,
   apiSetLocalBotVariablesFailure,
+  apiGetBotEntitiesSuccess,
+  apiGetBotEntitiesFailure,
+  apiSetBotEntitiesSuccess,
+  apiSetBotEntitiesFailure,
 } from "../actions/bot";
 
 const bot = [
@@ -145,6 +151,30 @@ const bot = [
         yield put(apiSetLocalBotVariablesSuccess(response));
       } catch (error) {
         yield put(apiSetLocalBotVariablesFailure(error));
+      }
+    },
+  ],
+  [
+    API_BOT_GET_ENTITIES + FETCH_REQUEST,
+    function* f({ botId }) {
+      try {
+        const response = yield getWebService().get(`bots/entities/${botId}`);
+        yield put(apiGetBotEntitiesSuccess(response));
+      } catch (error) {
+        yield put(apiGetBotEntitiesFailure(error));
+      }
+    },
+  ],
+  [
+    API_BOT_SET_ENTITIES + FETCH_REQUEST,
+    function* f({ botId, entities }) {
+      try {
+        const response = yield getWebService().post(`bots/entities/${botId}`, {
+          entities,
+        });
+        yield put(apiSetBotEntitiesSuccess(response));
+      } catch (error) {
+        yield put(apiSetBotEntitiesFailure(error));
       }
     },
   ],

@@ -35,6 +35,7 @@ import {
   API_SETMIDDLEWARE,
   API_GET_VARIABLES,
   API_SET_VARIABLES,
+  API_GET_ENTITIES,
 } from "../actions/constants";
 import {
   apiGetIntentsFailure,
@@ -51,6 +52,8 @@ import {
   apiGetVariablesFailure,
   apiSetVariablesSuccess,
   apiSetVariablesFailure,
+  apiGetEntitiesSuccess,
+  apiGetEntitiesFailure,
 } from "../actions/api";
 
 let sandboxSocketClient = null;
@@ -497,6 +500,17 @@ const api = [
         yield put(apiSetVariablesSuccess(response));
       } catch (error) {
         yield put(apiSetVariablesFailure(error));
+      }
+    },
+  ],
+  [
+    API_GET_ENTITIES + FETCH_REQUEST,
+    function* f() {
+      try {
+        const response = yield getWebService().get("admin/entities");
+        yield put(apiGetEntitiesSuccess(response));
+      } catch (error) {
+        yield put(apiGetEntitiesFailure(error));
       }
     },
   ],

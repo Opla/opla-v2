@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { SubToolbar, TableComponent } from "zoapp-ui";
 import Zrmc, { DialogManager } from "zrmc";
-import { apiGetUsersRequest } from "zoapp-front/dist/actions/api";
 import {
   apiGetVariablesRequest,
   apiSetVariablesRequest,
@@ -268,7 +267,6 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  apiGetUsersRequest: () => dispatch(apiGetUsersRequest()),
   apiGetVariablesRequest: () => dispatch(apiGetVariablesRequest()),
   apiSetVariablesRequest: (variables) =>
     dispatch(apiSetVariablesRequest(variables)),

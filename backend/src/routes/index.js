@@ -190,6 +190,8 @@ export default (zoapp) => {
 
   route.add("POST", "/variables/:botId", ["owner"], bots.setGlobalVariables);
   route.add("GET", "/variables/:botId", ["*"], bots.getGlobalVariables);
+  route.add("POST", "/entities/:botId", ["owner"], bots.setGlobalEntities);
+  route.add("GET", "/entities/:botId", ["*"], bots.getGlobalEntities);
 
   // Websocket services
   route = `${zoapp.endpoint}/bots/sandbox/messages`;
@@ -261,4 +263,5 @@ export default (zoapp) => {
   route.add("GET", "/languages", ["open"], admin.getLanguages);
   route.add("POST", "/variables", ["admin"], admin.setSystemVariables);
   route.add("GET", "/variables", ["*"], admin.getSystemVariables);
+  route.add("GET", "/entities", ["*"], admin.getSystemEntities);
 };

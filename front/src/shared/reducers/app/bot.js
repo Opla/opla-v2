@@ -14,6 +14,8 @@ import {
   API_BOT_SET_VARIABLES,
   API_BOT_GET_LOCAL_VARIABLES,
   API_BOT_SET_LOCAL_VARIABLES,
+  API_BOT_GET_ENTITIES,
+  API_BOT_SET_ENTITIES,
 } from "../../actions/constants";
 
 export const initialState = {
@@ -24,6 +26,7 @@ export const initialState = {
   bots: [],
   botVariables: [],
   botLocalVariables: [],
+  botEntities: [],
 };
 
 export const handlers = {
@@ -184,6 +187,38 @@ export const handlers = {
     botLocalVariables: variables,
   }),
   [API_BOT_SET_LOCAL_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_GET_ENTITIES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_GET_ENTITIES + FETCH_SUCCESS]: (state, { entities }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botEntities: entities,
+  }),
+  [API_BOT_GET_ENTITIES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_SET_ENTITIES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_SET_ENTITIES + FETCH_SUCCESS]: (state, { entities }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botEntities: entities,
+  }),
+  [API_BOT_SET_ENTITIES + FETCH_FAILURE]: (state, { error }) => ({
     ...state,
     loading: false,
     error,

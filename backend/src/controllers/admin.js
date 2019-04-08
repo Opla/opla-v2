@@ -42,4 +42,10 @@ export default class extends Controller {
       variables,
     });
   }
+
+  async getSystemEntities() {
+    return this.dispatch("system", {
+      action: "getEntities",
+    });
+  }
 }

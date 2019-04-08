@@ -14,6 +14,8 @@ import {
   API_BOT_SET_VARIABLES,
   API_BOT_GET_LOCAL_VARIABLES,
   API_BOT_SET_LOCAL_VARIABLES,
+  API_BOT_SET_ENTITIES,
+  API_BOT_GET_ENTITIES,
 } from "./constants";
 
 export function apiGetBotsRequest() {
@@ -90,4 +92,24 @@ export function apiSetLocalBotVariablesSuccess(variables) {
 }
 export function apiSetLocalBotVariablesFailure(error) {
   return { type: API_BOT_SET_LOCAL_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiGetBotEntitiesRequest(botId) {
+  return { type: API_BOT_GET_ENTITIES + FETCH_REQUEST, botId };
+}
+export function apiGetBotEntitiesSuccess(entities) {
+  return { type: API_BOT_GET_ENTITIES + FETCH_SUCCESS, entities };
+}
+export function apiGetBotEntitiesFailure(error) {
+  return { type: API_BOT_GET_ENTITIES + FETCH_FAILURE, error };
+}
+
+export function apiSetBotEntitiesRequest(botId, entities) {
+  return { type: API_BOT_SET_ENTITIES + FETCH_REQUEST, botId, entities };
+}
+export function apiSetBotEntitiesSuccess(entities) {
+  return { type: API_BOT_SET_ENTITIES + FETCH_SUCCESS, entities };
+}
+export function apiSetBotEntitiesFailure(error) {
+  return { type: API_BOT_SET_ENTITIES + FETCH_FAILURE, error };
 }

@@ -128,14 +128,24 @@ class ExplorerContainer extends Component {
       </ExpansionPanel>
     );
     items = [];
-    items.push({
-      id: "entitySystem",
-      name: (
-        <span>
-          <span style={{ margin: "0 14px 0 0px" }}>@</span>System
-        </span>
-      ),
-    });
+    items.push(
+      {
+        id: "entitySystem",
+        name: (
+          <span>
+            <span style={{ margin: "0 14px 0 0px" }}>@</span>System
+          </span>
+        ),
+      },
+      {
+        id: "entityGlobal",
+        name: (
+          <span>
+            <span style={{ margin: "0 14px 0 0px" }}>@</span>Global
+          </span>
+        ),
+      },
+    );
     const entityList = (
       <ExpansionPanel
         elevation={0}
@@ -144,20 +154,7 @@ class ExplorerContainer extends Component {
         leftArrow
         label={
           <div>
-            <Tooltip label="TODO add an entity">
-              <Icon
-                style={{
-                  paddingTop: "12px",
-                  paddingRight: "4px",
-                  marginLeft: "-8px",
-                }}
-                name="add_circle"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // this.props.handleAdd();
-                }}
-              />
-            </Tooltip>
+            <Tooltip label="@TODO Remove this tooltip when styling" />
             Entities
           </div>
         }

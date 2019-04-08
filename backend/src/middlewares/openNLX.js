@@ -346,6 +346,15 @@ class OpenNLXMiddleware {
           { agentId: botId, version, name: "global" },
           OpenNLXMiddleware.serializeVariables(variables),
         );
+      } else if (data.action === "setEntities") {
+        const { botId, entities } = data;
+        const entitiesProvider = this.openNLX.getEntitiesProvider(
+          botId,
+          "default",
+        );
+        entities.forEach((e) => {
+          entitiesProvider.addEnumEntity(e.name, e.values);
+        });
       }
     } else if (className === "messenger") {
       await this.handleMessengerActions(data);
@@ -356,8 +365,11 @@ class OpenNLXMiddleware {
           { name: "system" },
           OpenNLXMiddleware.serializeVariables(variables),
         );
+      } else if (data.action === "getEntities") {
+        return this.openNLX.getSystemEntities();
       }
     }
+    return null;
   }
 
   async doCall(botId, func, parameters) {
@@ -461,6 +473,15 @@ class OpenNLXMiddleware {
         { agentId: bot.id, version: "default", name: "global" },
         OpenNLXMiddleware.serializeVariables(globalVariables),
       );
+
+      const globalEntities = await botsController.getGlobalEntities(bot.id);
+      const entitiesProvider = this.openNLX.getEntitiesProvider(
+        bot.id,
+        "default",
+      );
+      globalEntities.forEach((e) => {
+        entitiesProvider.addEnumEntity(e.name, e.values);
+      });
     }
     /* eslint-disable no-restricted-syntax */
     /* eslint-disable no-await-in-loop */

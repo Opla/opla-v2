@@ -234,4 +234,30 @@ export default class extends Controller {
       .getValue(botId, "local-variables");
     return Object.values(variables || {});
   }
+
+  async setGlobalEntities(userId, botId, entities) {
+    const bot = this.getBot(botId, userId);
+    if (!bot) {
+      throw new ApiError(404, "Can't find bot");
+    }
+    await this.main.getParameters().setValue(botId, entities, "entities");
+
+    await this.dispatchGlobalEntities(botId, entities);
+    return this.getGlobalEntities(botId);
+  }
+
+  async getGlobalEntities(botId) {
+    const entities = await this.main
+      .getParameters()
+      .getValue(botId, "entities");
+    return Object.values(entities || {});
+  }
+
+  async dispatchGlobalEntities(botId, entities) {
+    await this.dispatch(this.className, {
+      botId,
+      action: "setEntities",
+      entities,
+    });
+  }
 }

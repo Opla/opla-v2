@@ -33,6 +33,7 @@ import {
   APP_SET_SB_CONVERSATION,
   API_GET_VARIABLES,
   API_SET_VARIABLES,
+  API_GET_ENTITIES,
 } from "./constants";
 
 export function apiImportRequest(botId, data, options) {
@@ -211,4 +212,17 @@ export function apiSetVariablesSuccess(variables) {
 }
 export function apiSetVariablesFailure(error) {
   return { type: API_SET_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiGetEntitiesRequest() {
+  return { type: API_GET_ENTITIES + FETCH_REQUEST };
+}
+export function apiGetEntitiesSuccess(entities) {
+  return {
+    type: API_GET_ENTITIES + FETCH_SUCCESS,
+    entities,
+  };
+}
+export function apiGetEntitiesFailure(error) {
+  return { type: API_GET_ENTITIES + FETCH_FAILURE, error };
 }
