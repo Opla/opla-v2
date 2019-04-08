@@ -17,6 +17,8 @@ import {
 import {
   apiGetBotVariablesRequest,
   apiSetBotVariablesRequest,
+  apiGetLocalBotVariablesRequest,
+  apiSetLocalBotVariablesRequest,
 } from "../../actions/bot";
 import VariableDetail from "../../components/variableDetail";
 
@@ -40,6 +42,7 @@ class VariableContainer extends Component {
     this.props.apiGetVariablesRequest();
     if (this.props.selectedBotId) {
       this.props.apiGetBotVariablesRequest(this.props.selectedBotId);
+      this.props.apiGetLocalBotVariablesRequest(this.props.selectedBotId);
     }
   }
 
@@ -64,8 +67,9 @@ class VariableContainer extends Component {
           break;
         case 2:
           titlename = "Local";
-          variables = []; // Override by local variables
-          setVariables = (vs) => () => console.log(vs); // Override by apiSetLocalVariables
+          variables = props.botLocalVariables;
+          setVariables = (vs) =>
+            props.apiSetLocalBotVariablesRequest(props.selectedBotId, vs);
           hasAccess = scope === "owner";
           break;
         default:
@@ -231,7 +235,8 @@ VariableContainer.defaultProps = {
 VariableContainer.propTypes = {
   selectedBotId: PropTypes.string,
   selectedVariableIndex: PropTypes.number,
-  botVariables: PropTypes.arrayOf(PropTypes.object),
+  botVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
+  botLocalVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
   systemVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape({}).isRequired,
   isLoading: PropTypes.bool.isRequired,
@@ -240,15 +245,23 @@ VariableContainer.propTypes = {
   apiSetVariablesRequest: PropTypes.func.isRequired,
   apiGetBotVariablesRequest: PropTypes.func.isRequired,
   apiSetBotVariablesRequest: PropTypes.func.isRequired,
+  apiGetLocalBotVariablesRequest: PropTypes.func.isRequired,
+  apiSetLocalBotVariablesRequest: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => {
   const selectedVariableIndex = state.app.selectedVariableIndex || 0;
   const { user } = state;
-  const { variables: systemVariables, botVariables, selectedBotId } = state.app;
+  const {
+    variables: systemVariables,
+    botVariables,
+    botLocalVariables,
+    selectedBotId,
+  } = state.app;
   return {
     selectedVariableIndex,
     selectedBotId,
     botVariables,
+    botLocalVariables,
     systemVariables,
     user,
     isLoading: false,
@@ -263,6 +276,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(apiGetBotVariablesRequest(botId)),
   apiSetBotVariablesRequest: (botId, variables) =>
     dispatch(apiSetBotVariablesRequest(botId, variables)),
+  apiGetLocalBotVariablesRequest: (botId) =>
+    dispatch(apiGetLocalBotVariablesRequest(botId)),
+  apiSetLocalBotVariablesRequest: (botId, variables) =>
+    dispatch(apiSetLocalBotVariablesRequest(botId, variables)),
 });
 
 export default connect(

@@ -215,4 +215,23 @@ export default class extends Controller {
       variables,
     });
   }
+
+  async setLocalVariables(userId, botId, variables) {
+    const bot = this.getBot(botId, userId);
+    if (!bot) {
+      throw new ApiError(404, "Can't find bot");
+    }
+    await this.main
+      .getParameters()
+      .setValue(botId, variables, "local-variables");
+
+    return this.getLocalVariables(botId);
+  }
+
+  async getLocalVariables(botId) {
+    const variables = await this.main
+      .getParameters()
+      .getValue(botId, "local-variables");
+    return Object.values(variables || {});
+  }
 }

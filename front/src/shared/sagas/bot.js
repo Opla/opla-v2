@@ -14,6 +14,8 @@ import {
   API_SAVEBOT,
   API_BOT_GET_VARIABLES,
   API_BOT_SET_VARIABLES,
+  API_BOT_GET_LOCAL_VARIABLES,
+  API_BOT_SET_LOCAL_VARIABLES,
 } from "../actions/constants";
 
 import {
@@ -25,6 +27,10 @@ import {
   apiGetBotVariablesFailure,
   apiSetBotVariablesSuccess,
   apiSetBotVariablesFailure,
+  apiGetLocalBotVariablesSuccess,
+  apiGetLocalBotVariablesFailure,
+  apiSetLocalBotVariablesSuccess,
+  apiSetLocalBotVariablesFailure,
 } from "../actions/bot";
 
 const bot = [
@@ -112,6 +118,33 @@ const bot = [
         yield put(apiSetBotVariablesSuccess(response));
       } catch (error) {
         yield put(apiSetBotVariablesFailure(error));
+      }
+    },
+  ],
+  [
+    API_BOT_GET_LOCAL_VARIABLES + FETCH_REQUEST,
+    function* f({ botId }) {
+      try {
+        const response = yield getWebService().get(
+          `bots/sandbox/variables/${botId}`,
+        );
+        yield put(apiGetLocalBotVariablesSuccess(response));
+      } catch (error) {
+        yield put(apiGetLocalBotVariablesFailure(error));
+      }
+    },
+  ],
+  [
+    API_BOT_SET_LOCAL_VARIABLES + FETCH_REQUEST,
+    function* f({ botId, variables }) {
+      try {
+        const response = yield getWebService().post(
+          `bots/sandbox/variables/${botId}`,
+          { variables },
+        );
+        yield put(apiSetLocalBotVariablesSuccess(response));
+      } catch (error) {
+        yield put(apiSetLocalBotVariablesFailure(error));
       }
     },
   ],

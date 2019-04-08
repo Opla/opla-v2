@@ -52,7 +52,7 @@ class OpenNLXMiddleware {
 
   async initContext(messenger, conversation, params = null) {
     this.wip = true;
-    let contextParams = params ? { ...params } : {};
+    const contextParams = params ? { ...params } : {};
     if (!contextParams.userprofile) {
       if (messenger && conversation) {
         const user = await messenger.getConversationUser(
@@ -60,7 +60,7 @@ class OpenNLXMiddleware {
           conversation.author,
         );
         if (user && user.username) {
-          contextParams = { "userprofile.username": user.username };
+          contextParams["userprofile.username"] = user.username;
         }
       }
       // logger.info("contextParams=", contextParams, conversation);
@@ -97,7 +97,14 @@ class OpenNLXMiddleware {
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     if (Array.isArray(messages)) {
       await this.resetContext(parameters, bot, conversationId, v);
-      const contextParams = await this.initContext(messenger, conversation);
+      const localVariables = await this.mainControllers
+        .getBots()
+        .getLocalVariables(bot.id);
+      const contextParams = await this.initContext(
+        messenger,
+        conversation,
+        OpenNLXMiddleware.serializeVariables(localVariables),
+      );
       this.openNLX.setContext(
         { agentId: bot.id, version: v, name: conversationId },
         contextParams,
@@ -170,7 +177,14 @@ class OpenNLXMiddleware {
     }
     if (data.action === "newConversation") {
       // create Conversation / Context
-      const contextParams = await this.initContext(messenger, data);
+      const localVariables = await this.mainControllers
+        .getBots()
+        .getLocalVariables(bot.id);
+      const contextParams = await this.initContext(
+        messenger,
+        data,
+        OpenNLXMiddleware.serializeVariables(localVariables),
+      );
       this.openNLX.setContext(
         { agentId: bot.id, version: v, name: data.conversationId },
         contextParams,
@@ -195,7 +209,6 @@ class OpenNLXMiddleware {
         parameters,
         data.conversationId,
       );
-      contextParams = await this.initContext(messenger, data, contextParams);
       for (const message of data.messages) {
         if (message.from !== fromBot && !message.debug) {
           // logger.info("contextParams=", contextParams);
@@ -237,7 +250,7 @@ class OpenNLXMiddleware {
             agentId: bot.id,
             version: v,
             name: data.conversationId,
-          });
+          }).variables;
         }
       }
       /* eslint-disable no-restricted-syntax */
