@@ -353,7 +353,7 @@ class OpenNLXMiddleware {
           "default",
         );
         entities.forEach((e) => {
-          entitiesProvider.addEnumEntity(e.name, e.values);
+          entitiesProvider.addEnumEntity(e.name, e.values, "global");
         });
       }
     } else if (className === "messenger") {
@@ -480,7 +480,7 @@ class OpenNLXMiddleware {
         "default",
       );
       globalEntities.forEach((e) => {
-        entitiesProvider.addEnumEntity(e.name, e.values);
+        entitiesProvider.addEnumEntity(e.name, e.values, "global");
       });
     }
     /* eslint-disable no-restricted-syntax */

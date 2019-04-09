@@ -202,23 +202,24 @@ class EntityContainer extends Component {
     ];
 
     return (
-      <div>
+      <div className="variables_container">
         <SubToolbar
-          className="variable_toolbar"
+          className="variables_toolbar"
           style={{ margin: "0px 0px 0 0px" }}
           titleName={
             <div
-              className="intent_title"
+              className="variables_title"
               onClick={(e) => {
                 e.preventDefault();
               }}
             >
-              <div>Entity @{this.state.titlename}</div>
+              <p className="variable_overline_title">Entity</p>
+              <div>@{this.state.titlename}</div>
             </div>
           }
           actions={action}
         />
-        <div className="zui-action-panel list-box">
+        <div className="zui-action-panel list-box variable_table_wrapper">
           <TableComponent
             className="variable_table"
             headers={this.state.headers}

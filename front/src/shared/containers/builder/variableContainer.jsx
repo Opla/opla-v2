@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { SubToolbar, TableComponent } from "zoapp-ui";
-import Zrmc, { DialogManager } from "zrmc";
+import Zrmc, { DialogManager, Icon } from "zrmc";
 import {
   apiGetVariablesRequest,
   apiSetVariablesRequest,
@@ -117,7 +117,12 @@ class VariableContainer extends Component {
             }
       }
       variableScope={this.state.variableScope}
-      header={<p>Variable {this.state.variableScope}</p>}
+      header={
+        <React.Fragment>
+          {this.state.action === "create" ? "Create" : "Edit"} Variable{" "}
+          {this.state.variableScope}
+        </React.Fragment>
+      }
     />
   );
 
@@ -126,11 +131,12 @@ class VariableContainer extends Component {
       header: "Are you sure?",
       body: "This action is definitive. Are you sure ?",
       actions: [{ name: "Cancel" }, { name: "Ok" }],
-      onAction: () => {
-        const { variables } = this.state;
-        variables.splice(this.state.selectedVariableId, 1);
-        this.state.setVariables(variables);
-
+      onAction: (e, action) => {
+        if (action !== "Cancel") {
+          const { variables } = this.state;
+          variables.splice(this.state.selectedVariableId, 1);
+          this.state.setVariables(variables);
+        }
         DialogManager.close();
       },
       onClose: () => {
@@ -140,50 +146,56 @@ class VariableContainer extends Component {
     });
   };
 
-  handleMenuSelect = (action, index) => {
-    switch (action) {
-      case "edit":
-        this.setState({
-          showVariableDetail: true,
-          action: "edit",
-          selectedVariableId: index,
-        });
-        break;
-      case "delete":
-        this.setState(
-          {
-            showVariableDetail: false,
-            action: "delete",
-            selectedVariableId: index,
-          },
-          () => {
-            this.onDelete();
-          },
-        );
-        break;
-      default:
-        break;
-    }
+  handleMenuEdit = () => {
+    this.setState({
+      showVariableDetail: true,
+      action: "edit",
+    });
+  };
+
+  handleMenuDelete = () => {
+    this.setState(
+      {
+        showVariableDetail: false,
+        action: "delete",
+      },
+      () => {
+        this.onDelete();
+      },
+    );
   };
 
   render() {
-    const headers = ["", "Name", "Value", "Type", "Access", "Description"];
+    const renderVariableMenu = this.state.hasAccess && (
+      <div className="variable-menu">
+        <Icon
+          name="edit"
+          onClick={() => {
+            this.handleMenuEdit();
+          }}
+        />
+        <Icon
+          name="delete"
+          onClick={() => {
+            this.handleMenuDelete();
+          }}
+        />
+      </div>
+    );
+
+    const headers = ["", "Name", "Value", "Type", "Access", "Description", ""];
+
     const items = this.state.variables.map((v) => ({
       id: v.id,
-      values: [v.name, v.value, v.type, v.access, v.description],
+      values: [
+        v.name,
+        v.value,
+        v.type,
+        v.access,
+        v.description,
+        renderVariableMenu,
+      ],
     }));
-    const menu = [
-      {
-        name: "edit",
-        onSelect: this.handleMenuSelect,
-        disabled: !this.state.hasAccess,
-      },
-      {
-        name: "delete",
-        onSelect: this.handleMenuSelect,
-        disabled: !this.state.hasAccess,
-      },
-    ];
 
     const action = [
       {
@@ -194,32 +206,39 @@ class VariableContainer extends Component {
         disabled: !this.state.hasAccess,
       },
     ];
+
     return (
-      <div>
+      <div className="variables_container">
         <SubToolbar
-          className="variable_toolbar"
+          className="variables_toolbar"
           style={{ margin: "0px 0px 0 0px" }}
           titleName={
             <div
-              className="intent_title"
+              className="variables_title"
               onClick={(e) => {
                 e.preventDefault();
               }}
             >
-              <div>Variable ${this.state.titlename}</div>
+              <p className="variable_overline_title">Variables</p>
+              <div>${this.state.titlename}</div>
             </div>
           }
           actions={action}
         />
-        <div className="zui-action-panel list-box">
-          <TableComponent
-            className="variable_table"
-            headers={headers}
-            items={items}
-            selectedItem={-1}
-            onSelect={() => {}}
-            menu={menu}
-          />
+        <div className="zui-action-panel list-box variable_table_wrapper">
+          {this.state.variables.length > 0 ? (
+            <TableComponent
+              className="variable_table"
+              headers={headers}
+              items={items}
+              selectedItem={-1}
+              onSelect={(index) => {
+                this.setState({ selectedVariableId: index });
+              }}
+            />
+          ) : (
+            <p>You have no variables ${this.state.titlename} yet.</p>
+          )}
         </div>
         {this.state.showVariableDetail && this.renderVariableDetail()}
       </div>
