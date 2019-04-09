@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { SubToolbar, TableComponent } from "zoapp-ui";
-import zrmc, { DialogManager } from "zrmc";
+import zrmc, { DialogManager, Icon } from "zrmc";
 import EntityDetail from "../../components/entityDetail";
 import { apiGetEntitiesRequest } from "../../actions/api";
 import {
@@ -58,7 +58,7 @@ class EntityContainer extends Component {
           titlename = "System";
           entities = props.systemEntities;
           hasAccess = false;
-          headers = ["", "Name", "Type", "Disabled"];
+          headers = ["", "Name", "Type", "Disabled", ""];
           items = entities.map((v) => ({
             id: v.type,
             values: [
@@ -74,7 +74,7 @@ class EntityContainer extends Component {
           setEntities = (es) =>
             props.apiSetBotEntitiesRequest(props.selectedBotId, es);
           hasAccess = scope === "owner";
-          headers = ["", "Name", "Values"];
+          headers = ["", "Name", "Values", ""];
           items = entities.map((v) => ({
             id: v.type,
             values: [v.name, v.values.join(",")],
@@ -128,7 +128,12 @@ class EntityContainer extends Component {
             }
       }
       entityScope={this.state.entitieScope}
-      header={<p>Entity {this.state.entitieScope}</p>}
+      header={
+        <React.Fragment>
+          {this.state.action === "create" ? "Create" : "Edit"} Entity{" "}
+          {this.state.entitieScope}
+        </React.Fragment>
+      }
     />
   );
 
@@ -151,45 +156,47 @@ class EntityContainer extends Component {
     });
   };
 
-  handleMenuSelect = (action, index) => {
-    switch (action) {
-      case "edit":
-        this.setState({
-          showEntityDetail: true,
-          action: "edit",
-          selectedEntityId: index,
-        });
-        break;
-      case "delete":
-        this.setState(
-          {
-            showEntityDetail: false,
-            action: "delete",
-            selectedEntityId: index,
-          },
-          () => {
-            this.onDelete();
-          },
-        );
-        break;
-      default:
-        break;
-    }
+  handleMenuEdit = () => {
+    this.setState({
+      showEntityDetail: true,
+      action: "edit",
+    });
+  };
+
+  handleMenuDelete = () => {
+    this.setState(
+      {
+        showEntityDetail: false,
+        action: "delete",
+      },
+      () => {
+        this.onDelete();
+      },
+    );
   };
 
   render() {
-    const menu = [
-      {
-        name: "edit",
-        onSelect: this.handleMenuSelect,
-        disabled: !this.state.hasAccess,
-      },
-      {
-        name: "delete",
-        onSelect: this.handleMenuSelect,
-        disabled: !this.state.hasAccess,
-      },
-    ];
+    const renderEntitiesMenu = this.state.hasAccess && (
+      <div className="entity-menu">
+        <Icon
+          name="edit"
+          onClick={() => {
+            this.handleMenuEdit();
+          }}
+        />
+        <Icon
+          name="delete"
+          onClick={() => {
+            this.handleMenuDelete();
+          }}
+        />
+      </div>
+    );
+
+    const { items } = this.state;
+    items.forEach((i) => {
+      i.values.push(renderEntitiesMenu);
+    });
 
     const action = [
       {
@@ -202,32 +209,37 @@ class EntityContainer extends Component {
     ];
 
     return (
-      <div className="variables_container">
+      <div className="entities_container">
         <SubToolbar
-          className="variables_toolbar"
+          className="entities_toolbar"
           style={{ margin: "0px 0px 0 0px" }}
           titleName={
             <div
-              className="variables_title"
+              className="entities_title"
               onClick={(e) => {
                 e.preventDefault();
               }}
             >
-              <p className="variable_overline_title">Entity</p>
+              <p className="entities_overline_title">Entity</p>
               <div>@{this.state.titlename}</div>
             </div>
           }
           actions={action}
         />
-        <div className="zui-action-panel list-box variable_table_wrapper">
-          <TableComponent
-            className="variable_table"
-            headers={this.state.headers}
-            items={this.state.items}
-            selectedItem={-1}
-            onSelect={() => {}}
-            menu={menu}
-          />
+        <div className="zui-action-panel list-box entities_table_wrapper">
+          {this.state.entities.length > 0 ? (
+            <TableComponent
+              className="entities_table"
+              headers={this.state.headers}
+              items={items}
+              selectedItem={-1}
+              onSelect={(index) => {
+                this.setState({ selectedEntityId: index });
+              }}
+            />
+          ) : (
+            <p>You have no entities ${this.state.titlename} yet.</p>
+          )}
         </div>
         {this.state.showEntityDetail && this.renderEntityDetail()}
       </div>

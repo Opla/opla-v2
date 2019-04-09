@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 import { Button, Dialog, DialogFooter, FormField, TextField } from "zrmc";
 
 class EntityDetail extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const entity = {
+      name: props.entity.name,
+      values: (props.entity.values || []).join(","),
+    };
     this.state = {
       edited: false,
-      updatedEntity: {},
+      updatedEntity: entity,
     };
   }
 
@@ -27,21 +31,17 @@ class EntityDetail extends React.Component {
     if (e.target && e.target.value) {
       v = e.target.value;
     }
-    const previousEntity = {
-      ...this.state.updatedEntity,
-      ...this.props.entity,
-    };
     this.setState({
       edited: true,
       updatedEntity: {
-        ...previousEntity,
+        ...this.state.updatedEntity,
         [name]: v,
       },
     });
   };
 
   render = () => {
-    const { onSubmit, onClose, header, entity } = this.props;
+    const { onSubmit, onClose, header } = this.props;
     return (
       <form
         onSubmit={(e) => {
@@ -57,7 +57,7 @@ class EntityDetail extends React.Component {
           <FormField key="entity-form-name" style={{ display: "block" }}>
             <TextField
               id="entity-tf-name"
-              defaultValue={entity.name}
+              defaultValue={this.state.updatedEntity.name}
               onChange={this.onChangeHandler("name")}
               label="Name"
               dense
@@ -69,7 +69,7 @@ class EntityDetail extends React.Component {
           <FormField key="entity-form-value" style={{ display: "block" }}>
             <TextField
               id="entity-tf-value"
-              defaultValue={(entity.values || []).join(",")}
+              defaultValue={this.state.updatedEntity.values}
               onChange={this.onChangeHandler("values")}
               label="Values"
               dense

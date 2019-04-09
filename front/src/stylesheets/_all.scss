@@ -327,7 +327,8 @@ html {
   padding: 16px 0;
 }
 
-.variable_overline_title {
+.variable_overline_title,
+.entities_overline_title {
   line-height: initial;
   text-transform: uppercase;
   margin: 0;
@@ -338,7 +339,8 @@ html {
 }
 
 .intent_title,
-.variables_title {
+.variables_title,
+.entities_title {
   padding-right: 16px;
   max-width: 28vw;
   height: 36px;
@@ -353,7 +355,8 @@ html {
   color: $color_secondary_a;
 }
 
-.variables_title {
+.variables_title,
+.entities_title {
   display: flex;
   flex-direction: column;
   height: auto;
@@ -880,13 +883,15 @@ hr {
   height: 96px;
 }
 
-.variables_container {
+.variables_container,
+.entities_container {
   height: calc(100vh - 66px);
   display: flex;
   flex-direction: column;
 }
 
-.variables_toolbar {
+.variables_toolbar,
+.entities_toolbar {
   height: 96px;
   display: flex;
   align-items: center;
@@ -899,7 +904,8 @@ hr {
   }
 }
 
-.variable_table_wrapper {
+.variable_table_wrapper,
+.entities_table_wrapper {
   background-color: #fff;
   padding: 0 12px;
   overflow: auto;
@@ -914,7 +920,8 @@ hr {
       display: none;
     }
 
-    .variable_table {
+    .variable_table,
+    .entities_table {
       thead tr th{
         padding-left: 0;
     
@@ -924,7 +931,8 @@ hr {
       } 
 
       tbody tr {
-        .variable-menu {
+        .variable-menu,
+        .entity-menu {
           display: flex;
           opacity: 0;
           transition: all .25s ease;
@@ -946,7 +954,8 @@ hr {
         }
 
         &:hover {
-          .variable-menu {
+          .variable-menu,
+          .entity-menu {
             opacity: 1;
           }
         }
