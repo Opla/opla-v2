@@ -74,10 +74,10 @@ class EntityContainer extends Component {
           setEntities = (es) =>
             props.apiSetBotEntitiesRequest(props.selectedBotId, es);
           hasAccess = scope === "owner";
-          headers = ["", "Name", "Values", ""];
+          headers = ["", "Name", "Values", "Description", ""];
           items = entities.map((v) => ({
             id: v.type,
-            values: [v.name, v.values.join(",")],
+            values: [v.name, v.values.join(","), v.description],
           }));
           break;
         default:

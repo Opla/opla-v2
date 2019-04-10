@@ -12,12 +12,14 @@ import Zrmc, { DialogManager, Icon } from "zrmc";
 import {
   apiGetVariablesRequest,
   apiSetVariablesRequest,
+  apiGetEntitiesRequest,
 } from "../../actions/api";
 import {
   apiGetBotVariablesRequest,
   apiSetBotVariablesRequest,
   apiGetLocalBotVariablesRequest,
   apiSetLocalBotVariablesRequest,
+  apiGetBotEntitiesRequest,
 } from "../../actions/bot";
 import VariableDetail from "../../components/variableDetail";
 
@@ -38,8 +40,10 @@ class VariableContainer extends Component {
   }
 
   componentDidMount() {
+    this.props.apiGetEntitiesRequest();
     this.props.apiGetVariablesRequest();
     if (this.props.selectedBotId) {
+      this.props.apiGetBotEntitiesRequest(this.props.selectedBotId);
       this.props.apiGetBotVariablesRequest(this.props.selectedBotId);
       this.props.apiGetLocalBotVariablesRequest(this.props.selectedBotId);
     }
@@ -123,6 +127,7 @@ class VariableContainer extends Component {
           {this.state.variableScope}
         </React.Fragment>
       }
+      entities={this.props.entities}
     />
   );
 
@@ -256,6 +261,7 @@ VariableContainer.propTypes = {
   botVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
   botLocalVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
   systemVariables: PropTypes.arrayOf(PropTypes.object).isRequired,
+  entities: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape({}).isRequired,
   isLoading: PropTypes.bool.isRequired,
 
@@ -265,6 +271,8 @@ VariableContainer.propTypes = {
   apiSetBotVariablesRequest: PropTypes.func.isRequired,
   apiGetLocalBotVariablesRequest: PropTypes.func.isRequired,
   apiSetLocalBotVariablesRequest: PropTypes.func.isRequired,
+  apiGetEntitiesRequest: PropTypes.func.isRequired,
+  apiGetBotEntitiesRequest: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => {
   const selectedVariableIndex = state.app.selectedVariableIndex || 0;
@@ -274,13 +282,19 @@ const mapStateToProps = (state) => {
     botVariables,
     botLocalVariables,
     selectedBotId,
+    entities: systemEntities,
+    botEntities,
   } = state.app;
+  const entities = [{ name: "string" }, { name: "number" }, { name: "array" }]
+    .concat(systemEntities)
+    .concat(botEntities);
   return {
     selectedVariableIndex,
     selectedBotId,
     botVariables,
     botLocalVariables,
     systemVariables,
+    entities,
     user,
     isLoading: false,
   };
@@ -297,6 +311,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(apiGetLocalBotVariablesRequest(botId)),
   apiSetLocalBotVariablesRequest: (botId, variables) =>
     dispatch(apiSetLocalBotVariablesRequest(botId, variables)),
+  apiGetEntitiesRequest: () => dispatch(apiGetEntitiesRequest()),
+  apiGetBotEntitiesRequest: (botId) =>
+    dispatch(apiGetBotEntitiesRequest(botId)),
 });
 
 export default connect(

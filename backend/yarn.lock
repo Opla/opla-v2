@@ -4168,10 +4168,10 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-opennlx@0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/opennlx/-/opennlx-0.8.3.tgz#ef240d8ab59239f18ca87ccc04ecd09cb123c98b"
-  integrity sha512-EwNGjHf5u5Q0LaAQov5OPSjxU9bxWvafjE04MvIS/uOq9lRT8u9U3/XTEiU0QUSF5vttxdMKbd7qYram/2Y7tA==
+opennlx@0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/opennlx/-/opennlx-0.8.5.tgz#3adc02b0030f25e1ec9fbc390009fa5789833a8e"
+  integrity sha512-QCQi3+iDgwJoQiqmThmiu0d1Gw6rtYaaWbm4AWPHymrYamo97gJrTP0n0zOie3Wu7b2LA1fQlKDcwSpTj/4RYQ==
 
 openurl@1.1.1:
   version "1.1.1"

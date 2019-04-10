@@ -11,17 +11,6 @@ import {
   Select,
 } from "zrmc";
 
-const OPEN_NLX_TYPES = [
-  {
-    id: "email",
-    name: "@Email",
-  },
-  {
-    id: "date",
-    name: "@Date",
-  },
-];
-
 const VARIABLES_ACCESS = ["Read", "Write"];
 
 class VariableDetail extends React.Component {
@@ -78,6 +67,7 @@ class VariableDetail extends React.Component {
       isLoading,
       error,
       variable,
+      entities,
     } = this.props;
     return (
       <form
@@ -129,17 +119,18 @@ class VariableDetail extends React.Component {
               label="Type"
               style={{ width: "100%" }}
               onSelected={this.onChangeHandler("type")}
-              selectedIndex={OPEN_NLX_TYPES.findIndex(
-                (t) => t.id === variable.type,
+              selectedIndex={entities.findIndex(
+                (e) => e.name === variable.type,
               )}
             >
-              {OPEN_NLX_TYPES.map((t) => (
+              {entities.map((e) => (
                 <MenuItem
-                  key={t.id}
-                  value={t.id}
-                  selected={t.id === variable.type}
+                  key={e.name}
+                  value={e.name}
+                  selected={e.name === variable.type}
+                  disabled={e.disabled}
                 >
-                  {t.name}
+                  {`@${e.name}`}
                 </MenuItem>
               ))}
             </Select>
@@ -219,6 +210,7 @@ VariableDetail.propTypes = {
   variableScope: PropTypes.string.isRequired,
   error: PropTypes.string,
   variable: PropTypes.object,
+  entities: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default VariableDetail;

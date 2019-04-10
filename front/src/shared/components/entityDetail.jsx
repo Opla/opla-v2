@@ -5,10 +5,9 @@ import { Button, Dialog, DialogFooter, FormField, TextField } from "zrmc";
 class EntityDetail extends React.Component {
   constructor(props) {
     super(props);
-    const entity = {
-      name: props.entity.name,
-      values: (props.entity.values || []).join(","),
-    };
+    const { entity } = props;
+    entity.values = (props.entity.values || []).join(",");
+
     this.state = {
       edited: false,
       updatedEntity: entity,
@@ -47,10 +46,10 @@ class EntityDetail extends React.Component {
         onSubmit={(e) => {
           e.preventDefault();
           const { updatedEntity } = this.state;
-          onSubmit({
-            name: updatedEntity.name,
-            values: updatedEntity.values.replace(/ , |, | ,/g, ",").split(","),
-          });
+          updatedEntity.values = updatedEntity.values
+            .replace(/ , |, | ,/g, ",")
+            .split(",");
+          onSubmit(updatedEntity);
         }}
       >
         <Dialog id="team-dialog" onClose={onClose} header={header}>
@@ -72,6 +71,18 @@ class EntityDetail extends React.Component {
               defaultValue={this.state.updatedEntity.values}
               onChange={this.onChangeHandler("values")}
               label="Values"
+              dense
+              style={{ width: "100%" }}
+              required
+              disabled={false}
+            />
+          </FormField>
+          <FormField key="entity-form-description" style={{ display: "block" }}>
+            <TextField
+              id="entity-tf-description"
+              defaultValue={this.state.updatedEntity.description}
+              onChange={this.onChangeHandler("description")}
+              label="Description"
               dense
               style={{ width: "100%" }}
               required
