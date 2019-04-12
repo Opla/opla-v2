@@ -9,6 +9,7 @@ import {
   /* APP Section */
   APP_SELECTENTITY,
   APP_SELECTFUNCTION,
+  APP_SELECTVARIABLE,
 } from "../../actions/constants";
 
 export const initialState = {
@@ -24,6 +25,7 @@ export const handlers = {
   [APP_SELECTENTITY]: (state, { selectedBotId, selectedEntityIndex }) => {
     const selectedIntent = null;
     const selectedIntentIndex = -1;
+    const selectedVariableIndex = -1;
     const selectedFunctionIndex = -1;
     const selectedType = "entity";
     return {
@@ -32,6 +34,25 @@ export const handlers = {
       selectedIntentIndex,
       selectedIntent,
       selectedEntityIndex,
+      selectedVariableIndex,
+      selectedFunctionIndex,
+      selectedType,
+    };
+  },
+  // SELECT VARIABLE
+  [APP_SELECTVARIABLE]: (state, { selectedBotId, selectedVariableIndex }) => {
+    const selectedIntent = null;
+    const selectedIntentIndex = -1;
+    const selectedFunctionIndex = -1;
+    const selectedEntityIndex = -1;
+    const selectedType = "variable";
+    return {
+      ...state,
+      selectedBotId,
+      selectedIntentIndex,
+      selectedIntent,
+      selectedEntityIndex,
+      selectedVariableIndex,
       selectedFunctionIndex,
       selectedType,
     };
@@ -40,6 +61,7 @@ export const handlers = {
     const selectedIntent = null;
     const selectedIntentIndex = -1;
     const selectedEntityIndex = -1;
+    const selectedVariableIndex = -1;
     const selectedType = "function";
     return {
       ...state,
@@ -47,6 +69,7 @@ export const handlers = {
       selectedIntentIndex,
       selectedIntent,
       selectedEntityIndex,
+      selectedVariableIndex,
       selectedFunctionIndex,
       selectedType,
     };

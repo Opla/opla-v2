@@ -32,6 +32,9 @@ import {
   API_SETMIDDLEWARE,
   APP_UPDATEPUBLISHER,
   APP_SET_SB_CONVERSATION,
+  API_GET_VARIABLES,
+  API_SET_VARIABLES,
+  API_GET_ENTITIES,
 } from "../../actions/constants";
 
 import {
@@ -64,6 +67,8 @@ export const initialState = {
   loadingMessages: false,
   templates: defaultTemplates,
   languages: defaultLanguages,
+  variables: [],
+  entities: [],
 };
 
 export default createReducer(initialState, {
@@ -382,5 +387,53 @@ export default createReducer(initialState, {
   [APP_SET_SB_CONVERSATION]: (state, { sandbox }) => ({
     ...state,
     sandbox,
+  }),
+  [API_GET_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_GET_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    variables,
+  }),
+  [API_GET_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_SET_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_SET_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    variables,
+  }),
+  [API_SET_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_GET_ENTITIES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_GET_ENTITIES + FETCH_SUCCESS]: (state, { entities }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    entities,
+  }),
+  [API_GET_ENTITIES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
   }),
 });

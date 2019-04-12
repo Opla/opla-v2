@@ -10,6 +10,12 @@ import {
   API_CREATEBOT,
   API_SAVEBOT,
   API_SELECT_BOT,
+  API_BOT_GET_VARIABLES,
+  API_BOT_SET_VARIABLES,
+  API_BOT_GET_LOCAL_VARIABLES,
+  API_BOT_SET_LOCAL_VARIABLES,
+  API_BOT_GET_ENTITIES,
+  API_BOT_SET_ENTITIES,
 } from "../../actions/constants";
 
 export const initialState = {
@@ -18,6 +24,9 @@ export const initialState = {
   botParameters: null,
   selectedBotId: null,
   bots: [],
+  botVariables: [],
+  botLocalVariables: [],
+  botEntities: [],
 };
 
 export const handlers = {
@@ -118,4 +127,100 @@ export const handlers = {
       project,
     };
   },
+  [API_BOT_GET_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_GET_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botVariables: variables,
+  }),
+  [API_BOT_GET_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_SET_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_SET_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botVariables: variables,
+  }),
+  [API_BOT_SET_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_GET_LOCAL_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_GET_LOCAL_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botLocalVariables: variables,
+  }),
+  [API_BOT_GET_LOCAL_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_SET_LOCAL_VARIABLES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_SET_LOCAL_VARIABLES + FETCH_SUCCESS]: (state, { variables }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botLocalVariables: variables,
+  }),
+  [API_BOT_SET_LOCAL_VARIABLES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_GET_ENTITIES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_GET_ENTITIES + FETCH_SUCCESS]: (state, { entities }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botEntities: entities,
+  }),
+  [API_BOT_GET_ENTITIES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
+  [API_BOT_SET_ENTITIES + FETCH_REQUEST]: (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  [API_BOT_SET_ENTITIES + FETCH_SUCCESS]: (state, { entities }) => ({
+    ...state,
+    loading: false,
+    error: null,
+    botEntities: entities,
+  }),
+  [API_BOT_SET_ENTITIES + FETCH_FAILURE]: (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }),
 };

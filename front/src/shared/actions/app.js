@@ -10,6 +10,7 @@ import {
   APP_SELECTIO,
   APP_UNSELECTIO,
   APP_SELECTENTITY,
+  APP_SELECTVARIABLE,
   APP_SELECTFUNCTION,
   APP_SETINTENTACTION,
   APP_UPDATEINTENT,
@@ -77,4 +78,8 @@ export function appSelectEntity(selectedBotId, selectedEntityIndex) {
 
 export function appSelectFunction(selectedBotId, selectedFunctionIndex) {
   return { type: APP_SELECTFUNCTION, selectedBotId, selectedFunctionIndex };
+}
+
+export function appSelectVariable(selectedBotId, selectedVariableIndex) {
+  return { type: APP_SELECTVARIABLE, selectedBotId, selectedVariableIndex };
 }

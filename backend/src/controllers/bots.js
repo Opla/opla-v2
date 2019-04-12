@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { Controller } from "zoapp-backend";
+import ApiError from "zoauth-server/errors/ApiError";
 import BotsModel from "../models/bots";
 import Participants from "../utils/participants";
 
@@ -187,5 +188,76 @@ export default class extends Controller {
 
   async dispatchBotAction(botId, action, bot) {
     await this.dispatch(this.className, { botId, action, bot });
+  }
+
+  async setGlobalVariables(userId, botId, variables) {
+    const bot = this.getBot(botId, userId);
+    if (!bot) {
+      throw new ApiError(404, "Can't find bot");
+    }
+    await this.main.getParameters().setValue(botId, variables, "variables");
+
+    await this.dispatchGlobalVariables(botId, variables);
+    return this.getGlobalVariables(botId);
+  }
+
+  async getGlobalVariables(botId) {
+    const variables = await this.main
+      .getParameters()
+      .getValue(botId, "variables");
+    return Object.values(variables || {});
+  }
+
+  async dispatchGlobalVariables(botId, variables) {
+    await this.dispatch(this.className, {
+      botId,
+      action: "setVariables",
+      variables,
+    });
+  }
+
+  async setLocalVariables(userId, botId, variables) {
+    const bot = this.getBot(botId, userId);
+    if (!bot) {
+      throw new ApiError(404, "Can't find bot");
+    }
+    await this.main
+      .getParameters()
+      .setValue(botId, variables, "local-variables");
+
+    return this.getLocalVariables(botId);
+  }
+
+  async getLocalVariables(botId) {
+    const variables = await this.main
+      .getParameters()
+      .getValue(botId, "local-variables");
+    return Object.values(variables || {});
+  }
+
+  async setGlobalEntities(userId, botId, entities) {
+    const bot = this.getBot(botId, userId);
+    if (!bot) {
+      throw new ApiError(404, "Can't find bot");
+    }
+    await this.main.getParameters().setValue(botId, entities, "entities");
+
+    await this.dispatchGlobalEntities(botId, entities);
+    return this.getGlobalEntities(botId);
+  }
+
+  async getGlobalEntities(botId) {
+    const entities = await this.main
+      .getParameters()
+      .getValue(botId, "entities");
+    return Object.values(entities || {});
+  }
+
+  async dispatchGlobalEntities(botId, entities) {
+    await this.dispatch(this.className, {
+      botId,
+      action: "setEntities",
+      entities,
+    });
   }
 }

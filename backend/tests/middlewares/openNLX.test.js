@@ -22,6 +22,9 @@ const fakeZoapp = {
   },
   extensions: {
     getBots: () => botsController,
+    getAdmin: () => ({
+      getSystemVariables: () => [],
+    }),
   },
 };
 

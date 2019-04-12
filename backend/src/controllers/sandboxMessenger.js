@@ -145,7 +145,21 @@ export default class extends MessengerController {
       }
 
       // Get new conversation
-      return this.getFullBotConversations(user, botId, isAdmin);
+      const newConversations = await this.getFullBotConversations(
+        user,
+        botId,
+        isAdmin,
+      );
+      if (this.className) {
+        const newConversation = newConversations[0];
+        await this.dispatch(this.className, {
+          origin: newConversation.origin,
+          author: newConversation.author,
+          conversationId: newConversation.id,
+          action: "newConversation",
+        });
+      }
+      return newConversations;
     }
 
     return conversations;

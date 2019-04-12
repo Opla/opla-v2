@@ -169,10 +169,16 @@ export default (zoapp) => {
   );
   // bot sandbox get context
   route.add(
+    "POST",
+    "/sandbox/variables/:botId",
+    ["owner"],
+    bots.sandboxSetVariables,
+  );
+  route.add(
     "GET",
-    "/:botId/sandbox/context",
-    ["owner", "admin", "master"],
-    bots.sandboxGetContext,
+    "/sandbox/variables/:botId",
+    ["*"],
+    bots.sandboxGetVariables,
   );
   // bot sandbox reset
   route.add(
@@ -181,6 +187,11 @@ export default (zoapp) => {
     ["owner", "admin", "master"],
     bots.sandboxReset,
   );
+
+  route.add("POST", "/variables/:botId", ["owner"], bots.setGlobalVariables);
+  route.add("GET", "/variables/:botId", ["*"], bots.getGlobalVariables);
+  route.add("POST", "/entities/:botId", ["owner"], bots.setGlobalEntities);
+  route.add("GET", "/entities/:botId", ["*"], bots.getGlobalEntities);
 
   // Websocket services
   route = `${zoapp.endpoint}/bots/sandbox/messages`;
@@ -250,4 +261,7 @@ export default (zoapp) => {
   route = zoapp.createRoute("/admin");
   route.add("GET", "/templates", ["open"], admin.getTemplates);
   route.add("GET", "/languages", ["open"], admin.getLanguages);
+  route.add("POST", "/variables", ["admin"], admin.setSystemVariables);
+  route.add("GET", "/variables", ["*"], admin.getSystemVariables);
+  route.add("GET", "/entities", ["*"], admin.getSystemEntities);
 };

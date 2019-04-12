@@ -27,9 +27,14 @@ export default class extends CommonRoutes {
     this.sandboxMessages = this.sandboxMessages.bind(this);
     this.sandboxUpdateMessages = this.sandboxUpdateMessages.bind(this);
     this.sandboxNewMessage = this.sandboxNewMessage.bind(this);
-    this.sandboxGetContext = this.sandboxGetContext.bind(this);
     this.sandboxReset = this.sandboxReset.bind(this);
     this.getParameters = this.getParameters.bind(this);
+    this.setGlobalVariables = this.setGlobalVariables.bind(this);
+    this.getGlobalVariables = this.getGlobalVariables.bind(this);
+    this.sandboxSetVariables = this.sandboxSetVariables.bind(this);
+    this.sandboxGetVariables = this.sandboxGetVariables.bind(this);
+    this.setGlobalEntities = this.setGlobalEntities.bind(this);
+    this.getGlobalEntities = this.getGlobalEntities.bind(this);
   }
 
   async authorizeAccess(context) {
@@ -364,11 +369,21 @@ export default class extends CommonRoutes {
     };
   }
 
-  async sandboxGetContext(context) {
-    this.todo = {};
-    return {
-      todo: `bots.sandboxGetContext route ${context.req.route.path}`,
-    };
+  async sandboxSetVariables(context) {
+    const scope = context.getScope();
+    if (scope !== "owner") {
+      throw new ApiError(403, "Forbiden: can't set local variables");
+    }
+    const { variables } = context.getBody();
+    const { botId } = context.getParams();
+    const me = await this.access(context);
+
+    return this.extensions.getBots().setLocalVariables(me.id, botId, variables);
+  }
+
+  async sandboxGetVariables(context) {
+    const { botId } = context.getParams();
+    return this.extensions.getBots().getLocalVariables(botId);
   }
 
   async sandboxReset(context) {
@@ -393,5 +408,41 @@ export default class extends CommonRoutes {
     }
 
     return value;
+  }
+
+  async setGlobalVariables(context) {
+    const scope = context.getScope();
+    if (scope !== "owner") {
+      throw new ApiError(403, "Forbiden: can't set global variables");
+    }
+    const { variables } = context.getBody();
+    const { botId } = context.getParams();
+    const me = await this.access(context);
+
+    return this.extensions
+      .getBots()
+      .setGlobalVariables(me.id, botId, variables);
+  }
+
+  async getGlobalVariables(context) {
+    const { botId } = context.getParams();
+    return this.extensions.getBots().getGlobalVariables(botId);
+  }
+
+  async setGlobalEntities(context) {
+    const scope = context.getScope();
+    if (scope !== "owner") {
+      throw new ApiError(403, "Forbiden: can't set global entities");
+    }
+    const { entities } = context.getBody();
+    const { botId } = context.getParams();
+    const me = await this.access(context);
+
+    return this.extensions.getBots().setGlobalEntities(me.id, botId, entities);
+  }
+
+  async getGlobalEntities(context) {
+    const { botId } = context.getParams();
+    return this.extensions.getBots().getGlobalEntities(botId);
   }
 }

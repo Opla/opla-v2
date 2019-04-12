@@ -10,6 +10,12 @@ import {
   API_CREATEBOT,
   API_SAVEBOT,
   API_SELECT_BOT,
+  API_BOT_GET_VARIABLES,
+  API_BOT_SET_VARIABLES,
+  API_BOT_GET_LOCAL_VARIABLES,
+  API_BOT_SET_LOCAL_VARIABLES,
+  API_BOT_SET_ENTITIES,
+  API_BOT_GET_ENTITIES,
 } from "./constants";
 
 export function apiGetBotsRequest() {
@@ -42,4 +48,68 @@ export function apiGetBotParametersFailure(error) {
 
 export function apiSelectBot(index) {
   return { type: API_SELECT_BOT, index };
+}
+
+export function apiGetBotVariablesRequest(botId) {
+  return { type: API_BOT_GET_VARIABLES + FETCH_REQUEST, botId };
+}
+export function apiGetBotVariablesSuccess(variables) {
+  return { type: API_BOT_GET_VARIABLES + FETCH_SUCCESS, variables };
+}
+export function apiGetBotVariablesFailure(error) {
+  return { type: API_BOT_GET_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiSetBotVariablesRequest(botId, variables) {
+  return { type: API_BOT_SET_VARIABLES + FETCH_REQUEST, botId, variables };
+}
+export function apiSetBotVariablesSuccess(variables) {
+  return { type: API_BOT_SET_VARIABLES + FETCH_SUCCESS, variables };
+}
+export function apiSetBotVariablesFailure(error) {
+  return { type: API_BOT_SET_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiGetLocalBotVariablesRequest(botId) {
+  return { type: API_BOT_GET_LOCAL_VARIABLES + FETCH_REQUEST, botId };
+}
+export function apiGetLocalBotVariablesSuccess(variables) {
+  return { type: API_BOT_GET_LOCAL_VARIABLES + FETCH_SUCCESS, variables };
+}
+export function apiGetLocalBotVariablesFailure(error) {
+  return { type: API_BOT_GET_LOCAL_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiSetLocalBotVariablesRequest(botId, variables) {
+  return {
+    type: API_BOT_SET_LOCAL_VARIABLES + FETCH_REQUEST,
+    botId,
+    variables,
+  };
+}
+export function apiSetLocalBotVariablesSuccess(variables) {
+  return { type: API_BOT_SET_LOCAL_VARIABLES + FETCH_SUCCESS, variables };
+}
+export function apiSetLocalBotVariablesFailure(error) {
+  return { type: API_BOT_SET_LOCAL_VARIABLES + FETCH_FAILURE, error };
+}
+
+export function apiGetBotEntitiesRequest(botId) {
+  return { type: API_BOT_GET_ENTITIES + FETCH_REQUEST, botId };
+}
+export function apiGetBotEntitiesSuccess(entities) {
+  return { type: API_BOT_GET_ENTITIES + FETCH_SUCCESS, entities };
+}
+export function apiGetBotEntitiesFailure(error) {
+  return { type: API_BOT_GET_ENTITIES + FETCH_FAILURE, error };
+}
+
+export function apiSetBotEntitiesRequest(botId, entities) {
+  return { type: API_BOT_SET_ENTITIES + FETCH_REQUEST, botId, entities };
+}
+export function apiSetBotEntitiesSuccess(entities) {
+  return { type: API_BOT_SET_ENTITIES + FETCH_SUCCESS, entities };
+}
+export function apiSetBotEntitiesFailure(error) {
+  return { type: API_BOT_SET_ENTITIES + FETCH_FAILURE, error };
 }

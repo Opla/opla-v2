@@ -11,7 +11,7 @@ class OpenNLXMiddleware {
   constructor(controllers, systemFunctions) {
     this.listener = null;
     this.name = "openNLX";
-    this.classes = ["messenger", "bot", "sandbox"];
+    this.classes = ["messenger", "bot", "sandbox", "system"];
     this.mainControllers = controllers;
     this.systemFunctions = systemFunctions;
     logger.info("OpenNLXMiddleware");
@@ -29,6 +29,14 @@ class OpenNLXMiddleware {
     return parameters.deleteValue(name, "conversationContext");
   }
 
+  static serializeVariables(variables) {
+    return variables.reduce((a, v) => {
+      // eslint-disable-next-line no-param-reassign
+      a[`${v.scope}.${v.name}`] = v.value;
+      return a;
+    }, {});
+  }
+
   async resetContext(parameters, bot, conversationId, v) {
     // console.log("deleteContextValue", conversationId);
     this.openNLX.deleteContext(bot.id, v, conversationId);
@@ -44,7 +52,7 @@ class OpenNLXMiddleware {
 
   async initContext(messenger, conversation, params = null) {
     this.wip = true;
-    let contextParams = params ? { ...params } : {};
+    const contextParams = params ? { ...params } : {};
     if (!contextParams.userprofile) {
       if (messenger && conversation) {
         const user = await messenger.getConversationUser(
@@ -52,7 +60,7 @@ class OpenNLXMiddleware {
           conversation.author,
         );
         if (user && user.username) {
-          contextParams = { "userprofile.username": user.username };
+          contextParams["userprofile.username"] = user.username;
         }
       }
       // logger.info("contextParams=", contextParams, conversation);
@@ -89,7 +97,14 @@ class OpenNLXMiddleware {
     const parameters = this.mainControllers.zoapp.controllers.getParameters();
     if (Array.isArray(messages)) {
       await this.resetContext(parameters, bot, conversationId, v);
-      const contextParams = await this.initContext(messenger, conversation);
+      const localVariables = await this.mainControllers
+        .getBots()
+        .getLocalVariables(bot.id);
+      const contextParams = await this.initContext(
+        messenger,
+        conversation,
+        OpenNLXMiddleware.serializeVariables(localVariables),
+      );
       this.openNLX.setContext(
         { agentId: bot.id, version: v, name: conversationId },
         contextParams,
@@ -162,7 +177,14 @@ class OpenNLXMiddleware {
     }
     if (data.action === "newConversation") {
       // create Conversation / Context
-      const contextParams = await this.initContext(messenger, data);
+      const localVariables = await this.mainControllers
+        .getBots()
+        .getLocalVariables(bot.id);
+      const contextParams = await this.initContext(
+        messenger,
+        data,
+        OpenNLXMiddleware.serializeVariables(localVariables),
+      );
       this.openNLX.setContext(
         { agentId: bot.id, version: v, name: data.conversationId },
         contextParams,
@@ -187,7 +209,6 @@ class OpenNLXMiddleware {
         parameters,
         data.conversationId,
       );
-      contextParams = await this.initContext(messenger, data, contextParams);
       for (const message of data.messages) {
         if (message.from !== fromBot && !message.debug) {
           // logger.info("contextParams=", contextParams);
@@ -229,7 +250,7 @@ class OpenNLXMiddleware {
             agentId: bot.id,
             version: v,
             name: data.conversationId,
-          });
+          }).variables;
         }
       }
       /* eslint-disable no-restricted-syntax */
@@ -318,10 +339,37 @@ class OpenNLXMiddleware {
         const { botId, versionId } = data.intents;
         const version = versionId || "default";
         this.openNLX.deleteAllIntents(botId, version);
+      } else if (data.action === "setVariables") {
+        const { botId, variables } = data;
+        const version = "default";
+        this.openNLX.setContext(
+          { agentId: botId, version, name: "global" },
+          OpenNLXMiddleware.serializeVariables(variables),
+        );
+      } else if (data.action === "setEntities") {
+        const { botId, entities } = data;
+        const entitiesProvider = this.openNLX.getEntitiesProvider(
+          botId,
+          "default",
+        );
+        entities.forEach((e) => {
+          entitiesProvider.addEnumEntity(e.name, e.values, "global");
+        });
       }
     } else if (className === "messenger") {
       await this.handleMessengerActions(data);
+    } else if (className === "system") {
+      if (data.action === "setVariables") {
+        const { variables } = data;
+        this.openNLX.setContext(
+          { name: "system" },
+          OpenNLXMiddleware.serializeVariables(variables),
+        );
+      } else if (data.action === "getEntities") {
+        return this.openNLX.getSystemEntities();
+      }
     }
+    return null;
   }
 
   async doCall(botId, func, parameters) {
@@ -391,7 +439,14 @@ class OpenNLXMiddleware {
   async init(m) {
     this.id = m.id;
     this.openNLX = openNLX;
-    this.openNLX.setup({ entity: { enableAll: true } });
+    this.openNLX.instance.setup({ entity: { enableAll: true } });
+    const systemVariables = await this.mainControllers
+      .getAdmin()
+      .getSystemVariables();
+    this.openNLX.setContext(
+      { name: "system" },
+      OpenNLXMiddleware.serializeVariables(systemVariables),
+    );
     // logger.info("OpenNLX init", this);
     // Add bots to openNLX
     const botsController = this.mainControllers.getBots();
@@ -412,6 +467,21 @@ class OpenNLXMiddleware {
         );
         this.openNLX.setIntents(bot.id, bot.publishedVersionId, intents);
       }
+
+      const globalVariables = await botsController.getGlobalVariables(bot.id);
+      this.openNLX.setContext(
+        { agentId: bot.id, version: "default", name: "global" },
+        OpenNLXMiddleware.serializeVariables(globalVariables),
+      );
+
+      const globalEntities = await botsController.getGlobalEntities(bot.id);
+      const entitiesProvider = this.openNLX.getEntitiesProvider(
+        bot.id,
+        "default",
+      );
+      globalEntities.forEach((e) => {
+        entitiesProvider.addEnumEntity(e.name, e.values, "global");
+      });
     }
     /* eslint-disable no-restricted-syntax */
     /* eslint-disable no-await-in-loop */
