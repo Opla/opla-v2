@@ -34,9 +34,9 @@ class About extends Component {
           complete and user oriented conversational interface tool.
         </p>
         <h1>Version</h1>
-        <h4>V0.1 - Amazing Alou </h4>
+        <h4>V0.2 - Blooming Barboiry </h4>
         <p>
-          (Le Puy Alou : a french volcano) July 2018<br />
+          (Le Puy Barboiry : a french volcano) Dec 2018<br />
           <a
             href="https://github.com/Opla/"
             target="_blank"
@@ -48,8 +48,9 @@ class About extends Component {
         <h1>Contributors</h1>
         <h4>Thanks to the team and contributors</h4>
         <p>
-          Elodie, Julie, Maali, Marie, Nicolle, Adil, Dorian, Florian, Loic,
-          Manu, Mik, Thomas, Will, Will<br />
+          Elodie, Maali, Marie, Nicolle, Claire, Emilie, Cindy, Christelle,
+          Jeff, Arnaud, Damien, Mathieu, Mik,<br />
+          Adil, Dorian, Florian, Loic, Manu, Thomas, Will, Will, Julie<br />
           <a
             href="https://github.com/Opla/joinUs"
             target="_blank"

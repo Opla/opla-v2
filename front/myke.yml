@@ -12,7 +12,7 @@ env:
   K8S_NAMESPACE: dev-ce
   APPLICATION_NAME: opla-front
   APPLICATION_SHORT_NAME: front
-  CHART_VERSION_SEM: 0.1.0
+  CHART_VERSION_SEM: 0.2.0
   REPO: opla/front
   TAG: latest
   CHART_DIR: charts/opla-front
