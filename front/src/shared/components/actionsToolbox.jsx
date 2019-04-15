@@ -101,13 +101,13 @@ class ActionsToolbox extends Component {
         </Tooltip>,
       );
       extras.push(
-        <Tooltip key="action_il" label="TODO Insert link">
+        <Tooltip key="action_il" label="TODO Insert intent ref">
           <Icon
             className="actionstoolbox-icon"
             onClick={(e) => {
               e.stopPropagation();
               // this.onButtonSelected(e);
-              // TODO insert link
+              // TODO insert intent ref
             }}
             id="atb_link"
             name="insert_link"
