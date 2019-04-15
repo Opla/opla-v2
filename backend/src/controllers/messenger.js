@@ -45,6 +45,17 @@ export default class extends Controller {
         p,
         origin,
       );
+      const { salt, anonymous_secret: au, ...author } = user;
+      if (conversation) {
+        const payload = {
+          origin,
+          author,
+          conversationId: conversation.id,
+          participants,
+          action: "createConversation",
+        };
+        await this.dispatch(this.className, payload);
+      }
     }
     return conversation;
   }
@@ -100,12 +111,6 @@ export default class extends Controller {
             action: "newMessages",
             messages: [message],
           };
-          /* logger.info(
-            "createMessage dispatch start",
-            this.className,
-            message,
-            payload,
-          ); */
           await this.dispatch(this.className, payload);
           // logger.info("dispatch stop", message.body);
         }
@@ -132,12 +137,32 @@ export default class extends Controller {
   }
 
   async deleteConversationMessages(conversationId) {
-    return this.model.deleteConversationMessages(conversationId);
-    // TODO dispatch message
+    const conversation = await this.getConversation(null, conversationId);
+    if (conversation) {
+      await this.model.deleteConversationMessages(conversationId);
+      return this.dispatch(this.className, {
+        action: "deleteConversationMessages",
+        conversationId,
+        origin: conversation.origin,
+      });
+    }
+    return null;
   }
 
   async deleteConversations(user, origin, isAdmin = false) {
-    return this.model.deleteConversations(user, origin, isAdmin);
-    // TODO dispatch message
+    const conversations = await this.model.deleteConversations(
+      user,
+      origin,
+      isAdmin,
+    );
+    if (Array.isArray(conversations) && conversations.length > 0) {
+      return this.dispatch(this.className, {
+        origin,
+        action: "deleteConversations",
+        user,
+        conversations,
+      });
+    }
+    return null;
   }
 }

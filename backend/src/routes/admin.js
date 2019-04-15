@@ -16,6 +16,7 @@ export default class extends CommonRoutes {
     this.setSystemVariables = this.setSystemVariables.bind(this);
     this.getSystemVariables = this.getSystemVariables.bind(this);
     this.getSystemEntities = this.getSystemEntities.bind(this);
+    this.callEvent = this.callEvent.bind(this);
   }
 
   async getTemplates() {
@@ -44,7 +45,9 @@ export default class extends CommonRoutes {
     return this.extensions.getAdmin().getSystemEntities();
   }
 
-  async callEvent(event) {
-    return this.extensions.getAdmin().callEvent(event);
+  async callEvent(context) {
+    // const { conversationId } = context.getParams();
+    const params = { ...context.getBody() };
+    return this.extensions.getAdmin().callEvent(params);
   }
 }

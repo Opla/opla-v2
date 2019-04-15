@@ -43,6 +43,7 @@ class EventsMiddleware {
 
   async callEventsWS(botId, className, action, parameters, close = false) {
     const ws = await this.getWS(botId, close);
+    // console.log("ws=", ws, botId);
     if (ws) {
       logger.info("ws=", ws);
       // WIP
@@ -72,23 +73,46 @@ class EventsMiddleware {
     return null;
   }
 
-  async doEvent(parameters, close = false) {
-    const ws = this.getWS(parameters.id, close);
-    if (ws) {
-      if (ws && ws.secret === parameters.secret) {
-        this.localWs[parameters.id] = ws;
+  async doEvent(data, close = false) {
+    // console.log("doEvent=", data);
+    const ws = this.getWS(data.id, close);
+    if (ws && ws.secret === data.secret) {
+      // TODO
+      const { parameters } = data;
+      if (parameters.action === "newMessage") {
         // TODO
-        const { call } = parameters;
-        if (call.action === "sendMessage") {
-          // TODO
+        const { message, scope } = parameters;
+        let messenger;
+        if (scope === "playground") {
+          messenger = this.mainControllers.getSandboxMessenger();
+        } else {
+          messenger = this.mainControllers.getMessenger();
+        }
+        // console.log("todo sendMessage", message);
+        if (parameters.message) {
+          await messenger.createMessage(null, message.conversationId, message);
         }
       }
     }
   }
 
-  async dispatchMessenger() {
-    // TODO
-    this.todo = "todo";
+  async dispatchMessenger(scope, action, parameters) {
+    // console.log("parameters=", parameters);
+    if (action === "newMessages") {
+      return this.callEventsWS(
+        parameters.conversationOrigin,
+        "events",
+        action,
+        parameters,
+      );
+    } else if (action === "createConversation") {
+      return this.callEventsWS(parameters.origin, "events", action, parameters);
+    } else if (action === "deleteConversations") {
+      return this.callEventsWS(parameters.origin, "events", action, parameters);
+    } else if (action === "deleteConversationMessages") {
+      return this.callEventsWS(parameters.origin, "events", action, parameters);
+    }
+    return null;
   }
 
   async dispatchBot(action, parameters) {
@@ -118,11 +142,11 @@ class EventsMiddleware {
 
   async onDispatch(className, data) {
     const { action, ...parameters } = data;
-    // logger.info("EventsMiddleware onDispatch: ", className, action);
+    logger.info("EventsMiddleware onDispatch: ", className, action);
     if (className === "sandbox") {
-      return this.dispatchMessenger();
+      return this.dispatchMessenger("playground", action, parameters);
     } else if (className === "messenger") {
-      return this.dispatchMessenger();
+      return this.dispatchMessenger("publish", action, parameters);
     } else if (className === "bot") {
       if (action === "startBot") {
         return this.dispatchStartBot(parameters.bot);
@@ -131,7 +155,7 @@ class EventsMiddleware {
       }
     } else if (className === "system") {
       if (action === "callEvent") {
-        return this.callEvent(parameters);
+        return this.doEvent(data);
       } else if (action === "closeServer") {
         // TODO
       } else if (action === "removeMiddleware") {

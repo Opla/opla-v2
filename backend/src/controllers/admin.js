@@ -49,10 +49,10 @@ export default class extends Controller {
     });
   }
 
-  async callEvent(event) {
+  async callEvent(parameters) {
     return this.dispatch("system", {
       action: "callEvent",
-      event,
+      parameters,
     });
   }
 }
