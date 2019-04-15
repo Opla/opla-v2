@@ -10,7 +10,7 @@ class EventWebservice extends abstractPlugin {
   constructor(zoapp) {
     super({
       name: "event-webservice",
-      type: "EventWebService",
+      type: "WebService",
       title: "Event WebService",
       icon: "images/webhook.svg",
     });
