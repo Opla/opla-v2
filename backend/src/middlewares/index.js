@@ -7,10 +7,11 @@
 // TODO remove import and use dynamic loading
 import OpenNLXMiddleware from "./openNLX";
 import PublishConnectorMiddleware from "./publishConnector";
+import EventsMiddleware from "./events";
 
 import SystemFunctions from "../systemFunction";
 
-const initMiddlewares = (middlewaresController, extensionsController) => {
+const initMiddlewares = async (middlewaresController, extensionsController) => {
   // TODO dynamic loading
   logger.info("initMiddlewares");
   const systemFunctions = new SystemFunctions(extensionsController);
@@ -18,13 +19,14 @@ const initMiddlewares = (middlewaresController, extensionsController) => {
     extensionsController,
     systemFunctions,
   );
-  middlewaresController
-    .attach(middleware.getProperties())
-    .then((m) => middleware.init(m));
+  const m = await middlewaresController.attach(middleware.getProperties());
+  await middleware.init(m);
 
   const connectorMiddleware = new PublishConnectorMiddleware(
     extensionsController,
   );
-  middlewaresController.attach(connectorMiddleware.getProperties());
+  await middlewaresController.attach(connectorMiddleware.getProperties());
+  const eventsMiddleware = new EventsMiddleware(extensionsController);
+  await middlewaresController.attach(eventsMiddleware.getProperties());
 };
 export default initMiddlewares;

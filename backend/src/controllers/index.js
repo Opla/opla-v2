@@ -49,13 +49,14 @@ class ExtensionsController {
   }
 
   async start() {
+    if (this.zoapp.controllers) {
+      await initMiddlewares(this.zoapp.controllers.getMiddlewares(), this);
+    }
+    await this.admin.open();
     await this.bots.open();
     await this.sandboxMessenger.open();
     await this.messenger.open();
-    await this.admin.open();
-    if (this.zoapp.controllers) {
-      initMiddlewares(this.zoapp.controllers.getMiddlewares(), this);
-    }
+    logger.info("started");
   }
 
   async stop() {

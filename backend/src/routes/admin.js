@@ -43,4 +43,8 @@ export default class extends CommonRoutes {
   async getSystemEntities() {
     return this.extensions.getAdmin().getSystemEntities();
   }
+
+  async callEvent(event) {
+    return this.extensions.getAdmin().callEvent(event);
+  }
 }

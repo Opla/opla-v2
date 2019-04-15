@@ -48,4 +48,11 @@ export default class extends Controller {
       action: "getEntities",
     });
   }
+
+  async callEvent(event) {
+    return this.dispatch("system", {
+      action: "callEvent",
+      event,
+    });
+  }
 }

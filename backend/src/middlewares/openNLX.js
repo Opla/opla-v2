@@ -9,7 +9,6 @@ import openNLX from "opennlx";
 
 class OpenNLXMiddleware {
   constructor(controllers, systemFunctions) {
-    this.listener = null;
     this.name = "openNLX";
     this.classes = ["messenger", "bot", "sandbox", "system"];
     this.mainControllers = controllers;
@@ -270,7 +269,7 @@ class OpenNLXMiddleware {
   }
 
   async onDispatch(className, data) {
-    logger.info("OpenNLX onDispatch: ", className, data.action);
+    // logger.info("OpenNLX onDispatch: ", className, data.action);
     if (className === "sandbox") {
       await this.handleMessengerActions(data, "sandbox");
     } else if (className === "bot") {

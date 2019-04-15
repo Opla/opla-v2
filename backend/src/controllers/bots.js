@@ -15,6 +15,15 @@ export default class extends Controller {
     this.model = new BotsModel(main.database, main.config);
   }
 
+  async open() {
+    await super.open();
+    const bots = await this.model.getBots();
+    await Promise.all(
+      bots.map(async (bot) => this.dispatchBotAction(bot.id, "startBot", bot)),
+    );
+    logger.info("bots opened");
+  }
+
   async getBots(user = null) {
     return this.model.getBots(user);
   }
