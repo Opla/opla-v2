@@ -45,7 +45,7 @@ class EventsMiddleware {
     const ws = await this.getWS(botId, close);
     // console.log("ws=", ws, botId);
     if (ws) {
-      logger.info("ws=", ws);
+      // logger.info("ws=", ws);
       // WIP
       const post = { action, parameters };
       const path = ws.path || "";
@@ -73,27 +73,38 @@ class EventsMiddleware {
     return null;
   }
 
-  async doEvent(data, close = false) {
-    // console.log("doEvent=", data);
-    const ws = this.getWS(data.id, close);
-    if (ws && ws.secret === data.secret) {
-      // TODO
-      const { parameters } = data;
-      if (parameters.action === "newMessage") {
-        // TODO
-        const { message, scope } = parameters;
-        let messenger;
-        if (scope === "playground") {
-          messenger = this.mainControllers.getSandboxMessenger();
-        } else {
-          messenger = this.mainControllers.getMessenger();
-        }
-        // console.log("todo sendMessage", message);
-        if (parameters.message) {
-          await messenger.createMessage(null, message.conversationId, message);
-        }
+  async call(className, action, origin, parameters = {}) {
+    // console.log("call=", data);
+    if (action === "newMessage") {
+      const { message, scope } = parameters;
+      let messenger;
+      if (scope === "playground") {
+        messenger = this.mainControllers.getSandboxMessenger();
+      } else {
+        messenger = this.mainControllers.getMessenger();
       }
+      // console.log("todo sendMessage", message);
+      if (parameters.message) {
+        await messenger.createMessage(null, message.conversationId, message);
+        return { result: "ok" };
+      }
+    } else if (action === "getBot") {
+      const bots = this.mainControllers.getBots();
+      const bot = await bots.getBot(origin);
+      return bot;
+    } else if (action === "getBotConversations") {
+      const conversations = {};
+      let messenger = this.mainControllers.getSandboxMessenger();
+      conversations.playground = await messenger.getConversationsFromOrigin(
+        origin,
+      );
+      messenger = this.mainControllers.getMessenger();
+      conversations.published = await messenger.getConversationsFromOrigin(
+        origin,
+      );
+      return conversations;
     }
+    return null;
   }
 
   async dispatchMessenger(scope, action, parameters) {
@@ -154,9 +165,7 @@ class EventsMiddleware {
         return this.dispatchStopBot(parameters.bot);
       }
     } else if (className === "system") {
-      if (action === "callEvent") {
-        return this.doEvent(data);
-      } else if (action === "closeServer") {
+      if (action === "closeServer") {
         // TODO
       } else if (action === "removeMiddleware") {
         return this.dispatchStopBot({ id: parameters.origin });
@@ -173,6 +182,7 @@ class EventsMiddleware {
       classes: this.classes,
       status: "start",
       onDispatch: this.onDispatch.bind(this),
+      call: this.call.bind(this),
     };
   }
 }

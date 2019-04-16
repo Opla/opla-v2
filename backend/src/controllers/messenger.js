@@ -17,6 +17,10 @@ export default class extends Controller {
     return this.model.getConversations(user, since, origin, isAdmin);
   }
 
+  async getConversationsFromOrigin(origin) {
+    return this.model.getConversationsFromOrigin(origin);
+  }
+
   async getConversation(user, conversationId) {
     return this.model.getConversation(user, conversationId);
   }

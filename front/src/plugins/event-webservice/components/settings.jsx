@@ -10,6 +10,18 @@ import PropTypes from "prop-types";
 import { TextField } from "zrmc";
 
 class EventsSettings extends Component {
+  // TODO generate on server side and better securing it
+  generateUDID = () => {
+    let i = 0;
+    let udid = "";
+    while (i < 8) {
+      udid += Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+      i += 1;
+    }
+    return udid;
+  };
   constructor(props) {
     super(props);
     this.state = {};
@@ -18,15 +30,9 @@ class EventsSettings extends Component {
       title: "Events",
       url: "http://localhost/",
     };
-    let className = "";
-    if (
-      settings &&
-      Array.isArray(settings.classes) &&
-      settings.classes.length
-    ) {
-      [className] = settings.classes;
-    } else {
-      className = "events";
+    let appToken = settings ? settings.appToken : null;
+    if (!appToken) {
+      appToken = this.generateUDID();
     }
     let secret = settings ? settings.secret : null;
     if (!secret) {
@@ -37,7 +43,7 @@ class EventsSettings extends Component {
     this.state = {
       ...defaultSettings,
       ...settings,
-      className,
+      appToken,
       secret,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -55,14 +61,15 @@ class EventsSettings extends Component {
   onAction = (action) => {
     if (action === "save") {
       // create middleware with settings
-      const { title, url, secret, className } = this.state;
+      const { title, url, secret, appToken } = this.state;
 
       const middlewareSettings = {
         ...this.props.plugin.middleware,
         origin: this.props.botId,
         title,
         url,
-        classes: [className],
+        appToken,
+        classes: ["events"],
         secret,
       };
       // set this middleware to new plugin
@@ -102,12 +109,12 @@ class EventsSettings extends Component {
           style={{ width: "100%" }}
         />
         <TextField
-          name="className"
-          value={this.state.className}
-          defaultValue={this.state.className}
+          name="application Token"
+          value={this.state.appToken}
+          defaultValue={this.state.appToken}
           onChange={this.handleInputChange}
           pattern=".+"
-          label="Classname"
+          label="AppToken"
           error="Wrong value"
           spellCheck={false}
           required

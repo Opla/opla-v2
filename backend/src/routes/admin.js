@@ -46,8 +46,8 @@ export default class extends CommonRoutes {
   }
 
   async callEvent(context) {
-    // const { conversationId } = context.getParams();
-    const params = { ...context.getBody() };
-    return this.extensions.getAdmin().callEvent(params);
+    const { token } = context.getQuery();
+    const data = { ...context.getBody() };
+    return this.extensions.getAdmin().callEvent(data, token);
   }
 }

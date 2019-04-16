@@ -48,6 +48,20 @@ class MessengerModel extends Model {
     return c;
   }
 
+  async getConversationsFromOrigin(
+    origin,
+    collection = this.database.getTable("conversations"),
+  ) {
+    // TODO
+    const conversations = [];
+    await collection.nextItem(async (conversation) => {
+      if (conversation.origin === origin) {
+        conversations.push(conversation);
+      }
+    });
+    return conversations;
+  }
+
   async getAuthorConversations(
     user,
     origin = null,
