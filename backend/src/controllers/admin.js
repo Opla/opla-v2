@@ -50,9 +50,10 @@ export default class extends Controller {
   }
 
   async callEvent(parameters) {
-    return this.dispatch("system", {
+    await this.dispatch("system", {
       action: "callEvent",
       parameters,
     });
+    return { result: "ok" };
   }
 }
