@@ -44,13 +44,13 @@ export default class WebchatSettings extends Component {
       ({ token } = instance);
     }
     const api = "API_URL";
-    let script = "<script>\r\n";
+    let script = "<script id='opla-webchat-script'>\r\n";
     script += ` opla = { config: { token: '${token}',url: '${api}', }};\r\n`;
     script +=
       "(function(o,p,l,a,i){a=p.createElement(l),i=p.getElementsByTagName(l)[0];";
     script += "a.async=1;a.src=o;i.parentNode.insertBefore(a,i)})";
     script +=
-      "('https://bots.opla.ai/js/app.js',document,'script');\r\n</script>";
+      "('https://bot.opla.ai/js/app.js',document,'script');\r\n</script>";
     // const container = WebchatSettings.renderCreateApp(this.props.plugin.middleware);
     /* if (this.props.instance && this.props.instance.application) {
       container = this.renderCreateApp();
