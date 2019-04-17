@@ -9,7 +9,7 @@ import { Controller } from "zoapp-backend";
 export default class extends Controller {
   constructor(name, main, className) {
     super(name, main, className);
-    this.parameters = main.zoapp.controllers.getParameters();
+    this.parameters = main.getParameters();
   }
 
   static serializeVariables(variables) {
