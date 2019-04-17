@@ -135,13 +135,20 @@ class OpenNLXMiddleware {
     }
     if (data.action === "newConversation") {
       // create Conversation / Context
-      const contextParams = await this.getContexts().init(data, bot.id, messenger);
+      const contextParams = await this.getContexts().init(
+        data,
+        bot.id,
+        messenger,
+      );
       this.openNLX.setContext(
         { agentId: bot.id, version: v, name: data.conversationId },
         contextParams,
       );
       // store in db parameters
-      await this.getContexts().setParameters(data.conversationId, contextParams);
+      await this.getContexts().setParameters(
+        data.conversationId,
+        contextParams,
+      );
       // logger.info("contextParams=", contextParams);
     } else if (data.action === "resetConversation") {
       // reset Conversation / Context
@@ -203,7 +210,10 @@ class OpenNLXMiddleware {
       /* eslint-disable no-await-in-loop */
       // logger.info("contextParams=", contextParams);
       // store in Db parameters
-      await this.getContexts().setParameters(data.conversationId, contextParams);
+      await this.getContexts().setParameters(
+        data.conversationId,
+        contextParams,
+      );
     } else if (data.action === "updateConversation") {
       await this.refreshConversation(messenger, data, bot, version, v);
     } else if (data.action === "deleteMessage") {
