@@ -24,7 +24,7 @@ export default class extends Controller {
   async setSystemVariables(variables) {
     await this.main.getParameters().setValue("system", variables, "variables");
 
-    await this.dispatchGlobalVariables(variables);
+    await this.dispatchSystemVariables(variables);
     return this.getSystemVariables();
   }
 
@@ -36,7 +36,7 @@ export default class extends Controller {
     return Object.values(variables || {});
   }
 
-  async dispatchGlobalVariables(variables) {
+  async dispatchSystemVariables(variables) {
     await this.dispatch("system", {
       action: "setVariables",
       variables,

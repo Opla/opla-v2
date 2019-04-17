@@ -40,7 +40,7 @@ export default class extends MessengerController {
       const conversation = await this.createConversation(user, {
         participants,
         origin: botId,
-        channel: "playground",
+        channel: "sandbox",
       });
       return conversation;
     }
