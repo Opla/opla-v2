@@ -41,7 +41,7 @@ export default class extends Controller {
 
   async createConversation(user, params) {
     let conversation = null;
-    const { participants, origin, ...p } = params;
+    const { participants, origin, channel, ...p } = params;
     if (participants) {
       conversation = await this.model.createConversation(
         user,
@@ -56,6 +56,8 @@ export default class extends Controller {
           author,
           conversationId: conversation.id,
           participants,
+          channel,
+          extra: p,
           action: "createConversation",
         };
         await this.dispatch(this.className, payload);

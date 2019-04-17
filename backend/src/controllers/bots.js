@@ -61,6 +61,7 @@ export default class extends Controller {
       conversation = await messenger.createConversation(user, {
         participants,
         origin: bot.id,
+        channel: "published",
       });
     }
     if (conversation) {
