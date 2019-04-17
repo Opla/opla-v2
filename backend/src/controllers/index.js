@@ -9,6 +9,7 @@ import MessengerController from "./messenger";
 import SandboxMessengerController from "./sandboxMessenger";
 import MetricsController from "./metrics";
 import AdminController from "./admin";
+import ContextsController from "./contexts";
 import initMiddlewares from "../middlewares";
 import { initGatewayClient, getGatewayClient } from "../utils/gatewayClient";
 
@@ -26,6 +27,7 @@ class ExtensionsController {
     );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
+    this.contexts = new ContextsController("Contexts", this);
 
     logger.info("will init");
     initGatewayClient(config);
@@ -88,6 +90,10 @@ class ExtensionsController {
 
   getParameters() {
     return this.zoapp.controllers.getParameters();
+  }
+
+  getContexts() {
+    return this.contexts;
   }
 }
 
