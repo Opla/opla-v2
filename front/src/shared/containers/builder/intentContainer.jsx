@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Zrmc, { Icon } from "zrmc";
+import Zrmc, { Icon, Select, MenuItem } from "zrmc";
 import { SubToolbar } from "zoapp-ui";
 import IntentDetail, {
   displayActionEditor,
@@ -176,6 +176,38 @@ class IntentContainer extends Component {
       });
     } else if (action === "trash") {
       editableComponent.deleteItem();
+    } else if (action === "ref") {
+      let scopedIntentRef;
+      Zrmc.showDialog({
+        header: "Action",
+        body: (
+          <React.Fragment>
+            <Select
+              label="Select an intent"
+              style={{ width: "100%" }}
+              onSelected={(t) => {
+                scopedIntentRef = t;
+              }}
+            >
+              {this.props.intents.map((int) => (
+                <MenuItem key={int.id} value={int.id || "default"}>
+                  {int.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </React.Fragment>
+        ),
+        actions: [{ name: "Cancel" }, { name: "Ok" }],
+        onAction: (dialog, actionType) => {
+          if (actionType !== "Cancel") {
+            editableComponent.insertItem({
+              type: "output_var",
+              text: `#${scopedIntentRef}`,
+            });
+          }
+          return true;
+        },
+      });
     }
   };
 
