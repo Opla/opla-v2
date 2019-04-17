@@ -7,11 +7,6 @@
 import { Controller } from "zoapp-backend";
 
 export default class extends Controller {
-  constructor(name, main, className) {
-    super(name, main, className);
-    this.parameters = main.getParameters();
-  }
-
   static serializeVariables(variables) {
     return variables.reduce((a, v) => {
       // eslint-disable-next-line no-param-reassign
