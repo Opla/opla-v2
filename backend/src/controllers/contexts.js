@@ -15,24 +15,30 @@ export default class extends Controller {
     }, {});
   }
 
-  getMainParameters() {
+  getParametersController() {
     return this.main.getParameters();
   }
 
-  async setParameters(name, value) {
-    return this.getMainParameters().setValue(
-      name,
-      value,
-      "conversationContext",
-    );
+  async getVariables(name, parameters = this.getParametersController()) {
+    return parameters.getValue(name, "conversationContext");
   }
 
-  async getParameters(name) {
-    return this.getMainParameters().getValue(name, "conversationContext");
+  async setVariables(name, value, parameters = this.getParametersController()) {
+    return parameters.setValue(name, value, "conversationContext");
   }
 
-  async deleteParameters(name) {
-    return this.getMainParameters().deleteValue(name, "conversationContext");
+  async appendVariables(
+    name,
+    value,
+    parameters = this.getParametersController(),
+  ) {
+    // const variables = await this.getParameters(name, parameters);
+    // TODO
+    return parameters.setValue(name, value, "conversationContext");
+  }
+
+  async deleteVariables(name, parameters = this.getParametersController()) {
+    return parameters.deleteValue(name, "conversationContext");
   }
 
   async init(conversation, botId, messenger) {
