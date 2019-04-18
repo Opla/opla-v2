@@ -166,7 +166,7 @@ class EventsMiddleware {
       if (action === "setVariables") {
         const { variables } = parameters;
         if (variables) {
-          return this.callEventsWS(variables["bot.id"], action, variables);
+          return this.callEventsWS(variables["bot.id"], action, parameters);
         }
       }
     }

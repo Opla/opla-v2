@@ -32,6 +32,7 @@ export default class Contexts extends Controller {
     if (needDispatch) {
       await this.dispatch(this.className, {
         action: "setVariables",
+        name,
         variables,
       });
     }
@@ -66,6 +67,7 @@ export default class Contexts extends Controller {
 
   static async resetLocalContext(conversationOrId, bot, messenger, vars) {
     const variables = vars || {};
+    const conversationId = conversationOrId.id || conversationOrId;
     if (!variables.userprofile) {
       if (messenger && conversationOrId) {
         const user = await messenger.getConversationUser(
@@ -80,6 +82,7 @@ export default class Contexts extends Controller {
     }
     variables["bot.name"] = bot.name;
     variables["bot.id"] = bot.id;
+    variables["conversation.id"] = conversationId;
     variables["platform.name"] = messenger.name;
     variables["platform.channel"] = messenger.channel;
     variables["platform.service"] = messenger.service;

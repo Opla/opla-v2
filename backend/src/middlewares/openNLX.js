@@ -62,6 +62,7 @@ class OpenNLXMiddleware {
       bot,
       messenger,
     );
+
     await this.resetContext(bot, conversationId, v);
     if (Array.isArray(messages)) {
       this.openNLX.setContext(
