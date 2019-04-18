@@ -54,6 +54,9 @@ class ExtensionsController {
     if (this.zoapp.controllers) {
       await initMiddlewares(this.zoapp.controllers.getMiddlewares(), this);
     }
+    await this.admin.dispatch("system", {
+      action: "startServer",
+    });
     await this.admin.open();
     await this.bots.open();
     await this.sandboxMessenger.open();
@@ -62,6 +65,9 @@ class ExtensionsController {
   }
 
   async stop() {
+    await this.admin.dispatch("system", {
+      action: "stopServer",
+    });
     await this.bots.close();
     await this.sandboxMessenger.close();
     await this.messenger.close();

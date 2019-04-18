@@ -16,6 +16,20 @@ class EventsMiddleware {
     logger.info("EventsMiddleware starting");
   }
 
+  async initWSS() {
+    const middlewares = this.mainControllers.zoapp.controllers.getMiddlewares();
+    const wss = await middlewares.list({
+      type: "WebService",
+      name: "event-webservice",
+    });
+    this.localWs = [];
+    if (Array.isArray(wss)) {
+      wss.forEach((ws) => {
+        this.localWs[ws.origin] = ws;
+      });
+    }
+  }
+
   async getWS(id, close) {
     let ws = null;
     if (close) {
@@ -41,8 +55,22 @@ class EventsMiddleware {
     return ws;
   }
 
+  async callAllEventsWS(action, parameters) {
+    const ids = Object.keys(this.localWs);
+    return Promise.all(
+      ids.map(async (id) => {
+        const ws = this.localWs[id];
+        return EventsMiddleware.callWS(ws, action, { id, ...parameters });
+      }),
+    );
+  }
+
   async callEventsWS(botId, action, parameters, close = false) {
     const ws = await this.getWS(botId, close);
+    return EventsMiddleware.callWS(ws, action, parameters);
+  }
+
+  static async callWS(ws, action, parameters) {
     // console.log("ws=", ws, botId);
     if (ws) {
       // logger.info("ws=", ws);
@@ -155,8 +183,11 @@ class EventsMiddleware {
         return this.dispatchStopBot(parameters.bot);
       }
     } else if (className === "system") {
-      if (action === "closeServer") {
-        // TODO
+      if (action === "startServer") {
+        await this.initWSS();
+        return this.callAllEventsWS(action, {});
+      } else if (action === "stopServer") {
+        return this.callAllEventsWS(action, {});
       } else if (action === "removeMiddleware") {
         return this.dispatchStopBot({ id: parameters.origin });
       } else if (action === "setMiddleware") {
