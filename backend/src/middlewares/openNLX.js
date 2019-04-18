@@ -57,16 +57,17 @@ class OpenNLXMiddleware {
     const { conversationId } = conversation;
     logger.info("conversation=", conversation);
     const messages = await messenger.getConversationMessages(conversationId);
+    const localContext = await this.getContexts().initLocalContext(
+      conversation,
+      bot,
+      messenger,
+    );
+    await this.resetContext(bot, conversationId, v);
     if (Array.isArray(messages)) {
-      await this.resetContext(bot, conversationId, v);
-      const contextParams = await this.getContexts().init(
-        conversation,
-        bot.id,
-        messenger,
-      );
       this.openNLX.setContext(
         { agentId: bot.id, version: v, name: conversationId },
-        contextParams,
+        localContext.variables,
+        localContext.attributes,
       );
       const fromBot = `bot_${bot.name}_${bot.id}`;
       /* eslint-disable no-restricted-syntax */
@@ -107,7 +108,15 @@ class OpenNLXMiddleware {
       /* eslint-disable no-restricted-syntax */
       /* eslint-disable no-await-in-loop */
       // store in Db parameters
-      await this.getContexts().setVariables(conversationId, contextParams);
+      await this.getContexts().setVariables(
+        conversationId,
+        localContext.variables,
+      );
+    } else {
+      await this.getContexts().setVariables(
+        conversationId,
+        localContext.variables,
+      );
     }
   }
 
@@ -127,17 +136,19 @@ class OpenNLXMiddleware {
     }
     if (data.action === "newConversation") {
       // create Conversation / Context
-      const contextParams = await this.getContexts().init(
+      const localContext = await this.getContexts().initLocalContext(
         data,
-        bot.id,
+        bot,
         messenger,
       );
+      const { variables, attributes } = localContext;
       this.openNLX.setContext(
         { agentId: bot.id, version: v, name: data.conversationId },
-        contextParams,
+        variables,
+        attributes,
       );
       // store in db parameters
-      await this.getContexts().setVariables(data.conversationId, contextParams);
+      await this.getContexts().setVariables(data.conversationId, variables);
     } else if (data.action === "resetConversation") {
       // reset Conversation / Context
       this.resetContext(bot, data.conversationId, v);
@@ -147,7 +158,7 @@ class OpenNLXMiddleware {
       /* eslint-disable no-restricted-syntax */
       /* eslint-disable no-await-in-loop */
       // get params from Db parameters
-      let contextParams = await this.getContexts().getVariables(
+      let variables = await this.getContexts().getVariables(
         data.conversationId,
       );
       for (const message of data.messages) {
@@ -155,7 +166,7 @@ class OpenNLXMiddleware {
           // set context in OpenNLX
           this.openNLX.setContext(
             { agentId: bot.id, version: v, name: data.conversationId },
-            contextParams,
+            variables,
           );
           const msg = {
             text: message.body,
@@ -183,21 +194,31 @@ class OpenNLXMiddleware {
           }
 
           // get context from OpenNLX
-          contextParams = this.openNLX.getContextData({
+          const contextParams = this.openNLX.getContextData({
             agentId: bot.id,
             version: v,
             name: data.conversationId,
-          }).variables;
+          });
+          ({ variables } = contextParams);
         }
       }
       /* eslint-disable no-restricted-syntax */
       /* eslint-disable no-await-in-loop */
       // logger.info("contextParams=", contextParams);
       // store in Db parameters
-      await this.getContexts().setVariables(data.conversationId, contextParams);
-    } else if (data.action === "updateConversation") {
-      await this.refreshConversation(messenger, data, bot, version, v);
-    } else if (data.action === "deleteMessage") {
+      const localContext = await Contexts.resetLocalContext(
+        data.conversationId,
+        bot,
+        messenger,
+        variables,
+      );
+      ({ variables } = localContext);
+      await this.getContexts().setVariables(data.conversationId, variables);
+    } else if (
+      data.action === "updateConversation" ||
+      data.action === "createConversation" ||
+      data.action === "deleteMessage"
+    ) {
       await this.refreshConversation(messenger, data, bot, version, v);
     }
   }

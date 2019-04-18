@@ -10,7 +10,7 @@ class EventsMiddleware {
   constructor(controllers) {
     this.listener = null;
     this.name = "events";
-    this.classes = ["messenger", "bot", "sandbox", "system"];
+    this.classes = ["messenger", "bot", "sandbox", "system", "context"];
     this.mainControllers = controllers;
     this.localWs = {};
     logger.info("EventsMiddleware starting");
@@ -161,6 +161,13 @@ class EventsMiddleware {
         return this.dispatchStopBot({ id: parameters.origin });
       } else if (action === "setMiddleware") {
         return this.dispatchStartBot({ id: parameters.origin });
+      }
+    } else if (className === "context") {
+      if (action === "setVariables") {
+        const { variables } = parameters;
+        if (variables) {
+          return this.callEventsWS(variables["bot.id"], action, variables);
+        }
       }
     }
     return null;

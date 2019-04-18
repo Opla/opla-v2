@@ -6,7 +6,7 @@
  */
 import { Controller } from "zoapp-backend";
 
-export default class extends Controller {
+export default class Contexts extends Controller {
   static serializeVariables(variables) {
     return variables.reduce((a, v) => {
       // eslint-disable-next-line no-param-reassign
@@ -23,38 +23,67 @@ export default class extends Controller {
     return parameters.getValue(name, "conversationContext");
   }
 
-  async setVariables(name, value, parameters = this.getParametersController()) {
-    return parameters.setValue(name, value, "conversationContext");
+  async setVariables(
+    name,
+    variables,
+    needDispatch = true,
+    parameters = this.getParametersController(),
+  ) {
+    if (needDispatch) {
+      await this.dispatch(this.className, {
+        action: "setVariables",
+        variables,
+      });
+    }
+    return parameters.setValue(name, variables, "conversationContext");
   }
 
   async appendVariables(
     name,
-    value,
+    vars,
+    needDispatch = true,
     parameters = this.getParametersController(),
   ) {
-    // const variables = await this.getParameters(name, parameters);
-    // TODO
-    return parameters.setValue(name, value, "conversationContext");
+    const variables = await this.getParameters(name, parameters);
+    const names = Object.keys(vars);
+    //  merge variables+vars
+    names.forEach((n) => {
+      variables[n] = vars[n];
+    });
+    return this.setVariables(name, variables, needDispatch, parameters);
   }
 
   async deleteVariables(name, parameters = this.getParametersController()) {
     return parameters.deleteValue(name, "conversationContext");
   }
 
-  async init(conversation, botId, messenger) {
-    const localVariables = await this.main.getBots().getLocalVariables(botId);
-    const contextParams = localVariables || {};
-    if (!contextParams.userprofile) {
-      if (messenger && conversation) {
+  async initLocalContext(conversation, bot, messenger) {
+    const localVariables = await this.main.getBots().getLocalVariables(bot.id);
+    const variables = localVariables || {};
+    // TODO merge context
+    return Contexts.resetLocalContext(conversation, bot, messenger, variables);
+  }
+
+  static async resetLocalContext(conversationOrId, bot, messenger, vars) {
+    const variables = vars || {};
+    if (!variables.userprofile) {
+      if (messenger && conversationOrId) {
         const user = await messenger.getConversationUser(
-          conversation.conversationId,
-          conversation.author,
+          conversationOrId,
+          conversationOrId.author,
         );
         if (user && user.username) {
-          contextParams["userprofile.username"] = user.username;
+          variables["userprofile.username"] = user.username;
+          variables["userprofile.id"] = user.id;
         }
       }
     }
-    return contextParams;
+    variables["bot.name"] = bot.name;
+    variables["bot.id"] = bot.id;
+    variables["platform.name"] = messenger.name;
+    variables["platform.channel"] = messenger.channel;
+    variables["platform.service"] = messenger.service;
+    // TODO attributes
+    return { variables };
   }
 }

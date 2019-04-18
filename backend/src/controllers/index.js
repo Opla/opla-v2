@@ -27,7 +27,7 @@ class ExtensionsController {
     );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
-    this.contexts = new ContextsController("Contexts", this);
+    this.contexts = new ContextsController("Contexts", this, "context");
 
     logger.info("will init");
     initGatewayClient(config);
