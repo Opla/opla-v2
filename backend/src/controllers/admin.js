@@ -49,7 +49,7 @@ export default class extends Controller {
     });
   }
 
-  async callEvent(data, token) {
+  async callAction(data, token) {
     const controller = this.zoapp.controllers.getMiddlewares();
     const { middlewares } = controller;
     let result = null;
