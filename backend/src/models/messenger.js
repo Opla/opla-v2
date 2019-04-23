@@ -30,26 +30,6 @@ class MessengerModel extends Model {
     );
   }
 
-  /* async deleteConversationMessages(user, conversationId, origin = null) {
-    const collection = this.database.getTable("conversations");
-    const coll = this.database.getTable("messages");
-    const conversations = await this.getAuthorConversations(
-      user,
-      origin,
-      collection,
-    );
-    const c = [];
-    const self = this;
-    conversations.forEach(async (conversation) => {
-      if (conversation.id === conversationId) {
-        await collection.deleteItem(conversation.id);
-        await self.deleteConversationMessages(conversation.id, coll);
-        c.push(conversation.id);
-      }
-    });
-    return c;
-  } */
-
   async deleteConversations(user, origin = null) {
     const collection = this.database.getTable("conversations");
     const coll = this.database.getTable("messages");
@@ -66,6 +46,20 @@ class MessengerModel extends Model {
       c.push(conversation.id);
     });
     return c;
+  }
+
+  async getConversationsFromOrigin(
+    origin,
+    collection = this.database.getTable("conversations"),
+  ) {
+    // TODO
+    const conversations = [];
+    await collection.nextItem(async (conversation) => {
+      if (conversation.origin === origin) {
+        conversations.push(conversation);
+      }
+    });
+    return conversations;
   }
 
   async getAuthorConversations(

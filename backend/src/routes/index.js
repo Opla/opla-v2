@@ -264,4 +264,5 @@ export default (zoapp) => {
   route.add("POST", "/variables", ["admin"], admin.setSystemVariables);
   route.add("GET", "/variables", ["*"], admin.getSystemVariables);
   route.add("GET", "/entities", ["*"], admin.getSystemEntities);
+  route.add("POST", "/action", ["open"], admin.callAction);
 };

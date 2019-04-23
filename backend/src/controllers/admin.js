@@ -24,7 +24,7 @@ export default class extends Controller {
   async setSystemVariables(variables) {
     await this.main.getParameters().setValue("system", variables, "variables");
 
-    await this.dispatchGlobalVariables(variables);
+    await this.dispatchSystemVariables(variables);
     return this.getSystemVariables();
   }
 
@@ -36,7 +36,7 @@ export default class extends Controller {
     return Object.values(variables || {});
   }
 
-  async dispatchGlobalVariables(variables) {
+  async dispatchSystemVariables(variables) {
     await this.dispatch("system", {
       action: "setVariables",
       variables,
@@ -47,5 +47,33 @@ export default class extends Controller {
     return this.dispatch("system", {
       action: "getEntities",
     });
+  }
+
+  async callAction(data, token) {
+    const controller = this.zoapp.controllers.getMiddlewares();
+    const { middlewares } = controller;
+    let result = null;
+    const keys = Object.keys(middlewares);
+    const { action, className, ...parameters } = data;
+    let plugin = null;
+    let middleware = null;
+    keys.some((id) => {
+      const m = middlewares[id];
+      if (m.appToken === token) {
+        plugin = m;
+      } else if (m.name === "events" && m.call) {
+        middleware = m;
+      }
+      return !!(middleware && plugin);
+    });
+    if (middleware && plugin && plugin.status === "start") {
+      result = await middleware.call(
+        className,
+        action,
+        plugin.origin,
+        parameters,
+      );
+    }
+    return result || { result: "not found" };
   }
 }

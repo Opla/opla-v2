@@ -17,19 +17,30 @@ export default class extends Controller {
     return this.model.getConversations(user, since, origin, isAdmin);
   }
 
+  async getConversationsFromOrigin(origin) {
+    return this.model.getConversationsFromOrigin(origin);
+  }
+
   async getConversation(user, conversationId) {
     return this.model.getConversation(user, conversationId);
   }
 
-  async getConversationUser(conversationId, userId) {
-    const conversation = await this.model.getConversation(null, conversationId);
+  async getConversationUser(conversationOrId, userId) {
+    let conversation = null;
+    if (typeof conversationOrId === "string") {
+      conversation = await this.model.getConversation(null, conversationOrId);
+    } else {
+      conversation = conversationOrId;
+    }
     let user = null;
     if (conversation && Array.isArray(conversation.participants)) {
       // console.log("getConv", userId, conversation.participants);
-      conversation.participants.forEach((username) => {
+      conversation.participants.some((username) => {
         if (username.indexOf("bot_") === -1 && !user) {
-          user = { username, id: userId };
+          user = { username, id: userId || conversation.author };
+          return true;
         }
+        return false;
       });
     }
     return user;
@@ -37,7 +48,7 @@ export default class extends Controller {
 
   async createConversation(user, params) {
     let conversation = null;
-    const { participants, origin, ...p } = params;
+    const { participants, origin, channel, ...p } = params;
     if (participants) {
       conversation = await this.model.createConversation(
         user,
@@ -45,6 +56,19 @@ export default class extends Controller {
         p,
         origin,
       );
+      const { salt, anonymous_secret: au, ...author } = user;
+      if (conversation) {
+        const payload = {
+          origin,
+          author,
+          conversationId: conversation.id,
+          participants,
+          channel,
+          extra: p,
+          action: "createConversation",
+        };
+        await this.dispatch(this.className, payload);
+      }
     }
     return conversation;
   }
@@ -100,12 +124,6 @@ export default class extends Controller {
             action: "newMessages",
             messages: [message],
           };
-          /* logger.info(
-            "createMessage dispatch start",
-            this.className,
-            message,
-            payload,
-          ); */
           await this.dispatch(this.className, payload);
           // logger.info("dispatch stop", message.body);
         }
@@ -132,12 +150,32 @@ export default class extends Controller {
   }
 
   async deleteConversationMessages(conversationId) {
-    return this.model.deleteConversationMessages(conversationId);
-    // TODO dispatch message
+    const conversation = await this.getConversation(null, conversationId);
+    if (conversation) {
+      await this.model.deleteConversationMessages(conversationId);
+      return this.dispatch(this.className, {
+        action: "deleteConversationMessages",
+        conversationId,
+        origin: conversation.origin,
+      });
+    }
+    return null;
   }
 
   async deleteConversations(user, origin, isAdmin = false) {
-    return this.model.deleteConversations(user, origin, isAdmin);
-    // TODO dispatch message
+    const conversations = await this.model.deleteConversations(
+      user,
+      origin,
+      isAdmin,
+    );
+    if (Array.isArray(conversations) && conversations.length > 0) {
+      return this.dispatch(this.className, {
+        origin,
+        action: "deleteConversations",
+        user,
+        conversations,
+      });
+    }
+    return null;
   }
 }

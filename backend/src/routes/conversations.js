@@ -47,7 +47,7 @@ export default class extends CommonRoutes {
     const params = context.getBody();
     const payload = await this.extensions
       .getMessenger()
-      .createConversation(me, params);
+      .createConversation(me, { channel: "published", ...params });
     if (payload === null) {
       return { error: "can't create conversation" };
     }

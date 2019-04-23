@@ -9,6 +9,7 @@ import MessengerController from "./messenger";
 import SandboxMessengerController from "./sandboxMessenger";
 import MetricsController from "./metrics";
 import AdminController from "./admin";
+import ContextsController from "./contexts";
 import initMiddlewares from "../middlewares";
 import { initGatewayClient, getGatewayClient } from "../utils/gatewayClient";
 
@@ -26,6 +27,7 @@ class ExtensionsController {
     );
     this.messenger = new MessengerController("Messenger", this, "messenger");
     this.metrics = new MetricsController("Metrics", this);
+    this.contexts = new ContextsController("Contexts", this, "context");
 
     logger.info("will init");
     initGatewayClient(config);
@@ -49,16 +51,23 @@ class ExtensionsController {
   }
 
   async start() {
+    if (this.zoapp.controllers) {
+      await initMiddlewares(this.zoapp.controllers.getMiddlewares(), this);
+    }
+    await this.admin.dispatch("system", {
+      action: "startServer",
+    });
+    await this.admin.open();
     await this.bots.open();
     await this.sandboxMessenger.open();
     await this.messenger.open();
-    await this.admin.open();
-    if (this.zoapp.controllers) {
-      initMiddlewares(this.zoapp.controllers.getMiddlewares(), this);
-    }
+    logger.info("started");
   }
 
   async stop() {
+    await this.admin.dispatch("system", {
+      action: "stopServer",
+    });
     await this.bots.close();
     await this.sandboxMessenger.close();
     await this.messenger.close();
@@ -87,6 +96,10 @@ class ExtensionsController {
 
   getParameters() {
     return this.zoapp.controllers.getParameters();
+  }
+
+  getContexts() {
+    return this.contexts;
   }
 }
 
