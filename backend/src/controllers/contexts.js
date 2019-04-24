@@ -45,7 +45,7 @@ export default class Contexts extends Controller {
     needDispatch = true,
     parameters = this.getParametersController(),
   ) {
-    const variables = await this.getParameters(name, parameters);
+    const variables = await this.getVariables(name, parameters);
     const names = Object.keys(vars);
     //  merge variables+vars
     names.forEach((n) => {
@@ -88,5 +88,9 @@ export default class Contexts extends Controller {
     variables["platform.service"] = messenger.service;
     // TODO attributes
     return { variables };
+  }
+
+  async appendLocalContext(conversationId, vars) {
+    return this.appendVariables(conversationId, vars);
   }
 }

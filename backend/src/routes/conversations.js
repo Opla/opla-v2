@@ -20,6 +20,7 @@ export default class extends CommonRoutes {
       this,
     );
     this.newMessage = this.newMessage.bind(this);
+    this.setContextVariables = this.setContextVariables.bind(this);
   }
 
   async conversations(context) {
@@ -100,5 +101,13 @@ export default class extends CommonRoutes {
       return { error: "can't create message" };
     }
     return payload;
+  }
+
+  async setContextVariables(context) {
+    const { conversationId, variables } = context.getParams();
+    // TODO validate user has the right to access this local vars
+    return this.extensions
+      .getContexts()
+      .setLocalVariables(conversationId, variables);
   }
 }

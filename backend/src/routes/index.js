@@ -54,6 +54,13 @@ export default (zoapp) => {
     ["*", "admin", "master"],
     conversations.newMessage,
   );
+  // Put some new variable in a conversation's context
+  route.add(
+    "PUT",
+    "/:conversationId/context",
+    ["*", "admin", "master"],
+    conversations.setContextVariables,
+  );
 
   // /bots routes
   route = zoapp.createRoute("/bots");
