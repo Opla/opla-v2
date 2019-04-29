@@ -15,6 +15,8 @@ const initMiddlewares = async (middlewaresController, extensionsController) => {
   // TODO dynamic loading
   logger.info("initMiddlewares");
   const systemFunctions = new SystemFunctions(extensionsController);
+  const eventsMiddleware = new EventsMiddleware(extensionsController);
+  await middlewaresController.attach(eventsMiddleware.getProperties());
   const middleware = new OpenNLXMiddleware(
     extensionsController,
     systemFunctions,
@@ -26,7 +28,5 @@ const initMiddlewares = async (middlewaresController, extensionsController) => {
     extensionsController,
   );
   await middlewaresController.attach(connectorMiddleware.getProperties());
-  const eventsMiddleware = new EventsMiddleware(extensionsController);
-  await middlewaresController.attach(eventsMiddleware.getProperties());
 };
 export default initMiddlewares;
