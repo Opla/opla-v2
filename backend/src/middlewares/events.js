@@ -131,6 +131,10 @@ class EventsMiddleware {
         origin,
       );
       return conversations;
+    } else if (action === "setConversationContext") {
+      const contexts = this.mainControllers.getContexts();
+      const { conversationId, variables } = parameters;
+      return contexts.appendLocalContext(conversationId, variables);
     }
     return null;
   }
