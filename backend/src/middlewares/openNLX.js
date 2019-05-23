@@ -82,7 +82,7 @@ class OpenNLXMiddleware {
             id: message.id,
             created_time: message.created_time,
           };
-          const debug = version === "sandbox";
+          const debug = v === "sandbox";
           const response = await this.openNLX.parse(bot.id, v, msg, debug);
           const params = await OpenNLXMiddleware.updateInputMessage(
             messenger,
@@ -220,7 +220,7 @@ class OpenNLXMiddleware {
       data.action === "createConversation" ||
       data.action === "deleteMessage"
     ) {
-      await this.refreshConversation(messenger, data, bot, version, v);
+      await this.refreshConversation(messenger, data, bot, v);
     }
   }
 
@@ -410,13 +410,6 @@ class OpenNLXMiddleware {
       let intents = await botsController.getIntents(bot.id);
       this.openNLX.setCallablesObserver(bot.id, this.callables.bind(this));
       this.openNLX.setIntents(bot.id, "default", intents);
-      if (bot.publishedVersionId) {
-        intents = await botsController.getIntents(
-          bot.id,
-          bot.publishedVersionId,
-        );
-        this.openNLX.setIntents(bot.id, bot.publishedVersionId, intents);
-      }
 
       const globalVariables = await botsController.getGlobalVariables(bot.id);
       this.openNLX.setContext(
@@ -432,6 +425,27 @@ class OpenNLXMiddleware {
       globalEntities.forEach((e) => {
         entitiesProvider.addEnumEntity(e.name, e.values, "global");
       });
+
+      if (bot.publishedVersionId) {
+        intents = await botsController.getIntents(
+          bot.id,
+          bot.publishedVersionId,
+        );
+        this.openNLX.setIntents(bot.id, bot.publishedVersionId, intents);
+
+        this.openNLX.setContext(
+          { agentId: bot.id, version: bot.publishedVersionId, name: "global" },
+          Contexts.serializeVariables(globalVariables),
+        );
+
+        const publishedEntitiesProvider = this.openNLX.getEntitiesProvider(
+          bot.id,
+          bot.publishedVersionId,
+        );
+        globalEntities.forEach((e) => {
+          publishedEntitiesProvider.addEnumEntity(e.name, e.values, "global");
+        });
+      }
     }
     /* eslint-disable no-restricted-syntax */
     /* eslint-disable no-await-in-loop */
