@@ -62,16 +62,21 @@ export default class Contexts extends Controller {
     const localVariables = await this.main.getBots().getLocalVariables(bot.id);
     const variables = localVariables || {};
     // TODO merge context
-    return Contexts.resetLocalContext(conversation, bot, messenger, variables);
+    return Contexts.resetLocalContext(
+      conversation,
+      bot,
+      messenger,
+      Contexts.serializeVariables(variables),
+    );
   }
 
   static async resetLocalContext(conversationOrId, bot, messenger, vars) {
     const variables = vars || {};
-    const conversationId = conversationOrId.id || conversationOrId;
+    const conversationId = conversationOrId.conversationId || conversationOrId;
     if (!variables.userprofile) {
       if (messenger && conversationOrId) {
         const user = await messenger.getConversationUser(
-          conversationOrId,
+          conversationId,
           conversationOrId.author,
         );
         if (user && user.username) {
