@@ -113,24 +113,73 @@ export default class extends Controller {
     return res;
   }
 
+  async duplicatePreviousIntents(botId, intents, versionId) {
+    // firstIntents is the array of the first duplicate intent to save
+    // its is the rest of unsaved intents
+    const { firstIntents, its } = intents.reduce(
+      (a, i) => {
+        if (!i.previousId || !/^unsaved_/g.test(i.previousId)) {
+          a.firstIntents.push(i);
+        } else {
+          a.its.push(i);
+        }
+        return a;
+      },
+      { firstIntents: [], its: [] },
+    );
+
+    if (firstIntents.length) {
+      // save new intents
+      await Promise.all(
+        firstIntents.map(async (i) => {
+          let newIntent = { ...i };
+          delete newIntent.id;
+          newIntent = await this.model.setIntent(botId, newIntent, versionId);
+          its.forEach((intent) => {
+            if (intent.previousId === i.id) {
+              // eslint-disable-next-line no-param-reassign
+              intent.previousId = newIntent.id;
+            }
+          });
+        }),
+      );
+      if (its.length) {
+        return this.duplicatePreviousIntents(botId, its, versionId);
+      }
+    }
+
+    return Promise.all(
+      its.map(async (i) => {
+        const newIntent = i;
+        delete newIntent.id;
+        await this.model.setIntent(botId, newIntent, versionId);
+      }),
+    );
+  }
+
   async duplicateIntents(botId, fromIntents, versionId = null) {
-    const intents = [];
-    fromIntents.forEach((i) => {
-      const intent = { ...i };
-      if (intent.id) {
-        delete intent.id;
+    const intentsToSave = fromIntents.map((fi) => {
+      const ri = fi;
+      if (fi.previousId) {
+        ri.previousId = `unsaved_${ri.previousId}`;
       }
-      if (intent.botId) {
-        delete intent.botId;
+      if (ri.id) {
+        ri.id = `unsaved_${ri.id}`;
       }
-      if (intent.versionId) {
-        delete intent.versionId;
+      if (ri.botId) {
+        delete ri.botId;
       }
-      intents.push(intent);
+      if (ri.versionId) {
+        delete ri.versionId;
+      }
+      return ri;
     });
+    await this.duplicatePreviousIntents(botId, intentsToSave, versionId);
+
     // logger.info("import intents=", intents);
-    await this.setIntents(botId, intents, versionId);
-    return this.getIntents(botId, versionId);
+    const intents = await this.getIntents(botId, versionId);
+    await this.dispatchIntentAction(botId, "setIntents", intents);
+    return intents;
   }
 
   async getIntents(botId, versionId = null) {
