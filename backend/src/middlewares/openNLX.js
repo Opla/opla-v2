@@ -53,7 +53,19 @@ class OpenNLXMiddleware {
     return p;
   }
 
-  async refreshConversation(messenger, conversation, bot, version, v) {
+  static intentsToOpenNLX(intents) {
+    return intents.map((int) => {
+      const toOpenNLXIntent = int;
+      if (int.previousId && int.previousId.length > 0) {
+        toOpenNLXIntent.previous = int.previousId;
+        delete toOpenNLXIntent.previousId;
+      }
+      toOpenNLXIntent.deactivated = int.state && int.state === "deactivated";
+      return toOpenNLXIntent;
+    });
+  }
+
+  async refreshConversation(messenger, conversation, bot, v) {
     const { conversationId } = conversation;
     logger.info("conversation=", conversation);
     const messages = await messenger.getConversationMessages(conversationId);
@@ -62,7 +74,6 @@ class OpenNLXMiddleware {
       bot,
       messenger,
     );
-
     await this.resetContext(bot, conversationId, v);
     if (Array.isArray(messages)) {
       this.openNLX.setContext(
@@ -82,7 +93,7 @@ class OpenNLXMiddleware {
             id: message.id,
             created_time: message.created_time,
           };
-          const debug = v === "sandbox";
+          const debug = v === "default";
           const response = await this.openNLX.parse(bot.id, v, msg, debug);
           const params = await OpenNLXMiddleware.updateInputMessage(
             messenger,
@@ -176,7 +187,7 @@ class OpenNLXMiddleware {
             id: message.id,
             created_time: message.created_time,
           };
-          const debug = version === "sandbox";
+          const debug = v === "default";
           const response = await this.openNLX.parse(bot.id, v, msg, debug);
           const { conversationId } = message;
           const params = await OpenNLXMiddleware.updateInputMessage(
@@ -246,6 +257,22 @@ class OpenNLXMiddleware {
       } else if (data.action === "publishBot") {
         // publish bot
         const { botId, version } = data;
+        const botsController = this.mainControllers.getBots();
+
+        const globalVariables = await botsController.getGlobalVariables(botId);
+        this.openNLX.setContext(
+          { agentId: botId, version, name: "global" },
+          Contexts.serializeVariables(globalVariables),
+        );
+
+        const publishedEntitiesProvider = this.openNLX.getEntitiesProvider(
+          botId,
+          version,
+        );
+        const globalEntities = await botsController.getGlobalEntities(botId);
+        globalEntities.forEach((e) => {
+          publishedEntitiesProvider.addEnumEntity(e.name, e.values, "global");
+        });
         this.openNLX.publishIntents(botId, "default", version);
       } else if (data.action === "setIntents") {
         // set Intents
@@ -254,16 +281,7 @@ class OpenNLXMiddleware {
           const version = versionId || "default";
           const bots = this.mainControllers.getBots();
           let intents = await bots.getIntents(botId, versionId);
-          intents = intents.map((int) => {
-            const toOpenNLXIntent = int;
-            if (int.previousId && int.previousId.length > 0) {
-              toOpenNLXIntent.previous = int.previousId;
-              delete toOpenNLXIntent.previousId;
-            }
-            toOpenNLXIntent.deactivated =
-              int.state && int.state === "deactivated";
-            return toOpenNLXIntent;
-          });
+          intents = OpenNLXMiddleware.intentsToOpenNLX(intents);
           this.openNLX.deleteAllIntents(botId, version);
           this.openNLX.setIntents(botId, version, intents);
         }
@@ -276,7 +294,8 @@ class OpenNLXMiddleware {
           const { versionId } = intent;
           const version = versionId || "default";
           this.openNLX.deleteAllIntents(botId, version);
-          const intents = await bots.getIntents(botId, versionId);
+          let intents = await bots.getIntents(botId, versionId);
+          intents = OpenNLXMiddleware.intentsToOpenNLX(intents);
           this.openNLX.setIntents(botId, version, intents);
         }
       } else if (data.action === "removeIntents") {
@@ -406,9 +425,11 @@ class OpenNLXMiddleware {
     /* eslint-disable no-await-in-loop */
     for (const bot of bots) {
       this.openNLX.createAgent(bot);
+      this.openNLX.setCallablesObserver(bot.id, this.callables.bind(this));
+
       // Add intents to openNLX
       let intents = await botsController.getIntents(bot.id);
-      this.openNLX.setCallablesObserver(bot.id, this.callables.bind(this));
+      intents = OpenNLXMiddleware.intentsToOpenNLX(intents);
       this.openNLX.setIntents(bot.id, "default", intents);
 
       const globalVariables = await botsController.getGlobalVariables(bot.id);
@@ -431,6 +452,7 @@ class OpenNLXMiddleware {
           bot.id,
           bot.publishedVersionId,
         );
+        intents = OpenNLXMiddleware.intentsToOpenNLX(intents);
         this.openNLX.setIntents(bot.id, bot.publishedVersionId, intents);
 
         this.openNLX.setContext(
