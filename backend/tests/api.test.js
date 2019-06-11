@@ -476,9 +476,7 @@ describe("API", () => {
           it("shouldcreate new message in bot's sandbox on /bots/:id/sandbox/messagesPOST", async () => {
             const res = await postAsync(
               context,
-              `/bots/${context.bot1.id}/sandbox/messages/${
-                context.botconversation.id
-              }`,
+              `/bots/${context.bot1.id}/sandbox/messages/${context.botconversation.id}`,
               context.authUser1.access_token,
               { body: "hello" },
             );
