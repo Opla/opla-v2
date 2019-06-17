@@ -243,7 +243,12 @@ export default class extends Model {
         // TODO: BUG this not the right way if we have multiple bots stored in
         // same database
         try {
-          i = await collection.moveItem(intentId, fromIndex, toIndex);
+          i = await collection.moveItem(
+            intentId,
+            fromIndex,
+            toIndex,
+            `botId=${botId}`,
+          );
         } catch (e) {
           logger.error(e);
           return false;
