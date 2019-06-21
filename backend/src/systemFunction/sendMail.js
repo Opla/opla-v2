@@ -21,6 +21,7 @@ export default class SendMail {
       to,
       subject,
       text,
+      html: text,
     };
     return this.service.sendMessage(mail);
   }
