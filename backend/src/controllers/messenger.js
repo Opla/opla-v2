@@ -153,10 +153,10 @@ export default class extends Controller {
     const conversation = await this.getConversation(null, conversationId);
     if (conversation) {
       await this.model.deleteConversationMessages(conversationId);
-      return this.dispatch(this.className, {
-        action: "deleteConversationMessages",
-        conversationId,
+      await this.dispatch(this.className, {
         origin: conversation.origin,
+        conversationId,
+        action: "resetConversation",
       });
     }
     return null;
