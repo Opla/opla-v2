@@ -542,7 +542,7 @@ IntentContainer.propTypes = {
   selectedIntent: PropTypes.shape({
     id: PropTypes.string,
   }),
-  selectedIntentIndex: PropTypes.number.isRequired,
+  selectedIntentIndex: PropTypes.number,
   selectedInputIndex: PropTypes.number.isRequired,
   selectedOutputIndex: PropTypes.number.isRequired,
   newActions: PropTypes.shape({}).isRequired,
