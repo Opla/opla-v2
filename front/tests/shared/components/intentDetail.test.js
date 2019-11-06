@@ -15,6 +15,7 @@ describe("components/intentDetail", () => {
     onSelect: () => {},
     onEdit: () => {},
     onAction: () => {},
+    onDisable: () => {},
     newActions: {
       input: undefined,
       output: undefined,
