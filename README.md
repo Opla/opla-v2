@@ -25,6 +25,7 @@
 
 <p align="center">
 :zap:<code>Actual release is : v0.2 - Blooming Barboiry</code>:zap:
+
 </p>
 
 
