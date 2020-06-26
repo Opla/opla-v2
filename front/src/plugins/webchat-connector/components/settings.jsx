@@ -50,7 +50,7 @@ export default class WebchatSettings extends Component {
       "(function(o,p,l,a,i){a=p.createElement(l),i=p.getElementsByTagName(l)[0];";
     script += "a.async=1;a.src=o;i.parentNode.insertBefore(a,i)})";
     script +=
-      "('https://bot.opla.ai/js/app.js',document,'script');\r\n</script>";
+      "('https://opla.ai/bot/js/app.js',document,'script');\r\n</script>";
     // const container = WebchatSettings.renderCreateApp(this.props.plugin.middleware);
     /* if (this.props.instance && this.props.instance.application) {
       container = this.renderCreateApp();
