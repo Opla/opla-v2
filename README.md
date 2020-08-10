@@ -4,7 +4,7 @@
   </a>
 </div>
 <h1 align="center">
-  Opla
+  [Deprecated] Opla
 </h1>
 <h4 align="center">An amazing solution for creating chatbots :robot: or virtual assistants without coding. <br><code>FULLY opensource</code> </h4>
 
