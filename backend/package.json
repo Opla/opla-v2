@@ -56,7 +56,7 @@
     "nodemon": "^1.18.9",
     "prettier": "^1.11.1",
     "regenerator-runtime": "^0.11.1",
-    "shelljs": "^0.8.2",
+    "shelljs": "^0.8.5",
     "supertest": "^3.0.0"
   },
   "jest": {
