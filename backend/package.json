@@ -31,7 +31,7 @@
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
     "inquirer": "^5.1.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "opennlx": "0.8.8",
     "zoapp-backend": "0.24.11",
     "zoapp-core": "0.13.1",
